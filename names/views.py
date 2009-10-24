@@ -8,6 +8,7 @@ from ragendja.template import render_to_response
 from ragendja.dbutils import get_object_or_404
 
 from names.models import Idea
+import counters.utils as counters
 
 
 class EnterNamesForm(forms.Form):
@@ -37,11 +38,12 @@ def index(request):
         # logging.debug("Content-Length: %d", len(upload['content']))
         # logging.debug("Content-Type: %s", upload['content-type'])
         names = upload.read().split()
-        selected = [random.choice(names) for index in range(100)]
+        selected = [random.choice(names) for index in range(300)]
         logging.debug(selected[:10])
         return create_ideas(request, selected)
     # Display list of recent names.
     idea_list = Idea.all().order('-created').fetch(20)
+    idea_count = counters.get_count('names_idea')
     return render_to_response(request, 'names/index.html', locals())
 
 
@@ -51,8 +53,11 @@ def detail(request, key_name):
 
 
 def create_ideas(request, names):
+    counter = 0
     for name in names:
         if '.' in name: # Cut off the top level domain.
             name = name[:name.index('.')]
-        idea = Idea.get_or_insert(key_name=name)
+        idea, created = Idea.get_or_insert_with_flag(key_name=name)
+        counter += int(created)
+    counters.increment('names_idea', counter)
     return HttpResponseRedirect(request.path)
