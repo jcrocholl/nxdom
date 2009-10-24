@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Names{% endblock %}
+
+{% block content %}
+<h1>Recently added names</h1>
+
+{% if create_names_form.names.errors %}
+<p class="error">{{ create_names_form.names.errors.0 }}</p>
+{% endif %}
+
+<form action="" method="post">
+<p>
+{{ create_names_form.names }}
+<input type="submit" value="Submit name ideas" />
+</p>
+</form>
+
+<p>Latest {{ idea_list|length }} names of {{ idea_count }} total:</p>
+{% include "names/table.html" %}
+{% endblock %}

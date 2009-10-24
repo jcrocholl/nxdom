@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from ragendja.settings_pre import *
 
 # Increase this when you update your media on the production site, so users
@@ -101,8 +100,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'appenginepatcher',
     'ragendja',
-    'pages',
     'mediautils',
+    'names',
 )
 
 # List apps which should be left out from app settings and urlsauto loading
