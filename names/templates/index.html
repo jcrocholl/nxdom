@@ -5,14 +5,25 @@
 {% block content %}
 <h1>Recently added names</h1>
 
-{% if create_names_form.names.errors %}
-<p class="error">{{ create_names_form.names.errors.0 }}</p>
+{% if enter_names_form.names.errors %}
+<p class="error">{{ enter_names_form.names.errors.0 }}</p>
 {% endif %}
 
 <form action="" method="post">
 <p>
-{{ create_names_form.names }}
-<input type="submit" value="Submit name ideas" />
+{{ enter_names_form.names }}
+<input type="submit" name="submit_names" value="Submit name ideas" />
+</p>
+</form>
+
+{% if upload_names_form.upload.errors %}
+<p class="error">{{ upload_names_form.upload.errors.0 }}</p>
+{% endif %}
+
+<form action="" method="post" enctype="multipart/form-data">
+<p>
+{{ upload_names_form.upload }}
+<input type="submit" name="upload_file" value="Upload text file" />
 </p>
 </form>
 
