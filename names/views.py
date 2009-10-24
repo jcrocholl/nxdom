@@ -35,12 +35,9 @@ def index(request):
         request.FILES if 'upload' in request.FILES else None)
     if 'upload' in request.FILES:
         upload = request.FILES['upload']
-        # logging.debug("Content-Length: %d", len(upload['content']))
-        # logging.debug("Content-Type: %s", upload['content-type'])
         names = upload.read().split()
-        selected = [random.choice(names) for index in range(300)]
-        logging.debug(selected[:10])
-        return create_ideas(request, selected)
+        random.shuffle(names)
+        return create_ideas(request, names[:200])
     # Display list of recent names.
     idea_list = Idea.all().order('-created').fetch(20)
     idea_count = counters.get_count('names_idea')
