@@ -16,10 +16,9 @@ class BaseModel(db.Model):
         self.after_put()
 
 
-
 class Idea(BaseModel):
     """
-    The name is used as the datastore key.
+    The name is also used as the datastore key.
     """
     name = db.StringProperty()
     backwards = db.StringProperty()
@@ -36,21 +35,9 @@ class Idea(BaseModel):
     score_triples = db.FloatProperty()
     score_words = db.FloatProperty()
 
-    com_dns_checked = db.DateTimeProperty()
-    net_dns_checked = db.DateTimeProperty()
-    org_dns_checked = db.DateTimeProperty()
-
-    com_dns_ip = db.StringProperty()
-    net_dns_ip = db.StringProperty()
-    org_dns_ip = db.StringProperty()
-
-    com_whois_checked = db.DateTimeProperty()
-    net_whois_checked = db.DateTimeProperty()
-    org_whois_checked = db.DateTimeProperty()
-
-    com_whois_expiration = db.DateTimeProperty()
-    net_whois_expiration = db.DateTimeProperty()
-    org_whois_expiration = db.DateTimeProperty()
+    com_expiration = db.DateProperty()
+    net_expiration = db.DateProperty()
+    org_expiration = db.DateProperty()
 
     def __unicode__(self):
         return self.key().name()
