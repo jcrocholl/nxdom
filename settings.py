@@ -104,6 +104,7 @@ INSTALLED_APPS = (
     'counters',
     'domains',
     'search',
+    'dictionaries',
 )
 
 # List apps which should be left out from app settings and urlsauto loading

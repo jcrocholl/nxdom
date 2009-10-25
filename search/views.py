@@ -4,6 +4,8 @@ from ragendja.template import render_to_response
 
 from domains.models import Domain
 
+from dictionaries import english
+
 
 class SearchForm(forms.Form):
     keyword = forms.CharField(
@@ -14,16 +16,19 @@ class SearchForm(forms.Form):
         widget=forms.RadioSelect(attrs={'class': 'radio'}))
     length = forms.IntegerField(
         initial=-1,
-        widget=forms.TextInput(attrs={'class': 'text span-2'}))
+        widget=forms.TextInput(attrs={'class': 'text span-1'}))
     letters = forms.IntegerField(
         initial=0,
-        widget=forms.TextInput(attrs={'class': 'text span-2'}))
+        widget=forms.TextInput(attrs={'class': 'text span-1'}))
     digits = forms.IntegerField(
-        initial=-5,
-        widget=forms.TextInput(attrs={'class': 'text span-2'}))
+        initial=-4,
+        widget=forms.TextInput(attrs={'class': 'text span-1'}))
     dashes = forms.IntegerField(
-        initial=-10,
-        widget=forms.TextInput(attrs={'class': 'text span-2'}))
+        initial=-8,
+        widget=forms.TextInput(attrs={'class': 'text span-1'}))
+    scowl10 = forms.IntegerField(
+        initial=20,
+        widget=forms.TextInput(attrs={'class': 'text span-1'}))
 
 
 def index(request):
@@ -49,6 +54,15 @@ def index(request):
             score += search_form.cleaned_data['letters'] * domain.letters
             score += search_form.cleaned_data['digits'] * domain.digits
             score += search_form.cleaned_data['dashes'] * domain.dashes
+            if position == 'left':
+                rest = domain.name[len(keyword):]
+            if position == 'right':
+                rest = domain.name[:-len(keyword)]
+            domain.scowl10 = rest in english.SCOWL10
+            if domain.scowl10:
+                score += search_form.cleaned_data['scowl10']
             score_domain_list.append((score, domain))
-        score_domain_list.sort(reverse=True)
+        score_domain_list.sort(
+            key=lambda triple: (-triple[0], triple[1].name))
+        score_domain_list = score_domain_list[:50]
     return render_to_response(request, 'search/index.html', locals())
