@@ -18,6 +18,8 @@
 <td>{{ search_form.digits }}</td>
 <td>{{ search_form.dashes }}</td>
 <td>{{ search_form.scowl10 }}</td>
+<td>{{ search_form.scowl20 }}</td>
+<td>{{ search_form.scowl35 }}</td>
 <td><input type="submit" name="search" value="Search" /></td>
 <td></td>
 </tr>
@@ -35,6 +37,8 @@ right</label>
 <th>Digits</th>
 <th>Dashes</th>
 <th>SCOWL 10</th>
+<th>SCOWL 20</th>
+<th>SCOWL 35</th>
 <th>Score</th>
 </tr>
 {% for score, domain in score_domain_list %}<tr>
@@ -43,7 +47,9 @@ right</label>
 <td>{{ domain.letters }}</td>
 <td>{{ domain.digits }}</td>
 <td>{{ domain.dashes }}</td>
-<td>{{ domain.scowl10 }}</td>
+<td>{% if domain.scowl10 %}{{ domain.rest }}{% endif%}</td>
+<td>{% if domain.scowl20 %}{{ domain.rest }}{% endif%}</td>
+<td>{% if domain.scowl35 %}{{ domain.rest }}{% endif%}</td>
 <td>{{ score }}</td>
 </tr>
 {% endfor %}</table>

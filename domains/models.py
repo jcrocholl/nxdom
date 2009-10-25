@@ -2,8 +2,23 @@ from datetime import datetime
 
 from google.appengine.ext import db
 
+from dictionaries import english
+
 
 class BaseModel(db.Model):
+
+    @classmethod
+    def get_or_insert_with_flag(cls, key_name, **kwds):
+        def txn():
+            created = False
+            entity = cls.get_by_key_name(key_name)
+            if entity is None:
+                created = True
+                entity = cls(key_name=key_name, **kwds)
+                entity.put()
+            return (entity, created)
+        return db.run_in_transaction(txn)
+
     def before_put(self):
         pass
 
@@ -58,17 +73,14 @@ class Domain(BaseModel):
                 self.dashes += 1
         self.length = self.letters + self.digits + self.dashes
 
-    @classmethod
-    def get_or_insert_with_flag(cls, key_name, **kwds):
-        def txn():
-            created = False
-            entity = cls.get_by_key_name(key_name)
-            if entity is None:
-                created = True
-                entity = cls(key_name=key_name, **kwds)
-                entity.put()
-            return (entity, created)
-        return db.run_in_transaction(txn)
+    def check_dictionaries(self, keyword, position):
+        if position == 'left':
+            self.rest = self.name[len(keyword):]
+        if position == 'right':
+            self.rest = self.name[:-len(keyword)]
+        self.scowl10 = self.rest in english.SCOWL10
+        self.scowl20 = self.rest in english.SCOWL20
+        self.scowl35 = self.rest in english.SCOWL35
 
 
 class DnsCheck(db.Model):
