@@ -56,5 +56,6 @@ def create_ideas(request, names):
             name = name[:name.index('.')]
         idea, created = Idea.get_or_insert_with_flag(key_name=name)
         counter += int(created)
-    counters.increment('ideas_idea', counter)
+    if counter:
+        counters.increment('ideas_idea', counter)
     return HttpResponseRedirect(request.path)
