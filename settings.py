@@ -102,7 +102,8 @@ INSTALLED_APPS = (
     'ragendja',
     'mediautils',
     'counters',
-    'names',
+    'ideas',
+    'search',
 )
 
 # List apps which should be left out from app settings and urlsauto loading

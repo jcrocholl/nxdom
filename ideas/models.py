@@ -21,6 +21,7 @@ class Idea(BaseModel):
     """
     The name is used as the datastore key.
     """
+    name = db.StringProperty()
     backwards = db.StringProperty()
     created = db.DateTimeProperty()
     updated = db.DateTimeProperty()
@@ -76,9 +77,10 @@ class Idea(BaseModel):
                 else:
                     continue
                 chars.append(char)
+            self.length = self.letters + self.digits + self.dashes
+            self.name = ''.join(chars)
             chars.reverse()
             self.backwards = ''.join(chars)
-            self.length = self.letters + self.digits + self.dashes
 
     @classmethod
     def get_or_insert_with_flag(cls, key_name, **kwds):

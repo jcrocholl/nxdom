@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<h1>Search available domain names</h1>
+
+{% if search_form.keyword.errors %}
+<p class="error">{{ search_form.keyword.errors.0 }}</p>
+{% endif %}
+
+<form action="" method="get">
+<p>
+{{ search_form.keyword }}
+{{ search_form.position }}
+<input type="submit" name="search" value="Search" />
+</p>
+</form>
+
+{% include "ideas/table.html" %}
+{% endblock %}

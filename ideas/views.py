@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from ragendja.template import render_to_response
 from ragendja.dbutils import get_object_or_404
 
-from names.models import Idea
+from ideas.models import Idea
 import counters.utils as counters
 
 
@@ -40,13 +40,13 @@ def index(request):
         return create_ideas(request, names[:200])
     # Display list of recent names.
     idea_list = Idea.all().order('-created').fetch(20)
-    idea_count = counters.get_count('names_idea')
-    return render_to_response(request, 'names/index.html', locals())
+    idea_count = counters.get_count('ideas_idea')
+    return render_to_response(request, 'ideas/index.html', locals())
 
 
 def detail(request, key_name):
     name = get_object_or_404(Name, key_name=key_name)
-    return render_to_response(request, 'names/detail.html', locals())
+    return render_to_response(request, 'ideas/detail.html', locals())
 
 
 def create_ideas(request, names):
@@ -56,5 +56,5 @@ def create_ideas(request, names):
             name = name[:name.index('.')]
         idea, created = Idea.get_or_insert_with_flag(key_name=name)
         counter += int(created)
-    counters.increment('names_idea', counter)
+    counters.increment('ideas_idea', counter)
     return HttpResponseRedirect(request.path)
