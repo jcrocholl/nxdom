@@ -1,26 +1,22 @@
 <table>
 <tr>
 <th>Name</th>
-<th>Backwards</th>
 <th>Length</th>
 <th>Letters</th>
 <th>Digits</th>
 <th>Dashes</th>
 <th>Syllables</th>
-<th>Created</th>
-<th>Updated</th>
+<th>Score</th>
 </tr>
 {% for idea in idea_list %}
 <tr>
 <td>{{ idea.key.name }}</td>
-<td>{{ idea.backwards }}</td>
 <td>{{ idea.length }}</td>
 <td>{{ idea.letters }}</td>
 <td>{{ idea.digits }}</td>
 <td>{{ idea.dashes }}</td>
 <td>{{ idea.syllables }}</td>
-<td>{{ idea.created|timesince }} ago</td>
-<td>{{ idea.updated|timesince }} ago</td>
+<td>{{ score }}</td>
 </tr>
 {% endfor %}
 </table>
