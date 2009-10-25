@@ -16,7 +16,7 @@ class BaseModel(db.Model):
         self.after_put()
 
 
-class Idea(BaseModel):
+class Domain(BaseModel):
     """
     The name is also used as the datastore key.
     """

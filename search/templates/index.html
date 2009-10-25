@@ -37,13 +37,13 @@ right</label>
 <th>Syllables</th>
 <th>Score</th>
 </tr>
-{% for score, idea in score_idea_list %}<tr>
-<td>{{ idea.key.name }}</td>
-<td>{{ idea.length }}</td>
-<td>{{ idea.letters }}</td>
-<td>{{ idea.digits }}</td>
-<td>{{ idea.dashes }}</td>
-<td>{{ idea.syllables }}</td>
+{% for score, domain in score_domain_list %}<tr>
+<td>{{ domain.key.name }}</td>
+<td>{{ domain.length }}</td>
+<td>{{ domain.letters }}</td>
+<td>{{ domain.digits }}</td>
+<td>{{ domain.dashes }}</td>
+<td>{{ domain.syllables }}</td>
 <td>{{ score }}</td>
 </tr>
 {% endfor %}</table>

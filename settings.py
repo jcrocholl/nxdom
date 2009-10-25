@@ -102,7 +102,7 @@ INSTALLED_APPS = (
     'ragendja',
     'mediautils',
     'counters',
-    'ideas',
+    'domains',
     'search',
 )
 
