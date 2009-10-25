@@ -20,21 +20,12 @@ class Domain(BaseModel):
     """
     The name is also used as the datastore key.
     """
-    name = db.StringProperty()
-    backwards = db.StringProperty()
-    created = db.DateTimeProperty()
-    updated = db.DateTimeProperty()
+    name = db.StringProperty() # Without top level domain and dots.
+    backwards = db.StringProperty() # For suffix matching, name[::-1].
+    created = db.DateTimeProperty() # Automatically set in before_put.
+    updated = db.DateTimeProperty() # Automatically set in before_put.
 
-    length = db.IntegerProperty()
-    syllables = db.IntegerProperty()
-    letters = db.IntegerProperty()
-    dashes = db.IntegerProperty()
-    digits = db.IntegerProperty()
-
-    score_pairs = db.FloatProperty()
-    score_triples = db.FloatProperty()
-    score_words = db.FloatProperty()
-
+    # Domain expiration dates, according to whois.
     com_expiration = db.DateProperty()
     net_expiration = db.DateProperty()
     org_expiration = db.DateProperty()
@@ -52,22 +43,20 @@ class Domain(BaseModel):
         self.updated = datetime.now()
         if not self.is_saved():
             self.created = self.updated
-            self.letters = self.digits = self.dashes = 0
-            chars = []
-            for char in self.key().name():
-                if 'a' <= char <= 'z':
-                    self.letters += 1
-                elif '0' <= char <= '9':
-                    self.digits += 1
-                elif char == '-':
-                    self.dashes += 1
-                else:
-                    continue
-                chars.append(char)
-            self.length = self.letters + self.digits + self.dashes
-            self.name = ''.join(chars)
-            chars.reverse()
-            self.backwards = ''.join(chars)
+            self.name = self.key().name()
+            self.backwards = self.name[::-1]
+
+    def count_letters(self):
+        self.letters = self.digits = self.dashes = 0
+        chars = []
+        for char in self.key().name():
+            if 'a' <= char <= 'z':
+                self.letters += 1
+            elif '0' <= char <= '9':
+                self.digits += 1
+            elif char == '-':
+                self.dashes += 1
+        self.length = self.letters + self.digits + self.dashes
 
     @classmethod
     def get_or_insert_with_flag(cls, key_name, **kwds):

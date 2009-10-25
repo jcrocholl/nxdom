@@ -24,9 +24,6 @@ class SearchForm(forms.Form):
     dashes = forms.IntegerField(
         initial=-10,
         widget=forms.TextInput(attrs={'class': 'text span-2'}))
-    syllables = forms.IntegerField(
-        initial=0,
-        widget=forms.TextInput(attrs={'class': 'text span-2'}))
 
 
 def index(request):
@@ -46,6 +43,7 @@ def index(request):
     if search_form.is_valid():
         score_domain_list = []
         for domain in domain_list.fetch(100):
+            domain.count_letters()
             score = 0
             score += search_form.cleaned_data['length'] * domain.length
             score += search_form.cleaned_data['letters'] * domain.letters

@@ -28,5 +28,20 @@
 </form>
 
 <p>Latest {{ domain_list|length }} names of {{ domain_count }} total:</p>
-{% include "domains/table.html" %}
+<table>
+<tr>
+<th>Name</th>
+<th>Backwards</th>
+<th>Created</th>
+<th>Updated</th>
+</tr>
+{% for domain in domain_list %}
+<tr>
+<td>{{ domain.name }}</td>
+<td>{{ domain.backwards }}</td>
+<td>{{ domain.created }} ago</td>
+<td>{{ domain.updated }} ago</td>
+</tr>
+{% endfor %}
+</table>
 {% endblock %}
