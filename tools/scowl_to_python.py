@@ -19,10 +19,25 @@ print """
 # "as is" without express or implied warranty.
 """.strip()
 
-def pythonize_wordlist(filename, constant):
+def pythonize_wordlist(constant, wordlist):
     print
     print constant, '= set("""'
     line = ''
+    for word in wordlist:
+        if len(line) + 1 + len(word) > MAX_LINE_LENGTH:
+            print line
+            line = ''
+        if line:
+          line += ' '
+        line += word
+    if line:
+        print line
+    print '""".split())'
+
+
+def load_wordlist(number):
+    wordlist = []
+    filename = '%s/english-words.%d' % (SCOWL_FINAL_DIR, number)
     for word in open(filename):
         if "'" in word:
             continue
@@ -30,16 +45,13 @@ def pythonize_wordlist(filename, constant):
         word = latin1.decode('latin1')
         word = unicodedata.normalize('NFKD', word)
         ascii = word.encode('ASCII', 'ignore')
-        if len(line) + 1 + len(ascii) > MAX_LINE_LENGTH:
-            print line
-            line = ''
-        if line:
-          line += ' '
-        line += ascii
-    if line:
-        print line
-    print '""".split())'
+        wordlist.append(ascii)
+    return wordlist
 
-for number in (10, 20, 35):
-  pythonize_wordlist('%s/english-words.%d' % (SCOWL_FINAL_DIR, number),
-                     'SCOWL%d' % number)
+
+for number in (10, 20, 35, 50):
+    wordlist = load_wordlist(number)
+    if number == 50:
+        wordlist += load_wordlist(40)
+    wordlist.sort()
+    pythonize_wordlist('SCOWL%d' % number, wordlist)

@@ -81,6 +81,7 @@ class Domain(BaseModel):
         self.scowl10 = self.rest in english.SCOWL10
         self.scowl20 = self.rest in english.SCOWL20
         self.scowl35 = self.rest in english.SCOWL35
+        self.scowl50 = self.rest in english.SCOWL50
 
 
 class DnsCheck(db.Model):

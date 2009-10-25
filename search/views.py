@@ -33,6 +33,9 @@ class SearchForm(forms.Form):
         initial=15,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
     scowl35 = forms.IntegerField(
+        initial=12,
+        widget=forms.TextInput(attrs={'class': 'text span-1'}))
+    scowl50 = forms.IntegerField(
         initial=10,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
 
@@ -64,6 +67,7 @@ def index(request):
             score += search_form.cleaned_data['scowl10'] * int(domain.scowl10)
             score += search_form.cleaned_data['scowl20'] * int(domain.scowl20)
             score += search_form.cleaned_data['scowl35'] * int(domain.scowl35)
+            score += search_form.cleaned_data['scowl50'] * int(domain.scowl50)
             score_domain_list.append((score, domain))
         score_domain_list.sort(
             key=lambda triple: (-triple[0], triple[1].name))
