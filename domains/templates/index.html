@@ -12,7 +12,7 @@
 <form action="" method="post">
 <p>
 {{ enter_names_form.names }}
-<input type="submit" name="submit_names" value="Submit name ideas" />
+<input type="submit" name="submit_names" value="Submit domain names" />
 </p>
 </form>
 
@@ -27,6 +27,6 @@
 </p>
 </form>
 
-<p>Latest {{ idea_list|length }} names of {{ idea_count }} total:</p>
+<p>Latest {{ domain_list|length }} names of {{ domain_count }} total:</p>
 {% include "domains/table.html" %}
 {% endblock %}
