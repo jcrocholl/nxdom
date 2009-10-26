@@ -69,14 +69,17 @@ def create_domains(request, names,
             com_expiration=com_expiration,
             net_expiration=net_expiration,
             org_expiration=org_expiration)
-        counter += int(created)
-        if not created and (
-            domain.com_expiration != com_expiration or
-            domain.net_expiration != net_expiration or
-            domain.org_expiration != org_expiration):
-            domain.com_expiration = com_expiration
-            domain.net_expiration = net_expiration
-            domain.org_expiration = org_expiration
+        if created:
+            counter += int(created)
+        elif (domain.com_expiration != com_expiration or
+              domain.net_expiration != net_expiration or
+              domain.org_expiration != org_expiration):
+            if com_expiration:
+                domain.com_expiration = com_expiration
+            if net_expiration:
+                domain.net_expiration = net_expiration
+            if org_expiration:
+                domain.org_expiration = org_expiration
             domain.put()
     if counter:
         counters.increment('domains_domain', counter)
