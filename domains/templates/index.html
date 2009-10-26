@@ -5,32 +5,28 @@
 {% block content %}
 <h1>Available domain names</h1>
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
 <p>
-{{ enter_names_form.names.errors }}
-{{ enter_names_form.names }}<br />
-{{ enter_names_form.com_expiration.errors }}
-{{ enter_names_form.net_expiration.errors }}
-{{ enter_names_form.org_expiration.errors }}
-{{ enter_names_form.com_expiration.label_tag }}:
-{{ enter_names_form.com_expiration }}
-{{ enter_names_form.net_expiration.label_tag }}:
-{{ enter_names_form.net_expiration }}
-{{ enter_names_form.org_expiration.label_tag }}:
-{{ enter_names_form.org_expiration }}<br />
+{{ names_form.names.errors }}
+{{ names_form.names.label_tag }}:<br />
+{{ names_form.names }}<br />
+{{ names_form.upload.errors }}
+{{ names_form.upload.label_tag }}:
+{{ names_form.upload }}<br />
+{{ names_form.com_expiration.errors }}
+{{ names_form.net_expiration.errors }}
+{{ names_form.org_expiration.errors }}
+{{ names_form.com_expiration.label_tag }}:
+{{ names_form.com_expiration }}
+{{ names_form.net_expiration.label_tag }}:
+{{ names_form.net_expiration }}
+{{ names_form.org_expiration.label_tag }}:
+{{ names_form.org_expiration }}
 <input type="submit" name="submit_names" value="Submit domain names" />
 </p>
 </form>
 
-<form action="" method="post" enctype="multipart/form-data">
-<p>
-{{ upload_names_form.upload.errors }}
-{{ upload_names_form.upload }}
-<input type="submit" name="upload_file" value="Upload text file" />
-</p>
-</form>
-
-<p>Latest {{ domain_list|length }} names of {{ domain_count }} total:</p>
+<p>The {{ domain_list|length }} most recently updated names of {{ domain_count }} total:</p>
 <table>
 <tr>
 <th>Name</th>
@@ -47,8 +43,8 @@
 <td>{% if domain.com_expiration %}{{ domain.com_expiration }}{% endif %}</td>
 <td>{% if domain.net_expiration %}{{ domain.net_expiration }}{% endif %}</td>
 <td>{% if domain.org_expiration %}{{ domain.org_expiration }}{% endif %}</td>
-<td>{{ domain.created }} ago</td>
-<td>{{ domain.updated }} ago</td>
+<td>{{ domain.created|timesince }} ago</td>
+<td>{{ domain.updated|timesince }} ago</td>
 </tr>
 {% endfor %}
 </table>

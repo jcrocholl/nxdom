@@ -11,48 +11,42 @@ from domains.models import Domain
 import counters.utils as counters
 
 
-class EnterNamesForm(forms.Form):
+class NamesForm(forms.Form):
     names = forms.CharField(
-        max_length=10000,
+        label="Enter domain names here", max_length=10000, required=False,
         widget=forms.TextInput(attrs={'class': 'text span-17 focus'}))
+    upload = forms.FileField(
+        label="Or upload a text file", required=False,
+        widget=forms.FileInput(attrs={'class': 'upload'}))
     com_expiration = forms.DateField(
-        label='com', required=False,
+        label="com", required=False,
         widget=forms.DateInput(attrs={'class': 'text span-3'}))
     net_expiration = forms.DateField(
-        label='net', required=False,
+        label="net", required=False,
         widget=forms.DateInput(attrs={'class': 'text span-3'}))
     org_expiration = forms.DateField(
-        label='org', required=False,
+        label="org", required=False,
         widget=forms.DateInput(attrs={'class': 'text span-3'}))
-
-
-class UploadNamesForm(forms.Form):
-    upload = forms.FileField(
-        widget=forms.FileInput(attrs={'class': 'upload'}))
 
 
 def index(request):
     # Save newly entered name domains.
-    enter_names_form = EnterNamesForm(
-        request.POST if 'submit_names' in request.POST else None)
-    if enter_names_form.is_valid():
-        names = enter_names_form.cleaned_data['names'].split()
-        return create_domains(
-            request, names,
-            enter_names_form.cleaned_data['com_expiration'],
-            enter_names_form.cleaned_data['net_expiration'],
-            enter_names_form.cleaned_data['org_expiration'])
-    # Save new name domains from file upload.
-    upload_names_form = UploadNamesForm(
-        request.POST if 'upload_file' in request.POST else None,
+    names_form = NamesForm(
+        request.POST if 'submit_names' in request.POST else None,
         request.FILES if 'upload' in request.FILES else None)
-    if 'upload' in request.FILES:
-        upload = request.FILES['upload']
-        names = upload.read().split()
+    if names_form.is_valid():
+        names = names_form.cleaned_data['names'].split()
+        if 'upload' in request.FILES:
+            upload = request.FILES['upload']
+            names.extend(upload.read().split())
         random.shuffle(names)
-        return create_domains(request, names[:200])
+        return create_domains(
+            request, names[:200],
+            names_form.cleaned_data['com_expiration'],
+            names_form.cleaned_data['net_expiration'],
+            names_form.cleaned_data['org_expiration'])
     # Display list of recent names.
-    domain_list = Domain.all().order('-created').fetch(20)
+    domain_list = Domain.all().order('-updated').fetch(20)
     domain_count = counters.get_count('domains_domain')
     return render_to_response(request, 'domains/index.html', locals())
 
@@ -76,6 +70,14 @@ def create_domains(request, names,
             net_expiration=net_expiration,
             org_expiration=org_expiration)
         counter += int(created)
+        if not created and (
+            domain.com_expiration != com_expiration or
+            domain.net_expiration != net_expiration or
+            domain.org_expiration != org_expiration):
+            domain.com_expiration = com_expiration
+            domain.net_expiration = net_expiration
+            domain.org_expiration = org_expiration
+            domain.put()
     if counter:
         counters.increment('domains_domain', counter)
     return HttpResponseRedirect(request.path)
