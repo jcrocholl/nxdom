@@ -1,5 +1,3 @@
-import logging
-
 from django import forms
 from django.http import HttpResponseRedirect
 from ragendja.template import render_to_response
@@ -71,6 +69,5 @@ def index(request):
             score_domain_list.append((score, domain))
         score_domain_list.sort(
             key=lambda triple: (-triple[0], triple[1].name))
-        logging.debug(score_domain_list[0])
         score_domain_list = score_domain_list[:50]
     return render_to_response(request, 'search/index.html', locals())
