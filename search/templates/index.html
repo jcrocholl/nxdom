@@ -13,6 +13,9 @@
 <table>
 <tr>
 <td>{{ search_form.keyword }}</td>
+<td>{{ search_form.com_expiration }}</td>
+<td>{{ search_form.net_expiration }}</td>
+<td>{{ search_form.org_expiration }}</td>
 <td>{{ search_form.length }}</td>
 <td>{{ search_form.letters }}</td>
 <td>{{ search_form.digits }}</td>
@@ -33,6 +36,9 @@ left</label>
 <input  type="radio" value="right" name="position" id="id_position_1" {% ifequal request.GET.position "right" %}checked="checked" {% endifequal %} />
 right</label>
 </th>
+<th>.com</th>
+<th>.net</th>
+<th>.org</th>
 <th>Length</th>
 <th>Letters</th>
 <th>Digits</th>
@@ -43,8 +49,12 @@ right</label>
 <th>SCOWL 50</th>
 <th>Score</th>
 </tr>
-{% for score, domain in score_domain_list %}<tr>
+{% for score, domain in score_domain_list %}
+<tr class="{% cycle 'row1' 'row2' %}">
 <td>{{ domain.name }}</td>
+<td>{% if domain.com_expiration %}{{ domain.com_expiration }}{% endif%}</td>
+<td>{% if domain.net_expiration %}{{ domain.net_expiration }}{% endif%}</td>
+<td>{% if domain.org_expiration %}{{ domain.org_expiration }}{% endif%}</td>
 <td>{{ domain.length }}</td>
 <td>{{ domain.letters }}</td>
 <td>{{ domain.digits }}</td>

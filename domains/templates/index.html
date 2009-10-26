@@ -5,23 +5,26 @@
 {% block content %}
 <h1>Available domain names</h1>
 
-{% if enter_names_form.names.errors %}
-<p class="error">{{ enter_names_form.names.errors.0 }}</p>
-{% endif %}
-
 <form action="" method="post">
 <p>
-{{ enter_names_form.names }}
+{{ enter_names_form.names.errors }}
+{{ enter_names_form.names }}<br />
+{{ enter_names_form.com_expiration.errors }}
+{{ enter_names_form.net_expiration.errors }}
+{{ enter_names_form.org_expiration.errors }}
+{{ enter_names_form.com_expiration.label_tag }}:
+{{ enter_names_form.com_expiration }}
+{{ enter_names_form.net_expiration.label_tag }}:
+{{ enter_names_form.net_expiration }}
+{{ enter_names_form.org_expiration.label_tag }}:
+{{ enter_names_form.org_expiration }}<br />
 <input type="submit" name="submit_names" value="Submit domain names" />
 </p>
 </form>
 
-{% if upload_names_form.upload.errors %}
-<p class="error">{{ upload_names_form.upload.errors.0 }}</p>
-{% endif %}
-
 <form action="" method="post" enctype="multipart/form-data">
 <p>
+{{ upload_names_form.upload.errors }}
 {{ upload_names_form.upload }}
 <input type="submit" name="upload_file" value="Upload text file" />
 </p>
@@ -32,13 +35,18 @@
 <tr>
 <th>Name</th>
 <th>Backwards</th>
-<th>Created</th>
+<th>com</th>
+<th>net</th>
+<th>org</th>
 <th>Updated</th>
 </tr>
 {% for domain in domain_list %}
-<tr>
+<tr class="{% cycle 'row1' 'row2' %}">
 <td>{{ domain.name }}</td>
 <td>{{ domain.backwards }}</td>
+<td>{% if domain.com_expiration %}{{ domain.com_expiration }}{% endif %}</td>
+<td>{% if domain.net_expiration %}{{ domain.net_expiration }}{% endif %}</td>
+<td>{% if domain.org_expiration %}{{ domain.org_expiration }}{% endif %}</td>
 <td>{{ domain.created }} ago</td>
 <td>{{ domain.updated }} ago</td>
 </tr>

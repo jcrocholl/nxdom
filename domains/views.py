@@ -15,6 +15,15 @@ class EnterNamesForm(forms.Form):
     names = forms.CharField(
         max_length=10000,
         widget=forms.TextInput(attrs={'class': 'text span-17 focus'}))
+    com_expiration = forms.DateField(
+        label='com', required=False,
+        widget=forms.DateInput(attrs={'class': 'text span-3'}))
+    net_expiration = forms.DateField(
+        label='net', required=False,
+        widget=forms.DateInput(attrs={'class': 'text span-3'}))
+    org_expiration = forms.DateField(
+        label='org', required=False,
+        widget=forms.DateInput(attrs={'class': 'text span-3'}))
 
 
 class UploadNamesForm(forms.Form):
@@ -28,7 +37,11 @@ def index(request):
         request.POST if 'submit_names' in request.POST else None)
     if enter_names_form.is_valid():
         names = enter_names_form.cleaned_data['names'].split()
-        return create_domains(request, names)
+        return create_domains(
+            request, names,
+            enter_names_form.cleaned_data['com_expiration'],
+            enter_names_form.cleaned_data['net_expiration'],
+            enter_names_form.cleaned_data['org_expiration'])
     # Save new name domains from file upload.
     upload_names_form = UploadNamesForm(
         request.POST if 'upload_file' in request.POST else None,
@@ -49,12 +62,19 @@ def detail(request, key_name):
     return render_to_response(request, 'domains/detail.html', locals())
 
 
-def create_domains(request, names):
+def create_domains(request, names,
+                   com_expiration=None,
+                   net_expiration=None,
+                   org_expiration=None):
     counter = 0
     for name in names:
         if '.' in name: # Cut off the top level domain.
             name = name[:name.index('.')]
-        domain, created = Domain.get_or_insert_with_flag(key_name=name)
+        domain, created = Domain.get_or_insert_with_flag(
+            key_name=name,
+            com_expiration=com_expiration,
+            net_expiration=net_expiration,
+            org_expiration=org_expiration)
         counter += int(created)
     if counter:
         counters.increment('domains_domain', counter)

@@ -12,6 +12,15 @@ class SearchForm(forms.Form):
     position = forms.ChoiceField(
         choices=[('left', 'left'), ('right', 'right')],
         widget=forms.RadioSelect(attrs={'class': 'radio'}))
+    com_expiration = forms.IntegerField(
+        initial=50,
+        widget=forms.TextInput(attrs={'class': 'text span-1'}))
+    net_expiration = forms.IntegerField(
+        initial=30,
+        widget=forms.TextInput(attrs={'class': 'text span-1'}))
+    org_expiration = forms.IntegerField(
+        initial=20,
+        widget=forms.TextInput(attrs={'class': 'text span-1'}))
     length = forms.IntegerField(
         initial=-1,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
@@ -55,17 +64,27 @@ def index(request):
     if search_form.is_valid():
         score_domain_list = []
         for domain in domain_list.fetch(100):
-            domain.count_letters()
             score = 0
+            if domain.com_expiration:
+                score += search_form.cleaned_data['com_expiration']
+            if domain.net_expiration:
+                score += search_form.cleaned_data['net_expiration']
+            if domain.org_expiration:
+                score += search_form.cleaned_data['org_expiration']
+            domain.count_letters()
             score += search_form.cleaned_data['length'] * domain.length
             score += search_form.cleaned_data['letters'] * domain.letters
             score += search_form.cleaned_data['digits'] * domain.digits
             score += search_form.cleaned_data['dashes'] * domain.dashes
             domain.check_dictionaries(keyword, position)
-            score += search_form.cleaned_data['scowl10'] * int(domain.scowl10)
-            score += search_form.cleaned_data['scowl20'] * int(domain.scowl20)
-            score += search_form.cleaned_data['scowl35'] * int(domain.scowl35)
-            score += search_form.cleaned_data['scowl50'] * int(domain.scowl50)
+            if domain.scowl10:
+                score += search_form.cleaned_data['scowl10']
+            if domain.scowl20:
+                score += search_form.cleaned_data['scowl20']
+            if domain.scowl35:
+                score += search_form.cleaned_data['scowl35']
+            if domain.scowl50:
+                score += search_form.cleaned_data['scowl50']
             score_domain_list.append((score, domain))
         score_domain_list.sort(
             key=lambda triple: (-triple[0], triple[1].name))
