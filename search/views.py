@@ -24,9 +24,6 @@ class SearchForm(forms.Form):
     length = forms.IntegerField(
         initial=-1,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    letters = forms.IntegerField(
-        initial=0,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
     digits = forms.IntegerField(
         initial=-4,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
@@ -71,9 +68,8 @@ def index(request):
                 score += search_form.cleaned_data['net_expiration']
             if domain.org_expiration:
                 score += search_form.cleaned_data['org_expiration']
-            domain.count_letters()
+            domain.count_chars()
             score += search_form.cleaned_data['length'] * domain.length
-            score += search_form.cleaned_data['letters'] * domain.letters
             score += search_form.cleaned_data['digits'] * domain.digits
             score += search_form.cleaned_data['dashes'] * domain.dashes
             domain.check_dictionaries(keyword, position)

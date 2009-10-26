@@ -61,7 +61,8 @@ class Domain(BaseModel):
             self.name = self.key().name()
             self.backwards = self.name[::-1]
 
-    def count_letters(self):
+    def count_chars(self):
+        self.length = len(self.name)
         self.letters = self.digits = self.dashes = 0
         chars = []
         for char in self.key().name():
@@ -71,7 +72,8 @@ class Domain(BaseModel):
                 self.digits += 1
             elif char == '-':
                 self.dashes += 1
-        self.length = self.letters + self.digits + self.dashes
+            else:
+                debug.error("%s contains bad char %s" % (self.name, char))
 
     def check_dictionaries(self, keyword, position):
         if position == 'left':

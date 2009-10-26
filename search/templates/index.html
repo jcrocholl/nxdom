@@ -17,7 +17,6 @@
 <td>{{ search_form.net_expiration }}</td>
 <td>{{ search_form.org_expiration }}</td>
 <td>{{ search_form.length }}</td>
-<td>{{ search_form.letters }}</td>
 <td>{{ search_form.digits }}</td>
 <td>{{ search_form.dashes }}</td>
 <td>{{ search_form.scowl10 }}</td>
@@ -40,7 +39,6 @@ right</label>
 <th>.net</th>
 <th>.org</th>
 <th>Length</th>
-<th>Letters</th>
 <th>Digits</th>
 <th>Dashes</th>
 <th>SCOWL 10</th>
@@ -56,7 +54,6 @@ right</label>
 <td>{% if domain.net_expiration %}{{ domain.net_expiration }}{% endif%}</td>
 <td>{% if domain.org_expiration %}{{ domain.org_expiration }}{% endif%}</td>
 <td>{{ domain.length }}</td>
-<td>{{ domain.letters }}</td>
 <td>{{ domain.digits }}</td>
 <td>{{ domain.dashes }}</td>
 <td>{% if domain.scowl10 %}{{ domain.rest }}{% endif%}</td>
