@@ -33,9 +33,7 @@ class NamesForm(forms.Form):
 
 def index(request):
     # Save newly entered name domains.
-    names_form = NamesForm(
-        request.POST if 'submit_names' in request.POST else None,
-        request.FILES if 'upload' in request.FILES else None)
+    names_form = NamesForm(request.POST or None, request.FILES or None)
     if names_form.is_valid():
         names = names_form.cleaned_data['names'].split()
         if 'upload' in request.FILES:
