@@ -1,6 +1,8 @@
 import logging
 import random
 
+from google.appengine.ext.db import stats
+
 from django import forms
 from django.http import HttpResponseRedirect
 
@@ -48,6 +50,9 @@ def index(request):
     # Display list of recent names.
     domain_list = Domain.all().order('-updated').fetch(20)
     domain_count = counters.get_count('domains_domain')
+    # Recent statistics.
+    domain_stats = stats.KindStat.all().filter('kind_name', 'domains_domain')
+    domain_stats = domain_stats.order('-timestamp').fetch(3)
     return render_to_response(request, 'domains/index.html', locals())
 
 

@@ -26,7 +26,13 @@
 </p>
 </form>
 
-<p>The {{ domain_list|length }} most recently updated names of {{ domain_count }} total:</p>
+{% for stat in domain_stats %}
+<p>{{ stat.timestamp|timesince }} ago,
+{{ stat.count }} domains were using {{ stat.bytes }} bytes.</p>
+{% endfor %}
+
+<p>The {{ domain_list|length }} most recently updated names, of
+{{ domain_count }} total:</p>
 <table>
 <tr>
 <th>Name</th>
