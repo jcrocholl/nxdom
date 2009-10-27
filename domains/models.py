@@ -62,7 +62,7 @@ class Domain(BaseModel):
             self.backwards = self.name[::-1]
 
     def count_chars(self):
-        self.length = len(self.name)
+        self.len = len(self.name)
         self.letters = self.digits = self.dashes = 0
         chars = []
         for char in self.key().name():
