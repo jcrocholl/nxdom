@@ -39,12 +39,12 @@ SECRET_KEY = '1234567890'
 #PROFILE_PATTERN = 'ext.db..+\((?:get|get_by_key_name|fetch|count|put)\)'
 
 # Enable I18N and set default language to 'en'
-USE_I18N = True
+USE_I18N = False
 LANGUAGE_CODE = 'en'
 
 # Restrict supported languages (and JS media generation)
 LANGUAGES = (
-    ('de', 'German'),
+    # ('de', 'German'),
     ('en', 'English'),
 )
 
