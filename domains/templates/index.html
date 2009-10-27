@@ -40,8 +40,7 @@
 <th>com</th>
 <th>net</th>
 <th>org</th>
-<th>Created</th>
-<th>Updated</th>
+<th>Timestamp</th>
 </tr>
 {% for domain in domain_list %}
 <tr class="{% cycle 'row1' 'row2' %}">
@@ -50,8 +49,7 @@
 <td>{% if domain.com_expiration %}{{ domain.com_expiration }}{% endif %}</td>
 <td>{% if domain.net_expiration %}{{ domain.net_expiration }}{% endif %}</td>
 <td>{% if domain.org_expiration %}{{ domain.org_expiration }}{% endif %}</td>
-<td>{{ domain.created|timesince }} ago</td>
-<td>{{ domain.updated|timesince }} ago</td>
+<td>{{ domain.timestamp|timesince }} ago</td>
 </tr>
 {% endfor %}
 </table>

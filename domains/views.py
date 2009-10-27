@@ -1,6 +1,8 @@
 import logging
 import random
+from datetime import datetime, date
 
+from google.appengine.ext import db
 from google.appengine.ext.db import stats
 
 from django import forms
@@ -9,7 +11,8 @@ from django.http import HttpResponseRedirect
 from ragendja.template import render_to_response
 from ragendja.dbutils import get_object_or_404
 
-from domains.models import Domain
+from domains.models import Domain, Dns, Whois
+from domains import utils
 import counters.utils as counters
 
 
@@ -46,7 +49,10 @@ def index(request):
             names_form.cleaned_data['net_expiration'],
             names_form.cleaned_data['org_expiration'])
     # Display list of recent names.
-    domain_list = Domain.all().order('-updated').fetch(20)
+    domain_list = Domain.all().order('-timestamp').fetch(20)
+    utils.get_domain_list_whois(domain_list, 'com')
+    utils.get_domain_list_whois(domain_list, 'net')
+    utils.get_domain_list_whois(domain_list, 'org')
     domain_count = counters.get_count('domains_domain')
     # Recent statistics.
     domain_stats = stats.KindStat.all().filter('kind_name', 'domains_domain')
@@ -67,23 +73,21 @@ def create_domains(request, names,
     for name in names:
         if '.' in name: # Cut off the top level domain.
             name = name[:name.index('.')]
-        domain, created = Domain.get_or_insert_with_flag(
-            key_name=name,
-            com_expiration=com_expiration,
-            net_expiration=net_expiration,
-            org_expiration=org_expiration)
+        domain, created = Domain.get_or_insert_with_flag(key_name=name)
         if created:
-            counter += int(created)
-        elif (domain.com_expiration != com_expiration or
-              domain.net_expiration != net_expiration or
-              domain.org_expiration != org_expiration):
+            counter += 1
             if com_expiration:
-                domain.com_expiration = com_expiration
+                Whois(key_name=name + '.com',
+                      expiration=com_expiration,
+                      timestamp=date.today()).put()
             if net_expiration:
-                domain.net_expiration = net_expiration
+                Whois(key_name=name + '.net',
+                      expiration=net_expiration,
+                      timestamp=date.today()).put()
             if org_expiration:
-                domain.org_expiration = org_expiration
-            domain.put()
+                Whois(key_name=name + '.org',
+                      expiration=org_expiration,
+                      timestamp=date.today()).put()
     if counter:
         counters.increment('domains_domain', counter)
     return HttpResponseRedirect(request.path)

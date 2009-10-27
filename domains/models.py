@@ -37,27 +37,20 @@ class Domain(BaseModel):
     """
     name = db.StringProperty() # Without top level domain and dots.
     backwards = db.StringProperty() # For suffix matching, name[::-1].
-    created = db.DateTimeProperty() # Automatically set in before_put.
-    updated = db.DateTimeProperty() # Automatically set in before_put.
-
-    # Domain expiration dates, according to whois.
-    com_expiration = db.DateProperty()
-    net_expiration = db.DateProperty()
-    org_expiration = db.DateProperty()
+    timestamp = db.DateTimeProperty() # Automatically set in before_put.
 
     def __unicode__(self):
-        return self.key().name()
+        return self.name
 
     def get_absolute_url(self):
-        return reverse('names.views.detail', args=[self.key().name()])
+        return reverse('names.views.detail', args=[self.name])
 
     def before_put(self):
         """
         Automatically populate some properties.
         """
-        self.updated = datetime.now()
         if not self.is_saved():
-            self.created = self.updated
+            self.timestamp = datetime.now()
             self.name = self.key().name()
             self.backwards = self.name[::-1]
 
@@ -65,7 +58,7 @@ class Domain(BaseModel):
         self.len = len(self.name)
         self.letters = self.digits = self.dashes = 0
         chars = []
-        for char in self.key().name():
+        for char in self.name:
             if 'a' <= char <= 'z':
                 self.letters += 1
             elif '0' <= char <= '9':
@@ -86,17 +79,17 @@ class Domain(BaseModel):
         self.scowl50 = self.rest in english.SCOWL50
 
 
-class DnsCheck(db.Model):
-    name = db.StringProperty()
-    enam = db.StringProperty()
-    tld = db.StringProperty()
-    checked = db.DateTimeProperty(auto_now=True)
-    ip = db.StringProperty()
+class Dns(db.Model):
+    """
+    The key name is domain.tld.
+    """
+    timestamp = db.DateProperty()
+    ip = db.StringProperty() # Or None if not found.
 
 
-class WhoisCheck(db.Model):
-    name = db.StringProperty()
-    enam = db.StringProperty()
-    tld = db.StringProperty()
-    checked = db.DateTimeProperty(auto_now=True)
-    expiration = db.DateTimeProperty()
+class Whois(db.Model):
+    """
+    The key name is domain.tld.
+    """
+    timestamp = db.DateProperty()
+    expiration = db.DateProperty() # Or None if not found.
