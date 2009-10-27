@@ -44,7 +44,7 @@
 </tr>
 {% for domain in domain_list %}
 <tr class="{% cycle 'row1' 'row2' %}">
-<td>{{ domain.name }}</td>
+<td>{{ domain.key.name }}</td>
 <td>{{ domain.backwards }}</td>
 <td>{% if domain.com_expiration %}{{ domain.com_expiration }}{% endif %}</td>
 <td>{% if domain.net_expiration %}{{ domain.net_expiration }}{% endif %}</td>

@@ -33,17 +33,16 @@ class BaseModel(db.Model):
 
 class Domain(BaseModel):
     """
-    The name is also used as the datastore key.
+    The datastore key name is the domain name, without top level.
     """
-    name = db.StringProperty() # Without top level domain and dots.
     backwards = db.StringProperty() # For suffix matching, name[::-1].
     timestamp = db.DateTimeProperty() # Automatically set in before_put.
 
     def __unicode__(self):
-        return self.name
+        return self.key().name()
 
     def get_absolute_url(self):
-        return reverse('names.views.detail', args=[self.name])
+        return reverse('names.views.detail', args=[self.key().name()])
 
     def before_put(self):
         """
@@ -51,14 +50,14 @@ class Domain(BaseModel):
         """
         if not self.is_saved():
             self.timestamp = datetime.now()
-            self.name = self.key().name()
-            self.backwards = self.name[::-1]
+            self.backwards = self.key().name()[::-1]
 
     def count_chars(self):
-        self.len = len(self.name)
+        name = self.key().name()
+        self.len = len(name)
         self.letters = self.digits = self.dashes = 0
         chars = []
-        for char in self.name:
+        for char in name:
             if 'a' <= char <= 'z':
                 self.letters += 1
             elif '0' <= char <= '9':
@@ -66,13 +65,13 @@ class Domain(BaseModel):
             elif char == '-':
                 self.dashes += 1
             else:
-                debug.error("%s contains bad char %s" % (self.name, char))
+                debug.error("%s contains bad char %s" % (name, char))
 
     def check_dictionaries(self, keyword, position):
         if position == 'left':
-            self.rest = self.name[len(keyword):]
+            self.rest = self.key().name()[len(keyword):]
         if position == 'right':
-            self.rest = self.name[:-len(keyword)]
+            self.rest = self.key().name()[:-len(keyword)]
         self.scowl10 = self.rest in english.SCOWL10
         self.scowl20 = self.rest in english.SCOWL20
         self.scowl35 = self.rest in english.SCOWL35
@@ -81,7 +80,7 @@ class Domain(BaseModel):
 
 class Dns(db.Model):
     """
-    The key name is domain.tld.
+    The datastore key name is "domain.tld".
     """
     timestamp = db.DateProperty()
     ip = db.StringProperty() # Or None if not found.
@@ -89,7 +88,7 @@ class Dns(db.Model):
 
 class Whois(db.Model):
     """
-    The key name is domain.tld.
+    The datastore key name is "domain.tld".
     """
     timestamp = db.DateProperty()
     expiration = db.DateProperty() # Or None if not found.
