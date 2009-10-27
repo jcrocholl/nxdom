@@ -21,7 +21,7 @@ function search() {
   });
 }
 $(document).ready(function() {
-  $("input.text").keyup(search);
+  $("input.text").typeWatch( { wait: 400, callback: search } );
   $("input[name=position]").click(search);
 });
 </script>
