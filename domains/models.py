@@ -78,17 +78,17 @@ class Domain(BaseModel):
         self.scowl50 = self.rest in english.SCOWL50
 
 
-class Dns(db.Model):
-    """
-    The datastore key name is "domain.tld".
-    """
-    timestamp = db.DateProperty()
-    ip = db.StringProperty() # Or None if not found.
-
-
 class Whois(db.Model):
     """
     The datastore key name is "domain.tld".
     """
     timestamp = db.DateProperty()
     expiration = db.DateProperty() # Or None if not found.
+
+
+class Dns(db.Model):
+    """
+    The datastore key name is "domain.tld".
+    """
+    timestamp = db.DateProperty()
+    ip = db.StringProperty() # Or None if not found.
