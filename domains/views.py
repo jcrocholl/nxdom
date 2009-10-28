@@ -1,4 +1,3 @@
-import logging
 import random
 from datetime import datetime, date
 

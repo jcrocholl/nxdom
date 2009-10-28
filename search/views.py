@@ -1,7 +1,11 @@
+from google.appengine.ext import db
+
 from django import forms
 from django.http import HttpResponseRedirect
+
 from ragendja.template import render_to_response
 
+from domains import utils
 from domains.models import Domain
 
 
@@ -44,22 +48,29 @@ class SearchForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
 
 
-def index(request):
-    search_form = SearchForm(request.GET or None)
-    keyword = request.GET.get('keyword', '')
-    position = request.GET.get('position', 'left')
+def filter_domains(keyword, position):
     domain_list = Domain.all()
     if keyword and position == 'left':
         next = keyword[:-1] + chr(ord(keyword[-1]) + 1)
-        domain_list.filter('name >=', keyword)
-        domain_list.filter('name <', next)
+        domain_list.filter(
+            '__key__ >=', db.Key.from_path('domains_domain', keyword))
+        domain_list.filter(
+            '__key__ <', db.Key.from_path('domains_domain', next))
     elif keyword and position == 'right':
         backwards = keyword[::-1]
         next = backwards[:-1] + chr(ord(backwards[-1]) + 1)
         domain_list.filter('backwards >=', backwards)
         domain_list.filter('backwards <', next)
+    return domain_list
+
+
+def index(request):
+    search_form = SearchForm(request.GET or None)
     if search_form.is_valid():
-        score_domain_list = score_domains(domain_list.fetch(100),
+        keyword = search_form.cleaned_data['keyword']
+        position = search_form.cleaned_data['position']
+        domain_list = filter_domains(keyword, position)
+        score_domain_list = score_domains(domain_list.fetch(1000),
                                           search_form.cleaned_data)
     return render_to_response(request, 'search/index.html', locals())
 
@@ -67,35 +78,26 @@ def index(request):
 def ajax(request):
     search_form = SearchForm(request.GET or None)
     if search_form.is_valid():
-        keyword = search_form.cleaned_data['keyword'] or ''
-        position = search_form.cleaned_data['position'] or 'left'
-        domain_list = Domain.all()
-        if keyword and position == 'left':
-            next = keyword[:-1] + chr(ord(keyword[-1]) + 1)
-            domain_list.filter('name >=', keyword)
-            domain_list.filter('name <', next)
-        elif keyword and position == 'right':
-            backwards = keyword[::-1]
-            next = backwards[:-1] + chr(ord(backwards[-1]) + 1)
-            domain_list.filter('backwards >=', backwards)
-            domain_list.filter('backwards <', next)
-        score_domain_list = score_domains(domain_list.fetch(100),
+        keyword = search_form.cleaned_data['keyword']
+        position = search_form.cleaned_data['position']
+        domain_list = filter_domains(keyword, position)
+        score_domain_list = score_domains(domain_list.fetch(1000),
                                           search_form.cleaned_data)
-    else:
-        score_domain_list = [(name, search_form[name].errors[0])
-                             for name in search_form.errors]
     return render_to_response(request, 'search/tbody.html', locals())
 
 
 def score_domains(domain_list, cleaned_data):
     score_domain_list = []
+    utils.get_domain_list_whois(domain_list, 'com')
+    utils.get_domain_list_whois(domain_list, 'net')
+    utils.get_domain_list_whois(domain_list, 'org')
     for domain in domain_list:
         score = 0
-        if domain.com_expiration:
+        if hasattr(domain, 'com_expiration'):
             score += cleaned_data['com_expiration'] or 50
-        if domain.net_expiration:
+        if hasattr(domain, 'net_expiration'):
             score += cleaned_data['net_expiration'] or 30
-        if domain.org_expiration:
+        if hasattr(domain, 'org_expiration'):
             score += cleaned_data['org_expiration'] or 20
         domain.count_chars()
         score += domain.len * (cleaned_data['len'] or -1)
@@ -113,5 +115,5 @@ def score_domains(domain_list, cleaned_data):
             score += cleaned_data['scowl50'] or 10
         score_domain_list.append((score, domain))
     score_domain_list.sort(
-        key=lambda triple: (-triple[0], triple[1].name))
+        key=lambda triple: (-triple[0], triple[1].key().name()))
     return score_domain_list[:20]

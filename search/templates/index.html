@@ -77,22 +77,7 @@ right</label>
 </tr>
 </thead>
 <tbody id="results">
-{% for score, domain in score_domain_list %}
-<tr class="{% cycle 'row1' 'row2' %}">
-<td>{{ domain.name }}</td>
-<td>{% if domain.com_expiration %}{{ domain.com_expiration }}{% endif%}</td>
-<td>{% if domain.net_expiration %}{{ domain.net_expiration }}{% endif%}</td>
-<td>{% if domain.org_expiration %}{{ domain.org_expiration }}{% endif%}</td>
-<td>{{ domain.len }}</td>
-<td>{{ domain.digits }}</td>
-<td>{{ domain.dashes }}</td>
-<td>{% if domain.scowl10 %}{{ domain.rest }}{% endif%}</td>
-<td>{% if domain.scowl20 %}{{ domain.rest }}{% endif%}</td>
-<td>{% if domain.scowl35 %}{{ domain.rest }}{% endif%}</td>
-<td>{% if domain.scowl50 %}{{ domain.rest }}{% endif%}</td>
-<td>{{ score }}</td>
-</tr>
-{% endfor %}
+{% include "search/tbody.html" %}
 </tbody>
 </table>
 </form>
