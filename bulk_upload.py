@@ -31,13 +31,16 @@ def put(objects):
 
 def bulk_upload(date, lines):
     objects = []
+    previous = ''
     for line in lines:
         line = line.strip()
         if not line:
             continue
         name, tld = line.split('.')
-        objects.append(Domain(key_name=name, backwards=name[::-1],
-                              timestamp=datetime.datetime.now()))
+        if name != previous:
+            objects.append(Domain(key_name=name, backwards=name[::-1],
+                                  timestamp=datetime.datetime.now()))
+        previous = name
         objects.append(Whois(key_name=line, expiration=date, timestamp=date))
         if len(objects) >= BATCH_SIZE:
             put(objects)
