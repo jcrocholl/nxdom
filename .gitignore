@@ -1,6 +1,7 @@
 *.pyc
 blueprintcss
 common
+trash
+.passwd
 .dynamic_media
 _generated_media
-2009*.txt
