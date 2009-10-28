@@ -2,6 +2,7 @@
 
 import os
 import sys
+import time
 import getpass
 import datetime
 
@@ -10,10 +11,12 @@ setup_env()
 
 from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
+from google.appengine.api.datastore_errors import Timeout
 
 from domains.models import Domain, Whois
 
 BATCH_SIZE = 400
+MAX_ATTEMPTS = 5
 
 
 def auth_func():
@@ -23,9 +26,20 @@ def auth_func():
 def put(objects):
     if not objects:
         return
-    print "Uploading %d objects (%s to %s):" % (
-        len(objects), objects[0].key().name(), objects[-1].key().name())
-    db.put(objects)
+    for attempt in range(MAX_ATTEMPTS):
+        if attempt:
+            print "Attempt %d of %d will start in %d seconds." % (
+                attempt + 1, MAX_ATTEMPTS, attempt)
+            time.sleep(attempt)
+        print "Uploading %d objects (%s to %s):" % (
+            len(objects), objects[0].key().name(), objects[-1].key().name())
+        try:
+            db.put(objects)
+            break
+        except Timeout:
+            print "*** Timeout ***"
+            if attempt + 1 == MAX_ATTEMPTS:
+                sys.exit(1)
     del objects[:]
 
 
