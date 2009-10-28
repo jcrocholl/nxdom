@@ -13,20 +13,11 @@ from google.appengine.ext.remote_api import remote_api_stub
 
 from domains.models import Domain, Whois
 
-BATCH_SIZE = 200
+BATCH_SIZE = 400
 
 
 def auth_func():
     return open('.passwd').read().split(':')
-
-
-def load_names(filename, resume=None):
-    names = []
-    for line in open(filename):
-        for name in line.split():
-            if name >= resume:
-                names.append(name)
-    return names
 
 
 def put(objects):
@@ -38,19 +29,19 @@ def put(objects):
     del objects[:]
 
 
-def bulk_upload(date, tld, names):
-    domains = []
-    whois = []
-    for name in names:
-        domains.append(Domain(key_name=name, backwards=name[::-1],
+def bulk_upload(date, lines):
+    objects = []
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        name, tld = line.split('.')
+        objects.append(Domain(key_name=name, backwards=name[::-1],
                               timestamp=datetime.datetime.now()))
-        whois.append(Whois(key_name=name + '.' + tld,
-                           expiration=date, timestamp=date))
-        if len(domains) >= BATCH_SIZE:
-            put(domains)
-            put(whois)
-    put(domains)
-    put(whois)
+        objects.append(Whois(key_name=line, expiration=date, timestamp=date))
+        if len(objects) >= BATCH_SIZE:
+            put(objects)
+    put(objects)
 
 
 def main():
@@ -65,12 +56,15 @@ def main():
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api', auth_func, options.server)
     for filename in args:
-        names = load_names(filename, options.resume)
-        names.sort()
-        date, tld, ext = os.path.basename(filename).split('.', 2)
-        year, month, day = date.split('-')
+        date, ext = os.path.basename(filename).split('.')
+        month, day, year = date.split('-')
         date = datetime.date(int(year), int(month), int(day))
-        bulk_upload(date, tld, names)
+        lines = open(filename).readlines()
+        lines.sort()
+        if filename == args[0] and options.resume:
+            while lines[0] < options.resume:
+                lines.pop(0)
+        bulk_upload(date, lines)
 
 
 if __name__ == '__main__':
