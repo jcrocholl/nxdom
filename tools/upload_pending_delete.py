@@ -15,7 +15,7 @@ NAMES_PER_REQUEST = 200
 
 
 def upload(filename):
-    date, tld, ext = os.path.basename(filename).split('.')
+    date, tld, ext = os.path.basename(filename).split('.', 2)
     names = []
     for line in open(filename):
         names.extend(line.split())
