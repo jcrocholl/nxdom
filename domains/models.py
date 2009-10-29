@@ -72,10 +72,16 @@ class Domain(BaseModel):
             self.rest = self.key().name()[len(keyword):]
         if position == 'right':
             self.rest = self.key().name()[:-len(keyword)]
-        self.scowl10 = self.rest in english.SCOWL10
-        self.scowl20 = self.rest in english.SCOWL20
-        self.scowl35 = self.rest in english.SCOWL35
-        self.scowl50 = self.rest in english.SCOWL50
+        if self.rest in english.SCOWL10:
+            self.scowl = 4
+        elif self.rest in english.SCOWL20:
+            self.scowl = 3
+        elif self.rest in english.SCOWL35:
+            self.scowl = 2
+        elif self.rest in english.SCOWL50:
+            self.scowl = 1
+        else:
+            self.scowl = 0
 
 
 class Whois(db.Model):

@@ -34,16 +34,7 @@ class SearchForm(forms.Form):
     dashes = forms.IntegerField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    scowl10 = forms.IntegerField(
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    scowl20 = forms.IntegerField(
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    scowl35 = forms.IntegerField(
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    scowl50 = forms.IntegerField(
+    scowl = forms.IntegerField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
 
@@ -79,10 +70,7 @@ def index(request, template_name='search/index.html'):
             'len': -1,
             'digits': -4,
             'dashes': -8,
-            'scowl10': 20,
-            'scowl20': 15,
-            'scowl35': 12,
-            'scowl50': 10,
+            'scowl': 10,
             })
     if search_form.is_valid():
         keyword = search_form.cleaned_data['keyword']
@@ -112,14 +100,7 @@ def score_domains(domain_list, cleaned_data):
         score += domain.dashes * cleaned_data['dashes']
         domain.check_dictionaries(cleaned_data['keyword'],
                                   cleaned_data['position'])
-        if domain.scowl10:
-            score += cleaned_data['scowl10']
-        if domain.scowl20:
-            score += cleaned_data['scowl20']
-        if domain.scowl35:
-            score += cleaned_data['scowl35']
-        if domain.scowl50:
-            score += cleaned_data['scowl50']
+        score += domain.scowl * cleaned_data['scowl']
         score_domain_list.append((score, domain))
     score_domain_list.sort(
         key=lambda triple: (-triple[0], triple[1].key().name()))
