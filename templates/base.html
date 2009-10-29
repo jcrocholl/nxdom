@@ -1,11 +1,9 @@
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}"
-    xml:lang="{% firstof LANGUAGE_CODE 'en' %}"
-    lang="{% firstof LANGUAGE_CODE 'en' %}">
+dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}"
+xml:lang="{% firstof LANGUAGE_CODE 'en' %}"
+lang="{% firstof LANGUAGE_CODE 'en' %}">
   <head>
     <title>{% block title %}{% endblock %} - Score Tool</title>
     {% block css %}
@@ -34,15 +32,8 @@
   </head>
 
   <body>
-    {% block header %}
-      <div id="header">
-        <div class="menu">
-          <a href="/">Home</a> |
-          <a href="/admin/">Admin</a>
-        </div>
-      </div>
-    {% endblock %}
-    <div id="content" class="column container">
+    <div class="container">
+      <div id="content" class="span-31 last">
       {% block content-header %}
         {% if error %}<div class="error">{{ error }}</div>{% endif %}
         {% if info %}<div class="info">{{ info }}</div>{% endif %}
@@ -54,7 +45,15 @@
       {% endblock %}
       {% block content %}{% endblock %}
     </div>
-    <div id="footer">
+    <div id="footer" class="span-31 last" style="text-align:center">
+      <a href="/pages/about/">About</a> |
+      <a href="/pages/faq/">FAQ</a> |
+      <a href="/pages/terms/">Terms of use</a> |
+      <a href="/pages/privacy/">Privacy policy</a> |
+      <a href="http://validator.w3.org/check?uri=referer">XHTML</a> |
+      <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> |
+      <a href="mailto:johann@rocholl.net">johann@rocholl.net</a>
+    </div>
     </div>
   </body>
 </html>

@@ -27,14 +27,13 @@ $(document).ready(function() {
 </script>
 {% endblock %}
 
-{% block title %}Search{% endblock %}
+{% block title %}Search and sort available domain names{% endblock %}
 
 {% block content %}
-<h1>Search available domain names</h1>
-
-{% if search_form.keyword.errors %}
-<p class="error">{{ search_form.keyword.errors.0 }}</p>
-{% endif %}
+<p style="margin:1em 0 0">
+<b>Type a keyword to search for available domain names.</b>
+Then adjust the score fields to sort the best names to the top of the list.
+</p>
 
 <form action="" method="get">
 <table>
@@ -52,7 +51,6 @@ $(document).ready(function() {
 <td>{{ search_form.scowl35 }}</td>
 <td>{{ search_form.scowl50 }}</td>
 <td><input type="submit" name="search" value="Search" /></td>
-<td></td>
 </tr>
 <tr>
 <th>Name
