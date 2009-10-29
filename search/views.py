@@ -64,26 +64,15 @@ def filter_domains(keyword, position):
     return domain_list
 
 
-def index(request):
+def index(request, template_name='search/index.html'):
     search_form = SearchForm(request.GET or None)
     if search_form.is_valid():
         keyword = search_form.cleaned_data['keyword']
         position = search_form.cleaned_data['position']
         domain_list = filter_domains(keyword, position)
-        score_domain_list = score_domains(domain_list.fetch(1000),
+        score_domain_list = score_domains(domain_list.fetch(100),
                                           search_form.cleaned_data)
-    return render_to_response(request, 'search/index.html', locals())
-
-
-def ajax(request):
-    search_form = SearchForm(request.GET or None)
-    if search_form.is_valid():
-        keyword = search_form.cleaned_data['keyword']
-        position = search_form.cleaned_data['position']
-        domain_list = filter_domains(keyword, position)
-        score_domain_list = score_domains(domain_list.fetch(1000),
-                                          search_form.cleaned_data)
-    return render_to_response(request, 'search/tbody.html', locals())
+    return render_to_response(request, template_name, locals())
 
 
 def score_domains(domain_list, cleaned_data):
