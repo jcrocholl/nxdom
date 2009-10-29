@@ -1,0 +1,29 @@
+h1. app-engine-patch users!!!
+
+This is a version of Blueprint CSS adapted to the app-engine-patch media generator:
+http://code.google.com/p/app-engine-patch/wiki/MediaGenerator
+
+You don't need to use Blueprint's CSS generator/compressor.
+
+This is just a demonstration of the media generator, so you can learn how to use the paths. Take a look at settings.py to see how media files get combined.
+
+This app can be uninstalled by simply removing 'blueprintcss' from INSTALLED_APPS in the root folder's settings.py.
+
+h1. Blueprint CSS Framework Readme
+
+Welcome to Blueprint! This is a CSS framework designed to cut down on your CSS development time. It gives you a solid foundation to build your own CSS on. Here are some of the features BP provides out-of-the-box:
+
+* An easily customizable grid
+* Sensible default typography
+* A typographic baseline
+* Perfected browser CSS reset
+* A stylesheet for printing
+* Powerful scripts for customization
+* Absolutely no bloat!
+
+h2. Project Info
+
+* *Web*: "http://blueprintcss.org":http://blueprintcss.org
+* *Source*: "http://github.com/joshuaclayton/blueprint-css":http://github.com/joshuaclayton/blueprint-css
+* *Wiki*: "http://github.com/joshuaclayton/blueprint-css/wikis/home":http://github.com/joshuaclayton/blueprint-css/wikis/home
+* *Bug/Feature Tracking*: "http://blueprintcss.lighthouseapp.com":http://blueprintcss.lighthouseapp.com
