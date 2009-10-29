@@ -1,6 +1,7 @@
 /*
  *	TypeWatch 2.0 - Original by Denny Ferrassoli
  *  Refactored by Charles Christolini
+ *  Cleaned up by Johann C. Rocholl in October 2009
  *
  *	Examples/Docs: www.dennydotnet.com
  *
@@ -24,10 +25,8 @@
 
 		function checkElement(timer, override) {
 			var elTxt = jQuery(timer.el).val();
-
-			// Fire if text > options.captureLength AND text != saved txt OR if override AND text > options.captureLength
-			if ((elTxt.length > options.captureLength && elTxt.toUpperCase() != timer.text)
-			|| (override && elTxt.length > options.captureLength)) {
+			if ((elTxt.length >= options.captureLength) &&
+				(override || elTxt.toUpperCase() != timer.text)) {
 				timer.text = elTxt.toUpperCase();
 				timer.cb(elTxt);
 			}
@@ -35,7 +34,8 @@
 
 		function watchElement(elem) {
 			// Must be text or textarea
-			if (elem.type.toUpperCase() == "TEXT" || elem.nodeName.toUpperCase() == "TEXTAREA") {
+			if (elem.type.toUpperCase() == "TEXT" ||
+				elem.nodeName.toUpperCase() == "TEXTAREA") {
 
 				// Allocate timer element
 				var timer = {
