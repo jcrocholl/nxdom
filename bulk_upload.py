@@ -17,6 +17,7 @@ from domains.models import Domain, Whois
 
 BATCH_SIZE = 400
 MAX_ATTEMPTS = 5
+MAX_NAME_LENGTH = 16
 
 
 def auth_func():
@@ -51,6 +52,8 @@ def bulk_upload(date, lines):
         if not line:
             continue
         name, tld = line.split('.')
+        if len(name) > MAX_NAME_LENGTH:
+            continue
         if name != previous:
             objects.append(Domain(key_name=name, backwards=name[::-1],
                                   timestamp=datetime.datetime.now()))
