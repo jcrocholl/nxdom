@@ -38,6 +38,26 @@ class Domain(BaseModel):
     backwards = db.StringProperty() # For suffix matching, name[::-1].
     timestamp = db.DateTimeProperty() # Automatically set in before_put.
 
+    length = db.IntegerProperty()
+    digits = db.IntegerProperty()
+    dashes = db.IntegerProperty()
+
+    # Prefixes.
+    left1 = db.StringProperty()
+    left2 = db.StringProperty()
+    left3 = db.StringProperty()
+    left4 = db.StringProperty()
+    left5 = db.StringProperty()
+    left6 = db.StringProperty()
+
+    # Suffixes.
+    right1 = db.StringProperty()
+    right2 = db.StringProperty()
+    right3 = db.StringProperty()
+    right4 = db.StringProperty()
+    right5 = db.StringProperty()
+    right6 = db.StringProperty()
+
     def __unicode__(self):
         return self.key().name()
 
@@ -48,24 +68,44 @@ class Domain(BaseModel):
         """
         Automatically populate some properties.
         """
-        if not self.is_saved():
-            self.timestamp = datetime.now()
-            self.backwards = self.key().name()[::-1]
+        if self.is_saved():
+            return
+        self.timestamp = datetime.now()
+        self.count_chars()
+        self.set_substrings()
 
     def count_chars(self):
+        """
+        Count digits and dashes.
+        """
         name = self.key().name()
-        self.len = len(name)
-        self.letters = self.digits = self.dashes = 0
-        chars = []
+        self.length = len(name)
+        self.digits = self.dashes = 0
         for char in name:
-            if 'a' <= char <= 'z':
-                self.letters += 1
-            elif '0' <= char <= '9':
+            if '0' <= char <= '9':
                 self.digits += 1
             elif char == '-':
                 self.dashes += 1
-            else:
-                debug.error("%s contains bad char %s" % (name, char))
+
+    def set_substrings(self):
+        """
+        Set substrings for fast index matching.
+        """
+        name = self.key().name()
+        length = len(name)
+        self.backwards = name[::-1]
+        self.left1 = name[:1] if length >= 1 else None
+        self.left2 = name[:2] if length >= 2 else None
+        self.left3 = name[:3] if length >= 3 else None
+        self.left4 = name[:4] if length >= 4 else None
+        self.left5 = name[:5] if length >= 5 else None
+        self.left6 = name[:6] if length >= 6 else None
+        self.right1 = name[-1:] if length >= 1 else None
+        self.right2 = name[-2:] if length >= 2 else None
+        self.right3 = name[-3:] if length >= 3 else None
+        self.right4 = name[-4:] if length >= 4 else None
+        self.right5 = name[-5:] if length >= 5 else None
+        self.right6 = name[-6:] if length >= 6 else None
 
     def check_dictionaries(self, keyword, position):
         if position == 'left':

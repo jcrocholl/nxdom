@@ -95,7 +95,7 @@ def score_domains(domain_list, cleaned_data):
         if hasattr(domain, 'org_expiration'):
             score += cleaned_data['org_expiration']
         domain.count_chars()
-        score += domain.len * cleaned_data['len']
+        score += domain.length * cleaned_data['len']
         score += domain.digits * cleaned_data['digits']
         score += domain.dashes * cleaned_data['dashes']
         domain.check_dictionaries(cleaned_data['keyword'],
