@@ -48,6 +48,9 @@ LANGUAGES = (
     ('en', 'English'),
 )
 
+# Set time zone to UTC, which is used internally by the datastore.
+TIME_ZONE = 'UTC'
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
     'django.core.context_processors.media',
