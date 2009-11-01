@@ -55,8 +55,10 @@ def bulk_upload(date, lines):
         if len(name) > MAX_NAME_LENGTH:
             continue
         if name != previous:
-            objects.append(Domain(key_name=name, backwards=name[::-1],
-                                  timestamp=datetime.datetime.now()))
+            domain = Domain(key_name=name, backwards=name[::-1],
+                            timestamp=datetime.datetime.now())
+            domain.before_put()
+            objects.append(domain)
         previous = name
         objects.append(Whois(key_name=line, expiration=date, timestamp=date))
         if len(objects) >= BATCH_SIZE:
@@ -76,7 +78,7 @@ def main():
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api', auth_func, options.server)
     for filename in args:
-        date, ext = os.path.basename(filename).split('.')
+        date, ext = os.path.basename(filename).split('.', 1)
         month, day, year = date.split('-')
         date = datetime.date(int(year), int(month), int(day))
         lines = open(filename).readlines()
