@@ -72,16 +72,6 @@ def get_oldest_domains():
     return Domain.all().order('timestamp').fetch(BATCH_SIZE)
 
 
-def delete_long_domains(domains):
-    long_domains = []
-    for index in range(len(domains) -1, -1, -1):
-        domain = domains[index]
-        if len(domain.key().name()) > MAX_NAME_LENGTH:
-            long_domains.append(domain)
-            del domains[index]
-    delete_batch(long_domains)
-
-
 def callback(answer, qname, rr, flags, domain):
     # print qname, answer
     ip_list = list(answer[3])
@@ -96,9 +86,10 @@ def callback(answer, qname, rr, flags, domain):
 def update_domains():
     dns = ADNS.QueryEngine()
     domains = get_oldest_domains()
-    delete_long_domains(domains)
     for domain in domains:
         name = domain.key().name()
+        if len(name) > MAX_NAME_LENGTH:
+            continue # No DNS lookup, this name will be deleted anyway.
         dns.submit('%s.com' % name, rr.A, callback=callback, extra=domain)
         dns.submit('%s.net' % name, rr.A, callback=callback, extra=domain)
         dns.submit('%s.org' % name, rr.A, callback=callback, extra=domain)
@@ -106,17 +97,32 @@ def update_domains():
         dns.submit('www.%s.net' % name, rr.A, callback=callback, extra=domain)
         dns.submit('www.%s.org' % name, rr.A, callback=callback, extra=domain)
     print "Waiting for DNS results..."
-    dns.finish() # Wait for all DNS results.
+    dns.finish()
+    domains_put = []
+    domains_delete = []
     for domain in domains:
         name = domain.key().name()
+        if len(name) > MAX_NAME_LENGTH:
+            print '%s %s is too long (%d), deleting' % (
+                domain.timestamp.strftime('%Y-%m-%d %H:%M'), name, len(name))
+            domains_delete.append(domain)
+            continue
+        if domain.com and domain.net and domain.org:
+            print '%s %s has DNS for .com .net .org, deleting' % (
+                domain.timestamp.strftime('%Y-%m-%d %H:%M'), name)
+            domains_delete.append(domain)
+            continue
         domain.count_chars()
         domain.set_substrings()
-        domain.timestamp = datetime.now()
-        print '%-20s %5s %5s %5s %-16s %-16s %-16s %s,%s,%s,%s' % (
-            name, domain.length, domain.digits, domain.dashes,
+        print '%s %-17s %5s %5s %5s %-16s %-16s %-16s %s,%s,%s,%s' % (
+            domain.timestamp.strftime('%Y-%m-%d %H:%M'), name,
+            domain.length, domain.digits, domain.dashes,
             domain.com, domain.net, domain.org,
             domain.left1, domain.left6, domain.right6, domain.right1)
-    put_batch(domains)
+        domain.timestamp = datetime.now()
+        domains_put.append(domain)
+    put_batch(domains_put)
+    delete_batch(domains_delete)
 
 
 def main():
