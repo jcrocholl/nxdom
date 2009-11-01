@@ -38,9 +38,15 @@ class Domain(BaseModel):
     backwards = db.StringProperty() # For suffix matching, name[::-1].
     timestamp = db.DateTimeProperty() # Automatically set in before_put.
 
+    # Character counts.
     length = db.IntegerProperty()
     digits = db.IntegerProperty()
     dashes = db.IntegerProperty()
+
+    # DNS lookups.
+    com = db.StringProperty()
+    net = db.StringProperty()
+    org = db.StringProperty()
 
     # Prefixes.
     left1 = db.StringProperty()
@@ -130,11 +136,3 @@ class Whois(db.Model):
     """
     timestamp = db.DateProperty()
     expiration = db.DateProperty() # Or None if not found.
-
-
-class Dns(db.Model):
-    """
-    The datastore key name is "domain.tld".
-    """
-    timestamp = db.DateProperty()
-    ip = db.StringProperty() # Or None if not found.
