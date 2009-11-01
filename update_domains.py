@@ -4,7 +4,7 @@ import os
 import sys
 import time
 import getpass
-import datetime
+from datetime import datetime
 
 from common.appenginepatch.aecmd import setup_env
 setup_env()
@@ -16,9 +16,9 @@ from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
 from google.appengine.api.datastore_errors import Timeout
 
-from domains.models import Domain, Whois, Dns
+from domains.models import Domain
 
-BATCH_SIZE = 20
+BATCH_SIZE = 100
 MAX_ATTEMPTS = 5
 MAX_NAME_LENGTH = 16
 DNS_HIJACKERS = '208.67.219.132'.split()
@@ -54,12 +54,14 @@ def get_oldest_domains():
         if len(domain.key().name()) <= MAX_NAME_LENGTH:
             result.append(domain)
         else:
+            print "Deleting %s because it has %d characters..." % (
+                domain.key().name(), len(domain.key().name()))
             domain.delete()
     return result
 
 
 def callback(answer, qname, rr, flags, domain):
-    print qname, answer
+    # print qname, answer
     ip_list = list(answer[3])
     ip_list.sort()
     ip = ip_list[0] if ip_list else None
@@ -80,15 +82,18 @@ def update_domains():
         dns.submit('www.%s.com' % name, rr.A, callback=callback, extra=domain)
         dns.submit('www.%s.net' % name, rr.A, callback=callback, extra=domain)
         dns.submit('www.%s.org' % name, rr.A, callback=callback, extra=domain)
+    print "Waiting for DNS results..."
     dns.finish() # Wait for all DNS results.
     for domain in domains:
         name = domain.key().name()
         domain.count_chars()
         domain.set_substrings()
+        domain.timestamp = datetime.now()
         print '%-20s %5s %5s %5s %-16s %-16s %-16s %s,%s,%s,%s' % (
             name, domain.length, domain.digits, domain.dashes,
             domain.com, domain.net, domain.org,
             domain.left1, domain.left6, domain.right6, domain.right1)
+    put(domains)
 
 
 def main():
