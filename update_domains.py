@@ -18,7 +18,7 @@ from google.appengine.api.datastore_errors import Timeout
 
 from domains.models import Domain
 
-BATCH_SIZE = 100
+BATCH_SIZE = 400
 MAX_ATTEMPTS = 5
 MAX_NAME_LENGTH = 16
 DNS_HIJACKERS = '208.67.219.132'.split()
@@ -28,7 +28,7 @@ def auth_func():
     return open('.passwd').read().split(':')
 
 
-def put(objects):
+def put_batch(objects):
     if not objects:
         return
     for attempt in range(MAX_ATTEMPTS):
@@ -48,16 +48,38 @@ def put(objects):
     del objects[:]
 
 
+def delete_batch(objects):
+    if not objects:
+        return
+    for attempt in range(MAX_ATTEMPTS):
+        if attempt:
+            print "Attempt %d of %d will start in %d seconds." % (
+                attempt + 1, MAX_ATTEMPTS, attempt)
+            time.sleep(attempt)
+        print "Deleting %d objects (%s to %s):" % (
+            len(objects), objects[0].key().name(), objects[-1].key().name())
+        try:
+            db.delete(objects)
+            break
+        except Timeout:
+            print "*** Timeout ***"
+            if attempt + 1 == MAX_ATTEMPTS:
+                sys.exit(1)
+    del objects[:]
+
+
 def get_oldest_domains():
-    result = []
-    for domain in Domain.all().order('timestamp').fetch(BATCH_SIZE):
-        if len(domain.key().name()) <= MAX_NAME_LENGTH:
-            result.append(domain)
-        else:
-            print "Deleting %s because it has %d characters..." % (
-                domain.key().name(), len(domain.key().name()))
-            domain.delete()
-    return result
+    return Domain.all().order('timestamp').fetch(BATCH_SIZE)
+
+
+def delete_long_domains(domains):
+    long_domains = []
+    for index in range(len(domains) -1, -1, -1):
+        domain = domains[index]
+        if len(domain.key().name()) > MAX_NAME_LENGTH:
+            long_domains.append(domain)
+            del domains[index]
+    delete_batch(long_domains)
 
 
 def callback(answer, qname, rr, flags, domain):
@@ -74,6 +96,7 @@ def callback(answer, qname, rr, flags, domain):
 def update_domains():
     dns = ADNS.QueryEngine()
     domains = get_oldest_domains()
+    delete_long_domains(domains)
     for domain in domains:
         name = domain.key().name()
         dns.submit('%s.com' % name, rr.A, callback=callback, extra=domain)
@@ -93,7 +116,7 @@ def update_domains():
             name, domain.length, domain.digits, domain.dashes,
             domain.com, domain.net, domain.org,
             domain.left1, domain.left6, domain.right6, domain.right1)
-    put(domains)
+    put_batch(domains)
 
 
 def main():
@@ -105,7 +128,8 @@ def main():
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api', auth_func, options.server)
-    update_domains()
+    while True:
+        update_domains()
 
 
 if __name__ == '__main__':
