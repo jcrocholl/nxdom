@@ -37,19 +37,29 @@
 <tr>
 <th>Name</th>
 <th>Backwards</th>
+<th>Left 5</th>
+<th>Right 5</th>
+<th>Length</th>
+<th>Digits</th>
+<th>Dashes</th>
+<th>Timestamp</th>
 <th>com</th>
 <th>net</th>
 <th>org</th>
-<th>Timestamp</th>
 </tr>
 {% for domain in domain_list %}
 <tr class="{% cycle 'row1' 'row2' %}">
 <td>{{ domain.key.name }}</td>
 <td>{{ domain.backwards }}</td>
+<td>{{ domain.left5 }}</td>
+<td>{{ domain.right5 }}</td>
+<td>{{ domain.length }}</td>
+<td>{{ domain.digits }}</td>
+<td>{{ domain.dashes }}</td>
+<td>{{ domain.timestamp|timesince }} ago</td>
 <td>{% if domain.com_expiration %}{{ domain.com_expiration }}{% endif %}</td>
 <td>{% if domain.net_expiration %}{{ domain.net_expiration }}{% endif %}</td>
 <td>{% if domain.org_expiration %}{{ domain.org_expiration }}{% endif %}</td>
-<td>{{ domain.timestamp|timesince }} ago</td>
 </tr>
 {% endfor %}
 </table>
