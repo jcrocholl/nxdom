@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 from ragendja.template import render_to_response
 from ragendja.dbutils import get_object_or_404
 
-from domains.models import Domain, Dns, Whois
+from domains.models import Domain
 from domains import utils
 
 
@@ -48,9 +48,6 @@ def index(request):
             names_form.cleaned_data['org_expiration'])
     # Display list of recent names.
     domain_list = Domain.all().order('-timestamp').fetch(20)
-    utils.get_domain_list_whois(domain_list, 'com')
-    utils.get_domain_list_whois(domain_list, 'net')
-    utils.get_domain_list_whois(domain_list, 'org')
     # Recent statistics.
     domain_stats = stats.KindStat.all().filter('kind_name', 'domains_domain')
     domain_stats = domain_stats.order('-timestamp').fetch(3)
@@ -70,17 +67,4 @@ def create_domains(request, names,
         if '.' in name: # Cut off the top level domain.
             name = name[:name.index('.')]
         domain, created = Domain.get_or_insert_with_flag(key_name=name)
-        if created:
-            if com_expiration:
-                Whois(key_name=name + '.com',
-                      expiration=com_expiration,
-                      timestamp=date.today()).put()
-            if net_expiration:
-                Whois(key_name=name + '.net',
-                      expiration=net_expiration,
-                      timestamp=date.today()).put()
-            if org_expiration:
-                Whois(key_name=name + '.org',
-                      expiration=org_expiration,
-                      timestamp=date.today()).put()
     return HttpResponseRedirect(request.path)
