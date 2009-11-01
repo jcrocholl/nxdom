@@ -12,7 +12,6 @@ from ragendja.dbutils import get_object_or_404
 
 from domains.models import Domain, Dns, Whois
 from domains import utils
-import counters.utils as counters
 
 
 class NamesForm(forms.Form):
@@ -52,7 +51,6 @@ def index(request):
     utils.get_domain_list_whois(domain_list, 'com')
     utils.get_domain_list_whois(domain_list, 'net')
     utils.get_domain_list_whois(domain_list, 'org')
-    domain_count = counters.get_count('domains_domain')
     # Recent statistics.
     domain_stats = stats.KindStat.all().filter('kind_name', 'domains_domain')
     domain_stats = domain_stats.order('-timestamp').fetch(3)
@@ -68,13 +66,11 @@ def create_domains(request, names,
                    com_expiration=None,
                    net_expiration=None,
                    org_expiration=None):
-    counter = 0
     for name in names:
         if '.' in name: # Cut off the top level domain.
             name = name[:name.index('.')]
         domain, created = Domain.get_or_insert_with_flag(key_name=name)
         if created:
-            counter += 1
             if com_expiration:
                 Whois(key_name=name + '.com',
                       expiration=com_expiration,
@@ -87,6 +83,4 @@ def create_domains(request, names,
                 Whois(key_name=name + '.org',
                       expiration=org_expiration,
                       timestamp=date.today()).put()
-    if counter:
-        counters.increment('domains_domain', counter)
     return HttpResponseRedirect(request.path)
