@@ -11,7 +11,6 @@ from ragendja.template import render_to_response
 from ragendja.dbutils import get_object_or_404
 
 from domains.models import Domain
-from domains import utils
 
 
 class NamesForm(forms.Form):

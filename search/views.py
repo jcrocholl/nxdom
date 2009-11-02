@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect
 
 from ragendja.template import render_to_response
 
-from domains import utils
 from domains.models import Domain
 
 
@@ -83,9 +82,6 @@ def index(request, template_name='search/index.html'):
 
 def score_domains(domain_list, cleaned_data):
     score_domain_list = []
-    utils.get_domain_list_whois(domain_list, 'com')
-    utils.get_domain_list_whois(domain_list, 'net')
-    utils.get_domain_list_whois(domain_list, 'org')
     for domain in domain_list:
         score = 0
         # Available domain names.
