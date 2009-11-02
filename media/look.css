@@ -12,3 +12,6 @@ ul.errorlist {
 tr.row1 {
   background-color: #EEE;
 }
+
+.red { color: #800; }
+.green { color: #080; }
