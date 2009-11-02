@@ -7,25 +7,29 @@
 
 <form action="" method="post">
 <p>
-{{ prefix_form.prefix }}
+{{ prefix_form.prefixes }}
 <input type="submit" name="count_names" value="Count domain names" />
 </p>
 </form>
 
+<p>
+2-letter prefixes counted: {{ prefix_count }} of 676<br />
+Total domains counted: {{ domain_count }}<br />
+Estimated domains in datastore: {{ domain_estimate }}<br />
+</p>
+
 <table>
 <thead>
 <tr>
-<th>Prefix</th>
-<th>Length</th>
-<th>Count</th>
+<th></th>
+{% for letter in letters %}<th>{{ letter }}</th>{% endfor %}
 </tr>
 </thead>
 <tbody>
-{% for prefix in prefix_list %}
+{% for letter, row in matrix %}
 <tr class="{% cycle 'row1' 'row2' %}">
-<td>{{ prefix.key.name }}</td>
-<td>{{ prefix.length }}</td>
-<td>{{ prefix.count }}</td>
+<th>{{ letter }}</th>
+{% for count in row %}<td>{% ifnotequal count None %}{{ count }}{% endifnotequal %}</td>{% endfor %}
 </tr>
 {% endfor %}
 </tbody>

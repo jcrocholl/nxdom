@@ -8,3 +8,4 @@ class Prefix(db.Model):
   """
   length = db.IntegerProperty(required=True)
   count = db.IntegerProperty(required=True, default=0)
+  timestamp = db.DateTimeProperty()
