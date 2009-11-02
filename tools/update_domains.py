@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 
+# Setup project environment in the parent directory.
 import os
 import sys
+sys.path[0] = os.path.dirname(sys.path[0])
+from common.appenginepatch.aecmd import setup_env
+setup_env()
+
 import time
 import getpass
 import datetime
-
-from common.appenginepatch.aecmd import setup_env
-setup_env()
 
 import ADNS
 from adns import rr
