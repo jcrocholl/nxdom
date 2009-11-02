@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Prefixes{% endblock %}
+
+{% block content %}
+<h1>Prefixes</h1>
+
+<form action="" method="post">
+<p>
+{{ prefix_form.prefix }}
+<input type="submit" name="count_names" value="Count domain names" />
+</p>
+</form>
+
+<table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Length</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+{% for prefix in prefix_list %}
+<tr class="{% cycle 'row1' 'row2' %}">
+<td>{{ prefix.key.name }}</td>
+<td>{{ prefix.length }}</td>
+<td>{{ prefix.count }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

@@ -9,12 +9,3 @@ class Config(db.Model):
 class Shard(db.Model):
   name = db.StringProperty(required=True)
   count = db.IntegerProperty(required=True, default=0)
-
-
-class Prefix(db.Model):
-  """
-  Count all domains in the datastore that start with the same prefix
-  as the key name of the counter.
-  """
-  length = db.IntegerProperty(required=True)
-  count = db.IntegerProperty(required=True, default=0)

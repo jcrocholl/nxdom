@@ -107,6 +107,7 @@ INSTALLED_APPS = (
     'mediautils',
     'counters',
     'domains',
+    'prefixes',
     'search',
     'dictionaries',
 )
