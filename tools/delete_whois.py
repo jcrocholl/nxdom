@@ -59,6 +59,8 @@ def main():
         'scoretool', '/remote_api', auth_func, options.server)
     while True:
         whois_keys = Whois.all(keys_only=True).fetch(BATCH_SIZE)
+        if not whois_keys:
+            break
         delete_batch(whois_keys)
 
 
