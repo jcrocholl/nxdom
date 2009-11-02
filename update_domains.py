@@ -4,7 +4,7 @@ import os
 import sys
 import time
 import getpass
-from datetime import datetime
+import datetime
 
 from common.appenginepatch.aecmd import setup_env
 setup_env()
@@ -103,12 +103,14 @@ def update_domains(domains):
         if len(name) > MAX_NAME_LENGTH:
             print '%s %s is too long (%d), deleting' % (
                 domain.timestamp.strftime('%Y-%m-%d %H:%M'), name, len(name))
-            domains_delete.append(domain)
+            if domain.is_saved():
+                domains_delete.append(domain)
             continue
         if domain.com and domain.net and domain.org:
             print '%s %s has DNS for .com .net .org, deleting' % (
                 domain.timestamp.strftime('%Y-%m-%d %H:%M'), name)
-            domains_delete.append(domain)
+            if domain.is_saved():
+                domains_delete.append(domain)
             continue
         domain.count_chars()
         domain.set_substrings()
@@ -117,10 +119,12 @@ def update_domains(domains):
             domain.length, domain.digits, domain.dashes,
             domain.com, domain.net, domain.org,
             domain.left1, domain.left6, domain.right6, domain.right1)
-        domain.timestamp = datetime.now()
+        domain.timestamp = datetime.datetime.now()
         domains_put.append(domain)
-    put_batch(domains_put)
-    delete_batch(domains_delete)
+    if domains_put:
+        put_batch(domains_put)
+    if domains_delete:
+        delete_batch(domains_delete)
 
 
 def update_server_domains():
@@ -129,12 +133,52 @@ def update_server_domains():
         update_domains(domains)
 
 
+def bulk_upload(date, lines):
+    domains = []
+    previous = ''
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        name, tld = line.split('.')
+        if len(name) > MAX_NAME_LENGTH:
+            continue
+        if name != previous:
+            domain = Domain(key_name=name, backwards=name[::-1],
+                            timestamp=datetime.datetime.now())
+            domain.before_put()
+            domains.append(domain)
+        previous = name
+        if len(domains) >= BATCH_SIZE:
+            update_domains(domains)
+    # After the last loop, upload the rest.
+    if domains:
+        update_domains(domains)
+
+
+def upload_from_file(filename, resume=None):
+    date, ext = os.path.basename(filename).split('.', 1)
+    if date[2] == date[5] == '-':
+        month, day, year = date.split('-')
+    else:
+        year, month, day = date.split('-')
+    date = datetime.date(int(year), int(month), int(day))
+    lines = open(filename).readlines()
+    lines.sort()
+    if resume:
+        while lines[0] < resume:
+            lines.pop(0)
+    bulk_upload(date, lines)
+
+
 def main():
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option('--server', metavar='<hostname>',
                       default='scoretool.appspot.com',
                       help="connect to a different server")
+    parser.add_option('--resume', metavar='<name>',
+                      help="resume upload, starting from this name")
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api', auth_func, options.server)
@@ -142,7 +186,8 @@ def main():
         update_server_domains()
     else:
         for filename in args:
-            upload_domains(filename)
+            upload_from_file(filename, options.resume)
+            options.resume = None # Only for the first filename.
 
 
 if __name__ == '__main__':
