@@ -16,13 +16,13 @@ class SearchForm(forms.Form):
     position = forms.ChoiceField(
         required=False, choices=[('left', 'left'), ('right', 'right')],
         widget=forms.RadioSelect(attrs={'class': 'radio'}))
-    com_expiration = forms.IntegerField(
+    com = forms.IntegerField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    net_expiration = forms.IntegerField(
+    net = forms.IntegerField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    org_expiration = forms.IntegerField(
+    org = forms.IntegerField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
     len = forms.IntegerField(
@@ -64,9 +64,9 @@ def filter_domains(keyword, position):
 
 def index(request, template_name='search/index.html'):
     search_form = SearchForm(request.GET or None, initial={
-            'com_expiration': 50,
-            'net_expiration': 30,
-            'org_expiration': 20,
+            'com': 50,
+            'net': 30,
+            'org': 20,
             'len': -1,
             'digits': -4,
             'dashes': -8,
@@ -76,8 +76,8 @@ def index(request, template_name='search/index.html'):
         keyword = search_form.cleaned_data['keyword']
         position = search_form.cleaned_data['position']
         domain_list = filter_domains(keyword, position)
-        score_domain_list = score_domains(domain_list.fetch(100),
-                                          search_form.cleaned_data)
+        domain_list = score_domains(domain_list.fetch(100),
+                                    search_form.cleaned_data)
     return render_to_response(request, template_name, locals())
 
 
@@ -88,21 +88,24 @@ def score_domains(domain_list, cleaned_data):
     utils.get_domain_list_whois(domain_list, 'org')
     for domain in domain_list:
         score = 0
-        if hasattr(domain, 'com_expiration'):
-            score += cleaned_data['com_expiration']
-        if hasattr(domain, 'net_expiration'):
-            score += cleaned_data['net_expiration']
-        if hasattr(domain, 'org_expiration'):
-            score += cleaned_data['org_expiration']
+        # Available domain names.
+        if domain.com is None:
+            score += cleaned_data['com']
+        if domain.net is None:
+            score += cleaned_data['net']
+        if domain.org is None:
+            score += cleaned_data['org']
+        # Character counts.
         if domain.length is None:
             domain.count_chars()
         score += domain.length * cleaned_data['len']
         score += domain.digits * cleaned_data['digits']
         score += domain.dashes * cleaned_data['dashes']
+        # Check dictionary words.
         domain.check_dictionaries(cleaned_data['keyword'],
                                   cleaned_data['position'])
         score += domain.scowl * cleaned_data['scowl']
-        score_domain_list.append((score, domain))
-    score_domain_list.sort(
-        key=lambda triple: (-triple[0], triple[1].key().name()))
-    return score_domain_list[:20]
+        domain.score = score
+    domain_list.sort(
+        key=lambda domain: (-domain.score, domain.key().name()))
+    return domain_list[:20]

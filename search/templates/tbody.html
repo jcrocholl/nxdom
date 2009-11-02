@@ -1,13 +1,13 @@
-{% for score, domain in score_domain_list %}
+{% for domain in domain_list %}
 <tr class="{% cycle 'row1' 'row2' %}">
 <td>{{ domain.key.name }}</td>
-<td>{% if domain.com_expiration %}{{ domain.com_expiration }}{% endif%}</td>
-<td>{% if domain.net_expiration %}{{ domain.net_expiration }}{% endif%}</td>
-<td>{% if domain.org_expiration %}{{ domain.org_expiration }}{% endif%}</td>
+<td>{% if domain.com %}{{ domain.com }}{% endif%}</td>
+<td>{% if domain.net %}{{ domain.net }}{% endif%}</td>
+<td>{% if domain.org %}{{ domain.org }}{% endif%}</td>
 <td>{{ domain.length }}</td>
 <td>{{ domain.digits }}</td>
 <td>{{ domain.dashes }}</td>
 <td>{% if domain.scowl %}{{ domain.rest }}={{ domain.scowl }}{% endif%}</td>
-<td>{{ score }}</td>
+<td>{{ domain.score }}</td>
 </tr>
 {% endfor %}

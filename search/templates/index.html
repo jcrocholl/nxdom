@@ -6,9 +6,9 @@ function search() {
   $.get("/search/ajax/", {
     keyword: $("input#id_keyword").val(),
     position: $("input[name=position]:checked").val(),
-    com_expiration: $("input#id_com_expiration").val(),
-    net_expiration: $("input#id_net_expiration").val(),
-    org_expiration: $("input#id_org_expiration").val(),
+    com: $("input#id_com").val(),
+    net: $("input#id_net").val(),
+    org: $("input#id_org").val(),
     len: $("input#id_len").val(),
     digits: $("input#id_digits").val(),
     dashes: $("input#id_dashes").val(),
@@ -37,9 +37,9 @@ Then adjust the score fields to sort the best names to the top of the list.
 <thead>
 <tr>
 <td>{{ search_form.keyword }}</td>
-<td>{{ search_form.com_expiration }}</td>
-<td>{{ search_form.net_expiration }}</td>
-<td>{{ search_form.org_expiration }}</td>
+<td>{{ search_form.com }}</td>
+<td>{{ search_form.net }}</td>
+<td>{{ search_form.org }}</td>
 <td>{{ search_form.len }}</td>
 <td>{{ search_form.digits }}</td>
 <td>{{ search_form.dashes }}</td>
