@@ -68,10 +68,6 @@ def delete_batch(objects):
     del objects[:]
 
 
-def get_oldest_domains():
-    return Domain.all().order('timestamp').fetch(BATCH_SIZE)
-
-
 def callback(answer, qname, rr, flags, domain):
     # print qname, answer
     ip_list = list(answer[3])
@@ -83,13 +79,15 @@ def callback(answer, qname, rr, flags, domain):
         setattr(domain, qname[-3:], ip)
 
 
-def update_domains():
+def update_domains(domains):
     dns = ADNS.QueryEngine()
-    domains = get_oldest_domains()
     for domain in domains:
         name = domain.key().name()
         if len(name) > MAX_NAME_LENGTH:
             continue # No DNS lookup, this name will be deleted anyway.
+        domain.com = None
+        domain.net = None
+        domain.org = None
         dns.submit('%s.com' % name, rr.A, callback=callback, extra=domain)
         dns.submit('%s.net' % name, rr.A, callback=callback, extra=domain)
         dns.submit('%s.org' % name, rr.A, callback=callback, extra=domain)
@@ -125,6 +123,12 @@ def update_domains():
     delete_batch(domains_delete)
 
 
+def update_server_domains():
+    while True:
+        domains = Domain.all().order('timestamp').fetch(BATCH_SIZE)
+        update_domains(domains)
+
+
 def main():
     from optparse import OptionParser
     parser = OptionParser()
@@ -134,8 +138,11 @@ def main():
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api', auth_func, options.server)
-    while True:
-        update_domains()
+    if not args:
+        update_server_domains()
+    else:
+        for filename in args:
+            upload_domains(filename)
 
 
 if __name__ == '__main__':
