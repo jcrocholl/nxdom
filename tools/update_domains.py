@@ -23,14 +23,13 @@ from domains.models import Domain
 BATCH_SIZE = 400
 MAX_ATTEMPTS = 5
 MAX_NAME_LENGTH = 16
-DNS_HIJACKERS = '208.67.219.132'.split()
 
 
 def auth_func():
     return open('.passwd').read().split(':')
 
 
-def put_batch(objects):
+def retry(func, objects):
     if not objects:
         return
     for attempt in range(MAX_ATTEMPTS):
@@ -38,36 +37,15 @@ def put_batch(objects):
             print "Attempt %d of %d will start in %d seconds." % (
                 attempt + 1, MAX_ATTEMPTS, attempt)
             time.sleep(attempt)
-        print "Uploading %d objects (%s to %s):" % (
-            len(objects), objects[0].key().name(), objects[-1].key().name())
+        print "Trying to %s %d objects (%s to %s):" % (
+            func.__name__, len(objects),
+            objects[0].key().name(), objects[-1].key().name())
         try:
-            db.put(objects)
-            break
+            return func(objects)
         except Timeout:
             print "*** Timeout ***"
-            if attempt + 1 == MAX_ATTEMPTS:
-                sys.exit(1)
-    del objects[:]
-
-
-def delete_batch(objects):
-    if not objects:
-        return
-    for attempt in range(MAX_ATTEMPTS):
-        if attempt:
-            print "Attempt %d of %d will start in %d seconds." % (
-                attempt + 1, MAX_ATTEMPTS, attempt)
-            time.sleep(attempt)
-        print "Deleting %d objects (%s to %s):" % (
-            len(objects), objects[0].key().name(), objects[-1].key().name())
-        try:
-            db.delete(objects)
-            break
-        except Timeout:
-            print "*** Timeout ***"
-            if attempt + 1 == MAX_ATTEMPTS:
-                sys.exit(1)
-    del objects[:]
+            if attempt + 1 >= MAX_ATTEMPTS:
+                raise
 
 
 def callback(answer, qname, rr, flags, domain):
@@ -75,10 +53,29 @@ def callback(answer, qname, rr, flags, domain):
     ip_list = list(answer[3])
     ip_list.sort()
     ip = ip_list[0] if ip_list else None
-    if ip in DNS_HIJACKERS:
-        ip = None
     if ip:
         setattr(domain, qname[-3:], ip)
+
+
+def detect_dns_hijacker(domains):
+    ip_counters = {}
+    for domain in domains:
+        ip_counters[domain.com] = ip_counters.get(domain.com, 0) + 1
+        ip_counters[domain.net] = ip_counters.get(domain.net, 0) + 1
+        ip_counters[domain.org] = ip_counters.get(domain.org, 0) + 1
+    none_counter = ip_counters.pop(None) if None in ip_counters else 0
+    if not ip_counters:
+        return
+    pairs = [(ip_counters[ip], ip) for ip in ip_counters]
+    pairs.sort(reverse=True)
+    if pairs[0][0] > none_counter:
+        hijacker = pairs[0][1]
+        print "DNS hijacker detected: %d of %d results returned %s." % (
+            pairs[0][0], len(domains) * 3, hijacker)
+        for domain in domains:
+            if domain.com == hijacker: domain.com = None
+            if domain.net == hijacker: domain.net = None
+            if domain.org == hijacker: domain.org = None
 
 
 def update_domains(domains):
@@ -98,6 +95,7 @@ def update_domains(domains):
         dns.submit('www.%s.org' % name, rr.A, callback=callback, extra=domain)
     print "Waiting for DNS results..."
     dns.finish()
+    detect_dns_hijacker(domains)
     domains_put = []
     domains_delete = []
     for domain in domains:
@@ -124,9 +122,9 @@ def update_domains(domains):
         domain.timestamp = datetime.datetime.now()
         domains_put.append(domain)
     if domains_put:
-        put_batch(domains_put)
+        retry(db.put, domains_put)
     if domains_delete:
-        delete_batch(domains_delete)
+        retry(db.delete, domains_delete)
 
 
 def update_server_domains():
@@ -153,6 +151,7 @@ def bulk_upload(date, lines):
         previous = name
         if len(domains) >= BATCH_SIZE:
             update_domains(domains)
+            domains = []
     # After the last loop, upload the rest.
     if domains:
         update_domains(domains)
