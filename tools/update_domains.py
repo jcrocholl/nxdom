@@ -129,7 +129,12 @@ def update_domains(domains):
 
 def update_server_domains():
     while True:
-        domains = Domain.all().order('timestamp').fetch(BATCH_SIZE)
+        try:
+            domains = Domain.all().order('timestamp').fetch(BATCH_SIZE)
+        except Timeout:
+            print "Attempt 2 of 2 will start in 2 seconds."
+            time.sleep(2)
+            domains = Domain.all().order('timestamp').fetch(BATCH_SIZE)
         update_domains(domains)
 
 
