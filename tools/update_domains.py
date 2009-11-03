@@ -138,7 +138,7 @@ def update_server_domains():
         update_domains(domains)
 
 
-def bulk_upload(date, lines):
+def bulk_upload(lines):
     domains = []
     previous = ''
     for line in lines:
@@ -164,18 +164,12 @@ def bulk_upload(date, lines):
 
 
 def upload_from_file(filename, resume=None):
-    date, ext = os.path.basename(filename).split('.', 1)
-    if date[2] == date[5] == '-':
-        month, day, year = date.split('-')
-    else:
-        year, month, day = date.split('-')
-    date = datetime.date(int(year), int(month), int(day))
     lines = open(filename).readlines()
     lines.sort()
     if resume:
         while lines[0] < resume:
             lines.pop(0)
-    bulk_upload(date, lines)
+    bulk_upload(lines)
 
 
 def main():
