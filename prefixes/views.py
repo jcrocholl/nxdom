@@ -24,13 +24,16 @@ def random_prefix(length=2):
 
 def index(request):
     size = len(LETTERS)
-    random_prefixes = [random_prefix() for index in range(20)]
-    initial = {'prefixes': ' '.join(random_prefixes)}
+    squared = size * size
+    names = need_update()
+    random.shuffle(names)
+    names = names[:20]
+    initial = {'prefixes': ' '.join(names)}
     prefix_form = PrefixForm(request.POST or None, initial=initial)
     if prefix_form.is_valid():
         prefixes = prefix_form.cleaned_data['prefixes'].split()
         if not prefixes:
-            prefixes = random_prefixes
+            prefixes = names
         for prefix in prefixes:
             update_prefix(prefix)
         return HttpResponseRedirect(request.path)
@@ -53,7 +56,6 @@ def index(request):
                 sum_row[x] += matrix[y][x]
         table_rows.append((letter, matrix[y],
                            sum([count for count in matrix[y] if count])))
-    squared = size * size
     if prefix_count:
         domain_estimate = domain_count * squared / prefix_count
     else:
@@ -62,9 +64,32 @@ def index(request):
     return render_to_response(request, 'prefixes/index.html', locals())
 
 
+def need_update():
+    size = len(LETTERS)
+    squared = size * size
+    keys = (Prefix.all(keys_only=True).filter('length', 2)
+            .order('__key__').fetch(1000))
+    if len(keys) == 1000:
+        keys.extend(Prefix.all(keys_only=True).filter('length', 2)
+                    .filter('__key__ >=', keys[-1]).fetch(1000))
+    if len(keys) == squared:
+        oldest = Prefix.all().order('timestamp').fetch(100)
+        return [prefix.key().name() for prefix in oldest]
+    existing = set([key.name() for key in keys])
+    result = []
+    for c1 in LETTERS:
+        for c2 in LETTERS:
+            name = c1 + c2
+            if name not in existing:
+                result.append(name)
+    return result
+
+
 def cron(request):
-    for index in range(20):
-        update_prefix(random_prefix())
+    names = need_update()
+    random.shuffle(names)
+    for name in names[:10]:
+        update_prefix(name)
     return HttpResponse('OK', mimetype="text/plain")
 
 
