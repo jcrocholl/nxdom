@@ -2,7 +2,7 @@ import random
 from datetime import datetime
 
 from django import forms
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 
 from ragendja.template import render_to_response
 
@@ -54,9 +54,18 @@ def index(request):
         table_rows.append((letter, matrix[y],
                            sum([count for count in matrix[y] if count])))
     squared = size * size
-    domain_estimate = domain_count * squared / prefix_count
+    if prefix_count:
+        domain_estimate = domain_count * squared / prefix_count
+    else:
+        domain_estimate = 'unknown'
     letters = LETTERS
     return render_to_response(request, 'prefixes/index.html', locals())
+
+
+def cron(request):
+    for index in range(20):
+        update_prefix(random_prefix())
+    return HttpResponse('OK', mimetype="text/plain")
 
 
 def update_prefix(prefix):
