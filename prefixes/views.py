@@ -9,12 +9,12 @@ from ragendja.template import render_to_response
 from domains.models import Domain
 from prefixes.models import Prefix
 
-LETTERS = 'abcdefghijklmnopqrstuvwxyz'
+LETTERS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
 
 
 class PrefixForm(forms.Form):
     prefixes = forms.CharField(
-        max_length=200,
+        max_length=200, required=False,
         widget=forms.TextInput(attrs={'class': 'text span-6 focus'}))
 
 
@@ -23,25 +23,38 @@ def random_prefix(length=2):
 
 
 def index(request):
-    assert len(LETTERS) == 26
-    initial = {'prefixes': ' '.join([random_prefix() for index in range(10)])}
+    size = len(LETTERS)
+    random_prefixes = [random_prefix() for index in range(20)]
+    initial = {'prefixes': ' '.join(random_prefixes)}
     prefix_form = PrefixForm(request.POST or None, initial=initial)
     if prefix_form.is_valid():
-        for prefix in prefix_form.cleaned_data['prefixes'].split():
+        prefixes = prefix_form.cleaned_data['prefixes'].split()
+        if not prefixes:
+            prefixes = random_prefixes
+        for prefix in prefixes:
             update_prefix(prefix)
         return HttpResponseRedirect(request.path)
     matrix = []
     for letter in LETTERS:
-        matrix.append((letter, [None] * 26))
+        matrix.append([None] * size)
     domain_count = 0
     prefix_count = 0
     for prefix in Prefix.all().filter('length', 2):
-        x = ord(prefix.key().name()[1]) - ord('a')
-        y = ord(prefix.key().name()[0]) - ord('a')
-        matrix[y][1][x] = prefix.count
+        x = LETTERS.index(prefix.key().name()[1])
+        y = LETTERS.index(prefix.key().name()[0])
+        matrix[y][x] = prefix.count
         domain_count += prefix.count
         prefix_count += 1
-    domain_estimate = domain_count * 26 * 26 / prefix_count
+    table_rows = []
+    sum_row = [0] * size
+    for y, letter in enumerate(LETTERS):
+        for x in range(size):
+            if matrix[y][x]:
+                sum_row[x] += matrix[y][x]
+        table_rows.append((letter, matrix[y],
+                           sum([count for count in matrix[y] if count])))
+    squared = size * size
+    domain_estimate = domain_count * squared / prefix_count
     letters = LETTERS
     return render_to_response(request, 'prefixes/index.html', locals())
 

@@ -13,7 +13,7 @@
 </form>
 
 <p>
-2-letter prefixes counted: {{ prefix_count }} of 676<br />
+2-letter prefixes counted: {{ prefix_count }} of {{ squared }}<br />
 Total domains counted: {{ domain_count }}<br />
 Estimated domains in datastore: {{ domain_estimate }}<br />
 </p>
@@ -21,15 +21,20 @@ Estimated domains in datastore: {{ domain_estimate }}<br />
 <table>
 <thead>
 <tr>
-<th></th>
-{% for letter in letters %}<th>{{ letter }}</th>{% endfor %}
+<td></td><td></td>
+{% for letter in letters %}<th>.{{ letter }}...</th>
+{% endfor %}
 </tr>
 </thead>
 <tbody>
-{% for letter, row in matrix %}
+<tr><td></td><th class="sum">Sum</th>
+{% for count in sum_row %}<td class="sum">{{ count }}</td>{% endfor %}
+</tr>
+{% for letter, counts, sum in table_rows %}
 <tr class="{% cycle 'row1' 'row2' %}">
-<th>{{ letter }}</th>
-{% for count in row %}<td>{% ifnotequal count None %}{{ count }}{% endifnotequal %}</td>{% endfor %}
+<th>{{ letter }}...</th><td class="sum">{{ sum }}</td>
+{% for count in counts %}<td>{% ifnotequal count None %}{{ count }}{% endifnotequal %}</td>
+{% endfor %}
 </tr>
 {% endfor %}
 </tbody>
