@@ -15,7 +15,7 @@ LETTERS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
 class PrefixForm(forms.Form):
     prefixes = forms.CharField(
         max_length=200, required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-6 focus'}))
+        widget=forms.TextInput(attrs={'class': 'text span-10 focus'}))
 
 
 def random_prefix(length=2):
