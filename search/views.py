@@ -104,4 +104,4 @@ def score_domains(domain_list, cleaned_data):
         domain.score = score
     domain_list.sort(
         key=lambda domain: (-domain.score, domain.key().name()))
-    return domain_list[:20]
+    return domain_list[:50]
