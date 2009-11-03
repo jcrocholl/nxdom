@@ -27,3 +27,8 @@ indexes:
   - name: kind_name
   - name: timestamp
     direction: desc
+
+- kind: prefixes_prefix
+  properties:
+  - name: length
+  - name: timestamp

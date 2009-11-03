@@ -71,10 +71,11 @@ def need_update():
             .order('__key__').fetch(1000))
     if len(keys) == 1000:
         keys.extend(Prefix.all(keys_only=True).filter('length', 2)
-                    .filter('__key__ >=', keys[-1]).fetch(1000))
+                    .filter('__key__ >', keys[-1]).fetch(1000))
     if len(keys) == squared:
-        oldest = Prefix.all().order('timestamp').fetch(100)
-        return [prefix.key().name() for prefix in oldest]
+        oldest = (Prefix.all(keys_only=True).filter('length', 2)
+                  .order('timestamp').fetch(100))
+        return [key.name() for key in oldest]
     existing = set([key.name() for key in keys])
     result = []
     for c1 in LETTERS:
@@ -105,11 +106,8 @@ def update_prefix(prefix):
         keys.filter(field, prefix).filter('__key__ >', previous)
         keys = keys.fetch(1000)
         count += len(keys)
-    Prefix(
-        key_name=prefix,
-        length=len(prefix),
-        count=count,
-        timestamp=datetime.now()).put()
+    Prefix(key_name=prefix, length=len(prefix),
+           count=count, timestamp=datetime.now()).put()
 
 
 def detail(request, prefix):
