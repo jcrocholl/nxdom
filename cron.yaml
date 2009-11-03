@@ -1,5 +1,5 @@
 cron:
 - description: count domains for some prefixes
   url: /prefixes/cron/
-  schedule: every 1 minutes
+  schedule: every 10 minutes
   timezone: America/Los_Angeles
