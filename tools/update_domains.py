@@ -142,10 +142,11 @@ def bulk_upload(date, lines):
     domains = []
     previous = ''
     for line in lines:
-        line = line.strip()
-        if not line:
+        name = line.strip()
+        if not name:
             continue
-        name, tld = line.split('.')
+        if '.' in name:
+            name, tld = line.split('.')
         if len(name) > MAX_NAME_LENGTH:
             continue
         if name != previous:
