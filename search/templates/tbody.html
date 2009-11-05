@@ -1,9 +1,9 @@
 {% for domain in domain_list %}
 <tr class="{% cycle 'row1' 'row2' %}">
 <td>{{ domain.key.name }}</td>
-<td><span class="{% if domain.com %}red">{{ domain.com }}{% else %}green">NXDOMAIN{% endif%}</span></td>
-<td><span class="{% if domain.net %}red">{{ domain.net }}{% else %}green">NXDOMAIN{% endif%}</span></td>
-<td><span class="{% if domain.org %}red">{{ domain.org }}{% else %}green">NXDOMAIN{% endif%}</span></td>
+<td class="{% if domain.com %}red{% else %}green{% endif%}">{% if domain.com %}{{ domain.com }}{% else %}NXDOMAIN{% endif%}</td>
+<td class="{% if domain.net %}red{% else %}green{% endif%}">{% if domain.net %}{{ domain.net }}{% else %}NXDOMAIN{% endif%}</td>
+<td class="{% if domain.org %}red{% else %}green{% endif%}">{% if domain.org %}{{ domain.org }}{% else %}NXDOMAIN{% endif%}</td>
 <td>{{ domain.length }}</td>
 <td>{{ domain.digits }}</td>
 <td>{{ domain.dashes }}</td>

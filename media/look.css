@@ -13,6 +13,14 @@ tr.row2 {
   background-color: #EEE;
 }
 
-.red { color: #800; }
-.green { color: #080; }
+col.name { width: 170px; }
+col.dns { width: 100px; }
+col.int { width: 50px; }
+
+tr.row1 td.red { color: #800; background: #fdd; }
+tr.row2 td.red { color: #800; background: #edd; }
+
+tr.row1 td.best {  background: #ff8; }
+tr.row2 td.best { background: #ee8; }
+
 .sum { background: #def; }

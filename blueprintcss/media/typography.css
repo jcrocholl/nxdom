@@ -77,10 +77,10 @@ dd          { margin-left: 1.5em;}
 /* Tables
 -------------------------------------------------------------- */
 
-table       { margin-bottom: 1.4em; width:100%; }
+table       { margin-bottom: 1.4em; }
 th          { font-weight: bold; }
 thead th 	{ background: #eee; color: #000; }
-th,td,caption { padding: 4px 10px 4px 5px; }
+th,td,caption { padding: 1px 4px; }
 tr.even td  { background: #e5ecf9; }
 tfoot       { font-style: italic; }
 caption     { background: #eee; }
