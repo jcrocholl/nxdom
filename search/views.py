@@ -9,12 +9,12 @@ from domains.models import Domain
 
 
 class SearchForm(forms.Form):
-    keyword = forms.CharField(
-        max_length=40,
-        widget=forms.TextInput(attrs={'class': 'text span-4 focus'}))
-    position = forms.ChoiceField(
-        required=False, choices=[('left', 'left'), ('right', 'right')],
-        widget=forms.RadioSelect(attrs={'class': 'radio'}))
+    left = forms.CharField(
+        max_length=40, required=False,
+        widget=forms.TextInput(attrs={'class': 'text span-2 focus'}))
+    right = forms.CharField(
+        max_length=40, required=False,
+        widget=forms.TextInput(attrs={'class': 'text span-2 right'}))
     com = forms.IntegerField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text span-1'}))
@@ -45,16 +45,20 @@ class SearchForm(forms.Form):
         return data
 
 
-def filter_domains(keyword, position):
+def filter_domains(left, right):
     domain_list = Domain.all()
-    if keyword and position == 'left':
-        next = keyword[:-1] + chr(ord(keyword[-1]) + 1)
+    if 1 <= len(left) <= 6:
+        domain_list.filter('left%d' % len(left), left)
+    elif len(left) > 6:
+        next = left[:-1] + chr(ord(left[-1]) + 1)
         domain_list.filter(
-            '__key__ >=', db.Key.from_path('domains_domain', keyword))
+            '__key__ >=', db.Key.from_path('domains_domain', left))
         domain_list.filter(
             '__key__ <', db.Key.from_path('domains_domain', next))
-    elif keyword and position == 'right':
-        backwards = keyword[::-1]
+    if 1 <= len(right) <= 6:
+        domain_list.filter('right%d' % len(right), right)
+    elif len(right) > 6 and not len(left):
+        backwards = right[::-1]
         next = backwards[:-1] + chr(ord(backwards[-1]) + 1)
         domain_list.filter('backwards >=', backwards)
         domain_list.filter('backwards <', next)
@@ -72,9 +76,8 @@ def index(request, template_name='search/index.html'):
             'scowl': 10,
             })
     if search_form.is_valid():
-        keyword = search_form.cleaned_data['keyword']
-        position = search_form.cleaned_data['position']
-        domain_list = filter_domains(keyword, position)
+        domain_list = filter_domains(search_form.cleaned_data['left'],
+                                     search_form.cleaned_data['right'])
         domain_list = score_domains(domain_list.fetch(100),
                                     search_form.cleaned_data)
     return render_to_response(request, template_name, locals())
@@ -98,8 +101,7 @@ def score_domains(domain_list, cleaned_data):
         score += domain.digits * cleaned_data['digits']
         score += domain.dashes * cleaned_data['dashes']
         # Check dictionary words.
-        domain.check_dictionaries(cleaned_data['keyword'],
-                                  cleaned_data['position'])
+        domain.check_dictionaries(cleaned_data['left'], 'left')
         score += domain.scowl * cleaned_data['scowl']
         domain.score = score
     domain_list.sort(

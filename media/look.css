@@ -14,4 +14,6 @@ tr.row2 td.red { color: #800; background: #edd; }
 tr.row1 td.best {  background: #ff8; }
 tr.row2 td.best { background: #ee8; }
 
+input.right { text-align: right; }
+
 .sum { background: #def; }

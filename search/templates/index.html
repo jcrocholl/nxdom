@@ -4,8 +4,8 @@
 <script type="text/javascript">
 function search() {
   $.get("/search/ajax/", {
-    keyword: $("input#id_keyword").val(),
-    position: $("input[name=position]:checked").val(),
+    left: $("input#id_left").val(),
+    right: $("input#id_right").val(),
     com: $("input#id_com").val(),
     net: $("input#id_net").val(),
     org: $("input#id_org").val(),
@@ -18,7 +18,7 @@ function search() {
   });
 }
 $(document).ready(function() {
-  $("input.text").typeWatch( { wait:400, callback:search, captureLength:1 } );
+  $("input.text").typeWatch( { wait:400, callback:search, captureLength:0 } );
   $("input[name=position]").click(search);
 });
 </script>
@@ -51,7 +51,7 @@ Then adjust the score fields to sort the best names to the top of the list.
 </colgroup>
 <thead>
 <tr>
-<td>{{ search_form.keyword }}</td>
+<td>{{ search_form.left }} {{ search_form.right }}</td>
 <td>{{ search_form.com }}</td>
 <td>{{ search_form.net }}</td>
 <td>{{ search_form.org }}</td>
@@ -62,14 +62,7 @@ Then adjust the score fields to sort the best names to the top of the list.
 <td><input type="submit" name="search" value="Search" /></td>
 </tr>
 <tr>
-<th>Name
-<label for="id_position_0">
-<input value="left" type="radio" name="position" id="id_position_0"  {% ifnotequal request.GET.position "right" %}checked="checked" {% endifnotequal %} />
-left</label>
-<label for="id_position_1">
-<input  type="radio" value="right" name="position" id="id_position_1" {% ifequal request.GET.position "right" %}checked="checked" {% endifequal %} />
-right</label>
-</th>
+<th>Name</th>
 <th>.com</th>
 <th>.net</th>
 <th>.org</th>
