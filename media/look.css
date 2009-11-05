@@ -1,21 +1,12 @@
-ul.errorlist {
-  padding: .8em;
-  margin-left: 0;
-  margin-bottom: 1em;
-  border: 2px solid #ddd;
-  background: #FBE3E4;
-  color: #8a1f11;
-  border-color: #FBC2C4;
-  list-style-type: none;
-}
+:root { overflow-y: scroll; }
 
-tr.row2 {
-  background-color: #EEE;
-}
+p { padding: 0 4px; }
 
 col.name { width: 170px; }
 col.dns { width: 100px; }
 col.int { width: 50px; }
+
+tr.row2 { background-color: #EEE; }
 
 tr.row1 td.red { color: #800; background: #fdd; }
 tr.row2 td.red { color: #800; background: #edd; }
