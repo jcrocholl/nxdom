@@ -20,7 +20,7 @@ from google.appengine.api.datastore_errors import Timeout
 
 from domains.models import Domain
 
-BATCH_SIZE = 400
+BATCH_SIZE = 100
 MAX_ATTEMPTS = 5
 MAX_NAME_LENGTH = 16
 
