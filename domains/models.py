@@ -38,17 +38,21 @@ class Domain(BaseModel):
     backwards = db.StringProperty() # For suffix matching, name[::-1].
     timestamp = db.DateTimeProperty() # Automatically set in before_put.
 
-    # Character counts.
-    length = db.IntegerProperty()
-    digits = db.IntegerProperty()
-    dashes = db.IntegerProperty()
-
     # DNS lookups.
     com = db.StringProperty()
     net = db.StringProperty()
     org = db.StringProperty()
 
-    # Prefixes.
+    # Character counts.
+    length = db.IntegerProperty()
+    digits = db.IntegerProperty()
+    dashes = db.IntegerProperty()
+
+    # Linguistic quality measurements.
+    scowl = db.IntegerProperty()
+    english = db.IntegerProperty()
+
+    # Prefixes for equality filters.
     left1 = db.StringProperty()
     left2 = db.StringProperty()
     left3 = db.StringProperty()
@@ -56,7 +60,7 @@ class Domain(BaseModel):
     left5 = db.StringProperty()
     left6 = db.StringProperty()
 
-    # Suffixes.
+    # Suffixes for equality filters.
     right1 = db.StringProperty()
     right2 = db.StringProperty()
     right3 = db.StringProperty()

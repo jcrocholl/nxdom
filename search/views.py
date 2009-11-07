@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 
 from ragendja.template import render_to_response
 
+from readability.english import readability
 from domains.models import Domain
 
 
@@ -15,27 +16,30 @@ class SearchForm(forms.Form):
     right = forms.CharField(
         max_length=40, required=False,
         widget=forms.TextInput(attrs={'class': 'text span-2 right'}))
-    com = forms.IntegerField(
+    com = forms.FloatField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    net = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    net = forms.FloatField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    org = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    org = forms.FloatField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    len = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    len = forms.FloatField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    digits = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    digits = forms.FloatField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    dashes = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    dashes = forms.FloatField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
-    scowl = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    scowl = forms.FloatField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-1'}))
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    english = forms.FloatField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
 
     def clean(self):
         data = self.cleaned_data
@@ -74,6 +78,7 @@ def index(request, template_name='search/index.html'):
             'digits': -4,
             'dashes': -8,
             'scowl': 10,
+            'english': 0.1,
             })
     if search_form.is_valid():
         domain_list = filter_domains(search_form.cleaned_data['left'],
@@ -103,6 +108,8 @@ def score_domains(domain_list, cleaned_data):
         # Check dictionary words.
         domain.check_dictionaries(cleaned_data['left'], 'left')
         score += domain.scowl * cleaned_data['scowl']
+        domain.english = readability(domain.key().name())
+        score += domain.english * cleaned_data['english']
         domain.score = score
     domain_list.sort(
         key=lambda domain: (-domain.score, domain.key().name()))

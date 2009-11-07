@@ -12,7 +12,8 @@ function search() {
     len: $("input#id_len").val(),
     digits: $("input#id_digits").val(),
     dashes: $("input#id_dashes").val(),
-    scowl: $("input#id_scowl").val() },
+    scowl: $("input#id_scowl").val(),
+    english: $("input#id_english").val() },
   function(data) {
     $('tbody#results').html(data);
   });
@@ -59,6 +60,7 @@ Then adjust the score fields to sort the best names to the top of the list.
 <td>{{ search_form.digits }}</td>
 <td>{{ search_form.dashes }}</td>
 <td>{{ search_form.scowl }}</td>
+<td>{{ search_form.english }}</td>
 <td><input type="submit" name="search" value="Search" /></td>
 </tr>
 <tr>
@@ -70,6 +72,7 @@ Then adjust the score fields to sort the best names to the top of the list.
 <th>Digits</th>
 <th>Dashes</th>
 <th>SCOWL</th>
+<th>English</th>
 <th>Score</th>
 </tr>
 </thead>

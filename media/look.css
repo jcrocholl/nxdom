@@ -15,5 +15,6 @@ tr.row1 td.best {  background: #ff8; }
 tr.row2 td.best { background: #ee8; }
 
 input.right { text-align: right; }
+input.score { width: 36px; }
 
 .sum { background: #def; }
