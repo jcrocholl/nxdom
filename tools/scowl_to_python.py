@@ -19,6 +19,7 @@ print """
 # "as is" without express or implied warranty.
 """.strip()
 
+
 def pythonize_wordlist(constant, wordlist):
     print
     print constant, '= set("""'

@@ -1484,28 +1484,30 @@ def word_triples(word):
         yield ''.join(groups[start:start + 3])
 
 
-def readability(word):
+def score_readability(word):
     """
-    >>> readability('xxyhcwx')
+    >>> score_readability('xxyhcwx')
     0
-    >>> readability('shlomo')
+    >>> score_readability('shlomo')
     625
-    >>> readability('shoebox')
+    >>> score_readability('shoebox')
     700
-    >>> readability('merchandise')
+    >>> score_readability('merchandise')
     1337
-    >>> readability('antidisestablishmentarianism')
+    >>> score_readability('antidisestablishmentarianism')
     1515
-    >>> readability('are')
+    >>> score_readability('are')
     1900
-    >>> readability('interesting')
+    >>> score_readability('interesting')
     1962
     """
     result = 0
     triples = list(word_triples(word))
     for triple in triples:
         result += TRIPLE_SCORES.get(triple, 0)
-    return result * 100 / len(triples)
+    result = result * 100 / len(triples)
+    # logging.debug('%s.english = %d', word, result)
+    return result
 
 
 if __name__ == '__main__':

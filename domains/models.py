@@ -2,7 +2,8 @@ from datetime import datetime
 
 from google.appengine.ext import db
 
-from dictionaries import english
+from dictionaries.english import score_scowl_substrings
+from readability.english import score_readability
 
 
 class BaseModel(db.Model):
@@ -76,15 +77,15 @@ class Domain(BaseModel):
 
     def before_put(self):
         """
-        Automatically populate some properties.
+        Automatically update most properties.
         """
-        if self.is_saved():
-            return
+        self.update_counts()
+        self.update_substrings()
+        self.scowl = score_scowl_substrings(self.key().name())
+        self.english = score_readability(self.key().name())
         self.timestamp = datetime.now()
-        self.count_chars()
-        self.set_substrings()
 
-    def count_chars(self):
+    def update_counts(self):
         """
         Count digits and dashes.
         """
@@ -97,7 +98,7 @@ class Domain(BaseModel):
             elif char == '-':
                 self.dashes += 1
 
-    def set_substrings(self):
+    def update_substrings(self):
         """
         Set substrings for fast index matching.
         """
@@ -116,22 +117,6 @@ class Domain(BaseModel):
         self.right4 = name[-4:] if length >= 4 else None
         self.right5 = name[-5:] if length >= 5 else None
         self.right6 = name[-6:] if length >= 6 else None
-
-    def check_dictionaries(self, keyword, position):
-        if position == 'left':
-            self.rest = self.key().name()[len(keyword):]
-        if position == 'right':
-            self.rest = self.key().name()[:-len(keyword)]
-        if self.rest in english.SCOWL10:
-            self.scowl = 4
-        elif self.rest in english.SCOWL20:
-            self.scowl = 3
-        elif self.rest in english.SCOWL35:
-            self.scowl = 2
-        elif self.rest in english.SCOWL50:
-            self.scowl = 1
-        else:
-            self.scowl = 0
 
 
 class Whois(db.Model):

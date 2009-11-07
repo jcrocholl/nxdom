@@ -8496,3 +8496,43 @@ zeppelins zestful zestfully zilch zing zinged zinger zingers zinging
 zings zinnia zinnias zippier zippiest zippy zircon zirconium zircons
 zit zither zithers zits zodiacal zonal zonked zwieback zygote zygotes
 """.split())
+
+
+def score_scowl(word):
+    """
+    >>> score_scowl('zing')
+    1
+    """
+    if word in SCOWL10:
+        return 4
+    if word in SCOWL20:
+        return 3
+    if word in SCOWL35:
+        return 2
+    if word in SCOWL50:
+        return 1
+    return 0
+
+
+def score_scowl_substrings(word):
+    """
+    >>> score_scowl_substrings('zing')
+    1
+    >>> score_scowl_substrings('totallyzonked')
+    15
+    """
+    result = score_scowl(word)
+    for index in range(1, len(word)):
+        if index > 1:
+            # print word[:index], score(word[:index])
+            result += score_scowl(word[:index])
+        if index < len(word) - 1:
+            # print word[index:], score(word[index:])
+            result += score_scowl(word[index:])
+    # logging.debug('%s.scowl = %d', word, result)
+    return result
+
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
