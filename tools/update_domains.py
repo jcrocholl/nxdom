@@ -112,14 +112,13 @@ def update_domains(domains):
             if domain.is_saved():
                 domains_delete.append(domain)
             continue
-        domain.count_chars()
-        domain.set_substrings()
+        old_timestamp = domain.timestamp
+        domain.before_put()
         print '%s %-17s %5s %5s %5s %-16s %-16s %-16s %s,%s,%s,%s' % (
-            domain.timestamp.strftime('%Y-%m-%d %H:%M'), name,
+            old_timestamp.strftime('%Y-%m-%d %H:%M'), name,
             domain.length, domain.digits, domain.dashes,
             domain.com, domain.net, domain.org,
             domain.left1, domain.left6, domain.right6, domain.right1)
-        domain.timestamp = datetime.datetime.now()
         domains_put.append(domain)
     if domains_put:
         retry(db.put, domains_put)
