@@ -3,3 +3,7 @@ cron:
   url: /prefixes/cron/
   schedule: every 10 minutes
   timezone: America/Los_Angeles
+- description: update fields for scowl and english
+  url: /domains/cron/scowl/english/
+  schedule: every 1 minutes
+  timezone: America/Los_Angeles
