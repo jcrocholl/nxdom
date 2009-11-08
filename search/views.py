@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect
 
 from ragendja.template import render_to_response
 
-from readability.english import readability
 from domains.models import Domain
 
 
@@ -106,9 +105,11 @@ def score_domains(domain_list, cleaned_data):
         score += domain.digits * cleaned_data['digits']
         score += domain.dashes * cleaned_data['dashes']
         # Check dictionary words.
-        domain.check_dictionaries(cleaned_data['left'], 'left')
+        if domain.scowl is None:
+            domain.update_scowl()
         score += domain.scowl * cleaned_data['scowl']
-        domain.english = readability(domain.key().name())
+        if domain.english is None:
+            domain.update_english()
         score += domain.english * cleaned_data['english']
         domain.score = score
     domain_list.sort(
