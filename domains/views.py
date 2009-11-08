@@ -10,9 +10,6 @@ from django.http import HttpResponseRedirect
 from ragendja.template import render_to_response
 from ragendja.dbutils import get_object_or_404
 
-from dictionaries.english import score_scowl_substrings
-from readability.english import score_readability
-
 from domains.models import Domain
 
 
@@ -77,9 +74,9 @@ def cron(request, rest):
     domain_list = Domain.all().order('timestamp').fetch(100)
     for domain in domain_list:
         if 'scowl' in updates:
-            domain.scowl = score_scowl_substrings(domain.key().name())
+            domain.update_scowl()
         if 'english' in updates:
-            domain.english = score_readability(domain.key().name())
+            domain.update_english()
         domain.timestamp = datetime.now()
     db.put(domain_list)
     return render_to_response(request, 'domains/index.html', locals())

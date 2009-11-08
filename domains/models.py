@@ -80,9 +80,9 @@ class Domain(BaseModel):
         Automatically update most properties.
         """
         self.update_counts()
+        self.update_scowl()
+        self.update_english()
         self.update_substrings()
-        self.scowl = score_scowl_substrings(self.key().name())
-        self.english = score_readability(self.key().name())
         self.timestamp = datetime.now()
 
     def update_counts(self):
@@ -97,6 +97,12 @@ class Domain(BaseModel):
                 self.digits += 1
             elif char == '-':
                 self.dashes += 1
+
+    def update_scowl(self):
+        self.scowl = score_scowl_substrings(self.key().name())
+
+    def update_english(self):
+        self.english = score_readability(self.key().name())
 
     def update_substrings(self):
         """
