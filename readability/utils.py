@@ -6,10 +6,11 @@ def word_groups(word):
     """
     >>> list(word_groups('weight'))
     ['w', 'ei', 'ght']
-    >>> list(word_groups('eightyfive'))
+    >>> list(word_groups('Eightyfive'))
     ['ei', 'ght', 'y', 'f', 'i', 'v', 'e']
     """
     index = 0
+    word = word.lower()
     while index < len(word):
         # Find some consonants.
         start = index
@@ -37,28 +38,12 @@ def word_triples(word):
         yield ''.join(groups[start:start + 3])
 
 
-def score_readability(word):
-    """
-    >>> score_readability('xxyhcwx')
-    0
-    >>> score_readability('shlomo')
-    625
-    >>> score_readability('shoebox')
-    700
-    >>> score_readability('merchandise')
-    1337
-    >>> score_readability('antidisestablishmentarianism')
-    1515
-    >>> score_readability('are')
-    1900
-    >>> score_readability('interesting')
-    1962
-    """
+def score_readability(word, triple_scores):
     result = 0
     triples = list(word_triples(word))
     for triple in triples:
-        result += TRIPLE_SCORES.get(triple, 0)
-    return result * 100 / len(triples)
+        result += triple_scores.get(triple, 0)
+    return result / len(triples)
 
 
 if __name__ == '__main__':

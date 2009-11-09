@@ -1,935 +1,1601 @@
-VOWELS = 'aeiouy'
 TRIPLE_SCORES = {}
-
-for triple in """
-^abg ^ang ^aufg ^ausg ^ba ^be ^bei ^bi ^bu ^da ^de ^di ^du ^eing ^fa
-^fe ^fi ^fo ^fu ^ga ^ge ^ha ^hau ^he ^hei ^hi ^ho ^ka ^ke ^ki ^ko ^ku
-^la ^le ^lo ^ma ^me ^mi ^mo ^na ^pa ^po ^pro ^ra ^re ^rei ^sa ^scha
-^schu ^se ^si ^so ^sta ^ste ^ta ^te ^to ^tra ^ueb ^umg ^un ^unb ^ung
-^unt ^ve ^vo ^wa ^we ^wei ^wi ^wie ^wo ^wu ^ze ^zi ^zu abe abge ache
-achte ade aege aehi aende aenge aessi aft$ afte age ahre ale ali alle
-alte ame amme and$ ande ange ani anke ara arbei are arte asse aste ate
-ati atio atte aufe aufge ausge bel ben bend ber bes che$ chem chen
-chend cher ches chte$ chten chter chtet chtig cken ckend den der ebe
-eche ecke ede edi efa efue ege eha ehe ehre eibe eiche eide eife eige
-eile eine einge eise eiste eit$ eite eko el$ ela ele eli elle eln$
-elnde els$ elt$ elte em$ eme en$ ena end$ ende ene enge ens$ ente er$
-era erau erbe ere erei erfa erge erha eri erke erle erli ern$ ernde
-erre ers$ ert$ erte eru erwa es$ esa eschae ese esse est$ esta este
-et$ ete ette ewa ewe ewi fen fend ften ge$ geb gef geh gel gem gen
-gend ger ges gesch gew gkeit gung hen hend her hren ich$ iche ichste
-ichte ichti icke ide iebe iede iefe iege ien$ iere iert$ ierte ieru
-ig$ ige igkei igste igte igu ik$ imme in$ ina inde ine inge inne inte
-ion$ ione isch$ ische isie isse iste itae itte itze ive komm le$ len
-lend ler lig lis lit lle$ llen llend ller llig lte$ lten lter mmen
-nde$ ndem nden nder ndes ndet ndig ne$ nem nen ner nes ngen ngend nger
-nnen obe oche ode oge oli olle omme orge ose osse ote rat rbeit re$
-rem ren rend rer res rig rin risch rlich rte$ rtem rten rter rtes
-rtest rtet rtig rung samm sche$ schen scher sches se$ sen send ser
-sest sier siert sse$ ssen ssend ssig ste$ stem sten ster stes te$ tem
-ten tend ter tes test tet tig tion tisch tten tzend uebe uecke uege
-uge unbe unde une ung$ unge unte urue usa ver verb verd verf verh verk
-verl vers verw wied zug zur zus
-""".split(): TRIPLE_SCORES[triple] = 20
-
-for triple in """
-^abs ^abw ^arb ^bau ^bo ^bue ^die ^do ^einz ^entw ^erf ^erw ^flu ^frei
-^fue ^gei ^glei ^go ^gro ^gru ^gu ^hu ^ind ^int ^ja ^ju ^kla ^klei
-^kue ^lei ^li ^lie ^lu ^mu ^ne ^neu ^nie ^no ^pe ^pla ^ri ^ro ^ru ^rue
-^schi ^schla ^schwa ^schwe ^see ^spa ^spe ^sti ^stra ^stu ^su ^tau ^ti
-^tie ^tro ^tu ^unv ^vie ^wae ^wue ^za ^zei ^zwei achge acke aeche
-aechti aendi aere aesse aete aetze aeufe aeume afe affe ag$ agte ahle
-ahme al$ altu ami ana ane ang$ anla anne annte ante api appe ar$ ari
-arste arti asche ase at$ ato atu atze aube ause aute auto be$ bed bef
-beh berl bers besch best bet betr bew bund chkeit chste$ chsten chstes
-chtend chtes cke$ de$ dem dend det dig durchg ebra ebu echse echte
-eckte eda efae efe efo ega egge egie egte ehei ehme eili ein$ eina
-eini eisse eitu elde elei ellte ellu ema emei emi emo enbe endste enha
-enke enne eno enste enswe enta erae erba erde erfe erfo erhae erie
-erla erma ermi ernd$ erne ero ersa erse ersi ersta erste erti ertra
-erue erve erwe erwi erzi eschi esi esti esu eta eti etrie etze etzte
-eute ewo fe$ fer ffen fte$ fter ftest ged geg gest get gier glich
-gste$ gstem gsten gster gstes gte$ gten gter gtes halt hig hin hlen
-hlend hmen hrend ichkei icht$ iehe iele ierst$ iese iesse iete iffe
-ika ike ilde ili ille illi indu ini inie irtscha is$ ischste isti ita
-ite iti izie kap kat ktion leb leg les llung log ltem ltend ltes ltest
-ltet ltig lung mat me$ men ment mer mil min mmend mmeng nal nat ndend
-ndlich ndung nge$ ngeb ngef ngeh ngel nges nhaft nier niert nig nisch
-nist nken nkend nlag nlos nnend nswert nte$ nten nter ocke odu offe
-ogra ole olo ona onde one onne or$ ora orde ore ori orte os$ osi oste
-oto otte pit pol rad reg richt rinn rnde$ rnden rnder rndes rueckg
-schaeft schem ses sser sses stand stellt stet stig stisch taet tal tel
-tier tik tiv tor tte$ tter ttert ttet tung tze$ tzen uche ucke ude
-ueche uechti ueckge uehre uelle uende uesse ueste uete uette ufe ula
-ulie ume umge umme una unke uppe urchge ure us$ uss$ uste ute verg
-verm verr versch verst vertr verz vor vorg wass wid zier
-""".split(): TRIPLE_SCORES[triple] = 19
-
-for triple in """
-^ab ^abl ^abr ^abst ^abz ^akt ^all ^an ^anf ^anl ^anz ^aus ^ausl ^auss
-^aut ^bea ^bra ^eig ^einf ^el ^entg ^entl ^er ^erh ^erl ^exp ^fei ^fra
-^gra ^hoe ^id ^kae ^kau ^kra ^kre ^lae ^ni ^ob ^off ^prae ^prei ^pri
-^pu ^rau ^schae ^schau ^sche ^schei ^schie ^sei ^sie ^spi ^spie ^spo
-^staa ^stei ^steue ^sue ^sy ^tei ^tre ^tri ^unr ^uns ^vi ^zie ^zue
-^zwi achse acht$ aede aefte aefti aelle aelli aempfe aerte aet$ aeti
-aette aeuse ahlu ake akte ala all$ alti an$ anda andlu anti anze apie
-artei aschi assu ata atz$ auche aus$ beg bek bem berg berh berr biet
-bil bild bracht bung chern chlich chstem chster chtest chtigst chtigt
-chtlich cker ckte$ ckten ckter dent derg dern des dit dukt ebi ebie
-ebo ebte echne effe egra egu ehle eho ehoe ehrte eich$ eichte eidi
-eien$ eihe eilte eis$ eistu eka eke eku elha elie elli elnd$ elo elu
-emae enba enhei eni enlo enscha ent$ entge enti entie entwi enu enue
-enve epa erbi erbo erfue erga erhe erhei erko erlei erlo erna erra
-errei erri erscha erso erst$ ersu ertei ervo erwei erze erzie escha
-eschla escho eso estae esto euge evo ewae ewu ezi ezo fahr fall fert
-ffend fin form fried ftes ftet ftig gang gek gelt getr gez gramm graph
-gtem gtest hand he$ hint hmend hrer hrung hung ickte iene ier$ ieri
-ifi ifte ildu ile ilie imi inau indi ing$ inke inni inse iona ionie
-isa ise itio ivi kal kan kind kons ktiv lag lass lat lder ldet lhaft
-lich lier liert list liz lnde$ lnden lnder lndes ltung macht maess met
-mitt mmer nachg nand ndern ndert ndustr neb nend ngesch ngest ngew
-nglich ngslos nheit nied nis nnig ntern oege oerde oere oermi oerte
-ohle olge ollste oma ome omi on$ oni onie onze oppe orga orie orma oze
-par part ppen prod ral rausg rbar rder rdig recht rei$ rein reit rfahr
-rgan rger rhaft rhalt ris rmig rstell rteil ruf sat schend schin
-schlag sem setz setzt sond staend stell stend tern tiert tlich trag
-trieb ttel tzes tzung ube uch$ uchte uechte ueckte uehle uehrte uendi
-uerdi uerge ueti ug$ uktio ule um$ ungsa ungsbe ungsge ungslo ungsvo
-uni unve ur$ usi usti ustrie utte verbr vern verschl vert wand wechs
-wegg weit werb wirtsch wiss wund yste zahl ziert zog zwisch
-""".split(): TRIPLE_SCORES[triple] = 18
-
-for triple in """
-^abf ^absch ^alt ^am ^anb ^anr ^anst ^ant ^aufr ^aufw ^ausr ^blu ^boe
-^bre ^bru ^cha ^co ^drei ^due ^eh ^eins ^eis ^empf ^erk ^erm ^err ^ers
-^erst ^erz ^ex ^fla ^fre ^frie ^gi ^gre ^hae ^inf ^inn ^kna ^koe ^kri
-^krie ^lau ^mae ^mue ^nae ^pi ^pra ^pre ^saeu ^sau ^schme ^schue
-^schwae ^schwei ^schwi ^sto ^stue ^tae ^und ^unf ^unw ^zo ^zwa ^zwe
-abi able abri abwe abzu ackte aedi aegli aehle aehri aehru aelte aelti
-aendle aengli aenke aerme aese aftli akti aktie aktio alo alt$ ama
-amm$ amste andte anzu arbe arie arke arre as$ assi asste auende auf$
-auge auli ausse begr bens berm bern bersch berst bert bertr berw bez
-bgew big blich bot brik chert chnet chtem chtung chung ckelt ckig
-cktes dat del delt dert dlich drig dung eba ebli ebue echni echt$ egi
-ehae eichne eichste eidu eilu eime einhei einze eiti ekla ekte elau
-ellscha elst$ empe emue enau endu enfa enla ensche ensi entli entra
-enze eraeu erbre erda erdu erfae erho erhoe erka erkau erlae erlie
-erme ermoe ernse erschie erschla erstae ertre erwae erzei esche espa
-espe esprae estie estri eto etra etre etz$ euchte ewei expo eza ezei
-ferns ffe$ fiz ftlich fuehr gebr geist geng gens gent geschm gesp gig
-gisch gtet herv hing hle$ hnen hnend hoer hre$ hrig hrlich hrten iali
-ichtli ichtu idri ieb$ iel$ igt$ ima ime indli inei ingli inha ippe
-ire ismu ist$ itie itu itzte ium$ iva kart kass ken ker kont konz kost
-kred kul lad land last lauf ldung legt leit lem lisch lles llte$ llten
-los mal man mass mend mess misch mit mme$ mmelt mmert mod mon nanz
-ndel ndelt nderg nderl nform ngebr ngem nne$ nner nomm nterg nterh
-nterl ntest ntgeg ntier ntiert nzen obi oegli oepfe oese oeste oete
-ogi oka olte olu ono onta ope opfe orbe orme orste ort$ ortge ot$ oti
-ozia pass pfend pier ppe$ priv raet rarb rben rden rechn red reich
-rfen rgeh rgew rier riert rke$ rken rmat rmen rnehm rrend rsten rsuch
-rtrag rtret rtschaft rwalt rzig seh sein sel sellsch sern sger sich
-sik sit sitz smus sonn soz ssion sslich ssung steh stung such sung tag
-teil ters tis tret ttelt ttend ttern tternd tur tzig tzte$ tzten uehe
-uehru uere uessi uetze uhe unau undi ungsve unkte usse ut$ utze ven
-verbl verdr verp vis weg wett zentr zial
-""".split(): TRIPLE_SCORES[triple] = 17
-
-for triple in """
-^abb ^and ^anh ^anm ^ann ^ans ^at ^auff ^aufh ^aufl ^aufz ^ausb ^ausf
-^ausst ^bli ^dra ^dre ^dru ^ehr ^einh ^eink ^einl ^einw ^entz ^erb
-^erd ^erg ^ern ^fae ^feue ^flie ^flue ^fro ^frue ^gae ^gla ^glue ^grue
-^gue ^hue ^imp ^kei ^kli ^mei ^nu ^qua ^sae ^schle ^schli ^schlu
-^schma ^schne ^scho ^schoe ^schrei ^spra ^spre ^stae ^stau ^stoe
-^strei ^tru ^tue ^umr ^ums ^umw ^unm ^va abbe abo ach$ ad$ adi aechte
-aehe aemme aene aengte aesi aeste aeube ahe ahl$ ahlte ahne alls$
-allte am$ andi ank$ ann$ anspo ansta antwo anzie arge arme aro asie
-assie asti auen$ aum$ ausei ausga ausha ausla aut$ befr beig belt berb
-berf berz bestr bev bgest boers bte$ bter chelt chig chnung chsen
-cktem derl dest deut dier diert digt earbei echnu edie edu eere efi
-efu ehnte ehr$ eil$ einde einfa einsa ekti ekto ekue elae elfe elge
-eloe emde empfi endi enko enku ensa enwa enz$ eque erbli erbu erdie
-erdo ereie erfi ergi eria erk$ erlau erlu ermae ernae erni eroe erstue
-ertrae ertu ervie erwue erzae erzu eschei eschrie eschue esie essi
-estue etei etro etu etzu euerte euro eve ewoe exe ezie faell fam fang
-farb fehl fgel flich ftem ftend fuehrt fussb gbar geln genh genst gern
-gers gert geschl geschw gespr gestr giert glichk gnet griff heim herb
-hler hlung hme$ hnlich iale icklu ielle ielte ienste ierba iga ilfe
-ilo immu impo info ionae irke irku ischte itge ivste izi jahr jug kar
-kett kleid komp kte$ ktor ldern ldes lektr licht lief llem llos
-llschaft llter mensch mes mind mitg mmern mot mter naer nber nbes nbew
-ndest ndlung nehm nell nfoerm ngek ngez ngsfaeh nke$ nkomm nkte$ nkten
-nlich nom nschaft nstalt nste$ nstell nsten nster nstes nterr ntes
-ntlich ntwickl ntwort nueb oble ochte oebe oecke oede oelke oeni oerpe
-oerse oesse ohlge ohne onfe onte ontro opa orau ordnu orre orschu per
-pers ppelt ppend press progr rang rber rde$ reien reing reis rekt ress
-rfend rgen rges rit rleg rlichst rmoeg rreg rren rricht rsich rson
-rstand rste$ rsteh rtend rzieh schoss schrieb schwind seg serv sgel
-sigk sinn spez ssensch ssest ssigst stat stern stert stimm stlich tan
-tar tat tent tigst tom tot transp tzer tzter tztes uali uede uefte
-uehne uellte uemme uerfe uero uerze ugzeu ulde uldi und$ ungsfae use
-ussba usste uti vat ve$ verfl verschw viert vorb wandt wert will winn
-wohlg wusst zeit zerst zess
-""".split(): TRIPLE_SCORES[triple] = 16
-
-for triple in """
-^abh ^ank ^ansch ^anw ^aufs ^aufst ^beu ^bie ^brau ^bro ^brue ^einr
-^einst ^eintr ^emp ^ent ^entf ^entsch ^ersch ^ertr ^eur ^fau ^fle ^fli
-^foe ^freu ^fri ^hy ^imm ^ins ^inv ^kle ^loe ^mie ^op ^pfli ^rea
-^schmu ^schna ^schni ^schri ^spei ^spri ^stie ^stro ^toe ^trau ^true
-^ty ^umf ^unsch ^unz abse abte abtei adie adio aefe aeft$ aehlte
-aeltni aemte aendli aenze aerke aeumte affte ahn$ ahrt$ ahru albe alie
-anfa anie ano ant$ anta apa arkt$ art$ asi ass$ atie auchte aude aufzu
-aume auste azi baut begl berfl bgel bges blem blieb bten cherh chnend
-chnik chtern ckert cklich cktest dank dernd ders derst dopp eamte ebau
-ebrau edeu edue eglei ego egri ehi ehrli eifte eima einli eins$
-einscha einzu eira eitli eize ektio eld$ ell$ ello empo endie enei
-enfoe enie enka enkte enma enntni enre enrei ense enwe epo eppe epu
-erbei erklae erkra erku ermue ernte erpa erro erru erschu erschue
-erschwe erspa ersto erzeu erzo eschwe eschwi espie ess$ essio estra
-estre etie ett$ euer$ eure ewie eze ezia felt fern fest ffer fgew fig
-fisch foerd folg fortg fund fung gal gefl gelnd genw gep hel herg herr
-herz higst hind hne$ hob hrte$ hrter ieg$ iehu ienst$ iers$ iff$ ift$
-igst$ ila immte inve ioese irche irme irre isto itglie itt$ iv$ izei
-kam klass kohl koll konf kontr kten kult kund lden ldig legr leist
-lieb lien ligst lligst lltes lzen mag mar masch mein meinsch mmand
-mmernd mper mpfend mput mten mus must nart nausg ndernd nders ndigst
-ndisch nett nfaeh ngeg ngeschl ngetr ngsvoll nhalt nie$ nigt nik nit
-nktion nkung nnten nnter norm nreich nstaend nung nzend nzier oeche
-oehne oeri ogie ohe olde olie oll$ ollte ombe omma omo onse onsu orfe
-ors$ orta ortu pap pfen port praes rakt rant rantw rband rbest rbrech
-rdert rdnet rek renz rett rfass rfolg rgeb rhaeltn rie$ rien rigst rik
-riss rist rkehr rkend rkomm rlag rlass rmend rnen rob rop rschlag
-rsetz rsorg rster rstes ruest ruh rungs runt rweis schicht schneid
-seit sens sgab sgeb sgeh sgew sid sieg sol spiel spraech ssert sster
-stest strass strie$ stud ton tteln ttes tut typ tzlich tztem ucht$
-uck$ uckte ueck$ uegte uerste uerte ultu uma ungspro ura urtei utzte
-uzie verkl vid vier vit voll vorh vorst wachs waehr waff wahrh welt
-wend wicht wies wohl wohn zit zuck zust zweif
-""".split(): TRIPLE_SCORES[triple] = 15
-
-for triple in """
-^abk ^abm ^abschl ^abtr ^auf ^auftr ^ausdr ^aush ^brei ^bri ^brie ^ca
-^che ^daue ^ein ^einb ^en ^flei ^flo ^haa ^inh ^inst ^je ^kie ^kno
-^krae ^krei ^lue ^moe ^org ^pha ^rie ^schlue ^schmie ^trae ^umh ^uml
-^ungl ^unk ^unn ^unp aate aba absa abso achtu ada adre aehne aehrte
-aehte aele aenne aerkte aerzte aessli aeufi aga agie agt$ agu ahrte
-allge als$ alste altsa aly ammte ampe ampfe amt$ andge angri angs$
-anste antie anu anz$ anzei ape aphi arkei assa aubte auer$ auerte
-aufna aune ausa ausbe ausche ausste avo bad bell bensw beschl beschw
-bgef bger bgesch bteil btes buerg char chers ckes dacht delnd derb
-derh disch disk dress eali eblie echti echtli efle eflo efte egli egne
-egt$ ehau ehne ehte eibu eier$ eihei einko einste einu eisu eitge ekle
-eklei ekt$ ektie ektro elbe ella emie emme enfe enle ennu ensio ensti
-entha entri entu erbrau erbri erdi erdrue ergae ergie ergnue erhi
-erkue erloe ermei ermo ermu erpu erschei erstei erta erwu esae eschle
-eschrae eschu essie esteue estge estrei etzt$ eude evi ewue exi expe
-ezue fes ffiz fgeh flieg fnahm freih gefr gie$ gleit graf gross gruend
-gsam gzeug haupt haush hbar heit hinw hinz hmer hrbar hrers hten ibe
-iebi ief$ iente iet$ iko iku ilbe ild$ ingu iri it$ itz$ kab kad kern
-kirch kol korr krat kter ktiert laend lang lar ldend lehr lfe$ lltem
-mark meist mier mmelnd mmenh mmun mmung mont mpfindl nag nah nbeh nbel
-ndbar ndelnd ndiert ndigt ndler neing nent nerg ners nfer nged ngung
-nhand nien nker nlass nleg nmaess nnung not nstig nteil nterb nters
-ntersch nterst ntert ntral nweis nze$ nzeig nzug odi oeffe oene ofe
-ohre oko ola olla ommu ompu onku ordne orhe orm$ ormu ortie oss$ ota
-pat pos preis prof prot prov ras rbel rbend rbot rdnung rel rent rep
-rfall rgek rgel rgest rhol rial rkeit rkund rlegt rlos rmal rme$ rne$
-rreich rschaft rteid rtier rtik rtlich rtung rzeichn rzend rzeug sagt
-samt schaed schatt scheid schloss schste$ schsten schster schstes
-schuett schuld seel sent sgef sges sig sion sisch sitt slich spitz
-ssenh ssern ssers ssier ssiert ssiv sste$ ssten stalt sters stimmt
-stoss strich taer techn temp terg tert tigt traeg ttelnd ttlich ttung
-ubli uchs$ udie uele uerme uerzte umfa umpe unfae ungsre ungsu unkt$
-unktio unre unsi unwi upe urge uri urse urze uta utie vergr verkr
-versp voelk vord wart weis well wes wint zahlt zeichn zerr zig zirk
-zuf zuk zul zuw
-""".split(): TRIPLE_SCORES[triple] = 14
-
-for triple in """
-^ad ^al ^anspr ^beei ^bla ^blo ^dia ^dri ^dro ^ed ^enth ^entr ^erbl
-^glau ^glo ^gri ^haeu ^heu ^irr ^kni ^opt ^ordn ^prue ^schnee ^schnei
-^schre ^spae ^spu ^the ^troe ^umsch ^umst ^unh ^unl abko aechli aegi
-aehrli aengi aeru aeubi aeute affne agba agi ags$ ahr$ ahrzeu alko
-alku allei ampf$ amte anbe ands$ ankte annt$ ansa antei anzte apfe
-aphie appa astro athi att$ attu atzte aufte auftra aule ausbi ausschu
-auszu axi azie bank bedr bekl berd bett bgeh bill bin bjekt bomb btem
-btest buehr buer chsel ckung dam dav dens derspr derw dez dien dienst
-dir duz eate ebni echa echli edrue eg$ egrue eht$ eichli eifa einfue
-einha einte eitsge ekre elba ellt$ elste elze emu enhae enmae ennba
-ensie ensta entla entzue enzu eordne erbae erbie erblue erbrei erflue
-erhue erkaeu erkscha ersae erschae erschwi erspre erstau erstre
-ertraue eschlo esge estu etae etau etri etru etrue etste etzba etzli
-euche eudi eugu eur$ explo ezae fabr festg fgeb fgef fger fgest forsch
-freig fuehl gar gart gat geld geschn glichst gniss grund haus hlte$
-hnung hoch hoerd hrtes hund ial$ ida iebte igna ingt$ inste insti inu
-inzu ira irge isi iso issio ittli itzi ize kaelt kannt ket klam konk
-krank kum lbar lebt lef lett lfen lfoerm lgend lger lif lin lleg llier
-llste$ llsten llster lock lon ltern lut lys ma$ mem mill mist mitl
-mlich mmig mmten mob mor mpfe$ mpfen mte$ nam nannt nbar nbest ndels
-nderb ndier ndigk ndlichst ndste$ nfaell nfuehr ngekl ngesp ngig nhab
-niv nnbar nnigst nnte$ nntest nricht nschaftl nspiel nsport nstit ntag
-nterv nterw nterz ntisch ntroll nunt nver oba oehe oeru oeti of$ offi
-ofi ohnu okra olke oly olze ommi ompe ontie opo ormie orsi osti otie
-pflicht phisch ppar proz rab raend rbe$ rbew rbiet rbring resp ret rev
-rgef rgeg rgend rgesch rhandl rium rkaeuf rkehrs rkenn rles rlust
-rmitt rmon rnat rom ros rschied rtigst rueb rueck sal san sbild schaff
-schalt scheit schnitt schstem schte$ senb senh sicht sign silb spannt
-spekt ssag ssbar sschuss ssel sselt sstell stieg stier stor sucht tab
-teg terl term terr tglied tions tit tod triebs ttels ttest tzbar
-tztest uechi ueckve uefu ueme uendu uensche uensti uerli uese uestu
-uetzte ugge uhi uhr$ undu unei ungsma ungsmi ungswe unvo upfe vergl
-vergn verkn verschm vil vorl vors vorz war werksch wirk worf wuch
-xport zaub zent zerf zerm zieh zueg zutr zuv
-""".split(): TRIPLE_SCORES[triple] = 13
-
-for triple in """
-^abbr ^aff ^ag ^angr ^ankl ^anp ^ansp ^antr ^ap ^ar ^aug ^ausk ^aussch
-^ausw ^bae ^bee ^dae ^deu ^einsch ^em ^erfr ^ergr ^erkl ^erschl ^et
-^feu ^fie ^fraue ^jae ^klo ^leu ^ol ^or ^pau ^pfe ^pho ^roe ^schru
-^schwu ^spru ^spue ^trei ^treu ^trie ^ur ^woe ^zae ^zeu ^zwie ab$ abla
-abschie abste achli ado adt$ aebe aedte aehnli aehre aer$ agge ahrhei
-aise aka akze alli alze amkei anni annscha annu anse ansi anwe anzue
-apu arbi arde arla armo arschie arto asa assna ast$ ats$ auke auschte
-ausdru aussi ave avie azu bar beln berk bkomm blas bler bor broch
-chernd ckelnd comp dar def dekl denk derr dicht ding dlos drueckt
-durchl durchs ebae ebro echtge eck$ eckt$ ecku edro edru eele egre ehu
-eigne eihna einba eisi eispie eist$ eleu elfoe elmae emmte empfa enae
-enbi enga engte enhe enieu enpa enspie enstae entschei entwe enwi epla
-erbrue erbue ergrei erklei erleu erpre erschi erschlu ersoe erspie
-erspru ersti erstoe erwo eschau eschma eschmie eschni etho etrae
-euern$ eug$ eunde euti eva ezu fed fenst fers ffekt fieb firm ford
-fueg fuellt funkt gedr gekl gekn gernd grenz grupp guet handl heft
-heil hlich hlig hlten hnte$ holt hres hrtest hte$ idea idee idie ied$
-iegte ilme ind$ ingte inn$ ino insta instru inwe ipli irkli irma isku
-itzu ivie just kalk kast kel kom kompl kond konstr kor kret ktier lern
-lge$ lgen lid lieg lker lliert llstes loest lust miert mig mkeit mmiss
-mtes nachb nachr nang narb nbed nbesch ndsten ndster neid nerf nerw
-nfall nflat ngeschr nget nglos ngte$ ngten nktes nnahm nntes nor noss
-npass nschlag nserv nsion nstrum ntem nterbr ntrag ntscheid nverk
-nvest oestli oje onto ophe orche orgu orsche ortei ove ovi pan path
-patr pen pfig plan prob publ ram ranst raufg rbeits rbind rbrauch
-rbreit rdernd rdin rech reist repr rfuehr rgang rgebr rient ries
-rischst rklaer rksam rkte$ rleit rmer rmin rmittl rndem rnend rner rot
-rschein rschuett rse$ rteilt rtigt rtraeg rtschaftl rueckb ruecks
-rueckv ruehrt satt satz schad schenk schickt schluess schten sieb sied
-spieg spielt sprech sserst ssnahm sstest stach steckt stein stens
-sterh steuer stiert stik stit tad thod tigk trock tschend tul ubi
-ueckbe ueckli uegli uehlte uehte uelti uenge ufue ukti ulae ulte ums$
-umsa umwe ungsau ungse unse urre urte ust$ usta uve verschn walt weihn
-woch wonn wuerf zend zeug zimm ziv zuecht
-""".split(): TRIPLE_SCORES[triple] = 12
-
-for triple in """
-^abn ^abschr ^absp ^acht ^adr ^akz ^anschl ^app ^arr ^ausd ^ausz ^baue
-^eff ^einm ^ents ^entst ^fru ^ill ^infl ^ost ^pfle ^rae ^schlei ^schnu
-^tee ^theo ^traue ^um ^umschl ^unfr ^zy abhae achri aecke aedche
-aenkte aenni aerge aerti aeuche aeusse agne alge amie amo anche anglo
-ans$ anspru anwa apo appte archi arma arrte artne atue aufse aufwa
-aufwe ausfue ausrei baend ball beitr belnd belst berdr beschr bgesp
-bod buehn butt chbar chens chricht chsend chtbar chtfert chtigk chtlos
-ckern cktet dah daz deck dek dell dev dikt duld durch eachte ebaeu
-ebt$ echu ecki edrae ehru eigte eilha einla eitra eizte eizu eja ekae
-ekau elta enki enme enpro enschli entei entue envo enzi enzie eoba
-epfla epro erbau erbra erdre erdru erflu erglei ermie erpro erschrei
-ersie erstrei ertie erza esau espo espro espru esve eueru eugni euli
-eundli eutsche euze evoe fach faeh fasst felnd fernd fess ffes ffnet
-fgebl find flugz frag ftigst gels genf geschr glied gnal goss hab hag
-hest higk hilf hlbar hmbar hnten hochg hoert hot hrern hrlos hrtem
-hter htes ichst$ ick$ iedli ielt$ igie imie imu infla ings$ ioni
-ionsge irksa irte isio ista itlei jekt kehrt kell kelt kers kess kocht
-krim ktur lab lde$ leid liebt lkul llbar llgem lligt llstem lmaess
-lsten lster ltsam mach med meind mel mens miss mmens mmenst mmte$
-mmter mpelt mpfer mueh mult nach nachw naeh nbek nbez nbild nderh neg
-nein ngebl ngep ngern nglichst ngsmitt njunkt nkurr nnisch nschen nsen
-nstrukt ntal ntin ntraeg nwaert obje ock$ ockne oefe oehnte oemmli
-oesu off$ og$ ohlbe oke oku olli ongre ons$ opfte orne otge othe otze
-ovo packt pfer pfleg phant phot pisch pot ppel ppelnd prop rabsch
-rausb rbaend rbig rechtg reh rge$ rgebn rgem ring rkauf rkung rnaehr
-rnier rnig roeffn rordn rrat rre$ rschung rsetzt rsichtl rsprech
-rstaendl rstatt rsteig rstem rtiert rueckt rueckz rumg rven rver rvorg
-rwart rzaehl rzigst sbar schreib seid sgek sgest sierst son speis spek
-spend sproch ssenb sserl sstes steig sterb sternd steuert stift stigst
-stin stlos suend tast teilt terb tin tischst tob togr treid trunk
-tschaft ttiert uchu ueckt$ uegi uegsa uendli uenschte uenste uepfe
-uerfti uesste ufa ufrie ufte ulti ulve umpfe umra undge unglue ungsko
-unktu unna unrei unzu urchschni urs$ urste utge utio utz$ uwe verj
-verschr vorm waffn wag witt wohlb wuerd xist zerl zif zis zub zuh zung
-""".split(): TRIPLE_SCORES[triple] = 11
-
-for triple in """
-^abstr ^abt ^ak ^allg ^arm ^aufm ^ausm ^ausschl ^austr ^blei ^eindr
-^einschl ^eint ^entm ^entspr ^erschw ^expl ^gea ^geo ^gli ^goe ^grau
-^groe ^hie ^in ^ink ^jo ^kreu ^neue ^pfla ^psy ^scheu ^schro ^ska ^ski
-^traeu ^umz ^unst ^zau ^zwoe aari abfa ablo abschlu absi abwa achba
-adu aendni aesche aeude aeure affee afti agra ahi akt$ aku alla alu
-ammlu andie ando anfae anga angie angte ankhei anlei anme anpa antra
-ardi arf$ arka arle ars$ aspe athe atho auern$ auernde auffa aufga
-aufre ausglei bacht baeud bas batt bent berbr bernd bersp berstr bess
-bezw bgeb bgek bgez bhaeng bhaft bigst bisch biss blik blut bnis bniss
-bonn bring chan chelnd chgem chger chhalt chlichst chnisch chstab
-chteil ckel ckernd ckers cklung deal deckt deg dies dik disp div dreht
-efrie egle ehmba eichge eichnu eils$ eim$ eimli eimni einfu einna
-einsi eitsa eitsbe eldu eltu empfae enda engli enhau entio entlo entre
-entru ents$ enwae enzei epae erbeu erflo ergru ergrue ergue erhau erhu
-eriu erkle erkoe ernie ernue erpe erqui ersche erscho erstri ersue
-ertrau ertrie erva erwie eschie eschwae estei etrei euende euere
-euernde eugte eutu faehrl falt fel ffel fges fing fot freiz fremd genb
-gepfl gger git gnend grab grundst gut haut heimn himm hlter hltes
-hlungs ichts$ ickt$ ieche ies$ ilge immi immo impe ins$ inzi ionsbe
-irbe iro ispo itbe ito ittlu iums$ jub kaempf kaff kant katz kauf
-kauft keg klebt koen koerp konj kraeft kris ktien ktisch kuemm kut
-laest leucht lib lichst liebl lind llern llion lndem lnehm lohn lom
-losg lters ltert ltigst lux lymp lzend markt mbol meld mgeb mik mikr
-mitb mitgl mmel mmenb mmlung mmob mpath mpet mpliz mues muet mul mutt
-na$ nabs nar nbef nderw ndid ndit ndstes nenh nerk nerl nern nerr nerv
-ngert ngriff ngsges ngsvollst nhaendl nhaeng nheitl nicht nim nism
-nkel nnern nntem nser nsich nsiv nstand ntergr nterk nvers nzieh obie
-ochge ochschu oeffne oeme oepfi oette ogno om$ onju onstru onve opi
-opie opti orgte orti ortli orzu osge pfe$ piert post probl proj psych
-pul ranl rbeig rbitt rblich rchen real rechtf rechts ref reign reinf
-reins rern rfest rgerl rgreif rhand rhoeh ritt rkannt rkten rlauf rleb
-rmach ro$ rrekt rsen rsitz rstaend rstig rweit rzen rzog rzte$ sag
-sant schaefts schein schimm schlacht schob schraenk schwef sek selbst
-sgeg sgem sgesch shalt sold somm spann spaz splitt sprung stab staff
-statt steck still strat streich stroph stund sundh tall tasch teiln
-thek therm thisch tok treff troff tterl tterst ttier ttig tuerl tztet
-ub$ uchsta uebli uebu ueffe uegu uehrt$ uene uhre uierte ukte uku ummi
-umpfte unda undhei undstue unfa unga ungsi ungsrei unsa unst$ unue
-urme utsche val vem verfr verspr verstr verv ves vol wach waerm waess
-weltm wolk woll wurz xpert xplos ympa zer zers zertr zusch
-""".split(): TRIPLE_SCORES[triple] = 10
-
-for triple in """
-^abd ^agr ^ahn ^alk ^art ^aufn ^ausfl ^ausn ^ble ^eb ^entb ^erpr
-^erstr ^ev ^inl ^klae ^lee ^nue ^ord ^pei ^phi ^que ^raeu ^schaue
-^schlae ^schlo ^schra ^stri ^umb aatli abga abre abrei abru acha ack$
-aengni aerbte aerche aetsche aeule aeusche agli ago ahnu ahrba ahrha
-ahrschei aiso altge altlo andwe angrei anle anma anre anstae aria arm$
-aru asst$ astu ateu attie auch$ aufhe augli ausch$ ausfa aust$ austau
-auswa auswei azwi band bendst benz berschr berv bespr bier blon btet
-buech chart chtlichst ckgew cklos darf dazw densch denst dep derv
-dlichst dok doll draengt duerft ebla ebre echtfe echts$ edre ef$ efra
-efre egrei ehba ehrs$ eicht$ eiende eifli eifri eihte eila eilt$ eimi
-einbe eindli einga einkau einrei einve einwa eisti elbstve enbau endli
-enfae enkli enli enmi enoe enschei enschi enstue enwei enzte eppte
-eprae erble erfreu ergo ergoe ergri erkte erpfla errte errue erschoe
-erspe ertoe erzue eschli eschlu eschmi eschna esei esso essu estli
-estoe etreue ettbe eutli exa ezwi fahrb fass fens fett fgab fik flog
-fon freud frig ftrag fuegt fuercht futt gab gebl gendst gepr gien
-glaub gleich gleichg grat gul gungs haengt haf heg heir heiss hell
-hner hntes hochsch hrzeug ichtsvo iebli iedri iegt$ ieht$ ientie ikro
-il$ illa illio illu inkte inze iolo ionsa ippte iqui irkte iszi itta
-itua kampf klapp klein kon krit ktes ktik kuend lant lanz lehrt leicht
-lenk lent lges lste$ lstes ltlos ltniss ltur lum meng mgeh mie$ mild
-mmenf mmenr mmlich mokr mol morg mport msten nacht nad naufg nbahn
-nbegr nbet nbetr nbring ndlers ndter nert nfahr ngelt ngers ngeschw
-ngsber ngter ngtes nhaus nkbar nkert nklich nkter nlang nleit nlichst
-nnes noet non nord npreis nrein nruh nsel nsetz nstem ntakt ntar ntat
-ntell ntens nterf ntet nthalt ntig ntil ntim ntrum ntwick nverb nwend
-nwill nzahl nzelt nzern obu odie oehu oesche oesli ohei ohnte oho
-ollge ollie omple onnta opf$ ord$ orni orts$ osio ossa osta otzi ovie
-pag paz pens pferd pfte$ pften phil plin ppert ppten praez prom ptim
-racht raeumt rass rbes rblend rdigst rehr reicht reinb rfe$ rfind
-rftig rguet rhebl rif rkes rlad rlam rlist rma$ rmeist rmiert rmul
-rmut rnseh rpflicht rpreis rrig rseh rstet rstreb rtag rtraegl rueckw
-rwend rwert rwund rze$ rzten rzug sam schabl schafft schlicht schnell
-schraenkt schtes schuetz selbstv sell selt serl sonnt sorgt spalt
-speich ssem staats stigt stil stoch stueck sup szipl tam tastr tbar
-thol tionsg tist tleid tlos totg tracht trans tromm trueg trupp tschen
-tterh tters tug tzigst tzlos uatio uecksi uehli uenstle uerchte uerde
-uerfni uf$ ugs$ uko umlau umschla umse ungsme ungso ungswi upfte usche
-ussrei utzi uwa uxu var vent vog vollg vorf vork vorr vorw wacht wack
-weiss wick wind wirkl wurst ycho ysie zaehlt zeich zerbr zieg ziell
-zuz
-""".split(): TRIPLE_SCORES[triple] = 9
-
-for triple in """
-^abdr ^abfl ^akk ^anbr ^anstr ^auft ^ausbr ^beau ^beo ^chi ^eng ^ert
-^feie ^gau ^gie ^grae ^graue ^ir ^is ^kai ^keu ^klu ^kne ^knu ^krau
-^nei ^noe ^oel ^saue ^scheue ^schmae ^schmei ^schmi ^schnue ^spli
-^thro ^triu ^umsp ^voe abma abrue abu achfo achs$ achtei achu aechste
-aedli aegt$ aegte aeke aeme aengt$ aerbe aermte aesti aetti aezi affie
-affu andscha andu angsa anhae anko anku anrei anschau anschla anschlu
-anza anzi arfe ark$ arkte armhe arne arze arzte atsche auere aufla
-aufs$ aufsta augte aulte aums$ ausde ausfu ausra aussta avi back bal
-bast beb beisp belg beng benst beob bergl berschw bgebr bgem binn
-blaett bog brannt brat brech bruest bsicht buch burt chnen ckenh dakt
-darl derk derstr derz digst dingt dram druck druckt duerfn durchschn
-echno edae eflue efoe egba ehmi ehrba eichni eid$ eilba eilne eimte
-einma einri einse eische eisge eisli eisste eita eki elda ellba ellste
-elme enbu enbue enfo enho enra enro entbe entfe eolo epe epra epre
-erbla erdae erdau erdoe erdue erfei ergu erio erja erkni erks$ ernei
-ernge ernu erpla erprei erque errie errli errscha errsche erschme
-erstaa erstie erstu ertru ertue ervoe erzau erzli esaeu espre essa
-essli estau etaeu etue eugne eule eutra ex$ fachg fas fecht fels ferst
-ffelt ffens floss flueg fortb freib ftigt funk gant gekr genk genl
-gepl gezw grad guenst gumm gur gutg habt haelt haeus handw heb heilt
-heimg held herrsch hlern hltem hoh hol hrhaft hrlichst hrungs htet hum
-iane ibi ibu ichu iebsa iefge ielge iels$ ieme ieni iessba iessli
-iesst$ ife igge inko innte ioti isvo kas kenn kil klaert klag klamm
-kok kompr konst konv kop kuenstl kuest kurs lanc larm lbig led lernt
-lism lkoh llert lligk llkomm lme$ lok lstem maecht mand mant mask mdet
-ments merk merkt mgel mgest miet mis mmeln mmers mmerz mos mpfind mpon
-mste$ mster mtest mut nachf nachz ndeln ndenz nderf ndesb ndienst
-ndlern nenb nerh nerm neug neutr nfach nftig ngab ngaeng ngbar ngelnd
-ngeschm ngestr ngiert ngsmoegl ngsrecht nigst nkheit nkund nmach nmeld
-nnehm nnschaft nntniss nogr nov nreg nreis nschaul nschein nschlaeg
-nschreib nspruch nsteh nstet nstreich ntas nterm nterpr ntion nutzt
-nverst nvertr nzer nzert nziert nzip nzueg nzung obte ockte oehnli
-oenne oepfte offnu ollstre ombi ompa ompli ompo ondie onge onti oote
-orko orra orri ost$ otscha oxe panz perf pet pflanz pper ppte$ prakt
-prallt preisg prim pruef qual quent raeum rausz rbef rbeitsl rbet
-rbild rdnend rdrueckt reb reif reinl reng rerz rez rfaell rford rgaeng
-rgnueg rheb rheir rheiss rheit rioes rktes rlang rlaub rletz rlieg
-rmaess rmass rmherz rmiet rnis rnte$ rol ron rrte$ rsam rschiess
-rsicht rspiel rtner rtoff rueckf rungsb rungsv rvat rwand rwandt
-rwirtsch rztes saeub schaut schig schmiert schtem schter schung schwer
-sess sged sinnt sorg spart spenst spon sseln ssenk ssens ssenst ssernd
-sslichst sstem staerk staet stap stemp stent strahl stritt stuerzt
-symp taus tekt tenb tenl tenst ternd terst terv teur text tgeb tgeh
-tgem theat tont tral transf tron trop tsche$ ttbew ttelm tterf turg
-turn twill uefe uehrli uemli uenfti uer$ ufli ufu uiere uktu ulle ulta
-umhe umu un$ unae undie ungs$ ungsmoe unpa unste unze urei urg$ urm$
-ursa uschla utzu veg verpfl vort wald wasch web wegf wegl weltb weltr
-wirkt witz wohnh wohnt wort wucht ympia ypi yra zerkn zin zufr zugr
-zun
-""".split(): TRIPLE_SCORES[triple] = 8
-
-for triple in """
-^abbl ^aerg ^alp ^arch ^arg ^aufkl ^aufsch ^aufschl ^aufsp ^aussp
-^ausstr ^boo ^cho ^chri ^einsp ^erdr ^ernt ^extr ^glae ^knau ^koa ^mau
-^plu ^schnau ^schwie ^stre ^teu ^thea ^umschw ^urt aat$ absti abwi
-achbe achgie achi achsi achstu achtsa aech$ aerli aetzte affi afi afie
-afri ahnte akle alke ammie amms$ ampfte anchie ancie andha andschu
-anoe arko artu arve asta atla atsa auend$ aufko aufle aufma aufsi auri
-ausko ausloe ausschla bat beamt beif beil berbl bergr berschl bind
-bitt blend blichst blum breit bruech buchst bueg chel chenb cherst
-chnol chse$ chters chtert chtungsv ckenl ckerb ckerst ckhaft dag darst
-deb deln delst densw dom donn dos drueck durchf eaktio eblae ebrue
-edaue ehaeu ehnli ehri eidli eift$ eigt$ eihu eilna eimge eintrae
-einwi eisa eissge eklae ektri elfa ellie eltbe elue elwe ems$ emse
-enbo enfi enfreu enkla enlie enna enni enpla enpo ensae ensbe ensei
-ensto ensu entle entste erbro erdeu erflie erfri erfu erg$ ergla
-ergroe erki erkli erkrue erksa erkzeu ernste erpfli erprue ersaeu
-erschle erschlei erschro erzwei eschleu eschoe eschwei espri espu
-espue etai etti euri exte fahrl fahrz faul feln fenth festl feucht
-ffenh ffentl ffnend ffte$ ffung fgeg fgek fix folt fricht frik frist
-ftraeg ftung gabt geldm gell gelm genm genn gfaeh ggest gion gnad
-grenzt grossh haend haeng halb harm hern herst herzl hitz hmig hnter
-hoeh hoffn hon hrenh hrscheinl htem htest huet ickli iegsa iera iffa
-ifti ildli ilia ilste immt$ impfe infi inla innu iru issa issi issve
-ittle kais kaltg kamm kand kath kehr kenntn kin klim koal kord ktivst
-laeuf laun lben ldert lei$ lers lgew ligt lik lken llar llenl lltest
-lor ltier ltlich lueck mann mben mischt mmenbr mment mmtest mporg
-mprom mstes muend nbem nbestr nbrech ndal ndesl ndiv ndlichk ndstem
-ndte$ nehr nenn nentw nerz nfabr ngedr nghaft ngier ngtem nhoer nieur
-nif nischst nkes nmut nnem npol nruf nsat nsatz nschlich nschluess
-nsend nseq nsinn nstimm nsul nterschl nterschr nthalts num nverd nverm
-nvoll nzentr nzig nzul oali oeffnu oefli oele oenli oente oesba ohn$
-ol$ olfe olgte ollbe ollko ompro ondi ont$ optio orda orha orke orsta
-ortbe ortrae oso ostue owje parl passt pflanzt pflegt phon plast pok
-poth quid ra$ rabs rag ran rann rbess rblick rbrenn rchend rchlaess
-rdern rdicht rdienst refl rell rers rfert rglich rgruend rhaeng rhuet
-riod rker rkleid rlaend rlaessl rmaecht rman rmes rmess rod rost rper
-rraet rrechn rred rreiss rrisch rrsinn rrten rschlaeg rschloss rsoenl
-rstaendn rstend rstueck rtis rueckh rverk rwuenscht rzaehlt rzeit
-saeur salz schauf schauk schieb schlaf schliess schmier schnuert
-schoepf schuetzt schul schult schwein seif senk sex sgestr sgetr sgez
-sim sis slos smaess soph sowj spritz sselnd ssigk ssisch stamm stausch
-stischst strier stuf sud syst tak tenz theor tief tivst tlichst truebs
-tsam tschig tschrift tuat tyr tzern uartie ubri uebte uechse uechtli
-uenfte uente uepfte uerso uetli umga umo umpte unbea unko uote urchei
-urchlae urku urve ustae utre uts$ uwi verzw vok vollb vollstr waehl
-wehr weid willk wimm wink wuehl ype ypo zerb zist zum zweck
-""".split(): TRIPLE_SCORES[triple] = 7
-
-for triple in """
-^abgr ^andr ^anpr ^anschw ^aufb ^aufdr ^aufp ^ausgl ^bio ^eg ^ehrl
-^eif ^eiw ^ek ^elt ^entschl ^flae ^impr ^mee ^my ^obj ^plau ^sai
-^schno ^schrau ^umkl aal$ ablie abne absu achtlo achwei aechtli aehli
-aehnte aeische aelde aengsti aenku aerfe aeri af$ ahlt$ ahnde akto
-aldi allo alpe altba althe alve anspi antrie anwei apse argu arra aske
-assge atzu aub$ aubi auchba auffue aufme aufri aufste auscha ausru ava
-awi barb begn benh berq berspr bgab bgetr bleib braucht brig brueck
-bschluss chselt chslos ckeln cknet diot dium durchw ebeu eeigne eerte
-efei efli egio eglie ehrlo ehrt$ ehue eibli einka einle eits$ eitschri
-eitsve eiwei eiwi ekna elaeu elbstge eltge enhaeu enlei enschla enschu
-ensge ensve entbra entfa entschlo epfle epi erdro erkae erkrie erno
-ernspre erschlo erspri esbe eschri esli etoe etto etts$ ettu euerli
-eufe euni eurs$ ezwei faehrd faerbt fein ffenst fgetr fil fkomm flott
-fluecht fmerks fragt freist fris fseh fuers gaz gegn gelb gelst germ
-gerst ggef ggel gin ginn gkraeft gog gor hall haltl handg heiz hem
-hlges hnlichst hntem hom hrtet ible ichta ideo idio ieli iello iesi
-iess$ imma ingst$ iplo iskre ispe jud ka$ klar kleinb komb kongr ktlos
-ktors ktron kur laech lbe$ lchen liq lkraeft llstaend lmen loes lueft
-lver lze$ lzes malt mbin meint mges mhaft missv mmerl mmtem mmtes moeb
-mpel mpelnd mpfaeng mpfung mtlich ndeg ndens ndesg ndesv ndhaft ndicht
-ndschaft neig nfert ngang ngeld ngeschn ngsprogr ngsproz nierst nkauf
-nkenl nkleid nlauf nnens nnuetz nrechn nseit nspar ntbrannt ntif
-ntraecht ntret ntschloss nutz nvent nwag nwand nwirk nwuerd och$ oehle
-oelle oelpe ohnhei ollstae olste olz$ omba onsta onu ordi orsa orschri
-orto oru osa osie ossi phys platz putzt rak rar rchges rdaecht rdes
-rdient reib reinh rfluess rgab rgetr rgisch rgriff rgroess rieb rkaufs
-rklich rland rleicht rloes rmier rnes rsach rsag rschuld rschwend
-rstoff rtel rtern rtigk rueckst rum rzeugn rzlich sab saugt schaud
-schaul schelt schest schiess schiff schleppt schleun schluss schmied
-schmutz schoen schreck selbstg senl sin spir ssant ssenl sset sshand
-ssreich staatsb stechl stelt sterl steuerb stief stiz straft strahlt
-stspiel sugg sult sund taenz taf takt tang tap tell tens tionsl to$
-tol tors traeum traul treuh trisch triumph trotz tschelt tusch tzest
-uchha uchslo uebri uedli uendni uergte uermte uga uha ultie ungsmae
-ungspo ungszei unne unschae unsta urbe urlau urne ursti uspe utzlo
-visch vollm vortr waehlt weltg wen werk widr wirb wohlt wortg wuensch
-xek ymbo yna ysi zen zerfl zersp
-""".split(): TRIPLE_SCORES[triple] = 6
-
-for triple in """
-^abschw ^aeuss ^aggr ^angl ^as ^ass ^aufk ^ausbl ^aust ^blae ^doe
-^einfl ^entfl ^ep ^erq ^es ^grei ^hee ^instr ^knei ^knie ^mai ^neua
-^pfa ^schleu ^taeu ^tou aare aatsa abei abfue abho abscheue absto
-abwei achlae acki aedie aemie aempfte aeppe aess$ aetzu aeumi aftle
-aggre ahie ahmte ahrlo ald$ alka allt$ amha andfe anfe anscha anstre
-antri anzle arni arzt$ aubha aues$ aufa aufloe auftrae ausbau ausdrue
-ausie ausku ausschue austra bahn baum beacht beist belh bels benb
-bensm beschm bgedr bgen bgeschl bgeschr biert birg blass branch bstimm
-buerst chgeb chgieb chner chseln dab darg dersp dew diff dipl dist
-drigst dringl durchbr eabsi eanspru eauftra edli edo eeinflu efla
-efreu ehli ehnba eiern$ eies$ eifi eigni einflu einsti eissi eitslo
-eizei eizi ekli ekni eknue ekrie ekta ektvo elsi eltli empla enfue
-engru enntli enso enstrei entfae entfre entschu entse entvo enza epfli
-erbaue erdrie ereo erfra erkla erpo erschli erschlie erschnei erschra
-erschrie erstra erwoe erzte eschnue eschrau eschrei euen$ eugs$ fachm
-fad festst ffeng ffig fgesp fgez flaech fleisch fluechtl fluest freim
-freit friedl fwand fwend gall garn gas gast gbarst gelf gendh gensch
-gist gnier gniert gott gramms greif haert helf herrscht hers hllos
-hltest hndet hochz horcht hrensw iani ienge igi ignie ilbi inae infa
-inrei iode ip$ ipfe ipu ischle ischu isko islo iss$ istie itschi itzt$
-kard ke$ kleb klett knall kriegt ktvoll la$ laengl lgesch lierst llekt
-llisch llmaecht lob lod lot ltiert ltnis maedch maerch magn mak mang
-mannsch meing metr mfass mgesch mgew missg missl mmenl mmenz mniss
-mpe$ mpften msatz mschlag mstem mtern nabh nachl nbeschr nbuerg nche$
-ndelb nderr nderv ndgel ndruck nempf net nfiz ngefl ngekn ngress
-ngsstell ngsunf ngsvers ngswidr nhaeus nheil nind nkass nkelm nkernd
-nkreis nktest nktet nleih nlief nnlich nprod nschiff nsehnl nsicht
-nsiert nsmitt nstall nswuerd ntfremd ntiq ntwortl ntzuend nzel nzelnd
-ocha ockie oerri oert$ oertli oga ohli ohrte okto olt$ omfo ommt$ onni
-ontra oot$ orbie orchte orla orle oro ortio owe pack pal past pell
-pend phen ppell ppig punkt rabg rabr raed raff rall ranschl ranz rausr
-rauss rbetr rbuch rdaul rdisch rdross rdruck rdrueck reinst rfer
-rfuett rgelt rgeschl rgestr rhaert rigk ril rim rjahr rkelt rklein
-rklichk rkuend rkul rlaess rleih rlief rmlos rniert rollt rpflanz
-rpret rrang rrit rrlich rrschaft rruf rrung rsamml rschieb rschier
-rschiert rschnitt rschreib rtei$ rtion rtrieb ruecksch ruehmt rund
-rungsm rurt rwind saub schild schlich schmeich schmett schmiss
-schnallt schraub schraubt schtest schwert schwest selbstb seng sez
-sgesp sgleich skand skret skut sor sperrt spion sreich sstet ssverst
-staat staedt stlichst stoer stoerr streb striert strukt stuem stuerm
-stutz summ taucht tax terw ther tierst train treib trockn truebt ttenl
-tterb tterw tum tzgeb uaele ubsta uchsvo uckt$ ueckga uecki uegt$
-uehl$ uellt$ uenktli ueri uesti ugte ungea unhei unta uppie ussbe
-utschte utu verpl viel vollst vste$ vster vstes watt weissh wirks
-wischt woehnl wog wohlf wollt xen xper zeil zerk zerkl zerschm zerspr
-zerstr zitt zorn zuend zuschl zuschn zweist zweit
-""".split(): TRIPLE_SCORES[triple] = 5
-
-for triple in """
-^ack ^anschn ^aufschr ^ausp ^chro ^eil ^eingr ^einschr ^end ^entgl
-^entk ^gee ^glaeu ^im ^jue ^knoe ^krue ^laeu ^pae ^pflue ^quae ^schmo
-^schnoe ^schrae ^spio ^spoe ^trai ^uebr ^umgr ^unschl ^untr ^zoe
-abdrue abscheu abschrei abstei achma acho achst$ achste achve achzu
-ackha aehrde aetse aetzli aeubte aeufte aeumt$ afa afft$ ah$ alde alme
-alzi ambo ammle ance andli angsve ankla anlo anna anrue aphe appt$
-armee armlo artie atei atri aufstei auftre aunte aushe ausle ausna
-auspa ausre ausri aussa baerd bagg beim belf bergb berkl besp bgekl
-bien ble$ bnehm brief brill broeck bsond bucht chfolg chlaess chmaess
-chol chschul chsels chtsvoll chwert ckgef cksicht dal deng derm dient
-din dox drung durchdr durchz eansta eckli eckmae efrei egue ehl$ ehlu
-einbi einbue eindri einhe einke einre eisst$ eitscha ekoe ekra ekrae
-elche eleie elka elve elwei elwi embe enaue enbei endba enhi enkba
-enkt$ enlae enlau enprei enrau ensmi enstu entae enteue eore eorga
-eppi erblei erbte erflae erglie ergra erhaeu erkna erlaeu errae
-erschni erschri erspo ersprue erstreu ertrei ertri ertste eschmu
-eschwo espi essba estste etsche etzge euert$ euse extre fasch fbar
-ferng ffenl ffter fgesch fget filt flatt fortf fortschr freil fress
-freund fsicht gegr gehr glaeub glas gleichm gne$ gnos gress grundb
-grunds gsamst gstell gungsm haar hackt haft heer heiml hev hier hlers
-hnbar hntest holf hors hos hrerb icks$ iedi ierli iktie illkue illte
-ilte indo ingba ionsve ips$ irrte ischge iska ituie itve ixie jagt
-kaempft kaus ketz klagt klappt klav klin kling knoch knuepft krieg
-ktions kuehlt kuerz kug kzept laeut langw laut lber lekt lenkt lie$
-lied llenf llon llstreck lspiel ltat ltigt lvoll massg max mgek mmentr
-mpen mpens mpfehl mpfte$ mpos mtem muetl nachh nakt nals nangr ncier
-ndard ndgeb ndin ndstueck ndtest neinh neng nfass nfest nfluss nfuehl
-ngepfl ngespr nglichk ngsbew ngsmaess ngsverf nkeln nkelt nkurs nlaend
-nmal nnehmb nnert nop nordn npap nsag nschuld nseh nsform nspir nstern
-nsum nsyst ntegr ntel nternd ntiell ntik nuegs nverl nwerf nwert nwes
-nwohn nzeit nzte$ oehni oehre oelbe oelze oerba oermli offha ohla olme
-onds$ onfi onia ony opaei oppo opu orbei oriu orschla orschlae ospe
-otio ots$ ottge otwe ourna owie paeisch pausch pe$ pflast pftem pfter
-pftes piers platzt polst ppeln praed quar radsch rafft rank rap rarm
-rasch rausf rbarst rbindl rbroch rbund rbung rdend rderb rdien reimt
-reinn reitsch renh rest rfekt rfuellt rgebl rgeld rgern rglied rgnuegt
-rgrab rgung rherg rhoert rkrank rlaubt rletzt rlichk rmigst rmlich
-rmord rmued rnicht rnuenft rrechtl rreicht rror rsatz rschrift
-rschwingl rsend rsit rstellt rstoer rteilh rtert rtlos ruecht rueckk
-ruehr rufl rungl rvers rviert rwerf rwies rzes rzicht sais salb sandt
-schaetz schick schied schien schmar schtet schwaech sert sgebr sgegl
-sgekl sinnl skizz skop sort sped spoett sprach spring spritzt spuelt
-sserh ssgeb ssigt ssivst sstatt stanz stems stoeb stol stopp straf
-strebt subst sued svoll symb tabl teng tenn them tim tionsb tionsr
-tischl tmach tos tour trink tschlag tslos tuecht tzbarst tzers ueckzu
-uellu uendba ueppe uetzi uft$ ugru uh$ ultra umi umri umtau unfoe
-ungsgru ungska ungste ungswue unio unme unwue urchse urie urnie uschie
-uschte uzu verq viol vollz vong waehrt wegr wein wieg wundg xempl xim
-ygie zapp zerw zioes zoeg zud zudr
-""".split(): TRIPLE_SCORES[triple] = 4
-
-for triple in """
-^abkl ^abspr ^aerzt ^allt ^amts ^anbl ^aufpr ^chau ^drue ^einbr ^einkl
-^entzw ^erbr ^ersp ^glie ^gy ^impl ^intr ^kaeu ^kloe ^laie ^opp ^pfi
-^phy ^plae ^qui ^reue ^schlie ^stru ^uebl ^ultr ^umd ^umfl ^umk abfae
-abfo abha abkue ablau ablei abloe abscha abschni abschue absta abstra
-abwae aby abza achkrie achku achschu achwi achwu ackt$ adioa adiu
-adscha aebi aehlt$ aellt$ aemi aense aermste aersche aetzi aeuschte
-agna agsge agst$ ahnho ahrge ahrne ahte aille ainie aki albu allie
-aloe alta amtli amue andba andwi anfte anfue angi angst$ anhe ankie
-ankt$ anns$ anru anspa apri ard$ armte arri arsch$ atrio atro atti
-atza aucht$ aufbau auffae auffi auffo aufha aufklae aufrue aufzei aumi
-auni aupta aupte ausflue ausi auspie ausrue bdrueck beeinfl bej bekr
-benf beq berpr berschn bget bildsch blad blig block boes brand bruet
-brut bstant bus cherw chgel chgest chgew chigst chkund chler chniss
-chtslos ckeng cklichst ckmaess da$ dehnt delm dels denb destr diz dor
-dreh dreif droh droht durchsch dyn eantwo echslu ecks$ een$ eer$ efro
-eglue eheue eichba eidge eiem$ eiere eigu eimtue einfae einspa einstu
-einwe eiss$ eitsi ektu elbi elbstbe elke elmue elsta eltre empfe empfu
-enbae enbla enbli enmo ennt$ enpu enru enschwe enspe enstra enswue
-ensy entde entrae entrie entschae entwei eplae erb$ erbea erche erfro
-erglue erklu ermaue erneue errschte erto ertraeu ertro ervi eschnei
-eschwoe estme estreu esue eswe eubau eundscha eurtei euste euzte evie
-ezwu fahrt fakt fat fault fernspr feuert ffenb ffhalt ffiert ffnung
-fften fgekl fgem fklaer freundsch fror ftigk fuell fuett gand gatt
-gegl geiz genbl gendr ggeb giess gigst gner gnost gold graus greis
-groess grundl gungsf haendl hebr heid heimt heizt hemm herl hinf hinr
-hist hochw hrens hrheitsg hrungsm hrungsw ialste iate iba ichs$ ichtba
-ichtslo iebha iebs$ iebu iefte iehba ielfae ienli ieti ieur$ iffte ifo
-iftu igno ilm$ ilze impfte inns$ irdi irie irne irsche ischo issbe
-itwe ixte jan jur kaes kampfb kav kels kies kitt kler krankh kratzt
-kriegs ktat kteur kuenst kzent lacht laer laerm landw langl leien leih
-lfaelt lfend lkig llens llenst lltet llustr loescht lopp lpunkt luftf
-lwerk lzig mas meer mgef mger mien missb mkomm mlos mmes mmier moegl
-mort mpfter mpfund mplar mplex mtet munt nachkr nachs naeht nanst
-nbau$ nbruech nciert ndant ndeck nderst ndesm ndesw ndeut ndex ndniss
-ndschuh ndten nersch neub nfalls nfang nfekt ngearb ngeln ngrupp
-ngsbef ngsger ngsmassn ngsschein ngstigt ngtest ngvoll nheft nip nkels
-nktem nland nlieg nmarsch nnaeh nntet nntlich nplatz nrat nrecht nsam
-nsber nschalt nsier nsist nstat nstueck nszen ntad ntast nto$ ntrieb
-ntritt ntwert nuetzt nut nverz nvestm nzten nzuf ob$ ocks$ oemte oerke
-oeschte oesste ohr$ ohte olgsa ollmae onfli onstruie orn$ orpe ortho
-orve otzte ouve paus plom pop portr ppernd ppier ppter proph ption
-ptisch pulv rabl raecht raest raets rand ratschl raub rauf raussch
-rbiss rche$ rchein rchest rdamm rdeck rdentl rdigt reakt rechtl regl
-reizt rfilm rfuell rgedr rgeist rgert rgift rgleich rgter rind rlaeuf
-rlangt rlebt rleumd rlin rmann rmel rmeld rmte$ rmten rnahm rnal rniss
-rnten rntet roest roh rpol rresp rring rrtest rsand rschen rschneid
-rschoss rschul rsinn rspring rstaatl rstech rstellb rstoss rsucht
-rteig rud ruht rungspr rungsw rvier rwaehnt rwerb rzter rzuck saeng
-saett sarb sart schbar scheh schelm scheng schert schind schmael
-schmerzl schmueckt schoenh schritt schust schutz seem senst setzl
-sfall sgeschl skuss slauf spitzb spond sprachl ssball ssendst ssenm
-ssim ssist start sterk sterr stersch steur streckt streift stub
-stuermt suedl supp tacht taets tauch taum tauscht tenh tenv terh terz
-tionsf tkraeft tlant tlicht toer toet traenk trakt tramp triot troest
-trott trueb ttent tterfr tuiert tungsv turb twend ucks$ uebsche ueckha
-uecks$ uehmte uerfte uerzu uetu umrei umschi umspa umstri undli
-undscha unfue unglei ungli ungsku ungspa ungsste unso unsy urchdri
-urchfue urf$ ussio ustie utma uvo verpr vierz wagt wahr wahrn walz
-wank wat weckt wegt werkst werkz wettb wich word wuenscht wuerz ymna
-ze$ zeigt zell zerdr zersch zerschr zielt zins zufl zwung
-""".split(): TRIPLE_SCORES[triple] = 3
-
-for triple in """
-^abkn ^abv ^aehnl ^aend ^altm ^amp ^anfr ^anschr ^aufschn ^auskl ^bloe
-^dei ^dy ^einn ^entd ^entsp ^erschr ^erzw ^ess ^floe ^froe ^grie ^ign
-^ing ^insp ^irg ^knue ^koo ^kru ^meu ^opf ^orth ^pfei ^pue ^quo ^rui
-^schlau ^schwue ^seu ^sou ^umkr ^umn ^umstr ^umt abae abgie abkoe
-abstrei abtre abve achmi admi aeda aehlba aehmte aelschte aelt$ aeltee
-aerste aesthe aeufli aeune aftspo aftsve agd$ ahlbe aini aite ako akro
-alse alts$ ampa ampfbe andle andma andre andse andslo andt$ angwei
-anha ankba anlae anmu annae anno anto anwae arfsi armu arnie arnte
-arro aschte aska askie aszi athle atschla attli atzfae atzt$ aubt$
-aubwue auert$ aufbe aufdri aufei aufrei aufru aufsa auft$ aufwi aumwo
-aure ausflu ausgea ausgie aushae auslau ausma awa ban baumw bbel bein
-bgebl bged bgeg bgeschm bgeschw bhalt bkoemml blen blickt brutt
-bschnitt bsetzb bstoss buendn bungsv bwand bwehr bwuerd ce$ chbez
-cherz chges chisch chmach chstell chthab chtmaess chtsam ckendst
-ckgest ckier ckiert ckisch dchen degr denkl depr die$ dieb diskr dopt
-draeng dreist drog dross dte$ duft dunk durchm eagie eble ebraeu
-eeilte eelle efri egia ehst$ eichmae eichs$ eichu eidsa eif$ eifu
-eifue eiko einbu einschla einwei einwo eissu eistrei eitba eitma eitri
-eitsvo ekru elki ellve elmi eltste emmu enblei enbre enbrie enfro
-engae enkoe enkre enkrei enswi entfue entne entspa entspre entwa
-entwue entzwei eoty epflue erfreie erfrie ergbau ergei erkma erpfle
-erschlue ersei erspi ertae ertau ertroe erzwi esba eschmae eschmo eske
-espei esste estru etreu euda euerbe eumde eut$ exo ezau fachk fachl
-faehrt fahnd fdringl fegt felh fell feud ffaell ffeln ffier fftes
-fgebr figst film fischt flach flag flasch flecht flekt flex fluess
-frank frecht freg frev frueh frustr fsteig ftragt ftspol fuenfz fuerst
-gaens geig genv gerl ggress gift glock glueckw gnis gnor grav greifl
-grossz gruess gutm haemm haeuf haeuft hagl has hast hausb hells hemmt
-herk heuch hex hltet hmef holz hyp ibt$ ice ichtbe icksa iedlu iefa
-iegst$ ielbe iellste ienrei ierge iesste iessu ieste iffi iffs$ igfa
-igtste ikta impli impu inkli innbi iose ipie ischt$ isrei istli itee
-itli itti ittsa izo kaltbl kalth kampfg kanntg kaufm kaut keln kelnd
-kennz klarg ko$ koff kogn kreis kreuz kreuzt krob ktest ktuell kuehl
-lack laess lbes ldigst ldlich leck lehnt lehrb let leugn lfer lgeb
-lgung lian lkend llenb llers llit llkuerl ltbar ltipl machtv maeld
-marm marsch math mech mfort mgaengl misstr mitf mmenk mmenw mmiert
-mmtet mmungsl mog monstr mpagn mpfang mpfes nabw naehnl naehrt nahr
-nanl narch naussch naut nbaend nben nbind nbleib nbrief nbruch nchron
-ndat ndef ndenk nderj nderm nderz ndger ndik ndnis ndslos nens nfahrt
-nfrag nfreundl nfuhr ngefr ngegr ngels ngsanl ngsbed ngsbest ngspol
-ngswert ngswuerd ngszeit ngtet nheb nheim niedr nint nkind nklag nkorr
-nmin nmus nntnis noev norg npart nred nrent nrot nsaetz nsche$
-nschluss nsgesch nsteck nstler nstoss nstreng ntan nterdr ntlass
-ntreff ntsprech ntur nueg nverh nwachs nzust nzutr obo ocki oecki
-oelbte oenhei oeve oha ohsto ohu olche olg$ omoe omte op$ orei orf$
-orgli ormo ormte orstae ortra ossge ossha paed pak papp ped pein perm
-pfaend pfiff phe$ phie$ phiert pid pien pil plaud ppet pptes progn
-protz pult pumpt quetscht quot ragt ralt rarzt rast rats raubt rbaut
-rbeh rbelt rbrannt rchgew rchit rchschnittl rdreh reinbr rentw reot
-rerb rerl rflueg rfreul rfrisch rgesp rgessl rget rgum rhaetsch rhoeht
-rhoer rhund richts risk riv rkant rkass rkennb rknitt rkreis rleh
-rling rmarkt rmter rmuerb rmund rnacht roert rpart rrer rrier rrter
-rsche$ rschiff rschreit rschrieb rstaedt rstein rstreich rstreut rterb
-rtlichst rton rtraut rtreib rtungsv ruin rutscht rve$ rverb rverh
-rvertr rvielf rvoll rvollst rvorr rwachs rweg rwerk rwes rwid rwort
-rzahl rzelt saeumt samtb sar sbest schal scharfs schenb schenf schenkt
-schenst schichtl schicks schief schlack schlang schlecht schliff
-schmugg schnappt schnitz schrift schuecht schwaetz schweiss schweisst
-schwenkt schwerf schwing schwoer segn seln set sev sgebl sil sinf siv
-siz skont slaend slig sloes smen snahm spass spert spiell spitzt
-sreiss ssenr ssenv ssenw sserb ssersch ssett ssungsv stadtb stall
-stammt stan stech steil steng sthet stich streit stroemt stungs subtr
-sunk sweis synchr ta$ taill tant tenk tgef tiefbl tiefs tionsk tipp
-tnehm tow traecht tranch trenn treuer trik troed tschte$ ttelst tteng
-ttenst ttler tupft tzfaeh uale ubve uchtba uchti ucksvo udi udiu
-ueckse ueckste ueckza uehlt$ uehrba uell$ uelte uengli uenze uetsche
-uetschte uftfa ugae uhte uldsa ulei uli ult$ ulu umgae umkla umle
-ummte umre umsi umwa umzu ungsla ungsle ungspla ungsschei ungsta unru
-unwa urde urt$ uru usio uske ussa ustria utrae utzt$ verpf vielg viers
-vorn vorv waermt waesch wahlb wegw weichl weicht werkt west wetzt widm
-wild win wirt woehn woert wohlw wuest wut xer xis ynchro zeitl zem
-zens zerz zierst zisch zte$ zut zwangsv zweid zykl
-""".split(): TRIPLE_SCORES[triple] = 2
-
-for triple in """
-^abschm ^add ^antw ^att ^ce ^drae ^dreie ^eign ^engl ^entn ^entt ^geae
-^rhei ^ulk ^unq ^urspr ^vu achla achsa achtvo aechtni aengstli aeto
-afge aftsa aftsge aftwe ahmslo akku akteu alb$ allfa allu andeu andsa
-anlie anmae anntwei ansti apfte arsa arteii atli aubni auchs$ auerli
-aufae auptge ausblei baeck baer beauftr bensb bepfl beugt beut bgefl
-blind bliz botsch braust bsatz bschreib bsichtl bsteig bvent chmitt
-christ chsicht chsvoll chtensw chweis ckenb ckens ckgang dankt deh
-derf dim disz dueng dues durchschl durchst ebrie echtmae echzi egei
-eglau egna egs$ egsa ehlte ehmu ehrsa eibt$ eibte eifba eig$ eike
-eims$ einbre einbri eindru eingae einschrei eintre eisba eitrae eitsre
-ekreu elbstae ells$ elma elsge elspie elstue eltmae elvo engu enia
-enkra enmu ennue ennzei enri entia entsta enzfae enzioe eorie erblu
-erdrei erfau erfli ergrae erhee erkru erschwo erspra ersteue ertha
-eschmue euja exti ezeu falls fasz feilt ferl festz fleck floet folgt
-franz freundl fuehlt fuerw fugt gard geistl genz gik gnung grossm
-gungsl gymn hamm hann hauptg heimd hlgef hmlich hmslos hochb hochm
-hoefl huehn hust iagno iblio id$ ielsi iensta ient$ ikte ilaeu illie
-inkt$ insze iogra ionsko iote ipse irtli ittei itts$ izioe jamm jap
-kaufkr kippt klemmt komf krut kuerzt lam langt lbild lbstaend leichtf
-lenz lgel lla$ llehr lleng lmuet lsam ltgew ltsamst ltungs mad mehr
-mmelw mmenkl mpuls mse$ muehs murm nabk nachm nahm nans nas nbefr
-ndenb ndersch ndesr ndfest ndlos ndoss ndringl ndungsr ndwirtsch neh
-nenm neuj ngenh ngernd ngleich nglisch ngsgem ngslag ngstig ngsunt
-ngsweis nin nkenh nkett nklig nkrieg nktur nmass nmess nprob nreiss
-nrenn nschrift nschwer nse$ nseln nspol nstift nstruiert ntaugl
-ntbehrl ntial ntlichst ntlos ntschaed nwerk nzimm nzioes nzter oehte
-oerni oessi ohl$ ohnli olgu ollue onfu onzi opha orfue oria orrae
-orsti ortle ostbe ott$ ottie ozie pfeff phez platt pluend pptem praem
-quael quem raeuss ramb rart rbeitsfr rbeug rbrechl rdacht rderbl rdet
-reink rerst rfolgt rform rgaengl rgaenz rgers rging rglas rhab rhaengt
-rhalts rholt riat rienr riums rkast rkenntn rlaeng rlaubn rled rleid
-rlicht rmtest rmung rohst rotz rpress rquickl rrag rrschend rrtes
-rschaetz rschluess rschuss rsetzb rsetzl rspieg rstaerk rstrich
-rstuetz rsuecht rtraet rtrags rtraul rtum rueckl rueckschr ruett runs
-rurs rverw rvoelk rwach rzust sald sbez schalld schleud schlos
-schmackl schmerz schminkt schmirg schnoerk schreckt schrull schuel
-schuerft schwerv sentl sep sfuhr sgep spaet spielh spuckt sruest
-sshaft sslos ssungsf starrs stenz stoert stopft storb streitb streut
-strial stron subv suess szin taend taeub taeuscht talg tankt tann tapf
-taub taut teig teilb telt tgel tgest thlet tiefg tir tism top torp
-tort trad traur tscher ttenb tungs tungsl tzenh tzpunkt uadra ueckwue
-uenne uetzli uhl$ uickli uidi uittie ulau ulli umdi ungsfo unk$ unmi
-unmu uno unsti untau uose urchzu uschaue uspri usst$ usstsei utwi vaet
-vielf wahrsch weich weltl wisch woehnt wuerg wussts xe$ yse yti zei$
-zern zett zim zon zuschr zweis
-""".split(): TRIPLE_SCORES[triple] = 1
-
-
-def word_groups(word):
-    """
-    >>> list(word_groups('weight'))
-    ['w', 'ei', 'ght']
-    >>> list(word_groups('eightyfive'))
-    ['ei', 'ght', 'y', 'f', 'i', 'v', 'e']
-    """
-    index = 0
-    while index < len(word):
-        # Find some consonants.
-        start = index
-        while index < len(word) and word[index] not in VOWELS:
-            index += 1
-        if index > start:
-            yield word[start:index]
-        # Find some vowels.
-        start = index
-        while index < len(word) and word[index] in VOWELS:
-            index += 1
-        if index > start:
-            yield word[start:index]
-
-
-def word_triples(word):
-    """
-    >>> list(word_triples('weight'))
-    ['^wei', 'weight', 'eight$']
-    >>> list(word_triples('eightyfive'))
-    ['^eight', 'eighty', 'ghtyf', 'yfi', 'fiv', 'ive', 've$']
-    """
-    groups = ['^'] + list(word_groups(word)) + ['$']
-    for start in range(len(groups) - 2):
-        yield ''.join(groups[start:start + 3])
-
-
-def score_readability(word):
-    """
-    >>> score_readability('xxyhcwx')
-    0
-    >>> score_readability('schlomo')
-    600
-    >>> score_readability('schuhkarton')
-    742
-    >>> score_readability('produkte')
-    1683
-    >>> score_readability('bezirksschornsteinfegermeister')
-    964
-    >>> score_readability('bin')
-    1766
-    >>> score_readability('interessant')
-    1537
-    """
-    result = 0
-    triples = list(word_triples(word))
-    for triple in triples:
-        result += TRIPLE_SCORES.get(triple, 0)
-    return result * 100 / len(triples)
-
-
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()
+for index, triple in enumerate("""
+en$ er$ es$ ende ^ve em$ ere ^ge ige ene ^be iche nden ung$ nder nde$ ^zu gen
+ete ger ngen ndes unge end$ ische iere ren et$ uebe ierte re$ este ern$ est$
+^ueb ten age eite rend erte cher ge$ rer ange ^ko eri nen ^ka ^we ege ^he ^vo
+ges chen res ^wa igste asse era are elte gend ose ne$ ner ssen ^wi ande eru
+ebe ^re ers$ ^mi amme ben te$ ^ma ehe unte iede ^abg rem abge ter ^ze ese gem
+erei ver eit$ ^hi rten unde rte$ itte ^na ausge afte che$ ^fe ber ig$ nes ele
+^un ^fa ^ang alte eise ^ha ^pa ate elle ^unt enge ichte ndem el$ erge ^se
+^ausg inge her abe sen rung omme ^du aufge gew atio samm usa zus inde eiche
+rter uge sten ^wo isie ^aufg ^de zur iege chend tion bend ichste eige ernde
+ster scher ^ho ^sta tet achte ssend ^ung ^unb hend ette schen ^pro ^wei lten
+^ta ache se$ ade einge inne isse ^ba llen ame ^so ser ^ra nem iebe esse olle
+elnde sche$ urue eln$ ^sa igte ion$ unbe sse$ rtes rtest ^la rtet arbei nnen
+tend eide ^fo ich$ ens$ osse ale ^da ches in$ alle ahre aende mmen zug tes ^si
+^eing ewi ^me oge lle$ ^le ste$ inte ide erbe ^scha ^po chtig fen gel geb der
+ckend gesch igkei erke ^fi ecke ewe iste ^mo rat ati arte risch erha ssig verw
+le$ ^wie erau den ede ^bu ela une ali llend ente rbeit eschae ^to aenge ert$
+verl ote chten gkeit iert$ chtet ngend ^ke vers gung ^wu aft$ isch$ ^schu eha
+chem eine obe aege geh aessi uege len rtem ^hei ^hau sier aufe tig ^te ine
+uecke verh ^ga ndig ewa erli ^ki wied eche lte$ lit eiste eli siert ller eife
+ena ione ive hen igu ^di oli efa atte imme ^ste gef eibe and$ chte$ stes rlich
+eme bel hren rin komm aehi tten send orge eko ani verd fend ^fu nger test ara
+^ku itze tzend lis ehre ichti ften cken verf rtig eile tisch verk bes sches
+lig ieru erle esa edi ^tra ina ^rei anke stem ndet ^zi erfa iefe icke ien$
+itae ^bi rig lend elt$ verb esta chter ^umg lter erwa aste tem ler oche llig
+erre els$ ode ik$ efue ^bei sest ^lo uche mmeng nter mer gest wid umge etze
+ema ika hrend ^no ment erti enste isti hig be$ ilde bew ichkei erne iti mmend
+offe ita ^pe ari esi aute ar$ fter ^do affe echte aendi gste$ rinn uehre ^bo
+erie izie hin erste erwe enha ante ike eta aube ^ne erla ^schla orde ^stu
+nisch betr ^kla ^ju ngel ndend iesse sser gsten ehme ^li schem ffen esu ega
+ag$ best rad oste irtscha ^vie ^lei ^frei ogra verm ahme chkeit ^su ngeh men
+ane stet ses gster etrie ^bue stisch nten mat ase min iffe cke$ annte ^sti
+eisse ^schi ^mu richt nge$ verg ischste ^gro gte$ erse ierst$ gstes ^gru ^fue
+iele ufe uesse ini ndlich nat enne ^zwei gten erae acke one fer beh verst ute
+uppe esti niert uette ore glich eno uende det is$ wass os$ ^erw inie enke leg
+nier ltet geg ^schwe nal ltes get log ^arb me$ elde ^spe ^int ersa tter nken
+nhaft ngeb chtend ure tte$ indu de$ atu tal erve nist eute etzte ili gter ause
+icht$ arti aete erue erma at$ nig ertra vertr orte onne fe$ bund nges ^ja vorg
+rueckg ula uste tzen ellu dig al$ versch ucke ^tro ersi agte egte eda arste
+sses iehe ^spa una ueche tze$ tung appe ^lu tor emei odu erfo eini dend eschi
+stand ktion emi efe ato ^tu kat halt fte$ ebu pol ^za tiv taet reg gstem aeufe
+ltig ^unv ueckge lung ^ro uete altu ahle schaeft ocke illi ^lie ^bau ite iete
+ewo bet besch us$ nkend ngef enbe aeche ged eitu eina echse ^wae ^flu ttet
+chtes ellte ein$ ^wue ori leb eckte durchg uechti ersta erfe dem ana ^zei ille
+ftest aetze efo nswert iese ^nie ueste verz mil erba bers anne ^stra efae berl
+api eti ami ^hu ^ru ^abs llung kap hlen erwi enswe ^ri ude tel nte$ erzi bed
+otte onde gier ero enta endste ^erf ^einz rnde$ egie ^ti ^gei verr urchge ole
+ermi chsten aeume ^schwa ^ind rnden atze pit oto auto ^see ^klei ttert ltend
+gtes ume osi or$ nnend asche ora emo ehei egge aechti ^rue hlend erhae aere
+anla ^die ^abw rnder erde ebra umme uelle tier nlag ^neu ulie ang$ afe ^kue
+^gu uss$ tik rndes ^tie ^tau olo ltest bef vor ndung hmen chste$ ^pla ^entw
+stig ona nlos elei ^go zier unke stellt ltem les ernd$ eili chstes aesse achge
+^glei olge oermi mmer mitt erhei orma ndert chster weit wegg ngew dukt ^staa
+^prae gelt erna ^zwi ^erl ^ab gramm enve akte aefte ^erh setz lat kind hand
+acht$ ^kra ^ausl wirtsch rmig onie erso apie ziert euge emae ehoe ^sue ^pu sem
+oerde fin ent$ aschi anze vern estae ^zie uch$ ohle ngest nand he$ erri getr
+bil aeti ilie hrung eho derg ^sie ^prei verbr ueckte rhaft itio iona berg ivi
+inke eso ervo enhei ^uns unve schend par ewu aelle uerdi rfahr part erfue erbi
+an$ ^sei ^kau ^hoe dern chtlich um$ nheit kan elnd$ anti aefti ollste list
+^stei on$ ^anl ube recht inni erwei egu ckte$ chlich ^ni ^an inau ftig ebi
+chtest ur$ inse ersu erscha enlo ala rgan oma hrer eien$ ustrie uchte tiert
+oppe nglich ndustr fahr eis$ ^gra ^fra ^auss omi kal hung fert tlich schlag
+lndes lass ier$ gang esto ebie beg ^aut chtigt ^vi wund lnde$ ise ftet ^spie
+^abz lich eschla eke bung ug$ ral ppen ltung lier ahlu ^id ^entg uendi rausg
+lnder errei aus$ ^schau staend orga nied ifi eilte atz$ ata oni ngesch erst$
+stell reit elie echne alti ueti oege macht ehle ^er ^akt vert ule oere liert
+ifte gtem enti uerge oerte eku tzung lhaft ickte erhe effe ^tri ^el setzt
+ndern enu enscha assu aet$ ^sche ^kre trieb ionie biet anda ^steue ^spo ^anz
+sat ezo entie elo eka bracht ^unr ^schae werb stend gez ffend evo ^pri zwisch
+uehrte rstell rbar nachg graph ewae entge berh aeuse aette zog oze onze ertei
+entwi ckten chstem bem aede ^lae ruf ktiv indi eidi ebo ^ob sond rger eichte
+^sy ungslo nis maess dit verschl eni artei ^eig rein hint aelli ^tei ^spi ^aus
+^all zahl utte ungsa uktio rteil ome nnig lnden ile iene erbo epa berr all$
+^bea ^abst ieri gek elu chern ake ^kae ^entl ^einf ^bra rdig ntern isa gtest
+fried erra erlei ebte cker wechs wand tern schin rhalt ngslos liz ing$ imi
+hmend erga enue elli des bild aerte ^anf yste ungsvo uehle ttel rei$ nend
+escha erzie eich$ andlu achse ^schie ^fei usi ungsge ungsbe rder orie met lag
+ildu eistu usti ris prod ldet kons erze egra ^abr wiss uechte enba elha dent
+ckter chtigst aempfe ^tre ^schei ^off ^abl uni tzes lder ftes form fall ezi
+escho erlo ehrte bek auche ^zue ^rau trag neb erko eihe ^exp wett oese erho
+elau chnet andte ^schwi ^lau man etra erstae ebue chtung ^kri ^erm sit ope
+mend ensi abri rben igt$ auli ama rke$ big arre tis nzen gesp gebr erbre eilu
+chung ^boe rtrag red ogi lisch ima ertre dert chtem ppe$ nterg erhoe bern abi
+^zo ^mue usse uehru ntiert ngem land hrig espe enze eiti berw ^anst ^absch
+tzte$ rtschaft riert rier ozia oegli iel$ hnen blich auge ^frie ^bru soz sitz
+rechn ort$ mod kass itu hre$ hing erschie erkau amste aftli ttend hnend gig
+gens esche emue del berst ^erst ^blu rmen mass legt iva fiz euchte eichne
+auende aehru ^krie ntgeg misch idri ftlich ffe$ ellscha bez anzu abwe ^koe
+^ausr sellsch ntier nomm mon gtet bertr ausse akti ^unf ^schwei ^empf ^eins
+^cha ven sich nner lad ime elst$ ekte ^err tag rrend oti lles ker ichtu iali
+empe ekla ^erz undi tzig tternd rmat olte nterl nterh llte$ kart inei erme
+asste alo aktio ^fla ^ant weg verbl sger rnehm orbe oeste mit inha geschm ewei
+echni bersch ^eis ^aufr ters oka mme$ enau eba aehle ^schue zentr vis entra
+einze egi arke ^sau ^nae ^mae sein oete kul gent echt$ dung ^drei verdr stung
+ssung smus raet indli hrten etre estie eidu bert ^pre ^inf ^ex ^abf unkte
+ungsve tzten lauf kred ismu gisch fuehr eime brik alt$ ^sto ^ers ^due ^aufw
+verp uhe sel seh rsten opfe olu nne$ ndel mmert los eto enfa delt assi amm$
+^bre unau rgeh reich ntest ken ist$ ichtli ermoe erka entli eichste drig aegli
+^saeu ^hae ^fre tur sslich rwalt rtret rfen ot$ orste nderl erlie berm aedi
+^zwe ^unw ^und ^pra ^co ttelt priv oepfe mmelt mess ire erschla erda aenke
+aendle ^pi ^inn rken rgew rarb pier pfend ernse einhei ebli bot ^anb uehe sonn
+sik rzig ortge onta ngebr last ippe ieb$ herv erzei erlae endu aengli ackte
+^gre utze rden nform nderg ndelt nanz ium$ etz$ erwae erdu ehae dlich cktes
+chert aelti aehri ^tae ^schwae ^eh zial uetze uessi sung rsuch llten ldung
+geist estri dat ckelt bgew aktie aelte ^gi ^erk ^anr ^alt ut$ steh pass obi
+itie hrlich eraeu ckig aese abzu ^zwa ^stue ^kna ^am ttern tret such ono lem
+leit kont itzte hoer geng ezei eza expo ensche enla as$ arie aerme ssion ingli
+hle$ ferns esprae espa arbe ^schme uere teil sern orme mal kost konz erfae
+bens begr auf$ able rson rang per nueb ischte exe eve ausei ^unm zerst zeit
+will wert tzter stert ohne nste$ ndlung ktor jug gern erlau ensa emde aehe
+^tue ^fro uemme ssest rtend ochte nterr nlich ndest jahr gestr erk$ arge abbe
+^va ^tru ^imp ^gla ^aufz uldi uerfe tar ress oerse oede nke$ iga gnet genh
+euro etro essi erbu earbei ansta ahl$ ^einh ^ehr ^aufl nbew izi ilfe hlung
+gert fuehrt ftem ezie ertrae erfi eere deut ^stau ^schlu ^mei ^ern viert und$
+ssigst ordnu oble hme$ etu edie dest berf aum$ anzie ahne aechte ^ums ^schle
+^nu ^kli wohlg uti tent orre ohlge kleid info giert geschw geschl endi echnu
+ann$ ^schli ^ausb zess vorb rste$ progr oesse nstell lektr kte$ kett kar ierba
+gespr fam eroe eria ekue ekti anspo ank$ abo ^frue ^bli winn ulde sgel reing
+orschu nstalt nschaft ivste itge erzu chsen belt antwo adi ad$ ve$ uede tzer
+tom stimm mes llos lief komp ilo etei eschue eschrie eloe elge einsa ehr$ efi
+chig ^stae ^qua ^feue ^fae ^ausst ussba use tigst rricht rlichst ppend pers
+nsten llschaft licht ienste flich empfi bgest bev aro aeste ^strei ^dra ^ausf
+uefte rstand rgen ntlich ngek nfoerm llter gbar estue derl berz ^umw ^eink
+^and ugzeu transp spez sigk rsich ontro mter irku irke gers geln fussb fehl
+ertu eque elfe einfa digt ausga auen$ ^ans wusst uehne onte ntes nber mensch
+ielte icklu esie erwue ervie erni enz$ enwa ekto eil$ cktem aeube ^stoe ^schne
+^hue ^flue ^aufh ^abb usste tot stlich ssensch serv rleg rde$ ppelt oelke
+oecke nell mmern ionae herb ftend erbli boers bestr aut$ assie am$ aene
+^schrei ^schma ^glue ^erd ^erb ^auff uerze tztes stat schoss rreg rit reien
+nom mot mind ielle hler fgel ewoe edu dier chnung arme andi allte ahlte ^umr
+^scho ^ann verschw tan stern sinn rsteh rmoeg onfe nkomm mitg ldern immu
+hnlich griff farb etzu erstue erlu diert ausha ^spre ^flie ^anh wandt seg
+rzieh rren press opa oeni naer glichk faell einde chelt berb ausla aemme ach$
+^dre ^at ^anm ungsfae uero uellte tat rfend orau oerpe ntwickl ldes impo iale
+genst fang eschei ermae ergi enku enko elae ehnte efu bter befr ahe ^spra ^gae
+vat uali schwind schrieb reis rber ntwort nstes nkten nehm nbes heim ernae
+ereie erdie bte$ asti asie aesi aengte ^entz ^dru verfl rges rekt oebe nster
+nkte$ ngsfaeh ngez llem euerte erzae erdo beig alls$ ^schoe ^sae ^kei ^gue
+^grue ^erg ^einw ^einl wohl waff wachs uerte tteln sgeb seit schicht rik oeri
+oehne nnter nit ngetr ndigst mus leist irme hel fung ffer estra erru erro enei
+ego dank auchte ^kle ^brau vier stest rien rant olie lien konf itt$ hne$ erzeu
+ersto cklich cherh ant$ anfa alie aeumte ^op ^imm waehr ucht$ rweis ruest
+rkomm renz pap nung norm nausg ldig klass izei immte ezia enma eitli egri
+cktest aude aehlte adie ^umf ^true ^spri ^emp ^bie ^aufs rlass rlag pfen ohe
+nhalt ngsvoll irche inve gep genw gal epo enwe enie einli edeu eamte anie
+^stie ^freu ^ertr ^anw uerste sgeh rmend rband rakt onsu onse omo mpfend lieb
+ift$ ienst$ hrte$ folg euer$ ernte enfoe eize einscha ders berfl ^fle ^entf
+zust zuck welt sid rsorg rschlag rop rhaeltn rantw ors$ omma nik nie$ masch
+lligst kund itglie ioese gefl fortg erklae enre empo eld$ eima blem aume
+aeltni adio ^inv ^abh zweif vorst ultu ueck$ uckte ton strass ssert spraech
+sgab schneid rster rfolg rbrech praes nart ligst kohl herz eze espie ermue
+eins$ ebau affte ^ty ^rea ^foe ^brue ^ansch vorh utzte sens rob rnen oll$
+ndernd kult iff$ iers$ fest einzu ehi ebrau dopp ckert chnik bten asi ahn$
+abse ^stro ^schmu ^einst vit vid stud rgeb rett olde nzend ngeschl mmand mag
+kam herg gelnd foerd fig erbei epu enka ektio eglei chtern atie ahru aendli
+aeft$ ^schri ^pfli ^fri ^ersch wend uck$ tut sgew rstes rek orfe nkung ndisch
+nders lltes kontr hind fgew fern eure ett$ essio eschwi ense enkte ello ell$
+ehrli aufzu aerke ^toe ^spei ^schna ^loe ^hy voll ura ungspro uma ttes sster
+rsetz rie$ ortu ollte lden hrter higst ess$ erschwe eppe bgel zit wohn wicht
+verkl uegte rigst rdnet nigt ngeg nfaeh mput legr irre ewie erzo erschue erpa
+erku enrei eira bges auste ass$ ano ^unz ^unsch ^entsch ^eintr ^ank wies sol
+rungs rkehr rist riss rfass oeche nstaend nreich nett must mmernd mar iv$
+igst$ ieg$ hob felt erspa enntni derst chnend baut arkt$ albe aenze abtei abte
+^trau ^schni ^fau ^einr ^bro wahrh tztem tzlich typ spiel sieg runt ruh rdert
+port orta ombe nzier nnten nktion mten koll isto ila iehu fund fisch eschwe
+erschu erkra endie eifte edue begl aefe ^mie ^ins ^aufst uzie urtei strie$
+rkend rbest ogie mper meinsch mein lzen kten herr etie estre dernd blieb azi
+art$ apa anta ahrt$ aemte ^fli ^eur ^ent ^beu zul uta uchs$ ssiert rkeit rial
+rgest rbend ohre oene ntral mark iet$ heit haush erloe bteil beschl bad auer$
+aubte antie alste achtu ^trae ^auf zuw zeichn uri uerme uele tigt sion sges
+scheid rzeichn rlegt rgel prot nters ibe flieg fgeh ffiz erstei ermei ergie
+erdrue erbrau entha ektie einste efle echti disch char bensw bell aphi angri
+aly allge aenne aehne ^unp ^bri ^auftr zuk zerr zahlt wint wes urge unktio
+umfa techn sgef schuett sagt rzend rtlich nnung nag mmun it$ iko expe eschrae
+entu ennu eihei egne eblie delnd auerte ampfe aga aba ^inh ^daue zuf versp
+utie urse upe ssten ssern sitt schaed rschaft rgek preis pat oss$ ormu nzeig
+nterst nterb nfer ndigt nbel nah ldend hten gzeug gruend fnahm exi ewue esae
+erwu erdi erbri echtli derh ckes ape anu ^ungl ^uml ^umh ^flo ^aush ^ausdr
+voelk vergr urze sste$ ssier schloss schatt nzug ntersch ngung ndelnd kern
+itz$ estrei esteue erschei ermo ergnue ergae enfe elbe eibu ehte ehau dacht
+bger ausa aufna arkei aele aehrte ^unn ^schmie ^org ^kno ^inst ^flei ^che
+^brei ^abm verkr unkt$ ttung traeg schstes rtung rne$ prov orm$ ola nien nerg
+neing ndiert mmung mier ingu ild$ hrbar gsam gross etzt$ erhi ektro egli ausbe
+assa ampe agu adre ^moe ^kie umpe ttlich stoss stimmt rtier rbel ortie onku
+odi nze$ ntert ndbar mpfindl mont lehr ktiert ilbe hmer gleit gie$ fes essie
+erkue emme ekle eisu eier$ eflo derb btes bgef beschw avo ausste angs$ ammte
+als$ ahrte aehte ^schlue ^lue ^haa ^abk zirk unwi unfae uerzte ubli terg ssenh
+sisch sent schste$ samt nweis nteil not nbeh lfe$ lar laend kad hinz haupt
+freih ermu ensio emie eklei einko ehne eali aune andge ^unk ^krei ^en ^ca
+^abtr zig weis wart ungsre udie ttelnd tert taer sters stalt ssers slich sig
+seel schuld schsten rzeug rep rbot prof ota ordne olla ofe nker nhand meist
+lltem kter krat iri iku graf evi eschu erpu einu buerg bgesch anzei anste
+aeufi ada absa ^ein ^brie ^abschl well vord unsi unre ungsu ssiv schster rtik
+rreich rme$ rmal rkund rfall nlass nent ndler lang korr ief$ iebi hrers eude
+estge eschle entri ensti eitge egt$ efte dress disk chers altsa agie aessli
+aate ^rie ^pha temp strich spitz rteid rlos rhol rent rel rdnung ras pos orhe
+ompu ommu oko oeffe nstig nmaess nleg nged ners mmenh mmelnd kol kirch kab
+iente hinw hbar gefr ezue erta enle ella ekt$ ausche anz$ amt$ agt$ aerzte
+aerkte abso ^krae ^je ^einb verschm uestu tzbar sucht senb rbe$ osti nsport
+nricht nnte$ ndigk mte$ mlich lef kaelt iebte grund gat gar fgef eudi euche
+etrue etae esge ennba echli duz dir dens dav att$ appa anzte ahr$ ^schnee
+^prue ^kni ^haeu ^enth ^bla zueg zerm zerf unvo uerli ttest tod terl ssbar
+schaff rgend otie ohnu offi of$ oehe ntisch nnbar ngekl nfuehr ndlichst mpfe$
+lbar konk hund hnung fuehl freig forsch fger etau enzu ensta egrue derspr buer
+bgeh ausschu aule auftra atzte attu apfe ^the ^spae ^dri ^blo zutr zieh zent
+war undu ugge tztest tit terr stieg spekt schalt rmon rmitt rlust rgesch rbiet
+rbew rab pflicht opo nschaftl nderb nbest ltern lon lleg lger lgend issio
+gniss explo eugu etste erspre erkaeu entzue ensie ellt$ eht$ eg$ eate dez bekl
+aufte ankte ahrzeu aehrli ^unh ^umst ^entr wirk vors vorl ungsmi uhi uese
+ttels tglied tab sign san sal rhandl rgef rbring raend proz ontie ompe olke
+okra oeti oeru ntroll ngesp ndels ma$ lin lfen erschwi erbie entla enmae ebni
+dienst buehr bett bank ausbi anbe agi affne ^gri ^ed ^al ^ad vorz vil verkn
+vergl upfe uetzte uefu term stor sselt schnitt sbild rueck rtigst rnat olze
+nterv nbar mpfen mor mob mem lfoerm ira inzu inu hlte$ haus geschn fgeb etri
+erstre erblue eordne enhae einte einfue dam bin bedr athi astro agba aeute
+abko ^schre ^dro ^dia ^beei zuv unei ueme uechi ssag schte$ schstem scheit
+resp ppar orsi ormie oly oba nunt nterw nspiel nntest ngig nannt lut llste$
+llier lett lebt kum ket iso igna ida festg fabr etzli etzba etru estu erstau
+erhue elze ekre eitsge einha edrue derw bjekt azie antei ansa ands$ ampf$
+allei alko ^umsch ^schnei ^irr xport worf vergn uendu ueckve triebs tions
+spannt rschied rom rles rkaeuf rgeg phisch ommi ofi nstit nnigst nhab ndste$
+ndier llster llsten lif kannt ize ittli irge insti inste glichst geld gart
+fgest ezae erschae erbae elste elba echa ckung chsel btem bomb bill aphie
+annt$ aeru ^unl ^troe ^spu ^opt ^heu ^glo ^erbl ^anspr zaub wuch werksch
+ungswe ungsma uhr$ uensti uensche teg stier sstell ssel sschuss silb sicht
+senh rueb ros rkenn rkehrs rium rev ret nver nterz ntag niv nfaell nam mmten
+mmig mitl mist mill lys lock krank klam itzi isi ingt$ ial$ hrtes hoerd hoch
+eur$ eschlo ertraue ersae erkscha erflue erbrei emu eifa eichli dien btest
+berd axi auszu amte alku ags$ aeubi aengi aegi aechli ^ordn ^glau ziv zimm
+walt uve uenge uehte uegli tigk steuer rtraeg rteilt rnend rleit rksam ries
+repr rech rbind path ophe nverk nterbr nsion nglos narb nachb mtes lliert itzu
+idee handl fueg firm eug$ etrae eschma erspie erbue epla entwe engte einba
+eele ebro durchl ckelnd bor bkomm bar avie ausdru armo agge ^pho ^klo ^fie ^ap
+^ag zend wonn urre ungse uelti ueckli tul trock thod stens stein steckt
+schickt ruehrt rueckv rse$ rschein rndem rmer rbreit plan ntrag nnahm ngten
+nget ndsten lust loest lker lgen ktier kor kom ivie hte$ holt guet gekn fed
+etho eschau erwo erstoe emmte eist$ egre ecku echtge ding ave ats$ arto arla
+apu aka aer$ ^treu ^trei ^or ^jae ^et ^erschl ^em ^einsch ust$ ulae uehlte
+stiert sserst sprech sied rtigt rmittl rkte$ rischst rgebr rgang rdernd orche
+nvest ntscheid nserv npass nntes nerf nachr mmiss llstes kompl ipli instru
+insta idea hrtest hlten hlig heft gernd fers euti erschlu erklei ergrei
+entschei enspie ehu edru drueckt derr dar comp bler aussi auschte asa arde
+arbi anwe annu annscha anni aedte aebe ado abschie ^zwie ^zeu ^pfe ^pau ^fraue
+^angr zuecht urte ukti sstest ssnahm schad rueckb rklaer rfuehr rbrauch rbeits
+publ oje oestli ntem nstrum ngte$ ngeschr neid nbesch miert lge$ kast just
+inwe ingte hres hnte$ ffekt euern$ eschmie ersti erspru erleu erbrue enwi
+empfa eigne edro eckt$ ebae dicht dekl def azu auke anse akze ^zae ^ur ^trie
+^schwu ^feu ^ausw ^ausk ^aug ^anp ^aff zeug wuerf usta ungsau ums$ ulte ueckbe
+tad stit sieb schten schenk satz rschuett rient reist rdin raufg ranst ram
+prob pan ovi ove orgu nschlag noss nktes nbed nang mig lid konstr kel kalk
+isku irkli inn$ ilme ied$ grupp grenz gekl ford eunde ersoe erschi enpa enbi
+enae elmae elfoe eleu eisi eihna durchs dlos chernd broch blas berk beln assna
+arschie anzue aise ahrhei aehre achli abste abla ^woe ^spru ^schru ^roe ^ol
+^erkl ^ergr ^erfr ^dae ^aussch woch weihn verschn unse umwe umsa ufue ubi
+tschend stik sterh stach spielt spieg schluess satt ruecks rtschaftl rot rner
+rmin pfig pen patr ortei orsche onto nor nflat nfall nerw ndster mkeit lieg
+lern kret kond irma ino ind$ iegte idie hlich heil gedr funkt fuellt fieb
+fenst ezu eva eschni erpre enstae enieu enhe enga eispie eck$ denk ast$ ansi
+amkei alze alli aehnli adt$ ab$ ^spue ^leu ^deu ^bee ^bae ^ar ^antr ^ansp
+^ankl ^abbr zis uwe urs$ unna ulti uenschte ueckt$ uchu trunk togr stlos son
+rstatt rsichtl rrat rgem rgebn rge$ reh prop pot packt off$ ockne ock$ ntin
+ntal nsen ngern neg nbez nachw mpfer mmter mel meind lkul lde$ lab irte igie
+hrtem hag genf gels ffnet eueru erstrei erdru entue entei eja einla eachte dek
+chtfert chens chbar aufwa artne appte anwa anspru amie alge aenkte aecke ^zy
+^pfle ^arr ^absp zung zuh witt wag waffn utio urchschni unzu unrei unglue
+ufrie uenste uegi treid tast stin steuert sternd steig ssenb sgek rzaehl rvorg
+rueckz rueckt rstem ring otge oku oke og$ oehnte obje ngsmitt nglichst nein
+nach mens med ktur krim kehrt infla imu iedli hter hrern goss geschr fgebl
+esve espro envo enki ekau ekae eizu eitra eigte ebt$ dev deck cktet chtlos
+bgesp beschr baend anche agne aerge achri ^ill ^anschl wuerd verj undge umpfe
+ulve uerfti uendli terb sstes sserl sgest seid schreib rver rtiert rsteig
+rsetzt roeffn rnig rnier rkung rbig rausb rabsch ppelnd pisch otze orne ons$
+ongre ntraeg nstrukt nnisch ngep ngebl naeh mpelt mmens lster lsten llstem
+lligt liebt leid kell jekt itlei ick$ hoert hnten glied frag find faeh evoe
+eundli eugni esau erschrei ermie erflu enzi enschli eizte edrae durch duld
+chtigk bod belst atue arrte ans$ amo aeusse aenni ^umschl ^schnu ^einm ^baue
+^ausd zub zif zerl xist wohlb vorm verschr utz$ utge urste ufte uesste uepfe
+tischst tin stigst spend spek speis sbar rzigst rwart rven rumg rre$ rnaehr
+rechtg phant pfleg pfer ovo opfte olli ohlbe oemmli nkurr nbild nbek mult mueh
+mmte$ miss kocht kess kers isio ioni ings$ ichst$ higk hest fess felnd fasst
+fach euli espru erdre erbra erbau epfla enme eilha ebaeu dell daz ckern
+chricht buehn belnd ball ausfue aufse apo aeuche aerti aedche abhae ^unfr ^tee
+^schlei ^rae ^ost ^entst ^ausz ^app ^akz ^adr ^abschr unktu ungsko umra ufa
+uegsa ttiert tschaft tob teilt suend stift sterb sproch sierst rstaendl
+rsprech rschung rordn rkauf rbaend ppel phot othe oesu oefe nwaert nschen
+njunkt nderh mmenst mach ltsam lmaess llgem llbar kelt ista irksa ionsge imie
+ielt$ htes hrlos hot hochg hmbar hlbar hilf hab gnal ftigst flugz ffes fernd
+euze eutsche espo erza ertie ersie erpro erglei epro eoba enzie enpro elta
+ehru ecki echu dikt dah chtbar chsend butt berdr beitr ausrei aufwe arma archi
+anglo ^um ^traue ^theo ^infl ^fru ^ents ^eff ^acht ^abn zer xplos wach ves
+verspr vem val urme unsa undstue uierte uhre tok thek teiln still spaz spann
+somm selbst sant rzog rstaend rleb rkten rhoeh rechts real rbitt ranl pul proj
+post ortli orgte opti onju oepfi ochschu nterk nsiv nnern nern nerl ndid nbef
+mul mmel mik meld ltigst ltert lind leucht kuemm koerp klebt kaempf ilge
+ichts$ haut fremd fot falt eutu eugte euernde eschie erwie ertrie erscho ernie
+ergue enwae entre ehmba efrie div disp dik cklung ckernd chger bernd bacht
+auern$ atho arle anme aku akt$ agra abfa ^goe ^gea ^eindr ^allg ^ak vol verv
+unue unfa undhei ukte uchsta ttig troff sundh steck statt stab sek schaefts
+sag rzen rkannt rhand reinf reign psych osge oette obie nsich nser nntem nkel
+nism nim nicht ngsges ngriff ndit nderw nar muet mmob markt losg kant jub impe
+immo ies$ hlter heimn grundst gnend freiz faehrl euere etrei eschwae erkle
+eriu entru eldu eitsbe eitsa einna eimni eim$ deckt chgem chan bring bnis
+bhaeng bess baeud arf$ ardi anpa aeure aeude adu achba ^zau ^umz ^ski ^ska
+^pfla ^kreu ^jo ^in ^eint zusch xpert wolk waerm verstr ungsi uku ueffe uebu
+uebli ub$ tztet tterl thisch tall staff shalt sgesch sgem sgeg schob schlacht
+rstig rsitz rsen rgerl reins rechtf rchen probl pfe$ orzu opi onstru ochge
+ntergr nhaendl nerv ndstes nabs mpliz mikr mbol lzend lters lib laest kraeft
+ionsbe ickt$ gger fing ffel euende estei erva ersue erhu ergrue enzei ents$
+entlo entio enda einsi dies ckers ckel chstab chnisch bniss blik bgeb berbr
+aufre auernde antra angte andie alu aesche abwa aari ^zwoe ^neue ^ink ^hie
+^entm ^blei ^aufm ^arm ^abstr ympa wurz waess verfr unga ummi uene uegu tuerl
+ttier treff tasch stroph sprung schwef schimm schein rzte$ rrekt ro$ rmach
+ritt rgreif rfest ref rbeig piert orti onve nstand nerr nerk na$ mpath mmenb
+mgeb lymp lohn lndem lichst ktisch ktien kauf katz itbe irbe ins$ ieche hltes
+gut gepfl genb fges ertrau erstri erqui erpe ernue erhau erbeu epae einfu
+eils$ eichnu eichge dreht deal chlichst chhalt blut bisch bhaft berstr bersp
+bent ausglei aufga auffa aspe ars$ anlei ando ammlu afti affee aendni absi
+abschlu ^unst ^scheu ^psy ^groe ^geo ^expl ^einschl ^austr ^ausschl ^ausm
+zertr zers woll weltm utsche unst$ ungsrei unda umpfte uehrt$ tterst therm
+stund streich strat splitt sold schraenk rweit rlauf rern rblich opie om$ ogno
+oeme oeffne nzieh nvers nheitl nhaeng ngsvollst ngert nenh mutt mues mpet
+mmlung mitgl mitb lux lom lnehm llion llern liebl kut kris konj koen keg kauft
+kaff iums$ ittlu ito ispo iro inzi immi hlungs himm grab git fel ersche erkoe
+ergru erflo enhau engli empfae eltu eimli egle deg chteil chelnd bonn biss
+bigst bgez bgek bezw batt bas athe arka ankhei angie anga anfae alla ahi ablo
+^traeu ^schro ^grau ^gli ^erschw ^entspr ^abt zuz zeich ysie wick vog vent var
+uwa usche uko uehli trupp totg tbar tastr tam stoch stigt speich selt sell
+schuetz schtes rwert rueckw rstreb rstet rmeist rma$ rlam rfind rass phil pag
+orni ohnte oehu nzern ntil noet nklich nkert nkbar ngeschw nert nbring nbet
+nbegr naufg nad mol mokr mmenr mie$ ltur iqui ippte illio hochsch hner hell
+gebl fuercht ftrag ezwi eutli ettbe etreue eschna eschlu erschoe errte erkte
+erfreu endli eisti einwa einrei einkau eilt$ eifri eifli ehrs$ ehba draengt
+denst buech blon attie anle altge ahrba ago aetsche ^stri ^schlae ^pei ^ord
+^lee ^inl ^agr ycho wind weiss vork vollg ungswi ugs$ uf$ uerfni uerchte
+uenstle tzlos tzigst tracht tionsg stil ssem spalt serl schraenkt schlicht
+schabl sam rze$ rwund rpflicht rmut rmiert rhebl reinb prom praez ppten pften
+paz opf$ omple odie nzelt nwend ntens ntakt non nnes nlichst nleit ngtes ngers
+ngelt ndter mport mmenf lstes lste$ lenk lant krit klein klapp kampf iszi
+irkte ionsa inze ientie ieht$ iegt$ iedri iebli heiss haengt gungs gleichg
+gleich gien gendst gab fuegt erspe ergo enschi enkli enbau einve eindli einbe
+eimi eihte eiende eicht$ echts$ ebre ebla duerft derv dep ckgew bespr auswei
+aust$ ateu astu arm$ anstae anre anma andwe ahrha ahnu ^raeu ^phi ^nue ^ev
+^erpr ^entb ^aufn ^art ^abd zerbr zaehlt wurst wirkl vorf uxu utzi ussrei
+upfte ungso ungsme umse umschla uecksi uatio tters tlos tleid thol sup stueck
+schnell rzug rzten rtag rseh rnseh rlist rif rftig rehr rdigst rbes racht ptim
+pens ovie otzi onnta ollge ohei oesli nzahl ntwick nthalt ntet nterf ntell
+nsel nruh nrein npreis nlang nhaus ngter nfahr nbetr nacht morg mmlich mgeh
+ltlos lges lent leicht lehrt lanz kuend ktik kon itua itta iolo illu il$
+hrzeug hntes gul glaub futt frig freud flog fgab fett exa estoe estli esso
+esei eschli erzue ertoe errue ergoe eppte enwei enstue eila egrei efra edre
+dlichst dazw darf chart berv berschr benz azwi austau ausfa aufhe asst$ altlo
+aiso aerbte aengni ack$ abrei abga ^umb ^que ^erstr ^eb ^ble ^ausn ^ausfl ^ahn
+ziell zieg wack wacht vorw vorr umlau uerde tug tterh tschen trueg tromm trans
+tist szipl staats sorgt sonnt selbstv schafft rwend rtraegl rrig rpreis rmul
+rlad rkes rguet rfe$ reicht rblend raeumt ppert plin pfte$ pferd osta ossa
+osio orts$ ord$ ollie oho oesche obu nwill nverb ntrum ntim ntig ntat ntar
+nstem nsetz nord nkter ngsber ndlers nbahn msten mild meng lum ltniss ktes
+inkte illa ikro ichtsvo heir heg haf grat gepr fon fik fens fass fahrb essu
+eschmi erpfla ergri erble eprae enzte enschei enoe enmi enli enfae elbstve
+einga efre ef$ echtfe doll dok densch cklos chtlichst btet bier bendst band
+auswa ausch$ augli auch$ aru aria angrei ahrschei agli aeusche aeule aerche
+acha abru abre aatli ^schra ^schlo ^schaue ^klae ^alk zin wucht wohnt wirkt
+wasch verpfl urg$ undie ulta turg trop tral tont tgem tgeh tgeb taus stuerzt
+stent ssernd ssens ssenk sorg rwirtsch rtner rschiess rol rlieg rheit rgnueg
+rfaell raeum prim perf otscha orri orko oote ompo ollstre nzert nvertr ntion
+nnehm nkund ngsrecht ngestr neug nenb ndenz nachz mste$ mmers mmeln merk mask
+lstem llert led larm kompr kil isvo ioti inko ibu gumm gekr ex$ eugne etaeu
+essa esaeu errsche errli erkni erja erdue erbla epre epra entbe enfo eische
+eilba ehmi egba durchschn duerfn druckt druck dingt derz derk buch bog binn
+avi ausfu aufs$ arkte ark$ arfe anschla anschau anrei anhae aezi aegte achu
+achtei ^spli ^schmi ^saue ^nei ^kne ^gie ^eng ^chi ^beo zugr zufr ympia wohnh
+wegl web utzu unze ungsmoe unae ulle uktu uiere ttbew tsche$ tron theat teur
+ssenst sseln spon schung schter rwand rvat rungsv ron rmiet rmass rletz rheiss
+rford reng reif rdnend panz oxe ompa oepfte oenne ockte nsteh nschreib nntniss
+nmeld nigst ngsmoegl ngaeng ngab neutr nderf ndeln nachf mut mis mgest lok
+lbig kuest kop kok klamm kenn kas igge iesst$ iessba ieni hrungs hrhaft
+herrsch gutg gant funk fortb floss fels eutra estau erzli erzau ervoe erschme
+erque erpla ernu ernge erks$ erio ergu eolo enho enbue ellste elda einri echno
+dram dakt burt beng beisp beb back aussta ausde aulte aufsta aufla atsche
+anschlu andu andscha affu aetti aesti aerbe achs$ ^voe ^schnue ^schmei ^oel
+^kai ^grae ^ert ^ausbr ^anbr ^akk zun zerkn yra ypi wort weltr weltb wegf veg
+urei unste uer$ uemli twill turn tterf transf terv tenl tekt stritt strahl
+staet sslichst spenst sinnt schwer schmiert schig rztes rwandt rungsb rueckf
+rtoff rspiel rsicht rnte$ rnis rlaub rktes rheir rheb rgaeng rez reinl rbeitsl
+rausz quent pruef pet ost$ orra onti onge offnu obte nzueg nziert nverst
+nschein nschaul nreg nov nkheit ngeschm ngelnd nerm ndienst mtest mster mos
+mmerz mgel merkt ments mand lkoh lernt konst klag iessli iels$ iebsa ibi iane
+hum htet hltem held heb habt gur gepl genl genk ftigt freib flueg fas eule
+espre ertue ertru erstu erstie erdau erdae epe entfe enro enra enbu elme ellba
+eki eita einse einma eimte darl bruest brech brat brannt bgem bgebr benst bast
+aums$ augte arne armhe anzi anku aermte aengt$ aeke abu abrue ^umsp ^triu ^noe
+^keu ^ir ^auft ^anstr ^abfl ^abdr witz wald vort uschla ursa urm$ unpa ungs$
+un$ umu umhe ufu ufli uenfti uehrli uefe ttelm text terst ternd tenst tenb
+symp stemp stap staerk sstem spart sged sess schtem schaut saeub rsam rrte$
+rmherz rmaess rlang rioes rerz reb rdrueckt rbild rbet rbef qual preisg prallt
+prakt ppte$ pper pflanz ondie ompli ombi oehnli nzung nzip nzer nutzt nterpr
+nterm ntas nstreich nstet nspruch nschlaeg nreis nogr nnschaft nmach ngiert
+ngbar nftig nfach nerh ndlern ndesb mpon mpfind miet mdet mant maecht lme$
+llkomm lligk lism lanc kurs kuenstl konv klaert innte ife ieme ielge iefge
+ichu hrlichst hol hoh hlern heimg heilt handw haeus haelt guenst grad gezw
+ffens ffelt ferst fecht fachg etue essli erstaa errscha errie erprei ernei
+erfei erdoe eisste eisli eisge eilne eid$ eichni ehrba efoe eflue edae digst
+derstr ckenh chnen bsicht blaett berschw bergl beob belg bal ausra auere arzte
+arze anza anko angsa affie aeme aegt$ aedli aechste achfo abma ^thro ^schmae
+^scheue ^krau ^knu ^klu ^is ^graue ^gau ^feie ^beau zerb wink weid uts$ unbea
+umpte uepfte tuat tsam truebs tlichst tief stuf stamm ssigk sgetr sgestr sex
+senk schult schul rueckh rschlaeg rrten rrisch rred rrechn rper rost rod rmess
+rman rhuet rell rdicht rchend rbess rann ra$ quid pflanzt passt parl ortbe
+orke ont$ ompro ollko olgte oente nzul nvoll nverm nverd nnem nieur ngedr nenn
+ndal nbestr mprom mischt llenl lik ligt lgew laun ktivst kath kand issi issa
+impfe ilia hrscheinl hrenh hon hoffn hmig herst halb grenzt geldm ftraeg fgeg
+ffung feucht festl fahrl espue eschoe erprue erfri erbro ensei enpo enni emse
+elue eltbe eklae einwi eilna eihu ehri ehaeu durchf dos dom darst cherst chenb
+blichst berbl beil bat ausschla auri aufle aufko andha ancie anchie ammie
+aech$ achi absti ^thea ^teu ^stre ^mau ^knau ^extr ^ernt ^erdr ^chri ^ausstr
+^aufsp ^aufschl ^aufkl ^arg ^arch zweck zist ypo wimm willk verzw uwi urku
+urchlae uote unko umo umga uerso uenfte uechse uebte ubri tzern tschrift theor
+tenz syst stausch sselnd soph smaess slos sis sim sgez schoepf schlaf salz
+rzeit rwuenscht rverk rsoenl rschloss rrsinn rreiss rmaecht rkleid rker
+rgruend rglich rfert rers rdienst ran rabs poth pok plast ortrae orda optio
+ondi olfe oenli oele nzig nterschr nterschl nsinn nseq nschluess nschlich nsat
+nruf npol nmut nischst nif nhoer nentw ndte$ ndiv nbrech nbem muend mporg
+mmtest mment lueck ltier lltest llar lei$ ldert lben laeuf klim kin kenntn
+kaltg kais ittle issve iru immt$ ildli iffa iegsa ickli htest hoeh hern haeng
+grossh gion ggest genn genm gelm ftung frist frik ffte$ fenth feln faul exte
+etti etai eschleu erzwei erschle erpfli erksa erkrue erkli ergroe ergla erg$
+erfu erdeu ensto ensbe ensae enpla enlie enkla enfi ems$ elwe ellie ektri
+eintrae eimge eigt$ eidli ehnli ebrue delst deln dag ckerst chtert chnol bueg
+buchst bitt bind berschl ausloe ausko auend$ atla asta arko anoe amms$ alke
+akle afri afie afi achgie aat$ ^cho ^aussp ^alp ^aerg zum ype wuehl wehr waehl
+vollstr vollb vok utre ustae urve urchei uetli uente uechtli uartie tyr tschig
+tivst tak sud strier stischst ssisch spritz sowj seif schwein schuetzt
+schnuert schmier schliess schieb schauk schauf saeur rzaehlt rtis rstueck
+rstend rstaendn rraet rmes rlaessl rlaend riod rhaeng refl rdern rchlaess
+rbrenn rblick rag phon pflegt owje ostue oso orsta orha ollbe ol$ ohn$ oesba
+oefli oeffnu oali nzentr num nthalts nsul nstimm nsend nsatz nkes ngtem ngier
+nghaft nfabr nerz nehr ndstem ndlichk ndesl mstes mmenbr mben mann ltlich lor
+lken lers kord koal kehr kamm innu inla infi ilste ifti iera huet htem hnter
+hitz herzl harm haend gnad gfaeh gell gabt fricht folt fix fgek ffnend ffentl
+ffenh fahrz euri espu espri eschwei erschro erschlei ersaeu ernste erkzeu erki
+erflie entste entle ensu enna enfreu enbo elfa eissge eisa eift$ edaue eblae
+eaktio drueck donn densw deb ckhaft ckerb ckenl chtungsv chters chse$ chel
+bruech breit blum blend bergr beif beamt aufsi aufma atsa arve artu andschu
+ampfte ahnte affi aetzte aerli achtsa achstu achsi achbe abwi ^urt ^umschw
+^schwie ^schnau ^plu ^koa ^glae ^einsp ^boo ^aufsch ^abbl zerfl xek wuensch
+wohlt widr werk wen weltg waehlt vollm uspe ursti urlau urbe unschae ungszei
+ungsmae uha uga uermte uendni uchslo tzest tusch triumph trisch traul traeum
+tors tens tap takt taf sugg stspiel stechl staatsb sshand sset ssant selbstg
+schleppt schiff schaud saugt rum rtel rstoff rschuld rmier rleicht rland
+rkaufs rgetr rfluess rdes putzt ossi osie osa onu omba olz$ ollstae ohnhei
+oelpe oelle oehle och$ nwuerd nwand nutz ntret ntraecht ntif nspar nrechn
+nnens nlauf nierst ngsprogr ngeld ngang nfert ndschaft ndesv mpfung mpfaeng
+mpel moeb mmtes missv meint mbin lze$ loes llstaend lkraeft lchen laech kur
+kongr komb jud ispe ingst$ imma iesi ieli hrtet hom heiz haltl gor gog ginn
+gin ggel ggef gerst germ gelst gelb gaz freist fmerks fluecht flott fgetr
+faehrd ezwei eufe euerli etts$ etto etoe esli eschri ernspre erno erkrie erkae
+epi enschu enschla enhaeu eltge elbstge eiwei eitsve einka eibli ehue ehrt$
+efei eeigne ebeu durchw dium diot chslos bschluss brueck brig bgetr bgab
+berspr awi ausru auscha aufste aufri aufme aubi aub$ atzu assge arra anwei
+alve althe alpe allo ahlt$ af$ aeri aeische aehnte aechtli achwei achtlo absu
+abne aal$ ^schno ^impr ^elt ^eg ^bio ^ausgl ^aufdr ^anpr zersp zen ysi yna
+ymbo wortg wirb vortr visch utzlo urne unsta unne ungspo ultie uergte uedli
+uebri uchha tschelt trotz treuh tol to$ tionsl tell tang taenz sund sult
+strahlt straft stiz stief steuerb sterl stelt ssreich ssenl spir sin senl
+schreck schoen schmutz schmied schluss schleun schiess schest schelt schaul
+sab rzlich rzeugn rueckst rtigk rtern rschwend rsag rsach rnes rloes rklich
+rieb rgroess rgriff rgisch rgab reinh reib rdient rdaecht rchges rar rak platz
+phys oru orto orschri orsa ordi onsta olste nwirk nwag nvent ntschloss
+ntbrannt nseit nnuetz nkleid nkenl nkauf ngsproz ngeschn neig ndicht ndhaft
+ndesg ndens ndeg mtlich mpelnd mmtem mmerl mhaft mges malt lzes lver lueft
+lmen liq lbe$ ktron ktors ktlos kleinb klar ka$ iskre iplo iess$ iello idio
+ideo ichta ible hntem hnlichst hlges hem handg hall gkraeft gegn fuers fseh
+fris fragt fkomm fil ffenst fein faerbt eurs$ euni ettu esbe erspri erschlo
+erdro epfle entschlo entfa entbra ensve ensge enlei elaeu ekna eiwi eitschri
+eits$ einle ehrlo eglie egio efli eerte cknet ckeln chselt braucht bleib berq
+benh begn barb ava auffue auchba aske argu apse antrie anspi altba aldi akto
+ahnde aerfe aenku aengsti aelde aehli ablie ^umkl ^schrau ^sai ^plau ^obj ^my
+^mee ^flae ^entschl ^ek ^eiw ^eif ^ehrl ^aufp ^aufb ^anschw ^andr ^abgr zuschn
+zorn zitt zerspr zerschm wollt wohlf woehnl wischt wirks weissh vste$ unta
+unhei ungea uesti ueri uellt$ uehl$ uegt$ uckt$ ubsta tum ttenl truebt trockn
+train ther tax strukt stoer stlichst staedt sreich sez seng schnallt schmiss
+schmett schmeich rurt rungsm rtion rschnitt rschier rrung rruf rrschaft rrlich
+rrit rrang rpret rpflanz rollt rmlos rlief rleih rlaess rkul rkuend rklichk
+rklein rkelt rim rigk rhaert rgeschl rfuett rdruck rdisch rbuch rauss ranschl
+rabr pend pell pal owe ortio orla oot$ omfo okto ohrte ohli oga oert$ ockie
+nzelnd nzel nstall nsmitt nsicht nprod nnlich nktet nktest nkreis nind nhaeus
+ngswidr ngsvers ngsunf ngress ngekn nfiz net nempf ndruck ndgel ndelb nbeschr
+nachl mstem mschlag msatz mmenl missg mgew mgesch meing mannsch mak magn
+maerch maedch ltnis ltiert lot lod lob llmaecht llisch la$ kleb ke$ kard itzt$
+istie iss$ islo ischle ipfe ip$ ilbi ignie igi hrensw horcht hochz hltest
+hllos hers gramms gott gnier gelf gbarst fwand freim flaech ffig ffeng festst
+fad fachm eugs$ euen$ eschrei eschnue erzte erstra erschrie erschra erschnei
+erschli erkla erfra epfli enza entvo entschu enstrei enso enfue empla eltli
+ekta ekrie eknue ekni ekli eizi eizei einsti eifi eiern$ efreu eeinflu edo
+edli eauftra eabsi drigst diff dew darg dab chgieb branch birg biert bgeschr
+bgen beschm bels belh beist beacht baum bahn austra ausschue ausku ausie
+ausdrue aubha arzt$ arni anzle antri anstre anfe andfe amha ahrlo ahie aggre
+aftle aetzu aess$ aemie achlae abwei absto abscheue abei ^tou ^pfa ^neua ^hee
+^grei ^aust ^ausbl ^aufk ^ass ^angl ^aggr zweit zweist zuschl zuend zerstr
+zerkl zerk zeil xper xen wog watt vstes vster vollst viel verpl utu utschte
+ussbe uppie ugte uenktli uecki ueckga uchsvo uaele tzgeb tterw tterb treib
+tierst terw taucht summ stutz stuerm stuem striert streb stoerr staat ssverst
+sstet spion sperrt sor skut skret skand sgleich sgesp selbstb schwest schwert
+schtest schraubt schraub schlich schild saub rwind rund ruehmt ruecksch rtrieb
+rtei$ rschreib rschiert rschieb rsamml rniert rjahr ril rgestr rgelt rfer
+reinst rdrueck rdross rdaul rbetr rausr ranz rall raff raed rabg punkt ppig
+ppell phen past pack oro orle orchte orbie ontra onni ommt$ olt$ oertli oerri
+ocha ntzuend ntwortl ntiq ntfremd nswuerd nsiert nsehnl nschiff nlief nleih
+nkernd nkelm nkass nheil ngsstell ngefl nderv nderr nche$ nbuerg nabh mtern
+mpften mpe$ mniss mmenz missl mfass metr mang llekt lierst lgesch laengl
+ktvoll kriegt knall klett itschi isko ischu ipu iode inrei infa inae ienge
+iani hndet herrscht helf haert greif gniert gist gensch gendh gast gas garn
+gall fwend friedl freit fluest fluechtl fleisch fgez fgesp eschrau erwoe
+erschlie erpo ereo erdrie erbaue entse entfre entfae enntli engru elsi ektvo
+eitslo eissi einflu eigni eies$ ehnba ehli efla eanspru durchbr dringl dist
+dipl dersp chseln chner chgeb buerst bstimm blass bgeschl bgedr bensm benb
+ausbau auftrae aufloe aufa aues$ anscha allt$ alka ald$ ahmte aeumi aeppe
+aempfte aedie acki abho abfue aatsa aare ^taeu ^schleu ^mai ^knie ^knei ^instr
+^es ^erq ^ep ^entfl ^einfl ^doe ^blae ^as ^aeuss ^abschw zudr zud zoeg zioes
+zerw zapp xim xempl wieg wein wegr waehrt vollz verq uzu uschie urnie urie
+unwue unme umri uh$ ugru ueppe tzers tuecht tslos trink tos tischl tionsb tim
+tenn teng tabl svoll sued subst strebt straf stopp stoeb stems ssivst ssigt
+ssgeb sserh spring sprach spoett sort sgekl sgegl sgebr schtet schmar schien
+schied schick sandt salb rwies rviert rvers rungl ruehr rueckk rtlos rteilh
+rschrift rror rreicht rrechtl rnuenft rnicht rmued rmord rletzt rkrank rhoert
+rherg rgung rgern rgeld rfekt rest renh reitsch reinn rdien rdend rbung rbund
+rbroch rbarst rausf rasch rap rank rafft praed polst pftes pflast pe$ pausch
+paeisch ots$ orschlae orschla oriu orbei opu opaei ony onds$ olme offha oermli
+oelze oehre oehni nzte$ nzeit nwes nwerf ntik ntiell ntel ntegr nsyst nsum
+nstern nseh nsag nnert nmal nlaend nkelt ngsbew nglichk ngepfl nfest nfass
+neinh ndtest ndstueck ndgeb nangr nals nakt nachh muetl mmentr lvoll ltigt
+ltat llenf lenkt lber langw kuehlt ktions knuepft klin klav ketz kaempft jagt
+ituie iska irrte ips$ ingba indo ilte illkue iktie ierli hrerb hos hnbar hlers
+hier hackt gsamst grunds grundb gress gleichm glas glaeub gehr fortf flatt
+fget fgesch ffenl ferng euert$ etzge etsche essba eschwo ertrei ersprue erspo
+erschni errae erhaeu erflae erbte erblei eppi eore ensmi enprei enlau enlae
+endba elwei elka ekrae ekoe eisst$ eindri einbi ehlu efrei eckmae eckli eansta
+durchz durchdr din derm ckgef chwert chmaess chfolg brief bnehm ble$ besp
+bergb bagg ausre ausle aunte armee appt$ aphe anrue anna ankla ammle alzi
+afft$ aeumt$ aeubte aehrde ackha achst$ achma abdrue ^zoe ^untr ^umgr ^uebr
+^trai ^spio ^schmo ^quae ^pflue ^krue ^knoe ^jue ^im ^glaeu ^gee ^entk
+^einschr ^eingr ^eil ^ausp ^aufschr ygie wundg vong viol uschte urchse unio
+ungswue ungste ungska ungsgru unfoe umtau umi ultra uft$ uetzi uendba uellu
+ueckzu tzbarst tschlag tour tmach tionsr them symb stol stanz sstatt spuelt
+spritzt sped skop skizz sinnl sert schwaech schaetz sais rzicht rzes rwerf
+rufl ruecht rtert rstoer rstellt rsit rsend rschwingl rsatz rmlich rmigst
+rlichk rlaubt rgrab rgnuegt rglied rgebl rfuellt reimt rderb rbindl rarm
+radsch quar ppeln platzt piers pfter pftem owie ourna otwe ottge otio ospe
+oppo onia onfi ohla oerba oelbe nwohn nwert nverl nuegs nternd nspir nsform
+nschuld npap nordn nop nnehmb nkurs nkeln ngsverf ngsmaess ngespr nfuehl
+nfluss neng ndin ndard ncier mtem mpos mpfte$ mpfehl mpens mpen mgek max massg
+lspiel llstreck llon lied lie$ lekt laut laeut kzept kug kuerz krieg knoch
+kling klappt klagt kaus ixie itve ischge ionsve illte iedi icks$ hors holf
+hntest hev heiml heer haft haar gungsm gstell gnos gne$ gegr fsicht freund
+fress freil fortschr filt ffter fbar fasch extre euse estste espi eschmu
+ertste ertri erstreu erschri erlaeu erkna ergra erglie eorga enteue entae
+enstu enrau enkt$ enkba enhi enbei enaue embe elwi elve eleie elche ekra
+eitscha einre einke einhe einbue ehl$ egue drung dox dient deng dal cksicht
+chtsvoll chsels chschul chol chlaess bucht bsond broeck brill bien bgekl berkl
+belf beim baerd aussa ausri auspa ausna aushe auftre aufstei atri atei artie
+armlo anlo angsve andli ance ambo alme alde ah$ afa aeufte aetzli aetse achzu
+achve achste acho abstei abschrei abscheu ^unschl ^spoe ^schrae ^schnoe ^pae
+^laeu ^entgl ^end ^chro ^anschn ^ack zwung zins zielt zersch zell zeigt
+wuenscht werkz werkst wank wahrn wagt vierz uvo ussio urchdri unsy unso ungsku
+unglei unfue undscha undli umstri umrei uetu uehmte ucks$ tuiert toet toer
+tlicht tlant terh tenh tauscht tauch tacht stub streift streckt steur start
+ssim ssenm ssball sprachl spond skuss sfall setzl schritt schmueckt schmerzl
+schert scheng schelm sart saett rzuck rvier rungspr rud rteig rstoss rstellb
+rstaatl rschul rschoss rschen rresp roh roest rntet rnahm rmten rmann rleumd
+rgter rgleich rgift rfuell rfilm reizt rechtl rdigt rdentl rbiss raussch rauf
+raub rand raecht rabl ptisch proph ppier ppernd pop plom otzte ortho orpe orn$
+olgsa ohte ohr$ oesste oeschte oerke ocks$ ob$ nzuf ntwert ntrieb nto$ ntast
+ntad nstueck nstat nsist nrat nntlich nmarsch nlieg nheft ngtest ngstigt
+ngsger ngeln nfekt nfalls neub ndschuh ndniss ndex ndeut ndesm ndeck ndant
+nciert nbruech nachs munt mpfund mort moegl missb mien mger meer lzig lwerk
+loescht llustr lltet lkig lfend leih landw lacht kuenst ktat krankh kler kies
+kels kampfb jur ixte itwe issbe irie irdi impfte ilm$ ifo ieur$ iefte iebs$
+ichtslo iba ialste hrungsw hrheitsg hist hinr hemm heizt heimt hebr gungsf
+grundl gold gnost gner gatt fuell ftigk fror fgekl ffnung ffhalt ffenb feuert
+fernspr fat ezwu evie euzte euste eurtei eundscha eswe esue estreu estme ertro
+ermaue erglue erbea erb$ eplae entde ensy enswue enspe enmo empfu empfe eltre
+elsta elmue elke ektu eiss$ einwe eigu eiere eidge eichba eheue ecks$ eantwo
+dyn durchsch droht droh dreh dor diz destr dels ckmaess chtslos chigst brut
+brand boes blig bget berschn berpr beq benf bdrueck ausrue aupte aupta auni
+aumi aufzei aufklae aufha auffo auffi aufbau aucht$ atza arsch$ arri anspa
+ankie angst$ anfue anfte andwi amue amtli alta aloe allie albu aki ainie aille
+ahnho agst$ aeuschte aense aemi aellt$ aebi adscha adiu ackt$ achwu achku abza
+abstra abschni ablau abkue abha ^umfl ^umd ^ultr ^uebl ^stru ^schlie ^reue
+^plae ^phy ^kloe ^intr ^impl ^erbr ^einkl ^drue ^chau ^aerzt ^abkl zufl
+zerschr zerdr ze$ ymna wuerz word wich wettb wegt weckt wat walz wahr verpr
+utma ustie urf$ urchfue ungsste ungspa ungli umspa umschi uerzu uerfte uecks$
+ueckha uebsche twend turb tungsv tterfr ttent trueb trott troest triot tramp
+trakt traenk tkraeft tionsf terz tenv taum taets supp suedl stuermt stersch
+sterr sterk ssist ssendst spitzb slauf sgeschl senst seem schutz schust
+schoenh schmael schind scheh schbar sarb saeng rzter rwerb rwaehnt rungsw ruht
+rsucht rstech rspring rsinn rschneid rsand rrtest rring rpol rnten rniss rnal
+rmte$ rmeld rmel rlin rlebt rlangt rlaeuf rind rgert rgeist rgedr regl reakt
+rdeck rdamm rchest rchein rche$ ratschl raets raest pulv ption ppter portr
+paus ouve orve onstruie onfli ollmae oemte nzten nvestm nverz nut nuetzt
+ntritt nszen nsier nschalt nsber nsam nrecht nplatz nntet nnaeh nland nktem
+nkels nip ngvoll ngsschein ngsmassn ngsbef ngrupp ngearb nfang nersch ndten
+ndesw nderst nbau$ nanst naeht nachkr mtet mplex mplar mpfter mmier mmes mlos
+mkomm mgef mas luftf lpunkt lopp llenst llens lfaelt leien langl laerm laer
+kzent kteur kriegs kratzt kitt kav kaes jan ischo irsche irne inns$ ilze igno
+iftu iffte ieti ienli ielfae iehba iebu iebha ichtba ichs$ iate hrungsm hrens
+hochw hinf herl heid haendl groess greis graus gigst giess ggeb gendr genbl
+geiz gegl gand fuett freundsch fklaer fgem fften ffiert fault fakt fahrt eubau
+eschwoe eschnei ervi ertraeu erto errschte erneue erklu erfro erche entwei
+entschae entrie entrae enstra enschwe enru enpu ennt$ enbli enbla enbae
+elbstbe elbi eitsi einstu einspa einfae eimtue eiem$ eglue efro eer$ een$
+echslu dreif denb delm dehnt da$ cklichst ckeng chniss chler chkund chgew
+chgest chgel cherw bus bstant bruet block blad bildsch bekr bej beeinfl auspie
+ausi ausflue aufrue auffae atti atro atrio armte ard$ apri anru anns$ ankt$
+anhe angi andba ahte ahrne ahrge agsge agna aetzi aersche aermste aehlt$ adioa
+achwi achschu achkrie aby abwae absta abschue abscha abloe ablei abfo abfae
+^umk ^qui ^pfi ^opp ^laie ^kaeu ^gy ^glie ^ersp ^entzw ^einbr ^aufpr ^anbl
+^amts ^allt ^abspr zykl zweid zwangsv zte$ zisch zierst zerz zeitl ynchro xis
+xer wut wuest wirt win wild widm west weicht weichl vorn viers verpf utzt$
+utrae ussa uru urde unwa unru ungsle ungsla umsi ugae uftfa uetschte uenze
+uell$ uehrba uehlt$ udi uchtba tzfaeh tupft ttler ttenst tteng tschte$ troed
+trenn traecht tipp tionsk tgef tant ta$ synchr sweis sunk stungs streit stich
+sthet stammt stall ssungsv sserb ssenr sreiss spitzt spass slig siz siv sinf
+sil seln segn schwoer schwerf schweisst schwaetz schuecht schrift schnitz
+schnappt schmugg schenst schenf schal sbest sar samtb rzahl rwes rweg rwachs
+rvorr rvertr rverh rtungsv rtraut rtlichst rterb rstreut rschreit rschiff
+rsche$ rrer rpart rmter rling rkreis rknitt rkennb rkant riv rhund rhaetsch
+rgum rget rflueg rerl rerb rentw rbeh raubt rast rarzt ralt ragt quot pumpt
+progn plaud pil pien phe$ pfiff perm pein papp ossha ossge orstae ormte orgli
+orf$ omte omoe oeve oenhei oelbte obo nwachs nverh ntlass nterdr nstreng
+nstoss nsteck nschluss nsche$ nsaetz nrot nrent nred npart noev nklag nkind
+niedr nheb ngtet ngswuerd ngsbest nfuhr nfrag nfahrt nchron nbleib nbind nben
+nbaend nanl naehnl nabw mpfes mog mmtet mmiert mmenk mfort marsch marm llit
+llers llenb lgeb ldlich laess ktest kreuz kennz kelnd kaufm kaltbl ittsa itti
+itee istli ipie innbi impli ikta iffi ieste ierge ienrei iellste ielbe iegst$
+icksa ibt$ hex heuch herk hemmt hells hausb haeuft haeuf grossz gnor glock
+gerl genv gaens fuerst ftspol frueh frev freg fluess fischt film ffier ffeln
+feud felh fahnd faehrt ezau eut$ eumde euerbe euda etreu estru esste eske
+eschmo ertau ergei erfreie entzwei entwue entfue enswi enkrei enkre engae
+enfro enbre enblei emmu elmi elki ekru eifue eifu ehst$ efri eeilte ebraeu
+eagie durchm dunk dross drog dreist draeng diskr dieb depr degr dchen ckier
+chtsam chthab chstell chmach chisch chges bwehr buendn bstoss bschnitt blickt
+bkoemml bhalt bgeschw ban ausgea auft$ aufru aufei aufbe auert$ aubt$ atzt$
+atzfae aschte arnte arnie arfsi anwae anno annae anmu ankba andt$ andse andre
+ampfbe alts$ alse akro ako aini ahlbe aftspo aeune aesthe aerste aelt$ aehlba
+abve abtre abstrei abkoe ^umt ^sou ^schlau ^meu ^irg ^ing ^ign ^grie ^froe
+^floe ^erzw ^entd ^einn ^bloe ^auskl ^aufschn ^aend ^aehnl ^abv zut zens zem
+wohlw woert woehn wetzt werkt wegw wahlb waesch waermt vorv vielg ustria uske
+usio urt$ ungsta ungsschei ungspla umzu umwa umre ummte umle umkla umgae ulu
+ult$ uli ulei uldsa uhte uetsche uengli uelte ueckza ueckste ueckse udiu
+ucksvo uchti ubve uale ttelst trik treuer tranch tow tnehm tiefs tiefbl tenk
+taill subtr stroemt steng steil stech stan stadtb ssett ssersch ssenw ssenv
+spiell spert snahm smen sloes slaend skont sgebl sev set schwing schwenkt
+schweiss schliff schlecht schlang schlack schief schicks schichtl schenkt
+schenb scharfs saeumt rzelt rwort rwid rwerk rvollst rvoll rvielf rverb rve$
+rutscht ruin rtreib rton rstreich rstein rstaedt rschrieb rrter rrier roert
+rnacht rmund rmuerb rmarkt rleh rkass risk richts rhoer rhoeht rgessl rgesp
+rfrisch rfreul reot reinbr rdreh rchschnittl rchit rchgew rbrannt rbelt rbaut
+rats quetscht pult protz pptes ppet pid phiert phie$ pfaend ped pak paed ortra
+ormo orei op$ olg$ olche ohu ohsto oha oecki ocki nzutr nzust nueg ntur
+ntsprech ntreff ntan nstler nsgesch norg nntnis nmus nmin nkorr nint nheim
+ngszeit ngswert ngspol ngsbed ngsanl ngels ngegr ngefr nfreundl nens ndslos
+ndnis ndik ndger nderz nderm nderj ndenk ndef ndat nbruch nbrief naut naussch
+narch nahr naehrt mpfang mpagn monstr mmungsl mmenw mitf misstr mgaengl mech
+math maeld machtv ltipl ltbar llkuerl lkend lian lgung lfer leugn let lehrb
+lehnt leck ldigst lbes lack kuehl ktuell krob kreuzt kreis kogn koff ko$ klarg
+keln kaut kanntg kampfg kalth izo itli isrei ischt$ iose inkli impu igtste
+igfa iffs$ iessu iesste iefa iedlu ichtbe ice hyp holz hmef hltet hast has
+hagl haemm gutm gruess greifl grav gnis glueckw gift ggress geig fuenfz ftragt
+fsteig frustr frecht frank flex flekt flecht flasch flag flach figst fgebr
+fftes ffaell fell fegt fdringl fachl fachk exo espei eschmae esba erzwi ertroe
+ertae erspi ersei erschlue erpfle erkma ergbau erfrie epflue eoty entwa
+entspre entspa entne enkoe enbrie eltste ellve eitsvo eitri eitma eitba
+eistrei eissu einwo einwei einschla einbu eiko eif$ eidsa eichu eichs$ eichmae
+egia eelle eble duft dte$ dopt die$ denkl ckisch ckiert ckgest ckendst
+chtmaess cherz chbez ce$ bwuerd bwand bungsv bsetzb brutt blen bgeschm bgeg
+bged bgebl bein bbel baumw awa ausma auslau aushae ausgie ausflu aure aumwo
+aufwi aufsa aufrei aufdri aubwue attli atschla athle aszi askie aska arro armu
+anto anlae anha angwei andslo andma andle ampa aite agd$ aftsve aeufli aeltee
+aelschte aehmte aeda admi achmi abgie abae ^umstr ^umn ^umkr ^seu ^schwue ^rui
+^quo ^pue ^pfei ^orth ^opf ^kru ^koo ^knue ^insp ^ess ^erschr ^entsp ^dy ^dei
+^anschr ^anfr ^amp ^altm ^abkn zweis zuschr zon zim zett zern zei$ yti yse xe$
+wussts wuerg woehnt wisch weltl weich wahrsch vielf vaet utwi usstsei usst$
+uspri uschaue urchzu uose untau unsti uno unmu unmi unk$ ungsfo umdi ulli ulau
+uittie uidi uickli uhl$ uetzli uenne ueckwue uadra tzpunkt tzenh tungsl tungs
+ttenb tscher traur trad tort torp top tism tir tiefg thlet tgest tgel telt
+teilb teig taut taub tapf tann tankt talg taeuscht taeub taend szin suess subv
+stron strial streut streitb storb stopft stoert stenz starrs ssungsf sslos
+sshaft sruest spuckt spielh spaet sgep sfuhr sep sentl schwerv schuerft schuel
+schrull schreckt schnoerk schmirg schminkt schmerz schmackl schlos schleud
+schalld sbez sald rzust rwach rvoelk rverw rurs runs ruett rueckschr rueckl
+rtum rtraul rtrags rtraet rsuecht rstuetz rstrich rstaerk rspieg rsetzl rsetzb
+rschuss rschluess rschaetz rrtes rrschend rrag rquickl rpress rotz rohst rmung
+rmtest rlicht rleid rled rlaubn rlaeng rkenntn rkast riums rienr riat rholt
+rhalts rhaengt rhab rglas rging rgers rgaenz rgaengl rform rfolgt rerst reink
+rdet rderbl rdacht rbrechl rbeug rbeitsfr rart ramb raeuss quem quael praem
+pptem pluend platt phez pfeff ozie ottie ott$ ostbe ortle orsti orrae oria
+orfue opha onzi onfu ollue olgu ohnli ohl$ oessi oerni oehte nzter nzioes
+nzimm nwerk ntschaed ntlos ntlichst ntial ntbehrl ntaugl nstruiert nstift
+nspol nseln nse$ nschwer nschrift nrenn nreiss nprob nmess nmass nktur nkrieg
+nklig nkett nkenh nin ngsweis ngsunt ngstig ngslag ngsgem nglisch ngleich
+ngernd ngenh neuj nenm neh ndwirtsch ndungsr ndringl ndoss ndlos ndfest ndesr
+ndersch ndenb nbefr nas nans nahm nachm nabk murm muehs mse$ mpuls mmenkl
+mmelw mehr mad ltungs ltsamst ltgew lsam lmuet lleng llehr lla$ lgel lenz
+leichtf lbstaend lbild langt lam kuerzt krut komf klemmt kippt kaufkr jap jamm
+izioe itts$ ittei irtli ipse iote ionsko iogra insze inkt$ illie ilaeu ikte
+ient$ iensta ielsi id$ iblio iagno hust huehn hoefl hochm hochb hmslos hmlich
+hlgef heimd hauptg hann hamm gymn gungsl grossm gnung gik genz geistl gard
+fugt fuerw fuehlt freundl franz folgt floet fleck festz ferl feilt fasz falls
+ezeu exti euja eschmue ertha ersteue erspra erschwo erkru erhee ergrae erfli
+erfau erdrei erblu eorie enzioe enzfae entsta entia enri ennzei ennue enmu
+enkra enia engu elvo eltmae elstue elspie elsge elma ells$ elbstae ekreu
+eitsre eitrae eisba eintre einschrei eingae eindru einbri einbre eims$ eike
+eig$ eifba eibte eibt$ ehrsa ehmu ehlte egsa egs$ egna eglau egei echzi
+echtmae ebrie durchst durchschl dues dueng disz dim derf deh dankt ckgang
+ckens ckenb chweis chtensw chsvoll chsicht christ chmitt bvent bsteig bsichtl
+bschreib bsatz braust botsch bliz blind bgefl beut beugt bepfl bensb beauftr
+baer baeck ausblei auptge aufae auerli auchs$ aubni atli arteii arsa apfte
+ansti anntwei anmae anlie andsa andeu allu allfa alb$ akteu akku ahmslo aftwe
+aftsge aftsa afge aeto aengstli aechtni achtvo achsa achla ^vu ^urspr ^unq
+^ulk ^rhei ^geae ^entt ^entn ^engl ^eign ^dreie ^drae ^ce ^att ^antw ^add
+^abschm zwing zwiesp zwerg zwanz zet zert zerg zeitr yri xtrem wuet wuerzt
+wortl woelbt wissb wien wertv werd weint wehrl wahlf vsten vstem vorschr viz
+virt vierst uschue upte unri unra ungssue ungssta ungsri ungskrie ungha unfe
+undsa undfu umste umkrei uetzu uerzt$ uerwo uehlba udri uchtlo tumm tueft
+ttlung ttenr ttenh trouill trotzk trill trib trepp trennt toll toelp tmet
+tlaeuf tionsv tionsm tint thet therz tersch tensch teilh tapp tanzt tagt susp
+suedw stuetzt stinn sterst steppt staub staatsr ssor ssierb ssgel sserr ssels
+ssber ssbeg sruf sprint sport sperr spars spar spacht sof slief skomm setzg
+sechst seb sdienst schwieg schweig schweift schulb schon schock schlafw schill
+schaetzt schaek schaeftst schaeftsb sait saeus sabb rzlos rzell rwill rwieg
+rvorh rverm russ rungsg rtuos rtschaftsp rtgef rspalt rschrock rschoen rscheid
+rsamst rrtet rrett rres rpruef rprogr rped roll roes rnung rnswert rnaehrt
+rmuet rmod rmenschl rmant rlog rlock rlieb rlast rkzeug rkraft rkauft rird
+rherb rhaus rgrupp rgieb rgez rgeschr rgeordn rgatt rfracht rflucht rfliess
+rekr rekl reinz reih rechtsb rdopp rbter rborst rbog rberg rauch ratt raengst
+radf rach quadr prost pon plant pilg pess perl park pacht owa ortschri ortrei
+ortfae orgae ophi omie ollt$ oile ohlfa ogst$ ofo oerdli oeli oeko odo nzuz
+nzuw nzus nztes nzess nzept nym nuetz ntvoll ntfalt nstvoll nstlich nsteig
+nsol nschliess nschaff nsamt nsamml nreichst npack notw no$ nnerl nnensw nnenh
+nnbildl nlist nlad niessb nial nguelt ngsreich ngskrieg ngskost ngsgeb ngepr
+ngeng ngenf nfront nfaelt neur nenr ndwerk ndtes ndnisv ndiskr ndges ndestr
+nderth nderpr ndelsg ndam nblick nbeschw nav nausw nausb nark nalb nachtr myst
+mung mstritt mord mlauf mkehr mith messb menb melt mde$ mbard matt marb maenn
+lzer lyt ltungsb lpreis lpol lphab loesl llernd llerl llat llag lierb lienh
+lieh lfert lerr leis leich ldigt ldest ldanl lbew kub krebs kosm kniff knet
+klopft klisch kkred kitz kent kastr kasp kampfl jed iz$ ivia iveau itei isste
+issbi isme irtuo irri ipe illko ilgba ilfsbe ienbe iell$ ielfa idy ichtei
+hrheit hins hilfsb heimk heimb hauptb handf gungss grosst gleichz gelr fuss
+ftlos fstand fruehz fruehr frisch frier flimm fgep ffuehr ffin ffert ffelnd
+feld feinf fahrv faengn extra expa euchle etta ets$ esko eska esdie eschmei
+erzlo err$ erquo erkba erju erioe ergwe ergeo erdaue erd$ erbrie epte eprue
+eprei eogra entwu entglei ennte enjae enfreie ends$ elwa elsue else elpu elpa
+elku elkte elko eldwe eldma elbste eizt$ eitve eisch$ einschlae eihli eierte
+eidlo eheu efti effli eende eege eale eahnde eaengsti dyll durchbl durchb
+dtisch dolm dlung ditw deol denfr dekr dauer cknend ckgez chtlin chold chmaenn
+chin chef bwert bweg bwechsl buehrl buchh bsehb bschied brenn bred blos bles
+beschn benstr bensl bendl beis bearb beanst baust bausp austre austi ausro
+auslie ausbeu auenha atroui atme arteie arrsi arkie anve antrae ansfo ansfe
+anntge anlau ankue angvo anei ampu ambu alsta alsche alpha alba akkre akko
+ahlka ahlba afwa aeuft$ aeuchli aetzba aente aelze aefts$ aedti adro adle
+achwe achmae achle achde abzie abt$ abschle abbre aar$ ^vio ^vae ^unpr ^unkl
+^treue ^schleie ^ree ^pfae ^oek ^oeff ^insz ^erbf ^endl ^ehrg ^ci ^broe ^blue
+^appl ^amb ^altb ^akkr ^akkl ^adv ^achtz zyn zwink zwieb zweim zweckm zielb
+zeig ypno yni ymme yli xklus xier xam wurmst wohnb wohlv wohlkl windsch werf
+weltw weil weichh wegz warmh wappn waldr wahl waelzt waelt vorj vir vinz vierm
+viels vanch uze uwei utzba utto utrau utra usto useu urz$ urri urmsti urchwa
+urchsi urchma urchfa urau uotie unwe ungswei ungsbei ungri unglau ungfe undbe
+umpf$ umha ugrei ugni ufae uetzpu uerst$ uerbe uempe ueht$ uehr$ uecku uebsi
+tzlichst tzeng tzel ttmach ttlichst ttigt tsten tste$ triv tripp treul traut
+trass tragb traeuf traell tonl tollk toen toast titl tger terf tenw tels tbest
+tats tarb talst taef swahl sverw stroem strien striell streif stib stgeb
+steuernd stenr stenl stehl standh stagn staerkt staatsg sszueg ssin ssicht
+sseur sserw ssentl ssdeut ssart squal spurt sprud spont sorgn smach slichst
+slaw slands skiert skalp sierb sien sick sgen sfuehrl sfuehr sendf sehn seet
+seef schwicht schwelg schwaerzt schwaerm schwaeng schwadr schnueff schnipp
+schmolz schlott schlagn schirmt schimpft schimpf schiefg schenr schenl scheff
+schausp schaend sbeut sauerst saeum saeugl saeg rzeihl rwuest rwild rwechs
+rwar rufs ruecktr rueckr rueckbl rtschaftsg rtschafts rtens rtelt rtbest rtaet
+rtabl rsteckt rsprung rsprach rsieg rsied rschuess rschluss rschliess rschlaf
+rschend rriss rrecht rraum rntest rnigst rnag rnachl rmisch rmind rmatt rliess
+rlei$ rlaut rkwuerd rktet rkrust rklaerl rkehrsr rkaelt rjaehr rinst rhitz
+rherrl rhell rhall rgungs rgtest rgold rfueg rfniss rfloss rfel rfang reorg
+reid reichst reck rdorb rderl rchtet rchgel rbrueck rblasst rbill rbed raum
+ransch ranf ralst rabf rabdr quitt quart pter pselt prueft presst praep praegt
+plaetz pist pis ortve ortka ortfue orschte orru orns$ orgni onna onfro onau
+olve olk$ olda okla ohlve oh$ oewe oesti oesi oerne oennte od$ ochzei ocht$
+oaste nzuk nztest nzfaeh nwegg nverw nvern nverbr nutzl nutzb nuecht ntum
+ntuem ntschuld ntrat ntlast ntit ntasch nstreit nstoess nstands nsplant nspekt
+nschiess nraeum nnzeichn nnungsl nnonc nnis nnerst nners nmarkt nles nktlich
+nkons nkleb nkfest nkern nick nherz ngsvertr ngsverm ngsort ngsmin ngsheim
+ngsgesch ngsarb nglied ngekr ngeeign nfueg nfte$ nfreund nfolg nertr nernd
+nenw nel ndo$ ndgesch ndertf nderk ndelsb ndag nbuss nbart nausr nats nanw
+nalf nachts nabg mspann mrand mpftest mnis mmetr mmensw mmatr mitr misst missm
+missd mfang meth merkw merkb menschl mder marktf lwert lvers luftw lueg lternd
+ltbluet ltabg lstein lsig lsich lseit llerg llein lke$ ljahr lim lichk leichts
+leib ldhaft launt las langs kuech ktionsm kos konfr koch knoepft kneb knabb
+knab kaud kanzl kaeuf jung journ itwue itsche issha issdeu iseu irschte ippi
+iothe inti insu innt$ ikti igra iern$ ierfa iedho iebt$ idua idme ic$ iat$
+ialge hypn hyg hrlaess hrgeiz hrbarst horch holl hoehn hntet hnsinn hnisch
+hmers hmens hlger hlerz hlbeh hes hens hekt heilb hauptv handh haeusl gungsr
+gran gnen glatt gipf gim gev genr genp geldv gaest gaengl gad fugn ftlichst
+frott flickt fleh fleckt fit fgekr fenw fempf fast fallsch exklu eurku eunte
+etou eteue essha erts$ erspro erschlae erraeu erpra erneu erkwue erknue erjue
+erjae erflei erdrae epti epei enzue enzbe enwo enttaeu entrue ento entgi enk$
+enbru emsi emmt$ elstei elrei elne eldbe ektue ekrei eitste eitse eitle
+eitlaeu eithe eisei eisbe einzie eintri eintra einne eimdie eilsa eihi eiha
+eigi eichtsi eichst$ ehrrei ehrhei ehrgei ehn$ eh$ egfa eft$ efeue efau ees$
+eeintrae edei eckst$ echtsve echtsbe echtsa echtba ebri eblue eaufsi earte
+dual dler dif dienstl diagn denh denf dant daemm ckzahl ckhalt ckgek chtsinn
+chternd chnungsf chherz cheln chauff chacht bzahl bumm bsolv bsel brauch
+brandsch braeuchl box blioth blinz bliert blauf blam bgeordn beurt beicht befl
+beend beeintr beaufs baug barg bab aussto ausho aupla aufschla auflo aufho
+astie assio arnu armse argo ardie appne aph$ anstie anspla ansae anktio ankha
+angba andta anbie ammi alzte altie altblue allspie allschi aktue ahrlae ahnsi
+ahns$ ahllo agkrae aftlo aftie aeugli aetie aertne aermi aerkste aepa aehrt$
+aehme aecki acklo ackli ackie abstu abspie absei abie abgeo ^waa ^url ^sprue
+^reo ^pfu ^nai ^kro ^kaue ^it ^geei ^freie ^exkl ^entbl ^eind ^auspr ^arms
+^argw ^amt ^allz ^afr ^adm zwoelft zukn zten zitr zion zil zeugt zes zenz
+zehnt zaertl ynthe ylo yklo xot wurmf wunk wuehlt woelb winz wieh weith weiht
+weih wehrf wegschl wegbl weck waltt wallt wall vorschl vorsch volks vierf vest
+utei ursprue urrte uro urke upi unu unha ungsra ungsli unba umstue umpfsi umne
+ummie umko umhue umgue umfu uke uisi uhoe ugu uftwa ufi uemte uempfe uemie
+ubtra tzkoepf tzelt twuerd tun ttich ttersch tterm ttenf ttelg ttelb treffs
+tragf tourn tork tog tionsp tif tiefb this teuer terk teln taugl szier sverk
+sumpf stumpfs stuerz strom stick sternh stelnd stam staemm ssteig ssherz
+sschuett ssbill ssar sreis spott spiess sper spens spark spaelt sow slass
+skrup sitts sist sigst siegt siebz siebt sgekr selts sekt seeh sechz sdrucksf
+schwor schwier schwerb schwabb schrumpft schriftst schneck schmelz schlittsch
+schlaefr schirr schiert scheussl scheib schaum schart schaml schalkh schaendl
+schadh sankt sang sand saenft saek sa$ rzul rztet rzhaft rzaust rwirkl rweichl
+rwag rvort rvorst rvoes rverl rus runr rungsz rungssch rungsf rumr rufsb
+rueckd rtungsl rtungsb rtruemm rtraecht rtnaeck rtgesch rtelj rstrickt rstrebt
+rstigst rstieg rstaunl rspenst rsorgl rsilb rschrammt rschmett rschlecht rsagt
+rrund rrump rruett rrog rrkoepf rrik rrenzf rreichb rpunkt rpest rpacht
+rnuecht rnsprech rnmeld rmunt rmtes rmstich rmoegl rmeidl rmee$ rmeb rlegb
+rkter rkot rkmal rkett rkensw rkens rkaempf rism rierst rheiml rhaengn rhaelt
+rgten rgoss rgart rfolgl rflut rflaechl rfeind rfein rfalls rew reitw reiss
+reichh redl rechtsw reag rdunk rbracht rbohrt rblueff rblind rbesch rausch
+raus rauftr raufk quenz ptier psend prol prest preisw preisb pred ppiert ppich
+ppenb por pliz pfung pfes pfert pfel peinl otzkoe oszie ostba osszue osshe
+osla osche orue ortbi orno onsti onso ollzie ollma olglo old$ olbe oja ohltae
+ogre ofs$ offs$ oetze oeswi oerbe oelfe oel$ ochi obst$ nzur nzuegl nzoes
+nziell nzelh nwalt nvort nvors numm nuetzl ntzuendb ntzueck ntoen nterstr
+ntend nteign ntdeck ntaet ntabl ntab nstud nstigst nstieg nspruech nspruchsl
+nsprach nspitz nspann nsit nsichtl nsfer nsfaeh nschter nschneid nschleich
+nschend nsatzf nsamm nrueck nords nnenst nmot nmitt nloes nlichk nlaut nkreuz
+nkers nkeng nkaeuf nion nil nierb nhandl ngsvorschl ngstlich ngssuecht ngsakt
+ngreif ngnisv nglueck nfroh netz netr nerkl nenth nellst neinz neigt nebl
+ndesk ndertst ndenl nce$ nberg nbank naz naust nanzm nalp nachst nabt musk
+mued mpraegn mpot mpfbeg moll mmler mkreis mklamm mitk missf mfangr mehl maeng
+machtl lttaet ltrek ltnism ltmod ltigk lott lluest llett llerw ling li$ lhab
+lglos letzt lert ldungs ldernd laendl laed kterl kreid koern knipst knaus
+klost kklim kamp ittschu isst$ ismae isla irrsi iqua ippt$ ios$ ionse inspe
+innge inka imprae ils$ illia ildschi ikie iki iespae ierzi ierma ierde ienstvo
+iena ielve ieh$ iedle iebst$ ido ichtwi ichtve ica hydr huett hrenst hltaet
+hlgem hetzt herrl heils heilkr haust hauptm hartn hant halts haek gruendl
+grossv grossb grob greich gnosz gmat gmach glueckl gler glaett gis gial ggew
+gges ggebl gerw geldg geldb gehrl ga$ fstell fruehst fruehl frigst fragl fortl
+formt floes flock flat fgedr fftet fflich ffern ffenk ffenf feinh feiert
+fblick fber farbl faess facht eutschla eussli eusche eugie ettie etba estse
+estroe estma eschru erzha ertrue erteu erschre erschrae erschmo erschmie
+erschleie erns$ ernme ernbe ergli eptie ept$ epho eori entwae entro enthue
+entbloe enschwa enraeu ennst$ enflu enfei enbrue elwo eltsa elre eldzu eldve
+eldme eklo eizue eizba eitwi eitswi eitsko eitsfreu eista eislau eintoe eintei
+einhoe einho eingea eilste eilche eik$ eifste eichhe eichha eicha ehnt$ ehmste
+egrie efs$ efeu eemae edai echtswi durchr duell dsel dron don dial dhof dhaft
+dertr derbr delh defl dder daill daechtn ckverw ckgel ckgeh ckenr chtbew
+chmuet chlos chgek chgef chenm chenl chempf chahm bust buss burg buesst bsurd
+bsinn bscheul bsam briz breitg brechn brauchb bosh boesw blitzt bgier bgestr
+bgekn bgegr bfert bfaell beurk berpfl beantw bart auwe auslae ausbre aunli
+aufwae aufsae aufpu aufhoe auersto attra attge astli artnae argwoe arei arau
+anzoe anstoe ankge angha andbe anbli ams$ ampfge ammge amma alwe alttae alre
+allzu allve allta alae akkli ak$ aine agsa agfae aftsmi aeuerli aesst$ aerze
+aertli aers$ aengste aemmte aeku aeht$ aegnie aefri aechi adha achvo abzei
+abstue abschla abme abfe abdi abbru ^umschr ^umdr ^teue ^stroe ^sproe ^sku
+^skru ^saa ^plue ^osts ^ortsk ^ort ^oeffn ^jou ^irrs ^ernst ^erkr ^erdg ^erdb
+^ems ^eisb ^ehrb ^cou ^anv ^anfl ^alb ^akr ^aeg zwitsch zwill zweckl zwangsl
+zwangl zuspr zoll zimp zierl zielstr ziels ziel zerspl zerschn zerschl zerkr
+zeitg zahlr zahlb zaehmt zaehl ypie yno xte$ xpans wortk wortbr wisp wins
+wildw wertp weltk weitschw weits weitl weissg weig weibl weht wehm wed wachh
+vulg voz vollk volksw vang utzge utsa uto utlo utha ussi uschlie urtsta urti
+urchque uolle unschi unmoe unmo unku ungvo ungszu ungsze ungsro ungslie ungsei
+ungsdie unfrei undla undeu undba umwi umie umbi ullie ulki ulgae uinie ufti
+uetzt$ uesie uert$ uepfi uen$ uehstue uehllo uechli uebse tzhaft tunt tuier
+ttens ttelk tteil tstes tstell tsicht tsgeb tsfreud tsel tsdienst tschweif
+tschten trunks trostl tromp troepf trav trapp transpl traegl toil tmasch
+tionsz thes tgeg teufl tein tee$ tausch tatkr talb taktl taetsch syn swill
+swert stutzt strand stral stillg steuerr sterw staut stattl staenk stadtr
+stadt ssungsw ssmut ssif ssichtsl sshalt ssetz ssess sserv sserm sserk ssent
+ssensw ssacht spuert sprenk sprachw sphaer spektl span spaerl sorgf soff sklav
+sib shalts shaft sgespr sgeschm sgefr sgefl sew sessh serr selb sekr seilt
+sdrueckl schwimm schwerl schwerd schwenk schwarz schwaenz schwaecht schutzm
+schumm schuldb schuft schrank schott schnieg schmackh schlussf schlagkr
+schlaeg schik schauend schamh schall schaemt schaem schaeftsk schaeb schadl
+sbes saum saugf samtv saegt rzoeg rzial rzaub rwuehlt rwick rweig rweck rwass
+rwahrl rwaert rview rverz runtr runst rtskund rtschaftsm rtgew rtfaeh rtbild
+rtab rstoffh rstoert rstimm rstandsf rspruechl rspruchsl rsplitt rspielt rseng
+rsehrt rschwengl rschritt rschmolz rscher rschaff rschaetzt rsandt rsal rsaett
+rrtem rret rregb rraeum rrad rprob rplatz rnter rnsthaft rnomm rniedr rnem
+rnbeg rmsel rmom rmell rmacht rlott rleugn rleucht rletzl rkungsl rkuemm
+rksamst rkrieg rkenntl rkehrsv rjub riet rieg richtsh rhung rhind rgwoehn
+rgoett rgeud rgess rgenh rgegr rfuehrt rfuehl rforsch rfolgv rfolgr rfetzt
+rfault rfaerbt rfaengl rfaelscht renn renf rempf reizb reitst reifl regs reds
+rdurst rdurchschn rdunst rduennt rdriessl rdonn rdnungsw rdnungsl rdis rdev
+rdest rders rdenk rdammt rchenh rborg rbin rbier rbeut rbein rarmt rannt rallg
+raeuschl raeuch puls puenktl ptiert prokl priz praegn poss pogr pnot plaus
+plat plagt plaen pion pfluegt pflichtb ova ouri oure otu otto ostlo ossie osha
+orwa orso orse optie oppte opho onstra onnie oncie omni olvie ollkue olgve
+olgrei oldu oes$ oepse ochmue nzufr nzett nzes nzaehl nwar ntwaffn ntwaess
+ntstell ntschied ntruest ntrig ntricht ntreib ntraegl ntol ntmuend ntlad ntis
+nting ntfuehr ntfess ntbind ntart ntaktfr nstruier nstrat nstleist nsters
+nstein nstarr nsportf nslos nselt nsekt nschtest nschickl nsakt nqual npflanz
+npers notd nol nob nnull nnlos nnenb nnekt nmuend nmoegl nmeng nmeist nlehr
+nkred nkohl njahr ninh ning ni$ nhal ngszentr ngstag ngspunkt ngslieb ngslehr
+ngslaeuf ngskurs ngsfrag ngsam ngeordn ngelh ngangs nford nfallsr nexp nerfr
+nerb nentschl nentb nengl nendl nehrl neck ndungsl ndulds ndsfaeh ndschaftl
+ndlag ndisz ndertr nderd ndankb nchen ncen nblas nbezw nbeg nausl naufm narm
+nant nann nalt nachsch nachd mutl mtueck msicht mschul mpress mplett mpfsinn
+mperl mpend mpakt mov moed mitz mitw missh mischst mildt mherg mget mentv menh
+mehrst mden mber maur matsch marg lunt luftd luft ltmaenn ltbew lstreb lstig
+lstaat lost lohnt lnahmsl lmitt lmetsch llsicht llgef llensst llensschw lleinv
+lkind lkhaft lint lhaus lgverspr lgbar lfarb lev lernb lep lentl leibt lebh
+ldtaet lbed lautl lausch lart landsch landg lan laeng kunstv kunftsr ktfreud
+kostb kopp koestl koemml klotz kleinl kleids klangv klaegl kief kerz kert kapr
+kampfst kalb jaehz ixe ius$ itro itfae issmu issgoe isqua irmte ir$ ionsvo
+ionsme ions$ iole intri into inta instruie insi innlo innli infe inea illge
+ildtae ilch$ igjae iftste if$ ievo ietu iepro ienstlei ielstre iehst$ iegs$
+iefsi iefma iefbli ieblo ichtssa ichi iati huts hnungsv hnungsl hners hmten
+hlungsf hligst hles hlenb hlber hlbarst higt hert hausm haupts harml handb
+haltb hals habg haarstr gwuerd gutw gungsb grub grossf grammg gon goldm glob
+glitt glaubw glaubh gjaehr gistr ggesch gfuehr gesg gej garr gaer fuhr fuehll
+ftwerk ftwaff ftstell ftret ftler frucht freiw frakt fragw folgs focht flunk
+flucht flick fid fgeschr fged ffnungsl ffels ffass ffahrt feur feuerw fests
+fernm feig falsch fahrg faellt ezwe exue eurlau eunru eulo eufli euerge
+etschte estzu estspie eschwue eschwu eschre eschlue eschlae eschaue esai erzoe
+erzia ertvo ertpa erteue erstaeu erspli erschnau erscheu errt$ erroe errau
+erple ernstha ergeu erfre erfeue erbloe erblie enzge enzae entzi entuie entsi
+entschie entmue entma entlee entko enthaa entbi enstei enschlae enrue enkrie
+enja enhu enhoe endrei endo enbri empoe elzu ellsi ellau elja ektlo ek$ eitsta
+eitschwei eitae eishei eischte einzi einzei einza eint$ einsei einschi eino
+einloe einlie eingra eimue eimbe eilkrae eilge eierli eideu eichtfe ehrfae
+ehrfa ehrbe ehra ehlei ehge efreiu efie eerdi eenrei eeindru edne eckwi ecklo
+ech$ ebst$ ebha eatme eantra durchfl duenst dsam drohl dritt drigk drehb dot
+ditf disq dienstb deutsch deutl denkf deenr dchenh darfs dan ckwirk ckverg
+cksvoll ckslos ckgesch ckbar chtmeist chtgem chstum chselh chlichk chkeitsn
+chgeh cherch chent burtst bschluess bruellt brit briefm brett bremst brechl
+bohrt bohr blitz bleit bleicht beurl beunr berp bergw benm benl beinh beerd
+beeindr beantr beanspr beaengst beabs bdicht bbest bauend bankg balk auswe
+ausschrei ausschie ausnu ausme ausba auptve aulu augfae aufwei aufspa aufo
+aufhae aufba atzha atzge atschi atkrae arsche ariie ankste ankau anhoe angt$
+angste andsfae andro amta ammt$ ammli amlo altmo alsi allsrei alkrae alkha
+albie alau aktlo aktfreu ajo ahrvo ahna ahm$ ahlrei ahba agwue agnie agha
+aftsbe aeuschu aeuschlo aeuli aerts$ aerdi aeni aenfti aempfu aemmi aelsche
+aehzo aegst$ aegna adve adlo adfa addie acku achtli abspe abra abia abdru abbi
+abbau ^wai ^umspr ^umbr ^toi ^sprei ^skla ^ske ^pio ^orts ^orch ^ohr ^obl ^gna
+^frau ^fee ^ernsth ^entschw ^endg ^eifr ^cu ^bou ^blau ^beae ^ausfr ^aufstr
+^auffr ^auffl ^attr ^atl ^arzn ^ankn ^allw ^alg ^achtl ^abschn zyl zwingb
+zwickt zweiz zweir zweig zweib zweckw zweckd zwangs zwangh zwaengt zusp zugkr
+zter zlos zinsbr zigst zierg zierb ziem zialst zerq zerpl zerpfl zerh zergl
+zept zelt zeitw zart zar zaehmb ylli xur xuell xplod xiert xalt wutschn wutsch
+wurm wunschl wulst wuergt wortr wohnl woertl witzt wirtl windschl windg wig
+westl wertl welk weidg weh watsch wallf wahns waechs wackl wabb vill vibr vet
+uttge utschnau utschaeu utmue ustlo ussve usssue uschrei urms$ urioe urgi
+urchtlo urchleu urbi urba unstvo unschu unqua unmae ungshi ungshei ungsfreie
+ungsfra unglo unfru unfei unchri unbrau unbie unbeu umzaeu umscha umsaeu umpfi
+umla umae ulsti ulsi uldha ugi uftdi uesst$ uerzi uerke uerba uenstli uennte
+uenchte uemmte uehzei uehu uehse uehme uehlvo uehlsbe ueckwi ueckwei ueckfa
+uebi udo uckslo ucksfae uchhae ualvo tzensw tuerk tuend tueck ttelf tsgem
+tsgef tsfremd tschsuecht tschnaub tschigst tschaeum truebl troestl trinkf
+trennb trem treffl traum traub trant torl tonb tomb tmuet tleidl tischg tilgb
+theol thab tfaeh tesk terpr tentf tentbr tenp tendst telb tduerft tauft tanz
+tals talkr taktv taktf tail taeusch szen stup stumpft stumm stuendl strickt
+stohl stoeps stickt stesg stenv stenf stellv steif stbest stbar staubh starrk
+starr staendn sstoss sssuecht ssichtsv sshaar ssform sserf ssenz ssenf
+sschlagg sschlag ssbluet spuerb sprungh spektv sohl sog slow skurr skrim sken
+skant sinng siev siegr siegb siedl sheit sheb sguenst sgieb sflueg sfahr serh
+selh sdrucksv sdrucksl sdehnb schwungv schwungl schwatzh schwang schutzl
+schutzh schupp schuldh schuess schrien schreckl schnupp schnuer schnodd
+schnatt schmutzt schmachv schlumm schleierh schlaks schlaff scheuert schenh
+schelnd scheinh schaur schauerl sbauf sauf sanft sach rzung rztest rztem rzon
+rzinsl rziel rzeugt rwuch rworf rwog rwiss rwint rwehr rwaelt rverbr rungsr
+rungsp rundl rundf rtramp rtoent rtigg rtgetr rteur rtels rteiisch rtbruech
+rtal rstuerm rstraeub rstoerb rstimmt rstandsl rspruengl rspruchsv rspriessl
+rsprengt rspannt rsonn rsinnb rseits rseit rsehb rschwer rschwemm rschungs
+rschiedl rschatt rsamm rsaeng rroet rrasch rraed rquoll rpfleg rpflanzt rpers
+rott rntes rniedl rnentbr rmuedl rmtet rmasch rlumpt rloet rloesl rletzb
+rlautb rlat rlaeut rlaest rkupp rkungsv rkoest rkoerp rkoch rknirscht rklug
+rklueft rklett rklebt rklaert rket rkehrt rkbar rkalk riz ringf rich rhols
+rhitzt rhimm rherst rhedd rhasst rhasp rgnuegl rgnis rglast rgilbt rgfaelt
+rfrier rfnisl rflixt rfinst rfig rfid rfes rfelt reuel rerk renk reizv reizl
+reil reig reift reifr reichs reichl regt rechtsv rechtsh rechtm rduft rdruess
+rdruckt rdreif rdreht rdlich rdeutl rdeckt rdamml rchtlos rchleucht rchgest
+rchgef rchgedr rchdringl rbtest rbrued rblut rbluemt rblos rbloed rblieb
+rbiert rbeitsb rbeb rbarr rapp raffg raeuschv raerg raepp raechtl rack qualv
+quaelt puttg pur prued promt praecht ppos ppens ppelst ppels polt plump planl
+pill pie$ phier pharm pftest pflueckt pflichtw pfelt penf pelt ournie otdue
+ostspie ostsee ostrei osko orwe ortsku ortbrue orsae orrei oroe orlaeu orgfae
+orfi opp$ opflo onlo onioe onfo olsa olpe ollae olki oji ohnge ohna ohlwei
+ohlu ohlkli oest$ oepfu oehli oechi oeblie odde ockt$ ochwe obli nzuv nztem
+nzigst nwirks nwid nwendb nwandfr nvert nverg nverf nusss nussr nunw nungs
+ntzweig ntziff ntwurf ntwuerd ntwend ntwegt ntsteh ntspann ntsetzl ntrisch
+ntor ntmacht ntkraeft ntgift ntfaeh nteur nterj nterd ntenz ntenn nswicht
+nsuch nstuf nsterh nstelt nstechn nstadt nspruchsv nsportl nslich nsittl
+nsichtsv nsichtb nschraenk nschmier nschild nschensw nschensch nschaetz
+nsbring nruech nredl npunkt nprobl nprall nos noerdl nntnisr nnoet nnischst
+nniert nnetr nnensch nnat nnachg nlin nkult nkuend nkonf nknuepf nkig nkhaft
+nkelnd nkap nioes niedl nichtss nhol nhof nhaltsr ngungsl ngsverk ngsten
+ngsreis ngsprobl ngsinst ngshilf ngsdienst ngsbetr ngsapp ngsantr ngsanst
+ngsamt ngrig ngriffsl ngift ngent ngag nfus nften nfruchtb nfreud nflussr nez
+neuart nerschr nergr nentsch ndurchl ndurchdr ndtem ndschluepf ndsatz ndrueck
+ndmal ndian ndheitssch ndguelt ndeutl ndesp nderbr ndent ndelst ndelsm
+nchristl nchol nchiert nchier nbrauchb nbiegs nbeugs nbett nbeq nbeabs nbarmh
+naus nauff nass napp namh nalw nalst naesth naerr mueht mtausch mseg mschiff
+mpftet mpflust mpfinds mpfers mond mom mnib mneb mmlichst mmerst mmerh
+mmenschl mmenfl mmelst mmelb mlichk minr milch migst mied mgez mehrd mbild
+mauert matl malst lzern lwass lwar lustl ltschnaeuz ltmeist ltim ltherz
+lteempf lprod lpelh losl loew loesb lnahmsv llzieh lliard llgeg lleb llaend
+lkenl lhand lgsam lgenschw leph lentv lehrr leert leckt ldsam ldmeng ldir
+ldepfl ldat lbungsv lbern lanch labt kurz kunstst ktvollst ktionsb ktfest
+krist kraus kraftf kraft kraenkl kot kostsp kork kopfl knuspr knuepf knoech
+knitt knist knausr knallt klipp kleinst kleink klebr klatschs kitsch kindl
+keusch kerbt kelh kein kaust kasch karr kann kaltschn kals kaergl jun jiz
+jaemm jaehr izzie ix$ iumphie iumpha itia isu istra isstraui isslo isseu
+ischoe irn$ ionste ionsre ionsmi ioakti inwei inva insli insbri innie inlae
+inkfe indschlue indschie indsa india indge indba immli im$ ilmte ilms$ illsta
+illo iliae ilgte igo igli iftli iffu iffslu iewe ienve ielha iegrei iegba
+iedfe idue ichtsa iatio ian$ hzorn hzeit hyst hurt hungr huebsch hsel hrverb
+hrfaeh hrdeut hrdet hor hoell hochs hnern hnachtl hmuet hmte$ hlweisl hlungsb
+hlsbet hlkling hlgest hlgen hlerh hlenm hlbel hlbed hinh himml hiert heuchl
+hep hensw heitsv heitl heissbl heims hauptf hans haessl haem gypt guth grundf
+grot grimm grauenv grauenh graessl goenn gnant gnaed glorr glitz glitsch
+gleichst gleichs giss gir ghaf ggeschl gge$ gess gentl gelfl geldw geistv
+geistr geeign gbek garst gack fussg furchtl fuehlv fuehlsb fuehls fuegs
+ftstuecht ftskund ftsfuehr ftdicht fspreis fschlussr fsaess frost froh froehl
+friedf freudl fraess fracht fortz forst foerml fmark flug fleg flamm flad
+flack fkraeft fiert fier fgeschl fftem ffslust ffsich fford ffnungsv ffgier
+ffektv feuerf fesch feinm feindl feind feierl fbahn faerb expre exie eust$
+eund$ eulte euhe eugsa euerwe euerfe euenswe euelo eudlo euarti etroe ests$
+escheu erz$ ertlo ertfa ersprie erspae erseu erschmu erschaue erschau erschaeu
+ersaue erpflue ernhe erkrei erklue erhie erchie enzo entzie entze entsa entmu
+entkrae enstaa ensch$ enplae enloe enkma enkae endha endgue emd$ emba eltmei
+elsei elsa elgae elfi eknoe eklu eizvo eizlo eitsu eitsschae eisve eistvo
+eistlo eisshaa eissha eissblue eissa eisgue einme eingue eifst$ eierha eibst$
+eibei ehrst$ ehrsrei ehrma ehrdeu ehmue ehls$ egscha efrae effsi eernte eempfi
+edse edde eckdie echi eachtli durst durchtr durchq dul duest dsorb dschaftl
+drett dreim drap dokt dmir diums dischst dioakt dieg dger dfert dehnb dauert
+dauernsw das dampf ckwidr cksfaeh ckgeb ckentfr ckdienl chzeit chtwidr chtssag
+chterh chtelt chslungsr chses chselv chselg chselb chron chnis chkomm chgesch
+cherl chentl chenst chbarst buess buechs btret btreib btrah btraegl bstrah
+bsorb bsetz bschreck bscheuensw brupt brumm brud brot blueht bleist blag
+blaeht biol bibl biat benschl beiss beib beachtl bbert bbernd bber bauscht
+bausch bauk bau$ bankr bak bahnh axie autlo autba auswi ausve ausu aumae
+aufzie aufsprei aufschlu aufpa aufkrae auffie auers$ auernswe auernd$ auenvo
+auene audie atuie atschsue asto asso assba asia aschie arznei arzi arsti arrt$
+arrkoe arrie arn$ armie arfue arblo applau appi appba aoti anzt$ ants$ ansprue
+anspri ansie anschi ankst$ anks$ anknue anka angstvo angslaeu angsbe angle
+ancho anbri amtsge amtbe ampi ampflu ampfa ammu alzu altsrei altschnaeu altma
+alpie alfi aldrei aldie aktvo aktfe aksi ahmsvo agsve affgie aeuzi aeusli
+aeuschvo aeuge aets$ aerri aergli aerde aenzu aenzte aennli aenkli aelzte
+aellte aeli aehmba aehlu aegy aeftstue aeftsku aeftsbe adso adli achtzi achtve
+achre achlo achei abtrei abtrae abschu abschre abschlue abschi absaeu abgra
+abde aatsge aarstraeu ^zio ^unzw ^unchr ^unbr ^toa ^straeu ^slo ^sla ^poe ^paa
+^omn ^oestl ^laue ^kreie ^klau ^irrt ^ihr ^gnae ^expr ^ew ^erspr ^entkr ^entfr
+^eitr ^einschm ^einbl ^eid ^drau ^chao ^baua ^ausspr ^ausschr ^aq ^apf ^angstv
+^amtsg ^allm ^ahnd ^aengstl ^aengst ^aelt ^ads ^abzw ^abq zwoelf zuerk zuegl
+zuchtl zuchth zubr zialg zel zeih zapft yp$ xyd xpress wringt wohlschm wohlm
+wjet witw wirr wildl weitm weisst weinb wegsch wapp wak wahrs wahnw wahll
+wahlk wachst vot vordr vollf vollbr volkst velt veau$ uthe ussgae uspre
+uschnei uschi urrie urmfoe urhe urfe urchtrie urchtba urchrei urchloe urchbre
+urcha unstrei unspo unschlue unschlo unschla unpue unpro unnoe unksue unhoe
+ungue ungswa ungsspie ungsschrei ungsprei ungsmo ungskrae ungskra ungsfa
+ungsbau unft$ unfreu undsae umstae umschwae umschu umfo uld$ ukt$ ukau ugri
+ugkrae ugha uftve uflie uernte uerne uerfi ueppi uepft$ uenz$ uenffa uenche
+uehrei uehmli uehlu uehls$ uegle uedi ueckwe ueckst$ ueckko ucha uba uarta
+tzenl tzeb tupf tungsw tungsr ttigst ttesd tterk ttenp ttbar ttag tsrecht
+tslieb tsches tsbuerg tsbes tsamst trud trostr tropft tropf troj trift triebsr
+triebh trab totschl tmaess tischt tionss tinn thischst thalt tgesch tenm
+tbrief tank taetsw szahl svollst streck strafg stoppt stillst stigk stichw
+stgest stesschw stenm staun stammv ssungsr ssungs ssreichst ssort ssions
+ssgebl ssgaeng ssenpr sschuess ssbuerg sricht sred spult sproed spol spit spes
+snutz ske$ sing sget sgedr sers serb senw senv selbsts selbstm sdruck
+schwuelst schwachs schussb schurk schuerz schnapp schnab schmunz schmeiss
+schmackv schlitz schlimm schlenk schlagw schlagb schlaeng schlaef schickl
+scheucht schepp schaerf schaedl schacht schabt schab sbrech saust saun sachv
+sachk rzweif rzueg rzitt rzins rzest rzaert rwundb rwuerf rwischt rwirr rwett
+rwacht rutsch rungsgr rul ruhs ruehm rtun rtraeumt rtpap rtoen rtoelp rtherz
+rteik rtart rsuend rstelt rsprud rspott rspann rses rsenk rschreck rschoepfl
+rschlimm rsches rschenk rrost rrischst rrest rrenh rrannt rramm rquickt rort
+roeff roch rntem rnsehs rmfoerm rmerk rmehr rmauert rmart rlernt rlebn rlangs
+rkuerz rkruepp rkont rkell rheer rgruendl rgiess rgie$ rgenl rfolgs rflugz
+rflog rfelf rfehl rfasst rfaelsch rfabr renr rechtsg rduld rdigk rdienstv
+rdeutsch rderst rchtrieb rchloech rchgesch rchger rchgebr rbuech rbten rbte$
+rbrief rblickt rblass rbeitst rbeitn rbeiss raufb rachs rabst quell prinz prax
+praeg plaed phist pflos pfigst pern partn paeck ozio oxy ouillie otzt$ otti
+ossu osau ortre ortlo ortko ortfa orteu orst$ orrte orro ornie orlie orja
+orgea ordsee orcie orbi oppie opae ond$ onba olkswi ohlschme ohlo ohlmei
+oepfli oent$ oehnu oedie oechte ochnae ochbe obt$ obste nzweif nzler nzeln
+nzeichn nwelt nwahrsch ntsich ntren nton ntmut ntlueft ntled ntkleid ntinn
+ntierst ntgegn ntfern nsymp nstrass nstanz nsprucht nsoz nsgeb nselbst
+nschwind nschlos nschlagb nschenk nschaetzb nsbed nsagb nsachg nreinl nreih
+npuenktl nnumm nntwein nnier nnernd nnam nnahb nmod nmisch nleb nlaeuf
+nksuecht nkontr nkont nkoll nklamm nkiert nkenw nkenntn nhimm nhilf nhangl
+nhaeuf ngut ngssyst ngsschreib ngspreis ngsplan ngsorg ngsmeth ngskraeft
+ngsgrupp ngsaussch ngsauftr ngrenz ngreifb ngegl ngeahnd nfuehlb nfreiw
+nfoerml nfirm nfeind nfehlb neuz ness nenk nenf ned ndstoff ndsetz ndiz
+ndischst ndergr ndenh ndelsv ndek nbuech nbuch nbaum nbauend nbarst naufh nauf
+natl narr nantr nan nahrh mwand mrechn mpor mpol mpftes mpftem mpfern mpert
+mpeln mnas mmod mmels mitv mgrupp mgeschl mfahr meuch mest mern menl meinst
+mehrf meck marktb makl maest maen lzenf lweit lverk lvent lungs luftv lterf
+lscher lsbrech loeff lockt lobt lo$ lnswert lmend llvertr llspiel llist lkert
+lipp ligk lienv lichtd lgert lgaeng lfte$ lfsber lfest lfabr lenv lek leimt
+lehrst ldlos ldenh lbert lbend laust lach kurb kunst kuesst kreisl krass
+kraftl konfl knickt klung klop klimp klemm kleing klatsch kkord kich kask karb
+kaemm joh jahrt jag jaeg izze ivs$ itza itwi itrei itne istu istrie issge isma
+irru irr$ irm$ ipste ionspo ionslo ionsi ionsfae ionsau ioche inzie ingie inga
+inbe illste ilbte ifu ifft$ ierze ienu ienstei ielwa iegsge iefste iefbe
+ichtge ichtdu ichbe ibrie iarde huld hsam hrungsg hrmitt hrheitsl hrber hock
+hochn hochl hnwitz hnig hmung hmtest hmter hmbarst hlunt hlschmeck hlmein
+hlenw hlenf hlanst hlang hirn hilfs hilfl heuerl hernd herm heng heimz hauptw
+haucht harth haltr halsbr gurg grundr gruen grueb grossst goldb glueh glem
+gle$ gkeitsb geordn gensv gelw gelsch gastr gastfr ganz galg gaertn gaeng
+fzieh furchtb fuenft ftelt fsinn fschlag fruest front fremdl freispr frauen
+forc fohl fnehm fmann flugb fliess flichk ffind fernl fem fekt feenh fahrr
+ext$ euzu eum$ eufze eueste euers$ euchtu ettge ethi esvo estfa esre eschnau
+erspue erspei ersee ersau erqua ernwa erjo erdra epfi entlue entklei entfla
+enspi enschrei enschie enpi ennsto enmoe engste engla engi enfri enfra endru
+endlo emste emaue eltrei eltie elstu elri elnswe elmo ellsto eldge elbre ekne
+eitswe eitslie eitsfre eitrau eitne eistue eintau einschae einhae einei eindu
+eindrue einbru eilst$ eilei eijae eiische eiht$ eihae eignu eierta eichsta
+ehrsve ehnu ehlba egwe egru egnue efru eenha eellste eeha eefa eblei eaende
+dring dlern ditv dios dil depl denkm delnsw deih dee$ ckwuensch ckvers cklig
+ckerg ckenst chzend chwiss chtvoll chtel chtdurchl chsteh chselnd chselk chsam
+chne$ chnaes chkeitsfr chhaendl chgez chgeschl chfrag chet charm chaot bwes
+bverl bseh bschraub brued brav braus borst borg bohn bmarsch blech bit bilst
+biets bied bib bgep bfall berkr bensg benr belw bdeck bauf bang bald aze
+ausschwei ausscha auso auske ausflie aufwie aufne auem$ asu astrie arts$ arthe
+arscha apeu ansio anschwe anschmie anschauu anpro ankrei andtscha andsve anbre
+anbau amei altrei alsbre allpla allbe albi aische ahrsa ahri ahnwi ahlfae afue
+aermt$ aerfte aengst$ aemo aelfte ackvo achtba achha achfra abschwae abschae
+abrie abkna abhe abflie abble aatsre aatsbue aage ^zuei ^wri ^urk ^unstr ^unsp
+^ump ^uf ^uepp ^strau ^soe ^schmau ^rou ^quie ^oz ^okt ^oelf ^oed ^od ^neuau
+^ly ^klue ^ichb ^flaue ^eth ^entkl ^eisk ^einj ^anschm ^amtsv zweij zollt zian
+zerrt zellst zbar ympho xik xes wurmkr wunschg wortf worb wohlr wohlh woech
+weink wehrt wehl webt walzt walts wais wahrt wahrg wahlfr wagh waehlb waegb
+wachr waagr vorspr volt vex vesp vel uza utzma utza utli ursve urmkra urchtsa
+urchschla urchga urchbo uppte upft$ upa up$ untae unschwe unschoe unschma
+unschge unschei unsae unrue unpe unma unli unle ungssy ungspu ungspfli
+ungsfrei ungsfi ungsbi ungsae ungie ungeei unftsrei unfai undbu unbei umsta
+umqua umlie umgru ulsie ulo ulge uldne ul$ uklea uickte uhsa uhae ugst$ ufs$
+uerchti uengte uenfzi ueda uda uchrei ubs$ ublei ubje uaelte tzungsm tzmitt
+tzert tzendst tver turw tub ttog ttisch ttenv ttenstr ttchen tswidr tsschaedl
+tsgetr tsgeh tschtes tsbew tritt treubr traen traechtl tov tons toedl tmend
+tippt tionst tionspr tionsn tionsh tilg tient tie$ thron tgeschl teuf tenf
+tenbl tben tauf taubst taetsb syr sweit surr sueff sueb subj stungsg stumpf
+stuemp stsetz strikt strig strieg stret strafr stokr steuern stesv stands
+stampft staatsm staatsf ssverk ssungsg sstsein sstaff ssling ssgew ssfall
+ssersp sserfl ssenszw ssenkr ssell sscheid ssbarst ssat srag spuel sprob
+sprachr spies spielf sles sleb skoch skier sir sher sford sfaell sept senkr
+sengt senfr sehnt sef seew seer sdrueck schwuer schweiz schweisstr schweb
+schwarzw schwank schulr schuh schreit schraff scholt schoepft schnupft
+schnellf schneeb schnaub schnall schluckt schluck schlend schleckt schlechtl
+schlapp schlamp schlafl schist schifft schger schenz schens scharl schar
+schaerft schaeftsl sber sbek samml saetz sachl sachg rzweigt rzimm rziert ry$
+rwehrt rwarn rwandtsch rwahr rwaehn rvollk rverf rungskr rumz rumf rueckschl
+rtschaftsl rtrauen rtrain rtners rtigb rtgel rtfuehr rteuf rtenb rtechn rtbew
+rstund rstuerz rstuemm rsteuer rstaat rspitz rschuecht rschlug rschlich
+rschafft rsaettl rrufl rronn rrieg rref rpfaend rpern roehr roech rnsehg
+rmundsch rmtem rming rmessl rlor rktem rkschaft rkonz rkitt rkelnd rkart rkaps
+rienk riell rhuebsch rhob rhin rhers rgtet rglueckl rgespr rgeschw rgernd rgas
+rfuess rften rfte$ rfror rfreut rfremd rforscht rfnis restl rergr renb reitg
+reim reilt rechtw rdraht rding rdat rchtig rchterl rchten rchsicht rchmarsch
+rchenr rbuend rbtes rbluefft rbeitsv rbeanspr rban rausstr rausst rauscht
+rauschg rath rahm raeusch pust pten preisv prahl pptet pptest pplaud ppelw
+ppart porz porn poch planm phor phik phien pftet pel pa$ ozea ox$ ow$ otau
+ostblo ossve osssta orze ortse orho orhae orfa orea orbeu opft$ onbe ombo
+ollwe ollfue olgt$ ohnt$ ohlue ohltue ohlte ohlrie ohlha ohlfei oftwa oevrie
+oerfe oelli oedli ochs$ nzlich nzeich nzapf nwirtsch nwillk nwicht nwegs nvorh
+nvollst nukl ntzieh ntums ntos ntiv ntersp ntergl nteils ntechn ntaer ntaeg
+nsymm nsweis nsumg nstuerz nstuerm nstrich nstrahl nstoff nstillst nstillb
+nstaedt nsprech nsperr nsink nsied nsgef nschnitt nschmackh nschgem nscheinb
+nschaedl nsanft nsaess nsaegl nsachl nruehml nroll nrettb nrechtm nplan
+nplaetz notl notg noevr nnetz nnerh nnenv nnent nnenm nnenl nnag nnachs nmech
+nmaerkt nlieb nleucht nkost nkoen nkenv nkell nkehr nkart nkalk njaehr nies
+nichts nhund ngsverh ngste$ ngsrat ngspflicht ngskraft ngsind ngezw ngersch
+ngensch ngendst ngeacht ngastl ngart ngar ngangb nfuegs nfrier nforsch nflikt
+nflieg nfeindl nfechtb nfassb nfarb nfaeng neunz nest nerschw nerschl nehmst
+ndstein ndroh ndpunkt ndir ndev nderp ndelsk ndbuch ndarb nbrenn nblatt nbeiss
+nball nausf naufst naufr nauer narzt nanf nalr nalk nald nagt naechst nab
+mwick mstell msen mschlaeg mriss mpig mpflich mpfaengl mnisv mmensch mmenp
+mmat mleit mitm mim mgeg mform meg mbegl mbe$ mbarg maj mahl lzwerk lzten lvin
+lvertr lvert lungsg luftp ltreich ltmach ltan ltakt lsuecht lsen lplatz lpferd
+lmeist llus llmeist llmacht llkommn llin llerm lldaempf llbes llarb lkund
+lkonz lkart lischst links liebk lgeld lgaer lflos lfeld lein legsch leer lebr
+ldem lbtest lbring lbad lauscht laienh kupp kupf ktris kriegsv kriegsg kremp
+kraenk kopf knoepf knob knackt klueg klaer kaufh juw jungf jor jah jagdg itma
+itle isve issfa iskri irt$ irrtue ionspro ionska ioes$ inz$ iniu impfu impfli
+imo immst$ imbi illba ilflo ildwe igio ifa ieve iest$ ierga iens$ ienhau iemte
+iefst$ iedlo iebko ickst$ icklei ichtsve ichtsbe ichtle iante hueg hrwert
+hrungsp hrnehmb hrnehm hrling hrkart hrheitsw hresb hrenb hreif hoehl hochsp
+hochdr hnheit hnes hmtes hmensw hlverd hlungsv hlueb hlriech hlichst hlhab
+hlfaeh hleid hitl heur herd henk heissg heis hausw hausfr hass hasch harrt
+handsch gwerk gschliess gsamk griech grecht gnahm gleichb glass gitt ghals
+ggert ggen ggem ggelt ggeh gfach gerv geq gepf genbr gelds gbring gauk gash
+gam gafft furchts fug fuenf ftwar ftverk ftsverb ftier ftern fstaend fschneid
+frohl fraul forts fort flugl flugg flor flirt fliessb flichst fleb finst fhetz
+fheb fhaeng fgen fftest ffindb ffet ffers festh fenb felg fehlschl fbew fan
+fahrsch fahl fack eues$ euebte eubrue ettba esteu esmae eskra esfue eschwa
+ertrai erstroe erskla erschwoe erpfae erkno ergre erfla erfie erdga erbroe
+epri enwue ensvo ensteue enspa ensko ensee enschae enprae enmei enkst$ enkreu
+enklei engt$ enfre endge enbra elsve elsu elpla elhe elga elee eiwa eitsfe
+eitre eispra eire eirae einstei einmue einja einfe einbrue einbau eimt$ eimo
+eimke eilbri eiend$ eichtu eichta eichse eichma eichbe ehve egzu egse egko
+egae edle echtma echste ebse ebroe ebbe ebaue durchk durchh drat ditk ditg
+ditb dion diom dierst dfahr derschl denz denr denkst dein daf ckverf ckges
+chzieh chtmach chtglaeub chtetst chterst chteln chtathl chself chrom chor
+chleist cherm chenw chenh charb car bzuw buend bub bstes bsol bschwaech
+bschneid bschaetz brok brier brennst breis brauchsf borgt bord bloed blick bir
+bigk bgezw bensch beiz bbar baupl baul bauh barr bahnt auze ausza austri
+austei ausstre ausstra ausstei ausspre ausso ausschlie ausschei auspu ausfe
+auschgi auhe aufsto aufstae aufschnei aufpro auerei atta atmu atlo atai
+astfreu aso arms$ arba anzve anzge anue annst$ anfo andsbe anba anae amtsbe
+amts$ amtie alsa alma allwi allmae alldae albjae akrie aillo ailie aienha aht$
+ahrpla ahrka ahlge aha agse agsau agdge aftu aeumni aeugi aettli aetsa aerfste
+aera aepfe aendu aempft$ aegba aeck$ adtbe acu acks$ achtha achtge achfue
+abzue abtro abschnei absae abna aagre ^vei ^unschw ^unschm ^sze ^staeu ^sprie
+^schroe ^schnie ^schmue ^schaeu ^py ^ostbl ^neo ^maue ^isl ^inb ^flau ^enz
+^eit ^einspr ^ehrs ^ehrf ^av ^ausgr ^astr ^apr ^ankr ^amtsb ^alth ^aehn ^adl
+^abp ^abkr zwiel zvoll zuschm zupf zukl zuernt zubl ztes zischt ziers zek zahn
+ysti yme xual xpon xend wundl wohlst wittw wippt windst wiegt wesp welkt wel
+weitg wegp wegb warm waehrl wachg vollbl volksv volksst volksk vierk vierb
+vielv vial verskl vell utue utri utau ussla ussfo uschna urzge urst$ urnu
+urchsu urchha urchflie unpae unloe unlie unkle ungsstue ungskrei ungsga
+ungsbue ungsbea umzie umzi umwoe umsie umschue umke umgre umflu umdre umbu
+ulmei uldbe uhs$ ugie ugeei ufo uerzle uerti uerre uerki uenfze uel$ uegba
+ueffte ueffi uedwe ueckzie ueckue ueckfue ueckda ueckbri ueckbli udio uchst$
+uchse uari tzenb tus tursch turnt tungsm tuencht ttschuhl ttsam ttgeg ttem
+tsvertr tster tstag tschtem tschert tsber trumpft trimmt trig trief triebl
+trennsch trauert trat totst totl torr tonn tobs tkart tilgt tiefst tick tiat
+thuer tepp telk teinb tees talv talk taerp sziert swand surrt sum suehn stvoll
+stupst stungsst strafv stpreis stoeck stiv steskr sterf sterbl stenb stemmt
+steln starrt starb stanzt stag stadtv stad staatsv staatsk ssungsl sstreich
+ssstell sspiel ssfert sserkr sserd sseng sselst sselr sselb sseh ssal ssakr
+srang srad sprueht spriesst sprengt spreng spottg sportl spinn spiessb spielw
+spielb speit spaeh souffl som sod smet smal sleit sland skrank sker skal skad
+sittl sinnv sinnb sgeschr sgepr sgepl sgearb sfuehrb senf selnd seekr sechsm
+sechsf sechs schwund schwemmt schwed schwaf schwaechl schutzg schulm schraeg
+schnorr schneew schmitt schmiegt schmeichl schmaeht schmack schmacht schiss
+schier schient schent scheint schaelt schaeftsg schaeftsf schaef sbreit sbegl
+sbed saug sahn saeul saeugt saeug rzuegl rztlich rziell rziehb rzett rwoch
+rwitt rwahl rvic rurg rungstr rungsd ruml rumk rufst rueckstr rtschaftspr
+rtroff rtroed rtrockn rtritt rtreff rtrat rtragsg rtragb rtnern rtkarg rtit
+rtief rtges rteuert rters rtenz rteln rteils rteien rsuchs rstud rstreit
+rstreif rstrahl rstoch rsteck rsproch rspekt rsparn rspaet rschwoer rschwind
+rschutz rschraenk rschmelz rschleud rscharf rschand rschal rschaemt rschach
+rsaeumn rrot rroll rriet rreis rrbar rrass rquick rquell rpust rprueg rprod
+rperl rpap rout ross rokr rok rog roem roed rntend rnlos rnern rmisst rmensch
+rmem rmeln rmannsch rmahl rloest rleist rlehr rktfaeh rkost rkopp rknot
+rknoech rkisch rkind rkehrsb rkaufspr rkaeufl rjueng rjag ritzt rirr rios
+riabl ria$ ri$ rher rheits rhang rgwerk rgitt rgerr rgerm rgangs rfung rfuhr
+rfuenff rfuegb rfsinn rfreund rfluecht rflaech rfirm rfecht reiz reith regn
+rechtst rechth rduest rduenn rdraeng rderr rdampf rchtend rchiv rchgeb
+rchfuehrb rchenb rbroeck rbrach rboot rbleib rblaett rbenpr rbenfr rbeitsr
+rbeitsm rbeitsk rbeg rausw raufn raufl rauff raucht ranstr raeub radst quit
+putz put pte$ pse$ prem preisr praef pport ppnet ppenst ppenr ppbar plag pins
+phal pfels pfeil peut paar outi oute otste otsta ostve osme orzei orspri orps$
+ormlo orka orgt$ orae opro opfs$ oordi oofe onste onko ondo omu ommne ollve
+olksve oldi olchte olcho ohrs$ ohnsi ohns$ ohnba ofa oepft$ oenste oen$ oemi
+oelve oelge oechste ochlei ochdru nzuschl nzuend nzuecht nzueb nzub nzil
+nzertr nwuerf nweich nweg nwechs nus nums nttaeusch ntrier ntkomm ntie$ nthet
+ntenv ntenst nteln ntdeckt nszeit nsverh nsult nstroem nstoeck nstich nstend
+nsteifr nstant nssyst nspinn nsitz nsiedl nsid nsfreih nschweiss nschick nsart
+nreiz nreif nras npilz npfleg notst nntag nnigf nneng nnendst nmerk nman nlehn
+nlands nkuenft nkrott nklichst nklar nkenst nkenb nkem njaeg nistr niess nic
+ngweil ngszeich ngswes ngswechs ngsverl ngsurk ngsstueck ngsrohr ngsreichst
+ngskreis ngskomm ngsgruend ngsgeld ngsform ngsempf ngsbeamt ngsanz ngreich
+ngrab ngniss nglimpf nfisz nfisch nfind nfess nfell nfant nfahrz neuw nensch
+neinn ndos ndhab ndew ndesst ndersp ndernsw nderfr ndeh ndeb ndaemm nda$
+nchend nbruchs nblaett nbiet nbein nbaut nausz nausst naufl nanzb namt nael
+naecht nachk nachdr mzing mzieh muett mstuerzl msetzb mschuett mquart mpter
+mphon mpan mo$ mnast mmerm mmenstr mmenschr mmendr mittl mguert mgepfl mgep
+mgekr mgekl mfunkt mforsch mflut meut melnd mdisp mdend mburg matr madr machth
+lzeit lverb ltrig ltnisw lterl ltbek lstueck lstert lstand lschiff lrecht
+lrechn lol lohnst loet loehn locht lmetscht lmes llsuecht llstoff llis llhalt
+llgel llab lkons lkes likt lift lieng lgte$ lgreich lgisch lgernd lfirm lfaell
+lex leut lesk lemm leichtgl ldzug lbter lbstgef lbrief lbetr lbest lbesch
+lbank laus landt laehmt ktiz ktionsk kterb krumm kruemmt koord konnt kolch
+knusp kniet knapp kleinh kerng kernf kerk kelst karm jahrh jagd ivo ittwe itfa
+iszie israe irk$ ipa ionsrei ionslei ionsku instae insa inro inri innve inna
+inche imse impre immba imbee ilve ilfi ilds$ ildle ikt$ iierte ihre iffst$
+ieure iets$ iessbue ierka ielo ielba ieko iegsve iedsge ieds$ iebwe iebste idi
+ichwo ias$ iaere iable hrungsb hrsag hrleist hrigst hrhund hresv hrenw horr
+hochv hochst hochk hmsvoll hlreich hirt hinst hinl himb het hegt hasst handgr
+halbl hack haarw gungsst gungspr gsgem grus grundv grundg gruesst grossr
+grossg grinst griert gras goldpr goett gling glers glern gleichl glaenz gkomm
+gierst gierd ggez ggep ggeg gerr gerk gerg gerb geogr gentr gelsp gelkl gelbl
+geeilt gan gaert fzeichn fwieg fwert fwart ftsmin ftsmaess ftsber fters fteil
+fruf fremdw frech fprob fpass fortst forscht forml for flisch fleht fle$ flank
+fist fisk filmt fgreif fgestr fgeschn fgefr fgefl fgearb ffernd ffahr fernschr
+fernh fenl feng felf fehls farbf fak fahrw fahrpl fab ezwae ezoe exua euung$
+eune eundi euhae euerve euernd$ etrau etraeu estrie estbe espli esku eschwie
+ersio erschwei erschwae erschrau erschnue erschmae erschleu erpfu ernve ernt$
+ernlo ernha erknoe ereu erdbe eppt$ epfe eome entlau entau enstre ensstae
+enssta ensschwae enschri enschmu enschlu enpra enmue engue engst$ englae engea
+enfrie enfrei enflue endve endfue enche enblae enbaue eltma elspo elro elprei
+elpe elna elmee ellwa eljae elfae elboo eju eivie eitspa eitsme eitei eiswue
+eisma eischa eisau eipe einstue einschue einraeu einpla einpa einmi einlei
+eimsu eilku eika eigst$ eidba eichtglaeu eichna eichle eichlau eibi ehrge
+ehnfa egrae egoi egbe efreie eetue eeke eco echtsu echtse echtle echtha echsmo
+eal$ eage dten drill dreit dreis dorn doof dogm do$ dmet dlin dienstw desst
+dersch derp densv denstr denl delg dauerl darb daem ckweis ckverl ckueb
+ckstell ckgetr ckgestr ckger ckgeg ckfuehr ckdat ckchen ckber ckbek ckbeh
+ckbegl chwuchs chvoll chtler chtgest chtgel chtgeb chtens chteck chsmon chreif
+chlass chir chensch chenf chbest bzus bweis bverd bstreich bsetzt bschalt
+brund bris brigg briert breag bras brandm bon bmont bmasch blutb blieg blenk
+bleich blehn blatt blank bildh bheb bhab bgrenz bgeschn bgeq bgekr bfaul bettl
+bellt bdruck bbruch bbend bbek baumst bankf ballt axe awe ausstrei ausstie
+ausspri auspro ausmi ausfra ausfi ausfae auscht$ ausbue auptsae aupro auplae
+aupe aunt$ aun$ aul$ auftei aufsu aufschie aufleu aufgea auerha aubu atzka
+atts$ asei aschmi asbe arktfae arbie apho anzlei antrei antia anstrei anschu
+anschlae ankro angzei angli angge andsge andko amu ampie ampfstae ambi alzwe
+alvi altwa allwe allsue allee algi alfe akao aire ahrs$ ahrhu aho ahndu ahls$
+ahlfe agwe agswe agsbe aftsspie aftsle aftfa aeunte aerztli aeno aengu aemli
+aeltli aehrlei aeftli aechze aechst$ adia achtra achta achro achko achke ace
+abrea abmo abgre abda aatsve aatsbe aale ^zwae ^zoo ^ut ^urh ^umschm ^umq
+^umpfl ^tsche ^thue ^tai ^sma ^schneu ^saeue ^phae ^oest ^isr ^haue ^gou ^geoe
+^ext ^ergl ^enk ^endsp ^einschn ^eck ^droe ^doo ^braue ^braeu ^aufkr ^argl
+^alph ^aerm ^adj ^achs zwick zustr zupft zugv zueckt zot zool zont zob ziol
+ziff ziemt ziehb zialp ziald zentn zeiw zeitschr zeik zahm ysio yrie yndi
+wohng wildb wier wichts wichtl wertm weltkl weissw weissb weism weinr weing
+weidm weichg wegs waschb warmw wann wankt walf wahlv wad vorsp vorpr volksb
+va$ utzmi utschei utsch$ ussu ussli ussfe uschu usae ursae urpro urchsa
+urchnae urchlau urchkreu upps$ untreue untreu unsch$ unsau unkts$ unklei
+ungszwe ungstrie ungsstae ungsplae ungspe ungslei ungskri ungsha ungsgrue
+unglaeu undve undre umschlae ummle umklei umfue umbe uldu uldba ukue uitae
+uicke uhrge ugo ufsbe uffe uessle uesche uergscha uenscht$ uengste uemste
+uellste uegst$ uedlae ueckstae ueckke uebt$ ueble udrue udre ucku uckfe tzwerk
+tzlichk tzgel tzenk tzenf tzelnd tverk tuscht tunkt tungsst tuermt ttstell
+ttrakt ttkaempf ttgeh ttenw ttenm ttant tsvoll tsrechtl tsmin tsmaenn tschter
+tschelnd tschech tsarb tsanw tsach trotzt trieft triebsf trie$ triarch treue$
+treu$ treibst treibh treck traenkt toz torsch tof toepf tivs tges terp tentr
+teert taugt taug tart tarnt taps tappt talm taen szug szeit synth symph
+swirtsch sus stur stungsv stungsb stuft stuetz stuend stuelpt stres streib
+strafm straeubt stoff stockt stillt stilg stiefm stickst steuerv steuers
+steuerm sterm sterg steinr steing steift staucht stattg stammb stal stahlb
+staeubt stadtk sswar sstreck sstrauisch ssreg ssierst sshandl sserkl sseb
+sschnitt srig sreit sreg srael spuer sprig sprichw sprengst sprengk spreis
+sprachf spottb spos spornt spor spielk sperrh spernd spal sorgl sonst solch
+sleih sleg slaeuf skett skel sivst sions sind sie$ sfind seum senz senm sellt
+selbsth sehr segl seelt sed sdehn schwuel schwitz schwerg schweif schwamm
+schvoll schutzb schuss schulg schuer schrumpf schrubbt schroff schroepft
+schrill schriftl schreibf schramm schor schont schnitzt schmus schmort schmalz
+schluepft schling schles schlert schlepp schlemm schleim schlechtg schilf
+schielt scheut scherzt scherz schern schentr schellt scheiss scheck schaust
+schauert schaub schatz scharrt schallschl schaeumt schaeftsp schaeftsm sbrenn
+sberg saur samtl samtk samth salzl saeuerl saet sad sachb saal rzueck rzlichst
+rzinst rzerr rzer rzelw rzeich rzehnt rwuensch rwisch rwerbst rwelt rwandl
+rwaeg rvorbr rvent rvens rupft rungsk rungsh rungsfr ruhr rufsv rueckn ruch
+rtvoll rtueml rtsetz rtschaftskr rtschaftsb rtschaetz rtrunk rtroest rtrink
+rtreich rtragsw rtragsv rtragsk rtraeum rtill rtiell rtheit rterm rterl rtent
+rtenst rtensp rtenh rtelst rtell rteif rtef rstreik rstoffs rstadt rsoehn
+rsion rsess rschers rschern rschau$ rschaerf rsaetz rrinn rril rrev rrent
+rrens rrenn rrel rraeuch rpulv rplemp rplaud rplapp rpert rperb roff rock
+rnwaff rnster rnseht rnit rnhell rneuer rnenn rnenf rneig rnaechst rmwass
+rmoerd rmeng rmaz rmalt rloesch rlob rlier rkuenft rkschafts rkor rkonf
+rkoemml rkling rklicht rkier ritz rill rifl rienv rieng richtsv rhythm rhielt
+rherrsch rheitsb rheil rharml rgtem rgte$ rgschaft rgrund rglichst rgenst
+rgendw rgar rgamm rfsicht rfreier rfrag rfiel rfahrt rex reuev rerbt renth
+renm renkt renkr reint reiht reell rechtsgr rdir rdergr rdaempf rdach rchte$
+rchtbar rchsetz rchlich rchhalt rchgeschl rchgeh rchgeg rchent rchens rbumm
+rbstaet rbluet rblichk rbern rbem rbelnd rbeln rbek rbeitg rbeif rbegr rbauend
+rbau$ rbat rball rbal raustr rausk rauh raufst rans ranm rammt ramm rals ralk
+ralb rahn ragr raerzt raen raech radl quis quemst pyr pump ptsaechl ptet pste$
+psen pseln prueg prosp prok probt pries preisst prass prang prall pragm pracht
+ppisch ppelb pomp poeb plik plak pierg phaen pflich pfern perv pelnd pant our$
+oule oty otts$ ottbi otschla otla ostge ospi ortwa ortscha ortlau ortaeu ortae
+orstre ormi orlau ordo orb$ ophie oope oolo onteu onnte ong$ oms$ ommo oht$
+ogma ogge offte offa oetti oesst$ oessli oerge oelko oehnt$ oehlte oda ocka
+ochve nzugs nzest nwiss nwass nvorst nvor nuss nuhr ntwuerf ntuer ntueml
+ntschuldb ntrakt ntlauf ntischst nthuell nteuerl nterbl nteng ntenf ntbloess
+ntbehr nstigt nstellt nstandg nstaat nsstaerk nspur nsort nskurs nsivst nsieg
+nsib nschuess nschuecht nschicht nschenm nschenl nschauend nsaub nsass nsaeur
+nreit nplaen npaar nobl nnungsm nntmach nntags nnov nmitgl nmenschl nmasch
+nleid nkoepf nkier nkenr nkenk nkam nkaempf nins ninch nickt nichtb nheiz
+nheitsw nheitsk nheits nhart ngweilt ngszweck ngsverw ngstvoll ngstrieb
+ngsterm ngstechn ngslist ngsgrund ngsgeg ngsart ngsabk ngrav ngluecks ngerl
+ngens ngenb ngbarst nfter nfress nfrei$ nfig nfeld nfein nexpl neul neuer nenz
+nenv nenst neinf neind neign ndungsg ndungs ndschief ndsam ndreich ndrang
+ndland ndess ndesf ndelsr ndbes nburg nbrat nbekl nbearb naufn nap nalch naiv
+mund mun muess mtier msig msend mschalt msaetz mpten mphal mpfig mosk molk
+moebl mmlisch mmling mmigst mmerf mmelf mman mleg mlag mkrieg mkleid mitspr
+mitbr missbr mins ming migr mierst mhuell mgedr mgang mentl menstr meis meil
+mdir mdenv mast marktw marktg manz maennl maeht lzung lzte$ lweis lvier lverbr
+luftk luest lud ltsreich ltklug ltiv ltgem ltgeh ltenst lteb ltar ltaet lsyst
+lsiv lschend lsamst lreg lraum lrat lplaetz lpin loss logr loel loch lmisch
+lmaenn llzug llungs llsreich llschluck llkuehn lling llgest llfahr llenv llenh
+lleit llee$ llber lkigst lkernd lkan ljaehr litt lith lins lienb liebh liaer
+lhaeus lhaendl lfjaehr lfin lfilm lfenst lfeck lfach leuts lerh leng lenfr
+lehrm lehn leerst ldungsb ldreich ldner ldled ldgesch lders ldeck ldbar lche$
+lboot lbjaehr lbaed law lauert lanst lamt lachs kust kus kurzg kursv kuenft
+ktob ktischst ktenm ktabl ksig kroch kriegst kreisch kreat kratz kraftv knuepp
+knot knirsch klos klopf klers klaut kist kiss kerb keck kautsch kauert katt
+karg kanntm kalv kak kahlk kaemmt kaef jen jaehrl ittwo ittsge itspie its$
+itka ithe itha itfue iteu itbri issbrau iske ischee irchli iori ionswe ionsfe
+ioli ioge ioeze inspi ingsa ingi ilre ill$ ilieu ildwa igtue igma igbe iermi
+ierme ierfi ierbei ienstu ienstli ienko ielma iefmue iebzi idste idia ichtwe
+ibue iarcha ialde iala huf huellt hrvoll hrungsst hrungsl hrungskr hrungsk
+hrungsf hrsreich hrreich hrlichk hrersch hrenm hreng horm hoelz hoechst
+hnungsb hnungs hntar hntaeg hndend hmern hmeb hlvoll hlkoepf hlenv hlens hlenl
+hlauf hink hielt hesch herf hendst heimr hbarst hauptst hauptr hauend hauen
+harr hang handschr halbj haftb gzeugs gutsh gungsv gungst gungsp gungskr
+gungsgr guelt gsverh gsrecht grossk grant gosl goldg goist go$ glueckt glueck
+gleis gleichn gkeitsg gget ggek ggebr gesz gerpr gerh geom gensw gendstr gendl
+gelh geil gangst fur ftfahrz fstein fsichtsr fsetz fschuerf fremdspr freiend
+freid frechn fpreis forn formv fopf fmuett flugh flos flitz fling fleucht
+fletscht flagg fkauf fgaeng ffuell ffner ffelf feuer fet festv festsp festm
+festkl ferb fenf felb fehlt fehlg fehlb farm fanz fant fahrk fahn faehr fachw
+eutse eutsa eutna eupho eugma euevo euerpfli euerau euera euend$ euchti ettkae
+eteo eszei estve estle estha essta esprei esoe esee eschlie erwai erschwie
+erschnu erpri erplau erpi ernhei ernfa ernbi erknei erfrei erbt$ erbstae equae
+eptio eorte eopfe enzy enzve enzli entua entspro entspri entrei entlie entkei
+enswei enstrae enspo enschue enschme enschlue enschhei enschau ensau ensaeu
+enpfle enpfe enpe enkue enkle enkau enflie enfeue endwe endspie endhei enboe
+emdspra emble elz$ elto elsmi elpfa elkae elho elhau elflu elds$ elbrie
+elblaue ekts$ ekroe eiz$ eitwei eitsnae eitsdie eitsche eitpu eitha eitbe
+eiswe eispre eisku eiska eipro eipfli einto einst$ einschrae einkle einkaeu
+eingu eiks$ eifae eieru eichzei eichwe eichtge eichi eibwa ehntae ehni ehmli
+ehlge ehie ehde egst$ eeve eerge eema eelte eeka eehrte ed$ echs$ eare durchn
+durchkr duns dumm duerf duenn druckf dreieck draht doerrt dlaend djekt digk
+dienr deuts dess dernst denw denkw deld deenl deen deell ddier dchens dantr
+daen daempft daemmt comm cod ckzieh ckvoll ckungsb ckstaend cksach cklichk
+ckischst ckigst ckenk ckenf ckelst ckels ckbring ckblick ckbeg ckad chwort
+chwirk chungsg chtungs chtum chtswidr chtsvollst chtgew chterf chtempf chtelnd
+chtarb chrechn chlehr chlaut chheit chhandl cherfr cheng chendst chenbl chell
+chdruck chber cal ca$ bzug bzeichn bwend bweich bwart bursch bul buesch bueckt
+bud buchm buchf bsuecht bstuf bstrakt bstell bstech bstamm bsend bschoepf
+bscher bsaug bsatzf brummt bruchst brieg brems braut brauchtw brandst boot
+bolsch bol bock bmeld bmag bmach blossg bloes blief blickf blett bleg bkuerz
+bkraeft bish bioch bieg bgespr beug bergst bep bensv bensf bends beipfl beid
+bbuerst bauw baub barv bant bankk bankb auung$ autschu ausue aussu auslei
+aushoe ausfo auschba ausbrue ausbrei auptbe aumei auma auko auftrie auftau
+aufspe aufsau aufmae auflie aufkau aufhaeu audi atzve atztei atzi atzbe atve
+attha atsve atria astra asteu assre asko aschba arz$ arse armwa armi arli
+arkti arktge arks$ ario arfs$ archie arbu arbo appste anzbe anua ansto anstei
+anspre anspra anschlue anschei ansche anprei anpra anntma ankli angsge ango
+anglei anfra andschri andpro anbrue anbra anbi amtve amsta ampft$ ammst$ alz$
+altsve altse altbe alpo alpi allschlu allha alfa alei aldo akts$ aive ahrra
+agswa agma agee agea afve aftsko aftsi afts$ afma aeugte aert$ aerbt$ aenkt$
+aelse aeftsfue aeftsa aefli aechs$ adje achzie achtstu achtmei achtfa achrue
+achlie achho achfe achau abtra abschoe abschlie abraeu abfla abbue abbu abbrau
+abba aatsfei aarte ^strae ^sko ^schreie ^rhy ^ov ^ostb ^oelpr ^ny ^neuei ^krea
+^impf ^engst ^ell ^elf ^einv ^eich ^dau ^boy ^ausschw ^aufgr ^ast ^asch ^aeth
+^aeff ^aechz ^achts ^abpr zwerchf zweih zweckb zuendst ztest zmin zirpt zirks
+zip ziellst zialw zeitsp yte ys$ yklu ykli xtern xter xten xped wortkl wor
+wollh wjetr wichst wettl wettk westf wertz wertsch wertg wer weltfr welch weiz
+weitv weissk weinst weib wehrs wegstr waschk warz waltl waldl wal wahlg waehnt
+vriert von volkssch volk voell viersp vielb vieh veilch vas vall utzpa utve
+utta utscht$ usu ustre ussvo ussei usrei uso usie uscht$ uschlae uscha urnte
+urio urga urdi urchgea urchbli upste uordne unwie unststue unststo unree unkge
+ungsza ungsstra ungsprue ungskla ungsfri ungsfe ungsdaue undlo undfa umwo
+umspi umschwei umschlo umschlie umsae umpt$ umpo umpi umpft$ umpa umhae umdrue
+uloe ulke ulka ukle uine uhrbe uho uhle ugve uglei uftpo ufsve uettu uetscht$
+uessli ueroa uermt$ uerha uenni uend$ uelste uegge ueckwu uecksve ueckschri
+ueckschla uckst$ ucksa ubbte ubaue uare ual$ tzungs tzger tzbueb tzanz turm
+tungsk tuer tuchh ttungs ttlichk ttin ttges ttgem ttelr ttelfr tszust tsverbr
+tsunf tstem tsschild tsprech tsprach tspiel tsmess tshaus tsgesch tschtet
+tschland tschein tsang tsakt trug truemm trinkb triebsv triebss tricht treuest
+treis trauend trap traeumt tpunkt tost tollt toh toent tocht tler tkomm tiz
+tionsw tionsst tierb tiefl tickt tib thront thmisch tgen tfahr tess teor tenr
+tengr telp telnd telg tei$ tbew tbank taufn tass tarn tanzb taerr taeg synd
+sweg svertr svers sverf surt sur stungsz stungsk ststaett streichst strag
+stossk stolp stock stizm stierst stgeh stgef stfahr steuerpfl steuerfr stenw
+stel steins steink steinb staur staunt staubt statth stattf startb stang
+standr stammh stahlbl stahl stadtg stabs staatss ssvoll ssuch sstrahl ssoz
+ssiersch ssgest ssengr sschweif sschreib sschalt ssbuch ssbetr ssballm srott
+srechn spuck spress spreizt sprachk sprachg splan spind spiesst spielg smar
+slaut slandsb skrieg skleid sic sibl siat shoehl shaeng shaend sgrab sgleit
+seur seufz setzw serw senkt sels selbstl seift sehns seen seeb sechsz sdenk
+schwoert schwist schwerw schwerm schwarzbl schwalb schwaerz schwad schulz
+schulj schuldn schuert schreiend schreibw schrammt schornst schoef schnupf
+schnauf schmeid schmaus schmatz schlitt schlank schlagz schlafs schirm
+schiffsr schiffs schiffbr schiffb schenv schensp scheinw scharfr schallpl
+schaf schachbr sbleib sbahn sauer sass sandb samtpr samtm samst salbt saft
+sackt rzugt rzler rzehr rzehnf rwohn rwest rwerbs rweltl rweil rweh rwaesch
+rwaerm rvortr rviett rup rumschl rumkr rueckm rueckgr ruech rtyp rtums
+rtschrittl rtrauenss rtragsp rtragsbr rtnersch rtlichk rtiz rtisch rtippt rtim
+rtilg rthop rthogr rtgest rtfach rternd rtenv rtenbr rteiz rteiv rteip rteib
+rtber rtbar rtaeusch rsuess rstuetzt rstrass rstieb rsteuert rstelnd rstaun
+rstands rstaerkt rspaenn rsiert rseucht rschwieg rschuh rschtest rschter
+rschrott rschoepf rschob rschmiert rschleier rschleich rschlaff rschickt
+rschick rschicht rschaut rscharrt rsatzm rsatzl rrutscht rrueck rrin rrid
+rrenk rregt rprobt rpack rotzt rorg rord roet rnlicht rnick rngeh rnbild
+rnannt rnack rmus rmstes rmkrank rmied rmelt rmeid rmarsch rmahn rlig rlern
+rlen rle$ rlahm rkur rkupf rkschaftl rkroch rkleb rkehrsw rkehrst rkehrsm rkan
+rienm rid richtl rhuellt rheitsv rheitsr rgutm rgo$ rglos rgleichb rgig rgien
+rgerkr rgelnd rgbau$ rgast rftigst rfolgsb rfocht rfilmt rfetz rfaerb rfach
+rektv reinr reichsv rehrt reckt rechtz rechtsk rdummt rdnen rdenkl rdarb
+rchtsam rchsuch rchschnitt rchsag rchquer rchgefl rchgebl rchfuehr rchfell
+rchdring rchaeol rbuergt rbtem rbsfaeh rbraucht rbon rbohr rblueht rbergt
+rbeitspl rbeir rbaus rbarm rbark rbann raust rausspr raumf ratl rarch ranw
+rantr ramp ralv ralf quant qualm pupp ptik pruefst pros priest ppigst ppelz
+postl postb poll pleit plattf piss pischst pir pik pierm phras phol pflueg
+pflueck pfers pfens petr pelzm peilt parf pac oyko ouffleu otve otsschi osstue
+ossle osphae osai orzue ortzu ortschrei ornstei orna ormvo orlo ordwe ordve
+orbri opaee oom$ onst$ onkre onke ongo onfae omwa omoeo omge olsche olni ollzo
+ollo ollbra oldge oldbe oire ohnbe ohma ohi ofu oetzli oerst$ oer$ oeopa oemu
+oels$ oelkte oedia oeckche ocku ockey ochspa nzuh nztet nzin nzeug nzell nzelk
+nzber nwied nwick nwart nwaend nversch nvergl ntzerr ntweih ntvollst nturm
+ntual ntriss ntrif ntriert ntransp ntragt ntlohn ntleer nthrop nthes nthaar
+ntgleis ntfall ntent ntenb nteis nsziel nsunt nstvollst nsterl nstag nspieg
+nspflicht nspek nsmitgl nsleit nskost nsibl nsgespr nserf nseif nschwerst
+nschutz nschul nschoen nschlaf nschieb nschenr nsbew nsang nsabg nrats nquitt
+npump npruef npraecht noff nod nntagsf nnstoff nnist nnisb nnib nnab nmakl
+nmaecht nlasst nlaessl nkturd nktlichst nktionsf nkret nkopf nkompl nkfaeh
+nkar nkampf nigk nienb nid nholz nhoefl nherst nherrsch nhauend nhalb nhaengl
+ngvollst nguenst ngszust ngszahl ngswiss ngsverpfl ngsver ngstes ngsspiel
+ngsref ngspruef ngsproj ngsplatz ngspaus ngspap ngsgew ngsgef ngsfrist ngsaust
+ngsaufg ngriffs ngigk ngenm ngal nftsreich nftigst nftest nfris nfried nflusst
+nflug nfluess nfett nfecht nfam nfair neunt netzt netts nenp nenl nekd ndungsb
+nduhr ndstuecks ndstift ndspiel ndschaftsg ndsaetzl ndring ndraeng ndpreis
+ndol ndlungsf ndle$ ndios ndinn ndierst ndhalt ndez ndespr ndeskr ndesh ndesd
+nderkl ndenw ndelspr ndeld ndbreit ndber ndbark ndanz nbuer naug naufz nau$
+natm nanzv nanzl nanzh nanschl nalz nalv nalsp nalph naerst naers nachsp
+nachschl nachkl nabst mwert mweltb mutm mum muenz muehl mtuer mschweif
+mschloss mring mreis mpork mpoer mpier mpfgew mpfflugz mors morph moeop mmungs
+mmle$ mmib mmgest mmenm mmelpl mmbad mloes mlieg mlicht mixt mium mitsp mism
+mhaeng mgem mgebr mfrag mfall metzg merkm menschh melh meinw mdrues mdrueck
+mdreh mdienst mchen mbul massn marx mart mannt manch mamm mahnt mahn maersch
+lzueg lzins lzimm lzeug lzahl lwiss lwes lvollst lturf ltreib ltger ltersschw
+ltenh lstrich lspur lsmin lsigst lschrift lschew lrot lring lraeum lpfad lpelz
+lonf lohnk loesch lnisch lnahm lmig lmet lly$ llwiss llwert llwach llvers
+llschirm llplatt llierst llierb llerh llent lleinh llaut lkurs lkte$ lkerr
+lkens liv link liers lheit lguet lgter lgten lgtem lgrupp lgest lgern lgef
+lfig lfehl lfall leum lesb leon lehrs ldverl ldungsm ldungsf ldgeb ldetst
+ldent ldbest lbstverst lbstbew lbrett lbier lberg lbem lbeh lbarst lav lars
+langz langg landstr lahm laehm laeg laecht kurd kuch ktual ktrom ktionsst
+ktionsl ktienk ktenk kruemm krof kroent kriegssch kriegsf kreuzf kreist kraw
+kram kraftw krach kors kordl koop konkr kob kneip knatt knack klus klarst
+klaeg kisch killt kill kiert kier kes kernl kennb keimt keim keif kdot kalt
+jungfr jagdh izmi iza itzfi itzbue ity itue itkae itau istri ishe irrste irkt$
+irgi ipo ionssy ionsma inue intra insge inno innba inkst$ indle ilz$ ilma
+illt$ ilgu ilfsa igs$ iette ietrae iestu ierwe ierta ierste ierspae iersi
+ierschei ierna ierko ierfue ierfe ierbae ienta ienmae ienku iema ielu ielka
+iefla ieen$ iechi iebze iebsve iebsta iebsi iebsge ickza icksto ichtsra
+ichtsho ichse ianti ialve ials$ ialpro ialpo ialie ialau hup hstueck hrungsr
+hrstoff hrlost hrgen hrgeld hrfach hresg hrenz hrdend hosp hort hold hohl
+hoerb hocht hochh hochbr hntel hnsuecht hnsitz hnlichk hnischst hnhof hngeb
+hnbarst hmigt hmes hlwoll hltuend hlfeil hlfahrts hlenst hinschl hinn heut
+herzt herh hentl henl hek heitsg heimw heilst heikl hauch handk handbr halst
+halbw hak grundz grundw grundpr grier grar gouv gnest gment glotz glos gleichw
+glasf gkeits gischst ging gheit ghaft ggreg gewr gendfr gendb gelk gelgl gelbr
+geis gehrt gaum gastw gastl gastg gasl gasf gasb gaehn fzuw fzur fvertr fus
+ftstoff ftsspiel ftlern ftfahrt ftauch fstoss fruecht fruchtb friedh frauenh
+fratz fputz fprall fortr foppt fluss flugk flottg fliss fleiss flehn flaut
+flass flammt fischg finn fikt fheit fflieg ffigst fferr ffenschm feuerz feuerg
+festn festb ferh fenk felw felst feldz feldm feil feg faelscht fachsch fachb
+exio ewri euzfa euzei euz$ euerzeu euerza euerro euerre eucht$ eube eszu
+estprei esschwae espla eshau eschra eschme erzt$ ertschae ertge erschwa
+erschna erschmi eroi ernschrei ernli ernla erkt$ erksta erkro erkei erglo
+erfrue erchfe erbsfae erboo eprie eplau eoffi enzt$ entflie enszwei enszei
+enstru enstri ensno enskra enroe enprue ennli enkrae engei enfu endri endre
+enboo emlo emiu elztie elzte eltrau elsma elschu elpro elphi elpfe ellne ellge
+elkla elfreie elf$ elbla elbee ektve eksta ekdo eitsna eitska eitsei eitschu
+eitkrae eistoe eisre eirrte einschme einschlie einschie einro einra einni
+einkue einfrie einfoe eindae eind$ einble einbaue einbae eimdrue eikle eifle
+eiers$ eichsve eichho eibma eiba eib$ ehrswe ehrdie ehpu ehnsue ehlbe ehaue
+egla eerste eeloe eeige eehu eehe eebe eebae eckve eckse eckba ebru ebei eam$
+ealte eakto eahnte dverb duscht durchstr dungspr dungsk duckt dter dschung
+droehn drillt dreiz dott dmin dle$ diol diog dioez dio$ dienstv dienstt
+diensth dick diab di$ dgen deutschl denv dentl densk denm delph dehn dbar
+dauerh darw daempf col ckwerk ckschlag ckpunkt ckerw ckerm ckerl ckent ckarb
+chzig chwass chverb chunt chtweis chtvers chtsverl chtstell chtsbeh chtrag
+chtkomm chtheit chtgef chternst chtbarst chtbark chsvollst chspann chseck
+chrot chop chnest chnam chland chiffr chfuehr chfuehl chest cherg cheldr
+chdenk chbrett chbew cell camp bzusch bzur bzul bzugsf bzueg bwick bwechs bwar
+bwaeg bunk bungsl bungsh buergt bueff bueb buck buchb btrenn bstuerz bstreif
+bsten bstatt bspiel bsperr bsich bschuett bschuerf bschieb bscheuend brustb
+bruesk bronz bricht brenzl boul bots bordn bnuetz bnahm bmild blutv bluet
+blink blier bkuehl bitz biogr bik bigt bhol bgas bfuell bfuehr bfolg bflach
+berfr benw bdross bdank bbett bbelt bbau$ baus baupr bauernh barmh bann baell
+aza avia auunge austue austo ausstroe ausschni ausklei ausgra ausbri aurie
+auptu aumsta aumfa auische augt$ aufzae aufve aufstoe aufspie aufschue
+aufschrei aufprei aufpra auflau aufhei auffri auffla aufbaue auchve auchtwa
+atsge atra athie asy astwi aststae astge astei assvo assstae ash$ ascha arue
+arta arrste arpfe armge arktbe arkta arkpla argte argste arga arfi arche
+archaeo arbli arb$ aqui aps$ aos$ antre anthro anstue anspie anschrei anschna
+anschlie anri anra anpfla anpei angre anfei andve andka andfreie andbrei
+andaue andae anbo anbei amtsvo amtei ampfflu amne altve altsge alsy alstaa
+alspie also alpa allpro allmei alfae albte albja aje ail$ ahrtau ahmt$ ahmst$
+ahlst$ ahlkoe agsre agspa agsfo agsfa aftska afta aflo aff$ aeuti aeupte
+aeumst$ aeufst$ aetsbe aerzti aerre aermli aeolo aen$ aehrst$ aegste aeftse
+aechse adtge ads$ adau ackst$ achwa achtze achtschi achtpo achsu achbre abzwei
+abwue abtu abstie abspei abspa abpra abpla abnue abmi abhoe abdro abdre abdie
+abbli aals$ ^zweie ^urs ^urb ^ult ^staue ^splee ^schwoe ^schlaue ^reu ^pru
+^prie ^plei ^ple ^ork ^om ^oelk ^kroe ^knae ^hai ^glu ^exk ^eul ^essb ^esk
+^erzb ^erstm ^erbt ^emb ^ekst ^eitl ^einpr ^einp ^eidg ^echt ^dschu ^dioe
+^baeue ^ausschn ^aufpl ^aufgl ^atm ^asp ^anpfl ^aesth ^aecht ^achtst ^achtb
+^abpl ^abgl zziert zwoelff zwitt zwietr zweigt zweifl zuern zueign ztem zopf
+zollh zollb zinss zickz zialpr zeut zellw zeitz zeitv zeipr zeiht zeib zank
+zahnl zaehm zack ythmi ypti ypte ydrau yd$ ybe xtest xierb xerz wusstl
+""".split()): TRIPLE_SCORES[triple] = (20000 - index) * 100 / 20000
