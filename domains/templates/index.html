@@ -5,21 +5,9 @@
 {% block content %}
 <h1>Available domain names</h1>
 
-<form action="" method="post" enctype="multipart/form-data">
-<p>
-{{ names_form.names.errors }}
-{{ names_form.names.label_tag }}:<br />
-{{ names_form.names }}<br />
-{{ names_form.upload.errors }}
-{{ names_form.upload.label_tag }}:
-{{ names_form.upload }}<br />
-<input type="submit" name="submit_names" value="Submit domain names" />
-</p>
-</form>
-
 {% for stat in domain_stats %}
-<p>{{ stat.timestamp|timesince }} ago,
-{{ stat.count }} domains were using {{ stat.bytes }} bytes.</p>
+<p>{{ stat.count }} domains were using {{ stat.bytes }} bytes
+{{ stat.timestamp|timesince }} ago.</p>
 {% endfor %}
 
 <table>
