@@ -28,6 +28,26 @@ indexes:
   - name: timestamp
     direction: desc
 
+- kind: domains_domain
+  properties:
+  - name: left3
+  - name: com
+
+- kind: domains_domain
+  properties:
+  - name: left4
+  - name: com
+
+- kind: domains_domain
+  properties:
+  - name: left5
+  - name: com
+
+- kind: domains_domain
+  properties:
+  - name: left6
+  - name: com
+
 - kind: prefixes_prefix
   properties:
   - name: length

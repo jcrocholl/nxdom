@@ -94,6 +94,22 @@ def cron(request):
     return HttpResponse('OK', mimetype="text/plain")
 
 
+def cron_popular(request):
+    # Pick some random existing .com domain names.
+    domain_keys = Domain.all(keys_only=True).filter('com !=', None)
+    domain_keys = domain_keys.order('-timestamp').fetch(100)
+    random.shuffle(domain_keys)
+    domain_keys = domain_keys[:10]
+    # Update popular prefix and suffix counters.
+    for key in domain_keys:
+        name = key.name()
+        for length in range(3, 7):
+            if len(name) < length:
+                break
+            count_dot_com_prefixes(name[:length])
+            count_dot_com_suffixes(name[-length:])
+
+
 def update_prefix(prefix):
     field = 'left%d' % len(prefix)
     keys = Domain.all(keys_only=True).order('__key__')
