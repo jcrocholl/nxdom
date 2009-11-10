@@ -2,11 +2,11 @@ from datetime import datetime
 
 from google.appengine.ext import db
 
-from dictionaries.english import score_scowl_substrings
-from readability.english import score_readability
+from languages import english, spanish, german, french
+from languages.utils import word_score
 
 
-class BaseModel(db.Model):
+class BaseModel(db.Expando):
 
     @classmethod
     def get_or_insert_with_flag(cls, key_name, **kwds):
@@ -50,8 +50,10 @@ class Domain(BaseModel):
     dashes = db.IntegerProperty()
 
     # Linguistic quality measurements.
-    scowl = db.IntegerProperty()
     english = db.IntegerProperty()
+    spanish = db.IntegerProperty()
+    french = db.IntegerProperty()
+    german = db.IntegerProperty()
 
     # Prefixes for equality filters.
     left1 = db.StringProperty()
@@ -80,8 +82,7 @@ class Domain(BaseModel):
         Automatically update most properties.
         """
         self.update_counts()
-        self.update_scowl()
-        self.update_english()
+        self.update_languages()
         self.update_substrings()
         self.timestamp = datetime.now()
 
@@ -98,11 +99,11 @@ class Domain(BaseModel):
             elif char == '-':
                 self.dashes += 1
 
-    def update_scowl(self):
-        self.scowl = score_scowl_substrings(self.key().name())
-
-    def update_english(self):
-        self.english = score_readability(self.key().name())
+    def update_languages(self):
+        self.english = word_score(self.key().name(), english.TRIPLE_SCORES)
+        self.spanish = word_score(self.key().name(), spanish.TRIPLE_SCORES)
+        self.german = word_score(self.key().name(), german.TRIPLE_SCORES)
+        self.french = word_score(self.key().name(), french.TRIPLE_SCORES)
 
     def update_substrings(self):
         """

@@ -73,10 +73,8 @@ def cron(request, rest):
     updates = rest.split('/')
     domain_list = Domain.all().order('timestamp').fetch(100)
     for domain in domain_list:
-        if 'scowl' in updates:
-            domain.update_scowl()
-        if 'english' in updates:
-            domain.update_english()
+        if 'languages' in updates:
+            domain.update_languages()
         domain.timestamp = datetime.now()
     db.put(domain_list)
     return render_to_response(request, 'domains/index.html', locals())
