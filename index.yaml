@@ -48,6 +48,26 @@ indexes:
   - name: left6
   - name: com
 
+- kind: domains_domain
+  properties:
+  - name: right3
+  - name: com
+
+- kind: domains_domain
+  properties:
+  - name: right4
+  - name: com
+
+- kind: domains_domain
+  properties:
+  - name: right5
+  - name: com
+
+- kind: domains_domain
+  properties:
+  - name: right6
+  - name: com
+
 - kind: prefixes_prefix
   properties:
   - name: length
