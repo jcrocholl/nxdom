@@ -38,7 +38,7 @@ def word_triples(word):
         yield ''.join(groups[start:start + 3])
 
 
-def score_readability(word, triple_scores):
+def word_score(word, triple_scores):
     result = 0
     triples = list(word_triples(word))
     for triple in triples:

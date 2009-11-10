@@ -5,9 +5,8 @@ import os
 import sys
 sys.path[0] = os.path.dirname(sys.path[0])
 
-from readability.utils import score_readability
-from readability.english import TRIPLE_SCORES as english_scores
-from readability.german import TRIPLE_SCORES as german_scores
+from languages.utils import word_score
+from languages import english, spanish, french, german
 
 WORDS = """
 ich mit einem wenig kostenlosen begabten verschraubenden
@@ -16,8 +15,14 @@ me with another little inexpensive ridiculous interlocking
 Python beautiful illusionist Antidisestablishmentarianism
 """.split()
 
+
+print '%-8s %-8s %-8s %-8s %s' % tuple('english spanish french german word'.split())
+
 for word in WORDS:
-    print '%-20s %5d %5d' % (
+    print '%-8d %-8d %-8d %-8d %s' % (
+        word_score(word, english.TRIPLE_SCORES),
+        word_score(word, spanish.TRIPLE_SCORES),
+        word_score(word, french.TRIPLE_SCORES),
+        word_score(word, german.TRIPLE_SCORES),
         word,
-        score_readability(word, english_scores),
-        score_readability(word, german_scores))
+)

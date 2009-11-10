@@ -5,7 +5,7 @@ import os
 import sys
 sys.path[0] = os.path.dirname(sys.path[0])
 
-from readability.utils import word_triples
+from languages.utils import word_triples
 
 import re
 
@@ -13,12 +13,20 @@ ACCEPTABLE_WORD_REGEX = re.compile('^[a-z0-9-]+$')
 
 
 def count_triples(words, counters):
+    rejfile = open('rejected.txt', 'w')
     for word in words:
         word = word.lower().strip()
+        word = word.lstrip('*').rstrip('#')
+        word = word.replace('\\', '').replace('/', '')
+        word = word.replace('~', '').replace('$', '')
+        word = word.replace('^', '').replace('`', '')
+        word = word.replace('"', '').replace("'", '')
         if not ACCEPTABLE_WORD_REGEX.match(word):
+            print >> rejfile, word
             continue
         for triple in word_triples(word):
             counters[triple] = counters.get(triple, 0) + 1
+    rejfile.close()
 
 
 if __name__ == '__main__':
