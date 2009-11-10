@@ -33,10 +33,16 @@ class SearchForm(forms.Form):
     dashes = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    scowl = forms.FloatField(
+    english = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    english = forms.FloatField(
+    spanish = forms.FloatField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    french = forms.FloatField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    german = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
 
@@ -76,8 +82,10 @@ def index(request, template_name='search/index.html'):
             'len': -1,
             'digits': -4,
             'dashes': -8,
-            'scowl': 10,
-            'english': 0.1,
+            'english': 2,
+            'spanish': 1,
+            'french': 1,
+            'german': 1,
             })
     if search_form.is_valid():
         domain_list = filter_domains(search_form.cleaned_data['left'],
@@ -104,13 +112,16 @@ def score_domains(domain_list, cleaned_data):
         score += domain.length * cleaned_data['len']
         score += domain.digits * cleaned_data['digits']
         score += domain.dashes * cleaned_data['dashes']
-        # Check dictionary words.
-        if domain.scowl is None:
-            domain.update_scowl()
-        score += domain.scowl * cleaned_data['scowl']
-        if domain.english is None:
-            domain.update_english()
+        # Languages.
+        if (not hasattr(domain, 'english') or domain.english is None or
+            not hasattr(domain, 'spanish') or domain.spanish is None or
+            not hasattr(domain, 'french') or domain.french is None or
+            not hasattr(domain, 'german') or domain.german is None):
+            domain.update_languages()
         score += domain.english * cleaned_data['english']
+        score += domain.spanish * cleaned_data['spanish']
+        score += domain.french * cleaned_data['french']
+        score += domain.german * cleaned_data['german']
         domain.score = score
     domain_list.sort(
         key=lambda domain: (-domain.score, domain.key().name()))
