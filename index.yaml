@@ -65,6 +65,151 @@ indexes:
 
 - kind: domains_domain
   properties:
+  - name: left2
+  - name: length
+
+- kind: domains_domain
+  properties:
+  - name: left2
+  - name: english
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left2
+  - name: spanish
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left2
+  - name: french
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left2
+  - name: german
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left3
+  - name: length
+
+- kind: domains_domain
+  properties:
+  - name: left3
+  - name: english
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left3
+  - name: spanish
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left3
+  - name: french
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left3
+  - name: german
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left4
+  - name: length
+
+- kind: domains_domain
+  properties:
+  - name: left4
+  - name: english
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left4
+  - name: spanish
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left4
+  - name: french
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left4
+  - name: german
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left5
+  - name: length
+
+- kind: domains_domain
+  properties:
+  - name: left5
+  - name: english
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left5
+  - name: spanish
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left5
+  - name: french
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left5
+  - name: german
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left6
+  - name: length
+
+- kind: domains_domain
+  properties:
+  - name: left6
+  - name: english
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left6
+  - name: spanish
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left6
+  - name: french
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left6
+  - name: german
+    direction: desc
+
+- kind: domains_domain
+  properties:
   - name: left3
   - name: com
 
