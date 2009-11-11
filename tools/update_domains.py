@@ -106,19 +106,16 @@ def update_domains(domains):
             if domain.is_saved():
                 domains_delete.append(domain)
             continue
-        if domain.com and domain.net and domain.org:
-            print '%s %s has DNS for .com .net .org, deleting' % (
-                domain.timestamp.strftime('%Y-%m-%d %H:%M'), name)
-            if domain.is_saved():
-                domains_delete.append(domain)
-            continue
         old_timestamp = domain.timestamp
         domain.before_put()
-        print '%s %-17s %5s %5s %5s %-16s %-16s %-16s %s,%s,%s,%s' % (
+        print '%s  %-16s %3d%3d%3d %3d%3d%3d%3d  %s %s %s' % (
             old_timestamp.strftime('%Y-%m-%d %H:%M'), name,
             domain.length, domain.digits, domain.dashes,
-            domain.com, domain.net, domain.org,
-            domain.left1, domain.left6, domain.right6, domain.right1)
+            domain.english, domain.spanish, domain.french, domain.german,
+            domain.com if domain.com else '-',
+            domain.net if domain.net else '-',
+            domain.org if domain.org else '-',
+            )
         domains_put.append(domain)
     if domains_put:
         retry(db.put, domains_put)
@@ -149,8 +146,7 @@ def bulk_upload(lines):
         if len(name) > MAX_NAME_LENGTH:
             continue
         if name != previous:
-            domain = Domain(key_name=name, backwards=name[::-1],
-                            timestamp=datetime.datetime.now())
+            domain = Domain(key_name=name)
             domain.before_put()
             domains.append(domain)
         previous = name
