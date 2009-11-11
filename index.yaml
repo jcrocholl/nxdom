@@ -30,6 +30,12 @@ indexes:
 
 - kind: domains_domain
   properties:
+  - name: com
+  - name: timestamp
+    direction: desc
+
+- kind: domains_domain
+  properties:
   - name: left3
   - name: com
 

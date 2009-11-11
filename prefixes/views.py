@@ -4,10 +4,13 @@ from datetime import datetime
 from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
 
+from google.appengine.ext import db
+
 from ragendja.template import render_to_response
+from appenginepatcher import on_production_server
 
 from domains.models import Domain
-from prefixes.models import Prefix
+from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
 
 LETTERS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
 
@@ -86,30 +89,6 @@ def need_update():
     return result
 
 
-def cron(request):
-    names = need_update()
-    random.shuffle(names)
-    for name in names[:10]:
-        update_prefix(name)
-    return HttpResponse('OK', mimetype="text/plain")
-
-
-def cron_popular(request):
-    # Pick some random existing .com domain names.
-    domain_keys = Domain.all(keys_only=True).filter('com !=', None)
-    domain_keys = domain_keys.order('-timestamp').fetch(100)
-    random.shuffle(domain_keys)
-    domain_keys = domain_keys[:10]
-    # Update popular prefix and suffix counters.
-    for key in domain_keys:
-        name = key.name()
-        for length in range(3, 7):
-            if len(name) < length:
-                break
-            count_dot_com_prefixes(name[:length])
-            count_dot_com_suffixes(name[-length:])
-
-
 def update_prefix(prefix):
     field = 'left%d' % len(prefix)
     keys = Domain.all(keys_only=True).order('__key__')
@@ -126,7 +105,57 @@ def update_prefix(prefix):
            count=count, timestamp=datetime.now()).put()
 
 
-def detail(request, prefix):
-    if len(prefix) > 6:
-        return HttpResponseRedirect('/prefixes/%s/' % prefix[:6])
+def cron(request):
+    names = need_update()
+    random.shuffle(names)
+    for name in names[:10]:
+        update_prefix(name)
+    return HttpResponse('OK', mimetype="text/plain")
 
+
+def cron_popular(request):
+    # Pick some random existing .com domain names.
+    domains = Domain.all()
+    domains.order('com').filter('com !=', None)
+    domains.order('-timestamp')
+    domains = domains.fetch(100)
+    random.shuffle(domains)
+    domains = domains[:10]
+    # Lists for batch put and HTML output.
+    prefixes = []
+    suffixes = []
+    prefix_rows = []
+    suffix_rows = []
+    prefixes_already_counted = set()
+    suffixes_already_counted = set()
+    # Update popular prefix and suffix counters.
+    for domain in domains:
+        name = domain.key().name()
+        prefix_rows.append([])
+        suffix_rows.append([])
+        for length in range(3, 7):
+            if len(name) < length:
+                break
+            if (name[:length] in prefixes_already_counted or
+                name[-length:] in suffixes_already_counted):
+                continue
+            prefixes_already_counted.add(name[:length])
+            suffixes_already_counted.add(name[-length:])
+            # Count popular prefixes.
+            prefix = DotComPrefix(key_name=name[:length], length=length)
+            prefix.count_domains()
+            if prefix.count >= 10 or not on_production_server:
+                prefixes.append(prefix)
+                prefix_rows[-1].append(prefix)
+            # Count popular suffixes.
+            suffix = DotComSuffix(key_name=name[-length:], length=length)
+            suffix.count_domains()
+            if suffix.count >= 10 or not on_production_server:
+                suffixes.append(suffix)
+                suffix_rows[-1].append(suffix)
+        if not prefix_rows[-1]:
+            prefix_rows.pop(-1)
+        if not suffix_rows[-1]:
+            suffix_rows.pop(-1)
+    db.put(prefixes + suffixes)
+    return render_to_response(request, 'prefixes/cron.html', locals())

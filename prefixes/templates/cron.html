@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Updated popular prefixes and suffixes{% endblock %}
+
+{% block content %}
+{% if prefix_rows %}
+<h1>Updated popular prefixes</h1>
+<table>
+{% for row in prefix_rows %}
+<tr class="{% cycle 'row1' 'row2' %}">
+{% for prefix in row %}
+<td>{{ prefix.count }}x {{ prefix.key.name }}</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
+{% if suffix_rows %}
+<h1>Updated popular suffixes</h1>
+<table>
+{% for row in suffix_rows %}
+<tr class="{% cycle 'row1' 'row2' %}">
+{% for suffix in row %}
+<td>{{ suffix.count }}x {{ suffix.key.name }}</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+{% endblock %}
