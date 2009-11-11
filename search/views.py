@@ -86,7 +86,7 @@ def filter_domains(keyword, position='left', order='length'):
         domain_list.filter('backwards >=', backwards)
         domain_list.filter('backwards <', next)
     domain_list.order(order)
-    names = [key.name() for key in domain_list.fetch(100)]
+    names = [key.name() for key in domain_list.fetch(333)]
     # Cache results for 24 hours.
     memcache.set(memcache_key, ' '.join(names), time=24 * 60 * 60)
     return names
@@ -119,7 +119,7 @@ def index(request, template_name='search/index.html'):
         if right and position == 'left':
             names = [name for name in names if name.endswith(right)]
         domain_list = db.get([db.Key.from_path('domains_domain', name)
-                              for name in names])
+                              for name in names][:1000])
         domain_list = score_domains(cleaned_data, domain_list)
     return render_to_response(request, template_name, locals())
 
