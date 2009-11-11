@@ -3,6 +3,10 @@ cron:
   url: /prefixes/cron/
   schedule: every 10 minutes
   timezone: America/Los_Angeles
+- description: count popular prefixes and suffixes
+  url: /prefixes/cron/popular/
+  schedule: every 3 minutes
+  timezone: America/Los_Angeles
 - description: update language scores
   url: /domains/cron/languages/
   schedule: every 1 minutes
