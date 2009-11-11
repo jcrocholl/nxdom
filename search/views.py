@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+from google.appengine.api import memcache
 
 from django import forms
 from django.http import HttpResponseRedirect
@@ -6,6 +7,12 @@ from django.http import HttpResponseRedirect
 from ragendja.template import render_to_response
 
 from domains.models import Domain
+
+INITIAL = {
+    'com': 50, 'net': 30, 'org': 20,
+    'len': -1, 'digits': -4, 'dashes': -8,
+    'english': 2, 'spanish': 1, 'french': 1, 'german': 1,
+    }
 
 
 class SearchForm(forms.Form):
@@ -57,6 +64,11 @@ class SearchForm(forms.Form):
 def filter_domains(cleaned_data, order):
     left = cleaned_data['left']
     right = cleaned_data['right']
+    memcache_key = ','.join((left, right, order))
+    names = memcache.get(memcache_key)
+    if names:
+        return [db.Key.from_path('domains_domain', name)
+                for name in names.split()]
     domain_list = Domain.all(keys_only=True).order(order)
     if 1 <= len(left) <= 6:
         domain_list.filter('left%d' % len(left), left)
@@ -73,22 +85,14 @@ def filter_domains(cleaned_data, order):
         next = backwards[:-1] + chr(ord(backwards[-1]) + 1)
         domain_list.filter('backwards >=', backwards)
         domain_list.filter('backwards <', next)
-    return domain_list.fetch(100)
+    keys = domain_list.fetch(100)
+    names = ' '.join([key.name() for key in keys])
+    memcache.set(memcache_key, names, time=3600) # Cache for one hour.
+    return keys
 
 
 def index(request, template_name='search/index.html'):
-    search_form = SearchForm(request.GET or None, initial={
-            'com': 50,
-            'net': 30,
-            'org': 20,
-            'len': -1,
-            'digits': -4,
-            'dashes': -8,
-            'english': 2,
-            'spanish': 1,
-            'french': 1,
-            'german': 1,
-            })
+    search_form = SearchForm(request.GET or INITIAL, initial=INITIAL)
     if search_form.is_valid():
         cleaned_data = search_form.cleaned_data
         domain_keys = set()
