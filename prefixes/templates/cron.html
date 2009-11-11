@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Updated popular prefixes and suffixes{% endblock %}
+{% block title %}Updated prefixes{% endblock %}
 
 {% block content %}
 {% if prefix_rows %}
-<h1>Updated popular prefixes</h1>
+<h1>Updated prefixes</h1>
 <table>
 {% for row in prefix_rows %}
 <tr class="{% cycle 'row1' 'row2' %}">
@@ -17,7 +17,7 @@
 {% endif %}
 
 {% if suffix_rows %}
-<h1>Updated popular suffixes</h1>
+<h1>Updated suffixes</h1>
 <table>
 {% for row in suffix_rows %}
 <tr class="{% cycle 'row1' 'row2' %}">

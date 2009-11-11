@@ -101,16 +101,19 @@ def update_prefix(prefix):
         keys.filter(field, prefix).filter('__key__ >', previous)
         keys = keys.fetch(1000)
         count += len(keys)
-    Prefix(key_name=prefix, length=len(prefix),
-           count=count, timestamp=datetime.now()).put()
+    prefix = Prefix(key_name=prefix, length=len(prefix),
+                    count=count, timestamp=datetime.now())
+    prefix.put()
+    return prefix
 
 
 def cron(request):
     names = need_update()
     random.shuffle(names)
+    prefix_rows = []
     for name in names[:10]:
-        update_prefix(name)
-    return HttpResponse('OK', mimetype="text/plain")
+        prefix_rows.append([update_prefix(name)])
+    return render_to_response(request, 'prefixes/cron.html', locals())
 
 
 def cron_popular(request):
