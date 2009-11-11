@@ -54,8 +54,10 @@ class SearchForm(forms.Form):
         return data
 
 
-def filter_domains(left, right):
-    domain_list = Domain.all()
+def filter_domains(cleaned_data, order):
+    left = cleaned_data['left']
+    right = cleaned_data['right']
+    domain_list = Domain.all(keys_only=True).order(order)
     if 1 <= len(left) <= 6:
         domain_list.filter('left%d' % len(left), left)
     elif len(left) > 6:
@@ -71,7 +73,7 @@ def filter_domains(left, right):
         next = backwards[:-1] + chr(ord(backwards[-1]) + 1)
         domain_list.filter('backwards >=', backwards)
         domain_list.filter('backwards <', next)
-    return domain_list
+    return domain_list.fetch(100)
 
 
 def index(request, template_name='search/index.html'):
@@ -88,14 +90,23 @@ def index(request, template_name='search/index.html'):
             'german': 1,
             })
     if search_form.is_valid():
-        domain_list = filter_domains(search_form.cleaned_data['left'],
-                                     search_form.cleaned_data['right'])
-        domain_list = score_domains(domain_list.fetch(100),
-                                    search_form.cleaned_data)
+        cleaned_data = search_form.cleaned_data
+        domain_keys = set()
+        domain_keys.update(filter_domains(cleaned_data, 'length'))
+        if cleaned_data['spanish'] > cleaned_data['english']:
+            domain_keys.update(filter_domains(cleaned_data, '-spanish'))
+        elif cleaned_data['french'] > cleaned_data['english']:
+            domain_keys.update(filter_domains(cleaned_data, '-french'))
+        elif cleaned_data['german'] > cleaned_data['english']:
+            domain_keys.update(filter_domains(cleaned_data, '-german'))
+        else:
+            domain_keys.update(filter_domains(cleaned_data, '-english'))
+        domain_list = db.get(list(domain_keys))
+        domain_list = score_domains(cleaned_data, domain_list)
     return render_to_response(request, template_name, locals())
 
 
-def score_domains(domain_list, cleaned_data):
+def score_domains(cleaned_data, domain_list):
     score_domain_list = []
     for domain in domain_list:
         score = 0

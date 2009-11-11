@@ -36,6 +36,35 @@ indexes:
 
 - kind: domains_domain
   properties:
+  - name: left1
+  - name: length
+
+- kind: domains_domain
+  properties:
+  - name: left1
+  - name: english
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left1
+  - name: spanish
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left1
+  - name: french
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left1
+  - name: german
+    direction: desc
+
+- kind: domains_domain
+  properties:
   - name: left3
   - name: com
 
