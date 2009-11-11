@@ -61,51 +61,65 @@ class SearchForm(forms.Form):
         return data
 
 
-def filter_domains(cleaned_data, order):
-    left = cleaned_data['left']
-    right = cleaned_data['right']
-    memcache_key = ','.join((left, right, order))
+def filter_domains(keyword, position='left', order='length'):
+    # Try to get names from memcache, to avoid datastore queries.
+    memcache_key = ','.join((keyword, position, order))
     names = memcache.get(memcache_key)
     if names:
-        return [db.Key.from_path('domains_domain', name)
-                for name in names.split()]
-    domain_list = Domain.all(keys_only=True).order(order)
-    if 1 <= len(left) <= 6:
-        domain_list.filter('left%d' % len(left), left)
-    elif len(left) > 6:
-        next = left[:-1] + chr(ord(left[-1]) + 1)
+        # logging.debug('memcache hit: %s', memcache_key)
+        return names.split()
+    # If not found in cache, get names from the datastore.
+    domain_list = Domain.all(keys_only=True)
+    if 1 <= len(keyword) <= 6:
+        domain_list.filter('%s%d' % (position, len(keyword)), keyword)
+    elif position == 'left' and len(keyword) > 6:
+        domain_list.order('__key__')
+        next = keyword[:-1] + chr(ord(keyword[-1]) + 1)
         domain_list.filter(
-            '__key__ >=', db.Key.from_path('domains_domain', left))
+            '__key__ >=', db.Key.from_path('domains_domain', keyword))
         domain_list.filter(
             '__key__ <', db.Key.from_path('domains_domain', next))
-    if 1 <= len(right) <= 6:
-        domain_list.filter('right%d' % len(right), right)
-    elif len(right) > 6 and not len(left):
-        backwards = right[::-1]
+    elif position == 'right' and len(keyword) > 6:
+        domain_list.order('backwards')
+        backwards = keyword[::-1]
         next = backwards[:-1] + chr(ord(backwards[-1]) + 1)
         domain_list.filter('backwards >=', backwards)
         domain_list.filter('backwards <', next)
-    keys = domain_list.fetch(100)
-    names = ' '.join([key.name() for key in keys])
-    memcache.set(memcache_key, names, time=3600) # Cache for one hour.
-    return keys
+    domain_list.order(order)
+    names = [key.name() for key in domain_list.fetch(100)]
+    # Cache results for 24 hours.
+    memcache.set(memcache_key, ' '.join(names), time=24 * 60 * 60)
+    return names
 
 
 def index(request, template_name='search/index.html'):
     search_form = SearchForm(request.GET or INITIAL, initial=INITIAL)
     if search_form.is_valid():
         cleaned_data = search_form.cleaned_data
-        domain_keys = set()
-        domain_keys.update(filter_domains(cleaned_data, 'length'))
-        if cleaned_data['spanish'] > cleaned_data['english']:
-            domain_keys.update(filter_domains(cleaned_data, '-spanish'))
-        elif cleaned_data['french'] > cleaned_data['english']:
-            domain_keys.update(filter_domains(cleaned_data, '-french'))
-        elif cleaned_data['german'] > cleaned_data['english']:
-            domain_keys.update(filter_domains(cleaned_data, '-german'))
+        left = cleaned_data['left']
+        right = cleaned_data['right']
+        if len(left) >= len(right):
+            position = 'left'
+            keyword = left
         else:
-            domain_keys.update(filter_domains(cleaned_data, '-english'))
-        domain_list = db.get(list(domain_keys))
+            position = 'right'
+            keyword = right
+        names = set()
+        names.update(filter_domains(keyword, position, 'length'))
+        if cleaned_data['spanish'] > cleaned_data['english']:
+            names.update(filter_domains(keyword, position, '-spanish'))
+        elif cleaned_data['french'] > cleaned_data['english']:
+            names.update(filter_domains(keyword, position, '-french'))
+        elif cleaned_data['german'] > cleaned_data['english']:
+            names.update(filter_domains(keyword, position, '-german'))
+        else:
+            names.update(filter_domains(keyword, position, '-english'))
+        if left and position == 'right':
+            names = [name for name in names if name.startswith(left)]
+        if right and position == 'left':
+            names = [name for name in names if name.endswith(right)]
+        domain_list = db.get([db.Key.from_path('domains_domain', name)
+                              for name in names])
         domain_list = score_domains(cleaned_data, domain_list)
     return render_to_response(request, template_name, locals())
 
