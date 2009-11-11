@@ -116,6 +116,44 @@ def cron(request):
     return render_to_response(request, 'prefixes/cron.html', locals())
 
 
+
+def count_popular_prefixes(domains, position='left'):
+    # Lists for batch put and HTML output.
+    prefixes = []
+    rows = []
+    already_counted = set()
+    # Update popular prefix and suffix counters.
+    for domain in domains:
+        name = domain.key().name()
+        rows.append([])
+        for length in range(3, 7):
+            if len(name) < length:
+                break
+            if position == 'left':
+                part = name[:length]
+            else:
+                part = name[-length:]
+            if part in already_counted:
+                continue
+            already_counted.add(part)
+            # Count popular prefixes.
+            if position == 'left':
+                prefix = DotComPrefix(key_name=part, length=length)
+            else:
+                prefix = DotComSuffix(key_name=part, length=length)
+            prefix.count_domains()
+            if prefix.count >= 10 or not on_production_server:
+                prefixes.append(prefix)
+                rows[-1].append(prefix)
+            else:
+                rows[-1].append(prefix)
+                break
+        if not rows[-1]:
+            rows.pop(-1)
+    db.put(prefixes)
+    return rows
+
+
 def cron_popular(request):
     # Pick some random existing .com domain names.
     domains = Domain.all()
@@ -123,42 +161,8 @@ def cron_popular(request):
     domains.order('-timestamp')
     domains = domains.fetch(100)
     random.shuffle(domains)
-    domains = domains[:10]
-    # Lists for batch put and HTML output.
-    prefixes = []
-    suffixes = []
-    prefix_rows = []
-    suffix_rows = []
-    prefixes_already_counted = set()
-    suffixes_already_counted = set()
-    # Update popular prefix and suffix counters.
-    for domain in domains:
-        name = domain.key().name()
-        prefix_rows.append([])
-        suffix_rows.append([])
-        for length in range(3, 7):
-            if len(name) < length:
-                break
-            if (name[:length] in prefixes_already_counted or
-                name[-length:] in suffixes_already_counted):
-                continue
-            prefixes_already_counted.add(name[:length])
-            suffixes_already_counted.add(name[-length:])
-            # Count popular prefixes.
-            prefix = DotComPrefix(key_name=name[:length], length=length)
-            prefix.count_domains()
-            if prefix.count >= 10 or not on_production_server:
-                prefixes.append(prefix)
-                prefix_rows[-1].append(prefix)
-            # Count popular suffixes.
-            suffix = DotComSuffix(key_name=name[-length:], length=length)
-            suffix.count_domains()
-            if suffix.count >= 10 or not on_production_server:
-                suffixes.append(suffix)
-                suffix_rows[-1].append(suffix)
-        if not prefix_rows[-1]:
-            prefix_rows.pop(-1)
-        if not suffix_rows[-1]:
-            suffix_rows.pop(-1)
-    db.put(prefixes + suffixes)
+    domains = domains[:3]
+    # Count some popular prefixes and suffixes.
+    prefix_rows = count_popular_prefixes(domains, 'left')
+    suffix_rows = count_popular_prefixes(domains, 'right')
     return render_to_response(request, 'prefixes/cron.html', locals())
