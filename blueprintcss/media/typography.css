@@ -93,7 +93,7 @@ caption     { background: #eee; }
 .large      { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
 .hide       { display: none; }
 
-.quiet      { color: #666; }
+.quiet      { color: #aaa; }
 .loud       { color: #000; }
 .highlight  { background:#ff0; }
 .added      { background:#060; color: #fff; }

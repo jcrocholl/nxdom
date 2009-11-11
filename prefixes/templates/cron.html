@@ -9,7 +9,8 @@
 {% for row in prefix_rows %}
 <tr class="{% cycle 'row1' 'row2' %}">
 {% for prefix in row %}
-<td class="right">{{ prefix.count }}x</td><td>{{ prefix.key.name }}</td>
+<td class="right{% firstof prefix.class_extra %}">{{ prefix.count }}x</td>
+<td class="left{% firstof prefix.class_extra %}">{{ prefix.key.name }}</td>
 {% endfor %}
 </tr>
 {% endfor %}
@@ -22,7 +23,8 @@
 {% for row in suffix_rows %}
 <tr class="{% cycle 'row1' 'row2' %}">
 {% for suffix in row %}
-<td class="right">{{ suffix.count }}x</td><td>{{ suffix.key.name }}</td>
+<td class="right{% firstof suffix.class_extra %}">{{ suffix.count }}x</td>
+<td class="left{% firstof suffix.class_extra %}">{{ suffix.key.name }}</td>
 {% endfor %}
 </tr>
 {% endfor %}

@@ -13,6 +13,7 @@ from domains.models import Domain
 from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
 
 LETTERS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
+POPULAR_COUNT = 30 if on_production_server else 2
 
 
 class PrefixForm(forms.Form):
@@ -116,7 +117,6 @@ def cron(request):
     return render_to_response(request, 'prefixes/cron.html', locals())
 
 
-
 def count_popular_prefixes(domains, position='left'):
     # Lists for batch put and HTML output.
     prefixes = []
@@ -142,10 +142,11 @@ def count_popular_prefixes(domains, position='left'):
             else:
                 prefix = DotComSuffix(key_name=part, length=length)
             prefix.count_domains()
-            if prefix.count >= 10 or not on_production_server:
+            if prefix.count >= POPULAR_COUNT:
                 prefixes.append(prefix)
                 rows[-1].append(prefix)
             else:
+                prefix.class_extra = ' quiet'
                 rows[-1].append(prefix)
                 break
         if not rows[-1]:
@@ -159,10 +160,10 @@ def cron_popular(request):
     domains = Domain.all()
     domains.order('com').filter('com !=', None)
     domains.order('-timestamp')
-    domains = domains.fetch(100)
+    domains = domains.fetch(20)
     random.shuffle(domains)
-    domains = domains[:3]
-    # Count some popular prefixes and suffixes.
+    domains = domains[:2]
+    # Count popular prefixes and suffixes.
     prefix_rows = count_popular_prefixes(domains, 'left')
     suffix_rows = count_popular_prefixes(domains, 'right')
     return render_to_response(request, 'prefixes/cron.html', locals())
