@@ -30,9 +30,11 @@ def cron(request, path_rest):
     updates = path_rest.split('/')
     domain_list = Domain.all().order('timestamp').fetch(200)
     for domain in domain_list:
+        if 'dns' in updates:
+            domain.update_dns()
         if 'languages' in updates:
             domain.update_languages()
-        domain.timestamp = datetime.now()
+            domain.timestamp = datetime.now()
     db.put(domain_list)
     domain_list = domain_list[:20]
     return render_to_response(request, 'domains/index.html', locals())

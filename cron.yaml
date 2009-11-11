@@ -8,6 +8,6 @@ cron:
   schedule: every 1 minutes
   timezone: America/Los_Angeles
 - description: update language scores
-  url: /domains/cron/languages/
+  url: /domains/cron/languages/dns/
   schedule: every 1 minutes
   timezone: America/Los_Angeles

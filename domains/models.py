@@ -44,6 +44,12 @@ class Domain(BaseModel):
     net = db.StringProperty()
     org = db.StringProperty()
 
+    # True if DNS returned an IP address.
+    dns_com = db.BooleanProperty()
+    dns_net = db.BooleanProperty()
+    dns_org = db.BooleanProperty()
+    dns_timestamp = db.DateTimeProperty()
+
     # Character counts.
     length = db.IntegerProperty()
     digits = db.IntegerProperty()
@@ -104,6 +110,18 @@ class Domain(BaseModel):
         self.spanish = word_score(self.key().name(), spanish.TRIPLE_SCORES)
         self.german = word_score(self.key().name(), german.TRIPLE_SCORES)
         self.french = word_score(self.key().name(), french.TRIPLE_SCORES)
+
+    def update_dns(self):
+        if (hasattr(self, 'com') and
+            hasattr(self, 'net') and
+            hasattr(self, 'org')):
+            self.dns_com = bool(self.com)
+            self.dns_net = bool(self.net)
+            self.dns_org = bool(self.org)
+            self.dns_timestamp = datetime.now()
+        else:
+            logging.warning("domain %s doesn't have com+net+org",
+                            self.key().name())
 
     def update_substrings(self):
         """
