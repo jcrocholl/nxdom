@@ -28,7 +28,7 @@ def detail(request, key_name):
 
 def cron(request, path_rest):
     updates = path_rest.split('/')
-    domain_list = Domain.all().order('timestamp').fetch(200)
+    domain_list = Domain.all().order('timestamp').fetch(100)
     for domain in domain_list:
         if 'dns' in updates:
             domain.update_dns()
