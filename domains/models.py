@@ -89,6 +89,7 @@ class Domain(BaseModel):
         """
         self.update_counts()
         self.update_languages()
+        self.update_dns()
         self.update_substrings()
         self.timestamp = datetime.now()
 
@@ -120,7 +121,7 @@ class Domain(BaseModel):
             self.dns_org = bool(self.org)
             self.dns_timestamp = datetime.now()
         else:
-            logging.warning("domain %s doesn't have com+net+org",
+            logging.warning("domain %s is missing com/net/org attributes",
                             self.key().name())
 
     def update_substrings(self):
