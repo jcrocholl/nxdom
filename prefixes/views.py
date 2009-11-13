@@ -9,10 +9,9 @@ from google.appengine.ext import db
 from ragendja.template import render_to_response
 from appenginepatcher import on_production_server
 
-from domains.models import Domain
+from domains.models import Domain, DnsLookup, DOMAIN_CHARS
 from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
 
-LETTERS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
 POPULAR_COUNT = 30 if on_production_server else 2
 
 
@@ -23,11 +22,11 @@ class PrefixForm(forms.Form):
 
 
 def random_prefix(length=2):
-    return ''.join([random.choice(LETTERS) for index in range(length)])
+    return ''.join([random.choice(DOMAIN_CHARS) for index in range(length)])
 
 
 def index(request):
-    size = len(LETTERS)
+    size = len(DOMAIN_CHARS)
     squared = size * size
     names = need_update()
     random.shuffle(names)
@@ -42,19 +41,19 @@ def index(request):
             update_prefix(prefix)
         return HttpResponseRedirect(request.path)
     matrix = []
-    for letter in LETTERS:
+    for letter in DOMAIN_CHARS:
         matrix.append([None] * size)
     domain_count = 0
     prefix_count = 0
     for prefix in Prefix.all().filter('length', 2):
-        x = LETTERS.index(prefix.key().name()[1])
-        y = LETTERS.index(prefix.key().name()[0])
+        x = DOMAIN_CHARS.index(prefix.key().name()[1])
+        y = DOMAIN_CHARS.index(prefix.key().name()[0])
         matrix[y][x] = prefix.count
         domain_count += prefix.count
         prefix_count += 1
     table_rows = []
     sum_row = [0] * size
-    for y, letter in enumerate(LETTERS):
+    for y, letter in enumerate(DOMAIN_CHARS):
         for x in range(size):
             if matrix[y][x]:
                 sum_row[x] += matrix[y][x]
@@ -64,12 +63,12 @@ def index(request):
         domain_estimate = domain_count * squared / prefix_count
     else:
         domain_estimate = 'unknown'
-    letters = LETTERS
+    letters = DOMAIN_CHARS
     return render_to_response(request, 'prefixes/index.html', locals())
 
 
 def need_update():
-    size = len(LETTERS)
+    size = len(DOMAIN_CHARS)
     squared = size * size
     keys = (Prefix.all(keys_only=True).filter('length', 2)
             .order('__key__').fetch(1000))
@@ -82,8 +81,8 @@ def need_update():
         return [key.name() for key in oldest]
     existing = set([key.name() for key in keys])
     result = []
-    for c1 in LETTERS:
-        for c2 in LETTERS:
+    for c1 in DOMAIN_CHARS:
+        for c2 in DOMAIN_CHARS:
             name = c1 + c2
             if name not in existing:
                 result.append(name)
@@ -117,27 +116,38 @@ def cron(request):
     return render_to_response(request, 'prefixes/cron.html', locals())
 
 
-def count_popular_prefixes(domains, position='left'):
-    # Lists for batch put and HTML output.
-    prefixes = []
-    rows = []
-    already_counted = set()
-    # Update popular prefix and suffix counters.
-    for domain in domains:
-        name = domain.key().name()
-        rows.append([])
-        for length in range(3, 7):
-            if len(name) < length:
-                break
+def fetch_names_with_com(prefix):
+    start = db.Key.from_path('domains_dnslookup', prefix)
+    stop = db.Key.from_path('domains_dnslookup',
+                            prefix[:-1] + chr(ord(prefix[-1]) + 1))
+    greater = '>='
+    while True:
+        query = DnsLookupDomain.all(keys_only=True)
+        query.filter('com', True)
+        query.filter('__key__ ' + greater, start)
+        query.filter('__key__ <', stop)
+        keys = query.fetch(1000)
+        for key in keys:
+            yield key.name()
+        if len(keys) < 1000:
+            break
+        start = keys[-1]
+        greater = '>'
+
+
+def count_popular_prefixes(three_chars, position='left'):
+    counters = {}
+    for name in iterate_names_with_com('%s3' % position, three_chars):
+        for length in range(3, min(7, len(name) + 1)):
             if position == 'left':
                 part = name[:length]
             else:
                 part = name[-length:]
-            if part in already_counted:
-                continue
-            already_counted.add(part)
-            # Count popular prefixes.
-            if position == 'left':
+            counters[part] = counters.get(part, 0) + 1
+    for part in counters:
+        count = counters[part]
+        if count < 
+
                 prefix = DotComPrefix(key_name=part, length=length)
             else:
                 prefix = DotComSuffix(key_name=part, length=length)
@@ -156,14 +166,7 @@ def count_popular_prefixes(domains, position='left'):
 
 
 def cron_popular(request):
-    # Pick some random existing .com domain names.
-    domains = Domain.all()
-    domains.order('com').filter('com !=', None)
-    domains.order('-timestamp')
-    domains = domains.fetch(20)
-    random.shuffle(domains)
-    domains = domains[:2]
-    # Count popular prefixes and suffixes.
-    prefix_rows = count_popular_prefixes(domains, 'left')
-    suffix_rows = count_popular_prefixes(domains, 'right')
+    three_chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(3)])
+    prefix_rows = count_popular_prefixes(three_chars, 'left')
+    suffix_rows = count_popular_prefixes(three_chars, 'right')
     return render_to_response(request, 'prefixes/cron.html', locals())
