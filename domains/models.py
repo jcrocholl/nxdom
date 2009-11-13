@@ -9,7 +9,7 @@ MAX_NAME_LENGTH = 16
 DOMAIN_CHARS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
 TOP_LEVEL_DOMAINS = 'com net org biz info'.split()
 OBSOLETE_ATTRIBUTES = """
-com net org dns_com dns_net dns_org dns_timestamp
+scowl com net org dns_com dns_net dns_org dns_timestamp
 """.split()
 
 
