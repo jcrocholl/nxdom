@@ -10,7 +10,7 @@ from ragendja.template import render_to_response
 from ragendja.dbutils import get_object_or_404
 
 from domains.models import MAX_NAME_LENGTH, DOMAIN_CHARS, OBSOLETE_ATTRIBUTES
-from domains.models import Domain, DnsLookup
+from domains.models import Domain
 
 
 def index(request):
