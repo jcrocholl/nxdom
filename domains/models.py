@@ -84,7 +84,6 @@ class Domain(BaseModel):
         """
         self.update_counts()
         self.update_languages()
-        self.update_dns()
         self.update_substrings()
         self.timestamp = datetime.now()
 
