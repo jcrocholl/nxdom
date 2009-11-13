@@ -17,9 +17,9 @@ from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
 from google.appengine.api.datastore_errors import Timeout
 
+from dns.models import TOP_LEVEL_DOMAINS, Lookup
+from domains.models import MAX_NAME_LENGTH, Domain
 from domains.utils import get_random_names
-from domains.models import MAX_NAME_LENGTH, TOP_LEVEL_DOMAINS
-from domains.models import Domain, DnsLookup
 
 BATCH_SIZE = 100
 MAX_ATTEMPTS = 5
@@ -94,7 +94,8 @@ def lookup_names(names):
     detect_dns_hijacker(results, threshold)
     lookups = []
     for name in names:
-        lookup = DnsLookup(key_name=name, timestamp = datetime.now())
+        lookup = Lookup(key_name=name, backwards=name[::-1],
+                        timestamp=datetime.now())
         print '%-16s' % name,
         for tld in TOP_LEVEL_DOMAINS:
             ip = results.get('%s.%s' % (name, tld), '')

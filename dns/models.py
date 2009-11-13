@@ -7,8 +7,8 @@ class Lookup(db.Model):
     """
     The datastore key name is the domain name, without top level.
     """
-    backwards = db.StringProperty() # For suffix matching, name[::-1].
-    timestamp = db.DateTimeProperty() # Created or updated.
+    backwards = db.StringProperty(required=True) # For suffix matching.
+    timestamp = db.DateTimeProperty(required=True) # Created or updated.
     com = db.BooleanProperty() # True if name.com has IP address.
     net = db.BooleanProperty()
     org = db.BooleanProperty()
