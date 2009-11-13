@@ -14,7 +14,10 @@ from domains.models import Domain
 
 def index(request):
     # Display list of recent names.
-    domain_list = Domain.all().order('-timestamp').fetch(20)
+    newest = Domain.all().order('-timestamp').fetch(30)
+    oldest = Domain.all().order('timestamp').fetch(5)
+    oldest.reverse()
+    domain_list = newest + [''] + oldest
     # Recent statistics.
     domain_stats = stats.KindStat.all().filter('kind_name', 'domains_domain')
     domain_stats = domain_stats.order('-timestamp').fetch(3)
@@ -30,8 +33,6 @@ def cron(request, path_rest):
     updates = path_rest.split('/')
     domain_list = Domain.all().order('timestamp').fetch(100)
     for domain in domain_list:
-        if 'dns' in updates:
-            domain.update_dns()
         if 'languages' in updates:
             domain.update_languages()
             domain.timestamp = datetime.now()
