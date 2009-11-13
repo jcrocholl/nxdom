@@ -7,7 +7,6 @@ from languages.utils import word_score
 
 MAX_NAME_LENGTH = 16
 DOMAIN_CHARS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
-TOP_LEVEL_DOMAINS = 'com net org biz info'.split()
 OBSOLETE_ATTRIBUTES = """
 scowl com net org dns_com dns_net dns_org dns_timestamp
 """.split()
@@ -127,15 +126,3 @@ class Domain(BaseModel):
         self.right4 = name[-4:] if length >= 4 else None
         self.right5 = name[-5:] if length >= 5 else None
         self.right6 = name[-6:] if length >= 6 else None
-
-
-class DnsLookup(db.Model):
-    """
-    The datastore key name is the domain name, without top level.
-    """
-    timestamp = db.DateTimeProperty()
-    com = db.BooleanProperty()
-    net = db.BooleanProperty()
-    org = db.BooleanProperty()
-    biz = db.BooleanProperty()
-    info = db.BooleanProperty()
