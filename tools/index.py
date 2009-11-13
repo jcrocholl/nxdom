@@ -13,10 +13,6 @@ for length in range(1, 7):
         INDEXES.append('domains_domain:left%d,%s' % (length, property))
         INDEXES.append('domains_domain:right%d,%s' % (length, property))
 
-for length in range(3, 7):
-    INDEXES.append('domains_domain:left%d,com' % length)
-    INDEXES.append('domains_domain:right%d,com' % length)
-
 print 'indexes:'
 for index in INDEXES:
     kind, properties = index.split(':')
