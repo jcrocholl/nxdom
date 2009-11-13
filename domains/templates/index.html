@@ -12,11 +12,8 @@
 
 <table>
 <tr>
-<th>Timestamp</th>
 <th>Name</th>
 <th>Backwards</th>
-<th>Left 5</th>
-<th>Right 5</th>
 <th>Length</th>
 <th>Digits</th>
 <th>Dashes</th>
@@ -24,18 +21,15 @@
 <th>Spanish</th>
 <th>French</th>
 <th>German</th>
-<th>.com</th>
-<th>.net</th>
-<th>.org</th>
-<th>DNS checked</th>
+<th>Timestamp</th>
 </tr>
 {% for domain in domain_list %}
+{% if not domain %}
+<tr class="{% cycle 'row1' 'row2' %}"><td>...</td></tr>
+{% else %}
 <tr class="{% cycle 'row1' 'row2' %}">
-<td>{{ domain.timestamp|timesince }} ago</td>
 <td>{{ domain.key.name }}</td>
 <td>{{ domain.backwards }}</td>
-<td>{{ domain.left5 }}</td>
-<td>{{ domain.right5 }}</td>
 <td>{{ domain.length }}</td>
 <td>{{ domain.digits }}</td>
 <td>{{ domain.dashes }}</td>
@@ -43,11 +37,9 @@
 <td>{{ domain.spanish }}</td>
 <td>{{ domain.french }}</td>
 <td>{{ domain.german }}</td>
-<td>{% if domain.com %}{{ domain.com }}{% endif %} {{ domain.dns_com }}</td>
-<td>{% if domain.net %}{{ domain.net }}{% endif %} {{ domain.dns_net }}</td>
-<td>{% if domain.org %}{{ domain.org }}{% endif %} {{ domain.dns_org }}</td>
-<td>{{ domain.dns_timestamp|timesince }} ago</td>
+<td>{{ domain.timestamp|timesince }} ago</td>
 </tr>
+{% endif %}
 {% endfor %}
 </table>
 {% endblock %}
