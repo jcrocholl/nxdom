@@ -7,7 +7,7 @@ from domains.models import Domain, DOMAIN_CHARS, MAX_NAME_LENGTH
 
 def get_random_names(count):
     query = Domain.all(keys_only=True)
-    length = random.choice([1, 2, 3, MAX_NAME_LENGTH])
+    length = random.choice([2, MAX_NAME_LENGTH])
     name = ''.join([random.choice(DOMAIN_CHARS) for i in range(length)])
     if length == MAX_NAME_LENGTH:
         key = db.Key.from_path('domains_domain', name)
