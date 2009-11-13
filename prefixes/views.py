@@ -9,7 +9,8 @@ from google.appengine.ext import db
 from ragendja.template import render_to_response
 from appenginepatcher import on_production_server
 
-from domains.models import Domain, DnsLookup, DOMAIN_CHARS
+from domains.models import Domain, DOMAIN_CHARS
+from dns.models import Lookup
 from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
 
 POPULAR_COUNT = 30 if on_production_server else 2
@@ -116,57 +117,73 @@ def cron(request):
     return render_to_response(request, 'prefixes/cron.html', locals())
 
 
-def fetch_names_with_com(prefix):
-    start = db.Key.from_path('domains_dnslookup', prefix)
-    stop = db.Key.from_path('domains_dnslookup',
-                            prefix[:-1] + chr(ord(prefix[-1]) + 1))
+def increment(chars):
+    return chars[:-1] + chr(ord(chars[-1]) + 1)
+
+
+def iterate_dot_com_names(position, three_chars):
+    if position == 'left':
+        field = '__key__'
+        start = db.Key.from_path('dns_lookup', three_chars)
+        stop = db.Key.from_path('dns_lookup', increment(three_chars))
+    else:
+        field = 'backwards'
+        start = three_chars[::-1]
+        stop = increment(start)
     greater = '>='
     while True:
-        query = DnsLookupDomain.all(keys_only=True)
+        query = Lookup.all(keys_only=True).order(field)
+        query.filter(field + ' ' + greater, start)
+        query.filter(field + ' <', stop)
         query.filter('com', True)
-        query.filter('__key__ ' + greater, start)
-        query.filter('__key__ <', stop)
         keys = query.fetch(1000)
         for key in keys:
             yield key.name()
         if len(keys) < 1000:
             break
-        start = keys[-1]
+        if position == 'left':
+            start = keys[-1]
+        else:
+            start = keys[-1].name()[::-1]
         greater = '>'
 
 
 def count_popular_prefixes(three_chars, position='left'):
     counters = {}
-    for name in iterate_names_with_com('%s3' % position, three_chars):
+    for name in iterate_dot_com_names(position, three_chars):
         for length in range(3, min(7, len(name) + 1)):
             if position == 'left':
                 part = name[:length]
             else:
                 part = name[-length:]
             counters[part] = counters.get(part, 0) + 1
+    updated = []
     for part in counters:
         count = counters[part]
-        if count < 
-
-                prefix = DotComPrefix(key_name=part, length=length)
-            else:
-                prefix = DotComSuffix(key_name=part, length=length)
-            prefix.count_domains()
-            if prefix.count >= POPULAR_COUNT:
-                prefixes.append(prefix)
-                rows[-1].append(prefix)
-            else:
-                prefix.class_extra = ' quiet'
-                rows[-1].append(prefix)
-                break
-        if not rows[-1]:
-            rows.pop(-1)
-    db.put(prefixes)
-    return rows
+        if count < POPULAR_COUNT:
+            continue
+        if position == 'left':
+            updated.append(DotComPrefix(key_name=part, length=len(part),
+                                        count=count, timestamp=datetime.now()))
+        else:
+            updated.append(DotComSuffix(key_name=part, length=len(part),
+                                        count=count, timestamp=datetime.now()))
+    updated.sort()
+    db.put(updated)
+    return updated
 
 
 def cron_popular(request):
-    three_chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(3)])
-    prefix_rows = count_popular_prefixes(three_chars, 'left')
-    suffix_rows = count_popular_prefixes(three_chars, 'right')
+    prefix_rows = []
+    suffix_rows = []
+    for attempt in range(10):
+        three_chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(3)])
+        prefixes = count_popular_prefixes(three_chars, 'left')
+        if prefixes:
+            prefix_rows.append(prefixes)
+        suffixes = count_popular_prefixes(three_chars, 'right')
+        if suffixes:
+            suffix_rows.append(suffixes)
+        if len(prefix_rows) >= 3 or len(suffix_rows) >= 3:
+            break
     return render_to_response(request, 'prefixes/cron.html', locals())
