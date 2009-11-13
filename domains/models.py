@@ -5,6 +5,11 @@ from google.appengine.ext import db
 from languages import english, spanish, german, french
 from languages.utils import word_score
 
+DOMAIN_CHARS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
+OBSOLETE_ATTRIBUTES = """
+com net org dns_com dns_net dns_org dns_timestamp
+""".split()
+
 
 class BaseModel(db.Expando):
 
