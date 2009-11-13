@@ -9,7 +9,6 @@ setup_env()
 
 import time
 from datetime import datetime
-import random
 
 import ADNS
 from adns import rr
@@ -18,7 +17,8 @@ from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
 from google.appengine.api.datastore_errors import Timeout
 
-from domains.models import MAX_NAME_LENGTH, DOMAIN_CHARS, TOP_LEVEL_DOMAINS
+from domains.utils import get_random_names
+from domains.models import MAX_NAME_LENGTH, TOP_LEVEL_DOMAINS
 from domains.models import Domain, DnsLookup
 
 BATCH_SIZE = 100
@@ -103,31 +103,6 @@ def lookup_names(names):
         print lookup.timestamp.strftime('%Y-%m-%d %H:%M')
         lookups.append(lookup)
     retry(db.put, lookups)
-
-
-def get_random_names(count):
-    query = Domain.all(keys_only=True)
-    length = random.choice(range(4))
-    if not length:
-        name = ''.join([random.choice(DOMAIN_CHARS) for i in range(10)])
-        random_key = db.Key.from_path('domains_domain', name)
-        description = "names that follow %s" % name
-        query.filter('__key__ >', random_key)
-    else:
-        position = random.choice(['left', 'right'])
-        name = ''.join([random.choice(DOMAIN_CHARS) for i in range(length)])
-        order = random.choice(['length', '-english'])
-        query.filter('%s%d' % (position, len(name)), name)
-        query.order(order)
-        description = "%s names that %s with %s" % (
-            'shortest' if order == 'length' else 'most readable',
-            'start' if position == 'left' else 'end', name)
-    keys = query.fetch(count)
-    names = [key.name() for key in keys]
-    if names:
-        return names, description
-    else: # Try again.
-        return get_random_names(count)
 
 
 def main():
