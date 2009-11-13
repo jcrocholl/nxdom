@@ -99,30 +99,35 @@ def lookup_names(names):
         for tld in TOP_LEVEL_DOMAINS:
             ip = results.get('%s.%s' % (name, tld), '')
             setattr(lookup, tld, bool(ip))
-            print '%-22s' % ('%s:%s' % (getattr(lookup, tld), ip)),
+            print '%-16s' % ip,
         print lookup.timestamp.strftime('%Y-%m-%d %H:%M')
         lookups.append(lookup)
     retry(db.put, lookups)
 
 
-def fetch_server_names():
+def get_random_names(count):
     query = Domain.all(keys_only=True)
     length = random.choice(range(4))
     if not length:
         name = ''.join([random.choice(DOMAIN_CHARS) for i in range(10)])
         random_key = db.Key.from_path('domains_domain', name)
-        print "Fetching names greater than", name
+        description = "names that follow %s" % name
         query.filter('__key__ >', random_key)
     else:
+        position = random.choice(['left', 'right'])
         name = ''.join([random.choice(DOMAIN_CHARS) for i in range(length)])
-        print "Fetching the shortest names that start with", name
-        query.filter('left%d' % len(name), name).order('length')
-    keys = query.fetch(BATCH_SIZE)
-    names = [key.name() for key in keys if len(key.name()) < MAX_NAME_LENGTH]
+        order = random.choice(['length', '-english'])
+        query.filter('%s%d' % (position, len(name)), name)
+        query.order(order)
+        description = "%s names that %s with %s" % (
+            'shortest' if order == 'length' else 'most readable',
+            'start' if position == 'left' else 'end', name)
+    keys = query.fetch(count)
+    names = [key.name() for key in keys]
     if names:
-        return names
+        return names, description
     else: # Try again.
-        return fetch_server_names()
+        return get_random_names(count)
 
 
 def main():
@@ -136,10 +141,15 @@ def main():
         'scoretool', '/remote_api', auth_func, options.server)
     if not args:
         while True:
-            lookup_names(fetch_server_names())
+            names, description = get_random_names(BATCH_SIZE)
+            print "Fetched %d %s" % (len(names), description)
+            print ' '.join(names)
+            lookup_names(names)
     else:
         for filename in args:
-            lookup_names([line.strip() for name in open(filename)])
+            names = [line.strip() for name in open(filename)]
+            print "Loaded %d names from %s" % (len(names), filename)
+            lookup_names(names)
 
 
 if __name__ == '__main__':
