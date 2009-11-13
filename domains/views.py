@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from ragendja.template import render_to_response
 from ragendja.dbutils import get_object_or_404
 
-from domains.models import DOMAIN_CHARS, OBSOLETE_ATTRIBUTES
+from domains.models import MAX_NAME_LENGTH, DOMAIN_CHARS, OBSOLETE_ATTRIBUTES
 from domains.models import Domain, DnsLookup
 
 
@@ -32,6 +32,7 @@ def detail(request, key_name):
 
 def cron(request):
     updated_domains = []
+    deleted_domains = []
     random_domains = Domain.all()
     random_key = db.Key.from_path('domains_domain',
         ''.join([random.choice(DOMAIN_CHARS) for i in range(20)]))
@@ -40,6 +41,9 @@ def cron(request):
     count_obsolete = 0
     count_languages = 0
     for domain in random_domains:
+        if len(domain.key().name()) > MAX_NAME_LENGTH:
+            deleted_domains.append(domain)
+            continue
         updated = False
         for attr in OBSOLETE_ATTRIBUTES:
             if hasattr(domain, attr):
@@ -58,6 +62,8 @@ def cron(request):
             domain.timestamp = datetime.now()
             updated_domains.append(domain)
     db.put(updated_domains)
+    db.delete(deleted_domains)
     count_updated = len(updated_domains)
+    count_deleted = len(deleted_domains)
     domain_list = updated_domains[:10]
     return render_to_response(request, 'domains/index.html', locals())
