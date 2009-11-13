@@ -23,11 +23,10 @@ indexes:
   - name: length
   - name: timestamp
 
-- kind: domains_domain
+- kind: dns_lookup
   properties:
   - name: com
-  - name: timestamp
-    direction: desc
+  - name: backwards
 
 - kind: domains_domain
   properties:
