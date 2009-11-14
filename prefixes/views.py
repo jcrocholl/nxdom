@@ -13,7 +13,7 @@ from domains.models import Domain, DOMAIN_CHARS
 from dns.models import Lookup
 from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
 
-POPULAR_COUNT = 30 if on_production_server else 2
+POPULAR_COUNT = 2 # 30 if on_production_server else 2
 
 
 class PrefixForm(forms.Form):
@@ -168,7 +168,7 @@ def count_popular_prefixes(three_chars, position='left'):
         else:
             updated.append(DotComSuffix(key_name=part, length=len(part),
                                         count=count, timestamp=datetime.now()))
-    updated.sort()
+    updated.sort(key=lambda prefix: prefix.length)
     db.put(updated)
     return updated
 
@@ -176,7 +176,7 @@ def count_popular_prefixes(three_chars, position='left'):
 def cron_popular(request):
     prefix_rows = []
     suffix_rows = []
-    for attempt in range(10):
+    for attempt in range(100):
         three_chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(3)])
         prefixes = count_popular_prefixes(three_chars, 'left')
         if prefixes:
@@ -184,6 +184,6 @@ def cron_popular(request):
         suffixes = count_popular_prefixes(three_chars, 'right')
         if suffixes:
             suffix_rows.append(suffixes)
-        if len(prefix_rows) >= 3 or len(suffix_rows) >= 3:
+        if len(prefix_rows) >= 10 or len(suffix_rows) >= 10:
             break
     return render_to_response(request, 'prefixes/cron.html', locals())
