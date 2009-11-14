@@ -13,7 +13,7 @@ from domains.models import Domain, DOMAIN_CHARS
 from dns.models import Lookup
 from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
 
-POPULAR_COUNT = 2 # 30 if on_production_server else 2
+POPULAR_COUNT = 3 if on_production_server else 1
 
 
 class PrefixForm(forms.Form):
@@ -121,14 +121,14 @@ def increment(chars):
     return chars[:-1] + chr(ord(chars[-1]) + 1)
 
 
-def iterate_dot_com_names(position, three_chars):
+def iterate_dot_com_names(position, chars):
     if position == 'left':
         field = '__key__'
-        start = db.Key.from_path('dns_lookup', three_chars)
-        stop = db.Key.from_path('dns_lookup', increment(three_chars))
+        start = db.Key.from_path('dns_lookup', chars)
+        stop = db.Key.from_path('dns_lookup', increment(chars))
     else:
         field = 'backwards'
-        start = three_chars[::-1]
+        start = chars[::-1]
         stop = increment(start)
     greater = '>='
     while True:
@@ -148,9 +148,9 @@ def iterate_dot_com_names(position, three_chars):
         greater = '>'
 
 
-def count_popular_prefixes(three_chars, position='left'):
+def count_popular_prefixes(chars, position='left'):
     counters = {}
-    for name in iterate_dot_com_names(position, three_chars):
+    for name in iterate_dot_com_names(position, chars):
         for length in range(3, min(7, len(name) + 1)):
             if position == 'left':
                 part = name[:length]
@@ -168,7 +168,7 @@ def count_popular_prefixes(three_chars, position='left'):
         else:
             updated.append(DotComSuffix(key_name=part, length=len(part),
                                         count=count, timestamp=datetime.now()))
-    updated.sort(key=lambda prefix: prefix.length)
+    updated.sort(key=lambda prefix: (prefix.length, -prefix.count))
     db.put(updated)
     return updated
 
@@ -176,14 +176,12 @@ def count_popular_prefixes(three_chars, position='left'):
 def cron_popular(request):
     prefix_rows = []
     suffix_rows = []
-    for attempt in range(100):
-        three_chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(3)])
-        prefixes = count_popular_prefixes(three_chars, 'left')
+    for attempt in range(10):
+        chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(2)])
+        prefixes = count_popular_prefixes(chars, 'left')
         if prefixes:
             prefix_rows.append(prefixes)
-        suffixes = count_popular_prefixes(three_chars, 'right')
+        suffixes = count_popular_prefixes(chars, 'right')
         if suffixes:
             suffix_rows.append(suffixes)
-        if len(prefix_rows) >= 10 or len(suffix_rows) >= 10:
-            break
     return render_to_response(request, 'prefixes/cron.html', locals())
