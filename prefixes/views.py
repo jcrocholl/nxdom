@@ -176,8 +176,12 @@ def count_popular_prefixes(chars, position='left'):
 def cron_popular(request):
     prefix_rows = []
     suffix_rows = []
+    already = set()
     for attempt in range(10):
         chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(2)])
+        if chars in already:
+            continue
+        already.add(chars)
         prefixes = count_popular_prefixes(chars, 'left')
         if prefixes:
             prefix_rows.append(prefixes)
