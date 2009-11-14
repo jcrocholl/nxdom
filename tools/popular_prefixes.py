@@ -19,9 +19,12 @@ def auth_func():
 
 
 def most_popular(query):
+    print
     query.order('-count')
-    for prefix in query.fetch(10):
-        print prefix.count, prefix.key().name(),
+    for prefix in query.fetch(100):
+        print '%s:%d' % (prefix.key().name(), prefix.count),
+        if prefix.count < 10:
+            break
     print
 
 
@@ -34,10 +37,8 @@ def main():
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api', auth_func, options.server)
-    print 'Most popular prefixes:'
     for length in range(3, 7):
         most_popular(DotComPrefix.all().filter('length', length))
-    print 'Most popular suffixes:'
     for length in range(3, 7):
         most_popular(DotComSuffix.all().filter('length', length))
 
