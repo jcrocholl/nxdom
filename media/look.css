@@ -3,13 +3,15 @@
 p { padding: 0 4px; }
 
 col.name { width: 170px; }
-col.dns { width: 100px; }
+col.dns { width: 50px; }
 col.int { width: 50px; }
 
 tr.row2 { background-color: #EEE; }
 
 tr.row1 td.red { color: #800; background: #fdd; }
 tr.row2 td.red { color: #800; background: #edd; }
+tr.row1 td.green { color: #080; background: #dfd; }
+tr.row2 td.green { color: #080; background: #ded; }
 
 tr.row1 td.best {  background: #ff8; }
 tr.row2 td.best { background: #ee8; }

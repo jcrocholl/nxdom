@@ -7,11 +7,13 @@ from django.http import HttpResponseRedirect
 from ragendja.template import render_to_response
 
 from domains.models import Domain
+from dns.models import Lookup, TOP_LEVEL_DOMAINS
 
 INITIAL = {
-    'com': 50, 'net': 30, 'org': 20,
+    'left': '', 'right': '',
     'len': -1, 'digits': -4, 'dashes': -8,
     'english': 2, 'spanish': 1, 'french': 1, 'german': 1,
+    'com': 50, 'net': 30, 'org': 20, 'biz': 20, 'info': 20,
     }
 
 
@@ -22,15 +24,6 @@ class SearchForm(forms.Form):
     right = forms.CharField(
         max_length=40, required=False,
         widget=forms.TextInput(attrs={'class': 'text span-2 right'}))
-    com = forms.FloatField(
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    net = forms.FloatField(
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    org = forms.FloatField(
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
     len = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
@@ -50,6 +43,21 @@ class SearchForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
     german = forms.FloatField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    com = forms.FloatField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    net = forms.FloatField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    org = forms.FloatField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    biz = forms.FloatField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    info = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
 
@@ -93,35 +101,49 @@ def filter_domains(keyword, position='left', order='length'):
 
 
 def index(request, template_name='search/index.html'):
-    search_form = SearchForm(request.GET or INITIAL, initial=INITIAL)
+    search_form = SearchForm(request.GET or None, initial=INITIAL)
     if search_form.is_valid():
         cleaned_data = search_form.cleaned_data
-        left = cleaned_data['left']
-        right = cleaned_data['right']
-        if len(left) >= len(right):
-            position = 'left'
-            keyword = left
-        else:
-            position = 'right'
-            keyword = right
-        names = set()
-        names.update(filter_domains(keyword, position, 'length'))
-        if cleaned_data['spanish'] > cleaned_data['english']:
-            names.update(filter_domains(keyword, position, '-spanish'))
-        elif cleaned_data['french'] > cleaned_data['english']:
-            names.update(filter_domains(keyword, position, '-french'))
-        elif cleaned_data['german'] > cleaned_data['english']:
-            names.update(filter_domains(keyword, position, '-german'))
-        else:
-            names.update(filter_domains(keyword, position, '-english'))
-        if left and position == 'right':
-            names = [name for name in names if name.startswith(left)]
-        if right and position == 'left':
-            names = [name for name in names if name.endswith(right)]
-        domain_list = db.get([db.Key.from_path('domains_domain', name)
-                              for name in names][:1000])
-        domain_list = score_domains(cleaned_data, domain_list)
+    else:
+        cleaned_data = INITIAL
+    left = cleaned_data['left']
+    right = cleaned_data['right']
+    if len(left) >= len(right):
+        position = 'left'
+        keyword = left
+    else:
+        position = 'right'
+        keyword = right
+    names = set()
+    names.update(filter_domains(keyword, position, 'length'))
+    if cleaned_data['spanish'] > cleaned_data['english']:
+        names.update(filter_domains(keyword, position, '-spanish'))
+    elif cleaned_data['french'] > cleaned_data['english']:
+        names.update(filter_domains(keyword, position, '-french'))
+    elif cleaned_data['german'] > cleaned_data['english']:
+        names.update(filter_domains(keyword, position, '-german'))
+    else:
+        names.update(filter_domains(keyword, position, '-english'))
+    if left and position == 'right':
+        names = [name for name in names if name.startswith(left)]
+    elif right and position == 'left':
+        names = [name for name in names if name.endswith(right)]
+    else:
+        names = list(names)
+    domain_list = fetch_domains_and_dns(names[:1000])
+    domain_list = score_domains(cleaned_data, domain_list)
     return render_to_response(request, template_name, locals())
+
+
+def fetch_domains_and_dns(names):
+    domain_keys = [db.Key.from_path('domains_domain', name) for name in names]
+    domain_list = db.get(domain_keys)
+    lookup_keys = [db.Key.from_path('dns_lookup', name) for name in names]
+    lookup_list = db.get(lookup_keys)
+    for domain, lookup in zip(domain_list, lookup_list):
+        for tld in TOP_LEVEL_DOMAINS:
+            setattr(domain, tld, getattr(lookup, tld) if lookup else None)
+    return domain_list
 
 
 def score_domains(cleaned_data, domain_list):
@@ -129,12 +151,9 @@ def score_domains(cleaned_data, domain_list):
     for domain in domain_list:
         score = 0
         # Available domain names.
-        if domain.com is None:
-            score += cleaned_data['com']
-        if domain.net is None:
-            score += cleaned_data['net']
-        if domain.org is None:
-            score += cleaned_data['org']
+        for tld in TOP_LEVEL_DOMAINS:
+            if getattr(domain, tld) == False:
+                score += cleaned_data[tld]
         # Character counts.
         if domain.length is None:
             domain.count_chars()
