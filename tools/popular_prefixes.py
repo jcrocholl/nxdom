@@ -19,12 +19,11 @@ def auth_func():
 
 
 def most_popular(query):
-    print
     query.order('-count')
     for prefix in query.fetch(100):
-        print '%s:%d' % (prefix.key().name(), prefix.count),
         if prefix.count < 10:
             break
+        print prefix.key().name(), prefix.count
     print
 
 
