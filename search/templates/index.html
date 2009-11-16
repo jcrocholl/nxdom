@@ -16,8 +16,8 @@ function search() {
     com: $("input#id_com").val(),
     net: $("input#id_net").val(),
     org: $("input#id_org").val(),
-    com: $("input#id_biz").val(),
-    net: $("input#id_info").val() },
+    biz: $("input#id_biz").val(),
+    info: $("input#id_info").val() },
   function(data) {
     $('tbody#results').html(data);
   });
