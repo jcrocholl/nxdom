@@ -85,18 +85,18 @@ def filter_domains(left, right, order='length'):
         domain_list.filter('left%d' % len(left), left)
     elif len(left) > 6:
         domain_list.order('__key__')
-        next = increment_prefix(left)
         domain_list.filter(
-            '__key__ >=', db.Key.from_path('domains_domain', keyword))
+            '__key__ >=', db.Key.from_path('domains_domain', left))
+        next = increment_prefix(left)
         domain_list.filter(
             '__key__ <', db.Key.from_path('domains_domain', next))
     if 1 <= len(right) <=6:
         domain_list.filter('right%d' % len(right), right)
     elif len(right) > 6:
         domain_list.order('backwards')
-        backwards = keyword[::-1]
-        next = increment_prefix(backwards)
+        backwards = right[::-1]
         domain_list.filter('backwards >=', backwards)
+        next = increment_prefix(backwards)
         domain_list.filter('backwards <', next)
     domain_list.order(order)
     names = [key.name() for key in domain_list.fetch(50)]
