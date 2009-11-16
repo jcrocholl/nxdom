@@ -1,3 +1,5 @@
+import logging
+
 from google.appengine.ext import db
 from google.appengine.api import memcache
 
@@ -8,6 +10,7 @@ from ragendja.template import render_to_response
 
 from domains.models import Domain
 from dns.models import Lookup, TOP_LEVEL_DOMAINS
+from prefixes.utils import increment_prefix
 
 INITIAL = {
     'left': '', 'right': '',
@@ -69,35 +72,66 @@ class SearchForm(forms.Form):
         return data
 
 
-def filter_domains(keyword, position='left', order='length'):
+def filter_domains(left, right, order='length'):
     # Try to get names from memcache, to avoid datastore queries.
-    memcache_key = ','.join((keyword, position, order))
+    memcache_key = ','.join((left, right, order))
     names = memcache.get(memcache_key)
     if names:
-        # logging.debug('memcache hit: %s', memcache_key)
+        logging.debug('filter_domains: memcache hit for %s', memcache_key)
         return names.split()
     # If not found in cache, get names from the datastore.
     domain_list = Domain.all(keys_only=True)
-    if 1 <= len(keyword) <= 6:
-        domain_list.filter('%s%d' % (position, len(keyword)), keyword)
-    elif position == 'left' and len(keyword) > 6:
+    if 1 <= len(left) <= 6:
+        domain_list.filter('left%d' % len(left), left)
+    elif len(left) > 6:
         domain_list.order('__key__')
-        next = keyword[:-1] + chr(ord(keyword[-1]) + 1)
+        next = increment_prefix(left)
         domain_list.filter(
             '__key__ >=', db.Key.from_path('domains_domain', keyword))
         domain_list.filter(
             '__key__ <', db.Key.from_path('domains_domain', next))
-    elif position == 'right' and len(keyword) > 6:
+    if 1 <= len(right) <=6:
+        domain_list.filter('right%d' % len(right), right)
+    elif len(right) > 6:
         domain_list.order('backwards')
         backwards = keyword[::-1]
-        next = backwards[:-1] + chr(ord(backwards[-1]) + 1)
+        next = increment_prefix(backwards)
         domain_list.filter('backwards >=', backwards)
         domain_list.filter('backwards <', next)
     domain_list.order(order)
-    names = [key.name() for key in domain_list.fetch(333)]
+    names = [key.name() for key in domain_list.fetch(50)]
     # Cache results for 24 hours.
     memcache.set(memcache_key, ' '.join(names), time=24 * 60 * 60)
     return names
+
+
+def get_domains_with_cache(names):
+    # Try to get domains from memcache.
+    from_cache = memcache.get_multi(names)
+    if from_cache:
+        logging.debug('get_domains_with_cache: memcache hit %d/%d domains' %
+                      (len(from_cache), len(names)))
+    result = [Domain.from_cache(name, from_cache[name])
+              for name in from_cache]
+    # Fetch missing domains from datastore.
+    missing = [name for name in names if name not in from_cache]
+    if missing:
+        datastore_domains = db.get([db.Key.from_path('domains_domain', name)
+                                    for name in missing])
+        datastore_lookups = db.get([db.Key.from_path('dns_lookup', name)
+                                    for name in missing])
+        # Pull DNS results into the Domain instances.
+        to_cache = {}
+        for domain, lookup in zip(datastore_domains, datastore_lookups):
+            if domain is not None:
+                for tld in TOP_LEVEL_DOMAINS:
+                    value = getattr(lookup, tld) if lookup else None
+                    setattr(domain, tld, value)
+                result.append(domain)
+                to_cache[domain.key().name()] = domain.to_cache()
+        # Cache results for 24 hours.
+        memcache.set_multi(to_cache, 24 * 60 * 60)
+    return result
 
 
 def index(request, template_name='search/index.html'):
@@ -108,42 +142,30 @@ def index(request, template_name='search/index.html'):
         cleaned_data = INITIAL
     left = cleaned_data['left']
     right = cleaned_data['right']
-    if len(left) >= len(right):
-        position = 'left'
-        keyword = left
-    else:
-        position = 'right'
-        keyword = right
+    if left and right:
+        if len(left) >= len(right):
+            right = ''
+        else:
+            left = ''
     names = set()
-    names.update(filter_domains(keyword, position, 'length'))
+    names.update(filter_domains(left, right, 'length'))
     if cleaned_data['spanish'] > cleaned_data['english']:
-        names.update(filter_domains(keyword, position, '-spanish'))
+        names.update(filter_domains(left, right, '-spanish'))
     elif cleaned_data['french'] > cleaned_data['english']:
-        names.update(filter_domains(keyword, position, '-french'))
+        names.update(filter_domains(left, right, '-french'))
     elif cleaned_data['german'] > cleaned_data['english']:
-        names.update(filter_domains(keyword, position, '-german'))
+        names.update(filter_domains(left, right, '-german'))
     else:
-        names.update(filter_domains(keyword, position, '-english'))
-    if left and position == 'right':
+        names.update(filter_domains(left, right, '-english'))
+    if cleaned_data['left'] and not left:
+        left = cleaned_data['left']
         names = [name for name in names if name.startswith(left)]
-    elif right and position == 'left':
+    if cleaned_data['right'] and not right:
+        right = cleaned_data['right']
         names = [name for name in names if name.endswith(right)]
-    else:
-        names = list(names)
-    domain_list = fetch_domains_and_dns(names[:1000])
+    domain_list = get_domains_with_cache(names)
     domain_list = score_domains(cleaned_data, domain_list)
     return render_to_response(request, template_name, locals())
-
-
-def fetch_domains_and_dns(names):
-    domain_keys = [db.Key.from_path('domains_domain', name) for name in names]
-    domain_list = db.get(domain_keys)
-    lookup_keys = [db.Key.from_path('dns_lookup', name) for name in names]
-    lookup_list = db.get(lookup_keys)
-    for domain, lookup in zip(domain_list, lookup_list):
-        for tld in TOP_LEVEL_DOMAINS:
-            setattr(domain, tld, getattr(lookup, tld) if lookup else None)
-    return domain_list
 
 
 def score_domains(cleaned_data, domain_list):

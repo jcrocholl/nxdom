@@ -10,6 +10,14 @@ DOMAIN_CHARS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
 OBSOLETE_ATTRIBUTES = """
 scowl com net org dns_com dns_net dns_org dns_timestamp
 """.split()
+CACHE_ATTRIBUTES = """
+digits dashes
+english spanish french german
+com net org biz info
+""".split()
+BOOLEAN_ATTRIBUTES = set("""
+com net org biz info
+""".split())
 
 
 class BaseModel(db.Expando):
@@ -125,3 +133,25 @@ class Domain(BaseModel):
         self.right4 = name[-4:] if length >= 4 else None
         self.right5 = name[-5:] if length >= 5 else None
         self.right6 = name[-6:] if length >= 6 else None
+
+    def to_cache(self):
+        values = []
+        for attr in CACHE_ATTRIBUTES:
+            if hasattr(self, attr):
+                values.append(str(getattr(self, attr)))
+            else:
+                values.append('None')
+        return ' '.join(values)
+
+    @classmethod
+    def from_cache(cls, key, values):
+        attributes = {}
+        for attr, value in zip(CACHE_ATTRIBUTES, values.split()):
+            if value == 'None':
+                value = None
+            elif attr in BOOLEAN_ATTRIBUTES:
+                value = value == 'True'
+            else:
+                value = int(value)
+            attributes[attr] = value
+        return cls(key_name=key, length=len(key), **attributes)

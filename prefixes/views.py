@@ -12,6 +12,7 @@ from appenginepatcher import on_production_server
 from domains.models import Domain, DOMAIN_CHARS
 from dns.models import Lookup
 from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
+from prefixes.utils import increment_prefix
 
 POPULAR_COUNT = 10 if on_production_server else 1
 
@@ -117,19 +118,15 @@ def cron(request):
     return render_to_response(request, 'prefixes/cron.html', locals())
 
 
-def increment(chars):
-    return chars[:-1] + chr(ord(chars[-1]) + 1)
-
-
 def iterate_dot_com_names(position, chars):
     if position == 'left':
         field = '__key__'
         start = db.Key.from_path('dns_lookup', chars)
-        stop = db.Key.from_path('dns_lookup', increment(chars))
+        stop = db.Key.from_path('dns_lookup', increment_prefix(chars))
     else:
         field = 'backwards'
         start = chars[::-1]
-        stop = increment(start)
+        stop = increment_prefix(start)
     greater = '>='
     while True:
         query = Lookup.all(keys_only=True).order(field)
