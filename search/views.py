@@ -12,6 +12,7 @@ from domains.models import Domain
 from dns.models import Lookup, TOP_LEVEL_DOMAINS
 from prefixes.utils import increment_prefix
 
+MEMCACHE_TIMEOUT = 3600 # One hour.
 INITIAL = {
     'left': '', 'right': '',
     'len': -1, 'digits': -4, 'dashes': -8,
@@ -100,8 +101,8 @@ def filter_domains(left, right, order='length'):
         domain_list.filter('backwards <', next)
     domain_list.order(order)
     names = [key.name() for key in domain_list.fetch(50)]
-    # Cache results for 24 hours.
-    memcache.set(memcache_key, ' '.join(names), time=24 * 60 * 60)
+    # Cache results for one hour.
+    memcache.set(memcache_key, ' '.join(names), MEMCACHE_TIMEOUT)
     return names
 
 
@@ -129,8 +130,8 @@ def get_domains_with_cache(names):
                     setattr(domain, tld, value)
                 result.append(domain)
                 to_cache[domain.key().name()] = domain.to_cache()
-        # Cache results for 24 hours.
-        memcache.set_multi(to_cache, 24 * 60 * 60)
+        # Cache results for one hour.
+        memcache.set_multi(to_cache, MEMCACHE_TIMEOUT)
     return result
 
 
