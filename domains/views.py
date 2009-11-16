@@ -11,6 +11,7 @@ from ragendja.dbutils import get_object_or_404
 
 from domains.models import MAX_NAME_LENGTH, DOMAIN_CHARS, OBSOLETE_ATTRIBUTES
 from domains.models import Domain
+from domains.utils import get_random_domains
 
 
 def index(request):
@@ -33,13 +34,9 @@ def detail(request, key_name):
 def cron(request):
     updated_domains = []
     deleted_domains = []
-    random_domains = Domain.all()
-    random_key = db.Key.from_path('domains_domain',
-        ''.join([random.choice(DOMAIN_CHARS) for i in range(20)]))
-    random_domains.filter('__key__ >=', random_key)
-    random_domains = random_domains.fetch(100)
     count_obsolete = 0
     count_languages = 0
+    random_domains, update_description = get_random_domains(100)
     for domain in random_domains:
         if len(domain.key().name()) > MAX_NAME_LENGTH:
             deleted_domains.append(domain)
