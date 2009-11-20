@@ -122,7 +122,8 @@ def main():
         'scoretool', '/remote_api', auth_func, options.server)
     if not args:
         while True:
-            query, description = random_domains(keys_only=True)
+            query, description = random_domains(
+                keys_only=True, length_choices=[MAX_NAME_LENGTH])
             print "Trying to fetch %d %s" % (BATCH_SIZE, description)
             keys = retry(query.fetch, BATCH_SIZE)
             names = [key.name() for key in keys]
