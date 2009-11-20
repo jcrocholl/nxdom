@@ -57,6 +57,11 @@ def cron(request):
             domain.update_languages()
             count_languages += 1
             updated = True
+        if (len(domain.key().name()) > 6 and
+            domain.english == 0 and domain.spanish == 0 and
+            domain.french == 0 and domain.german == 0):
+            deleted_domains.append(domain)
+            continue
         if updated:
             domain.timestamp = datetime.now()
             updated_domains.append(domain)
@@ -64,5 +69,5 @@ def cron(request):
     db.delete(deleted_domains)
     count_updated = len(updated_domains)
     count_deleted = len(deleted_domains)
-    domain_list = updated_domains[:10]
+    domain_list = updated_domains[:10] + [None] + deleted_domains[:10]
     return render_to_response(request, 'domains/index.html', locals())
