@@ -19,33 +19,38 @@ from google.appengine.api.datastore_errors import Timeout
 
 from dns.models import TOP_LEVEL_DOMAINS, Lookup
 from domains.models import MAX_NAME_LENGTH, Domain
-from domains.utils import get_random_names
+from domains.utils import random_domains
 
 BATCH_SIZE = 100
-MAX_ATTEMPTS = 5
+MAX_ATTEMPTS = 10
 
 
 def auth_func():
     return open('.passwd').read().split(':')
 
 
-def retry(func, objects):
-    if not objects:
-        return
+def retry(func, *args, **kwargs):
     for attempt in range(MAX_ATTEMPTS):
         if attempt:
+            seconds = min(300, 2 ** attempt)
             print "Attempt %d of %d will start in %d seconds." % (
-                attempt + 1, MAX_ATTEMPTS, attempt)
-            time.sleep(attempt)
-        print "Trying to %s %d objects (%s to %s):" % (
-            func.__name__, len(objects),
-            objects[0].key().name(), objects[-1].key().name())
+                attempt + 1, MAX_ATTEMPTS, seconds)
+            time.sleep(seconds)
         try:
-            return func(objects)
+            return func(*args, **kwargs)
         except Timeout:
             print "*** Timeout ***"
             if attempt + 1 >= MAX_ATTEMPTS:
                 raise
+
+
+def retry_objects(func, objects):
+    if not objects:
+        return
+    print "Trying to %s %d objects (%s to %s)" % (
+        func.__name__, len(objects),
+        objects[0].key().name(), objects[-1].key().name())
+    return retry(func, objects)
 
 
 def callback(answer, name, rr, flags, results):
@@ -103,7 +108,7 @@ def lookup_names(names):
             print '%-16s' % ip,
         print lookup.timestamp.strftime('%Y-%m-%d %H:%M')
         lookups.append(lookup)
-    retry(db.put, lookups)
+    retry_objects(db.put, lookups)
 
 
 def main():
@@ -117,8 +122,11 @@ def main():
         'scoretool', '/remote_api', auth_func, options.server)
     if not args:
         while True:
-            names, description = get_random_names(BATCH_SIZE)
-            print "Fetched %d %s" % (len(names), description)
+            query, description = random_domains(keys_only=True)
+            print "Trying to fetch %d %s" % (BATCH_SIZE, description)
+            keys = retry(query.fetch, BATCH_SIZE)
+            names = [key.name() for key in keys]
+            print "Fetched", len(names), description
             print ' '.join(names)
             lookup_names(names)
     else:
