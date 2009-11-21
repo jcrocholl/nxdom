@@ -9,13 +9,14 @@ setup_env()
 
 import time
 from datetime import datetime
+import urllib2
 
 import ADNS
 from adns import rr
 
 from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
-from google.appengine.api.datastore_errors import Timeout
+from google.appengine.api import datastore_errors
 
 from dns.models import TOP_LEVEL_DOMAINS, Lookup
 from domains.models import MAX_NAME_LENGTH, Domain
@@ -38,8 +39,9 @@ def retry(func, *args, **kwargs):
             time.sleep(seconds)
         try:
             return func(*args, **kwargs)
-        except Timeout:
-            print "*** Timeout ***"
+        except (datastore_errors.Timeout, urllib2.URLError), error:
+            print type(error)
+            print error
             if attempt + 1 >= MAX_ATTEMPTS:
                 raise
 
