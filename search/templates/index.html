@@ -2,8 +2,16 @@
 
 {% block extra-head %}
 <script type="text/javascript">
-function search() {
-  $.get("/search/ajax/", {
+function unchanged(x, y) {
+  for (var key in x) {
+    if (!(key in y)) return false;
+    if (x[key] !== y[key]) return false;
+  }
+  return true;
+}
+
+function get_form_data() {
+  return {
     left: $("input#id_left").val(),
     right: $("input#id_right").val(),
     len: $("input#id_len").val(),
@@ -17,14 +25,26 @@ function search() {
     net: $("input#id_net").val(),
     org: $("input#id_org").val(),
     biz: $("input#id_biz").val(),
-    info: $("input#id_info").val() },
-  function(data) {
+    info: $("input#id_info").val()
+  }
+}
+
+function ajax_search() {
+  var form_data = get_form_data();
+  if (unchanged(form_data, $.ajax_search.data)) return;
+  $.ajax_search.data = form_data;
+  if ($.ajax_search.xhr) $.ajax_search.xhr.abort();
+  $.ajax_search.xhr = $.get("/search/ajax/", form_data, function(data) {
+    $.ajax_search.xhr = false;
     $('tbody#results').html(data);
   });
 }
+
 $(document).ready(function() {
-  $("input.text").typeWatch( { wait:400, callback:search, captureLength:0 } );
-  $("input[name=position]").click(search);
+  $.ajax_search = Object();
+  $.ajax_search.xhr = false;
+  $.ajax_search.data = get_form_data();
+  $("input.text").keyup(ajax_search);
 });
 </script>
 {% endblock %}
