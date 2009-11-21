@@ -45,8 +45,12 @@ $(document).ready(function() {
   $.ajax_search.data = get_form_data();
   $("input.text").keypress(function(e) {
     var form_data = get_form_data();
-    if (e.which >= 32 && e.which < 127) {
-      form_data[this.name] += String.fromCharCode(e.which);
+    if ((e.which >= 48 && e.which <= 57) ||
+        (e.which >= 97 && e.which <= 122) || e.which == 45) {
+      form_data[this.name] =
+		this.value.substr(0, this.selectionStart) +
+		String.fromCharCode(e.which) +
+		this.value.substr(this.selectionEnd);
       ajax_search(form_data);
     }
   });
