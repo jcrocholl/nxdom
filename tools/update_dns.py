@@ -17,12 +17,12 @@ from adns import rr
 from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
 from google.appengine.api import datastore_errors
+from google.appengine.runtime import apiproxy_errors
 
 from dns.models import TOP_LEVEL_DOMAINS, Lookup
 from domains.models import MAX_NAME_LENGTH, Domain
 from domains.utils import random_domains
 
-BATCH_SIZE = 100
 MAX_ATTEMPTS = 10
 
 
@@ -39,7 +39,8 @@ def retry(func, *args, **kwargs):
             time.sleep(seconds)
         try:
             return func(*args, **kwargs)
-        except (datastore_errors.Timeout, urllib2.URLError), error:
+        except (datastore_errors.Timeout, apiproxy_errors.Error,
+                urllib2.URLError), error:
             print type(error)
             print error
             if attempt + 1 >= MAX_ATTEMPTS:
@@ -119,6 +120,8 @@ def main():
     parser.add_option('--server', metavar='<hostname>',
                       default='scoretool.appspot.com',
                       help="connect to a different server")
+    parser.add_option('--batch', metavar='<size>', type="int", default=50,
+                      help="adjust batch size (default 50)")
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api', auth_func, options.server)
@@ -126,8 +129,8 @@ def main():
         while True:
             query, description = random_domains(
                 keys_only=True, length_choices=[MAX_NAME_LENGTH])
-            print "Trying to fetch %d %s" % (BATCH_SIZE, description)
-            keys = retry(query.fetch, BATCH_SIZE)
+            print "Trying to fetch %d %s" % (options.batch, description)
+            keys = retry(query.fetch, options.batch)
             names = [key.name() for key in keys]
             print "Fetched", len(names), description
             print ' '.join(names)
