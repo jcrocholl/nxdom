@@ -15,9 +15,9 @@ from prefixes.utils import increment_prefix
 MEMCACHE_TIMEOUT = 3600 # One hour.
 INITIAL = {
     'left': '', 'right': '',
-    'len': -1, 'digits': -4, 'dashes': -8,
+    'len': -10, 'digits': -100, 'dashes': -500,
     'english': 2, 'spanish': 1, 'french': 1, 'german': 1,
-    'com': 50, 'net': 30, 'org': 20, 'biz': 20, 'info': 20,
+    'com': 300, 'net': 100, 'org': 100, 'biz': 50, 'info': 50,
     }
 
 
