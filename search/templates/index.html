@@ -29,8 +29,7 @@ function get_form_data() {
   }
 }
 
-function ajax_search() {
-  var form_data = get_form_data();
+function ajax_search(form_data) {
   if (unchanged(form_data, $.ajax_search.data)) return;
   $.ajax_search.data = form_data;
   if ($.ajax_search.xhr) $.ajax_search.xhr.abort();
@@ -44,7 +43,14 @@ $(document).ready(function() {
   $.ajax_search = Object();
   $.ajax_search.xhr = false;
   $.ajax_search.data = get_form_data();
-  $("input.text").keyup(ajax_search);
+  $("input.text").keypress(function(e) {
+    var form_data = get_form_data();
+    if (e.which >= 32 && e.which < 127) {
+      form_data[this.name] += String.fromCharCode(e.which);
+      ajax_search(form_data);
+    }
+  });
+  $("input.text").keyup(function() { ajax_search(get_form_data()); });
 });
 </script>
 {% endblock %}
