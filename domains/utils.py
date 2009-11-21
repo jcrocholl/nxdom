@@ -7,6 +7,7 @@ from prefixes import counts
 
 ORDER_DESCRIPTIONS = {'length': 'shortest', '-english': 'most readable'}
 POSITION_DESCRIPTIONS = {'left': 'start', 'right': 'end'}
+LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 
 
 def random_prefix_one():
@@ -32,7 +33,7 @@ def random_prefix(length=2):
             if index <= 0:
                 result = c1 + c2
                 while len(result) < length:
-                    result += random.choice(DOMAIN_CHARS)
+                    result += random.choice(LETTERS)
                 return result
 
 
