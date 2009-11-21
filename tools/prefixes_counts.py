@@ -32,6 +32,7 @@ def print_counts(name, counts):
 def main():
     one = {}
     two = {}
+    total = 0
     for c1 in DOMAIN_CHARS:
         query = Prefix.all().filter('length', 2)
         query.filter('__key__ >', db.Key.from_path('prefixes_prefix', c1))
@@ -39,9 +40,13 @@ def main():
         query.filter('__key__ <', db.Key.from_path('prefixes_prefix', next))
         one[c1] = 0
         for prefix in query.fetch(100):
+            total += prefix.count
             one[c1] += prefix.count
             two[prefix.key().name()] = prefix.count
+    print 'TOTAL =', total
+    print
     print_counts('ONE', one)
+    print
     print_counts('TWO', two)
 
 
