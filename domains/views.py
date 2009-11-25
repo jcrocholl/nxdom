@@ -34,8 +34,9 @@ def detail(request, key_name):
 def cron(request):
     updated_domains = []
     deleted_domains = []
-    query, update_description = random_domains()
-    domains = query.fetch(100)
+    query, update_description = random_domains(
+        length_choices=[MAX_NAME_LENGTH])
+    domains = query.fetch(200)
     count_random = len(domains)
     count_obsolete = 0
     count_languages = 0
