@@ -51,8 +51,8 @@ def random_domains(keys_only=False,
             key = db.Key.from_path('domains_domain', name)
             query.filter('__key__ >', key)
         elif position == 'right':
-            query.filter('backwards', name)
-            description += " (backwards)"
+            query.filter('backwards >', name)
+            description += " backwards"
     else:
         order = random.choice(order_choices)
         query.filter('%s%d' % (position, len(name)), name)
