@@ -9,8 +9,8 @@ class Lookup(db.Model):
     """
     backwards = db.StringProperty(required=True) # For suffix matching.
     timestamp = db.DateTimeProperty(required=True) # Created or updated.
-    com = db.BooleanProperty() # True if name.com has IP address.
-    net = db.BooleanProperty()
-    org = db.BooleanProperty()
-    biz = db.BooleanProperty()
-    info = db.BooleanProperty()
+    com = db.IntegerProperty() # Use 0 (zero) for NXDOMAIN because None
+    net = db.IntegerProperty() # is returned for missing properties.
+    org = db.IntegerProperty()
+    biz = db.IntegerProperty()
+    info = db.IntegerProperty()
