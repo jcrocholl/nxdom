@@ -18,12 +18,17 @@ def auth_func():
     return open('.passwd').read().split(':')
 
 
-def most_popular(query):
+def most_popular(query, variable):
+    print 'for index, part in enumerate("""'
     query.order('-count')
+    total = 0
     for prefix in query.fetch(1000):
         if prefix.count < 10:
             break
-        print prefix.key().name(), prefix.count
+        print prefix.key().name()
+        total += 1
+    print '""".split()): %s[part] = (%d - index) / %d.0' % (
+        variable, total, total)
     print
 
 
@@ -36,10 +41,14 @@ def main():
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api', auth_func, options.server)
+    print 'PREFIX_SCORES = {}'
     for length in range(3, 7):
-        most_popular(DotComPrefix.all().filter('length', length))
+        most_popular(DotComPrefix.all().filter('length', length),
+                     'PREFIX_SCORES')
+    print 'SUFFIX_SCORES = {}'
     for length in range(3, 7):
-        most_popular(DotComSuffix.all().filter('length', length))
+        most_popular(DotComSuffix.all().filter('length', length),
+                     'SUFFIX_SCORES')
 
 
 if __name__ == '__main__':
