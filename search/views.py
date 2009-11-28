@@ -175,7 +175,7 @@ def score_domains(cleaned_data, domain_list):
         score = 0
         # Available domain names.
         for tld in TOP_LEVEL_DOMAINS:
-            if getattr(domain, tld) == False:
+            if getattr(domain, tld) == 0:
                 score += cleaned_data[tld]
         # Character counts.
         if domain.length is None:

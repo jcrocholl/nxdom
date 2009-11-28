@@ -15,9 +15,6 @@ digits dashes
 english spanish french german
 com net org biz info
 """.split()
-BOOLEAN_ATTRIBUTES = set("""
-com net org biz info
-""".split())
 
 
 class BaseModel(db.Expando):
@@ -149,8 +146,10 @@ class Domain(BaseModel):
         for attr, value in zip(CACHE_ATTRIBUTES, values.split()):
             if value == 'None':
                 value = None
-            elif attr in BOOLEAN_ATTRIBUTES:
-                value = value == 'True'
+            elif value == 'True':
+                value = -1
+            elif value == 'False':
+                value = 0
             else:
                 value = int(value)
             attributes[attr] = value
