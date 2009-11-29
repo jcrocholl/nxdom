@@ -27,7 +27,7 @@ def index(request):
 
 
 def detail(request, key_name):
-    name = get_object_or_404(Name, key_name=key_name)
+    name = get_object_or_404(Domain, key_name=key_name)
     return render_to_response(request, 'domains/detail.html', locals())
 
 
@@ -36,11 +36,13 @@ def cron(request):
     deleted_domains = []
     query, update_description = random_domains(
         length_choices=[MAX_NAME_LENGTH])
-    domains = query.fetch(200)
+    domains = query.fetch(300)
     count_random = len(domains)
     count_obsolete = 0
     count_languages = 0
     for domain in domains:
+        if max(len(updated_domains), len(deleted_domains)) >= 100:
+            break
         if len(domain.key().name()) > MAX_NAME_LENGTH:
             deleted_domains.append(domain)
             continue
