@@ -72,10 +72,10 @@ class NameServer(ADNS.QueryEngine):
 
     def remove_hijacker(self):
         print "Server %-16s" % self.ip,
-        print self.queries, "queries,", len(self.results), "results",
         if not self.results:
-            print
+            print self.queries, "queries"
             return
+        print self.queries, "queries,", len(self.results), "results",
         counters = {}
         for name in self.results:
             ip = self.results[name]
