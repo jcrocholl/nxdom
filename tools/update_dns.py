@@ -148,6 +148,8 @@ def update(lookups):
             if domain_name in results:
                 setattr(lookup, tld, ip_to_int(results.get(domain_name)))
                 display = True
+            elif getattr(lookup, tld, None) is None:
+                setattr(lookup, tld, 0)
         if display:
             print '%-16s' % name,
             for tld in TOP_LEVEL_DOMAINS:
