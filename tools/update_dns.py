@@ -19,6 +19,7 @@ from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
 
 from dns.models import TOP_LEVEL_DOMAINS, Lookup
+from dns.utils import ip_to_int, int_to_ip
 from domains.models import MAX_NAME_LENGTH, Domain
 from domains.utils import random_domains
 from utils.retry import retry, retry_objects
@@ -93,27 +94,6 @@ class NameServer(ADNS.QueryEngine):
                 del self.results[name]
 
 
-def ip_to_int(ip):
-    if ip is None:
-        return 0
-    result = 0
-    for part in ip.split('.'):
-        result = (result << 8) + int(part)
-    return result
-
-
-def int_to_ip(value):
-    if not value:
-        return ''
-    if value < 0:
-        return value
-    return '.'.join((
-        str((value >> 24) & 0xFF),
-        str((value >> 16) & 0xFF),
-        str((value >> 8) & 0xFF),
-        str(value & 0xFF)))
-
-
 def update_dns(lookups, subdomain=None):
     if subdomain is None:
         print "Sending requests to name servers (without subdomain)..."
@@ -182,8 +162,8 @@ def main():
             print "Trying to fetch %d oldest DNS lookups" % options.batch
             query = Lookup.all().order('timestamp')
             lookups = retry(query.fetch, options.batch)
-            update_dns(lookups)
             update_dns(lookups, 'www')
+            update_dns(lookups)
             retry_objects(db.put, lookups)
     else:
         for filename in args:
