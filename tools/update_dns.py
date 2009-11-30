@@ -67,8 +67,6 @@ class NameServer(ADNS.QueryEngine):
         ip_list = list(answer[3])
         if not ip_list:
             return
-        if name.startswith('www.'):
-            name = name[4:]
         ip_list.sort()
         results[name] = ip_list[0]
 
@@ -116,15 +114,21 @@ def int_to_ip(value):
         str(value & 0xFF)))
 
 
-def update(lookups):
-    print "Sending requests to name servers..."
+def update_dns(lookups, subdomain=None):
+    if subdomain is None:
+        print "Sending requests to name servers (without subdomain)..."
+        prefix = ''
+    else:
+        print "Sending requests to name servers (subdomain %s)..." % subdomain
+        prefix = subdomain + '.'
     servers = [NameServer(ip) for ip in NAMESERVERS]
     for lookup in lookups:
         for tld in TOP_LEVEL_DOMAINS:
             old_ip = getattr(lookup, tld)
             if old_ip == -1 or not old_ip:
                 server = random.choice(servers)
-                server.submit('%s.%s' % (lookup.key().name(), tld))
+                domain_name = prefix + lookup.key().name() + '.' + tld
+                server.submit(domain_name)
     print "Waiting for DNS results..."
     results = {}
     start = time.time()
@@ -144,7 +148,7 @@ def update(lookups):
         display = False
         name = lookup.key().name()
         for tld in TOP_LEVEL_DOMAINS:
-            domain_name = '%s.%s' % (name, tld)
+            domain_name = prefix + lookup.key().name() + '.' + tld
             if domain_name in results:
                 setattr(lookup, tld, ip_to_int(results.get(domain_name)))
                 display = True
@@ -156,7 +160,6 @@ def update(lookups):
                 print '%-16s' % int_to_ip(getattr(lookup, tld)),
             print lookup.timestamp.strftime('%Y-%m-%d %H:%M')
         lookup.timestamp = datetime.now()
-    retry_objects(db.put, lookups)
 
 
 def main():
@@ -179,7 +182,9 @@ def main():
             print "Trying to fetch %d oldest DNS lookups" % options.batch
             query = Lookup.all().order('timestamp')
             lookups = retry(query.fetch, options.batch)
-            update(lookups)
+            update_dns(lookups)
+            update_dns(lookups, 'www')
+            retry_objects(db.put, lookups)
     else:
         for filename in args:
             names = [line.strip() for name in open(filename)]
