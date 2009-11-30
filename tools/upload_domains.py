@@ -15,51 +15,13 @@ from google.appengine.ext.remote_api import remote_api_stub
 from google.appengine.api.datastore_errors import Timeout
 
 from domains.models import Domain, MAX_NAME_LENGTH
+from utils.retry import retry_objects
 
 BATCH_SIZE = 100
-MAX_ATTEMPTS = 5
 
 
 def auth_func():
     return open('.passwd').read().split(':')
-
-
-def retry(func, objects):
-    if not objects:
-        return
-    for attempt in range(MAX_ATTEMPTS):
-        if attempt:
-            print "Attempt %d of %d will start in %d seconds." % (
-                attempt + 1, MAX_ATTEMPTS, attempt)
-            time.sleep(attempt)
-        print "Trying to %s %d objects (%s to %s):" % (
-            func.__name__, len(objects),
-            objects[0].key().name(), objects[-1].key().name())
-        try:
-            return func(objects)
-        except Timeout:
-            print "*** Timeout ***"
-            if attempt + 1 >= MAX_ATTEMPTS:
-                raise
-
-
-def update_domains(domains):
-    domains_put = []
-    for domain in domains:
-        name = domain.key().name()
-        if len(name) > MAX_NAME_LENGTH:
-            print '%s %s is too long (%d), deleting' % (
-                domain.timestamp.strftime('%Y-%m-%d %H:%M'), name, len(name))
-            continue
-        domain.before_put()
-        print '%s  %-16s %3d%3d%3d %3d%3d%3d%3d' % (
-            domain.timestamp.strftime('%Y-%m-%d %H:%M'), name,
-            domain.length, domain.digits, domain.dashes,
-            domain.english, domain.spanish, domain.french, domain.german,
-            )
-        domains_put.append(domain)
-    if domains_put:
-        retry(db.put, domains_put)
 
 
 def bulk_upload(lines):
@@ -74,16 +36,26 @@ def bulk_upload(lines):
         if len(name) > MAX_NAME_LENGTH:
             continue
         if name != previous:
+            previous = name
             domain = Domain(key_name=name)
             domain.before_put()
-            domains.append(domain)
-        previous = name
+            print '%s  %-16s %3d%3d%3d %3d%3d%3d%3d' % (
+                domain.timestamp.strftime('%Y-%m-%d %H:%M'), name,
+                domain.length, domain.digits, domain.dashes,
+                domain.english, domain.spanish, domain.french, domain.german),
+            if domain.length > 6 and not (
+                domain.english or domain.spanish or
+                domain.french or domain.german):
+                print 'unreadable'
+            else:
+                domains.append(domain)
+                print
         if len(domains) >= BATCH_SIZE:
-            update_domains(domains)
+            retry_objects(db.put, domains)
             domains = []
     # After the last loop, upload the rest.
     if domains:
-        update_domains(domains)
+        retry_objects(db.put, domains)
 
 
 def upload_from_file(filename, resume=None):
