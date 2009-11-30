@@ -17,14 +17,12 @@ import ADNS
 
 from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
-from google.appengine.api import datastore_errors
-from google.appengine.runtime import apiproxy_errors
 
 from dns.models import TOP_LEVEL_DOMAINS, Lookup
 from domains.models import MAX_NAME_LENGTH, Domain
 from domains.utils import random_domains
+from utils.retry import retry, retry_objects
 
-MAX_ATTEMPTS = 10
 NAMESERVERS = """
 208.67.222.222
 208.67.220.220
@@ -48,32 +46,6 @@ NAMESERVERS = """
 
 def auth_func():
     return open('.passwd').read().split(':')
-
-
-def retry(func, *args, **kwargs):
-    for attempt in range(MAX_ATTEMPTS):
-        if attempt:
-            seconds = min(300, 2 ** attempt)
-            print "Attempt %d of %d will start in %d seconds." % (
-                attempt + 1, MAX_ATTEMPTS, seconds)
-            time.sleep(seconds)
-        try:
-            return func(*args, **kwargs)
-        except (datastore_errors.Timeout, apiproxy_errors.Error,
-                urllib2.URLError), error:
-            print type(error)
-            print error
-            if attempt + 1 >= MAX_ATTEMPTS:
-                raise
-
-
-def retry_objects(func, objects):
-    if not objects:
-        return
-    print "Trying to %s %d objects (%s to %s)" % (
-        func.__name__, len(objects),
-        objects[0].key().name(), objects[-1].key().name())
-    return retry(func, objects)
 
 
 class NameServer(ADNS.QueryEngine):
@@ -135,6 +107,8 @@ def ip_to_int(ip):
 def int_to_ip(value):
     if not value:
         return ''
+    if value < 0:
+        return value
     return '.'.join((
         str((value >> 24) & 0xFF),
         str((value >> 16) & 0xFF),
