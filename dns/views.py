@@ -42,4 +42,5 @@ def cron(request):
     obsolete = [db.Key.from_path('dns_lookup', name)
                 for name in lookup_names if name not in domain_set]
     db.delete(obsolete)
+    refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'dns/cron.html', locals())
