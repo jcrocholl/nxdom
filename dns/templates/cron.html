@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}DNS Lookups{% endblock %}
+
+{% block content %}
+<h1>DNS Lookups</h1>
+
+<p>
+Found {{ domain_names|length }} domain names:
+{{ domain_names|first }} to {{ domain_names|last }}<br />
+Found {{ lookup_names|length }} DNS lookups:
+{{ lookup_names|first }} to {{ lookup_names|last }}
+</p>
+
+<p>
+Created {{ missing|length }} missing DNS lookups:<br />
+{% for lookup in missing %}{{ lookup.key.name}} {% endfor %}
+</p>
+
+<p>
+Deleted {{ obsolete|length }} obsolete DNS lookups:<br />
+{% for key in obsolete %}{{ key.name}} {% endfor %}
+</p>
+{% endblock %}

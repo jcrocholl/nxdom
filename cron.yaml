@@ -5,9 +5,13 @@ cron:
   timezone: America/Los_Angeles
 - description: count popular prefixes and suffixes
   url: /prefixes/cron/popular/
+  schedule: every friday 17:00
+  timezone: America/Los_Angeles
+- description: update domain names
+  url: /domains/cron/
   schedule: every 1 minutes
   timezone: America/Los_Angeles
-- description: update domains
-  url: /domains/cron/
+- description: update DNS lookups
+  url: /dns/cron/
   schedule: every 1 minutes
   timezone: America/Los_Angeles
