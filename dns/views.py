@@ -34,7 +34,7 @@ def cron(request):
     domain_set = set(domain_names)
     lookup_set = set(lookup_names)
     # Create missing lookups.
-    timestamp = datetime.now() - timedelta(days=7)
+    timestamp = datetime.now() - timedelta(days=365)
     missing = [Lookup(key_name=name, backwards=name[::-1], timestamp=timestamp)
                for name in domain_names if name not in lookup_set]
     db.put(missing)
