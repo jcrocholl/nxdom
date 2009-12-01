@@ -148,7 +148,8 @@ def main():
     for line in file('/etc/resolv.conf'):
         if line.startswith('nameserver'):
             nameserver, ip = line.strip().split()
-            NAMESERVERS.append(ip)
+            if ip not in NAMESERVERS:
+                NAMESERVERS.append(ip)
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option('--server', metavar='<hostname>',
