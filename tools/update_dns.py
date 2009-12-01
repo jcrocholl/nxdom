@@ -76,7 +76,6 @@ class NameServer(ADNS.QueryEngine):
         if not self.results:
             print self.queries, "queries"
             return
-        print self.queries, "queries,", len(self.results), "results",
         counters = {}
         for name in self.results:
             ip = self.results[name]
@@ -84,11 +83,14 @@ class NameServer(ADNS.QueryEngine):
         pairs = [(counters[ip], ip) for ip in counters]
         pairs.sort(reverse=True)
         if pairs[0][0] < self.queries - len(self.results):
-            print
+            print self.queries, "queries,", len(self.results), "results"
             return # No DNS hijacker found.
         hijacker = pairs[0][1]
-        print "(%d okay," % (len(self.results) - pairs[0][0]),
-        print pairs[0][0], "hijacked by %s)" % hijacker
+        print self.queries, "queries,",
+        valid_results = len(self.results) - pairs[0][0]
+        if valid_results:
+            print valid_results, "results,",
+        print pairs[0][0], "hijacked by %s" % hijacker
         for name in self.results.keys():
             if self.results[name] == hijacker:
                 del self.results[name]
