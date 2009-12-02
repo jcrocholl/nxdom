@@ -1,7075 +1,7098 @@
 PREFIX_SCORES = {}
-for index, part in enumerate("""
-car
-man
-pay
-sex
-can
-the
-map
-mad
-now
-bar
-bid
-bet
-cat
-got
-box
-met
-hot
-art
-law
-net
-why
-for
-dog
-fan
-pop
-fix
-bad
-kid
-fit
-top
-tax
-far
-red
-all
-buy
-big
-par
-may
-win
-any
-men
-joy
-say
-low
-sun
-log
-two
-and
-try
-see
-bit
-fin
-set
-how
-web
-bug
-ten
-fly
-sit
-tea
-day
-mod
-sat
-fun
-let
-war
-one
-who
-bed
-boy
-bus
-tra
-mix
-run
-com
-his
-she
-min
-raw
-cas
-key
-nor
-res
-led
-chi
-six
-too
-bes
-col
-mar
-own
-not
-pla
-air
-lin
-get
-her
-dea
-ban
-pen
-son
-way
-pro
-via
-new
-sel
-ask
-gap
-ice
-lot
-age
-int
-job
-use
-hit
-tin
-aim
-mai
-die
-che
-gam
-roo
-med
-oil
-han
-ind
-san
-was
-pre
-dat
-dry
-mas
-fir
-flo
-leg
-mil
-gas
-you
-bod
-inf
-sto
-hea
-sad
-arm
-sta
-fed
-des
-end
-fre
-ins
-our
-lea
-rea
-sof
-sam
-sho
-bas
-has
-tru
-van
-add
-hat
-pic
-pol
-con
-mat
-pri
-bal
-lay
-mer
-mes
-yes
-pat
-cha
-foo
-saw
-sol
-stu
-old
-bel
-pho
-ran
-sum
-gun
-sha
-don
-eas
-por
-sav
-wal
-cre
-ste
-ant
-rep
-tel
-thi
-but
-cal
-har
-mis
-mov
-shi
-bio
-fai
-joi
-tha
-tri
-are
-lon
-loo
-put
-wor
-ben
-blo
-cam
-gol
-rec
-ser
-spe
-act
-kin
-ref
-sal
-sea
-fis
-som
-boa
-fil
-sos
-glo
-gos
-hel
-pas
-pea
-sur
-aut
-boo
-cur
-dis
-liv
-mag
-mel
-myc
-org
-pet
-qui
-tie
-clo
-cup
-eye
-fat
-fiv
-gen
-per
-rel
-ren
-sil
-ama
-dan
-dom
-odd
-tot
-hal
-rac
-ret
-sou
-wan
-bea
-cit
-pur
-sai
-ter
-bra
-cop
-did
-eat
-hol
-hom
-las
-tim
-cra
-fac
-mon
-mor
-nat
-cho
-eco
-ele
-gar
-lov
-mys
-sin
-loa
-mal
-wes
-clu
-den
-str
-usa
-biz
-gra
-guy
-rid
-tom
-ton
-cor
-doc
-dos
-gre
-had
-out
-pac
-aid
-mya
-uni
-mac
-hig
-nos
-ope
-tor
-ana
-few
-mot
-pai
-pan
-sen
-bla
-cos
-hor
-ris
-wea
-dot
-max
-sec
-soc
-wis
-cut
-fee
-fla
-gay
-inc
-ove
-sti
-tan
-tre
-whe
-www
-goo
-hos
-nex
-ont
-spa
-ans
-bee
-div
-fas
-rou
-sup
-dia
-doo
-god
-hac
-loc
-myt
-ons
-kar
-off
-rap
-saf
-spo
-ams
-asp
-bri
-hai
-lad
-lif
-mak
-rem
-sor
-tod
-vie
-cod
-dol
-tos
-vip
-wet
-wil
-ber
-eve
-ide
-kee
-val
-cou
-dar
-him
-kno
-los
-row
-bat
-bro
-dec
-imp
-tex
-vin
-wei
-ala
-ame
-ani
-bon
-inn
-its
-mym
-pin
-roc
-dow
-dre
-hou
-hua
-hug
-onl
-soh
-cap
-ken
-meg
-reg
-vir
-wir
-won
-acc
-ali
-ann
-cla
-cli
-mid
-moo
-nob
-non
-reb
-seo
-uss
-wed
-wel
-wit
-mei
-myg
-myl
-shu
-sid
-ang
-bai
-gal
-nan
-rol
-sma
-tob
-ats
-bir
-cle
-lie
-mob
-myd
-pok
-sig
-tas
-arc
-bay
-bul
-deb
-del
-fra
-mom
-rat
-tal
-tam
-ast
-cab
-dra
-gui
-lis
-mus
-myr
-tow
-wha
-adv
-fry
-inv
-lar
-les
-mem
-myb
-nam
-plu
-sch
-vis
-ash
-cel
-geo
-hab
-hes
-jun
-kat
-rev
-tok
-typ
-ate
-bor
-dor
-dri
-fro
-goa
-gop
-kit
-lab
-lit
-mye
-soo
-tec
-whi
-wow
-app
-bei
-blu
-mea
-mec
-nin
-ust
-ari
-ass
-bab
-bre
-bur
-bys
-caf
-dem
-doe
-ham
-inb
-iss
-lan
-neo
-pis
-pit
-sim
-tou
-ups
-aca
-ath
-bec
-lap
-laz
-que
-scr
-tur
-ale
-coo
-ero
-eur
-fur
-gor
-hep
-myw
-nic
-nom
-sub
-toy
-ano
-chu
-dig
-gri
-hao
-hon
-hop
-lat
-myh
-noc
-pra
-ros
-sop
-tar
-usb
-amp
-beb
-ent
-fer
-gon
-lev
-mik
-pal
-rus
-tab
-alt
-bac
-coc
-hun
-kim
-luc
-mic
-nof
-nov
-pip
-sob
-sot
-thr
-ven
-beh
-bol
-gir
-ita
-mir
-myo
-nol
-tho
-ato
-bef
-cry
-dir
-dop
-exc
-gua
-ist
-myp
-nee
-ohs
-ora
-pos
-pus
-rob
-swe
-thu
-tof
-wee
-wer
-byt
-coa
-dob
-gog
-gom
-gul
-hoo
-inp
-ite
-jin
-jok
-pim
-qua
-ram
-rew
-sca
-tro
-zer
-123
-bos
-bou
-der
-din
-lim
-mou
-myf
-pag
-pil
-pow
-rad
-rei
-tee
-tek
-tol
-usl
-vid
-wef
-bin
-bob
-cul
-dav
-fie
-fli
-imm
-isl
-itb
-itf
-mos
-noh
-onc
-ric
-tak
-upf
-wen
-alp
-anc
-asa
-atr
-dai
-equ
-goh
-hip
-hum
-itm
-lib
-pul
-tit
-usd
-viv
-100
-ada
-dod
-dou
-hem
-ing
-isa
-len
-lig
-lol
-mit
-ron
-sar
-ace
-als
-dum
-gob
-hen
-hil
-meb
-pix
-pub
-roa
-smi
-swi
-wai
-wat
-ads
-alm
-aqu
-att
-bew
-bui
-ina
-inm
-nea
-usp
-wom
-ago
-ami
-ara
-cen
-chr
-fam
-fri
-goc
-gro
-inl
-ith
-jus
-lac
-lik
-meh
-mol
-myi
-orl
-pir
-rar
-sev
-sky
-spi
-spr
-upl
-usc
-var
-vot
-bey
-byp
-cer
-dam
-dvd
-ear
-fal
-fut
-ger
-het
-inh
-itc
-maj
-nev
-onb
-owe
-sus
-tic
-ush
-wec
-yog
-abe
-ado
-alo
-amb
-amc
-amt
-beg
-byb
-cro
-cst
-dub
-heb
-ima
-isb
-itl
-kai
-kil
-mew
-pie
-poo
-pot
-soa
-tun
-upb
-upp
-usf
-usw
-xxx
-aer
-ane
-bic
-bru
-css
-cum
-dru
-edg
-edu
-fol
-fou
-ful
-hid
-isc
-isf
-itp
-itr
-lau
-mef
-nod
-ori
-pap
-pha
-ses
-sug
-upt
-vit
-wri
-abl
-asb
-bag
-bem
-cov
-fig
-ine
-iph
-jia
-kra
-nop
-orb
-ors
-reh
-sas
-tap
-toc
-ver
-abo
-ata
-atw
-awa
-dof
-eba
-eli
-esc
-goe
-gow
-hei
-itt
-kir
-lam
-lux
-ond
-onp
-orc
-pau
-rom
-spy
-tat
-ugl
-wep
-wew
-adi
-arr
-atm
-bik
-cyc
-err
-gof
-itw
-jam
-jap
-jon
-jos
-ker
-kor
-ray
-ree
-sco
-sem
-sod
-usm
-vas
-weh
-xtr
-ach
-aml
-avi
-byw
-def
-det
-ell
-fab
-fel
-ink
-liq
-mam
-mur
-nap
-nav
-ona
-onh
-tes
-usr
-anh
-ase
-atb
-bep
-bud
-byh
-bym
-dal
-dee
-dev
-ema
-eng
-evi
-ill
-inw
-iso
-isp
-jan
-joe
-jud
-lor
-mep
-noo
-onf
-onw
-poi
-sab
-smo
-toh
-amf
-amr
-asf
-asm
-atc
-bak
-byc
-cin
-cri
-ebo
-gat
-goi
-gou
-lee
-nec
-nud
-pia
-quo
-riv
-sac
-ski
-sle
-spl
-sui
-toa
-yan
-aaa
-aft
-amh
-amw
-ank
-anp
-asw
-auc
-bis
-gem
-hap
-hec
-hed
-hir
-hyd
-ico
-""".split()): PREFIX_SCORES[part] = (1000 - index) / 1000.0
+LEFT3_TOTAL = 81056
+LEFT3 = [
+('100', 47),
+('365', 32),
+('aaa', 33),
+('abc', 32),
+('abe', 42),
+('abo', 33),
+('aca', 58),
+('acc', 69),
+('ace', 46),
+('ach', 37),
+('act', 105),
+('add', 92),
+('adi', 38),
+('ado', 40),
+('ads', 43),
+('adv', 41),
+('age', 156),
+('ago', 43),
+('agr', 32),
+('aid', 75),
+('aim', 136),
+('air', 120),
+('ala', 65),
+('ale', 50),
+('ali', 57),
+('all', 219),
+('alm', 43),
+('alo', 37),
+('alp', 46),
+('als', 45),
+('alt', 51),
+('ama', 86),
+('amb', 33),
+('amc', 42),
+('ame', 49),
+('amf', 35),
+('amh', 34),
+('ami', 41),
+('aml', 37),
+('amp', 54),
+('amr', 35),
+('ams', 77),
+('amt', 41),
+('amw', 34),
+('ana', 85),
+('anc', 48),
+('and', 234),
+('ane', 41),
+('ang', 67),
+('anh', 36),
+('ani', 72),
+('ank', 34),
+('anl', 33),
+('ann', 70),
+('ano', 57),
+('anp', 34),
+('ans', 80),
+('ant', 111),
+('any', 249),
+('app', 46),
+('aqu', 39),
+('ara', 41),
+('arc', 61),
+('are', 84),
+('ari', 58),
+('arm', 125),
+('aro', 33),
+('arr', 38),
+('art', 274),
+('asa', 49),
+('asb', 40),
+('ase', 36),
+('asf', 34),
+('ash', 55),
+('ask', 158),
+('asm', 35),
+('asp', 77),
+('ass', 56),
+('ast', 63),
+('asw', 34),
+('ata', 39),
+('atb', 36),
+('atc', 35),
+('ate', 61),
+('ath', 58),
+('atm', 39),
+('ato', 52),
+('atr', 48),
+('ats', 66),
+('att', 45),
+('atw', 39),
+('auc', 34),
+('aut', 68),
+('awa', 39),
+('bab', 58),
+('bac', 54),
+('bad', 278),
+('bag', 40),
+('bai', 67),
+('bak', 35),
+('bal', 123),
+('ban', 164),
+('bar', 322),
+('bas', 123),
+('bat', 73),
+('bay', 65),
+('bea', 97),
+('beb', 55),
+('bec', 58),
+('bed', 199),
+('bee', 80),
+('bef', 52),
+('beg', 42),
+('beh', 53),
+('bei', 60),
+('bel', 114),
+('bem', 40),
+('ben', 106),
+('bep', 36),
+('ber', 75),
+('bes', 182),
+('bet', 321),
+('bew', 44),
+('bey', 45),
+('bic', 41),
+('bid', 337),
+('big', 224),
+('bik', 36),
+('bil', 37),
+('bin', 46),
+('bio', 103),
+('bir', 66),
+('bis', 35),
+('bit', 180),
+('biz', 91),
+('bla', 87),
+('bli', 46),
+('blo', 94),
+('blu', 52),
+('boa', 99),
+('bob', 49),
+('bod', 132),
+('bol', 53),
+('bon', 72),
+('boo', 97),
+('bor', 57),
+('bos', 50),
+('bou', 48),
+('box', 303),
+('boy', 199),
+('bra', 96),
+('bre', 59),
+('bri', 77),
+('bro', 73),
+('bru', 41),
+('bud', 34),
+('bug', 213),
+('bui', 45),
+('bul', 65),
+('bur', 57),
+('bus', 158),
+('but', 98),
+('buy', 237),
+('byb', 42),
+('byc', 35),
+('byh', 36),
+('bym', 36),
+('byp', 43),
+('bys', 59),
+('byt', 50),
+('byw', 37),
+('cab', 64),
+('caf', 58),
+('cal', 106),
+('cam', 93),
+('can', 387),
+('cap', 58),
+('car', 452),
+('cas', 174),
+('cat', 305),
+('cel', 41),
+('cen', 33),
+('cer', 41),
+('cha', 85),
+('che', 136),
+('chi', 105),
+('cho', 86),
+('chr', 39),
+('chu', 54),
+('cit', 48),
+('cla', 69),
+('cle', 66),
+('cli', 70),
+('clo', 101),
+('clu', 93),
+('coa', 42),
+('coc', 54),
+('cod', 65),
+('col', 161),
+('com', 157),
+('con', 103),
+('coo', 54),
+('cop', 93),
+('cor', 75),
+('cos', 81),
+('cou', 72),
+('cov', 39),
+('cra', 95),
+('cre', 110),
+('cri', 35),
+('cro', 43),
+('cry', 52),
+('csm', 33),
+('css', 41),
+('cst', 42),
+('cul', 48),
+('cum', 38),
+('cup', 99),
+('cur', 90),
+('cut', 73),
+('dai', 48),
+('dal', 36),
+('dam', 44),
+('dan', 97),
+('dar', 72),
+('dat', 126),
+('dav', 49),
+('day', 210),
+('dea', 153),
+('deb', 63),
+('dec', 71),
+('dee', 36),
+('def', 37),
+('del', 70),
+('dem', 58),
+('den', 89),
+('der', 48),
+('des', 117),
+('det', 37),
+('dev', 34),
+('dia', 62),
+('did', 88),
+('die', 133),
+('din', 49),
+('dir', 44),
+('dis', 84),
+('div', 73),
+('diy', 33),
+('dob', 51),
+('doc', 85),
+('dod', 47),
+('doe', 52),
+('dof', 39),
+('dog', 276),
+('dol', 75),
+('dom', 90),
+('don', 99),
+('doo', 80),
+('dop', 52),
+('dor', 61),
+('dos', 89),
+('dot', 83),
+('dou', 45),
+('dow', 63),
+('dra', 61),
+('dre', 71),
+('dri', 59),
+('dru', 39),
+('dry', 139),
+('dub', 37),
+('dum', 43),
+('dvd', 33),
+('ear', 42),
+('eas', 80),
+('eat', 79),
+('ebo', 33),
+('eco', 48),
+('edg', 41),
+('edi', 33),
+('edu', 41),
+('ele', 87),
+('eli', 35),
+('ell', 37),
+('end', 120),
+('eng', 36),
+('ent', 54),
+('equ', 38),
+('ero', 48),
+('esc', 38),
+('eur', 33),
+('eve', 41),
+('exc', 49),
+('exe', 34),
+('eye', 97),
+('fab', 37),
+('fac', 78),
+('fai', 73),
+('fal', 40),
+('fam', 36),
+('fan', 271),
+('far', 255),
+('fas', 71),
+('fat', 98),
+('fea', 34),
+('fed', 130),
+('fee', 79),
+('fel', 33),
+('fer', 51),
+('few', 84),
+('fie', 49),
+('fig', 40),
+('fil', 95),
+('fin', 216),
+('fir', 131),
+('fis', 101),
+('fit', 268),
+('fiv', 99),
+('fix', 291),
+('fla', 81),
+('fli', 48),
+('flo', 127),
+('flu', 33),
+('fly', 207),
+('fol', 40),
+('foo', 116),
+('for', 224),
+('fou', 39),
+('fra', 60),
+('fre', 113),
+('fri', 42),
+('fro', 56),
+('fry', 49),
+('fun', 132),
+('fur', 51),
+('gal', 63),
+('gam', 94),
+('gap', 153),
+('gar', 88),
+('gas', 128),
+('gay', 82),
+('gem', 34),
+('gen', 64),
+('geo', 62),
+('ger', 42),
+('get', 143),
+('gir', 45),
+('glo', 101),
+('goa', 61),
+('gob', 46),
+('goc', 43),
+('god', 78),
+('goe', 39),
+('gof', 38),
+('gog', 54),
+('goh', 48),
+('goi', 35),
+('gol', 103),
+('gom', 51),
+('gon', 55),
+('goo', 78),
+('gop', 61),
+('gor', 57),
+('gos', 102),
+('got', 314),
+('gou', 35),
+('gow', 39),
+('gra', 90),
+('gre', 88),
+('gri', 59),
+('gro', 41),
+('gua', 51),
+('gui', 57),
+('gul', 51),
+('gun', 99),
+('gur', 33),
+('guy', 81),
+('hab', 40),
+('hac', 75),
+('had', 85),
+('hai', 74),
+('hal', 90),
+('ham', 59),
+('han', 125),
+('hao', 56),
+('har', 116),
+('has', 123),
+('hat', 116),
+('hea', 121),
+('heb', 42),
+('hec', 34),
+('hed', 34),
+('hei', 39),
+('hel', 97),
+('hem', 44),
+('hen', 52),
+('hep', 57),
+('her', 148),
+('hes', 62),
+('het', 43),
+('hig', 78),
+('hil', 58),
+('him', 67),
+('hip', 48),
+('hir', 34),
+('his', 192),
+('hit', 143),
+('hol', 97),
+('hom', 87),
+('hon', 55),
+('hoo', 51),
+('hop', 54),
+('hor', 83),
+('hos', 78),
+('hot', 319),
+('hou', 70),
+('how', 215),
+('hua', 71),
+('hug', 71),
+('hum', 48),
+('hun', 54),
+('ice', 122),
+('ico', 34),
+('ide', 39),
+('ifl', 33),
+('ima', 37),
+('imm', 49),
+('imp', 65),
+('ina', 45),
+('inb', 58),
+('inc', 72),
+('ind', 131),
+('ine', 40),
+('inf', 122),
+('ing', 47),
+('inh', 43),
+('ink', 37),
+('inl', 43),
+('inm', 45),
+('inn', 62),
+('inp', 49),
+('ins', 111),
+('int', 132),
+('inv', 56),
+('inw', 36),
+('isa', 47),
+('isb', 42),
+('isc', 41),
+('isf', 41),
+('isl', 49),
+('iso', 36),
+('isp', 36),
+('iss', 56),
+('ist', 50),
+('ita', 48),
+('itb', 49),
+('itc', 43),
+('itd', 33),
+('ite', 38),
+('itf', 49),
+('ith', 44),
+('itl', 42),
+('itm', 48),
+('itp', 41),
+('itr', 41),
+('its', 68),
+('itt', 39),
+('itw', 38),
+('jam', 35),
+('jia', 33),
+('jin', 41),
+('job', 148),
+('joe', 35),
+('joi', 108),
+('jok', 48),
+('jon', 36),
+('jos', 37),
+('joy', 245),
+('jud', 35),
+('jun', 46),
+('kai', 43),
+('kan', 34),
+('kar', 78),
+('kat', 62),
+('kee', 75),
+('ken', 62),
+('ker', 38),
+('key', 186),
+('kid', 273),
+('kil', 42),
+('kim', 54),
+('kin', 105),
+('kir', 39),
+('kit', 61),
+('kno', 71),
+('kon', 35),
+('kor', 38),
+('kra', 39),
+('lab', 60),
+('lac', 43),
+('lad', 76),
+('lam', 38),
+('lan', 46),
+('lap', 58),
+('lar', 62),
+('las', 93),
+('lat', 45),
+('lau', 39),
+('law', 285),
+('lay', 120),
+('laz', 35),
+('lea', 131),
+('led', 187),
+('lee', 35),
+('leg', 139),
+('lei', 33),
+('len', 47),
+('les', 63),
+('let', 207),
+('lev', 55),
+('lia', 33),
+('lib', 47),
+('lie', 59),
+('lif', 64),
+('lig', 43),
+('lik', 39),
+('lil', 33),
+('lim', 50),
+('lin', 167),
+('liq', 37),
+('lis', 63),
+('lit', 57),
+('liv', 90),
+('loa', 65),
+('loc', 75),
+('log', 215),
+('lol', 47),
+('lon', 100),
+('loo', 107),
+('lor', 36),
+('los', 71),
+('lot', 153),
+('lov', 73),
+('low', 239),
+('lux', 36),
+('mac', 78),
+('mad', 377),
+('mag', 100),
+('mai', 143),
+('maj', 43),
+('mak', 72),
+('mal', 90),
+('mam', 37),
+('man', 443),
+('map', 393),
+('mar', 162),
+('mas', 131),
+('mat', 122),
+('mau', 33),
+('max', 81),
+('may', 255),
+('mea', 60),
+('meb', 46),
+('mec', 60),
+('med', 134),
+('mee', 34),
+('mef', 41),
+('meg', 68),
+('meh', 44),
+('mei', 68),
+('mel', 101),
+('mem', 62),
+('men', 243),
+('mep', 36),
+('mer', 121),
+('mes', 122),
+('met', 297),
+('mew', 42),
+('mic', 45),
+('mid', 69),
+('mik', 53),
+('mil', 138),
+('min', 177),
+('mir', 50),
+('mis', 104),
+('mit', 47),
+('mix', 207),
+('mob', 64),
+('mod', 203),
+('mol', 44),
+('mom', 65),
+('mon', 96),
+('moo', 69),
+('mor', 96),
+('mos', 49),
+('mot', 84),
+('mou', 50),
+('mov', 108),
+('mur', 37),
+('mus', 56),
+('mya', 88),
+('myb', 63),
+('myc', 100),
+('myd', 65),
+('mye', 59),
+('myf', 50),
+('myg', 67),
+('myh', 56),
+('myi', 46),
+('myl', 68),
+('mym', 72),
+('myo', 53),
+('myp', 52),
+('myr', 64),
+('mys', 94),
+('myt', 79),
+('myw', 57),
+('nam', 63),
+('nan', 67),
+('nap', 37),
+('nat', 95),
+('nav', 37),
+('nea', 43),
+('nec', 35),
+('nee', 52),
+('neo', 59),
+('net', 275),
+('neu', 33),
+('nev', 42),
+('new', 178),
+('nex', 81),
+('nic', 37),
+('nin', 57),
+('nob', 70),
+('noc', 57),
+('nod', 41),
+('nof', 55),
+('noh', 49),
+('nol', 53),
+('nom', 57),
+('non', 69),
+('noo', 37),
+('nop', 40),
+('nor', 189),
+('nos', 86),
+('not', 178),
+('nov', 70),
+('now', 338),
+('nud', 33),
+('odd', 69),
+('off', 75),
+('ohs', 52),
+('oil', 143),
+('old', 81),
+('ona', 37),
+('onb', 43),
+('onc', 50),
+('ond', 39),
+('one', 203),
+('onf', 36),
+('onh', 37),
+('onl', 71),
+('onp', 39),
+('ons', 79),
+('ont', 81),
+('onw', 36),
+('ope', 49),
+('ora', 52),
+('orb', 40),
+('orc', 39),
+('org', 102),
+('ori', 41),
+('orl', 44),
+('ors', 40),
+('our', 115),
+('out', 48),
+('ove', 71),
+('owe', 43),
+('own', 180),
+('pac', 86),
+('pag', 40),
+('pai', 80),
+('pal', 54),
+('pan', 81),
+('pap', 39),
+('par', 223),
+('pas', 93),
+('pat', 125),
+('pau', 38),
+('pay', 430),
+('pea', 101),
+('pen', 162),
+('per', 94),
+('pet', 92),
+('pha', 41),
+('pho', 66),
+('pia', 34),
+('pic', 120),
+('pie', 42),
+('pil', 46),
+('pim', 49),
+('pin', 68),
+('pip', 35),
+('pir', 43),
+('pis', 59),
+('pit', 59),
+('pix', 45),
+('pla', 174),
+('plu', 62),
+('poi', 34),
+('pok', 49),
+('pol', 119),
+('pon', 34),
+('poo', 41),
+('pop', 273),
+('por', 99),
+('pos', 45),
+('pot', 42),
+('pow', 44),
+('pra', 56),
+('pre', 135),
+('pri', 101),
+('pro', 132),
+('pub', 46),
+('pul', 44),
+('pur', 95),
+('pus', 52),
+('put', 105),
+('que', 55),
+('qui', 81),
+('quo', 33),
+('rac', 95),
+('rad', 44),
+('ram', 51),
+('ran', 111),
+('rap', 77),
+('rar', 41),
+('rat', 59),
+('raw', 193),
+('ray', 38),
+('rea', 115),
+('reb', 68),
+('rec', 101),
+('red', 256),
+('ree', 38),
+('ref', 105),
+('reg', 69),
+('reh', 38),
+('rei', 50),
+('rel', 95),
+('rem', 72),
+('ren', 94),
+('rep', 110),
+('res', 174),
+('ret', 89),
+('rev', 59),
+('rew', 51),
+('ric', 52),
+('rid', 91),
+('ris', 84),
+('riv', 36),
+('roa', 42),
+('rob', 48),
+('roc', 68),
+('rol', 59),
+('ron', 47),
+('roo', 138),
+('ros', 52),
+('rou', 80),
+('row', 69),
+('rub', 34),
+('run', 195),
+('rus', 53),
+('sab', 36),
+('sac', 35),
+('sad', 107),
+('saf', 63),
+('sag', 34),
+('sai', 97),
+('sal', 85),
+('sam', 126),
+('san', 134),
+('sar', 41),
+('sas', 40),
+('sat', 202),
+('sav', 104),
+('saw', 113),
+('say', 246),
+('sca', 51),
+('sch', 63),
+('sco', 38),
+('scr', 59),
+('sea', 105),
+('sec', 84),
+('see', 228),
+('sei', 33),
+('sel', 161),
+('sem', 38),
+('sen', 86),
+('seo', 69),
+('ser', 106),
+('ses', 41),
+('set', 226),
+('sev', 47),
+('sex', 431),
+('sha', 111),
+('she', 191),
+('shi', 109),
+('sho', 125),
+('shu', 68),
+('sid', 68),
+('sig', 66),
+('sil', 100),
+('sim', 57),
+('sin', 93),
+('sit', 210),
+('six', 185),
+('ski', 35),
+('sky', 44),
+('sle', 35),
+('sma', 67),
+('smi', 46),
+('smo', 36),
+('soa', 42),
+('sob', 54),
+('soc', 83),
+('sod', 38),
+('sof', 130),
+('sog', 36),
+('soh', 71),
+('sol', 118),
+('som', 103),
+('son', 168),
+('soo', 61),
+('sop', 56),
+('sor', 70),
+('sos', 103),
+('sot', 54),
+('sou', 103),
+('sow', 33),
+('spa', 81),
+('spe', 106),
+('spi', 50),
+('spl', 35),
+('spo', 79),
+('spr', 44),
+('spy', 39),
+('sta', 118),
+('ste', 102),
+('sti', 82),
+('sto', 122),
+('str', 89),
+('stu', 119),
+('sub', 56),
+('sug', 40),
+('sui', 35),
+('sum', 84),
+('sun', 227),
+('sup', 54),
+('sur', 92),
+('sus', 41),
+('swi', 38),
+('tab', 53),
+('tak', 44),
+('tal', 62),
+('tam', 68),
+('tan', 78),
+('tap', 36),
+('tar', 55),
+('tas', 62),
+('tat', 37),
+('tax', 263),
+('tea', 189),
+('tec', 53),
+('tee', 46),
+('tek', 50),
+('tel', 84),
+('ten', 189),
+('ter', 83),
+('tex', 69),
+('tha', 106),
+('the', 368),
+('thi', 112),
+('tho', 52),
+('thr', 55),
+('thu', 53),
+('tic', 43),
+('tie', 106),
+('tim', 96),
+('tin', 160),
+('tit', 48),
+('toa', 35),
+('tob', 67),
+('toc', 39),
+('tod', 75),
+('tof', 52),
+('toh', 36),
+('tok', 59),
+('tol', 42),
+('tom', 91),
+('ton', 84),
+('too', 196),
+('top', 250),
+('tor', 84),
+('tos', 75),
+('tot', 96),
+('tou', 56),
+('tow', 62),
+('toy', 57),
+('tra', 190),
+('tre', 79),
+('tri', 87),
+('tro', 51),
+('tru', 130),
+('try', 229),
+('tun', 40),
+('tur', 58),
+('twi', 37),
+('two', 158),
+('ult', 34),
+('uni', 85),
+('upb', 42),
+('upf', 49),
+('uph', 33),
+('upl', 43),
+('upm', 34),
+('upp', 41),
+('ups', 59),
+('upt', 38),
+('upw', 33),
+('usa', 91),
+('usb', 56),
+('usc', 44),
+('usd', 48),
+('use', 138),
+('usf', 42),
+('ush', 43),
+('usl', 50),
+('usm', 38),
+('usp', 45),
+('usr', 37),
+('uss', 49),
+('ust', 62),
+('usw', 43),
+('val', 71),
+('van', 116),
+('var', 44),
+('vas', 35),
+('ven', 54),
+('ver', 40),
+('via', 164),
+('vid', 50),
+('vie', 77),
+('vil', 34),
+('vin', 73),
+('vip', 74),
+('vir', 70),
+('vis', 63),
+('vit', 41),
+('viv', 48),
+('wai', 46),
+('wal', 113),
+('wan', 98),
+('war', 207),
+('was', 143),
+('wat', 46),
+('way', 168),
+('wea', 77),
+('web', 171),
+('wec', 43),
+('wed', 44),
+('wee', 52),
+('wef', 50),
+('weh', 38),
+('wei', 73),
+('wel', 61),
+('wen', 48),
+('wep', 39),
+('wer', 46),
+('wes', 85),
+('wet', 76),
+('wew', 39),
+('wha', 60),
+('whe', 82),
+('whi', 55),
+('who', 191),
+('why', 287),
+('wil', 45),
+('win', 254),
+('wir', 68),
+('wis', 78),
+('wit', 69),
+('wom', 44),
+('won', 69),
+('wor', 85),
+('wow', 59),
+('www', 82),
+('yes', 122),
+('yog', 41),
+('you', 95),
+('zer', 42),
+]
 
-for index, part in enumerate("""
-only
-army
-gain
-game
-join
-body
-five
-site
-best
-meta
-sell
-clue
-free
-lets
-park
-laws
-fish
-love
-food
-orga
-high
-over
-chin
-open
-soft
-city
-hack
-miss
-save
-medi
-room
-sees
-auto
-find
-live
-club
-home
-comm
-line
-mail
-pres
-fast
-data
-flow
-cans
-fine
-glob
-long
-east
-deal
-fire
-huge
-wire
-boat
-card
-face
-some
-type
-case
-code
-pure
-idea
-pack
-plan
-wish
-arts
-next
-rest
-rock
-with
-fore
-mass
-pass
-poke
-safe
-time
-lead
-phot
-side
-tell
-colo
-inte
-know
-mang
-move
-movi
-peak
-real
-what
-feed
-lady
-supe
-thew
-viet
-carb
-cost
-info
-joke
-mapf
-pric
-host
-load
-mens
-part
-rapi
-stud
-tota
-wall
-ball
-cats
-crea
-rate
-true
-amer
-book
-fair
-sure
-anys
-clea
-cold
-cure
-dead
-desi
-diet
-hair
-mana
-mand
-mays
-sexp
-bulk
-dati
-fanf
-girl
-keep
-manh
-mapb
-maps
-race
-alll
-blac
-carr
-getd
-list
-loan
-need
-para
-payl
-rare
-beds
-bigf
-cafe
-doma
-fars
-file
-fina
-hope
-keyl
-quic
-thin
-twol
-word
-aqua
-euro
-kidb
-lazy
-like
-mobi
-nice
-paym
-redh
-road
-root
-self
-text
-that
-zero
-alla
-basi
-boxt
-lawt
-mind
-nowa
-onli
-porn
-powe
-this
-base
-hors
-ligh
-lows
-matc
-mega
-plac
-spot
-stoc
-suga
-sunb
-task
-team
-vote
-warp
-batt
-boar
-cove
-funa
-grea
-ipho
-joyf
-just
-life
-name
-pick
-port
-tops
-ugly
-work
-blue
-comp
-copy
-edge
-fiel
-firm
-funw
-hero
-hold
-hous
-main
-make
-mike
-page
-payt
-risk
-trav
-cras
-dogb
-firs
-help
-hotw
-lift
-lott
-madp
-manc
-mari
-mine
-mini
-more
-moto
-refi
-seef
-smil
-soon
-spea
-they
-wash
-buyr
-carc
-cycl
-dogl
-farm
-leaf
-majo
-manw
-phon
-popc
-sale
-soli
-tele
-them
-tick
-trus
-wait
-whyl
-wild
-able
-bank
-barl
-betw
-bidf
-bidw
-canf
-door
-heav
-hoth
-immo
-indo
-infi
-inno
-joys
-king
-link
-liqu
-lock
-look
-lowp
-payb
-peac
-ther
-tran
-wind
-anim
-beyo
-bicy
-bidr
-buil
-buyl
-carh
-cart
-casa
-cast
-driv
-fanp
-fitf
-fitw
-good
-intr
-japa
-kids
-leve
-menb
-mile
-moda
-nati
-nets
-payc
-poin
-prim
-quot
-repl
-seve
-sexs
-sign
-thai
-town
-wedd
-yoga
-afte
-anyt
-back
-dayt
-diab
-disk
-fors
-goth
-gotp
-mada
-made
-many
-mena
-musi
-nowf
-onef
-pain
-paul
-payf
-pixe
-popa
-push
-rich
-rive
-sain
-stic
-stop
-ands
-anyc
-aska
-betp
-boyp
-brea
-busi
-chip
-clos
-coll
-cred
-dogw
-down
-even
-fana
-fith
-fixb
-gold
-ices
-litt
-madm
-mali
-modl
-modp
-near
-onet
-roll
-serv
-shif
-terr
-thre
-unit
-anyp
-artb
-cata
-each
-eatw
-equa
-figh
-flor
-flya
-full
-funp
-give
-gulf
-hand
-head
-hear
-ilov
-logf
-loop
-madf
-moun
-myco
-pola
-poli
-rach
-says
-shar
-shoo
-star
-teab
-tech
-tena
-trip
-want
-addl
-andw
-anti
-arch
-bada
-beda
-beli
-call
-camp
-catp
-ever
-fail
-hang
-kida
-lase
-lega
-loca
-loos
-madw
-mayf
-mesa
-nett
-onth
-othe
-paya
-plas
-popb
-popu
-rawb
-read
-ride
-roun
-sana
-scra
-sexg
-sexl
-styl
-swee
-then
-virt
-voic
-whee
-wher
-adda
-airc
-allw
-area
-bart
-bugb
-cent
-chic
-cloc
-cybe
-deco
-digi
-doub
-enjo
-exac
-eyea
-fait
-fanl
-form
-funs
-gasf
-gass
-gotb
-goto
-guar
-herl
-hote
-hour
-jobc
-kind
-laww
-madb
-manm
-milf
-nowr
-payr
-pipe
-pull
-sayw
-seem
-sexa
-step
-tank
-teac
-todo
-trac
-twoh
-wear
-whyb
-will
-writ
-auct
-beer
-bidl
-bitp
-blow
-boxl
-busy
-catt
-daya
-dear
-drea
-ente
-foto
-gunp
-hana
-happ
-hydr
-insu
-lake
-last
-lawf
-luck
-madt
-mere
-notl
-nowl
-nowp
-onel
-oner
-owns
-peop
-resu
-sens
-sex-
-sexr
-toda
-trap
-trea
-tryl
-walk
-adul
-adva
-aero
-allm
-arti
-badt
-barc
-baro
-bear
-beth
-betr
-bidt
-bith
-bria
-cang
-casi
-choc
-clou
-divi
-exce
-fanr
-fear
-flag
-forl
-fuck
-fund
-furn
-gree
-half
-indi
-ista
-maym
-neta
-netd
-newm
-nowd
-nows
-nude
-payp
-popt
-post
-publ
-rela
-roug
-sayp
-sets
-sile
-smar
-stil
-tale
-taxa
-tenb
-topp
-tune
-wayf
-whol
-whyw
-wina
-woma
-xtre
-yesp
-ange
-appr
-bigm
-bitw
-blog
-boya
-busb
-bust
-carl
-clic
-curr
-cust
-davi
-dayf
-done
-dyna
-easy
-gard
-gene
-gots
-hill
-hitp
-hota
-huma
-inde
-inse
-inve
-joym
-keyf
-mess
-nano
-patr
-play
-setr
-sexw
-sher
-slee
-spli
-syst
-taxf
-tryb
-twom
-unde
-weal
-whyc
-youb
-acce
-allc
-athe
-barb
-boxb
-boxs
-buga
-canh
-carp
-catm
-coac
-disc
-ebay
-erot
-fixf
-foot
-futu
-hunt
-inne
-item
-jose
-kidl
-lapt
-logo
-maga
-magn
-mapt
-meli
-menl
-metf
-mexi
-mira
-modb
-nowm
-offl
-ohio
-oill
-oldf
-penw
-pimp
-scen
-seec
-sexi
-shop
-soun
-stra
-teah
-term
-toof
-twoa
-ulti
-viva
-winp
-aimc
-aira
-amst
-artm
-asse
-bike
-bloc
-bost
-boxa
-boxr
-canb
-chea
-choo
-cons
-cult
-dayc
-dire
-elec
-fact
-fate
-filt
-fixp
-flyc
-fort
-gaps
-gara
-habe
-harr
-hiss
-hisw
-hotg
-invi
-juli
-kara
-keen
-kill
-lawb
-ledp
-logm
-magi
-mapa
-maph
-myli
-offi
-oura
-phar
-pizz
-psyc
-quad
-radi
-reli
-remo
-repa
-revi
-saws
-saya
-seco
-sexo
-sheg
-shor
-spec
-sunl
-theb
-tieb
-tinp
-toky
-toma
-tony
-touc
-truc
-trym
-twos
-usea
-usel
-vanc
-wayo
-well
-whya
-whyh
-year
-zhen
-art-
-arth
-askd
-badf
-beac
-bidp
-bige
-boyb
-buys
-buyw
-buzz
-came
-canr
-cant
-coff
-defe
-dogr
-drug
-duba
-dump
-farf
-fart
-genc
-goal
-guid
-holl
-icon
-indu
-iran
-jean
-junk
-lati
-legs
-loli
-lose
-manr
-mapg
-math
-merc
-mixa
-myre
-nota
-notc
-pair
-pant
-payh
-reac
-redd
-role
-runb
-rund
-sams
-seea
-setp
-sett
-sext
-shep
-silv
-simp
-soca
-sohb
-soma
-stay
-stor
-stre
-tabl
-taxg
-thel
-tone
-vias
-vita
-weig
-whoh
-wide
-yell
-yesw
-youg
-1-80
-acad
-acco
-addr
-adve
-afri
-allr
-alph
-anta
-arma
-arro
-aspe
-atom
-badb
-bala
-bard
-bein
-beto
-bidg
-bigc
-boxm
-boyw
-bran
-broa
-brok
-buya
-byte
-cabl
-cann
-carf
-chro
-cook
-demo
-dogc
-earl
-fanw
-fest
-flyd
-fora
-four
-habi
-hita
-hots
-howl
-hype
-icea
-icel
-imag
-impo
-impr
-john
-jump
-kidr
-lawe
-layb
-lear
-leda
-logp
-lowh
-mapo
-mapr
-mayw
-meri
-micr
-myso
-nake
-nora
-norw
-nova
-nowo
-outs
-ownb
-patc
-pent
-phoe
-plug
-plum
-poll
-popd
-prod
-quee
-rese
-rewa
-runw
-sate
-sexy
-shir
-smok
-sola
-spac
-stro
-take
-taxc
-tens
-thom
-tige
-topg
-trad
-trya
-tryf
-vend
-vira
-wave
-your
-alum
-anda
-andr
-arto
-audi
-badm
-belo
-bigw
-birt
-bita
-brid
-buyp
-caro
-cele
-circ
-clin
-""".split()): PREFIX_SCORES[part] = (1000 - index) / 1000.0
+LEFT4_TOTAL = 30674
+LEFT4 = [
+('1-80', 20),
+('able', 21),
+('acad', 21),
+('acce', 24),
+('acco', 21),
+('adda', 28),
+('addl', 28),
+('addr', 21),
+('adva', 21),
+('aero', 26),
+('afri', 19),
+('afte', 28),
+('agea', 19),
+('aimc', 23),
+('aimp', 19),
+('aira', 19),
+('airc', 27),
+('alla', 34),
+('allc', 24),
+('alll', 43),
+('allm', 26),
+('allr', 21),
+('allw', 28),
+('alph', 19),
+('alum', 20),
+('amer', 27),
+('amst', 23),
+('anda', 20),
+('ande', 19),
+('andr', 20),
+('ands', 31),
+('andw', 29),
+('ange', 25),
+('anim', 33),
+('anta', 21),
+('ante', 19),
+('anti', 29),
+('anya', 19),
+('anyc', 31),
+('anyo', 19),
+('anyp', 30),
+('anys', 45),
+('anyt', 32),
+('appr', 25),
+('aqua', 37),
+('arch', 27),
+('area', 25),
+('arma', 20),
+('army', 141),
+('arro', 21),
+('art-', 22),
+('artb', 29),
+('arth', 21),
+('arti', 19),
+('artm', 23),
+('arto', 19),
+('arts', 54),
+('aska', 31),
+('askd', 22),
+('aspe', 21),
+('asse', 22),
+('athe', 24),
+('atom', 21),
+('auct', 27),
+('audi', 19),
+('auto', 41),
+('back', 32),
+('bada', 29),
+('badb', 21),
+('badc', 19),
+('badf', 21),
+('badm', 20),
+('badr', 19),
+('badt', 26),
+('bala', 21),
+('ball', 46),
+('bank', 35),
+('barb', 24),
+('barc', 26),
+('bard', 21),
+('barl', 34),
+('baro', 26),
+('bart', 27),
+('base', 35),
+('basi', 38),
+('batt', 38),
+('beac', 22),
+('bear', 26),
+('beda', 29),
+('bedb', 19),
+('bedc', 19),
+('beds', 42),
+('beer', 27),
+('bein', 21),
+('beli', 29),
+('belo', 20),
+('best', 93),
+('beth', 26),
+('beto', 21),
+('betp', 31),
+('betr', 26),
+('betw', 34),
+('beyo', 33),
+('bicy', 33),
+('bidf', 33),
+('bidg', 21),
+('bidl', 27),
+('bidp', 22),
+('bidr', 33),
+('bidt', 26),
+('bidw', 34),
+('bigc', 21),
+('bige', 22),
+('bigf', 41),
+('bigm', 24),
+('bike', 21),
+('birt', 20),
+('bith', 26),
+('bitp', 27),
+('bitw', 25),
+('blac', 41),
+('bloc', 23),
+('blog', 22),
+('blow', 21),
+('blue', 29),
+('boar', 38),
+('boat', 57),
+('body', 100),
+('book', 45),
+('bost', 23),
+('boxa', 23),
+('boxl', 27),
+('boxm', 21),
+('boxr', 23),
+('boxs', 24),
+('boxt', 40),
+('boya', 25),
+('boyb', 22),
+('boyp', 31),
+('boyw', 21),
+('bran', 21),
+('brea', 31),
+('bria', 26),
+('brid', 20),
+('broa', 21),
+('brok', 21),
+('buga', 24),
+('bugb', 28),
+('buil', 33),
+('bulk', 44),
+('busb', 25),
+('busi', 30),
+('bust', 25),
+('busy', 25),
+('buyl', 33),
+('buyp', 20),
+('buyr', 35),
+('buys', 20),
+('buyw', 21),
+('buzz', 22),
+('byte', 21),
+('cabl', 21),
+('cafe', 41),
+('call', 27),
+('camp', 27),
+('canb', 22),
+('canf', 34),
+('cang', 26),
+('canh', 23),
+('cann', 20),
+('canr', 22),
+('cans', 64),
+('cant', 22),
+('carb', 48),
+('carc', 34),
+('card', 58),
+('carf', 21),
+('carh', 33),
+('carl', 23),
+('carp', 40),
+('carr', 43),
+('cart', 31),
+('casa', 31),
+('case', 57),
+('cast', 32),
+('cata', 27),
+('catm', 24),
+('catp', 27),
+('cats', 46),
+('catt', 26),
+('chea', 22),
+('chic', 22),
+('chin', 61),
+('chip', 30),
+('choc', 22),
+('choo', 23),
+('city', 33),
+('clea', 45),
+('clic', 26),
+('clin', 20),
+('cloc', 29),
+('clos', 31),
+('clou', 26),
+('club', 72),
+('clue', 87),
+('code', 48),
+('coff', 21),
+('cold', 45),
+('colo', 47),
+('comm', 61),
+('cook', 21),
+('copy', 36),
+('cost', 47),
+('cove', 37),
+('cras', 36),
+('crea', 46),
+('cred', 31),
+('cult', 22),
+('cure', 40),
+('curr', 21),
+('cust', 23),
+('cybe', 20),
+('cycl', 26),
+('dail', 20),
+('data', 58),
+('dati', 44),
+('dave', 20),
+('davi', 24),
+('daya', 27),
+('dayc', 24),
+('dayf', 25),
+('dayt', 32),
+('dead', 44),
+('deal', 50),
+('dear', 25),
+('deco', 26),
+('defe', 22),
+('demo', 20),
+('desi', 30),
+('diet', 43),
+('digi', 28),
+('disk', 31),
+('divi', 24),
+('divo', 20),
+('dogb', 36),
+('dogc', 20),
+('dogl', 35),
+('dogr', 22),
+('dogw', 31),
+('doma', 36),
+('door', 35),
+('doub', 26),
+('down', 24),
+('draw', 20),
+('drea', 27),
+('driv', 33),
+('drug', 22),
+('duba', 20),
+('dump', 22),
+('each', 25),
+('earl', 21),
+('east', 52),
+('eatw', 30),
+('edge', 37),
+('educ', 20),
+('emer', 20),
+('enjo', 28),
+('ente', 27),
+('envi', 20),
+('equa', 28),
+('exac', 21),
+('exce', 24),
+('eyea', 28),
+('face', 52),
+('fail', 28),
+('fair', 42),
+('fait', 27),
+('fana', 31),
+('fanf', 44),
+('fanl', 28),
+('fanp', 33),
+('fanr', 26),
+('fanw', 21),
+('farf', 22),
+('farm', 32),
+('fars', 41),
+('fart', 22),
+('fast', 61),
+('fate', 21),
+('fear', 27),
+('feed', 48),
+('fest', 21),
+('fiel', 37),
+('figh', 30),
+('file', 36),
+('filt', 23),
+('fina', 38),
+('find', 72),
+('fine', 58),
+('fire', 55),
+('firm', 37),
+('firs', 34),
+('fish', 79),
+('fitf', 33),
+('fith', 31),
+('fitm', 20),
+('fitw', 33),
+('five', 99),
+('fixb', 31),
+('fixf', 24),
+('fixp', 23),
+('fixs', 30),
+('flag', 26),
+('flor', 20),
+('flow', 63),
+('flya', 29),
+('flyc', 23),
+('flyd', 21),
+('flyt', 20),
+('food', 79),
+('foot', 22),
+('fora', 21),
+('fore', 36),
+('forl', 26),
+('form', 20),
+('fors', 30),
+('foto', 21),
+('free', 69),
+('fuck', 26),
+('funa', 38),
+('funp', 30),
+('funs', 26),
+('funw', 37),
+('furn', 20),
+('gain', 131),
+('gala', 20),
+('game', 66),
+('gaps', 23),
+('gara', 23),
+('gard', 25),
+('gasf', 28),
+('gass', 27),
+('genc', 22),
+('gene', 21),
+('getd', 43),
+('girl', 36),
+('give', 29),
+('glob', 63),
+('goal', 22),
+('gold', 30),
+('good', 33),
+('gotb', 27),
+('goth', 32),
+('gotm', 20),
+('goto', 28),
+('gotp', 32),
+('gots', 25),
+('grap', 20),
+('grea', 37),
+('gree', 25),
+('guar', 28),
+('gulf', 30),
+('gunp', 27),
+('habe', 23),
+('habi', 21),
+('hack', 70),
+('hair', 42),
+('half', 25),
+('hana', 27),
+('hang', 24),
+('happ', 22),
+('harr', 23),
+('head', 28),
+('hear', 28),
+('heav', 33),
+('help', 35),
+('hera', 20),
+('herl', 30),
+('hero', 33),
+('high', 69),
+('hill', 37),
+('hiss', 23),
+('hisw', 23),
+('hita', 21),
+('hitp', 25),
+('hold', 37),
+('holl', 22),
+('home', 60),
+('hone', 20),
+('hope', 40),
+('hors', 39),
+('host', 45),
+('hota', 24),
+('hote', 27),
+('hotg', 23),
+('hoth', 33),
+('hoto', 20),
+('hots', 28),
+('hotw', 36),
+('hour', 28),
+('hous', 36),
+('howl', 21),
+('huan', 20),
+('huge', 62),
+('huma', 25),
+('hunt', 24),
+('hydr', 25),
+('hype', 21),
+('icea', 21),
+('icel', 21),
+('ices', 28),
+('icon', 22),
+('idea', 21),
+('immo', 34),
+('impr', 21),
+('inde', 22),
+('indo', 33),
+('indu', 21),
+('infi', 33),
+('info', 37),
+('inne', 21),
+('inno', 32),
+('inse', 25),
+('inte', 31),
+('intr', 33),
+('invi', 22),
+('ipho', 27),
+('isla', 20),
+('ista', 26),
+('japa', 21),
+('jazz', 20),
+('jobc', 28),
+('john', 21),
+('join', 105),
+('joke', 47),
+('jose', 23),
+('joya', 20),
+('joyf', 38),
+('joym', 25),
+('joys', 34),
+('juli', 23),
+('kara', 23),
+('keen', 23),
+('keep', 44),
+('keyf', 25),
+('keyl', 42),
+('keym', 20),
+('kida', 29),
+('kidb', 41),
+('kidl', 24),
+('kidr', 21),
+('kids', 33),
+('kill', 23),
+('kind', 28),
+('king', 34),
+('know', 48),
+('kore', 20),
+('ladi', 20),
+('lady', 49),
+('lake', 24),
+('lapt', 24),
+('lase', 28),
+('last', 25),
+('lawb', 22),
+('lawe', 21),
+('lawf', 27),
+('laws', 83),
+('lawt', 40),
+('laww', 28),
+('layb', 21),
+('lead', 53),
+('leaf', 35),
+('lear', 21),
+('leda', 21),
+('ledp', 23),
+('lega', 29),
+('legs', 22),
+('lets', 87),
+('leve', 33),
+('lian', 20),
+('life', 25),
+('lift', 36),
+('ligh', 35),
+('like', 36),
+('line', 63),
+('link', 33),
+('liqu', 34),
+('list', 42),
+('litt', 27),
+('live', 61),
+('load', 47),
+('loca', 25),
+('lock', 34),
+('logf', 30),
+('logm', 23),
+('logo', 22),
+('logp', 21),
+('loli', 22),
+('long', 58),
+('look', 34),
+('loop', 30),
+('loos', 29),
+('lose', 21),
+('lott', 34),
+('love', 60),
+('lowh', 21),
+('lowp', 34),
+('lows', 39),
+('luck', 28),
+('mada', 29),
+('madb', 30),
+('made', 29),
+('madf', 30),
+('madm', 31),
+('madp', 36),
+('madt', 27),
+('madw', 28),
+('maga', 24),
+('magi', 22),
+('magn', 24),
+('mail', 66),
+('main', 33),
+('majo', 35),
+('make', 31),
+('mali', 31),
+('mana', 38),
+('manc', 36),
+('mand', 39),
+('mang', 51),
+('manh', 44),
+('manl', 20),
+('manm', 27),
+('manp', 21),
+('manr', 22),
+('manw', 35),
+('many', 30),
+('mapa', 23),
+('mapb', 44),
+('mapf', 49),
+('mapg', 22),
+('maph', 30),
+('mapo', 21),
+('mapr', 21),
+('maps', 44),
+('mapt', 23),
+('mari', 27),
+('mass', 49),
+('matc', 39),
+('math', 22),
+('mayf', 29),
+('maym', 26),
+('mays', 45),
+('mayw', 21),
+('medi', 65),
+('mega', 37),
+('meli', 24),
+('mena', 32),
+('menb', 33),
+('menl', 24),
+('mens', 48),
+('merc', 22),
+('mere', 26),
+('meri', 21),
+('mesa', 29),
+('mess', 25),
+('meta', 90),
+('metb', 20),
+('metf', 24),
+('mexi', 24),
+('mike', 35),
+('mile', 38),
+('milf', 28),
+('mind', 37),
+('mine', 31),
+('mini', 31),
+('mira', 23),
+('miss', 72),
+('mixa', 22),
+('mobi', 39),
+('moda', 27),
+('modb', 24),
+('modl', 31),
+('modp', 31),
+('more', 36),
+('moto', 35),
+('moun', 30),
+('move', 50),
+('movi', 51),
+('musi', 25),
+('myco', 30),
+('mydo', 20),
+('myli', 23),
+('mymi', 20),
+('mymo', 20),
+('myre', 22),
+('myso', 21),
+('mywe', 20),
+('nake', 21),
+('name', 38),
+('nano', 25),
+('nati', 33),
+('near', 29),
+('need', 43),
+('neta', 25),
+('netd', 23),
+('netg', 20),
+('nets', 32),
+('nett', 27),
+('newm', 26),
+('news', 28),
+('next', 55),
+('nice', 30),
+('nomo', 20),
+('nora', 21),
+('norw', 21),
+('nota', 22),
+('notb', 20),
+('notc', 22),
+('notl', 27),
+('nova', 21),
+('nove', 21),
+('nowa', 40),
+('nowd', 26),
+('nowf', 32),
+('nowl', 27),
+('nowm', 24),
+('nowo', 21),
+('nowp', 27),
+('nowr', 28),
+('nows', 26),
+('nude', 24),
+('offi', 22),
+('offl', 24),
+('oill', 24),
+('oldf', 22),
+('onef', 32),
+('onel', 27),
+('oner', 27),
+('onet', 31),
+('onli', 40),
+('only', 221),
+('onth', 29),
+('open', 43),
+('orch', 20),
+('orga', 81),
+('othe', 23),
+('oura', 22),
+('outs', 20),
+('over', 67),
+('owna', 20),
+('ownb', 21),
+('owns', 27),
+('pack', 54),
+('page', 27),
+('pain', 30),
+('pair', 20),
+('pant', 22),
+('para', 29),
+('park', 82),
+('part', 38),
+('pass', 46),
+('patc', 21),
+('pate', 23),
+('patr', 25),
+('paul', 31),
+('paya', 29),
+('payb', 34),
+('payc', 33),
+('payf', 32),
+('payh', 22),
+('payl', 43),
+('paym', 41),
+('payp', 26),
+('payr', 28),
+('payt', 37),
+('peac', 33),
+('peak', 51),
+('pent', 20),
+('penw', 24),
+('peop', 26),
+('phar', 23),
+('phon', 20),
+('phot', 26),
+('pick', 36),
+('pimp', 22),
+('pixe', 32),
+('pizz', 23),
+('plac', 40),
+('plan', 51),
+('plas', 29),
+('play', 24),
+('plug', 21),
+('plum', 21),
+('poin', 31),
+('poke', 37),
+('pola', 30),
+('poli', 25),
+('poll', 20),
+('popa', 32),
+('popb', 29),
+('popc', 35),
+('popd', 21),
+('popt', 23),
+('popu', 29),
+('porn', 33),
+('port', 32),
+('post', 21),
+('powe', 34),
+('pres', 61),
+('pric', 42),
+('prim', 31),
+('prod', 20),
+('publ', 26),
+('pull', 24),
+('pure', 57),
+('push', 32),
+('quad', 22),
+('quee', 21),
+('quic', 41),
+('quot', 31),
+('race', 42),
+('rach', 30),
+('rapi', 47),
+('rare', 40),
+('rate', 41),
+('rawb', 29),
+('rawh', 20),
+('reac', 22),
+('read', 25),
+('real', 39),
+('redd', 22),
+('redh', 41),
+('redi', 20),
+('refi', 36),
+('rela', 25),
+('reli', 22),
+('remo', 20),
+('repa', 23),
+('repl', 33),
+('rest', 50),
+('resu', 24),
+('revi', 22),
+('rewa', 21),
+('rich', 32),
+('ride', 29),
+('rise', 20),
+('risk', 37),
+('rive', 32),
+('road', 37),
+('rock', 52),
+('roll', 29),
+('room', 69),
+('root', 40),
+('roug', 26),
+('roun', 29),
+('runb', 21),
+('rund', 22),
+('runf', 20),
+('runw', 21),
+('ryan', 20),
+('safe', 39),
+('sain', 32),
+('sale', 22),
+('sams', 22),
+('sana', 27),
+('sate', 21),
+('save', 67),
+('saws', 23),
+('saya', 23),
+('sayp', 26),
+('says', 29),
+('sayw', 28),
+('scar', 20),
+('scen', 24),
+('scho', 20),
+('scra', 30),
+('seco', 23),
+('secu', 20),
+('seea', 22),
+('seec', 24),
+('seef', 36),
+('seeh', 20),
+('seem', 28),
+('seep', 20),
+('sees', 73),
+('self', 41),
+('sell', 90),
+('sens', 27),
+('serv', 31),
+('sesl', 20),
+('setp', 22),
+('setr', 25),
+('sets', 26),
+('sett', 22),
+('seve', 33),
+('sex-', 27),
+('sexa', 28),
+('sexg', 29),
+('sexi', 24),
+('sexl', 29),
+('sexo', 23),
+('sexp', 45),
+('sexr', 27),
+('sexs', 34),
+('sext', 22),
+('sexw', 25),
+('sexy', 21),
+('shar', 29),
+('sheg', 23),
+('shep', 22),
+('sher', 24),
+('shif', 31),
+('shir', 21),
+('shoo', 29),
+('shop', 21),
+('shor', 23),
+('side', 53),
+('sign', 33),
+('sile', 26),
+('silv', 22),
+('simp', 21),
+('site', 94),
+('slee', 25),
+('smal', 20),
+('smar', 26),
+('smil', 36),
+('smok', 21),
+('soca', 22),
+('soft', 76),
+('sohb', 22),
+('sola', 21),
+('soli', 35),
+('soma', 22),
+('some', 59),
+('soon', 36),
+('sort', 20),
+('soun', 24),
+('spac', 21),
+('spea', 36),
+('spec', 23),
+('spli', 25),
+('spor', 21),
+('spot', 39),
+('star', 24),
+('stay', 22),
+('step', 23),
+('stic', 32),
+('stil', 26),
+('stoc', 38),
+('stop', 30),
+('stra', 22),
+('stre', 21),
+('stro', 21),
+('stud', 49),
+('styl', 25),
+('suga', 38),
+('sunb', 39),
+('sunl', 22),
+('sunp', 20),
+('supe', 26),
+('sure', 38),
+('surv', 20),
+('swee', 29),
+('syst', 23),
+('tabl', 20),
+('tale', 26),
+('tank', 27),
+('task', 39),
+('taxa', 26),
+('taxc', 21),
+('taxf', 25),
+('taxg', 22),
+('teab', 28),
+('teac', 24),
+('teah', 24),
+('team', 27),
+('tech', 22),
+('tell', 51),
+('tena', 25),
+('tenb', 26),
+('tens', 20),
+('terr', 26),
+('text', 39),
+('thai', 32),
+('that', 40),
+('theb', 22),
+('them', 30),
+('then', 31),
+('ther', 29),
+('thew', 50),
+('they', 37),
+('thin', 43),
+('this', 40),
+('thom', 20),
+('thre', 32),
+('tick', 35),
+('tieb', 23),
+('tige', 21),
+('time', 54),
+('ting', 23),
+('tinp', 23),
+('toda', 27),
+('todo', 28),
+('toky', 23),
+('toma', 23),
+('tony', 22),
+('toof', 24),
+('tool', 22),
+('topg', 21),
+('topp', 26),
+('tops', 38),
+('tota', 45),
+('touc', 23),
+('town', 33),
+('trac', 29),
+('tran', 32),
+('trap', 27),
+('trav', 30),
+('trea', 27),
+('truc', 24),
+('true', 47),
+('trus', 35),
+('trya', 21),
+('tryb', 25),
+('tryf', 21),
+('tryl', 27),
+('trym', 23),
+('tune', 24),
+('twoa', 24),
+('twoh', 28),
+('twol', 42),
+('twom', 25),
+('twos', 22),
+('ugly', 26),
+('ulti', 24),
+('unde', 21),
+('unit', 31),
+('usel', 23),
+('vana', 20),
+('vanc', 23),
+('vend', 21),
+('vial', 20),
+('vias', 22),
+('viet', 50),
+('vira', 21),
+('virt', 29),
+('visi', 20),
+('vita', 22),
+('viva', 24),
+('voic', 25),
+('vote', 28),
+('wait', 35),
+('walk', 27),
+('wall', 48),
+('want', 30),
+('wara', 20),
+('warp', 39),
+('wars', 20),
+('wash', 36),
+('wave', 21),
+('wayf', 26),
+('wayo', 23),
+('weal', 25),
+('wear', 25),
+('weig', 22),
+('what', 47),
+('whee', 29),
+('wher', 28),
+('whoh', 22),
+('whya', 23),
+('whyb', 28),
+('whyc', 21),
+('whyh', 23),
+('whyl', 35),
+('whyt', 20),
+('whyw', 26),
+('wild', 35),
+('will', 26),
+('wina', 26),
+('winc', 20),
+('wind', 26),
+('winf', 25),
+('winp', 24),
+('winr', 20),
+('wire', 60),
+('wish', 56),
+('with', 55),
+('woma', 26),
+('word', 24),
+('work', 37),
+('xtre', 26),
+('year', 24),
+('yell', 22),
+('yesp', 26),
+('yesw', 22),
+('yoga', 31),
+('youb', 24),
+('youg', 22),
+('zero', 32),
+('zhen', 23),
+]
 
-for index, part in enumerate("""
-event
-organ
-sales
-china
-globa
-goods
-photo
-price
-super
-movie
-rapid
-media
-press
-fancy
-total
-quick
-black
-clean
-datin
-color
-power
-horse
-light
-stock
-basic
-board
-sugar
-field
-highl
-iphon
-match
-place
-smile
-speak
-crash
-domai
-onlin
-poker
-first
-liqui
-major
-bicyc
-drive
-phone
-quote
-seven
-after
-beyon
-build
-point
-river
-solid
-trust
-weddi
-ameri
-desig
-great
-japan
-level
-peace
-pixel
-shift
-trave
-close
-costa
-fight
-ilove
-natio
-stick
-cycle
-diabe
-equal
-farma
-final
-forec
-loose
-music
-other
-round
-signa
-voice
-wheel
-where
-busin
-cyber
-laser
-littl
-clock
-creat
-dealb
-enjoy
-exact
-faith
-findp
-finel
-hugeb
-mobil
-mount
-peopl
-scrap
-style
-trace
-aucti
-citya
-cover
-credi
-enter
-facet
-hairb
-leadb
-rache
-resta
-saint
-shoot
-thisf
-whole
-cloud
-clubw
-doubl
-excel
-flowb
-infin
-patri
-publi
-rough
-silen
-sitew
-still
-syste
-three
-virtu
-woman
-xtrem
-adult
-advan
-break
-brian
-chica
-custo
-feedb
-fiveb
-futur
-human
-kingf
-local
-plast
-someb
-sound
-split
-sweet
-ticke
-ultim
-under
-vietn
-wilda
-casin
-coach
-copyb
-eroti
-fairb
-fivef
-foodl
-garde
-mexic
-parad
-pharm
-serve
-smart
-sureb
-talen
-tokyo
-truck
-anima
-beach
-block
-bodyb
-bosto
-carda
-coffe
-commu
-datab
-david
-deala
-divin
-dream
-fireh
-foodm
-guard
-happy
-inter
-lapto
-lazyb
-livew
-mailb
-manag
-missm
-picka
-psych
-roadb
-secon
-sleep
-sohbe
-today
-touch
-weigh
-write
-1-800
-alpha
-booka
-broad
-cardr
-click
-codeb
-colle
-direc
-elect
-fasta
-guide
-house
-insur
-linea
-listb
-micro
-offic
-onthe
-parki
-patch
-queen
-rateb
-reach
-rocke
-scene
-softt
-thatb
-tripa
-yello
-balla
-brand
-broke
-cable
-cheap
-curre
-divor
-findr
-freeb
-frees
-haber
-homes
-india
-infor
-korea
-learn
-lockb
-londo
-looka
-magic
-openb
-paper
-polar
-raceb
-roomb
-sesli
-sideb
-space
-speci
-study
-table
-teach
-textb
-thoma
-tiger
-birth
-choco
-daily
-digit
-doorb
-early
-famil
-fileb
-firmb
-found
-furni
-guita
-hinta
-hybri
-inner
-joinl
-liftb
-likeb
-lineb
-lista
-manha
-medic
-metas
-moveb
-naked
-needa
-ocean
-parka
-pizza
-polic
-pushf
-thinb
-timea
-titan
-trade
-trueh
-villa
-wallb
-wealt
-whata
-which
-worka
-afric
-angel
-arizo
-auto-
-battl
-bulkb
-choos
-club-
-coldf
-commo
-deadb
-dieta
-dubai
-eastb
-envir
-exoti
-feeda
-firea
-float
-free-
-getsa
-headb
-heavy
-inven
-istan
-joinb
-label
-loadb
-lotte
-mindb
-multi
-paula
-payme
-prima
-pureb
-reala
-roomt
-rootb
-route
-sanal
-seema
-sella
-sellp
-share
-simpl
-spotf
-steel
-stone
-swiss
-thewo
-uglyb
-viral
-zhong
-adven
-being
-bigfa
-boatw
-bodyl
-buylo
-carre
-colda
-dataa
-decor
-easta
-edgeb
-educa
-egypt
-elega
-fishf
-flori
-gadge
-going
-goodb
-gospe
-helpf
-home-
-hopeb
-hosta
-integ
-intra
-iwant
-julia
-ladyb
-lasta
-legac
-letsb
-limit
-lineh
-loanb
-lotus
-magaz
-missh
-nexta
-nurse
-overb
-passa
-plant
-pocke
-recyc
-santa
-sitep
-small
-south
-sport
-texta
-theno
-thera
-theyw
-topse
-torre
-trans
-yacht
-alumi
-arcad
-batte
-bestp
-blind
-bodya
-bodyc
-cance
-capit
-cartr
-catal
-celeb
-chrom
-comic
-compu
-conne
-cruis
-cultu
-dance
-defen
-dress
-dynam
-eagle
-ebook
-eight
-europ
-firma
-focus
-frame
-gamew
-garag
-giveb
-habit
-heave
-hotel
-hydro
-hyper
-image
-joinm
-josep
-leafb
-letsl
-linux
-milfh
-namea
-natur
-neuro
-never
-newma
-nextb
-night
-olymp
-opena
-orang
-packa
-parks
-passl
-payle
-phoen
-plana
-popul
-porta
-repor
-rewar
-riska
-schoo
-secur
-sellb
-sello
-stude
-summe
-surve
-terra
-texas
-thail
-thebu
-thund
-aaron
-allma
-andre
-artis
-artof
-atomi
-awake
-barlo
-beiji
-bella
-bingo
-boata
-boise
-bolly
-busyb
-canst
-carbo
-cosme
-couga
-crack
-denta
-drago
-essen
-fastd
-filte
-formc
-forst
-girla
-girlb
-green
-hacka
-hillw
-hotst
-houst
-ideab
-jonat
-kitch
-ladie
-linka
-loana
-macro
-magne
-maila
-manga
-mapfi
-massf
-morer
-nicea
-orien
-overa
-pagea
-paren
-peakb
-pipeb
-posta
-purea
-rareb
-ratea
-richm
-rides
-safeh
-salea
-salon
-satel
-silve
-socce
-softd
-taska
-taskb
-teame
-tellf
-topfa
-turbo
-tutor
-vital
-water
-wireb
-women
-worda
-absol
-addre
-alway
-anypa
-anytr
-appra
-aroma
-arrow
-auror
-aweso
-balti
-bidfi
-bookb
-carol
-castl
-chipa
-chris
-circl
-claim
-codea
-cureb
-death
-delta
-denve
-deser
-dolla
-elekt
-etern
-execu
-facea
-famou
-festi
-finem
-fisha
-gamen
-glitt
-hackl
-haira
-handa
-hearb
-hipho
-holly
-hospi
-impac
-innov
-jenny
-jobco
-jokef
-journ
-keith
-leada
-leftb
-liber
-live-
-livin
-loadc
-longm
-longp
-makeu
-makin
-mango
-manya
-melis
-milit
-moral
-nearb
-netth
-nowma
-orlan
-parta
-payfi
-peakp
-repla
-resea
-revie
-risin
-savef
-selfp
-silly
-since
-sitea
-skate
-softw
-somer
-spiri
-stoph
-strea
-stuff
-targe
-tekno
-tella
-tellb
-theli
-trash
-treas
-twitt
-twolo
-upper
-viewa
-votea
-willa
-allwa
-amazi
-answe
-artwo
-athle
-audio
-baidu
-baske
-best-
-bigca
-bikin
-bluea
-borde
-calls
-casad
-caseb
-casec
-centa
-cigar
-cowbo
-deada
-downa
-dutch
-ebony
-elite
-emerg
-falco
-fanfi
-fanlo
-fatal
-feela
-fishs
-fixed
-fixfi
-floww
-fortr
-frien
-fruit
-galle
-gamin
-giant
-gotst
-gotwa
-graph
-grill
-hangt
-hawai
-hotwe
-hourb
-hurri
-icest
-inthe
-jokeb
-juego
-keylo
-knowa
-knowb
-larry
-laura
-lawre
-ledpa
-letsp
-locka
-lovew
-madeb
-mapst
-mayma
-menta
-metac
-midwe
-minda
-mineb
-mirac
-myhea
-mylif
-neara
-nevad
-nowfi
-nowpa
-nutri
-omega
-onetr
-owner
-payla
-plain
-plane
-posit
-radio
-rebec
-resid
-riskw
-rollb
-roman
-scout
-senio
-sexle
-sexpa
-sketc
-smoke
-speed
-spywa
-stepa
-steve
-sunlo
-tenne
-thoug
-tucso
-tunea
-uploa
-urban
-usele
-walla
-wantf
-weird
-wella
-wicke
-winsa
-wordb
-ableb
-acces
-addlo
-album
-allle
-allli
-ankar
-athen
-atlan
-belie
-bestg
-bests
-betra
-bigwa
-blowb
-buypa
-buyre
-bytea
-caffe
-campi
-canba
-canlo
-carhi
-catst
-cause
-choic
-churc
-civil
-compa
-costo
-craft
-cynth
-dayfi
-dayto
-dogca
-doglo
-domin
-dubli
-earth
-email
-emlak
-error
-failb
-fashi
-femal
-fiber
-finda
-fitwi
-fivel
-flagb
-front
-germa
-gogre
-gourm
-harbo
-harda
-highb
-hothe
-ideaa
-ihate
-iklan
-impor
-impro
-indus
-islam
-izmir
-joina
-kevin
-keyfi
-knock
-lateb
-lolit
-loopb
-madtr
-mater
-motor
-netde
-ninja
-nokia
-nowse
-obama
-onefi
-onema
-orbit
-packp
-payth
-pirat
-polla
-preci
-prime
-pussy
-puzzl
-qwert
-raven
-redhe
-regal
-relia
-rescu
-resul
-retai
-right
-rockb
-rooma
-sampl
-secre
-seefi
-selec
-sexpo
-sexse
-shock
-short
-silic
-siteo
-socal
-soont
-spice
-stron
-succe
-sunwa
-surea
-team-
-theya
-token
-topst
-townh
-trueg
-twoma
-unite
-vasta
-voteb
-walkb
-wallc
-warpa
-watch
-whato
-winda
-wishb
-acade
-adopt
-aimpa
-allco
-alter
-angle
-annie
-archi
-areab
-argen
-artma
-artse
-autom
-badmo
-baker
-bankf
-barli
-berry
-bestr
-betsi
-bible
-bidtr
-bigbo
-bigfi
-blond
-boatt
-boxlo
-boypa
-brida
-bryan
-buyme
-canpa
-carla
-casca
-caseh
-cedar
-city-
-class
-conve
-culve
-cupid
-dayca
-detox
-disca
-diska
-ditto
-docto
-doggi
-dogwi
-dumpl
-eachb
-eastw
-engin
-fanst
-farfi
-favor
-filea
-folkb
-fooda
-foota
-foura
-fulla
-ghost
-""".split()): PREFIX_SCORES[part] = (1000 - index) / 1000.0
+LEFT5_TOTAL = 17212
+LEFT5 = [
+('1-800', 20),
+('ableb', 12),
+('absol', 13),
+('acade', 11),
+('acces', 12),
+('addlo', 12),
+('addre', 14),
+('adult', 16),
+('advan', 19),
+('adven', 11),
+('afric', 16),
+('after', 28),
+('aimpa', 11),
+('album', 12),
+('allco', 11),
+('allle', 12),
+('allli', 12),
+('allma', 15),
+('allwa', 13),
+('alpha', 19),
+('alter', 11),
+('alumi', 16),
+('alway', 14),
+('amazi', 13),
+('ameri', 12),
+('andre', 15),
+('angel', 18),
+('angle', 11),
+('anima', 22),
+('ankar', 12),
+('annie', 11),
+('answe', 13),
+('anypa', 14),
+('anytr', 14),
+('appra', 14),
+('arcad', 15),
+('archi', 11),
+('areab', 11),
+('argen', 11),
+('arizo', 18),
+('aroma', 14),
+('arrow', 14),
+('artis', 15),
+('artma', 11),
+('artof', 15),
+('artse', 11),
+('artwo', 13),
+('athen', 12),
+('athle', 13),
+('atlan', 12),
+('atomi', 15),
+('aucti', 26),
+('audio', 12),
+('auror', 14),
+('auto-', 18),
+('autom', 11),
+('awake', 15),
+('aweso', 14),
+('badmo', 11),
+('baidu', 13),
+('baker', 11),
+('balla', 20),
+('balti', 14),
+('bankf', 11),
+('barli', 11),
+('barlo', 15),
+('basic', 37),
+('baske', 13),
+('batte', 16),
+('battl', 18),
+('beach', 22),
+('beiji', 15),
+('being', 17),
+('belie', 12),
+('bella', 15),
+('berry', 11),
+('best-', 13),
+('bestg', 12),
+('bestp', 16),
+('bestr', 11),
+('bests', 12),
+('betra', 12),
+('betsi', 11),
+('beyon', 32),
+('bicyc', 33),
+('bidfi', 14),
+('bidtr', 11),
+('bigbo', 11),
+('bigca', 13),
+('bigfa', 17),
+('bigfi', 11),
+('bigwa', 12),
+('bikin', 13),
+('bingo', 15),
+('birth', 19),
+('black', 39),
+('blind', 16),
+('bliss', 15),
+('block', 22),
+('blond', 11),
+('blowb', 12),
+('bluea', 13),
+('board', 38),
+('boata', 15),
+('boatt', 11),
+('boatw', 17),
+('bodya', 16),
+('bodyb', 22),
+('bodyc', 16),
+('bodyl', 17),
+('boise', 14),
+('bolly', 15),
+('booka', 21),
+('bookb', 14),
+('borde', 13),
+('bosto', 22),
+('boxlo', 11),
+('boypa', 11),
+('brand', 20),
+('break', 24),
+('brian', 24),
+('brida', 11),
+('broad', 21),
+('broke', 20),
+('bryan', 11),
+('build', 32),
+('bulkb', 18),
+('busin', 27),
+('busyb', 15),
+('buylo', 17),
+('buyme', 11),
+('buypa', 12),
+('buyre', 12),
+('bytea', 12),
+('cable', 20),
+('caffe', 12),
+('calls', 13),
+('campi', 12),
+('canba', 12),
+('cance', 16),
+('canlo', 12),
+('canpa', 11),
+('canst', 15),
+('capit', 15),
+('carbo', 14),
+('carda', 22),
+('cardr', 21),
+('carhi', 12),
+('carla', 11),
+('carpa', 11),
+('carre', 17),
+('cartr', 16),
+('casad', 13),
+('casca', 11),
+('caseb', 13),
+('casec', 13),
+('caseh', 11),
+('casin', 14),
+('castl', 14),
+('catal', 16),
+('catst', 12),
+('cause', 13),
+('cedar', 11),
+('celeb', 15),
+('centa', 12),
+('cheap', 20),
+('chica', 21),
+('china', 52),
+('chipa', 14),
+('choco', 16),
+('choic', 12),
+('choos', 18),
+('chris', 13),
+('chrom', 16),
+('churc', 11),
+('cigar', 13),
+('circl', 11),
+('city-', 11),
+('citya', 26),
+('cityf', 24),
+('civil', 12),
+('claim', 14),
+('class', 11),
+('clean', 41),
+('click', 22),
+('clock', 28),
+('close', 30),
+('cloud', 25),
+('club-', 18),
+('clubw', 25),
+('coach', 14),
+('codea', 14),
+('codeb', 21),
+('coffe', 21),
+('colda', 17),
+('coldf', 18),
+('colle', 16),
+('color', 38),
+('comic', 16),
+('commo', 18),
+('commu', 19),
+('compa', 12),
+('compu', 15),
+('conne', 15),
+('conve', 11),
+('copyb', 23),
+('cosme', 15),
+('costa', 30),
+('costo', 12),
+('couga', 15),
+('cover', 25),
+('cowbo', 13),
+('crack', 15),
+('craft', 12),
+('crash', 35),
+('creat', 26),
+('credi', 26),
+('cruis', 15),
+('cultu', 15),
+('culve', 11),
+('cupid', 11),
+('cureb', 14),
+('curre', 19),
+('custo', 22),
+('cyber', 20),
+('cycle', 25),
+('cynth', 12),
+('daily', 19),
+('dance', 14),
+('dataa', 17),
+('datab', 22),
+('datin', 41),
+('david', 22),
+('dayca', 11),
+('dayfi', 12),
+('dayto', 12),
+('deada', 13),
+('deadb', 18),
+('deala', 22),
+('dealb', 26),
+('death', 14),
+('decor', 16),
+('defen', 16),
+('delta', 14),
+('delux', 13),
+('denta', 14),
+('denve', 14),
+('deser', 14),
+('desig', 20),
+('detox', 11),
+('diabe', 19),
+('dieta', 18),
+('digit', 19),
+('direc', 15),
+('disca', 11),
+('diska', 11),
+('ditto', 11),
+('divin', 21),
+('divor', 20),
+('docto', 11),
+('dogca', 12),
+('doggi', 11),
+('doglo', 12),
+('dogma', 11),
+('dogwi', 11),
+('dolla', 13),
+('domai', 32),
+('doorb', 19),
+('doubl', 25),
+('downa', 13),
+('drago', 13),
+('dream', 22),
+('dress', 16),
+('drive', 33),
+('dubai', 18),
+('dumpl', 11),
+('dutch', 12),
+('eagle', 15),
+('early', 19),
+('earth', 12),
+('easta', 17),
+('eastb', 17),
+('eastw', 11),
+('ebony', 13),
+('ebook', 14),
+('edgeb', 17),
+('educa', 17),
+('egypt', 17),
+('eight', 15),
+('elect', 16),
+('elega', 16),
+('elekt', 14),
+('elite', 12),
+('emerg', 13),
+('emlak', 12),
+('engin', 11),
+('enjoy', 27),
+('enter', 26),
+('envir', 18),
+('equal', 27),
+('eroti', 17),
+('error', 12),
+('essen', 15),
+('etern', 14),
+('europ', 16),
+('event', 89),
+('exact', 20),
+('excel', 23),
+('execu', 14),
+('facea', 15),
+('facet', 26),
+('failb', 12),
+('faira', 11),
+('fairb', 23),
+('faith', 26),
+('falco', 13),
+('famil', 11),
+('famou', 14),
+('fancy', 43),
+('fanfi', 13),
+('fanlo', 13),
+('fanst', 11),
+('farfi', 11),
+('farma', 29),
+('fashi', 12),
+('fasta', 21),
+('fastd', 15),
+('fatal', 13),
+('favor', 11),
+('feeda', 18),
+('feedb', 24),
+('feela', 13),
+('femal', 12),
+('festi', 14),
+('fiber', 12),
+('field', 37),
+('fight', 30),
+('filea', 11),
+('fileb', 19),
+('filte', 15),
+('final', 29),
+('finda', 12),
+('findp', 27),
+('findr', 20),
+('finel', 27),
+('finem', 14),
+('firea', 18),
+('fireh', 22),
+('firma', 16),
+('firmb', 19),
+('first', 32),
+('fisha', 14),
+('fishf', 17),
+('fishs', 13),
+('fitwi', 12),
+('fiveb', 24),
+('fivef', 23),
+('fivel', 12),
+('fixed', 13),
+('fixfi', 13),
+('flagb', 12),
+('float', 18),
+('flowb', 25),
+('floww', 13),
+('focus', 15),
+('folkb', 11),
+('fooda', 11),
+('foodl', 23),
+('foodm', 22),
+('foota', 11),
+('forec', 29),
+('formc', 15),
+('forst', 15),
+('fortr', 13),
+('found', 19),
+('foura', 11),
+('frame', 16),
+('free-', 18),
+('freeb', 20),
+('frees', 20),
+('frien', 13),
+('front', 12),
+('fruit', 13),
+('fulla', 11),
+('furni', 14),
+('gadge', 17),
+('galle', 12),
+('gamen', 14),
+('gamew', 15),
+('gamin', 13),
+('garag', 16),
+('garde', 23),
+('germa', 12),
+('getsa', 18),
+('ghost', 11),
+('giant', 13),
+('girla', 15),
+('girlb', 15),
+('giveb', 16),
+('glitt', 14),
+('globa', 51),
+('gogre', 12),
+('going', 17),
+('goodb', 17),
+('goodt', 11),
+('gospe', 17),
+('gotst', 13),
+('gotwa', 13),
+('gourm', 12),
+('graph', 13),
+('great', 30),
+('green', 14),
+('griff', 12),
+('grill', 13),
+('guard', 22),
+('guide', 17),
+('guita', 19),
+('haber', 20),
+('habit', 16),
+('hacka', 15),
+('hackl', 14),
+('haira', 14),
+('hairb', 26),
+('handa', 14),
+('hangt', 12),
+('happy', 17),
+('harbo', 12),
+('harda', 12),
+('harri', 11),
+('hawai', 12),
+('headb', 18),
+('hearb', 14),
+('heave', 15),
+('heavy', 18),
+('helpf', 17),
+('herho', 11),
+('herli', 12),
+('higha', 11),
+('highb', 12),
+('highl', 37),
+('hillw', 15),
+('hinta', 19),
+('hipho', 14),
+('hispa', 11),
+('hitsa', 11),
+('holda', 11),
+('holly', 14),
+('home-', 17),
+('homes', 16),
+('honda', 11),
+('honey', 11),
+('hopeb', 17),
+('horiz', 11),
+('horse', 39),
+('hospi', 14),
+('hosta', 17),
+('hostb', 11),
+('hotel', 15),
+('hothe', 12),
+('hotst', 15),
+('hotwa', 11),
+('hotwe', 13),
+('hourb', 13),
+('house', 20),
+('houst', 15),
+('hugeb', 27),
+('human', 24),
+('hurri', 13),
+('hybri', 19),
+('hydro', 14),
+('hyper', 16),
+('icest', 13),
+('ideab', 15),
+('ihate', 12),
+('iklan', 12),
+('ilove', 15),
+('image', 12),
+('impac', 14),
+('imper', 12),
+('impro', 12),
+('india', 18),
+('infin', 25),
+('infor', 19),
+('inner', 19),
+('innov', 13),
+('integ', 17),
+('inter', 15),
+('inthe', 13),
+('intra', 17),
+('inven', 17),
+('iphon', 27),
+('islam', 12),
+('istan', 18),
+('iwant', 12),
+('izmir', 12),
+('japan', 19),
+('jenny', 14),
+('jobco', 14),
+('joina', 12),
+('joinb', 18),
+('joinl', 19),
+('joinm', 16),
+('jokeb', 13),
+('jokef', 14),
+('jonat', 13),
+('josep', 16),
+('journ', 14),
+('juego', 13),
+('julia', 17),
+('keith', 14),
+('kevin', 12),
+('keyfi', 12),
+('keylo', 13),
+('kingf', 24),
+('kitch', 15),
+('knock', 12),
+('knowa', 13),
+('knowb', 13),
+('korea', 20),
+('label', 18),
+('ladie', 15),
+('ladyb', 17),
+('lapto', 22),
+('larry', 13),
+('laser', 27),
+('lasta', 17),
+('lateb', 12),
+('laura', 12),
+('lawre', 13),
+('lazyb', 22),
+('leada', 14),
+('leadb', 26),
+('leafb', 16),
+('learn', 20),
+('ledpa', 13),
+('leftb', 14),
+('legac', 17),
+('letsb', 17),
+('letsl', 16),
+('letsp', 13),
+('level', 31),
+('liber', 13),
+('liftb', 19),
+('light', 35),
+('likeb', 19),
+('limit', 17),
+('linea', 21),
+('lineb', 18),
+('lineh', 17),
+('linka', 15),
+('linux', 15),
+('liqui', 34),
+('lista', 19),
+('listb', 21),
+('littl', 24),
+('live-', 14),
+('livew', 22),
+('livin', 14),
+('loadb', 18),
+('loadc', 14),
+('loana', 15),
+('loanb', 17),
+('local', 20),
+('locka', 13),
+('lockb', 20),
+('lolit', 12),
+('londo', 19),
+('longm', 14),
+('longp', 14),
+('looka', 20),
+('loopb', 12),
+('loose', 29),
+('lotte', 18),
+('lotus', 17),
+('lovew', 13),
+('macro', 15),
+('madeb', 13),
+('madtr', 12),
+('magaz', 17),
+('magic', 19),
+('magne', 15),
+('maila', 15),
+('mailb', 22),
+('major', 34),
+('makeu', 14),
+('makin', 14),
+('manag', 18),
+('manga', 15),
+('mango', 14),
+('manha', 19),
+('manya', 14),
+('mapfi', 15),
+('mapst', 13),
+('massf', 15),
+('match', 37),
+('mater', 12),
+('mayma', 13),
+('media', 42),
+('medic', 17),
+('melis', 14),
+('menta', 13),
+('metac', 13),
+('metas', 19),
+('mexic', 23),
+('micro', 15),
+('midwe', 13),
+('milfh', 16),
+('milit', 13),
+('minda', 13),
+('mindb', 18),
+('mineb', 13),
+('mirac', 13),
+('missh', 17),
+('missm', 22),
+('mobil', 25),
+('moral', 14),
+('morer', 15),
+('mount', 27),
+('moveb', 19),
+('movie', 48),
+('multi', 16),
+('music', 24),
+('myhea', 13),
+('mylif', 13),
+('naked', 19),
+('namea', 16),
+('natio', 30),
+('natur', 16),
+('neara', 13),
+('nearb', 14),
+('needa', 19),
+('netde', 12),
+('netth', 14),
+('neuro', 16),
+('nevad', 13),
+('never', 15),
+('newma', 16),
+('newsl', 15),
+('nexta', 17),
+('nextb', 16),
+('nicea', 15),
+('night', 15),
+('ninja', 12),
+('nokia', 12),
+('novel', 17),
+('nowfi', 13),
+('nowma', 14),
+('nowpa', 13),
+('nowse', 12),
+('nurse', 17),
+('nutri', 13),
+('obama', 12),
+('ocean', 14),
+('offic', 20),
+('olymp', 16),
+('onefi', 12),
+('onema', 12),
+('onetr', 13),
+('onlin', 35),
+('onthe', 21),
+('opena', 16),
+('openb', 18),
+('orang', 16),
+('orbit', 12),
+('organ', 76),
+('orien', 15),
+('orlan', 14),
+('other', 23),
+('overa', 12),
+('overb', 17),
+('owner', 12),
+('packa', 16),
+('packp', 12),
+('pagea', 15),
+('paper', 19),
+('parad', 20),
+('paren', 15),
+('parka', 19),
+('parki', 21),
+('parks', 16),
+('parta', 14),
+('passa', 17),
+('passl', 16),
+('patch', 21),
+('paten', 15),
+('patri', 25),
+('paula', 18),
+('payfi', 14),
+('payla', 13),
+('payle', 16),
+('payme', 18),
+('payth', 12),
+('peace', 31),
+('peakb', 15),
+('peakp', 14),
+('peopl', 26),
+('pharm', 23),
+('phoen', 16),
+('phone', 19),
+('photo', 23),
+('picka', 22),
+('pipeb', 15),
+('pirat', 12),
+('pixel', 31),
+('pizza', 19),
+('place', 38),
+('plain', 13),
+('plana', 16),
+('plane', 13),
+('plant', 17),
+('plast', 24),
+('pocke', 13),
+('point', 30),
+('poker', 19),
+('polar', 20),
+('polic', 19),
+('polla', 12),
+('popul', 16),
+('porta', 12),
+('posta', 14),
+('power', 34),
+('preci', 12),
+('press', 44),
+('price', 42),
+('prima', 18),
+('psych', 17),
+('publi', 25),
+('purea', 15),
+('pureb', 18),
+('pushf', 19),
+('pussy', 12),
+('puzzl', 12),
+('queen', 21),
+('quick', 41),
+('quote', 31),
+('qwert', 12),
+('raceb', 20),
+('rache', 26),
+('rapid', 47),
+('rareb', 15),
+('ratea', 15),
+('rateb', 21),
+('raven', 12),
+('reach', 21),
+('reala', 17),
+('rebec', 13),
+('recyc', 17),
+('redhe', 12),
+('regal', 12),
+('relia', 12),
+('repla', 14),
+('repor', 16),
+('rescu', 12),
+('resea', 14),
+('resid', 13),
+('resta', 26),
+('resul', 12),
+('revie', 14),
+('rewar', 16),
+('richm', 15),
+('rides', 15),
+('right', 12),
+('risin', 14),
+('riska', 16),
+('riskw', 13),
+('river', 32),
+('roadb', 22),
+('rockb', 12),
+('rocke', 21),
+('rollb', 13),
+('roman', 12),
+('rooma', 12),
+('roomb', 20),
+('roomt', 18),
+('rootb', 18),
+('rough', 25),
+('round', 29),
+('route', 18),
+('safeh', 15),
+('saint', 26),
+('salea', 15),
+('sales', 71),
+('salon', 14),
+('sampl', 12),
+('sanal', 18),
+('santa', 13),
+('satel', 15),
+('savef', 14),
+('scene', 21),
+('schoo', 16),
+('scout', 13),
+('scrap', 28),
+('secon', 22),
+('secre', 12),
+('secur', 16),
+('seefi', 12),
+('seema', 18),
+('selec', 12),
+('selfp', 14),
+('sella', 18),
+('sellb', 16),
+('sello', 16),
+('sellp', 18),
+('senio', 13),
+('serve', 23),
+('sesli', 20),
+('seven', 33),
+('sexle', 13),
+('sexpa', 13),
+('sexpo', 12),
+('sexse', 12),
+('share', 16),
+('shift', 31),
+('shock', 12),
+('shoot', 25),
+('short', 12),
+('sideb', 20),
+('signa', 29),
+('silen', 25),
+('silic', 12),
+('silly', 14),
+('silve', 15),
+('simpl', 17),
+('since', 14),
+('sitea', 14),
+('siteo', 12),
+('sitep', 17),
+('sitew', 25),
+('skate', 14),
+('sketc', 13),
+('sleep', 22),
+('small', 17),
+('smart', 23),
+('smile', 36),
+('smoke', 13),
+('socal', 12),
+('socce', 15),
+('softd', 15),
+('softt', 21),
+('softw', 14),
+('sohbe', 22),
+('solid', 32),
+('someb', 24),
+('somer', 14),
+('soont', 12),
+('sound', 24),
+('south', 17),
+('space', 20),
+('speak', 36),
+('speci', 20),
+('speed', 13),
+('spice', 12),
+('spiri', 13),
+('split', 24),
+('sport', 18),
+('spotf', 18),
+('spywa', 13),
+('steel', 18),
+('stepa', 13),
+('steve', 13),
+('stick', 30),
+('still', 25),
+('stock', 38),
+('stone', 16),
+('stoph', 14),
+('strea', 14),
+('stron', 12),
+('stude', 16),
+('study', 21),
+('stuff', 14),
+('style', 23),
+('succe', 12),
+('sugar', 37),
+('summe', 15),
+('sunlo', 13),
+('sunwa', 12),
+('super', 25),
+('surea', 12),
+('sureb', 21),
+('surve', 19),
+('sweet', 24),
+('swiss', 18),
+('syste', 23),
+('table', 19),
+('talen', 23),
+('targe', 14),
+('taska', 15),
+('taskb', 15),
+('teach', 18),
+('team-', 12),
+('teame', 15),
+('tekno', 14),
+('tella', 14),
+('tellb', 14),
+('tellf', 15),
+('tenne', 13),
+('terra', 15),
+('texas', 14),
+('texta', 17),
+('textb', 20),
+('thail', 16),
+('thatb', 21),
+('thebu', 16),
+('theli', 14),
+('theno', 17),
+('thera', 17),
+('thewo', 18),
+('theya', 12),
+('theyw', 17),
+('thinb', 19),
+('thisf', 26),
+('thoma', 20),
+('thoug', 13),
+('three', 26),
+('thund', 16),
+('ticke', 24),
+('tiger', 20),
+('timea', 19),
+('titan', 19),
+('today', 22),
+('tokyo', 23),
+('topfa', 15),
+('topse', 17),
+('topst', 12),
+('torre', 17),
+('total', 41),
+('touch', 22),
+('townh', 12),
+('trace', 27),
+('trade', 17),
+('trans', 15),
+('trash', 14),
+('trave', 24),
+('treas', 14),
+('tripa', 21),
+('truck', 24),
+('trueg', 12),
+('trueh', 19),
+('trust', 32),
+('tucso', 13),
+('tunea', 13),
+('turbo', 15),
+('tutor', 15),
+('twitt', 14),
+('twolo', 14),
+('twoma', 12),
+('uglyb', 18),
+('ultim', 24),
+('under', 20),
+('unite', 12),
+('uploa', 13),
+('upper', 14),
+('urban', 12),
+('usele', 13),
+('vasta', 12),
+('victo', 13),
+('vietn', 24),
+('viewa', 14),
+('villa', 19),
+('viral', 18),
+('virtu', 25),
+('vital', 15),
+('voice', 25),
+('votea', 14),
+('voteb', 12),
+('walkb', 12),
+('walla', 13),
+('wallb', 19),
+('wallc', 12),
+('wantf', 13),
+('warpa', 12),
+('watch', 12),
+('water', 15),
+('wealt', 19),
+('weigh', 22),
+('weird', 13),
+('wella', 13),
+('whata', 19),
+('whato', 12),
+('wheel', 29),
+('where', 28),
+('which', 18),
+('whole', 18),
+('wicke', 13),
+('wilda', 24),
+('willa', 14),
+('winda', 12),
+('winsa', 13),
+('wireb', 15),
+('wishb', 12),
+('woman', 25),
+('women', 14),
+('worda', 15),
+('wordb', 13),
+('worka', 19),
+('xtrem', 25),
+('yacht', 17),
+('yello', 21),
+('your-', 15),
+('zhong', 18),
+]
 
-for index, part in enumerate("""
-organi
-global
-dating
-iphone
-liquid
-bicycl
-online
-domain
-weddin
-beyond
-colora
-design
-nation
-diabet
-little
-busine
-people
-travel
-auctio
-mounta
-double
-system
-virtua
-americ
-patric
-rachel
-ultima
-custom
-forecl
-garden
-infini
-silent
-xtreme
-advanc
-boston
-casino
-commun
-credit
-future
-laptop
-second
-sohbet
-ticket
-vietna
-manage
-paradi
-pharma
-plasti
-animal
-chicag
-coffee
-curren
-divorc
-london
-mobile
-talent
-thomas
-yellow
-direct
-erotic
-guitar
-hybrid
-africa
-arizon
-battle
-choose
-greata
-invent
-powera
-public
-specia
-wealth
-weight
-advent
-digita
-elegan
-enviro
-exotic
-firsta
-furnit
-gadget
-office
-pocket
-police
-recycl
-simple
-stockb
-arcade
-blacka
-cancer
-colleg
-connec
-costar
-divine
-garage
-heaven
-insura
-istanb
-joseph
-legacy
-mediaa
-milfhu
-orange
-phoeni
-quickb
-report
-school
-studen
-thaila
-thunde
-totala
-beijin
-birthd
-black-
-capita
-cleana
-cougar
-creati
-cultur
-dailya
-dental
-dragon
-dynami
-filter
-gospel
-integr
-jonath
-ladies
-magazi
-olympi
-orient
-parent
-silver
-soccer
-adult-
-alumin
-always
-aurora
-awesom
-batter
-carbon
-castle
-chrome
-comput
-cruise
-denver
-desert
-elektr
-famous
-florid
-grapha
-hiphop
-horseb
-housto
-kitche
-living
-locala
-milita
-moviea
-orland
-parkin
-review
-reward
-richmo
-smart-
-softwa
-spirit
-stream
-stylea
-survey
-target
-treasu
-voicea
-1-800-
-absolu
-andrea
-answer
-apprai
-basica
-builda
-chocol
-circle
-cowboy
-crashb
-decora
-dollar
-educat
-excell
-execut
-falcon
-founda
-friend
-gaming
-glitte
-hawaii
-impact
-innova
-magnet
-meliss
-nevada
-placeb
-planta
-poker-
-positi
-pricea
-priceb
-quicka
-rapida
-rebecc
-resear
-restau
-rising
-scrapb
-senior
-sketch
-sounda
-spywar
-sticka
-stocka
-summer
-though
-tucson
-twitte
-upload
-wicked
-access
-amazin
-ankara
-athlet
-atomic
-choice
-church
-common
-cynthi
-eastba
-entera
-eterna
-fashio
-female
-festiv
-german
-gogree
-gourme
-habita
-hospit
-hurric
-import
-japane
-juegos
-lighta
-lightb
-making
-medica
-mexica
-midwes
-musica
-mylife
-planet
-popula
-puzzle
-queens
-rescue
-result
-retail
-select
-silico
-strong
-super-
-torren
-toucha
-trusta
-academ
-angela
-artwor
-basket
-blockb
-bodylo
-border
-breakb
-bridal
-callsa
-campin
-cheap-
-cleanb
-culver
-electr
-engine
-finelo
-galler
-horizo
-humana
-indust
-inside
-joomla
-journa
-leisur
-livewi
-magic-
-malibu
-matcha
-matchb
-mexico
-miracl
-natura
-nighta
-papera
-paymen
-phonea
-pimpmy
-pointa
-purple
-qwerty
-racing
-retire
-riverb
-robert
-satell
-search
-shirle
-smilea
-solida
-source
-speaka
-speake
-spring
-studya
-sugarb
-taylor
-threeb
-tutori
-vacati
-vector
-wheela
-alabam
-arctic
-athens
-atlant
-attorn
-august
-aussie
-bamboo
-basicb
-bayare
-boardb
-cascad
-china-
-clubwi
-coasta
-covera
-cycleb
-databa
-doctor
-dream-
-enchan
-enjoya
-enjoyb
-europe
-faitha
-famili
-favori
-fusion
-gamewa
-griffi
-guarda
-harbor
-harris
-highlo
-horsea
-improv
-italia
-kerala
-lonest
-member
-mental
-moviec
-music-
-oklaho
-orchid
-over50
-pacifi
-pirate
-prayer
-pressa
-pressb
-primar
-repair
-resume
-righta
-rivera
-rockba
-rocker
-sample
-saving
-scarle
-scienc
-secret
-sevena
-spacea
-stillb
-stloui
-stonea
-straig
-teacha
-trucka
-truckb
-trustb
-univer
-unlimi
-xpress
-""".split()): PREFIX_SCORES[part] = (409 - index) / 409.0
+LEFT6_TOTAL = 5853
+LEFT6 = [
+('1-800-', 13),
+('absolu', 12),
+('academ', 11),
+('access', 12),
+('adult-', 14),
+('advanc', 18),
+('advent', 11),
+('africa', 16),
+('alabam', 10),
+('alumin', 14),
+('always', 14),
+('amazin', 12),
+('americ', 16),
+('andrea', 13),
+('angela', 11),
+('animal', 20),
+('ankara', 12),
+('answer', 13),
+('apprai', 13),
+('arcade', 15),
+('arctic', 10),
+('arizon', 18),
+('artwor', 11),
+('athens', 10),
+('athlet', 12),
+('atlant', 10),
+('atomic', 12),
+('attorn', 10),
+('auctio', 26),
+('august', 10),
+('aurora', 14),
+('aussie', 10),
+('awesom', 14),
+('bamboo', 10),
+('basica', 12),
+('basicb', 10),
+('basket', 11),
+('batter', 14),
+('battle', 18),
+('bayare', 10),
+('beijin', 15),
+('beyond', 30),
+('bicycl', 33),
+('birthd', 15),
+('black-', 15),
+('blacka', 16),
+('blissf', 11),
+('blockb', 11),
+('boardb', 10),
+('bodylo', 11),
+('border', 11),
+('boston', 22),
+('breakb', 11),
+('bridal', 11),
+('builda', 13),
+('busine', 26),
+('callsa', 11),
+('campin', 11),
+('cancer', 16),
+('capita', 15),
+('carbon', 13),
+('cascad', 10),
+('casino', 13),
+('castle', 14),
+('cheap-', 11),
+('chicag', 20),
+('china-', 10),
+('chocol', 11),
+('choice', 12),
+('choose', 18),
+('chrome', 14),
+('church', 11),
+('circle', 10),
+('cleana', 15),
+('cleanb', 11),
+('clubwi', 10),
+('coasta', 10),
+('coffee', 20),
+('colleg', 12),
+('colora', 30),
+('common', 12),
+('commun', 19),
+('comput', 13),
+('connec', 15),
+('costar', 16),
+('cougar', 15),
+('covera', 10),
+('cowboy', 13),
+('crashb', 13),
+('creati', 15),
+('credit', 22),
+('cruise', 14),
+('cultur', 14),
+('culver', 11),
+('curren', 19),
+('custom', 21),
+('cycleb', 10),
+('cynthi', 12),
+('dailya', 15),
+('databa', 10),
+('dating', 41),
+('decora', 13),
+('deluxe', 12),
+('dental', 14),
+('denver', 14),
+('desert', 14),
+('design', 19),
+('diabet', 19),
+('digita', 17),
+('direct', 13),
+('divine', 16),
+('divorc', 20),
+('doctor', 10),
+('dollar', 13),
+('domain', 29),
+('double', 25),
+('dragon', 13),
+('dream-', 10),
+('dynami', 15),
+('eastba', 12),
+('educat', 13),
+('electr', 11),
+('elegan', 16),
+('elektr', 14),
+('enchan', 10),
+('engine', 11),
+('enjoya', 10),
+('enjoyb', 10),
+('entera', 12),
+('enviro', 17),
+('erotic', 15),
+('eterna', 12),
+('europe', 10),
+('excell', 11),
+('execut', 13),
+('exotic', 10),
+('faitha', 10),
+('falcon', 13),
+('famili', 10),
+('famous', 14),
+('fashio', 12),
+('favori', 10),
+('female', 12),
+('festiv', 12),
+('filter', 15),
+('finelo', 11),
+('firsta', 17),
+('florid', 14),
+('forecl', 23),
+('founda', 13),
+('friend', 13),
+('furnit', 12),
+('fusion', 10),
+('future', 10),
+('gadget', 17),
+('galler', 10),
+('gamewa', 10),
+('gaming', 13),
+('garage', 16),
+('garden', 23),
+('german', 12),
+('glitte', 13),
+('global', 51),
+('gogree', 12),
+('gospel', 15),
+('gourme', 12),
+('grapha', 14),
+('greata', 18),
+('griffi', 12),
+('guarda', 10),
+('guitar', 19),
+('habita', 12),
+('harbor', 10),
+('harris', 10),
+('hawaii', 12),
+('health', 10),
+('heaven', 15),
+('highlo', 10),
+('hiphop', 14),
+('horizo', 11),
+('horsea', 10),
+('horseb', 14),
+('hospit', 12),
+('housto', 14),
+('humana', 11),
+('hurric', 12),
+('hybrid', 19),
+('impact', 13),
+('import', 11),
+('improv', 10),
+('indust', 10),
+('infini', 23),
+('innova', 12),
+('inside', 10),
+('insura', 11),
+('integr', 15),
+('invent', 17),
+('iphone', 27),
+('istanb', 16),
+('italia', 10),
+('japane', 12),
+('jonath', 13),
+('joomla', 11),
+('joseph', 16),
+('journa', 11),
+('juegos', 12),
+('kerala', 10),
+('kitche', 14),
+('ladies', 15),
+('laptop', 22),
+('legacy', 16),
+('leisur', 11),
+('lighta', 12),
+('lightb', 12),
+('liquid', 34),
+('little', 24),
+('livewi', 11),
+('living', 14),
+('locala', 14),
+('london', 19),
+('lonest', 10),
+('magazi', 15),
+('magic-', 11),
+('magnet', 13),
+('making', 12),
+('malibu', 11),
+('manage', 17),
+('matcha', 11),
+('matchb', 11),
+('mediaa', 16),
+('medica', 11),
+('meliss', 13),
+('member', 10),
+('mental', 10),
+('mexica', 12),
+('mexico', 11),
+('midwes', 12),
+('milfhu', 16),
+('milita', 13),
+('miracl', 11),
+('mobile', 18),
+('mortga', 10),
+('mounta', 26),
+('moviea', 14),
+('moviec', 10),
+('music-', 10),
+('musica', 10),
+('mylife', 12),
+('nation', 30),
+('natura', 11),
+('nevada', 13),
+('newsle', 11),
+('nighta', 11),
+('office', 16),
+('oklaho', 10),
+('olympi', 15),
+('online', 33),
+('orange', 16),
+('orchid', 10),
+('organi', 75),
+('orient', 15),
+('orland', 14),
+('over50', 10),
+('pacifi', 10),
+('papera', 11),
+('paradi', 18),
+('parent', 15),
+('parkin', 14),
+('patent', 15),
+('patric', 24),
+('paymen', 11),
+('people', 26),
+('pharma', 21),
+('phoeni', 16),
+('phonea', 11),
+('pimpmy', 10),
+('pirate', 10),
+('placeb', 13),
+('planet', 12),
+('planta', 13),
+('plasti', 21),
+('pocket', 13),
+('pointa', 11),
+('poker-', 13),
+('police', 17),
+('popula', 12),
+('positi', 11),
+('powera', 18),
+('prayer', 10),
+('pressa', 10),
+('pressb', 10),
+('pricea', 13),
+('priceb', 13),
+('primar', 10),
+('public', 18),
+('purple', 11),
+('puzzle', 12),
+('queens', 12),
+('quicka', 13),
+('quickb', 16),
+('qwerty', 11),
+('rachel', 24),
+('racing', 11),
+('rapida', 13),
+('rebecc', 13),
+('recycl', 17),
+('repair', 10),
+('report', 16),
+('rescue', 12),
+('resear', 13),
+('restau', 13),
+('result', 12),
+('resume', 10),
+('retail', 11),
+('retire', 11),
+('review', 14),
+('reward', 14),
+('richmo', 14),
+('righta', 10),
+('rising', 13),
+('rivera', 10),
+('riverb', 11),
+('robert', 10),
+('rockba', 10),
+('rocker', 10),
+('sample', 10),
+('satell', 11),
+('saving', 10),
+('scarle', 10),
+('school', 16),
+('scienc', 10),
+('scrapb', 13),
+('search', 11),
+('second', 22),
+('secret', 10),
+('select', 12),
+('senior', 13),
+('sevena', 10),
+('shirle', 11),
+('silent', 23),
+('silico', 12),
+('silver', 15),
+('simple', 16),
+('sketch', 13),
+('smart-', 14),
+('smilea', 11),
+('soccer', 15),
+('softwa', 14),
+('sohbet', 22),
+('solida', 11),
+('sounda', 13),
+('source', 11),
+('spacea', 10),
+('speaka', 11),
+('speake', 11),
+('specia', 18),
+('spirit', 13),
+('spring', 11),
+('spywar', 13),
+('sticka', 13),
+('stillb', 10),
+('stloui', 10),
+('stocka', 13),
+('stockb', 17),
+('stonea', 10),
+('straig', 10),
+('stream', 14),
+('strong', 12),
+('studen', 16),
+('studya', 11),
+('stylea', 14),
+('sugarb', 11),
+('summer', 13),
+('super-', 12),
+('survey', 17),
+('system', 23),
+('talent', 20),
+('target', 14),
+('taylor', 11),
+('teacha', 10),
+('thaila', 16),
+('thomas', 20),
+('though', 13),
+('threeb', 11),
+('thunde', 16),
+('ticket', 22),
+('torren', 12),
+('totala', 16),
+('toucha', 12),
+('travel', 20),
+('treasu', 14),
+('trucka', 10),
+('truckb', 10),
+('trusta', 12),
+('trustb', 10),
+('tucson', 13),
+('tutori', 11),
+('twitte', 13),
+('ultima', 24),
+('univer', 10),
+('unlimi', 10),
+('upload', 13),
+('vacati', 11),
+('vector', 11),
+('victor', 13),
+('vietna', 22),
+('virtua', 25),
+('voicea', 14),
+('wealth', 18),
+('weddin', 10),
+('weight', 18),
+('wheela', 11),
+('wicked', 13),
+('xpress', 10),
+('xtreme', 23),
+('yellow', 20),
+]
 
 SUFFIX_SCORES = {}
-for index, part in enumerate("""
-ing
-all
-ine
-ers
-ion
-and
-age
-art
-air
-ter
-ate
-are
-ice
-one
-ess
-ack
-est
-tes
-mes
-ear
-ard
-ies
-ons
-ace
-ent
-ive
-les
-ain
-ore
-ill
-ite
-ase
-ell
-ide
-ity
-nce
-act
-aid
-day
-net
-ost
-ght
-bar
-box
-ver
-tal
-ble
-its
-arm
-rts
-ets
-nds
-dia
-law
-ome
-way
-ars
-man
-ank
-ign
-use
-ook
-oup
-der
-hop
-ind
-nes
-own
-ews
-ame
-ang
-nts
-ile
-ead
-ure
-ife
-int
-log
-ock
-ort
-ast
-ics
-ass
-our
-ong
-rds
-now
-tor
-ree
-sic
-als
-lub
-any
-ges
-ark
-ist
-ise
-tch
-dio
-eat
-inc
-ans
-ays
-web
-eam
-rea
-boy
-bet
-een
-und
-ash
-ick
-lan
-car
-lls
-ove
-ads
-ker
-res
-bid
-buy
-hat
-ood
-ors
-ere
-ses
-bit
-ale
-old
-ect
-you
-ail
-rld
-ant
-eal
-ina
-ote
-ech
-lue
-ery
-ngs
-tel
-vel
-can
-ner
-end
-nfo
-ool
-add
-ink
-ask
-ins
-ire
-son
-per
-low
-her
-out
-ids
-oot
-eed
-alk
-cks
-els
-obs
-ler
-ork
-aim
-ave
-ish
-ady
-bug
-ach
-ade
-rks
-ago
-oad
-ces
-ica
-afe
-ild
-men
-bed
-big
-rum
-ean
-ney
-deo
-eek
-lay
-rth
-cat
-job
-ake
-cts
-key
-ode
-ime
-oks
-wer
-usa
-bus
-ian
-iew
-ily
-eas
-eet
-gns
-irl
-red
-ems
-rch
-fun
-lus
-dge
-ial
-oft
-pen
-sex
-eye
-orp
-yes
-nge
-dog
-rty
-oom
-sts
-oor
-gic
-ket
-ten
-ory
-top
-ves
-ata
-ens
-ero
-joy
-ran
-ats
-oto
-how
-oll
-ung
-fer
-rry
-eak
-fan
-des
-ple
-ral
-ust
-ban
-row
-unt
-bad
-fix
-ody
-oil
-rmy
-eel
-oss
-ole
-ser
-ton
-rop
-tem
-uck
-urs
-eep
-oat
-off
-fly
-new
-oan
-rce
-ana
-ath
-guy
-nks
-ext
-fit
-led
-uth
-war
-ber
-eys
-gas
-ino
-nch
-ods
-ger
-com
-nal
-ope
-ven
-cal
-ilm
-dit
-eng
-ike
-kid
-ops
-tin
-ump
-hip
-ose
-set
-cup
-let
-eds
-ord
-ada
-try
-van
-dds
-elp
-get
-ted
-han
-lar
-nto
-sit
-ams
-ips
-ots
-pot
-tos
-ift
-ncy
-for
-tan
-two
-hot
-nia
-cut
-mix
-oes
-map
-nit
-orn
-ows
-pro
-win
-ama
-isk
-lot
-tas
-ull
-yle
-ane
-ary
-gun
-lth
-nor
-vie
-ape
-esi
-hen
-kes
-ply
-que
-biz
-hit
-orm
-run
-uff
-aws
-oms
-tar
-nse
-rap
-sun
-ush
-who
-his
-ith
-oke
-tic
-ara
-del
-lty
-raw
-tax
-ari
-rms
-tra
-ube
-unk
-dea
-oon
-cle
-era
-gle
-nly
-rse
-sed
-too
-uch
-dex
-emy
-igh
-888
-bel
-uan
-ley
-uit
-eck
-mer
-azy
-ert
-ols
-rgy
-123
-ico
-las
-pay
-rge
-asy
-den
-pop
-arn
-ego
-hes
-isc
-lie
-llc
-ogs
-008
-eld
-eme
-ene
-fts
-mit
-rip
-uys
-eri
-lle
-ogy
-pes
-tea
-yte
-gal
-ppy
-ria
-via
-000
-bal
-iet
-ios
-ken
-lab
-not
-olf
-ris
-ste
-elf
-lks
-met
-une
-eer
-eto
-mas
-uto
-365
-esh
-nda
-ras
-rus
-sat
-lam
-llo
-phy
-ult
-eos
-ier
-ita
-lat
-ndo
-nel
-ram
-rst
-tis
-ute
-eaf
-ipe
-lms
-nic
-ous
-pan
-tat
-yer
-dan
-hem
-med
-rid
-sen
-sis
-ani
-cer
-edu
-ees
-lak
-oin
-ren
-say
-see
-shi
-six
-the
-asi
-das
-has
-nny
-opy
-rls
-tre
-ums
-uty
-aph
-die
-dos
-lla
-nas
-oys
-pas
-ado
-aps
-bum
-ddy
-kan
-san
-sum
-ugs
-xes
-hin
-irm
-iss
-ize
-mag
-ont
-yat
-yet
-ala
-edo
-far
-ium
-mps
-rew
-ros
-sad
-bbs
-ege
-ein
-iao
-iki
-lag
-mad
-min
-nis
-rit
-ule
-uts
-100
-cam
-cry
-gap
-ims
-lik
-mod
-oop
-put
-999
-eap
-err
-ias
-ida
-lia
-lis
-may
-odd
-ric
-tie
-aby
-lly
-sia
-ual
-ebe
-gen
-ief
-leg
-lon
-ngo
-ond
-pic
-tek
-yan
-but
-eby
-ena
-nan
-ora
-she
-xxx
-ype
-360
-aya
-don
-dry
-gan
-him
-lin
-ltd
-nte
-oth
-rat
-ron
-sky
-tam
-tik
-ury
-esk
-hai
-ika
-ini
-inn
-ism
-max
-nat
-spa
-tle
-tro
-why
-won
-abs
-che
-cia
-con
-gar
-ham
-ils
-ret
-sim
-ali
-nam
-sta
-tec
-aat
-dam
-dat
-gue
-ony
-pet
-pin
-rve
-ues
-urt
-was
-acy
-amp
-avi
-chi
-eks
-ich
-ied
-kit
-saw
-tto
-ura
-urn
-911
-aff
-cky
-eit
-gel
-sas
-seo
-sor
-tex
-168
-ags
-ait
-ano
-asa
-eft
-eno
-eon
-har
-ndy
-pid
-pon
-ude
--it
-666
-ami
-dor
-ito
-iva
-lug
-nik
-rol
-tay
-114
-bag
-cha
-did
-fed
-lex
-rom
-sty
-zen
-atv
-dom
-due
-epi
-esa
-eth
-ety
-got
-hts
-isi
-ogo
-sea
-tte
-ese
-hua
-hui
-ien
-kat
-lee
-mp3
-nta
-rex
-rez
-rie
-tai
-tit
-ulk
-aft
-ati
-din
-eta
-fry
-gin
-git
-ira
-lse
-mon
-oem
-oma
-owe
-sin
-wan
-001
-ded
-eda
-egs
-ete
-ima
-lor
-lts
-mos
-nus
-oga
-ola
-oof
-pat
-pts
-sol
-tus
-uge
-bay
-bes
-doe
-ece
-eis
-eli
-eur
-fee
-hub
-kam
-kas
-kin
-lad
-lid
-lso
-mic
-rma
-rno
-rue
-sam
-sco
-sel
-tif
-udy
-uel
-uru
-ved
-yon
--tv
-bao
-eco
-ela
-emo
-eso
-eup
-ird
-ked
-len
-lya
-nos
-ona
-osa
-pia
-ska
-sus
-sys
-umb
-aza
-dev
-dvd
-ept
-ern
-gly
-had
-ior
-mai
-non
-rte
-sue
-xed
-688
-alf
-bot
-ewe
-few
-ila
-imo
-isa
-iye
-lds
-nie
-omm
-oni
-tby
-tep
-tup
-ups
-aka
-arp
-cpa
-ely
-etv
-glu
-nga
-ror
-sms
-uri
-val
-vip
-ybe
-zer
--uk
-101
-bai
-dir
-eau
-ele
-eof
-eti
-hun
-itz
-iya
-lip
-mar
-oet
-ori
-pix
-ray
-rel
-rio
-ski
-sse
-zza
-cai
-doh
-erm
-god
-lic
-lli
-nde
-ntv
-oyu
-rer
-rin
-rup
-sil
-sks
-ssy
-tof
-ula
-uns
-usy
-007
-009
-411
-abc
-ann
-aos
-bio
-bul
-cas
-dgo
-dot
-ecs
-fox
-gon
-lve
-mor
-ned
-nna
-nth
-olk
-oxy
-stv
-tbe
-tno
-tti
-uer
-vis
-yam
-777
-alo
-aze
-bin
-cus
-dby
-dis
-elt
-eum
-eva
-gos
-hao
-hid
-ili
-ilt
-jie
-kup
-lit
-los
-lry
-mat
-nco
-pal
-rix
-ssa
-tim
-toh
-xin
--co
-aus
-cos
-dar
-ebs
-ema
-hic
-ict
-jor
-mba
-nea
-olo
-opt
-oru
-oul
-rgo
-rim
-rly
-sup
-thy
-tty
-ume
-wow
-yar
-zle
-010
-120
-163
-188
-aar
-abe
-aku
-awa
-dem
-dup
-dus
-eji
-erz
-hut
-idc
-iti
-""".split()): SUFFIX_SCORES[part] = (1000 - index) / 1000.0
+RIGHT3_TOTAL = 101694
+RIGHT3 = [
+('-co', 22),
+('-it', 37),
+('-tv', 30),
+('-uk', 21),
+('000', 55),
+('001', 32),
+('007', 24),
+('008', 65),
+('010', 21),
+('100', 45),
+('101', 26),
+('114', 29),
+('123', 71),
+('163', 21),
+('168', 38),
+('188', 21),
+('360', 42),
+('365', 61),
+('411', 24),
+('666', 31),
+('688', 26),
+('888', 73),
+('911', 26),
+('999', 49),
+('aar', 20),
+('aat', 41),
+('abc', 22),
+('abe', 23),
+('abs', 35),
+('aby', 47),
+('ace', 462),
+('ach', 164),
+('ack', 507),
+('act', 381),
+('acy', 29),
+('ada', 100),
+('add', 183),
+('ade', 163),
+('ado', 50),
+('ads', 230),
+('ady', 166),
+('ael', 20),
+('afe', 156),
+('aff', 36),
+('aft', 27),
+('age', 762),
+('ago', 159),
+('ags', 39),
+('aid', 371),
+('ail', 204),
+('aim', 172),
+('ain', 427),
+('air', 654),
+('ais', 21),
+('ait', 38),
+('aka', 27),
+('ake', 152),
+('aki', 21),
+('ala', 49),
+('ale', 216),
+('alf', 26),
+('ali', 41),
+('alk', 153),
+('all', 1047),
+('als', 219),
+('ama', 76),
+('ame', 289),
+('ami', 35),
+('amp', 40),
+('ams', 91),
+('ana', 113),
+('and', 798),
+('ane', 84),
+('ang', 282),
+('ani', 57),
+('ank', 319),
+('ann', 23),
+('ano', 45),
+('ans', 242),
+('ant', 200),
+('any', 231),
+('aos', 23),
+('ape', 86),
+('aph', 40),
+('aps', 50),
+('ara', 80),
+('ard', 489),
+('are', 568),
+('ari', 80),
+('ark', 249),
+('arm', 330),
+('arn', 67),
+('arp', 25),
+('ars', 313),
+('art', 730),
+('ary', 72),
+('asa', 34),
+('ase', 399),
+('ash', 227),
+('asi', 54),
+('ask', 196),
+('ass', 261),
+('ast', 265),
+('asy', 70),
+('ata', 118),
+('ate', 566),
+('ath', 112),
+('ati', 33),
+('ats', 120),
+('atv', 34),
+('aus', 21),
+('ave', 175),
+('avi', 40),
+('awa', 21),
+('aws', 85),
+('aya', 40),
+('ays', 236),
+('aza', 22),
+('azy', 72),
+('bad', 108),
+('bag', 36),
+('bai', 23),
+('bal', 67),
+('ban', 119),
+('bao', 26),
+('bar', 337),
+('bay', 29),
+('bbs', 51),
+('bed', 163),
+('bel', 73),
+('ber', 105),
+('bes', 31),
+('bet', 219),
+('bid', 217),
+('big', 147),
+('bio', 21),
+('bit', 208),
+('biz', 84),
+('ble', 341),
+('bot', 25),
+('box', 346),
+('boy', 208),
+('bug', 162),
+('bul', 24),
+('bum', 54),
+('bus', 143),
+('but', 42),
+('buy', 225),
+('cai', 21),
+('cal', 98),
+('cam', 47),
+('can', 203),
+('car', 213),
+('cas', 23),
+('cat', 158),
+('cer', 54),
+('ces', 158),
+('cha', 34),
+('che', 42),
+('chi', 36),
+('cia', 43),
+('cks', 166),
+('cky', 37),
+('cle', 77),
+('com', 96),
+('con', 43),
+('cos', 22),
+('cpa', 26),
+('cry', 44),
+('cts', 152),
+('cup', 92),
+('cus', 23),
+('cut', 90),
+('dam', 36),
+('dan', 59),
+('das', 54),
+('dat', 42),
+('day', 347),
+('dby', 24),
+('dds', 98),
+('ddy', 49),
+('dea', 77),
+('ded', 32),
+('del', 81),
+('dem', 20),
+('den', 71),
+('deo', 158),
+('der', 297),
+('des', 120),
+('dev', 23),
+('dex', 74),
+('dge', 134),
+('dgo', 23),
+('dia', 312),
+('did', 37),
+('die', 50),
+('din', 25),
+('dio', 234),
+('dir', 24),
+('dit', 99),
+('doc', 20),
+('doe', 20),
+('dog', 130),
+('dom', 33),
+('don', 45),
+('dor', 37),
+('dos', 54),
+('dot', 24),
+('dry', 40),
+('due', 35),
+('dus', 21),
+('dvd', 20),
+('ead', 269),
+('eaf', 52),
+('eak', 117),
+('eal', 201),
+('eam', 224),
+('ean', 160),
+('eap', 47),
+('ear', 483),
+('eas', 143),
+('eat', 245),
+('eau', 26),
+('ebe', 46),
+('eby', 44),
+('ece', 32),
+('ech', 199),
+('eck', 69),
+('eco', 30),
+('ecs', 24),
+('ect', 212),
+('eda', 32),
+('eds', 100),
+('edu', 46),
+('eed', 182),
+('eek', 148),
+('eel', 118),
+('een', 235),
+('eep', 111),
+('eer', 61),
+('ees', 56),
+('eet', 147),
+('eft', 38),
+('ege', 49),
+('ego', 48),
+('egs', 31),
+('ein', 38),
+('eis', 25),
+('eit', 36),
+('eks', 40),
+('ela', 28),
+('eld', 69),
+('ele', 26),
+('elf', 61),
+('eli', 29),
+('ell', 396),
+('elp', 75),
+('els', 164),
+('elt', 21),
+('ely', 27),
+('ema', 21),
+('eme', 64),
+('emo', 30),
+('ems', 133),
+('emy', 78),
+('ena', 46),
+('end', 177),
+('ene', 70),
+('eng', 102),
+('eno', 51),
+('ens', 129),
+('ent', 440),
+('eof', 22),
+('eon', 38),
+('eos', 58),
+('ept', 27),
+('era', 75),
+('ere', 196),
+('eri', 68),
+('erm', 25),
+('ern', 25),
+('ero', 122),
+('err', 45),
+('ers', 828),
+('ert', 74),
+('ery', 176),
+('esa', 20),
+('ese', 34),
+('esh', 61),
+('esi', 86),
+('esk', 45),
+('eso', 30),
+('ess', 510),
+('est', 493),
+('eta', 30),
+('ete', 29),
+('eth', 35),
+('eti', 26),
+('eto', 47),
+('ets', 313),
+('etv', 26),
+('ety', 27),
+('eue', 20),
+('eum', 23),
+('eup', 23),
+('eur', 29),
+('eva', 22),
+('evi', 20),
+('ews', 299),
+('ext', 82),
+('eye', 139),
+('eys', 110),
+('fan', 122),
+('far', 51),
+('fed', 38),
+('fee', 26),
+('fer', 120),
+('few', 26),
+('fit', 110),
+('fix', 84),
+('fly', 110),
+('for', 95),
+('fox', 24),
+('fry', 33),
+('fts', 69),
+('fun', 138),
+('gal', 59),
+('gan', 45),
+('gap', 43),
+('gar', 43),
+('gas', 107),
+('gel', 39),
+('gen', 47),
+('ger', 105),
+('ges', 243),
+('get', 89),
+('ght', 356),
+('gic', 126),
+('gin', 28),
+('git', 32),
+('gle', 78),
+('glu', 26),
+('gly', 29),
+('gns', 146),
+('god', 23),
+('gon', 24),
+('gos', 22),
+('got', 33),
+('gue', 41),
+('gun', 85),
+('guy', 113),
+('had', 28),
+('hai', 40),
+('ham', 41),
+('han', 98),
+('hao', 21),
+('har', 38),
+('has', 55),
+('hat', 226),
+('hem', 54),
+('hen', 85),
+('her', 178),
+('hes', 68),
+('hic', 22),
+('hid', 23),
+('him', 43),
+('hin', 50),
+('hip', 94),
+('his', 79),
+('hit', 84),
+('hop', 284),
+('hot', 88),
+('how', 121),
+('hts', 35),
+('hua', 34),
+('hub', 31),
+('hui', 28),
+('hun', 25),
+('hut', 21),
+('ial', 132),
+('ian', 148),
+('iao', 45),
+('ias', 48),
+('iba', 20),
+('ica', 148),
+('ice', 505),
+('ich', 34),
+('ici', 20),
+('ick', 221),
+('ico', 69),
+('ics', 271),
+('ict', 22),
+('ida', 49),
+('idc', 21),
+('ide', 378),
+('ids', 184),
+('ied', 40),
+('ief', 44),
+('ien', 34),
+('ier', 59),
+('ies', 483),
+('iet', 64),
+('iew', 138),
+('ife', 257),
+('ift', 87),
+('igh', 57),
+('ign', 318),
+('ika', 44),
+('ike', 98),
+('iki', 50),
+('ila', 28),
+('ild', 161),
+('ile', 288),
+('ili', 22),
+('ill', 415),
+('ilm', 106),
+('ils', 42),
+('ilt', 22),
+('ily', 144),
+('ima', 31),
+('ime', 148),
+('imo', 28),
+('ims', 45),
+('ina', 208),
+('inc', 243),
+('ind', 300),
+('ine', 992),
+('ing', 1823),
+('ini', 40),
+('ink', 197),
+('inn', 34),
+('ino', 110),
+('ins', 194),
+('int', 278),
+('ion', 853),
+('ior', 29),
+('ios', 64),
+('ipe', 59),
+('ips', 92),
+('iqe', 20),
+('ira', 33),
+('ird', 30),
+('ire', 191),
+('irl', 145),
+('irm', 54),
+('isa', 27),
+('isc', 70),
+('ise', 247),
+('ish', 170),
+('isi', 34),
+('isk', 89),
+('ism', 41),
+('isp', 21),
+('iss', 51),
+('ist', 223),
+('ita', 52),
+('ite', 372),
+('ith', 82),
+('iti', 21),
+('ito', 35),
+('its', 323),
+('ity', 324),
+('itz', 22),
+('ium', 52),
+('iva', 32),
+('ive', 465),
+('iya', 26),
+('iye', 28),
+('ize', 46),
+('jia', 20),
+('jie', 21),
+('job', 155),
+('jor', 22),
+('joy', 116),
+('kam', 30),
+('kan', 54),
+('kas', 31),
+('kat', 34),
+('ked', 31),
+('ken', 65),
+('ker', 216),
+('kes', 85),
+('ket', 120),
+('key', 155),
+('kid', 103),
+('kin', 28),
+('kit', 39),
+('kup', 23),
+('lab', 63),
+('lad', 30),
+('lag', 53),
+('lak', 56),
+('lam', 60),
+('lan', 240),
+('lar', 88),
+('las', 71),
+('lat', 62),
+('law', 329),
+('lay', 157),
+('lds', 28),
+('led', 111),
+('lee', 31),
+('leg', 28),
+('len', 30),
+('ler', 165),
+('les', 448),
+('let', 93),
+('lex', 33),
+('ley', 72),
+('lia', 43),
+('lic', 22),
+('lid', 31),
+('lie', 64),
+('lik', 50),
+('lim', 21),
+('lin', 42),
+('lip', 25),
+('lis', 45),
+('lit', 22),
+('lks', 64),
+('lla', 48),
+('llc', 64),
+('lle', 68),
+('lli', 23),
+('llo', 57),
+('lls', 223),
+('lly', 45),
+('lms', 58),
+('log', 275),
+('lon', 47),
+('lor', 32),
+('los', 22),
+('lot', 84),
+('low', 175),
+('lry', 23),
+('lse', 33),
+('lso', 30),
+('ltd', 39),
+('lth', 87),
+('lts', 30),
+('lty', 77),
+('lub', 251),
+('lue', 205),
+('lug', 36),
+('lus', 143),
+('lve', 24),
+('lya', 30),
+('mac', 21),
+('mad', 43),
+('mag', 53),
+('mai', 25),
+('man', 321),
+('map', 75),
+('mar', 27),
+('mas', 61),
+('mat', 24),
+('max', 44),
+('may', 48),
+('mba', 22),
+('med', 58),
+('mei', 20),
+('men', 161),
+('mer', 69),
+('mes', 487),
+('met', 58),
+('mia', 22),
+('mic', 28),
+('min', 43),
+('mit', 68),
+('mix', 77),
+('mod', 58),
+('mon', 33),
+('mor', 25),
+('mos', 31),
+('mp3', 34),
+('mps', 48),
+('nal', 99),
+('nam', 38),
+('nan', 46),
+('nas', 55),
+('nat', 45),
+('nce', 344),
+('nch', 102),
+('nco', 22),
+('ncy', 82),
+('nda', 63),
+('nde', 24),
+('ndo', 56),
+('nds', 333),
+('ndy', 34),
+('nea', 21),
+('ned', 24),
+('nel', 54),
+('ner', 194),
+('nes', 296),
+('net', 327),
+('new', 89),
+('ney', 156),
+('nfo', 165),
+('nga', 24),
+('nge', 135),
+('ngo', 47),
+('ngs', 178),
+('nia', 87),
+('nic', 55),
+('nie', 24),
+('nik', 37),
+('nis', 46),
+('nit', 89),
+('nka', 20),
+('nks', 105),
+('nly', 75),
+('nna', 24),
+('nny', 56),
+('non', 29),
+('nor', 87),
+('nos', 29),
+('not', 57),
+('now', 253),
+('nse', 83),
+('nta', 33),
+('nte', 43),
+('nth', 25),
+('nto', 96),
+('nts', 277),
+('ntv', 26),
+('nue', 20),
+('nus', 29),
+('oad', 164),
+('oan', 114),
+('oat', 114),
+('obe', 20),
+('obs', 164),
+('ock', 272),
+('oda', 20),
+('odd', 42),
+('ode', 146),
+('ods', 110),
+('ody', 109),
+('oem', 32),
+('oes', 92),
+('oet', 27),
+('off', 93),
+('oft', 127),
+('oga', 27),
+('ogo', 34),
+('ogs', 69),
+('ogy', 69),
+('oil', 108),
+('oin', 56),
+('ois', 20),
+('oji', 20),
+('oke', 80),
+('oks', 146),
+('ola', 31),
+('old', 206),
+('ole', 117),
+('olf', 65),
+('olk', 23),
+('oll', 123),
+('ols', 72),
+('oma', 30),
+('ome', 319),
+('omm', 25),
+('omo', 20),
+('oms', 79),
+('ona', 30),
+('ond', 43),
+('one', 519),
+('ong', 253),
+('oni', 24),
+('ons', 484),
+('ont', 51),
+('ony', 36),
+('ood', 218),
+('oof', 32),
+('ook', 282),
+('ool', 185),
+('oom', 128),
+('oon', 80),
+('oop', 47),
+('oor', 137),
+('oot', 181),
+('ope', 105),
+('ops', 98),
+('opt', 20),
+('opy', 56),
+('ora', 45),
+('ord', 100),
+('ore', 417),
+('ori', 26),
+('ork', 177),
+('orm', 84),
+('orn', 83),
+('orp', 111),
+('ors', 213),
+('ort', 278),
+('oru', 20),
+('ory', 109),
+('osa', 28),
+('ose', 102),
+('oss', 112),
+('ost', 341),
+('ote', 204),
+('oth', 44),
+('oto', 120),
+('ots', 94),
+('oul', 22),
+('oup', 300),
+('our', 262),
+('ous', 59),
+('out', 181),
+('ova', 20),
+('ove', 231),
+('owe', 31),
+('own', 272),
+('ows', 90),
+('oxy', 24),
+('oys', 54),
+('oyu', 20),
+('pan', 65),
+('pas', 54),
+('pat', 32),
+('pay', 71),
+('pen', 138),
+('per', 185),
+('pes', 67),
+('pet', 40),
+('phy', 47),
+('pia', 30),
+('pic', 48),
+('pid', 38),
+('pin', 34),
+('ple', 120),
+('ply', 86),
+('pon', 38),
+('pop', 65),
+('por', 20),
+('pot', 89),
+('ppy', 67),
+('pro', 85),
+('pts', 31),
+('put', 48),
+('que', 86),
+('ral', 111),
+('ram', 54),
+('ran', 127),
+('rap', 81),
+('ras', 62),
+('rat', 45),
+('raw', 81),
+('ray', 26),
+('rce', 110),
+('rch', 130),
+('rds', 265),
+('rea', 213),
+('red', 146),
+('ree', 250),
+('rel', 26),
+('ren', 56),
+('rer', 23),
+('res', 222),
+('ret', 40),
+('rew', 49),
+('rex', 32),
+('rez', 23),
+('rge', 68),
+('rgy', 72),
+('ria', 62),
+('ric', 45),
+('rid', 57),
+('rie', 25),
+('rim', 22),
+('rio', 23),
+('rip', 62),
+('ris', 67),
+('rit', 50),
+('rix', 23),
+('rks', 158),
+('rld', 206),
+('rls', 52),
+('rly', 22),
+('rma', 25),
+('rms', 79),
+('rmy', 118),
+('rno', 32),
+('rol', 36),
+('rom', 31),
+('ron', 45),
+('rop', 110),
+('ror', 27),
+('ros', 51),
+('row', 114),
+('rry', 115),
+('rse', 78),
+('rst', 58),
+('rte', 27),
+('rth', 159),
+('rts', 330),
+('rty', 135),
+('rue', 31),
+('rum', 163),
+('run', 85),
+('rus', 62),
+('rve', 41),
+('sad', 50),
+('sam', 29),
+('san', 54),
+('sas', 38),
+('sat', 63),
+('saw', 40),
+('say', 55),
+('sco', 30),
+('sea', 33),
+('sed', 78),
+('see', 50),
+('sel', 31),
+('sen', 59),
+('seo', 39),
+('ser', 113),
+('ses', 212),
+('set', 92),
+('sex', 120),
+('she', 43),
+('shi', 48),
+('sia', 45),
+('sic', 257),
+('sil', 23),
+('sim', 42),
+('sin', 25),
+('sis', 51),
+('sit', 97),
+('six', 43),
+('ska', 30),
+('ski', 25),
+('sks', 24),
+('sky', 41),
+('sms', 24),
+('sol', 30),
+('son', 195),
+('sor', 39),
+('spa', 35),
+('sse', 26),
+('ssy', 25),
+('sta', 37),
+('ste', 63),
+('sts', 130),
+('stv', 24),
+('sty', 34),
+('sue', 29),
+('sum', 54),
+('sun', 82),
+('sus', 29),
+('sys', 29),
+('tai', 30),
+('tal', 323),
+('tam', 39),
+('tan', 93),
+('tar', 81),
+('tas', 82),
+('tat', 59),
+('tax', 81),
+('tay', 36),
+('tbe', 23),
+('tby', 28),
+('tch', 236),
+('tcs', 21),
+('tea', 53),
+('tec', 37),
+('ted', 98),
+('tek', 42),
+('tel', 200),
+('tem', 105),
+('ten', 129),
+('tep', 25),
+('ter', 649),
+('tes', 485),
+('tex', 35),
+('the', 45),
+('thy', 21),
+('tic', 78),
+('tie', 43),
+('tif', 32),
+('tik', 44),
+('tim', 23),
+('tin', 64),
+('tis', 58),
+('tit', 30),
+('tle', 44),
+('tno', 24),
+('tof', 23),
+('ton', 115),
+('too', 77),
+('top', 114),
+('tor', 261),
+('tos', 93),
+('tra', 79),
+('tre', 50),
+('tro', 40),
+('try', 91),
+('tte', 33),
+('tti', 24),
+('tto', 37),
+('tus', 31),
+('two', 92),
+('ual', 46),
+('uan', 77),
+('ube', 77),
+('uch', 72),
+('uck', 108),
+('ude', 38),
+('udy', 27),
+('uel', 32),
+('uer', 24),
+('ues', 41),
+('uff', 61),
+('uge', 32),
+('ugs', 50),
+('uit', 77),
+('ula', 22),
+('ule', 52),
+('ulk', 31),
+('ull', 88),
+('ult', 48),
+('umb', 29),
+('ume', 21),
+('ump', 104),
+('ums', 54),
+('und', 226),
+('une', 59),
+('ung', 123),
+('unk', 80),
+('uns', 26),
+('unt', 115),
+('ups', 24),
+('ura', 39),
+('ure', 266),
+('uri', 26),
+('urn', 39),
+('urs', 113),
+('urt', 41),
+('uru', 27),
+('ury', 43),
+('usa', 135),
+('use', 319),
+('ush', 84),
+('ust', 115),
+('usy', 25),
+('ute', 58),
+('uth', 109),
+('uto', 62),
+('uts', 51),
+('uty', 56),
+('uys', 69),
+('val', 21),
+('van', 99),
+('ved', 31),
+('vel', 191),
+('ven', 104),
+('ver', 333),
+('ves', 126),
+('vey', 21),
+('via', 66),
+('vie', 78),
+('vip', 23),
+('vis', 24),
+('wan', 33),
+('war', 102),
+('was', 41),
+('way', 315),
+('web', 224),
+('wer', 144),
+('who', 70),
+('why', 38),
+('win', 82),
+('won', 44),
+('wow', 22),
+('xed', 29),
+('xes', 53),
+('xxx', 38),
+('yam', 22),
+('yan', 47),
+('yar', 22),
+('yat', 53),
+('ybe', 27),
+('yby', 21),
+('ycs', 25),
+('yer', 59),
+('yes', 135),
+('yet', 53),
+('yle', 89),
+('ymy', 21),
+('yon', 31),
+('you', 196),
+('ype', 45),
+('yte', 65),
+('zen', 36),
+('zer', 23),
+('zle', 22),
+('zza', 22),
+]
 
-for index, part in enumerate("""
-line
-tion
-ting
-ions
-ight
-sign
-able
-shop
-roup
-ames
-club
-bank
-ance
-ball
-edia
-life
-land
-band
-usic
-ages
-book
-home
-news
-atch
-orld
-port
-king
-oday
-base
-live
-info
-tech
-ates
-area
-back
-ings
-away
-best
-nter
-site
-ters
-ents
-jobs
-ware
-city
-tore
-ress
-host
-card
-ound
-work
-blog
-ouse
-vice
-otel
-ring
-ideo
-ment
-ooks
-ards
-orts
-lock
-omes
-avel
-uide
-view
-eads
-igns
-girl
-care
-hair
-ding
-ales
-ater
-mail
-ones
-corp
-ital
-soft
-lace
-orum
-ster
-arts
-ower
-here
-free
-lass
-sale
-ture
-each
-wear
-udio
-ning
-ites
-list
-plus
-sion
-game
-ness
-bear
-iles
-oney
-blue
-over
-park
-hing
-love
-rain
-head
-ries
-army
-race
-eart
-link
-oint
-adio
-arch
-call
-ines
-less
-ords
-page
-rate
-tems
-tors
-ands
-orks
-tate
-team
-pace
-room
-bars
-core
-plan
-date
-part
-talk
-ties
-body
-gain
-tage
-acts
-lady
-reen
-ours
-wall
-film
-alls
-rand
-ream
-hina
-oker
-loan
-ange
-ices
-post
-food
-orth
-otes
-eals
-help
-oard
-tory
-town
-mall
-hone
-west
-ling
-tone
-cell
-code
-ming
-ders
-farm
-oods
-bids
-deal
-mage
-ures
-bill
-bits
-boat
-case
-data
-long
-rage
-ways
-nder
-alth
-inks
-play
-bets
-cafe
-ears
-down
-keys
-lack
-well
-ever
-sing
-more
-real
-ride
-rket
-road
-show
-tart
-time
-agic
-oice
-zero
-edit
-pack
-ebar
-fish
-ners
-ovie
-rint
-rise
-uild
-load
-tyle
-week
-zone
-alty
-cing
-find
-good
-idea
-rade
-rect
-ence
-iver
-tree
-deas
-face
-fast
-hall
-hool
-iews
-kers
-ther
-tics
-ains
-eall
-ease
-file
-hoto
-name
-only
-prop
-rice
-uard
-door
-fair
-hack
-inds
-mark
-oman
-safe
-tour
-high
-mily
-ndia
-odel
-rive
-ants
-arty
-hand
-late
-ndex
-pair
-reat
-rica
-walk
-bout
-days
-eeds
-ergy
-ills
-lead
-open
-peak
-pple
-tive
-easy
-ense
-feed
-hell
-ique
-laws
-outh
-tuff
-wide
-wire
-eact
-jump
-kill
-save
-very
-abel
-aper
-imes
-know
-logy
-mind
-roll
-ator
-byte
-cial
-ctor
-ebox
-fund
-lean
-nice
-test
-vote
-aily
-ffer
-form
-larm
-lies
-pool
-porn
-read
-rity
-spot
-eair
-etal
-main
-star
-unds
-alue
-edge
-note
-omen
-orce
-pany
-pass
-ping
-ving
-will
-boot
-disc
-eage
-ends
-even
-made
-rder
-uote
-vent
-adds
-bile
-buys
-egal
-eyes
-ists
-mart
-mile
-nine
-trip
-wash
-hill
-lash
-ools
-word
-zine
-anet
-hits
-ical
-ises
-scan
-tall
-tand
-tels
-unit
-auto
-clan
-eaid
-east
-fire
-hare
-path
-ross
-ship
-stem
-tube
-user
-aphy
-arth
-bite
-cars
-eady
-ency
-hunt
-junk
-leaf
-lers
-look
-next
-sell
-wine
-2008
-cess
-flow
-lery
-like
-ntal
-ount
-rest
-sure
-tair
-tock
-want
-year
-your
-aste
-deos
-hole
-ilms
-kids
-raph
-uses
-akes
-appy
-cent
-hard
-heat
-ield
-lans
-mine
-rown
-copy
-golf
-ifts
-mlak
-ngle
-ocks
-pply
-sage
-side
-vers
-wang
-wise
-chat
-eats
-firm
-foot
-irst
-ives
-kets
-logs
-meet
-mode
-move
-oung
-text
-uick
-what
-feel
-lbum
-lift
-rack
-rant
-cure
-done
-ebet
-eboy
-gone
-hops
-nics
-obal
-odes
-oors
-ches
-come
-dies
-earn
-fine
-five
-hite
-item
-oans
-ogic
-pipe
-risk
-rush
-task
-ania
-ebid
-irls
-last
-nity
-paid
-tact
-tune
--web
-ader
-arks
-fact
-ller
-luck
-nner
-oing
-razy
-rtal
-tral
-wind
-ycle
-ares
-cash
-eadd
-ebit
-erty
-gage
-gear
-lege
-pain
-pick
-seek
-self
-that
-wers
-acks
-alks
-cene
-full
-hope
-lant
-lity
-need
-resh
-rust
-stop
-type
-ward
-cker
-dage
-dios
-gold
-heap
-kind
-lage
-lone
-lose
-make
-otos
-ouch
-reak
-rver
-send
-sino
-bugs
-chip
-dare
-desk
-hang
-heel
-icks
-join
-just
-lair
-nada
-once
-orse
-rial
-uman
-wish
-arry
-baby
-keep
-lots
-mate
-onal
-ooms
-pper
-rame
-root
-sers
-tals
-vies
-wild
-yers
-dart
-ells
-erts
-flag
-four
-ging
-grow
-heng
-hion
-mber
-oads
-peed
-poll
-rime
-ruck
-this
-used
-xtra
-ytes
-eens
-hold
-ider
-laim
-lect
-lets
-rash
-taid
-tter
-unch
-arge
-eams
-ebuy
-fall
-fice
-hour
-ject
-lder
-lend
-osts
-oxes
-ront
--net
-auty
-cost
-ello
-erve
-lane
-loor
-loss
-njoy
-nnel
-ntry
-pics
-rall
-rums
-some
-ules
-warm
-aker
-dair
-dall
-dark
-demy
-diet
-disk
-drop
-hild
-ille
-loop
-mass
-nesi
-ocal
-pers
-pure
-rite
-slaw
-tbox
-urce
-ancy
-ases
-eand
-ecar
-eeks
-fans
-gets
-give
-hain
-hers
-hine
-lain
-oves
-rick
-ruth
-said
-sent
-trap
-vest
-wife
-anch
-ause
-cher
-cold
-enow
-feet
-fill
-joke
-keen
-many
-nall
-nlaw
-odds
-rner
-take
-tare
-unny
-wing
-yair
-apid
-bulk
-cast
-dact
-deep
-ebed
-elaw
-eman
-erry
-eway
-into
-isit
-ited
-lick
-nart
-nger
-ores
-orms
-plug
-rink
-sort
-sult
-andy
-cale
-daid
-dbar
-etwo
-fail
-imit
-lear
-left
-near
-pull
-rare
-rent
-rson
-tape
-tell
-uter
-2000
-eath
-evel
-hart
-itor
-llas
-oise
-pile
-raft
-rart
-rock
-rong
-size
-taff
-tric
-wins
-with
-yuan
--inc
-4you
-apan
-draw
-ebug
-harm
-hics
-ides
-idge
-kage
-lays
-lter
-orea
-ourt
-rule
-seen
-sinc
-soon
-stay
-tbar
-tery
-turn
-aims
-alia
-apes
-blow
-cpas
-ebig
-ecat
-enet
-hear
-hoes
-hong
-nage
-neck
-nion
-none
-ople
-stry
-tlow
-true
-ucts
-wait
-ylaw
-arms
-asic
-aweb
-bove
-char
-cket
-dbox
-ghts
-hows
-lart
-leri
-lips
-miss
-nair
-nect
-nows
-onto
-otal
-poem
-rman
-sold
-them
-tice
-trol
-ucky
-udge
-yage
-ails
-also
-amer
-bind
-bury
-buse
-cope
-dago
-eans
-egas
-eply
-ered
-gift
-hree
-ints
-kart
-labs
-lari
-lley
-mics
-ract
-rair
-role
-roof
-sses
-step
-tadd
-tank
-tars
-tica
-ucks
-wner
-wood
-ybox
-aber
-aith
-anda
-aria
-aven
-bags
-boys
-dlaw
-eing
-fate
-fear
-fter
-gies
-half
-hile
-hips
-hung
-iang
-iler
-ious
-kbar
-orry
-quit
-rbox
-rind
-rnet
-saat
-sets
-slog
-ssue
-uang
-ugly
-umps
-ying
-aint
-aise
-asty
-camp
-dbuy
-dcar
-dump
-eace
-einc
-evia
-fest
-flat
-from
-goes
-hape
-illa
-inal
-kair
-lert
-lias
-mean
-mers
-mess
-nkey
-oach
-onet
-tbuy
-tick
-till
-tudy
-urch
-wiki
-yact
-yall
-crap
-cuts
-dboy
-dmix
-eday
-eers
-epot
-ette
-fang
-fing
-gent
-hase
-ials
-kins
-leep
-legs
-nies
-nits
-orex
-oute
-plot
-poet
-reet
-rief
-rlaw
-suit
-than
-thin
-tips
-tong
-toys
-uddy
-yart
-ybar
-alon
-anks
-busy
-dbid
-dead
-dels
-dian
-eask
-ecom
-edog
-elow
-gate
-gers
-huge
-inet
-ison
-ixed
-lazy
-nact
-nbar
-nite
-oglu
-oles
-raid
-rees
-rnal
-rter
-sart
-snow
-tist
-tlaw
-tool
-upon
-when
-xing
-yoga
-""".split()): SUFFIX_SCORES[part] = (1000 - index) / 1000.0
+RIGHT4_TOTAL = 62128
+RIGHT4 = [
+('-inc', 30),
+('-net', 38),
+('-web', 47),
+('2000', 27),
+('2008', 52),
+('4you', 29),
+('abel', 66),
+('aber', 26),
+('abit', 22),
+('able', 306),
+('acks', 39),
+('acts', 102),
+('adds', 61),
+('ader', 44),
+('adio', 107),
+('ages', 215),
+('agic', 79),
+('ails', 28),
+('aily', 62),
+('aims', 28),
+('ains', 74),
+('aint', 27),
+('aise', 26),
+('aith', 27),
+('aker', 36),
+('akes', 54),
+('ales', 136),
+('alia', 28),
+('alks', 45),
+('alls', 102),
+('alon', 24),
+('also', 27),
+('alth', 86),
+('alty', 75),
+('alue', 63),
+('amer', 27),
+('ames', 251),
+('ance', 221),
+('anch', 32),
+('ancy', 33),
+('anda', 26),
+('ands', 111),
+('andy', 30),
+('anet', 56),
+('ange', 98),
+('ania', 45),
+('ants', 70),
+('apan', 31),
+('aper', 67),
+('apes', 30),
+('aphy', 44),
+('apid', 34),
+('appy', 54),
+('arch', 101),
+('ards', 149),
+('area', 174),
+('ares', 46),
+('arge', 37),
+('aria', 23),
+('aris', 23),
+('arks', 44),
+('arms', 29),
+('army', 114),
+('arry', 39),
+('arth', 56),
+('arts', 127),
+('arty', 72),
+('ases', 36),
+('asic', 29),
+('aste', 54),
+('asty', 26),
+('atch', 205),
+('ater', 136),
+('ates', 187),
+('ator', 65),
+('ause', 37),
+('auto', 57),
+('auty', 38),
+('avel', 137),
+('aven', 28),
+('aves', 22),
+('away', 171),
+('aweb', 25),
+('baby', 42),
+('back', 178),
+('bags', 28),
+('ball', 236),
+('band', 214),
+('bang', 22),
+('bank', 253),
+('bars', 107),
+('base', 199),
+('bear', 116),
+('best', 171),
+('bets', 77),
+('bids', 90),
+('bile', 61),
+('bill', 85),
+('bind', 28),
+('bite', 53),
+('bits', 82),
+('blog', 159),
+('blow', 29),
+('blue', 118),
+('boat', 88),
+('body', 99),
+('book', 197),
+('boot', 58),
+('bout', 70),
+('bove', 29),
+('boys', 27),
+('bugs', 40),
+('bulk', 31),
+('bury', 27),
+('buse', 28),
+('busy', 24),
+('buys', 61),
+('byte', 63),
+('cafe', 81),
+('cale', 33),
+('call', 111),
+('camp', 26),
+('card', 165),
+('care', 136),
+('cars', 57),
+('case', 89),
+('cash', 44),
+('cast', 33),
+('cell', 91),
+('cene', 46),
+('cent', 53),
+('cess', 59),
+('char', 29),
+('chat', 52),
+('cher', 34),
+('ches', 49),
+('chip', 42),
+('cial', 62),
+('cing', 69),
+('city', 150),
+('cker', 41),
+('cket', 27),
+('clan', 58),
+('club', 250),
+('code', 84),
+('cold', 33),
+('come', 48),
+('cope', 28),
+('copy', 53),
+('core', 107),
+('corp', 107),
+('cost', 35),
+('cpas', 30),
+('crap', 25),
+('ctor', 66),
+('cure', 47),
+('cuts', 25),
+('dact', 34),
+('dage', 42),
+('dago', 28),
+('daid', 33),
+('dair', 34),
+('dall', 37),
+('dare', 40),
+('dark', 37),
+('dart', 42),
+('data', 80),
+('date', 98),
+('days', 69),
+('dbar', 30),
+('dbid', 24),
+('dbox', 29),
+('dbuy', 26),
+('dcar', 23),
+('dead', 23),
+('deal', 86),
+('deas', 73),
+('deep', 28),
+('demy', 38),
+('deos', 53),
+('ders', 89),
+('desk', 44),
+('dian', 24),
+('dies', 49),
+('diet', 35),
+('ding', 128),
+('dios', 42),
+('disc', 62),
+('disk', 38),
+('dlaw', 27),
+('dmix', 25),
+('done', 46),
+('door', 74),
+('down', 77),
+('draw', 31),
+('drop', 37),
+('dump', 26),
+('eace', 26),
+('each', 127),
+('eact', 68),
+('eadd', 43),
+('eads', 147),
+('eady', 54),
+('eage', 59),
+('eaid', 57),
+('eair', 61),
+('eall', 74),
+('eals', 92),
+('eams', 39),
+('eand', 33),
+('eans', 28),
+('earn', 47),
+('ears', 83),
+('eart', 115),
+('ease', 74),
+('eask', 24),
+('east', 56),
+('easy', 68),
+('eath', 31),
+('eats', 48),
+('ebar', 76),
+('ebed', 34),
+('ebet', 47),
+('ebid', 48),
+('ebig', 26),
+('ebit', 44),
+('ebox', 65),
+('eboy', 43),
+('ebug', 31),
+('ebus', 23),
+('ebuy', 39),
+('ecar', 31),
+('ecat', 30),
+('eday', 23),
+('edge', 60),
+('edia', 227),
+('edit', 76),
+('eeds', 70),
+('eeks', 36),
+('eens', 40),
+('eers', 24),
+('eeth', 23),
+('egal', 54),
+('egas', 27),
+('einc', 26),
+('eing', 25),
+('elaw', 35),
+('elle', 23),
+('ello', 36),
+('ells', 39),
+('elry', 23),
+('else', 23),
+('eman', 34),
+('ence', 66),
+('ency', 47),
+('ends', 63),
+('enow', 28),
+('ense', 69),
+('ents', 162),
+('eply', 27),
+('ered', 28),
+('ergy', 69),
+('erry', 31),
+('erts', 41),
+('erty', 44),
+('erve', 38),
+('etal', 61),
+('ette', 23),
+('etwo', 31),
+('evel', 30),
+('even', 60),
+('ever', 78),
+('evia', 26),
+('eway', 33),
+('eyes', 61),
+('face', 75),
+('fact', 49),
+('fail', 34),
+('fair', 72),
+('fall', 40),
+('fang', 24),
+('fans', 36),
+('farm', 92),
+('fast', 75),
+('fate', 27),
+('fear', 27),
+('feed', 70),
+('feel', 52),
+('feet', 36),
+('fest', 25),
+('ffer', 63),
+('fice', 35),
+('file', 76),
+('fill', 37),
+('film', 106),
+('find', 74),
+('fine', 48),
+('fing', 25),
+('fire', 58),
+('firm', 53),
+('fish', 77),
+('five', 51),
+('flag', 43),
+('flat', 27),
+('flow', 56),
+('food', 95),
+('foot', 54),
+('form', 66),
+('four', 42),
+('free', 124),
+('from', 24),
+('fter', 27),
+('full', 45),
+('fund', 63),
+('gage', 45),
+('gain', 104),
+('game', 121),
+('gate', 23),
+('gear', 46),
+('gent', 24),
+('gets', 35),
+('ghts', 29),
+('gies', 27),
+('gift', 26),
+('ging', 33),
+('girl', 143),
+('give', 36),
+('goes', 27),
+('gold', 42),
+('golf', 53),
+('gone', 49),
+('good', 76),
+('grow', 41),
+('hack', 73),
+('hain', 36),
+('hair', 137),
+('half', 25),
+('hall', 75),
+('hand', 70),
+('hang', 42),
+('hape', 26),
+('hard', 54),
+('hare', 58),
+('harm', 31),
+('hart', 32),
+('hase', 25),
+('head', 109),
+('heap', 42),
+('hear', 29),
+('heat', 54),
+('heel', 43),
+('hell', 70),
+('help', 73),
+('heng', 40),
+('here', 129),
+('hers', 34),
+('hics', 31),
+('high', 52),
+('hild', 37),
+('hile', 27),
+('hill', 61),
+('hina', 101),
+('hine', 32),
+('hing', 108),
+('hion', 41),
+('hips', 26),
+('hite', 47),
+('hits', 58),
+('hoes', 30),
+('hold', 40),
+('hole', 55),
+('home', 212),
+('hone', 91),
+('hong', 29),
+('hool', 69),
+('hope', 45),
+('hops', 49),
+('host', 158),
+('hoto', 71),
+('hour', 38),
+('hows', 29),
+('hree', 27),
+('huge', 24),
+('hung', 28),
+('hunt', 56),
+('iang', 26),
+('ical', 53),
+('ices', 95),
+('icks', 41),
+('idea', 75),
+('ideo', 153),
+('ider', 37),
+('ides', 30),
+('idge', 31),
+('ield', 54),
+('iews', 75),
+('ifts', 53),
+('ight', 346),
+('igns', 145),
+('iler', 26),
+('iles', 118),
+('illa', 25),
+('ille', 37),
+('ills', 64),
+('ilms', 54),
+('imes', 66),
+('imit', 32),
+('inal', 24),
+('inds', 73),
+('ines', 107),
+('info', 164),
+('ings', 158),
+('inks', 82),
+('into', 34),
+('ints', 25),
+('ions', 398),
+('ious', 26),
+('ique', 69),
+('irls', 44),
+('irst', 50),
+('ises', 59),
+('isit', 34),
+('ison', 24),
+('ists', 59),
+('ital', 127),
+('ited', 34),
+('item', 47),
+('ites', 115),
+('itor', 32),
+('iver', 72),
+('ives', 51),
+('ixed', 24),
+('ject', 39),
+('jobs', 156),
+('join', 44),
+('joke', 36),
+('jump', 69),
+('junk', 57),
+('just', 44),
+('kage', 29),
+('kair', 25),
+('kall', 23),
+('kart', 28),
+('kbar', 26),
+('keen', 35),
+('keep', 43),
+('kers', 68),
+('kets', 48),
+('keys', 85),
+('kids', 57),
+('kill', 69),
+('kind', 45),
+('king', 196),
+('kins', 25),
+('know', 68),
+('lace', 130),
+('lack', 84),
+('lady', 104),
+('lage', 43),
+('laid', 24),
+('laim', 40),
+('lain', 36),
+('lair', 44),
+('lall', 23),
+('land', 217),
+('lane', 39),
+('lank', 23),
+('lans', 54),
+('lant', 45),
+('lari', 28),
+('larm', 62),
+('lart', 29),
+('lash', 58),
+('lass', 130),
+('last', 47),
+('late', 66),
+('laws', 70),
+('lays', 31),
+('lazy', 24),
+('lbum', 51),
+('lder', 36),
+('lead', 65),
+('leaf', 50),
+('lean', 66),
+('lear', 32),
+('lect', 40),
+('leep', 28),
+('left', 33),
+('lege', 45),
+('legs', 24),
+('lend', 37),
+('leri', 29),
+('lers', 58),
+('lert', 26),
+('lery', 48),
+('less', 109),
+('lets', 39),
+('lias', 26),
+('lick', 32),
+('lies', 65),
+('life', 214),
+('lift', 45),
+('like', 51),
+('line', 588),
+('ling', 85),
+('link', 113),
+('lips', 27),
+('list', 115),
+('lity', 31),
+('live', 199),
+('llas', 31),
+('ller', 41),
+('lley', 27),
+('load', 78),
+('loan', 101),
+('lock', 145),
+('logs', 51),
+('logy', 68),
+('lone', 40),
+('long', 81),
+('look', 53),
+('loop', 35),
+('loor', 38),
+('lose', 44),
+('loss', 38),
+('lots', 41),
+('love', 116),
+('lter', 31),
+('ltor', 23),
+('luck', 45),
+('made', 62),
+('mage', 84),
+('mail', 130),
+('main', 63),
+('make', 45),
+('mall', 96),
+('many', 34),
+('mark', 74),
+('mart', 61),
+('mass', 35),
+('mate', 36),
+('mber', 38),
+('mean', 26),
+('meet', 52),
+('ment', 143),
+('mers', 24),
+('mess', 26),
+('mics', 28),
+('mile', 62),
+('mily', 72),
+('mind', 66),
+('mine', 52),
+('ming', 86),
+('miss', 28),
+('mlak', 52),
+('mode', 51),
+('more', 79),
+('move', 52),
+('nact', 25),
+('nada', 43),
+('nage', 28),
+('nair', 28),
+('nall', 33),
+('name', 72),
+('nart', 35),
+('navi', 23),
+('nder', 85),
+('ndex', 68),
+('ndia', 69),
+('ndos', 23),
+('near', 33),
+('neck', 28),
+('nect', 29),
+('need', 45),
+('ners', 73),
+('nesi', 37),
+('ness', 116),
+('news', 214),
+('next', 44),
+('ngel', 23),
+('nger', 32),
+('ngle', 53),
+('nice', 59),
+('nics', 51),
+('nies', 25),
+('nine', 58),
+('ning', 114),
+('nion', 31),
+('nits', 25),
+('nity', 40),
+('njoy', 36),
+('nkey', 26),
+('nlaw', 35),
+('nnel', 35),
+('nner', 46),
+('none', 27),
+('note', 61),
+('nows', 29),
+('nson', 23),
+('ntal', 49),
+('nter', 174),
+('ntry', 37),
+('oads', 41),
+('oans', 49),
+('oard', 96),
+('obal', 50),
+('ocal', 37),
+('ocks', 49),
+('oday', 196),
+('odds', 35),
+('odel', 71),
+('odes', 50),
+('ogic', 45),
+('oglu', 24),
+('oice', 78),
+('oing', 47),
+('oint', 113),
+('oise', 32),
+('oker', 92),
+('oles', 23),
+('oman', 73),
+('omen', 62),
+('omes', 143),
+('onal', 38),
+('once', 42),
+('ones', 133),
+('oney', 116),
+('only', 71),
+('onth', 24),
+('onto', 29),
+('oods', 92),
+('ooks', 144),
+('ools', 59),
+('ooms', 40),
+('oors', 48),
+('open', 69),
+('ople', 30),
+('orce', 63),
+('ords', 113),
+('orea', 28),
+('ores', 34),
+('orex', 24),
+('orks', 107),
+('orld', 206),
+('orms', 34),
+('orno', 23),
+('orry', 27),
+('orse', 43),
+('orth', 99),
+('orts', 149),
+('orum', 135),
+('osts', 39),
+('otal', 27),
+('otel', 157),
+('otes', 96),
+('otos', 41),
+('ouch', 40),
+('ound', 158),
+('oung', 51),
+('ount', 53),
+('ours', 103),
+('ourt', 31),
+('ouse', 162),
+('oute', 25),
+('outh', 68),
+('over', 117),
+('oves', 36),
+('ovie', 71),
+('ower', 126),
+('oxes', 38),
+('pace', 106),
+('pack', 78),
+('page', 110),
+('paid', 48),
+('pain', 47),
+('pair', 68),
+('pany', 58),
+('park', 119),
+('part', 109),
+('pass', 59),
+('path', 59),
+('peak', 69),
+('peed', 41),
+('pers', 35),
+('pick', 46),
+('pics', 39),
+('pile', 32),
+('ping', 57),
+('pipe', 49),
+('plan', 111),
+('play', 86),
+('plot', 25),
+('plug', 33),
+('plus', 126),
+('poem', 28),
+('poet', 26),
+('poll', 40),
+('pool', 64),
+('porn', 62),
+('port', 208),
+('post', 94),
+('pper', 40),
+('pple', 70),
+('pply', 54),
+('prop', 69),
+('pull', 33),
+('pure', 37),
+('quit', 29),
+('race', 112),
+('rack', 52),
+('ract', 28),
+('rade', 72),
+('raft', 26),
+('rage', 81),
+('raid', 24),
+('rain', 115),
+('rair', 26),
+('rall', 37),
+('rame', 42),
+('rand', 98),
+('rant', 50),
+('raph', 40),
+('rare', 30),
+('rart', 32),
+('rash', 40),
+('rate', 102),
+('razy', 46),
+('rbox', 27),
+('rden', 24),
+('rder', 60),
+('read', 63),
+('reak', 43),
+('real', 82),
+('ream', 101),
+('reat', 71),
+('rect', 77),
+('reen', 107),
+('rees', 24),
+('reet', 24),
+('rent', 29),
+('resh', 45),
+('ress', 154),
+('rest', 53),
+('rial', 41),
+('rica', 66),
+('rice', 67),
+('rick', 31),
+('ride', 77),
+('rief', 25),
+('ries', 112),
+('rime', 41),
+('rind', 27),
+('ring', 151),
+('rink', 34),
+('rint', 78),
+('rise', 79),
+('risk', 49),
+('rite', 36),
+('rity', 51),
+('rive', 72),
+('rket', 73),
+('rlaw', 25),
+('rman', 29),
+('rner', 33),
+('rnet', 27),
+('road', 82),
+('rock', 30),
+('role', 29),
+('roll', 66),
+('rong', 32),
+('ront', 38),
+('roof', 28),
+('room', 105),
+('root', 43),
+('ross', 56),
+('roup', 290),
+('rown', 51),
+('rson', 33),
+('rtal', 46),
+('ruck', 37),
+('rule', 32),
+('rums', 36),
+('rush', 50),
+('rust', 41),
+('ruth', 36),
+('rver', 41),
+('saat', 27),
+('safe', 71),
+('sage', 47),
+('said', 37),
+('sake', 23),
+('sale', 131),
+('sart', 24),
+('save', 68),
+('scan', 60),
+('seek', 43),
+('seen', 31),
+('self', 43),
+('sell', 57),
+('send', 43),
+('sent', 36),
+('sers', 39),
+('sets', 27),
+('ship', 51),
+('shop', 278),
+('show', 79),
+('side', 51),
+('sign', 311),
+('sinc', 32),
+('sing', 72),
+('sino', 45),
+('sion', 122),
+('site', 157),
+('size', 28),
+('slaw', 39),
+('slog', 27),
+('snow', 24),
+('soft', 122),
+('sold', 30),
+('some', 38),
+('soon', 32),
+('sort', 34),
+('spot', 63),
+('sses', 26),
+('ssue', 27),
+('star', 62),
+('stay', 30),
+('stem', 51),
+('step', 25),
+('ster', 129),
+('stop', 43),
+('stry', 26),
+('suit', 24),
+('sult', 29),
+('sure', 54),
+('tact', 47),
+('tadd', 26),
+('taff', 30),
+('tage', 104),
+('taid', 39),
+('tair', 53),
+('take', 32),
+('talk', 86),
+('tall', 54),
+('tals', 34),
+('tand', 53),
+('tank', 28),
+('tape', 33),
+('tare', 32),
+('tars', 27),
+('tart', 83),
+('task', 48),
+('tate', 95),
+('tbar', 31),
+('tbox', 35),
+('tbuy', 26),
+('team', 105),
+('tech', 188),
+('tell', 32),
+('tels', 56),
+('tems', 104),
+('ters', 160),
+('tery', 24),
+('test', 62),
+('text', 37),
+('than', 25),
+('that', 46),
+('them', 27),
+('ther', 73),
+('thin', 24),
+('this', 40),
+('tica', 24),
+('tice', 24),
+('tick', 25),
+('tics', 75),
+('ties', 108),
+('till', 25),
+('time', 77),
+('ting', 439),
+('tion', 601),
+('tips', 25),
+('tive', 71),
+('tlaw', 24),
+('tlow', 30),
+('tock', 56),
+('tone', 88),
+('tong', 24),
+('tore', 163),
+('tors', 107),
+('tory', 79),
+('tour', 70),
+('town', 83),
+('toys', 24),
+('tral', 47),
+('trap', 35),
+('tree', 74),
+('tric', 29),
+('trip', 55),
+('trol', 29),
+('true', 30),
+('tter', 36),
+('tube', 55),
+('tudy', 23),
+('tuff', 48),
+('tune', 44),
+('ture', 118),
+('turn', 30),
+('tyle', 79),
+('type', 44),
+('uang', 26),
+('uard', 74),
+('ucks', 25),
+('ucky', 28),
+('ucts', 30),
+('uddy', 23),
+('udge', 28),
+('udio', 123),
+('ugly', 27),
+('uick', 51),
+('uide', 139),
+('uild', 78),
+('ules', 39),
+('uman', 43),
+('umps', 26),
+('unch', 38),
+('unds', 65),
+('unit', 59),
+('unny', 35),
+('uote', 61),
+('upon', 24),
+('urce', 35),
+('urch', 25),
+('ures', 87),
+('used', 41),
+('user', 57),
+('uses', 56),
+('usic', 221),
+('uter', 31),
+('vent', 60),
+('vers', 47),
+('very', 63),
+('vest', 34),
+('vice', 150),
+('vies', 43),
+('view', 137),
+('ving', 58),
+('vote', 63),
+('wait', 30),
+('walk', 66),
+('wall', 102),
+('wang', 51),
+('want', 54),
+('ward', 46),
+('ware', 156),
+('warm', 37),
+('wash', 60),
+('ways', 86),
+('wear', 126),
+('week', 74),
+('well', 83),
+('wers', 45),
+('west', 93),
+('what', 53),
+('when', 24),
+('wide', 67),
+('wife', 36),
+('wiki', 26),
+('wild', 42),
+('will', 63),
+('wind', 45),
+('wine', 55),
+('wing', 34),
+('wins', 32),
+('wire', 69),
+('wise', 54),
+('wish', 42),
+('with', 32),
+('wner', 27),
+('wood', 26),
+('word', 60),
+('work', 163),
+('xtra', 40),
+('yact', 26),
+('yage', 29),
+('yair', 35),
+('yall', 26),
+('yart', 25),
+('ybar', 25),
+('ybox', 28),
+('ycle', 46),
+('year', 57),
+('yers', 42),
+('ying', 27),
+('ylaw', 30),
+('your', 55),
+('ytes', 41),
+('yuan', 32),
+('zero', 78),
+('zine', 58),
+('zone', 73),
+]
 
-for index, part in enumerate("""
-nline
-tions
-group
-ation
-esign
-music
-world
-media
-today
-games
-store
-ction
-house
-video
-guide
-press
-ravel
-hotel
-signs
-homes
-books
-sting
-sales
-forum
-enter
-pages
-place
-ports
-money
-radio
-space
-works
-light
-water
-china
-board
-green
-tudio
-watch
-cards
-phone
-deals
-state
-ealth
-lting
-power
-rvice
-twork
-eting
-earch
-point
-rance
-arket
-image
-parts
-magic
-movie
-style
-dream
-glass
-sites
-ealty
-poker
-print
-stems
-views
-chool
-guard
-irect
-photo
-table
-vices
-alive
-ideas
-lines
-names
-links
-index
-model
-party
-amily
-drive
-stone
-india
-nergy
-stuff
-about
-apple
-thing
-trade
-tures
-leads
-again
-right
-sport
-voice
-alarm
-daily
-ments
-notes
-price
-value
-files
-label
-lands
-offer
-paper
-pital
-quote
-river
-legal
-aming
-clean
-match
-metal
-times
-woman
-brand
-event
-goods
-night
-obile
-tware
-ctory
-eview
-ology
-order
-cords
-earth
-otels
-raphy
-ution
-ystem
-mpany
-black
-films
-force
-ideos
-share
-stock
-vents
-women
-ental
-graph
-happy
-ining
-sound
-azine
-eball
-emlak
-ready
-build
-erica
-flash
-ision
-nding
-rates
-young
-album
-count
-facts
-first
-iness
-nting
-quick
-reach
-sense
-chair
-class
-plans
-shops
-words
-block
-ebank
-gifts
-range
-tball
--shop
-acing
-girls
-loans
-lobal
-cycle
-ement
-learn
-logic
-north
-white
-ating
-aware
-doors
-ebook
-iving
-ntral
-tries
-ahead
-ccess
-crazy
-field
-llery
-ortal
-rises
-scene
-cheap
-cover
-eback
-eband
-fresh
-urity
-where
-angle
-erver
-great
-hange
-plant
-train
-trust
-aster
-clock
-codes
-ering
-frame
-funds
-lists
-ouses
-pping
-rties
-sland
-touch
-wheel
-asino
-ition
-llege
-shion
-tings
-tours
-truck
-anada
-eight
-gency
-lanet
-loads
-mania
-miles
-perty
-rooms
-round
-track
-udios
-apart
-brown
-bytes
-extra
-horse
-ional
-ovies
-trace
-eable
-floor
-prime
-score
-stage
-sters
-there
-unity
-ading
-boxes
-child
-eauty
-ebase
-front
-human
-iates
-items
-lders
-mains
-ncial
-oject
-redit
-serve
-speed
-walls
-chain
-dates
-eport
-gital
-local
-ntals
-ource
-start
-truth
-worth
-alone
-calls
-earea
-elect
-ffice
-grant
-heads
-heart
-hotos
-inder
-marks
-otors
-ranch
-reams
-seven
-stand
-teens
-tgage
-tness
-tools
-waste
-ademy
-anesi
-break
-cross
-dance
-forms
-large
-llage
-needs
-onics
-rapid
-rules
-annel
-ather
-clear
-ctors
-ebest
-owers
-patch
-tique
-tners
-ckers
-epair
-eshop
-eside
-fight
-level
-limit
-reads
-speak
-staff
-vital
--tech
-claim
-court
-drink
-eaway
-eland
-funny
-nking
-nsult
-orums
-plays
-tones
-unter
-visit
-audio
-bears
-dable
-ducts
-eclub
-eflow
-etics
-feeds
-lunch
-pedia
-phics
-scale
-shell
-teach
-thome
-ville
-write
-above
-ality
-along
-aprop
-ckets
-ctive
-dings
-ehome
-eless
-eople
-grand
-joint
-knows
-korea
-lower
-minds
-nnect
-noise
-ories
-overs
-ridge
-shoes
-shows
-south
-uters
-abuse
-basic
-close
-enjoy
-ideal
-ights
-japan
-lucky
-nance
-nload
-nvest
-pport
-prise
-reply
-shing
-smile
-tment
-years
-after
-ative
-bound
-craft
-death
-faith
-guild
-hands
-iance
-issue
-judge
-mages
-orage
-owner
-total
-upply
-votes
-yours
--info
-alert
-apply
-click
-ctric
-dvice
-elife
-going
-lives
-nable
-oking
-otech
-picks
-ssage
-story
-study
-using
-uture
--club
-award
-blogs
-brief
-buddy
-ebear
-ehelp
-email
-esale
-forex
-grind
-hurch
-iends
-nders
-peace
-pment
-puter
-raise
-route
-shape
-sions
-sleep
-sshop
-tband
-tbank
-three
-trial
-users
--life
-beach
-being
-cases
-chine
-earmy
-eries
-found
-inter
-ities
-moves
-nasty
-nsaat
-octor
-omain
-other
-plane
-scrap
-sight
-ssion
-stick
-tarea
-taway
-treet
-walks
-altor
-anews
-bites
-cares
-coach
-crash
-depot
-ebars
-ecity
-einfo
-enews
-erson
-etown
-gains
-haber
-iture
-locks
-marry
-month
-offee
-otion
-proof
-rader
-sells
-small
-tants
-tates
-trick
-twear
-wants
-welry
-4life
-acker
-actor
-angel
-ature
-cause
-clips
-dband
-eblue
-ejobs
-guess
-habit
-hello
-kills
-mance
-march
-mouth
-nshop
-ntrol
-odels
-stars
-tches
-teeth
-tjobs
-vings
-wards
-ybank
-agent
-aging
-alley
-broke
-chaos
-chips
-ebody
-erage
-ernet
-every
-final
-handy
-idays
-iller
-ising
-jumps
-kings
-later
-lding
-lland
-major
-maker
-mited
-narea
-nclub
-salon
-talks
-tback
-tbase
-think
-union
-urnal
-yball
-anner
-arage
-arden
-awyer
-blank
-catch
-check
-cking
-dback
-dbank
-dical
-doing
-dwide
-eboat
-eline
-eling
-epark
-erate
-error
-fancy
-finds
-jones
-lable
-nbank
-nbest
-nture
-oring
-oster
-ounds
-ounge
-pizza
-posts
-rning
-skill
-slist
-sugar
-tapes
-tdoor
-tlife
-topic
-trees
-ttery
-under
-venue
-visor
-alias
-bsite
-built
-daway
-dbook
-eblog
-ecall
-ecard
-eking
-ender
-epage
-hones
-ilder
-inner
-ircle
-nitor
-nment
-novel
-nters
-ondos
-onkey
-piece
-porno
-sharp
-sheng
-solar
-tooth
-tores
-yclub
-yking
-yshop
--clan
--host
-ators
-backs
-ching
-ciety
-daddy
-dding
-drops
-ebids
-ebits
-ecare
-esort
-farms
-foods
-holes
-hting
-ience
-itech
-lance
-lecom
-llair
-nball
-nband
-ntage
-olate
-owing
-queue
-refer
-roker
-shall
-smith
-spots
-stics
-tcard
-tclub
-tests
-tland
-tters
-units
-upper
-urces
-weeks
-whole
-ygirl
-youth
-4free
-adopt
-alter
-corts
-digit
-dmore
-eader
-early
-ebill
-ector
-eloan
-entry
-erman
-esite
-exico
-falls
-folks
-frica
-gamer
-gross
-hools
-hours
-istry
-lease
-merit
-ncard
-ncing
-nnews
-ogies
-osure
-rator
-rings
-rlife
-rport
-rsity
-sayar
-snews
-solve
-takes
-thers
-token
-unite
-urkey
-urope
-wyers
-yable
-aland
-amers
-asses
-babes
-basis
-begin
-below
-carry
-cheng
-cture
-diary
-dirty
-ealer
-edata
-egirl
-ehost
-elief
-elist
-erlaw
-etter
-exact
-ffair
-hings
-iland
-ishop
-ister
-itute
-knock
-leave
-lisim
-lling
-nager
-ncare
-ndate
-nhome
-njobs
-nlove
-nning
-npost
-ogram
-orner
-perts
-phase
-react
-rocks
-rshop
-saint
-sband
-scape
-scorp
-shack
-sheet
-shelf
-shoot
-sinfo
-smart
-tbook
-title
-topia
-tplan
-trash
-treat
-tting
-urism
-useum
-wears
-yarea
-yinfo
--home
-akers
-amuse
-ashop
-banks
-based
-berry
-bilya
-bingo
-boats
-bring
-caret
-cepts
-dbase
-eaven
-ebets
-entre
-esoft
-evice
-grams
-iones
-known
-lates
-lback
-linic
-ltors
-lture
-mbers
-naway
-nblog
-ncept
-ndage
-nlong
-older
-omics
-orney
-oshop
-parel
-proxy
-rasil
-rblog
-rence
-rever
-rking
-safer
-scafe
-shome
-solid
-splan
-talia
-taste
-tical
-tinfo
-tream
-tshop
-twall
-umber
-urant
-uster
-vegas
-xpert
-yback
-ylife
-ynews
--love
--news
--zone
-abase
-adise
-admin
-alaxy
-ancer
-areer
-arter
-avels
-creek
-crets
-darea
-dubai
-dwest
-edisc
-edown
-efilm
-egame
-elive
-epost
-erapy
-etail
-forth
-heavy
-hints
-icity
-ility
-illas
-ivery
-kshop
-larea
-laway
-llart
-looks
-lover
-nbook
-never
-ngirl
-ngles
-nland
-nplan
-nplus
-ogger
-ohbet
-okers
-ondon
-orate
-oryou
-pharm
-plain
-plaza
-pound
-quiet
-rinfo
-rkiye
-rline
-rsale
-rship
-rtner
-ruise
-sblog
-sbook
-sclub
-scope
-sfree
-shair
-shift
-short
-sorry
-spell
-stech
-stoms
-talog
-tbest
-terms
-tking
-tlady
-tmail
-tview
-twalk
-tzero
-untry
-urner
-urvey
-which
-xport
-yarmy
-yaway
-ybest
-ycare
-yfood
-yloan
--city
--site
-4sale
-ahost
-alace
-althy
-amber
-""".split()): SUFFIX_SCORES[part] = (1000 - index) / 1000.0
+RIGHT5_TOTAL = 33470
+RIGHT5 = [
+('-city', 13),
+('-clan', 18),
+('-club', 26),
+('-home', 15),
+('-host', 18),
+('-info', 25),
+('-life', 24),
+('-love', 14),
+('-news', 14),
+('-shop', 43),
+('-site', 13),
+('-tech', 28),
+('-zone', 13),
+('4free', 16),
+('4life', 20),
+('4sale', 13),
+('abase', 14),
+('about', 68),
+('above', 29),
+('abuse', 28),
+('acing', 44),
+('acker', 21),
+('actor', 22),
+('ademy', 35),
+('ading', 35),
+('adise', 14),
+('admin', 13),
+('adopt', 17),
+('after', 27),
+('again', 61),
+('agent', 21),
+('aging', 16),
+('ahead', 43),
+('ahost', 13),
+('akers', 14),
+('aland', 15),
+('alarm', 61),
+('alaxy', 14),
+('album', 51),
+('alert', 26),
+('alias', 19),
+('ality', 21),
+('alive', 73),
+('alley', 21),
+('alone', 32),
+('along', 27),
+('alter', 17),
+('althy', 13),
+('altor', 23),
+('amber', 13),
+('amers', 15),
+('amily', 70),
+('aming', 57),
+('amuse', 15),
+('anada', 40),
+('ancer', 13),
+('anesi', 34),
+('anews', 23),
+('angel', 22),
+('angle', 43),
+('anime', 13),
+('annel', 31),
+('anner', 19),
+('apart', 39),
+('apple', 68),
+('apply', 26),
+('aprop', 26),
+('arage', 18),
+('arden', 21),
+('areer', 13),
+('arket', 72),
+('arter', 14),
+('ashop', 13),
+('asino', 42),
+('asses', 15),
+('aster', 41),
+('ather', 32),
+('ating', 38),
+('ation', 292),
+('ative', 27),
+('ators', 17),
+('attoo', 13),
+('ature', 20),
+('audio', 29),
+('awaii', 13),
+('award', 26),
+('aware', 41),
+('awyer', 20),
+('azine', 52),
+('babes', 16),
+('backs', 16),
+('banks', 13),
+('based', 15),
+('basic', 28),
+('basis', 16),
+('beach', 23),
+('bears', 29),
+('begin', 14),
+('being', 23),
+('below', 13),
+('berry', 14),
+('bilya', 15),
+('bingo', 15),
+('bites', 22),
+('black', 55),
+('blank', 20),
+('block', 49),
+('blogs', 25),
+('board', 96),
+('boats', 15),
+('books', 124),
+('bound', 27),
+('boxes', 36),
+('brand', 55),
+('break', 33),
+('brief', 25),
+('bring', 15),
+('broke', 19),
+('brown', 37),
+('bsite', 18),
+('buddy', 23),
+('build', 52),
+('built', 19),
+('bytes', 39),
+('cable', 13),
+('cakes', 14),
+('calls', 36),
+('cards', 93),
+('cares', 23),
+('caret', 14),
+('carry', 15),
+('cases', 24),
+('catch', 20),
+('cause', 23),
+('ccess', 46),
+('cepts', 15),
+('chain', 36),
+('chair', 50),
+('chaos', 20),
+('chart', 13),
+('cheap', 42),
+('check', 18),
+('cheng', 16),
+('child', 37),
+('china', 97),
+('chine', 22),
+('ching', 15),
+('chips', 21),
+('chive', 13),
+('chool', 68),
+('ciety', 16),
+('ckers', 29),
+('ckets', 26),
+('cking', 19),
+('claim', 31),
+('class', 49),
+('clean', 60),
+('clear', 32),
+('click', 24),
+('clips', 21),
+('clock', 43),
+('close', 28),
+('coach', 18),
+('codes', 42),
+('cords', 57),
+('corts', 17),
+('count', 48),
+('court', 31),
+('cover', 42),
+('craft', 23),
+('crash', 23),
+('crazy', 44),
+('creek', 13),
+('crets', 13),
+('cross', 32),
+('ction', 158),
+('ctive', 30),
+('ctors', 32),
+('ctory', 50),
+('ctric', 24),
+('cture', 14),
+('cycle', 46),
+('dable', 30),
+('daddy', 15),
+('daily', 61),
+('dance', 29),
+('darea', 13),
+('dates', 36),
+('daway', 18),
+('dback', 21),
+('dband', 21),
+('dbank', 20),
+('dbase', 16),
+('dbook', 19),
+('dcard', 14),
+('dding', 14),
+('deals', 86),
+('death', 27),
+('depot', 19),
+('dical', 19),
+('digit', 17),
+('dings', 26),
+('dirty', 16),
+('discs', 13),
+('dmore', 16),
+('doing', 20),
+('doors', 44),
+('dpark', 13),
+('dream', 76),
+('drink', 31),
+('drive', 70),
+('drops', 18),
+('ducts', 30),
+('dvice', 24),
+('dwest', 14),
+('dwide', 20),
+('eable', 38),
+('eader', 16),
+('ealer', 16),
+('ealth', 85),
+('ealty', 74),
+('earch', 73),
+('earea', 29),
+('early', 17),
+('earmy', 24),
+('earth', 56),
+('eauty', 37),
+('eaven', 15),
+('eaway', 29),
+('eback', 40),
+('eball', 52),
+('eband', 41),
+('ebank', 49),
+('ebars', 22),
+('ebase', 37),
+('ebear', 26),
+('ebest', 32),
+('ebets', 14),
+('ebids', 18),
+('ebill', 17),
+('ebits', 17),
+('eblog', 18),
+('eblue', 22),
+('eboat', 20),
+('ebody', 18),
+('ebook', 41),
+('ecall', 19),
+('ecard', 19),
+('ecare', 17),
+('ecity', 20),
+('eclub', 29),
+('ector', 17),
+('edisc', 14),
+('edown', 13),
+('efarm', 13),
+('efilm', 14),
+('eflow', 30),
+('eform', 13),
+('egame', 13),
+('egirl', 16),
+('egypt', 13),
+('ehelp', 17),
+('ehome', 29),
+('ehost', 16),
+('ehunt', 13),
+('eight', 40),
+('einfo', 17),
+('ejobs', 19),
+('eking', 19),
+('eland', 30),
+('elect', 35),
+('eless', 26),
+('elief', 14),
+('elife', 18),
+('eline', 18),
+('eling', 16),
+('elist', 15),
+('elive', 14),
+('eloan', 17),
+('email', 23),
+('emark', 13),
+('ement', 45),
+('emlak', 52),
+('ender', 18),
+('enews', 23),
+('enjoy', 27),
+('ental', 47),
+('enter', 118),
+('entre', 15),
+('entry', 16),
+('eople', 29),
+('epage', 19),
+('epair', 30),
+('epark', 20),
+('epart', 13),
+('eport', 36),
+('erage', 20),
+('erapy', 18),
+('erate', 17),
+('erica', 47),
+('eries', 22),
+('ering', 41),
+('erlaw', 16),
+('erman', 17),
+('ernet', 21),
+('eroom', 13),
+('error', 20),
+('erson', 23),
+('erver', 41),
+('esale', 25),
+('eshop', 29),
+('eside', 32),
+('esign', 253),
+('esite', 15),
+('esort', 18),
+('etail', 14),
+('etics', 30),
+('eting', 81),
+('etown', 20),
+('etter', 16),
+('event', 56),
+('every', 21),
+('evice', 14),
+('eview', 52),
+('exact', 16),
+('exico', 16),
+('extra', 38),
+('facts', 50),
+('faith', 27),
+('falls', 17),
+('fancy', 20),
+('farms', 18),
+('feeds', 30),
+('ffair', 13),
+('ffice', 32),
+('field', 45),
+('fight', 32),
+('files', 61),
+('films', 54),
+('final', 20),
+('finds', 20),
+('first', 49),
+('flash', 50),
+('float', 13),
+('floor', 38),
+('folks', 17),
+('foods', 18),
+('force', 55),
+('forex', 24),
+('forms', 34),
+('forth', 14),
+('forum', 123),
+('found', 24),
+('frame', 42),
+('fresh', 44),
+('frica', 17),
+('front', 36),
+('funds', 42),
+('funny', 31),
+('gains', 23),
+('gamer', 16),
+('games', 160),
+('gency', 36),
+('gifts', 49),
+('girls', 44),
+('gital', 35),
+('glass', 77),
+('going', 26),
+('goods', 60),
+('grams', 13),
+('grand', 30),
+('grant', 35),
+('graph', 40),
+('great', 43),
+('green', 97),
+('grind', 25),
+('gross', 17),
+('group', 290),
+('guard', 74),
+('guess', 22),
+('guide', 139),
+('guild', 26),
+('haber', 22),
+('habit', 21),
+('hands', 27),
+('handy', 20),
+('hange', 43),
+('happy', 54),
+('heads', 36),
+('heart', 37),
+('hello', 23),
+('helps', 13),
+('hings', 15),
+('hints', 13),
+('holes', 17),
+('homes', 131),
+('hones', 19),
+('hools', 16),
+('horse', 39),
+('hotel', 143),
+('hotos', 32),
+('hours', 16),
+('house', 154),
+('hting', 18),
+('human', 37),
+('hurch', 24),
+('iance', 25),
+('iates', 37),
+('idays', 21),
+('ideal', 26),
+('ideas', 71),
+('ideos', 53),
+('ience', 16),
+('iends', 25),
+('ights', 28),
+('iland', 16),
+('ilder', 17),
+('ilers', 13),
+('ility', 14),
+('illas', 14),
+('iller', 21),
+('image', 76),
+('inder', 35),
+('index', 68),
+('india', 66),
+('iness', 48),
+('ining', 49),
+('inner', 19),
+('inter', 23),
+('ional', 36),
+('iones', 15),
+('ircle', 19),
+('irect', 74),
+('ishop', 14),
+('ising', 18),
+('ision', 52),
+('islam', 13),
+('issue', 27),
+('ister', 15),
+('istry', 14),
+('itech', 18),
+('items', 36),
+('ities', 24),
+('ition', 42),
+('iture', 22),
+('itute', 16),
+('iving', 41),
+('japan', 28),
+('joint', 29),
+('jones', 20),
+('judge', 26),
+('jumps', 21),
+('kable', 13),
+('kaway', 13),
+('kills', 20),
+('kings', 17),
+('knock', 15),
+('known', 15),
+('knows', 29),
+('korea', 27),
+('kshop', 14),
+('label', 61),
+('lable', 20),
+('lance', 16),
+('lands', 62),
+('lanet', 38),
+('larea', 13),
+('large', 33),
+('later', 21),
+('lates', 15),
+('laway', 14),
+('lback', 16),
+('lbank', 13),
+('lders', 36),
+('lding', 20),
+('leads', 66),
+('learn', 45),
+('lease', 17),
+('leave', 16),
+('lecom', 16),
+('legal', 54),
+('level', 30),
+('light', 104),
+('limit', 31),
+('lines', 70),
+('linic', 15),
+('links', 69),
+('lisim', 16),
+('lists', 40),
+('lives', 25),
+('llage', 33),
+('llair', 18),
+('lland', 21),
+('llart', 14),
+('llege', 40),
+('llery', 39),
+('lling', 15),
+('loads', 40),
+('loans', 48),
+('lobal', 48),
+('local', 36),
+('locks', 23),
+('logic', 43),
+('looks', 13),
+('lover', 13),
+('lower', 29),
+('lting', 84),
+('ltors', 15),
+('lture', 14),
+('lucky', 27),
+('lunch', 29),
+('mages', 25),
+('magic', 77),
+('mains', 37),
+('major', 21),
+('maker', 19),
+('makes', 13),
+('mance', 20),
+('mania', 38),
+('march', 21),
+('marks', 34),
+('marry', 21),
+('match', 58),
+('mbers', 14),
+('media', 196),
+('ments', 59),
+('merit', 17),
+('metal', 57),
+('miles', 40),
+('minds', 29),
+('mited', 21),
+('model', 70),
+('money', 109),
+('month', 24),
+('mouth', 22),
+('moves', 24),
+('movie', 70),
+('mpany', 53),
+('music', 220),
+('nable', 26),
+('nager', 15),
+('names', 73),
+('nance', 28),
+('narea', 19),
+('narmy', 13),
+('nasty', 24),
+('nball', 17),
+('nband', 18),
+('nbank', 20),
+('nbear', 13),
+('nbest', 19),
+('nblog', 15),
+('nbook', 13),
+('ncard', 17),
+('ncare', 16),
+('ncept', 14),
+('ncial', 35),
+('ncing', 14),
+('nclub', 21),
+('ndage', 15),
+('ndate', 16),
+('nders', 24),
+('nding', 48),
+('needs', 34),
+('nergy', 68),
+('never', 13),
+('ngame', 13),
+('ngels', 13),
+('ngirl', 14),
+('ngles', 14),
+('nhome', 16),
+('night', 59),
+('nings', 13),
+('nitor', 19),
+('njobs', 16),
+('nkeys', 13),
+('nking', 31),
+('nland', 14),
+('nline', 460),
+('nload', 28),
+('nlong', 13),
+('nlove', 16),
+('nment', 18),
+('nnect', 29),
+('nnews', 17),
+('nning', 14),
+('noise', 29),
+('north', 47),
+('notes', 63),
+('novel', 19),
+('nplan', 15),
+('nplus', 14),
+('npost', 15),
+('nroom', 13),
+('nsaat', 24),
+('nshop', 22),
+('nster', 13),
+('nsult', 27),
+('ntage', 17),
+('ntals', 31),
+('nters', 18),
+('nting', 50),
+('ntral', 46),
+('ntrol', 22),
+('nture', 19),
+('nvest', 26),
+('obile', 59),
+('occer', 13),
+('octor', 24),
+('odels', 20),
+('offee', 19),
+('offer', 61),
+('ogger', 14),
+('ogies', 17),
+('ogram', 13),
+('ohbet', 13),
+('oject', 37),
+('oking', 24),
+('olate', 15),
+('older', 15),
+('olive', 13),
+('ology', 59),
+('omain', 23),
+('omics', 15),
+('ondon', 14),
+('ondos', 19),
+('onics', 35),
+('onkey', 19),
+('orage', 23),
+('order', 56),
+('orial', 13),
+('ories', 28),
+('oring', 16),
+('orner', 15),
+('orney', 15),
+('ortal', 44),
+('orums', 30),
+('oryou', 13),
+('oshop', 14),
+('oster', 19),
+('osure', 17),
+('otech', 24),
+('otels', 54),
+('other', 24),
+('otion', 23),
+('otors', 33),
+('ounds', 21),
+('ounge', 20),
+('ource', 34),
+('ouses', 43),
+('overs', 26),
+('ovies', 40),
+('owall', 13),
+('owers', 32),
+('owing', 19),
+('owner', 26),
+('pages', 113),
+('paper', 62),
+('parel', 15),
+('parts', 78),
+('party', 72),
+('patch', 34),
+('peace', 25),
+('pedia', 28),
+('perts', 16),
+('perty', 38),
+('pharm', 14),
+('phase', 16),
+('phics', 30),
+('phone', 89),
+('photo', 71),
+('picks', 28),
+('piece', 20),
+('pital', 56),
+('pizza', 17),
+('place', 115),
+('plain', 14),
+('plane', 25),
+('plans', 50),
+('plant', 43),
+('plays', 31),
+('pment', 24),
+('point', 83),
+('poker', 69),
+('porno', 20),
+('ports', 113),
+('posts', 20),
+('pound', 14),
+('power', 79),
+('pping', 38),
+('pport', 28),
+('press', 135),
+('price', 62),
+('prime', 38),
+('print', 75),
+('prise', 28),
+('proof', 23),
+('proxy', 15),
+('ption', 14),
+('puter', 24),
+('queue', 19),
+('quick', 50),
+('quiet', 14),
+('quote', 61),
+('rader', 21),
+('radio', 106),
+('raise', 25),
+('rance', 72),
+('ranch', 32),
+('range', 49),
+('raphy', 44),
+('rapid', 34),
+('rates', 51),
+('rator', 16),
+('ravel', 135),
+('rblog', 16),
+('reach', 51),
+('react', 16),
+('reads', 32),
+('ready', 52),
+('reams', 35),
+('redit', 34),
+('refer', 18),
+('rence', 14),
+('reply', 27),
+('rever', 14),
+('ridge', 30),
+('right', 63),
+('rings', 14),
+('rises', 45),
+('river', 61),
+('rkiye', 14),
+('rlife', 17),
+('rning', 18),
+('rocks', 14),
+('roker', 17),
+('rooms', 39),
+('round', 37),
+('route', 25),
+('rport', 17),
+('rsale', 14),
+('rshop', 16),
+('rsity', 16),
+('rties', 42),
+('rtner', 14),
+('ruise', 14),
+('rules', 35),
+('rvice', 81),
+('safer', 14),
+('saint', 17),
+('sales', 119),
+('salon', 21),
+('sayar', 17),
+('sband', 14),
+('sblog', 14),
+('scafe', 15),
+('scale', 30),
+('scape', 16),
+('scene', 46),
+('scope', 14),
+('score', 38),
+('scrap', 24),
+('sells', 23),
+('sense', 51),
+('serve', 37),
+('seven', 33),
+('shack', 15),
+('shair', 14),
+('shall', 18),
+('shape', 25),
+('share', 55),
+('sharp', 18),
+('sheet', 17),
+('shelf', 16),
+('shell', 30),
+('sheng', 18),
+('shift', 14),
+('shing', 24),
+('shion', 41),
+('shoes', 29),
+('shome', 15),
+('shoot', 16),
+('shops', 49),
+('short', 14),
+('shows', 29),
+('sight', 24),
+('signs', 143),
+('sinfo', 15),
+('sions', 26),
+('sites', 73),
+('skill', 21),
+('sland', 36),
+('sleep', 28),
+('slist', 20),
+('small', 24),
+('smart', 16),
+('smile', 29),
+('smith', 18),
+('snews', 17),
+('solar', 17),
+('solid', 15),
+('solve', 17),
+('sorry', 14),
+('sound', 52),
+('south', 29),
+('space', 104),
+('speak', 30),
+('speed', 37),
+('spell', 16),
+('splan', 15),
+('sport', 65),
+('spots', 18),
+('ssage', 23),
+('sshop', 24),
+('ssion', 23),
+('staff', 30),
+('stage', 37),
+('stand', 33),
+('stars', 22),
+('start', 36),
+('state', 83),
+('stech', 14),
+('stems', 68),
+('sters', 36),
+('stick', 23),
+('stics', 18),
+('sting', 114),
+('stock', 55),
+('stone', 68),
+('store', 158),
+('story', 21),
+('study', 23),
+('stuff', 48),
+('style', 79),
+('sugar', 20),
+('table', 74),
+('takes', 16),
+('talks', 21),
+('tants', 23),
+('tapes', 20),
+('tarea', 22),
+('taste', 15),
+('tates', 23),
+('taway', 24),
+('tback', 22),
+('tball', 50),
+('tband', 24),
+('tbank', 25),
+('tbase', 21),
+('tbook', 15),
+('tcard', 18),
+('tches', 22),
+('tclub', 18),
+('tdoor', 20),
+('teach', 30),
+('teens', 35),
+('teeth', 22),
+('tests', 17),
+('tgage', 33),
+('there', 38),
+('thers', 15),
+('thing', 67),
+('think', 21),
+('thome', 30),
+('three', 25),
+('times', 59),
+('tings', 32),
+('tions', 351),
+('tique', 33),
+('title', 16),
+('tjobs', 21),
+('tking', 14),
+('tlady', 14),
+('tland', 17),
+('tlife', 19),
+('tment', 24),
+('tners', 32),
+('tness', 34),
+('today', 194),
+('token', 16),
+('tones', 30),
+('tools', 36),
+('tooth', 19),
+('topia', 16),
+('topic', 20),
+('tores', 19),
+('total', 25),
+('touch', 39),
+('tours', 41),
+('tplan', 15),
+('trace', 37),
+('track', 41),
+('trade', 61),
+('train', 43),
+('trash', 16),
+('tream', 15),
+('treat', 16),
+('trees', 20),
+('treet', 23),
+('trial', 24),
+('trick', 22),
+('tries', 46),
+('truck', 37),
+('trust', 39),
+('truth', 36),
+('tters', 16),
+('ttery', 17),
+('tudio', 91),
+('tures', 64),
+('twall', 14),
+('tware', 55),
+('twear', 23),
+('twork', 86),
+('tzero', 14),
+('udios', 38),
+('under', 20),
+('union', 21),
+('unite', 16),
+('units', 19),
+('unity', 32),
+('unter', 30),
+('untry', 14),
+('upper', 17),
+('upply', 28),
+('urant', 14),
+('urces', 18),
+('urism', 16),
+('urity', 34),
+('urkey', 16),
+('urnal', 19),
+('urner', 14),
+('urope', 17),
+('urvey', 14),
+('users', 25),
+('useum', 16),
+('using', 24),
+('uster', 14),
+('uters', 28),
+('ution', 57),
+('uture', 23),
+('value', 63),
+('vegas', 14),
+('vents', 52),
+('venue', 20),
+('vices', 71),
+('video', 152),
+('views', 75),
+('ville', 30),
+('vings', 19),
+('visit', 31),
+('visor', 20),
+('vital', 32),
+('voice', 62),
+('votes', 26),
+('walks', 24),
+('walls', 36),
+('wants', 22),
+('wards', 22),
+('waste', 35),
+('watch', 88),
+('water', 98),
+('wears', 15),
+('weeks', 18),
+('welry', 23),
+('wheel', 42),
+('where', 44),
+('which', 14),
+('white', 46),
+('whole', 18),
+('woman', 60),
+('women', 54),
+('words', 51),
+('works', 104),
+('world', 205),
+('worth', 37),
+('write', 30),
+('wyers', 17),
+('xpert', 16),
+('xport', 14),
+('yable', 17),
+('yarea', 14),
+('yarmy', 14),
+('yaway', 14),
+('yback', 14),
+('yball', 22),
+('ybank', 22),
+('ybest', 14),
+('yclub', 18),
+('years', 28),
+('yfilm', 14),
+('yfood', 14),
+('ygirl', 17),
+('yking', 19),
+('yloan', 14),
+('ynews', 15),
+('young', 51),
+('yours', 27),
+('youth', 17),
+('yshop', 19),
+('ystem', 50),
+]
 
-for index, part in enumerate("""
-online
-design
-travel
-utions
-esigns
-ations
-osting
-studio
-ctions
-sports
-center
-search
-ulting
-market
-ervice
-realty
-direct
-school
-etwork
-rvices
-ystems
-family
-keting
-health
-energy
-ection
-xpress
-urance
-ftware
-mobile
-cation
-ecords
-graphy
-system
-hotels
-lution
-ompany
-uction
-videos
-events
-gazine
-gaming
-apital
-siness
-estate
-merica
-racing
-global
-vision
-entral
-nation
-prises
-portal
-curity
-review
-server
-tation
-aining
-change
-stoday
-ashion
-ollege
-operty
-stries
-tudios
-casino
-movies
-allery
-houses
-ration
-ancial
-beauty
-roject
-canada
-entals
-igital
-agency
-motors
-office
-omains
-photos
-rtgage
-source
--group
-erties
-inting
-living
-planet
-tional
-cademy
-itness
-othing
-dreams
-finder
-munity
-rtners
-credit
-forums
-hannel
-nology
-onsult
-rading
-report
-zanesi
-aphics
-oducts
-tments
-actory
-ectory
-eworld
-ilders
-onnect
-puters
-eather
-ending
-invest
-island
-people
-sworld
-estore
-opping
-supply
-upport
-ciates
-ectric
-etoday
-hunter
-inance
-liance
-lowers
-master
-ngroup
-tworks
-church
-ctures
-emusic
-eviews
-mation
-ntures
-ronics
-uccess
-achine
-action
-doctor
-ehouse
-gement
-insaat
-mputer
-rental
-repair
-riends
-rprise
-sgroup
-street
-utique
--world
-coffee
-dental
-ealtor
-egroup
-ewelry
-nmusic
-wnload
-images
-ishing
-models
-niture
-ontrol
-states
-torage
-trader
-advice
-estyle
-illage
-imited
-tering
-tgroup
--hotel
-access
-active
-agroup
-avings
-dating
-dation
-domain
-lawyer
-lounge
-reless
-sstore
-wpages
--china
--music
-anking
-circle
-dvisor
-edical
-egames
-emedia
-enture
-flower
-garden
-iphone
-motion
-ogroup
-ournal
-wealth
-ytoday
-asters
-broker
-condos
-ebooks
-ebsite
-elecom
-france
-ickets
-lidays
-ociety
-onitor
-ources
-phones
-tmoney
-tmusic
-africa
-avenue
-awyers
-eguide
-ersity
-europe
-future
-ghting
-gtoday
-isayar
-logies
-mexico
-nloads
-scorts
-seball
-sguide
-smusic
-splace
-ternet
-tories
-ttoday
-tvideo
--forum
-anager
-atches
-bridge
-corner
-dgroup
-driver
-eative
-emoney
-esales
-garage
-iation
-ldings
-ltants
-museum
-ngames
-nmedia
-ntable
-ooking
-others
-racker
-resort
-rlines
-tguide
-things
-thotel
-tising
-titute
-turkey
-valley
-xperts
-altors
-amusic
-arning
-assage
-brasil
-centre
-chools
-clinic
-eforum
-ehomes
-epoker
-evideo
-eworks
-heaven
-iaprop
-icaret
-ilisim
-nature
-ncepts
-nhouse
-nworld
-obilya
-omedia
-otball
-ourism
-pparel
-relief
-select
-stings
-stream
-tmedia
-torney
-towing
-ulture
-ygroup
--media
-actors
-affair
-artner
-athome
-aurant
-career
-cruise
-dealer
-eality
-ecrets
-edding
-espace
-foryou
-galaxy
-gamers
-ground
-herapy
-lgroup
-lights
-logger
-london
-nguide
-nhomes
-nsport
-oncept
-orever
-otions
-ravels
-rhouse
-rmance
-shomes
-survey
-tphone
-tstore
-twater
-uilder
-unding
-urkiye
-ymusic
-yradio
--board
--games
--store
--video
-aching
-angels
-antage
-arkets
-dplace
-dtoday
-ealthy
-eating
-ehotel
-ements
-emovie
-eports
-eradio
-esting
-ewater
-expert
-export
-iamond
-ldwide
-livery
-llness
-lovers
-miller
-monkey
-nbooks
-ndmore
-nspace
-nwater
-onight
-opment
-ostore
-ountry
-palace
-radise
-rhomes
-scards
-soccer
-sohbet
-stores
-tdrive
-tguard
-tplace
-tsales
-ywatch
-yworld
--books
-agents
-ahomes
-amedia
-anning
-areers
-atalog
-ateway
-attack
-camera
-ciones
-crafts
-dizayn
-dpress
-eboard
-elegal
-elinks
-ervers
-estock
-filter
-flight
-galore
-iction
-idence
-ietnam
-ingles
-inment
-ipment
-ipping
-irport
-ission
-italia
-llable
-lliams
-nhotel
-octors
-ogames
-oguide
-omusic
-oofing
-orsale
-outlet
-owatch
-puting
-rchive
-rescue
-rgroup
-rition
-rmusic
-rogram
-sgames
-signer
-stable
-stment
-svideo
-tlands
-tlight
-twatch
-united
-ustoms
-yspace
-ystore
-addict
-ailers
-anclub
-armacy
-asting
-campus
-cgroup
-choice
-colate
-counts
-dbooks
-deling
-dguide
-dmusic
-eaners
-elight
-enders
-epages
-eplace
-esults
-garcia
-hamber
-hopper
-indows
-ington
-lasses
-liates
-llenge
-lorida
-lyrics
-martin
-nagain
-nglish
-npress
-nsales
-nswers
-nvideo
-offers
-olding
-omotiv
-onster
-ooring
-orange
-orlife
-oupons
-oworld
-pharma
-ptions
-reklam
-rhotel
-ritasi
-rparts
-rstore
-smedia
-spital
-square
-tabout
-talarm
-tattoo
-tcards
-tdream
-tgames
-thomas
-timage
-tpoint
-umbing
-unters
-utdoor
-visors
-ylight
-ymedia
-ynames
-ypoint
-ywoman
--audio
--guide
--guild
--house
--india
-ackers
-ailand
-amonds
-ardens
-assist
-asures
-atings
-attery
-atural
-bakery
-bazaar
-bility
-boards
-bsites
-burada
-ccount
-cierge
-comics
-course
-dguard
-dvideo
-ealers
-eaning
-eapple
-eeting
-egifts
-ekstil
-eloans
-emetal
-enames
-engine
-ension
-epress
-ercial
-estuff
-etball
-etrade
-factor
-fusion
-gratis
-hawaii
-heater
-ibrary
-income
-irtual
-irways
-istory
-jewels
-kontor
-latino
-leader
-llaway
-logist
-nalbum
-nchina
-nerals
-nnames
-nworks
-ograms
-oparts
-osales
-ottery
-otwear
-plates
-pplies
-prices
-reedom
-rehber
-rgames
-rkshop
-rokers
-scount
-sepeti
-sitesi
-skills
-smiles
-spider
-ssions
-stones
-tbooks
-tdeals
-tglass
-tgraph
-tpages
-tpaper
-trucks
-turizm
-tvoice
-untain
-unting
-xtreme
-ygames
-ygreen
-yhouse
-ymoney
-ysales
-ystuff
-ything
-ytimes
-""".split()): SUFFIX_SCORES[part] = (640 - index) / 640.0
+RIGHT6_TOTAL = 13452
+RIGHT6 = [
+('-audio', 10),
+('-board', 13),
+('-books', 12),
+('-china', 19),
+('-forum', 16),
+('-games', 12),
+('-group', 32),
+('-guide', 10),
+('-guild', 10),
+('-hotel', 21),
+('-house', 10),
+('-india', 10),
+('-media', 14),
+('-music', 19),
+('-store', 13),
+('-video', 12),
+('-world', 22),
+('access', 20),
+('achine', 22),
+('aching', 11),
+('ackers', 10),
+('action', 24),
+('active', 21),
+('actors', 13),
+('actory', 25),
+('addict', 11),
+('advice', 20),
+('affair', 12),
+('africa', 17),
+('agency', 32),
+('agents', 11),
+('agroup', 20),
+('ahomes', 12),
+('ailand', 10),
+('ailers', 11),
+('aining', 37),
+('allery', 34),
+('altors', 15),
+('amedia', 11),
+('amonds', 10),
+('amusic', 14),
+('anager', 15),
+('ancial', 35),
+('anclub', 11),
+('angels', 13),
+('anking', 19),
+('anning', 10),
+('antage', 12),
+('aphics', 30),
+('apital', 45),
+('ardens', 11),
+('areers', 12),
+('arkets', 12),
+('armacy', 10),
+('arning', 15),
+('artner', 14),
+('ashion', 40),
+('assage', 12),
+('assist', 10),
+('asters', 17),
+('asting', 11),
+('asures', 10),
+('atalog', 11),
+('atches', 16),
+('ateway', 12),
+('athome', 14),
+('atings', 10),
+('ations', 98),
+('attack', 11),
+('attery', 10),
+('atural', 10),
+('aurant', 13),
+('avenue', 17),
+('avings', 17),
+('awyers', 17),
+('bakery', 10),
+('bazaar', 10),
+('beauty', 37),
+('bility', 10),
+('boards', 10),
+('brasil', 13),
+('bridge', 16),
+('broker', 17),
+('bsites', 10),
+('burada', 10),
+('cademy', 34),
+('camera', 11),
+('campus', 11),
+('canada', 36),
+('career', 13),
+('casino', 40),
+('cation', 57),
+('ccount', 10),
+('center', 84),
+('centre', 15),
+('cgroup', 11),
+('change', 41),
+('choice', 11),
+('chools', 14),
+('church', 24),
+('ciates', 26),
+('cierge', 10),
+('ciones', 12),
+('circle', 19),
+('clinic', 15),
+('coffee', 19),
+('colate', 10),
+('comics', 10),
+('condos', 18),
+('corner', 15),
+('counts', 11),
+('course', 10),
+('crafts', 12),
+('credit', 29),
+('cruise', 14),
+('ctions', 91),
+('ctures', 25),
+('curity', 33),
+('dating', 17),
+('dation', 20),
+('dbooks', 11),
+('dealer', 14),
+('deling', 10),
+('dental', 20),
+('design', 247),
+('dgroup', 14),
+('dguard', 10),
+('dguide', 10),
+('direct', 74),
+('dizayn', 12),
+('dmusic', 11),
+('doctor', 24),
+('domain', 19),
+('dplace', 12),
+('dpress', 12),
+('dreams', 32),
+('driver', 16),
+('dtoday', 13),
+('dvideo', 10),
+('dvisor', 19),
+('ealers', 10),
+('eality', 12),
+('ealthy', 13),
+('ealtor', 23),
+('eaners', 11),
+('eaning', 10),
+('eapple', 10),
+('eather', 27),
+('eating', 12),
+('eative', 16),
+('eboard', 12),
+('ebooks', 17),
+('ebsite', 17),
+('ecords', 57),
+('ecrets', 13),
+('ection', 62),
+('ectory', 25),
+('ectric', 24),
+('edding', 10),
+('edical', 18),
+('eeting', 10),
+('eforum', 15),
+('egames', 18),
+('egifts', 10),
+('egroup', 21),
+('eguide', 17),
+('ehomes', 13),
+('ehotel', 13),
+('ehouse', 25),
+('ekstil', 10),
+('elecom', 16),
+('elegal', 12),
+('elight', 11),
+('elinks', 10),
+('eloans', 10),
+('emedia', 19),
+('ements', 11),
+('emetal', 10),
+('emoney', 15),
+('emovie', 13),
+('emusic', 23),
+('enames', 10),
+('enders', 10),
+('ending', 26),
+('energy', 63),
+('engine', 10),
+('ension', 10),
+('entals', 31),
+('entral', 46),
+('enture', 18),
+('epages', 11),
+('eplace', 11),
+('epoker', 11),
+('eports', 13),
+('epress', 10),
+('eradio', 11),
+('erblog', 10),
+('ercial', 10),
+('ersity', 16),
+('erties', 34),
+('ervers', 10),
+('ervice', 75),
+('esales', 14),
+('esigns', 110),
+('esorts', 10),
+('espace', 12),
+('estate', 41),
+('esting', 13),
+('estock', 11),
+('estore', 26),
+('estuff', 10),
+('estyle', 21),
+('esults', 10),
+('etball', 10),
+('etoday', 25),
+('etrade', 10),
+('etwork', 74),
+('europe', 17),
+('events', 50),
+('evideo', 15),
+('eviews', 25),
+('ewater', 13),
+('ewelry', 23),
+('eworks', 13),
+('eworld', 28),
+('expert', 14),
+('export', 13),
+('factor', 10),
+('family', 70),
+('filter', 11),
+('finder', 32),
+('flight', 11),
+('flower', 19),
+('forums', 30),
+('foryou', 13),
+('france', 17),
+('ftware', 54),
+('fusion', 10),
+('future', 14),
+('galaxy', 14),
+('galore', 11),
+('gamers', 13),
+('gaming', 49),
+('garage', 14),
+('garcia', 11),
+('garden', 20),
+('gazine', 52),
+('gement', 23),
+('ghting', 17),
+('global', 47),
+('graphy', 44),
+('gratis', 10),
+('ground', 12),
+('gtoday', 16),
+('hamber', 11),
+('hannel', 31),
+('hawaii', 10),
+('health', 66),
+('heater', 10),
+('heaven', 15),
+('herapy', 18),
+('hopper', 10),
+('hotels', 52),
+('houses', 39),
+('hunter', 25),
+('iamond', 10),
+('iaprop', 14),
+('iation', 16),
+('ibrary', 10),
+('icaret', 14),
+('ickets', 16),
+('iction', 11),
+('idence', 11),
+('ietnam', 11),
+('igital', 35),
+('ilders', 28),
+('ilisim', 15),
+('illage', 20),
+('images', 20),
+('imited', 21),
+('inance', 26),
+('income', 10),
+('indows', 11),
+('ingles', 12),
+('ington', 11),
+('inment', 12),
+('insaat', 24),
+('inting', 33),
+('invest', 26),
+('iphone', 17),
+('ipment', 12),
+('ipping', 11),
+('irport', 12),
+('irtual', 10),
+('irways', 10),
+('isayar', 17),
+('ishing', 20),
+('island', 23),
+('ission', 12),
+('istory', 10),
+('italia', 10),
+('itness', 32),
+('ivirus', 10),
+('jewels', 10),
+('keting', 66),
+('kontor', 10),
+('lasses', 10),
+('latino', 11),
+('lawyer', 20),
+('ldings', 15),
+('ldwide', 13),
+('leader', 10),
+('lgroup', 14),
+('liance', 24),
+('liates', 11),
+('lidays', 18),
+('lights', 14),
+('livery', 10),
+('living', 30),
+('llable', 12),
+('llaway', 10),
+('llenge', 10),
+('lliams', 12),
+('llness', 12),
+('logger', 14),
+('logies', 17),
+('logist', 10),
+('london', 14),
+('lorida', 11),
+('lounge', 20),
+('lovers', 11),
+('lowers', 26),
+('ltants', 16),
+('lution', 55),
+('lyrics', 11),
+('market', 72),
+('martin', 10),
+('master', 27),
+('mation', 25),
+('merica', 43),
+('mexico', 16),
+('miller', 13),
+('mobile', 58),
+('models', 20),
+('monkey', 13),
+('mories', 10),
+('motion', 19),
+('motors', 33),
+('movies', 40),
+('mputer', 23),
+('munity', 27),
+('museum', 16),
+('nagain', 10),
+('nalbum', 10),
+('nation', 45),
+('nature', 13),
+('nbooks', 12),
+('ncepts', 15),
+('nchina', 10),
+('ndmore', 12),
+('nerals', 10),
+('ngames', 16),
+('nglish', 11),
+('ngroup', 25),
+('nguide', 13),
+('nhomes', 14),
+('nhotel', 12),
+('nhouse', 15),
+('niture', 21),
+('nloads', 17),
+('nmedia', 16),
+('nmusic', 23),
+('nnames', 10),
+('nology', 31),
+('nplace', 10),
+('npress', 11),
+('nsales', 11),
+('nspace', 13),
+('nsport', 15),
+('nswers', 11),
+('ntable', 16),
+('ntures', 23),
+('nvideo', 11),
+('nwater', 13),
+('nworks', 10),
+('nworld', 15),
+('obilya', 15),
+('ociety', 16),
+('octors', 12),
+('oducts', 30),
+('offers', 11),
+('office', 32),
+('ogames', 12),
+('ograms', 10),
+('ogroup', 18),
+('oguide', 11),
+('olding', 10),
+('olight', 10),
+('ollege', 39),
+('omains', 35),
+('omedia', 15),
+('omotiv', 11),
+('ompany', 52),
+('omusic', 13),
+('oncept', 13),
+('onight', 13),
+('onitor', 18),
+('online', 446),
+('onnect', 29),
+('onster', 11),
+('onsult', 27),
+('ontrol', 22),
+('oofing', 12),
+('ooking', 15),
+('ooring', 10),
+('oparts', 10),
+('operty', 38),
+('opment', 12),
+('opping', 24),
+('orange', 11),
+('orever', 13),
+('orlife', 11),
+('orsale', 12),
+('osales', 10),
+('osting', 90),
+('ostore', 13),
+('otball', 15),
+('others', 14),
+('othing', 32),
+('otions', 14),
+('ottery', 10),
+('otwear', 10),
+('ountry', 13),
+('oupons', 11),
+('ources', 18),
+('ourism', 15),
+('ournal', 17),
+('outlet', 11),
+('owatch', 10),
+('oworld', 11),
+('palace', 10),
+('people', 28),
+('pharma', 11),
+('phones', 18),
+('photos', 32),
+('planet', 32),
+('plates', 10),
+('portal', 43),
+('pparel', 15),
+('pplies', 10),
+('prices', 10),
+('prises', 45),
+('ptions', 11),
+('puters', 28),
+('puting', 11),
+('racing', 44),
+('racker', 16),
+('rading', 29),
+('radise', 13),
+('raffic', 10),
+('ration', 37),
+('ravels', 12),
+('rchive', 12),
+('realty', 74),
+('reedom', 10),
+('rehber', 10),
+('reklam', 11),
+('reless', 19),
+('relief', 13),
+('rental', 21),
+('repair', 22),
+('report', 31),
+('rescue', 12),
+('resort', 16),
+('review', 38),
+('rgames', 10),
+('rgroup', 12),
+('rhomes', 13),
+('rhotel', 11),
+('rhouse', 14),
+('ridges', 10),
+('riends', 24),
+('ritasi', 11),
+('rition', 13),
+('rkshop', 10),
+('rlines', 15),
+('rmance', 14),
+('rmusic', 11),
+('rogram', 10),
+('roject', 37),
+('rokers', 10),
+('ronics', 26),
+('rparts', 11),
+('rprise', 24),
+('rstore', 11),
+('rtgage', 33),
+('rtners', 31),
+('rvices', 70),
+('scards', 13),
+('school', 68),
+('scorts', 17),
+('scount', 10),
+('search', 73),
+('seball', 16),
+('select', 15),
+('sepeti', 10),
+('server', 41),
+('sgames', 12),
+('sgroup', 23),
+('sguide', 15),
+('shomes', 13),
+('signer', 12),
+('siness', 47),
+('sitesi', 10),
+('skills', 10),
+('smedia', 10),
+('smiles', 10),
+('smusic', 17),
+('soccer', 13),
+('sohbet', 12),
+('source', 33),
+('spider', 10),
+('spital', 11),
+('splace', 17),
+('sports', 86),
+('square', 10),
+('ssions', 10),
+('sstore', 19),
+('stable', 12),
+('states', 22),
+('stings', 12),
+('stment', 11),
+('stoday', 40),
+('stones', 10),
+('stores', 13),
+('stream', 15),
+('street', 23),
+('stries', 40),
+('studio', 90),
+('supply', 28),
+('survey', 14),
+('svideo', 12),
+('sworld', 27),
+('system', 50),
+('tabout', 11),
+('talarm', 11),
+('tation', 42),
+('tattoo', 11),
+('tbooks', 10),
+('tcards', 11),
+('tdeals', 10),
+('tdream', 11),
+('tdrive', 13),
+('tering', 21),
+('ternet', 17),
+('tgames', 11),
+('tglass', 10),
+('tgraph', 10),
+('tgroup', 21),
+('tguard', 13),
+('tguide', 16),
+('things', 15),
+('thomas', 11),
+('thotel', 16),
+('timage', 11),
+('tional', 31),
+('tising', 13),
+('titute', 16),
+('tlands', 12),
+('tlight', 12),
+('tmedia', 15),
+('tments', 29),
+('tmoney', 18),
+('tmusic', 18),
+('torage', 19),
+('tories', 16),
+('torney', 15),
+('towing', 15),
+('tpages', 10),
+('tpaper', 10),
+('tphone', 14),
+('tplace', 13),
+('tpoint', 11),
+('trader', 20),
+('travel', 135),
+('trucks', 10),
+('tsales', 13),
+('tstore', 13),
+('ttoday', 17),
+('tudios', 38),
+('turizm', 10),
+('turkey', 15),
+('tvideo', 17),
+('tvoice', 10),
+('twatch', 10),
+('twater', 13),
+('tworks', 25),
+('uccess', 26),
+('uction', 55),
+('uilder', 12),
+('ulting', 82),
+('ulture', 14),
+('umbing', 10),
+('unding', 14),
+('united', 12),
+('untain', 10),
+('unters', 10),
+('unting', 10),
+('upport', 27),
+('urance', 52),
+('urkiye', 14),
+('ustoms', 10),
+('utdoor', 11),
+('utions', 123),
+('utique', 24),
+('valley', 16),
+('videos', 53),
+('vision', 47),
+('visors', 11),
+('wealth', 19),
+('wnload', 23),
+('wpages', 20),
+('xperts', 16),
+('xpress', 56),
+('xtreme', 11),
+('ygames', 10),
+('ygreen', 10),
+('ygroup', 14),
+('yhouse', 10),
+('ylight', 11),
+('ymedia', 10),
+('ymoney', 10),
+('ymusic', 13),
+('ynames', 11),
+('ypoint', 11),
+('yradio', 14),
+('ysales', 10),
+('yspace', 12),
+('ystems', 66),
+('ystore', 11),
+('ystuff', 10),
+('ything', 10),
+('ytimes', 10),
+('ytoday', 18),
+('ywatch', 13),
+('ywoman', 11),
+('yworld', 13),
+('zanesi', 31),
+]
 

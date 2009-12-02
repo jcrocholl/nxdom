@@ -19,16 +19,20 @@ def auth_func():
 
 
 def most_popular(query, variable):
-    print 'for index, part in enumerate("""'
     query.order('-count')
     total = 0
+    counters = []
     for prefix in query.fetch(1000):
         if prefix.count < 10:
             break
-        print prefix.key().name()
-        total += 1
-    print '""".split()): %s[part] = (%d - index) / %d.0' % (
-        variable, total, total)
+        counters.append((prefix.key().name(), prefix.count))
+        total += prefix.count
+    print variable + '_TOTAL =', total
+    counters.sort()
+    print variable, '= ['
+    for pair in counters:
+        print "('%s', %d)," % pair
+    print ']'
     print
 
 
@@ -44,11 +48,11 @@ def main():
     print 'PREFIX_SCORES = {}'
     for length in range(3, 7):
         most_popular(DotComPrefix.all().filter('length', length),
-                     'PREFIX_SCORES')
+                     'LEFT%d' % length)
     print 'SUFFIX_SCORES = {}'
     for length in range(3, 7):
         most_popular(DotComSuffix.all().filter('length', length),
-                     'SUFFIX_SCORES')
+                     'RIGHT%d' % length)
 
 
 if __name__ == '__main__':
