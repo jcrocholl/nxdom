@@ -2,45 +2,54 @@ from datetime import datetime, timedelta
 
 from django.http import HttpResponseRedirect
 from ragendja.template import render_to_response
+from appenginepatcher import on_production_server
 
 from google.appengine.ext import db
 
 from domains.utils import random_prefix
 from domains.models import MAX_NAME_LENGTH, Domain
 from dns.models import Lookup
+from prefixes.selectors import Selector
 
-BATCH_SIZE = 400
+BATCH_SIZE = 200
+
+
+def assert_missing(missing):
+    keys = [db.Key.from_path('dns_lookup', domain.key().name())
+            for domain in missing]
+    for lookup in db.get(keys):
+        assert lookup is None
+
+
+def assert_obsolete(obsolete):
+    for lookup in db.get(obsolete):
+        assert lookup is not None
 
 
 def cron(request):
-    # Get 200 random domain names.
-    prefix = random_prefix(MAX_NAME_LENGTH)
-    query = Domain.all(keys_only=True).order('__key__')
-    query.filter('__key__ >=', db.Key.from_path('domains_domain', prefix))
-    domain_names = [key.name() for key in query.fetch(BATCH_SIZE)]
+    # Get random domain names and DNS loookups in the same range.
+    selector = Selector()
+    domain_names = selector.fetch_names(Domain, BATCH_SIZE)
     if not domain_names:
         return render_to_response(request, 'dns/cron.html', locals())
-    # Get 200 DNS lookups starting from the same random name.
-    query = Lookup.all(keys_only=True).order('__key__')
-    query.filter('__key__ >=', db.Key.from_path('dns_lookup', prefix))
-    lookup_names = [key.name() for key in query.fetch(BATCH_SIZE)]
-    # Truncate to the same range if necessary.
-    while (domain_names and lookup_names and
-           domain_names[-1] > lookup_names[-1]):
-        del domain_names[-1]
-    while (domain_names and lookup_names and
-           lookup_names[-1] > domain_names[-1]):
-        del lookup_names[-1]
+    lookup_names = selector.fetch_names(Lookup, BATCH_SIZE)
+    domains_all = domain_names[:]
+    lookups_all = lookup_names[:]
+    selector.truncate_range(domain_names, lookup_names)
     domain_set = set(domain_names)
     lookup_set = set(lookup_names)
     # Create missing lookups.
     timestamp = datetime.now() - timedelta(days=365)
     missing = [Lookup(key_name=name, backwards=name[::-1], timestamp=timestamp)
                for name in domain_names if name not in lookup_set]
+    if not on_production_server:
+        assert_missing(missing)
     db.put(missing)
     # Delete obsolete lookups.
     obsolete = [db.Key.from_path('dns_lookup', name)
                 for name in lookup_names if name not in domain_set]
+    if not on_production_server:
+        assert_obsolete(obsolete)
     db.delete(obsolete)
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'dns/cron.html', locals())

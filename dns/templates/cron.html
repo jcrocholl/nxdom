@@ -12,19 +12,24 @@
 <h1>DNS Lookups</h1>
 
 <p>
-Found {{ domain_names|length }} domain names:
+Selector: {{ selector.description }}<br />
+Found {{ domains_all|length }} domain names:
+{{ domains_all|first }} to {{ domains_all|last }}<br />
+Found {{ lookups_all|length }} DNS lookups:
+{{ lookups_all|first }} to {{ lookups_all|last }}<br />
+Truncated {{ domain_names|length }} domain names:
 {{ domain_names|first }} to {{ domain_names|last }}<br />
-Found {{ lookup_names|length }} DNS lookups:
+Truncated {{ lookup_names|length }} DNS lookups:
 {{ lookup_names|first }} to {{ lookup_names|last }}
 </p>
 
-<p>
+{% if missing %}<p>
 Created {{ missing|length }} missing DNS lookups:<br />
 {% for lookup in missing %}{{ lookup.key.name}} {% endfor %}
-</p>
+</p>{% endif %}
 
-<p>
+{% if obsolete %}<p>
 Deleted {{ obsolete|length }} obsolete DNS lookups:<br />
 {% for key in obsolete %}{{ key.name}} {% endfor %}
-</p>
+</p>{% endif%}
 {% endblock %}
