@@ -1,5 +1,6 @@
 import time
 import urllib2
+import socket
 
 from google.appengine.api import datastore_errors
 from google.appengine.runtime import apiproxy_errors
@@ -17,7 +18,7 @@ def retry(func, *args, **kwargs):
         try:
             return func(*args, **kwargs)
         except (datastore_errors.Timeout, apiproxy_errors.Error,
-                urllib2.URLError), error:
+                urllib2.URLError, socket.error), error:
             print type(error)
             print error
             if attempt + 1 >= MAX_ATTEMPTS:
