@@ -28,6 +28,16 @@ indexes:
   - name: com
   - name: backwards
 
+- kind: dns_lookup
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: domains_domain
   properties:
   - name: left1
