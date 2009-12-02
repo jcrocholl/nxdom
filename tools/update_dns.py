@@ -44,6 +44,12 @@ NAMESERVERS = """
 205.171.3.65
 """.split()
 
+KNOWN_HIJACKERS = set("""
+208.67.216.132
+92.242.140.13
+63.123.155.104
+""".split())
+
 
 def auth_func():
     return open('.passwd').read().split(':')
@@ -69,7 +75,10 @@ class NameServer(ADNS.QueryEngine):
         if not ip_list:
             return
         ip_list.sort()
-        results[name] = ip_list[0]
+        ip = ip_list[0]
+        if ip in KNOWN_HIJACKERS:
+            return
+        results[name] = ip
 
     def remove_hijacker(self):
         print "Server %-16s" % self.ip,
