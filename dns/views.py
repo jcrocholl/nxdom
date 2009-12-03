@@ -9,7 +9,7 @@ from google.appengine.ext import db
 from domains.utils import random_prefix
 from domains.models import MAX_NAME_LENGTH, Domain
 from dns.models import Lookup
-from prefixes.selectors import Selector
+from prefixes.selectors import Selector, random_name
 
 BATCH_SIZE = 200
 
@@ -44,12 +44,29 @@ def cron(request):
                for name in domain_names if name not in lookup_set]
     if not on_production_server:
         assert_missing(missing)
-    db.put(missing)
     # Delete obsolete lookups.
     obsolete = [db.Key.from_path('dns_lookup', name)
                 for name in lookup_names if name not in domain_set]
     if not on_production_server:
         assert_obsolete(obsolete)
-    db.delete(obsolete)
+    # Perform update, unless using descending key order (needs debugging).
+    if selector.position == 'left' and selector.order == 'descending':
+        not_really = True
+    else:
+        db.put(missing)
+        db.delete(obsolete)
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'dns/cron.html', locals())
+
+
+def test(request):
+    name = random_name()
+    query_ascending = Lookup.all(keys_only=True).order('__key__').filter(
+        '__key__ >=', db.Key.from_path('dns_lookup', name))
+    names_ascending = [key.name() for key in query_ascending.fetch(100)]
+    query_descending = Lookup.all(keys_only=True).order('-__key__').filter(
+        '__key__ <=', db.Key.from_path('dns_lookup', names_ascending[-1]))
+    names_descending = [key.name() for key in query_descending.fetch(100)]
+    names_descending.reverse()
+    refresh_seconds = request.GET.get('refresh', 0)
+    return render_to_response(request, 'dns/test.html', locals())

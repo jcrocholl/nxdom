@@ -70,8 +70,15 @@ class Selector:
     def fetch_names(self, model, count):
         query = self.select(model, keys_only=True)
         names = [key.name() for key in query.fetch(count)]
-        if self.order == 'descending':
+        if not names:
+            return []
+        if self.order == 'ascending':
+            assert names[0] >= self.name
+        elif self.order == 'descending':
+            assert names[0] <= self.name
             names.reverse()
+        for index in range(1, len(names)):
+            assert names[index] > names[index - 1]
         return names
 
     def truncate_range(self, a, b):
