@@ -24,12 +24,14 @@ Truncated {{ lookup_names|length }} DNS lookups:
 </p>
 
 {% if missing %}<p>
-Created {{ missing|length }} missing DNS lookups:<br />
+Created {{ missing|length }} missing DNS lookups:
+{% if not_really %}(not really){% endif %}<br />
 {% for lookup in missing %}{{ lookup.key.name}} {% endfor %}
 </p>{% endif %}
 
 {% if obsolete %}<p>
-Deleted {{ obsolete|length }} obsolete DNS lookups:<br />
+Deleted {{ obsolete|length }} obsolete DNS lookups:
+{% if not_really %}(not really){% endif %}<br />
 {% for key in obsolete %}{{ key.name}} {% endfor %}
 </p>{% endif%}
 {% endblock %}
