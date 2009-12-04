@@ -61,10 +61,10 @@ class Selector:
             compare = self.name[::-1]
         if self.order == 'ascending':
             query.order(field)
-            query.filter(field + ' >', compare)
+            query.filter(field + ' >=', compare)
         elif self.order == 'descending':
             query.order('-' + field)
-            query.filter(field + ' <', compare)
+            query.filter(field + ' <=', compare)
         return query
 
     def fetch_names(self, model, count):
@@ -72,13 +72,17 @@ class Selector:
         names = [key.name() for key in query.fetch(count)]
         if not names:
             return []
+        if self.position == 'left':
+            compare = cmp
+        elif self.position == 'right':
+            compare = lambda a, b: cmp(a[::-1], b[::-1])
         if self.order == 'ascending':
-            assert names[0] >= self.name
+            assert compare(names[0], self.name) >= 0 # ascending index
         elif self.order == 'descending':
-            assert names[0] <= self.name
+            assert compare(names[0], self.name) <= 0 # descending index
             names.reverse()
         for index in range(1, len(names)):
-            assert names[index] > names[index - 1]
+            assert compare(names[index - 1], names[index]) < 0 # sorted
         return names
 
     def truncate_range(self, a, b):
