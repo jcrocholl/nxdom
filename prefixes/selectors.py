@@ -1,3 +1,4 @@
+import logging
 import random
 
 from google.appengine.ext import db
@@ -72,6 +73,8 @@ class Selector:
         names = [key.name() for key in query.fetch(count)]
         if not names:
             return []
+        logging.info('%s %s %s: %s' % (
+                self.order, self.name, self.position, ' '.join(names)))
         if self.position == 'left':
             compare = cmp
         elif self.position == 'right':
