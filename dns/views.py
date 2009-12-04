@@ -74,6 +74,6 @@ def test(request):
                   for name in names_descending]
     missing = sum([int(name not in names_ascending)
                    for name in names_descending])
-    percent_missing = 100.0 * missing / len(names_descending)
+    percent_missing = 100 * missing / len(names_descending)
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'dns/test.html', locals())
