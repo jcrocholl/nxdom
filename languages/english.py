@@ -1458,4 +1458,4 @@ ouca oubts$ oubtle oubti oubtfu oubt$ oubloo ouba ottoe otshe otpou otpie otoe
 otme otlu otlie otley othoo othfu otheo otfu oteu otei otee otea otchy otca
 otboi ostscri ostro ostmi ostlu ostie osthu ostgra ostco ostca osswo osswa
 ossroa osspie
-""".split()): TRIPLE_SCORES[triple] = (20000 - index) * 100 / 20000
+""".split()): TRIPLE_SCORES[triple] = (20000 - index) / 20000.0

@@ -39,10 +39,10 @@ def word_triples(word):
 
 
 def word_score(word, triple_scores):
-    result = 0
     triples = list(word_triples(word))
+    result = 0.0
     for triple in triples:
-        result += triple_scores.get(triple, 0)
+        result += triple_scores.get(triple, 0.0)
     return result / len(triples)
 
 

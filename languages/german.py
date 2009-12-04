@@ -1598,4 +1598,4 @@ abbli aals$ ^zweie ^urs ^urb ^ult ^staue ^splee ^schwoe ^schlaue ^reu ^pru
 ^abpl ^abgl zziert zwoelff zwitt zwietr zweigt zweifl zuern zueign ztem zopf
 zollh zollb zinss zickz zialpr zeut zellw zeitz zeitv zeipr zeiht zeib zank
 zahnl zaehm zack ythmi ypti ypte ydrau yd$ ybe xtest xierb xerz wusstl
-""".split()): TRIPLE_SCORES[triple] = (20000 - index) * 100 / 20000
+""".split()): TRIPLE_SCORES[triple] = (20000 - index) / 20000.0
