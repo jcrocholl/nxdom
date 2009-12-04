@@ -27,6 +27,8 @@ from utils.retry import retry, retry_objects
 NAMESERVERS = """
 208.67.222.222
 208.67.220.220
+8.8.8.8
+8.8.4.4
 156.154.70.1
 156.154.71.1
 4.2.2.1
