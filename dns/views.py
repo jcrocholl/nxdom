@@ -60,13 +60,20 @@ def cron(request):
 
 
 def test(request):
-    name = random_name()
+    start_name = random_name()
     query_ascending = Lookup.all(keys_only=True).order('__key__').filter(
-        '__key__ >=', db.Key.from_path('dns_lookup', name))
+        '__key__ >=', db.Key.from_path('dns_lookup', start_name))
     names_ascending = [key.name() for key in query_ascending.fetch(100)]
     query_descending = Lookup.all(keys_only=True).order('-__key__').filter(
         '__key__ <=', db.Key.from_path('dns_lookup', names_ascending[-1]))
     names_descending = [key.name() for key in query_descending.fetch(100)]
     names_descending.reverse()
+    ascending = [('black' if name in names_descending else 'red', name)
+                 for name in names_ascending]
+    descending = [('black' if name in names_ascending else 'red', name)
+                  for name in names_descending]
+    missing = sum([int(name not in names_ascending)
+                   for name in names_descending])
+    percent_missing = 100.0 * missing / len(names_descending)
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'dns/test.html', locals())

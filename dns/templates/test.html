@@ -13,18 +13,23 @@
 
 <p>
 The following two queries should return the same results.
-Reload this page for another random example.
+But {{ percent_missing }}% of results are missing from the
+descending __key__ index. Reload this page for another random example.
 </p>
 
 <p>
 Lookup.all(keys_only=True).order('__key__').filter('__key__ >=',
-db.Key.from_path('dns_lookup', '{{ name }}')).fetch(100)<br />
-{% for name in names_ascending %}{{ name}} {% endfor %}
+db.Key.from_path('dns_lookup', '{{ start_name }}')).fetch(100)<br />
+{% for color, name in ascending %}
+<span style="color:{{ color }}">{{ name }}</span>
+{% endfor %}
 </p>
 
 <p>
 Lookup.all(keys_only=True).order('-__key__').filter('__key__ <=',
 db.Key.from_path('dns_lookup', '{{ names_ascending|last }}')).fetch(100)<br />
-{% for name in names_descending %}{{ name}} {% endfor %}
+{% for color, name in descending %}
+<span style="color:{{ color }}">{{ name }}</span>
+{% endfor %}
 </p>
 {% endblock %}
