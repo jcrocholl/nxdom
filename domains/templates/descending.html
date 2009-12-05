@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block extra-head %}
+{% if refresh_seconds %}
+<meta http-equiv="refresh" content="{{ refresh_seconds }}" />
+{% endif %}
+{% endblock %}
+
+{% block title %}Descending Key Index Test{% endblock %}
+
+{% block content %}
+<h1>Descending Key Index Test</h1>
+
+<p>
+The following two queries should return the same results.
+But {{ percent_missing }}% of results are missing from the
+descending __key__ index. Reload this page for another random example.
+</p>
+
+<p>
+Domain.all(keys_only=True).order('__key__').filter('__key__ >=',
+db.Key.from_path('domains_domain', '{{ start_name }}')).fetch(100)<br />
+{% for color, name in ascending %}
+<span style="color:{{ color }}">{{ name }}</span>
+{% endfor %}
+</p>
+
+<p>
+Domain.all(keys_only=True).order('-__key__').filter('__key__ <=',
+db.Key.from_path('domains_domain', '{{ names_ascending|last }}')).fetch(100)<br />
+{% for color, name in descending %}
+<span style="color:{{ color }}">{{ name }}</span>
+{% endfor %}
+</p>
+{% endblock %}
