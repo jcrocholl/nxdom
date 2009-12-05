@@ -11,7 +11,10 @@ from ragendja.dbutils import get_object_or_404
 
 from domains.models import MAX_NAME_LENGTH, DOMAIN_CHARS, OBSOLETE_ATTRIBUTES
 from domains.models import Domain
-from domains.utils import random_domains
+from prefixes.selectors import Selector, random_name
+
+BATCH_SIZE_FETCH = 100
+BATCH_SIZE_UPDATE = 100
 
 
 def index(request):
@@ -34,14 +37,16 @@ def detail(request, key_name):
 def cron(request):
     updated_domains = []
     deleted_domains = []
-    query, update_description = random_domains(
-        length_choices=[MAX_NAME_LENGTH])
-    domains = query.fetch(300)
+    selector = Selector()
+    query = selector.select(Domain)
+    update_description = selector.description()
+    domains = query.fetch(BATCH_SIZE_FETCH)
     count_random = len(domains)
     count_obsolete = 0
     count_languages = 0
     for domain in domains:
-        if max(len(updated_domains), len(deleted_domains)) >= 100:
+        if (len(deleted_domains) >= BATCH_SIZE_UPDATE or
+            len(updated_domains) >= BATCH_SIZE_UPDATE):
             break
         if len(domain.key().name()) > MAX_NAME_LENGTH:
             deleted_domains.append(domain)
@@ -53,10 +58,12 @@ def cron(request):
                 updated = True
         if updated:
             count_obsolete += 1
-        if (not hasattr(domain, 'english') or domain.english is None or
-            not hasattr(domain, 'spanish') or domain.spanish is None or
-            not hasattr(domain, 'french') or domain.french is None or
-            not hasattr(domain, 'german') or domain.german is None):
+        if (not hasattr(domain, 'english') or not hasattr(domain, 'french') or
+            not hasattr(domain, 'spanish') or not hasattr(domain, 'german') or
+            min(domain.english, domain.spanish,
+                domain.french, domain.german) is None or
+            max(domain.english, domain.spanish,
+                domain.french, domain.german) >= 1):
             domain.update_languages()
             count_languages += 1
             updated = True
@@ -75,3 +82,23 @@ def cron(request):
     domain_list = updated_domains[:10] + [None] + deleted_domains[:10]
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'domains/index.html', locals())
+
+
+def descending(request):
+    start_name = random_name()
+    query_ascending = Domain.all(keys_only=True).order('__key__').filter(
+        '__key__ >=', db.Key.from_path('domains_domain', start_name))
+    names_ascending = [key.name() for key in query_ascending.fetch(100)]
+    query_descending = Domain.all(keys_only=True).order('-__key__').filter(
+        '__key__ <=', db.Key.from_path('domains_domain', names_ascending[-1]))
+    names_descending = [key.name() for key in query_descending.fetch(100)]
+    names_descending.reverse()
+    ascending = [('black' if name in names_descending else 'red', name)
+                 for name in names_ascending]
+    descending = [('black' if name in names_ascending else 'red', name)
+                  for name in names_descending]
+    missing = sum([int(name not in names_ascending)
+                   for name in names_descending])
+    percent_missing = 100 * missing / len(names_descending)
+    refresh_seconds = request.GET.get('refresh', 0)
+    return render_to_response(request, 'domains/descending.html', locals())
