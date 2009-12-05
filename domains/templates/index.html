@@ -48,10 +48,10 @@ Deleted {{ count_deleted }} domains.
 <td>{{ domain.length }}</td>
 <td>{{ domain.digits }}</td>
 <td>{{ domain.dashes }}</td>
-<td>{{ domain.english }}</td>
-<td>{{ domain.spanish }}</td>
-<td>{{ domain.french }}</td>
-<td>{{ domain.german }}</td>
+<td>{{ domain.english|floatformat:5 }}</td>
+<td>{{ domain.spanish|floatformat:5 }}</td>
+<td>{{ domain.french|floatformat:5 }}</td>
+<td>{{ domain.german|floatformat:5 }}</td>
 <td>{{ domain.timestamp|timesince }} ago</td>
 </tr>
 {% endif %}

@@ -43,6 +43,15 @@ class BaseModel(db.Expando):
         self.after_put()
 
 
+class UpgradeFloatProperty(db.FloatProperty):
+
+    def validate(self, value):
+        if isinstance(value, (int, long)):
+            return float(value)
+        else:
+            return value
+
+
 class Domain(BaseModel):
     """
     The datastore key name is the domain name, without top level.
@@ -56,10 +65,10 @@ class Domain(BaseModel):
     dashes = db.IntegerProperty()
 
     # Linguistic quality measurements.
-    english = db.IntegerProperty()
-    spanish = db.IntegerProperty()
-    french = db.IntegerProperty()
-    german = db.IntegerProperty()
+    english = UpgradeFloatProperty()
+    spanish = UpgradeFloatProperty()
+    french = UpgradeFloatProperty()
+    german = UpgradeFloatProperty()
 
     # Prefixes for equality filters.
     left1 = db.StringProperty()
