@@ -39,6 +39,9 @@ class Selector:
                  order_choices=['ascending', 'descending']):
         self.position = random.choice(position_choices)
         self.order = random.choice(order_choices)
+        if self.position == 'left' and self.order == 'descending':
+             # Don't use corrupt descending __key__ indexes.
+            self.order = 'ascending'
         self.name = random_name(position=self.position)
 
     def description(self):
@@ -52,7 +55,7 @@ class Selector:
             description.append('backwards')
         return ' '.join(description)
 
-    def select(self, model, keys_only=True):
+    def select(self, model, keys_only=False):
         query = model.all(keys_only=keys_only)
         if self.position == 'left':
             field = '__key__'
@@ -71,10 +74,18 @@ class Selector:
     def fetch_names(self, model, count):
         query = self.select(model, keys_only=True)
         names = [key.name() for key in query.fetch(count)]
-        if not names:
-            return []
+        if (self.position == 'left' and self.order == 'ascending' and
+            names and names[0].startswith('zzzzz')):
+            logging.warning('second attempt after getting zzzzz')
+            names = [key.name() for key in query.fetch(count)]
+        if (self.position == 'left' and self.order == 'ascending' and
+            names and names[0].startswith('zzzzz')):
+            logging.warning('third attempt after getting zzzzz')
+            names = [key.name() for key in query.fetch(count)]
         logging.info('%s %s %s: %s' % (
                 self.order, self.name, self.position, ' '.join(names)))
+        if not names:
+            return []
         if self.position == 'left':
             compare = cmp
         elif self.position == 'right':
