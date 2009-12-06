@@ -46,11 +46,11 @@ def main():
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api', auth_func, options.server)
     print 'PREFIX_SCORES = {}'
-    for length in range(3, 7):
+    for length in range(3, 11):
         most_popular(DotComPrefix.all().filter('length', length),
                      'LEFT%d' % length)
     print 'SUFFIX_SCORES = {}'
-    for length in range(3, 7):
+    for length in range(3, 11):
         most_popular(DotComSuffix.all().filter('length', length),
                      'RIGHT%d' % length)
 
