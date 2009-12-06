@@ -12,64 +12,50 @@ from domains.models import Domain
 from dns.models import Lookup, TOP_LEVEL_DOMAINS
 from prefixes.utils import increment_prefix
 
-MEMCACHE_TIMEOUT = 3600 # One hour.
+MEMCACHE_TIMEOUT = 24 * 60 * 60 # 24 hours.
 INITIAL = {
     'left': '', 'right': '',
-    'len': -10, 'digits': -100, 'dashes': -500,
-    'english': 2, 'spanish': 1, 'french': 1, 'german': 1,
-    'com': 300, 'net': 100, 'org': 100, 'biz': 50, 'info': 50,
+    'len': -1, 'digits': -2, 'dashes': -5,
+    'english': 3, 'spanish': 1, 'french': 1, 'german': 1,
+    'com': 10, 'net': 5, 'org': 5, 'biz': 3, 'info': 3,
     }
 
 
 class SearchForm(forms.Form):
-    left = forms.CharField(
-        max_length=40, required=False,
+    left = forms.CharField(max_length=40, required=False,
         widget=forms.TextInput(attrs={'class': 'text span-2 focus'}))
-    right = forms.CharField(
-        max_length=40, required=False,
+    right = forms.CharField(max_length=40, required=False,
         widget=forms.TextInput(attrs={'class': 'text span-2 right'}))
-    len = forms.FloatField(
-        required=False,
+    len = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    digits = forms.FloatField(
-        required=False,
+    digits = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    dashes = forms.FloatField(
-        required=False,
+    dashes = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    english = forms.FloatField(
-        required=False,
+    english = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    spanish = forms.FloatField(
-        required=False,
+    spanish = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    french = forms.FloatField(
-        required=False,
+    french = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    german = forms.FloatField(
-        required=False,
+    german = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    com = forms.FloatField(
-        required=False,
+    com = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    net = forms.FloatField(
-        required=False,
+    net = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    org = forms.FloatField(
-        required=False,
+    org = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    biz = forms.FloatField(
-        required=False,
+    biz = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
-    info = forms.FloatField(
-        required=False,
+    info = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
 
     def clean(self):
         data = self.cleaned_data
         for key in data:
             if data[key] is None:
-                data[key] = self.initial[key]
+                data[key] = 0.0
         return data
 
 
