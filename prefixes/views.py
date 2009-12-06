@@ -145,9 +145,10 @@ def iterate_dot_com_names(position, chars):
         greater = '>'
 
 
-def count_popular_prefixes(chars, position='left'):
+def count_popular_prefixes(chars, position, names):
     counters = {}
     for name in iterate_dot_com_names(position, chars):
+        names.append(name)
         for length in range(3, min(11, len(name) + 1)):
             if position == 'left':
                 part = name[:length]
@@ -173,11 +174,15 @@ def count_popular_prefixes(chars, position='left'):
 def cron_popular(request):
     prefix_rows = []
     suffix_rows = []
-    chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(2)])
-    prefixes = count_popular_prefixes(chars, 'left')
-    if prefixes:
-        prefix_rows.append(prefixes)
-    suffixes = count_popular_prefixes(chars, 'right')
-    if suffixes:
-        suffix_rows.append(suffixes)
+    names = []
+    while True:
+        chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(3)])
+        prefixes = count_popular_prefixes(chars, 'left', names)
+        if prefixes:
+            prefix_rows.append(prefixes)
+        suffixes = count_popular_prefixes(chars, 'right', names)
+        if suffixes:
+            suffix_rows.append(suffixes)
+        if len(names) >= 100:
+            break
     return render_to_response(request, 'prefixes/cron.html', locals())
