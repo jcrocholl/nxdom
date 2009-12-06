@@ -5,7 +5,7 @@ cron:
   timezone: America/Los_Angeles
 - description: count popular prefixes and suffixes
   url: /prefixes/cron/popular/
-  schedule: every friday 17:00
+  schedule: every 1 minutes
   timezone: America/Los_Angeles
 - description: update domain names
   url: /domains/cron/

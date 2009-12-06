@@ -123,32 +123,32 @@ def iterate_dot_com_names(position, chars):
         field = '__key__'
         start = db.Key.from_path('dns_lookup', chars)
         stop = db.Key.from_path('dns_lookup', increment_prefix(chars))
-    else:
+    elif position == 'right':
         field = 'backwards'
         start = chars[::-1]
         stop = increment_prefix(start)
     greater = '>='
     while True:
-        query = Lookup.all(keys_only=True).order(field)
+        query = Lookup.all().order(field)
         query.filter(field + ' ' + greater, start)
         query.filter(field + ' <', stop)
-        query.filter('com', True)
-        keys = query.fetch(1000)
-        for key in keys:
-            yield key.name()
-        if len(keys) < 1000:
+        lookups = query.fetch(1000)
+        for lookup in lookups:
+            if lookup.com:
+                yield lookup.key().name()
+        if len(lookups) < 1000:
             break
         if position == 'left':
-            start = keys[-1]
-        else:
-            start = keys[-1].name()[::-1]
+            start = lookups[-1].key()
+        elif position == 'right':
+            start = lookups[-1].key().name()[::-1]
         greater = '>'
 
 
 def count_popular_prefixes(chars, position='left'):
     counters = {}
     for name in iterate_dot_com_names(position, chars):
-        for length in range(3, min(7, len(name) + 1)):
+        for length in range(3, min(11, len(name) + 1)):
             if position == 'left':
                 part = name[:length]
             else:
@@ -173,16 +173,11 @@ def count_popular_prefixes(chars, position='left'):
 def cron_popular(request):
     prefix_rows = []
     suffix_rows = []
-    already = set()
-    for attempt in range(20):
-        chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(2)])
-        if chars in already:
-            continue
-        already.add(chars)
-        prefixes = count_popular_prefixes(chars, 'left')
-        if prefixes:
-            prefix_rows.append(prefixes)
-        suffixes = count_popular_prefixes(chars, 'right')
-        if suffixes:
-            suffix_rows.append(suffixes)
+    chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(2)])
+    prefixes = count_popular_prefixes(chars, 'left')
+    if prefixes:
+        prefix_rows.append(prefixes)
+    suffixes = count_popular_prefixes(chars, 'right')
+    if suffixes:
+        suffix_rows.append(suffixes)
     return render_to_response(request, 'prefixes/cron.html', locals())
