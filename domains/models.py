@@ -47,9 +47,10 @@ class UpgradeFloatProperty(db.FloatProperty):
 
     def validate(self, value):
         if isinstance(value, (int, long)):
-            return float(value)
-        else:
-            return value
+            value = float(value)
+        if value > 1.0:
+            value /= 100.0
+        return value
 
 
 class Domain(BaseModel):
@@ -156,9 +157,11 @@ class Domain(BaseModel):
             if value == 'None':
                 value = None
             elif value == 'True':
-                value = -1
+                value = True
             elif value == 'False':
-                value = 0
+                value = False
+            elif '.' in value:
+                value = float(value)
             else:
                 value = int(value)
             attributes[attr] = value
