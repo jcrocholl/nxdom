@@ -4,15 +4,15 @@
 <td>{{ domain.length }}</td>
 <td>{{ domain.digits }}</td>
 <td>{{ domain.dashes }}</td>
-<td>{{ domain.english }}</td>
-<td>{{ domain.spanish }}</td>
-<td>{{ domain.french }}</td>
-<td>{{ domain.german }}</td>
+<td>{{ domain.english|floatformat:2 }}</td>
+<td>{{ domain.spanish|floatformat:2 }}</td>
+<td>{{ domain.french|floatformat:2 }}</td>
+<td>{{ domain.german|floatformat:2 }}</td>
 <td class="{{ domain.com|yesno:"red,green,unknown" }}">{{ domain.com|yesno:"taken,free," }}</td>
 <td class="{{ domain.net|yesno:"red,green,unknown" }}">{{ domain.net|yesno:"taken,free," }}</td>
 <td class="{{ domain.org|yesno:"red,green,unknown" }}">{{ domain.org|yesno:"taken,free," }}</td>
 <td class="{{ domain.biz|yesno:"red,green,unknown" }}">{{ domain.biz|yesno:"taken,free," }}</td>
 <td class="{{ domain.info|yesno:"red,green,unknown" }}">{{ domain.info|yesno:"taken,free," }}</td>
-<td>{{ domain.score }}</td>
+<td>{{ domain.score|floatformat:1 }}</td>
 </tr>
 {% endfor %}
