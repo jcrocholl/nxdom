@@ -12,7 +12,9 @@
 <h1>DNS Lookups</h1>
 
 <p>
-Selector: {{ selector.description }}<br />
+Selector: {{ selector.description }}{% if attempts %}
+(following {% for attempt in attempts %} {{ attempt }}{% endfor %})
+{% endif %}<br />
 Found {{ domains_all|length }} domain names:
 {{ domains_all|first }} to {{ domains_all|last }}<br />
 Found {{ lookups_all|length }} DNS lookups:

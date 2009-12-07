@@ -59,16 +59,16 @@ class Selector:
         query = model.all(keys_only=keys_only)
         if self.position == 'left':
             field = '__key__'
-            compare = db.Key.from_path(model.kind(), self.name)
+            start = db.Key.from_path(model.kind(), self.name)
         elif self.position == 'right':
             field = 'backwards'
-            compare = self.name[::-1]
+            start = self.name[::-1]
         if self.order == 'ascending':
             query.order(field)
-            query.filter(field + ' >=', compare)
+            query.filter(field + ' >', start)
         elif self.order == 'descending':
             query.order('-' + field)
-            query.filter(field + ' <=', compare)
+            query.filter(field + ' <', start)
         return query
 
     def fetch_names(self, model, count):

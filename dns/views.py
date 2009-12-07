@@ -11,7 +11,7 @@ from domains.models import MAX_NAME_LENGTH, Domain
 from dns.models import Lookup
 from prefixes.selectors import Selector, random_name
 
-BATCH_SIZE = 200
+BATCH_SIZE = 100
 
 
 def assert_missing(missing):
@@ -27,17 +27,27 @@ def assert_obsolete(obsolete):
 
 
 def cron(request):
-    # Get random domain names and DNS loookups in the same range.
+    # Get random domain names and DNS lookups in the same range.
+    attempts = []
     selector = Selector()
-    domain_names = selector.fetch_names(Domain, BATCH_SIZE)
-    if not domain_names:
-        return render_to_response(request, 'dns/cron.html', locals())
-    lookup_names = selector.fetch_names(Lookup, BATCH_SIZE)
-    domains_all = domain_names[:]
-    lookups_all = lookup_names[:]
-    selector.truncate_range(domain_names, lookup_names)
-    domain_set = set(domain_names)
-    lookup_set = set(lookup_names)
+    while True:
+        domain_names = selector.fetch_names(Domain, BATCH_SIZE)
+        if not domain_names:
+            return render_to_response(request, 'dns/cron.html', locals())
+        lookup_names = selector.fetch_names(Lookup, BATCH_SIZE)
+        domains_all = domain_names[:]
+        lookups_all = lookup_names[:]
+        selector.truncate_range(domain_names, lookup_names)
+        domain_set = set(domain_names)
+        lookup_set = set(lookup_names)
+        if (len(attempts) >= 10 or domain_set != lookup_set or
+            len(domain_set) != BATCH_SIZE):
+            break
+        attempts.append(selector.name)
+        if selector.order == 'ascending':
+            selector.name = domain_names[-1]
+        elif selector.order == 'descending':
+            selector.name = domain_names[0]
     # Create missing lookups.
     timestamp = datetime.now() - timedelta(days=365)
     missing = [Lookup(key_name=name, backwards=name[::-1], timestamp=timestamp)
