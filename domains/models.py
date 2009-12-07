@@ -98,7 +98,7 @@ class Domain(BaseModel):
         Automatically update most properties.
         """
         self.update_counts()
-        self.update_languages()
+        self.update_language_scores()
         self.update_substrings()
         self.timestamp = datetime.now()
 
@@ -115,7 +115,20 @@ class Domain(BaseModel):
             elif char == '-':
                 self.dashes += 1
 
-    def update_languages(self):
+    def language_scores_need_update(self):
+        for lang in 'english spanish french german'.split():
+            if not hasattr(self, lang):
+                return True
+            score = getattr(self, lang)
+            if score is None or score >= 1:
+                return True
+            score_string = '%.8f' % score
+            if (score_string.endswith('000000') and not
+                score_string.startswith('0.00')):
+                return True
+        return False
+
+    def update_language_scores(self):
         self.english = word_score(self.key().name(), english.TRIPLE_SCORES)
         self.spanish = word_score(self.key().name(), spanish.TRIPLE_SCORES)
         self.german = word_score(self.key().name(), german.TRIPLE_SCORES)

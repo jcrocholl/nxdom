@@ -58,14 +58,8 @@ def cron(request):
                 updated = True
         if updated:
             count_obsolete += 1
-        if (not hasattr(domain, 'english') or not hasattr(domain, 'french') or
-            not hasattr(domain, 'spanish') or not hasattr(domain, 'german') or
-            min(domain.english, domain.spanish,
-                domain.french, domain.german) is None or
-            max(domain.english, domain.spanish,
-                domain.french, domain.german) >= 1 or
-            ('%.8f' % domain.english).endswith('000000')):
-            domain.update_languages()
+        if domain.language_scores_need_update():
+            domain.update_language_scores()
             count_languages += 1
             updated = True
         if (len(domain.key().name()) > 6 and

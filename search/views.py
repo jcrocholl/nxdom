@@ -169,12 +169,9 @@ def score_domains(cleaned_data, domain_list):
         score += domain.length * cleaned_data['len']
         score += domain.digits * cleaned_data['digits']
         score += domain.dashes * cleaned_data['dashes']
-        # Languages.
-        if (not hasattr(domain, 'english') or domain.english is None or
-            not hasattr(domain, 'spanish') or domain.spanish is None or
-            not hasattr(domain, 'french') or domain.french is None or
-            not hasattr(domain, 'german') or domain.german is None):
-            domain.update_languages()
+        # Language scores.
+        if domain.language_scores_need_update():
+            domain.update_language_scores()
         score += domain.english * cleaned_data['english']
         score += domain.spanish * cleaned_data['spanish']
         score += domain.french * cleaned_data['french']
