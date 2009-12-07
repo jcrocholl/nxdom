@@ -23,15 +23,27 @@ indexes:
   - name: length
   - name: timestamp
 
-- kind: dns_lookup
+- kind: prefixes_dotcomprefix
   properties:
-  - name: com
-  - name: backwards
+  - name: length
+  - name: count
+    direction: desc
+
+- kind: prefixes_dotcomsuffix
+  properties:
+  - name: length
+  - name: count
+    direction: desc
 
 - kind: dns_lookup
   properties:
   - name: __key__
     direction: desc
+
+- kind: dns_lookup
+  properties:
+  - name: com
+  - name: backwards
 
 - kind: domains_domain
   properties:
@@ -395,15 +407,3 @@ indexes:
 # manually, move them above the marker line.  The index.yaml file is
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
-
-- kind: prefixes_dotcomprefix
-  properties:
-  - name: length
-  - name: count
-    direction: desc
-
-- kind: prefixes_dotcomsuffix
-  properties:
-  - name: length
-  - name: count
-    direction: desc

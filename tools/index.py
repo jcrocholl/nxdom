@@ -5,7 +5,11 @@ django_admin_log:content_type,object_id,action_time
 django_admin_log:user,-action_time
 __Stat_Kind__:kind_name,-timestamp
 prefixes_prefix:length,timestamp
+prefixes_dotcomprefix:length,-count
+prefixes_dotcomsuffix:length,-count
+dns_lookup:-__key__
 dns_lookup:com,backwards
+domains_domain:-__key__
 """.split()
 
 for length in range(1, 7):
