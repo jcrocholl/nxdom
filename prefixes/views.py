@@ -183,6 +183,6 @@ def cron_popular(request):
         suffixes = count_popular_prefixes(chars, 'right', names)
         if suffixes:
             suffix_rows.append(suffixes)
-        if len(names) >= 100:
+        if len(names) >= 50:
             break
     return render_to_response(request, 'prefixes/cron.html', locals())
