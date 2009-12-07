@@ -13,7 +13,7 @@ domains_domain:-__key__
 """.split()
 
 for length in range(1, 7):
-    for property in 'length -english -spanish -french -german'.split():
+    for property in 'length -english'.split():
         INDEXES.append('domains_domain:left%d,%s' % (length, property))
         INDEXES.append('domains_domain:right%d,%s' % (length, property))
 
