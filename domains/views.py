@@ -63,7 +63,8 @@ def cron(request):
             min(domain.english, domain.spanish,
                 domain.french, domain.german) is None or
             max(domain.english, domain.spanish,
-                domain.french, domain.german) >= 1):
+                domain.french, domain.german) >= 1 or
+            ('%.8f' % domain.english).endswith('000000')):
             domain.update_languages()
             count_languages += 1
             updated = True
