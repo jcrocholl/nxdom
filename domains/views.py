@@ -80,7 +80,7 @@ def cron(request):
 
 
 def descending(request):
-    start_name = random_name()
+    start_name = request.GET.get('start', random_name())
     query_ascending = Domain.all(keys_only=True).order('__key__').filter(
         '__key__ >=', db.Key.from_path('domains_domain', start_name))
     names_ascending = [key.name() for key in query_ascending.fetch(100)]
