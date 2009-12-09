@@ -82,8 +82,6 @@ class Selector:
             names and names[0].startswith('zzzzz')):
             logging.warning('third attempt after getting zzzzz')
             names = [key.name() for key in query.fetch(count)]
-        logging.info('%s %s %s: %s' % (
-                self.order, self.name, self.position, ' '.join(names)))
         if not names:
             return []
         if self.position == 'left':
