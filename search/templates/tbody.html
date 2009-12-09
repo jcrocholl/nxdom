@@ -4,10 +4,10 @@
 <td>{{ domain.length }}</td>
 <td>{{ domain.digits }}</td>
 <td>{{ domain.dashes }}</td>
-<td>{{ domain.english|floatformat:2 }}</td>
-<td>{{ domain.spanish|floatformat:2 }}</td>
-<td>{{ domain.french|floatformat:2 }}</td>
-<td>{{ domain.german|floatformat:2 }}</td>
+<td>{{ domain.english|floatformat:3 }}</td>
+<td>{{ domain.spanish|floatformat:3 }}</td>
+<td>{{ domain.french|floatformat:3 }}</td>
+<td>{{ domain.german|floatformat:3 }}</td>
 <td class="{{ domain.com|yesno:"red,green,unknown" }}">{{ domain.com|yesno:"taken,free," }}</td>
 <td class="{{ domain.net|yesno:"red,green,unknown" }}">{{ domain.net|yesno:"taken,free," }}</td>
 <td class="{{ domain.org|yesno:"red,green,unknown" }}">{{ domain.org|yesno:"taken,free," }}</td>
