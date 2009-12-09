@@ -95,5 +95,6 @@ def descending(request):
     missing = sum([int(name not in names_ascending)
                    for name in names_descending])
     percent_missing = 100 * missing / len(names_descending)
+    next_random_name = random_name()
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'domains/descending.html', locals())

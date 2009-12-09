@@ -13,8 +13,13 @@
 
 <p>
 The following two queries should return the same results.
-But {{ percent_missing }}% of results are missing from the
-descending __key__ index. Reload this page for another random example.
+{% if percent_missing %}But {{ percent_missing }}% of entities are
+missing from the descending __key__ index.
+{% else %}This range seems to be okay.{% endif %}<br />
+<a href="/domains/descending/?start={{ ascending.0.1 }}">Reload this
+page</a> or try
+<a href="/domains/descending/?start={{ next_random_name }}">another
+random example</a>.
 </p>
 
 <p>
