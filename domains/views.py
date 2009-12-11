@@ -94,11 +94,11 @@ def color(result, trunc1, trunc2):
 
 
 def descending(request):
-    comparison = Comparison(path=request.META.get('PATH_INFO', ''),
+    start_name = request.GET.get('start', random_name())
+    comparison = Comparison(path='/domains/descending/?start=' + start_name,
                             message="error",
                             timestamp=datetime.now())
     comparison.put()
-    start_name = request.GET.get('start', random_name())
     # Build and execute query 1.
     gql1 = ' '.join(("SELECT __key__ FROM domains_domain",
                      "WHERE __key__ >= :1 ORDER BY __key__ ASC",
