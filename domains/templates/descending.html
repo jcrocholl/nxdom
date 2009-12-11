@@ -13,28 +13,21 @@
 
 <p>
 The following two queries should return the same results.
-{% if percent_missing %}But {{ percent_missing }}% of entities are
-missing from the descending __key__ index.
+{% if comparison.message %}But {{ comparison.message }}.
 {% else %}This range seems to be okay.{% endif %}<br />
-<a href="/domains/descending/?start={{ ascending.0.1 }}">Reload this
+<a href="/domains/descending/?start={{ start_name }}">Reload this
 page</a> or try
 <a href="/domains/descending/?start={{ next_random_name }}">another
 random example</a>.
 </p>
 
 <p>
-Domain.all(keys_only=True).order('__key__').filter('__key__ >=',
-db.Key.from_path('domains_domain', '{{ start_name }}')).fetch(100)<br />
-{% for color, name in ascending %}
-<span style="color:{{ color }}">{{ name }}</span>
-{% endfor %}
+{{ comparison.gql1 }}<br />
+{% for name in colored1 %}{{ name|safe }} {% endfor %}
 </p>
 
 <p>
-Domain.all(keys_only=True).order('-__key__').filter('__key__ <=',
-db.Key.from_path('domains_domain', '{{ names_ascending|last }}')).fetch(100)<br />
-{% for color, name in descending %}
-<span style="color:{{ color }}">{{ name }}</span>
-{% endfor %}
+{{ comparison.gql2 }}<br />
+{% for name in colored2 %}{{ name|safe }} {% endfor %}
 </p>
 {% endblock %}
