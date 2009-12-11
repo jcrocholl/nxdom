@@ -13,7 +13,7 @@ from ragendja.dbutils import get_object_or_404
 from domains.models import MAX_NAME_LENGTH, DOMAIN_CHARS, OBSOLETE_ATTRIBUTES
 from domains.models import Domain
 from prefixes.selectors import Selector, random_name
-from indexes.models import Comparison
+from tests.models import Comparison
 
 BATCH_SIZE_FETCH = 100
 BATCH_SIZE_UPDATE = 100
@@ -95,7 +95,8 @@ def color(result, trunc1, trunc2):
 
 def descending(request):
     start_name = request.GET.get('start', random_name())
-    comparison = Comparison(path='/domains/descending/?start=' + start_name,
+    comparison = Comparison(path='/domains/descending/',
+                            params='start=' + start_name,
                             message="error",
                             timestamp=datetime.now())
     comparison.put()

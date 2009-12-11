@@ -1,12 +1,12 @@
 application: scoretool
-version: 2009-11-29
+version: 2009-12-10
 runtime: python
 api_version: 1
 
 default_expiration: '3650d'
 
 handlers:
-- url: /remote_api
+- url: /remote_api_hidden
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
   secure: optional
   login: admin

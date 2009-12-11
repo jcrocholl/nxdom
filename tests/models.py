@@ -3,6 +3,7 @@ from google.appengine.ext import db
 
 class Comparison(db.Model):
     path = db.StringProperty()
+    params = db.StringProperty()
     message = db.StringProperty()
     timestamp = db.DateTimeProperty()
     # Query 1 and results.

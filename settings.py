@@ -112,6 +112,7 @@ INSTALLED_APPS = (
     'search',
     'dictionaries',
     'languages',
+    'tests',
 )
 
 # List apps which should be left out from app settings and urlsauto loading
@@ -127,7 +128,7 @@ DATABASE_OPTIONS = {
     # Override remoteapi handler's path (default: '/remote_api').
     # This is a good idea, so you make it not too easy for hackers. ;)
     # Don't forget to also update your app.yaml!
-    #'remote_url': '/remote-secret-url',
+    'remote_url': '/remote_api_hidden',
 
     # !!!Normally, the following settings should not be used!!!
 
