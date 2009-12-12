@@ -171,7 +171,7 @@ def main():
                       help="adjust batch size (default 100)")
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
-        'scoretool', '/remote_api', auth_func, options.server)
+        'scoretool', '/remote_api_hidden', auth_func, options.server)
     if not args:
         while True:
             print "Trying to fetch %d oldest DNS lookups" % options.batch
