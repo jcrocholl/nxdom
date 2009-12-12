@@ -19,3 +19,7 @@ cron:
   url: /domains/descending/
   schedule: every 5 minutes
   timezone: America/Los_Angeles
+- description: test Lookup model's descending __key__ index
+  url: /dns/descending/
+  schedule: every 5 minutes
+  timezone: America/Los_Angeles

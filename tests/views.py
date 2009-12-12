@@ -58,6 +58,7 @@ def statistics(path):
 def index(request):
     statistics_list = [
         statistics('/domains/descending/'),
+        statistics('/dns/descending/'),
         ]
     return render_to_response(request, 'tests/index.html', locals())
 

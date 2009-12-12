@@ -101,4 +101,4 @@ def descending(request):
     comparison.update_and_put()
     next_random_name = random_name()
     refresh_seconds = request.GET.get('refresh', 0)
-    return render_to_response(request, 'domains/descending.html', locals())
+    return render_to_response(request, 'tests/descending.html', locals())

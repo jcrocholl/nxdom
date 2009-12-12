@@ -15,9 +15,9 @@
 The following two queries should return the same results.
 {% if comparison.message %}But {{ comparison.message }}.
 {% else %}This range seems to be okay.{% endif %}<br />
-<a href="/domains/descending/?start={{ start_name }}">Reload this
+<a href="{{ comparison.path }}?start={{ start_name }}">Reload this
 page</a> or try
-<a href="/domains/descending/?start={{ next_random_name }}">another
+<a href="{{ comparison.path }}?start={{ next_random_name }}">another
 random example</a>.
 </p>
 

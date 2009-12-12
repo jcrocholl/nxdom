@@ -10,6 +10,7 @@ from domains.utils import random_prefix
 from domains.models import MAX_NAME_LENGTH, Domain
 from dns.models import Lookup
 from prefixes.selectors import Selector, random_name
+from tests.models import Comparison
 
 BATCH_SIZE = 100
 
@@ -69,21 +70,24 @@ def cron(request):
     return render_to_response(request, 'dns/cron.html', locals())
 
 
-def test(request):
-    start_name = random_name()
-    query_ascending = Lookup.all(keys_only=True).order('__key__').filter(
-        '__key__ >=', db.Key.from_path('dns_lookup', start_name))
-    names_ascending = [key.name() for key in query_ascending.fetch(100)]
-    query_descending = Lookup.all(keys_only=True).order('-__key__').filter(
-        '__key__ <=', db.Key.from_path('dns_lookup', names_ascending[-1]))
-    names_descending = [key.name() for key in query_descending.fetch(100)]
-    names_descending.reverse()
-    ascending = [('black' if name in names_descending else 'red', name)
-                 for name in names_ascending]
-    descending = [('black' if name in names_ascending else 'red', name)
-                  for name in names_descending]
-    missing = sum([int(name not in names_ascending)
-                   for name in names_descending])
-    percent_missing = 100 * missing / len(names_descending)
+def descending(request):
+    start_name = request.GET.get('start', random_name())
+    comparison = Comparison(
+        message='error', timestamp=datetime.now(),
+        path='/dns/descending/', params='start=' + start_name)
+    comparison.put()
+    comparison.fetch1(
+        "SELECT __key__ FROM dns_lookup " +
+        "WHERE __key__ >= :1 ORDER BY __key__ ASC",
+        db.Key.from_path('dns_lookup', start_name))
+    comparison.fetch2(
+        "SELECT __key__ FROM dns_lookup " +
+        "WHERE __key__ <= :1 ORDER BY __key__ DESC",
+        db.Key.from_path('dns_lookup', comparison.names1[-1]))
+    comparison.check_sort_order()
+    comparison.truncate_front_back()
+    comparison.count_missing_items()
+    comparison.update_and_put()
+    next_random_name = random_name()
     refresh_seconds = request.GET.get('refresh', 0)
-    return render_to_response(request, 'dns/test.html', locals())
+    return render_to_response(request, 'tests/descending.html', locals())
