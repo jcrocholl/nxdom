@@ -12,9 +12,9 @@
 <th>Tests</th>
 <th>Datastore</th>
 <th>Test</th>
-<th colspan="2">Missing items</th>
-<th colspan="2">Query 1 seconds</th>
-<th colspan="2">Query 2 seconds</th>
+<th colspan="2" style="text-align:center">Missing items</th>
+<th colspan="2" style="text-align:center">Query 1 time</th>
+<th colspan="2" style="text-align:center">Query 2 time</th>
 <th></th>
 </tr>
 <tr>
@@ -40,10 +40,10 @@
 <td>{{ stat.failure_percent|floatformat:1 }}%</td>
 <td>{{ stat.missing_max }}</td>
 <td>{{ stat.missing_median }}</td>
-<td>{{ stat.seconds1_max|floatformat:3 }}</td>
-<td>{{ stat.seconds1_median|floatformat:3 }}</td>
-<td>{{ stat.seconds2_max|floatformat:3 }}</td>
-<td>{{ stat.seconds2_median|floatformat:3 }}</td>
+<td>{{ stat.seconds1_max|floatformat:3 }} s</td>
+<td>{{ stat.seconds1_median|floatformat:3 }} s</td>
+<td>{{ stat.seconds2_max|floatformat:3 }} s</td>
+<td>{{ stat.seconds2_median|floatformat:3 }} s</td>
 <td>{{ stat.message }}</td>
 </tr>
 {% endfor %}
