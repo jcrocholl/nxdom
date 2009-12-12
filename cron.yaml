@@ -17,5 +17,5 @@ cron:
   timezone: America/Los_Angeles
 - description: test Domain model's descending __key__ index
   url: /domains/descending/
-  schedule: every 1 minutes
+  schedule: every 5 minutes
   timezone: America/Los_Angeles
