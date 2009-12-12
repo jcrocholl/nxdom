@@ -83,24 +83,22 @@ def cron(request):
 
 def descending(request):
     start_name = request.GET.get('start', random_name())
-    comparison = Comparison(message="error",
-                            path='/domains/descending/',
-                            params='start=' + start_name,
-                            timestamp=datetime.now())
+    comparison = Comparison(
+        message='error', timestamp=datetime.now(),
+        path='/domains/descending/', params='start=' + start_name)
     comparison.put()
-    comparison.fetch1("SELECT __key__ FROM domains_domain " +
-                      "WHERE __key__ >= :1 ORDER BY __key__ ASC",
-                      db.Key.from_path('domains_domain', start_name))
-    comparison.fetch2("SELECT __key__ FROM domains_domain " +
-                      "WHERE __key__ <= :1 ORDER BY __key__ DESC",
-                      db.Key.from_path('domains_domain', comparison.names1[-1]))
-    messages = []
-    comparison.check_sort_order(messages)
+    comparison.fetch1(
+        "SELECT __key__ FROM domains_domain " +
+        "WHERE __key__ >= :1 ORDER BY __key__ ASC",
+        db.Key.from_path('domains_domain', start_name))
+    comparison.fetch2(
+        "SELECT __key__ FROM domains_domain " +
+        "WHERE __key__ <= :1 ORDER BY __key__ DESC",
+        db.Key.from_path('domains_domain', comparison.names1[-1]))
+    comparison.check_sort_order()
     comparison.truncate_front_back()
-    comparison.count_missing_items(messages)
-    comparison.message = ' and '.join(messages)
-    comparison.put()
-    # User-friendly HTML output.
+    comparison.count_missing_items()
+    comparison.update_and_put()
     next_random_name = random_name()
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'domains/descending.html', locals())

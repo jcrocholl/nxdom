@@ -1,4 +1,5 @@
 import time
+from datetime import datetime
 
 from google.appengine.ext import db
 from google.appengine.ext.db import GqlQuery
@@ -43,6 +44,7 @@ class Comparison(db.Model):
     missing2 = db.IntegerProperty()
 
     def fetch1(self, gql, *args, **kwargs):
+        self.messages = []
         limit = kwargs.get('limit', 100)
         start_time = time.time()
         self.keys1 = GqlQuery(gql, *args).fetch(limit)
@@ -60,13 +62,13 @@ class Comparison(db.Model):
         self.gql2 = '%s LIMIT %d' % (replace_args(gql, *args), limit)
         self.result2 = ' '.join(self.names2)
 
-    def check_sort_order(self, messages):
+    def check_sort_order(self):
         sorted1 = sorted(self.names1, reverse='DESC' in self.gql1)
         if sorted1 != self.names1:
-            messages.append("query 1 returned incorrect sort order")
+            self.messages.append("query 1 returned incorrect sort order")
         sorted2 = sorted(self.names2, reverse='DESC' in self.gql2)
         if sorted2 != self.names2:
-            messages.append("query 2 returned incorrect sort order")
+            self.messages.append("query 2 returned incorrect sort order")
 
     def truncate_front_back(self):
         trunc1 = self.names1[:]
@@ -84,10 +86,15 @@ class Comparison(db.Model):
         self.colored1 = color_names(self.names1, self.set1, self.set2)
         self.colored2 = color_names(self.names2, self.set2, self.set1)
 
-    def count_missing_items(self, messages):
+    def count_missing_items(self):
         self.missing1 = sum([int(name not in self.set1) for name in self.set2])
         self.missing2 = sum([int(name not in self.set2) for name in self.set1])
         if self.missing1:
-            messages.append("query 1 missed %d items" % self.missing1)
+            self.messages.append("query 1 missed %d items" % self.missing1)
         if self.missing2:
-            messages.append("query 2 missed %d items" % self.missing2)
+            self.messages.append("query 2 missed %d items" % self.missing2)
+
+    def update_and_put(self):
+        self.message = ' and '.join(self.messages)
+        self.timestamp = datetime.now()
+        self.put()
