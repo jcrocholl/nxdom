@@ -8,43 +8,46 @@
 <table>
 <tr>
 <th></th>
-<th>Tests</th>
-<th>Tests</th>
+<th>Tests in</th>
 <th>Datastore</th>
 <th>Test</th>
-<th colspan="2" style="text-align:center">Missing items</th>
-<th colspan="2" style="text-align:center">Query 1 time</th>
-<th colspan="2" style="text-align:center">Query 2 time</th>
+<th colspan="3" style="text-align:center">Missing items</th>
+<th colspan="3" style="text-align:center">First query time</th>
+<th colspan="3" style="text-align:center">Second query time</th>
 <th></th>
 </tr>
 <tr>
-<th>Path</th>
-<th>logged</th>
-<th>per hour</th>
+<th>Test path</th>
+<th>24 hours</th>
 <th>errors</th>
 <th>failures</th>
-<th>max</th>
+<th>min</th>
 <th>median</th>
 <th>max</th>
+<th>min</th>
 <th>median</th>
 <th>max</th>
+<th>min</th>
 <th>median</th>
+<th>max</th>
 <th>Last error message</th>
 </tr>
 {% for stat in statistics_list %}
 <tr class="{% cycle 'row1' 'row2' %}">
 <td><a href="/tests{{ stat.path }}">{{ stat.path }}</a></td>
 <td>{{ stat.total }}</td>
-<td>{{ stat.per_hour }}</td>
 <td>{{ stat.error_percent|floatformat:1 }}%</td>
 <td>{{ stat.failure_percent|floatformat:1 }}%</td>
-<td>{{ stat.missing_max }}</td>
+<td>{{ stat.missing_min }}</td>
 <td>{{ stat.missing_median }}</td>
-<td>{{ stat.seconds1_max|floatformat:3 }} s</td>
+<td>{{ stat.missing_max }}</td>
+<td>{{ stat.seconds1_min|floatformat:3 }} s</td>
 <td>{{ stat.seconds1_median|floatformat:3 }} s</td>
-<td>{{ stat.seconds2_max|floatformat:3 }} s</td>
+<td>{{ stat.seconds1_max|floatformat:3 }} s</td>
+<td>{{ stat.seconds2_min|floatformat:3 }} s</td>
 <td>{{ stat.seconds2_median|floatformat:3 }} s</td>
-<td>{{ stat.message }}</td>
+<td>{{ stat.seconds2_max|floatformat:3 }} s</td>
+<td>{{ stat.message|capfirst }}.</td>
 </tr>
 {% endfor %}
 </table>

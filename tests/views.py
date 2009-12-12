@@ -11,10 +11,10 @@ def statistics(path):
     missing = []
     seconds1 = []
     seconds2 = []
-    total = per_hour = errors = failures = 0
-    one_hour_ago = datetime.now() - timedelta(hours=1)
+    total = errors = failures = 0
+    one_day_ago = datetime.now() - timedelta(hours=24)
     query = Comparison.all().filter('path', path).order('-timestamp')
-    for comparison in query.fetch(100):
+    for comparison in query.fetch(400):
         if not comparison.path or not comparison.path.startswith(path):
             continue
         if comparison.message and 'message' not in results:
@@ -24,8 +24,6 @@ def statistics(path):
             errors += 1
         elif comparison.message:
             failures += 1
-        if comparison.timestamp > one_hour_ago:
-            per_hour += 1
         if comparison.missing1:
             missing.append(comparison.missing1)
         if comparison.missing2:
@@ -35,7 +33,6 @@ def statistics(path):
         if comparison.seconds2:
             seconds2.append(comparison.seconds2)
     results['total'] = total
-    results['per_hour'] = per_hour
     if not total:
         results['error_percent'] = 0.0
         results['failure_percent'] = 0.0
@@ -44,14 +41,17 @@ def statistics(path):
     results['failure_percent'] = 100.0 * failures / total
     missing.sort()
     if missing:
-        results['missing_max'] = max(missing)
+        results['missing_min'] = min(missing)
         results['missing_median'] = missing[len(missing) / 2]
+        results['missing_max'] = max(missing)
     seconds1.sort()
     seconds2.sort()
-    results['seconds1_max'] = max(seconds1)
-    results['seconds2_max'] = max(seconds2)
+    results['seconds1_min'] = min(seconds1)
+    results['seconds2_min'] = min(seconds2)
     results['seconds1_median'] = seconds1[len(seconds1) / 2]
     results['seconds2_median'] = seconds2[len(seconds2) / 2]
+    results['seconds1_max'] = max(seconds1)
+    results['seconds2_max'] = max(seconds2)
     return results
 
 

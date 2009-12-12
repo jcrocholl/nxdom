@@ -65,10 +65,12 @@ class Comparison(db.Model):
     def check_sort_order(self):
         sorted1 = sorted(self.names1, reverse='DESC' in self.gql1)
         if sorted1 != self.names1:
-            self.messages.append("query 1 returned incorrect sort order")
+            self.messages.append(
+                "the first query returned incorrect sort order")
         sorted2 = sorted(self.names2, reverse='DESC' in self.gql2)
         if sorted2 != self.names2:
-            self.messages.append("query 2 returned incorrect sort order")
+            self.messages.append(
+                "the second query returned incorrect sort order")
 
     def truncate_front_back(self):
         trunc1 = self.names1[:]
@@ -90,9 +92,11 @@ class Comparison(db.Model):
         self.missing1 = sum([int(name not in self.set1) for name in self.set2])
         self.missing2 = sum([int(name not in self.set2) for name in self.set1])
         if self.missing1:
-            self.messages.append("query 1 missed %d items" % self.missing1)
+            self.messages.append(
+                "the first query missed %d items" % self.missing1)
         if self.missing2:
-            self.messages.append("query 2 missed %d items" % self.missing2)
+            self.messages.append(
+                "the second query missed %d items" % self.missing2)
 
     def update_and_put(self):
         self.message = ' and '.join(self.messages)
