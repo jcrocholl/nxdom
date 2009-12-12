@@ -81,80 +81,26 @@ def cron(request):
     return render_to_response(request, 'domains/index.html', locals())
 
 
-def color(result, trunc1, trunc2):
-    colored = []
-    for name in result:
-        if name not in trunc1:
-            colored.append('<span style="color:gray">%s</span>' % name)
-        elif name not in trunc2:
-            colored.append('<span style="color:red">%s</span>' % name)
-        else:
-            colored.append(name)
-    return colored
-
-
 def descending(request):
     start_name = request.GET.get('start', random_name())
-    comparison = Comparison(path='/domains/descending/',
+    comparison = Comparison(message="error",
+                            path='/domains/descending/',
                             params='start=' + start_name,
-                            message="error",
                             timestamp=datetime.now())
     comparison.put()
-    # Build and execute query 1.
-    gql1 = ' '.join(("SELECT __key__ FROM domains_domain",
-                     "WHERE __key__ >= :1 ORDER BY __key__ ASC",
-                     "LIMIT 100"))
-    key1 = db.Key.from_path('domains_domain', start_name)
-    comparison.gql1 = gql1.replace(':1', repr(key1))
-    start_time = time.time()
-    keys1 = GqlQuery(gql1, key1).fetch(100)
-    comparison.seconds1 = time.time() - start_time
-    result1 = [key.name() for key in keys1]
-    comparison.result1 = ' '.join(result1)
-    # Build and execute query 2.
-    gql2 = ' '.join(("SELECT __key__ FROM domains_domain",
-                     "WHERE __key__ <= :1 ORDER BY __key__ DESC",
-                     "LIMIT 100"))
-    key2 = db.Key.from_path('domains_domain', result1[-1])
-    comparison.gql2 = gql2.replace(':1', repr(key2))
-    start_time = time.time()
-    keys1 = GqlQuery(gql2, key2).fetch(100)
-    comparison.seconds2 = time.time() - start_time
-    result2 = [key.name() for key in keys1]
-    comparison.result2 = ' '.join(result2)
-    # Check sort order.
-    message = []
-    if sorted(result1) != result1:
-        message.append("query 1 returned incorrect sort order")
-    if sorted(result2, reverse=True) != result2:
-        message.append("query 2 returned incorrect sort order")
-    # Truncate result lists if necessary.
-    trunc1 = result1[:]
-    trunc2 = result2[:]
-    if trunc1 and trunc2 and trunc2[-1] < trunc1[0]:
-        while trunc1 and trunc2 and trunc2[-1] < trunc1[0]:
-            del trunc2[-1]
-    elif trunc1 and trunc2 and trunc1[0] < trunc2[-1]:
-        while trunc1 and trunc2 and trunc1[0] < trunc2[-1]:
-            del trunc1[0]
-    comparison.trunc1 = ' '.join(trunc1)
-    comparison.trunc2 = ' '.join(trunc2)
-    # Count missing entries.
-    set1 = set(trunc1)
-    set2 = set(trunc2)
-    comparison.missing1 = sum([int(name not in set1) for name in trunc2])
-    comparison.missing2 = sum([int(name not in set2) for name in trunc1])
-    # Human-readable error message.
-    if comparison.missing1:
-        message.append("query 1 missed %d items" % comparison.missing1)
-    if comparison.missing2:
-        message.append("query 2 missed %d items" % comparison.missing2)
-    # Save the results.
-    comparison.message = ' and '.join(message)
+    comparison.fetch1("SELECT __key__ FROM domains_domain " +
+                      "WHERE __key__ >= :1 ORDER BY __key__ ASC",
+                      db.Key.from_path('domains_domain', start_name))
+    comparison.fetch2("SELECT __key__ FROM domains_domain " +
+                      "WHERE __key__ <= :1 ORDER BY __key__ DESC",
+                      db.Key.from_path('domains_domain', comparison.names1[-1]))
+    messages = []
+    comparison.check_sort_order(messages)
+    comparison.truncate_front_back()
+    comparison.count_missing_items(messages)
+    comparison.message = ' and '.join(messages)
     comparison.put()
     # User-friendly HTML output.
     next_random_name = random_name()
     refresh_seconds = request.GET.get('refresh', 0)
-    colored1 = color(result1, trunc1, trunc2)
-    colored2 = color(result2, trunc2, trunc1)
     return render_to_response(request, 'domains/descending.html', locals())
