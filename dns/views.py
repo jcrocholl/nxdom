@@ -12,7 +12,7 @@ from dns.models import Lookup
 from prefixes.selectors import Selector, random_name
 from tests.models import Comparison
 
-BATCH_SIZE = 100
+BATCH_SIZE = 200
 
 
 def assert_missing(missing):
