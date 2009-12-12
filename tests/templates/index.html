@@ -15,6 +15,7 @@
 <th colspan="2">Missing items</th>
 <th colspan="2">Query 1 seconds</th>
 <th colspan="2">Query 2 seconds</th>
+<th></th>
 </tr>
 <tr>
 <th>Path</th>
@@ -28,6 +29,7 @@
 <th>median</th>
 <th>max</th>
 <th>median</th>
+<th>Last error message</th>
 </tr>
 {% for stat in statistics_list %}
 <tr class="{% cycle 'row1' 'row2' %}">
@@ -42,6 +44,7 @@
 <td>{{ stat.seconds1_median|floatformat:3 }}</td>
 <td>{{ stat.seconds2_max|floatformat:3 }}</td>
 <td>{{ stat.seconds2_median|floatformat:3 }}</td>
+<td>{{ stat.message }}</td>
 </tr>
 {% endfor %}
 </table>
