@@ -48,8 +48,6 @@ class UpgradeFloatProperty(db.FloatProperty):
     def validate(self, value):
         if isinstance(value, (int, long)):
             value = float(value)
-        if value > 1.0:
-            value /= 100.0
         return value
 
 
@@ -121,10 +119,6 @@ class Domain(BaseModel):
                 return True
             score = getattr(self, lang)
             if score is None or score >= 1:
-                return True
-            score_string = '%.8f' % score
-            if (score_string.endswith('000000') and not
-                score_string.startswith('0.00')):
                 return True
         return False
 
