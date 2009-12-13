@@ -12,8 +12,8 @@ def statistics(path):
     seconds1 = []
     seconds2 = []
     total = errors = failures = 0
-    one_day_ago = datetime.now() - timedelta(hours=24)
-    query = Comparison.all().filter('path', path).order('-timestamp')
+    query = Comparison.all().filter('path', path)
+    query.filter('timestamp >', datetime.now() - timedelta(hours=24))
     for comparison in query.fetch(400):
         if not comparison.path or not comparison.path.startswith(path):
             continue
