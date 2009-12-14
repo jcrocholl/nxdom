@@ -7,15 +7,17 @@ __Stat_Kind__:kind_name,-timestamp
 prefixes_prefix:length,timestamp
 prefixes_dotcomprefix:length,-count
 prefixes_dotcomsuffix:length,-count
+tests_comparison:path,-timestamp
 dns_lookup:-__key__
 dns_lookup:com,backwards
 domains_domain:-__key__
+domains_domain:length,-score
 """.split()
 
 for length in range(1, 7):
-    for property in 'length -english'.split():
-        INDEXES.append('domains_domain:left%d,%s' % (length, property))
-        INDEXES.append('domains_domain:right%d,%s' % (length, property))
+    INDEXES.append('domains_domain:left%d,length,-score' % length)
+    INDEXES.append('domains_domain:right%d,length,-score' % length)
+
 
 print 'indexes:'
 for index in INDEXES:
