@@ -35,7 +35,10 @@ function ajax_search(form_data) {
   if ($.ajax_search.xhr) $.ajax_search.xhr.abort();
   $.ajax_search.xhr = $.get("/search/ajax/", form_data, function(data) {
     $.ajax_search.xhr = false;
-    $('tbody#results').html(data);
+    $("tbody#results").html(data);
+    $("tbody tr").hover(
+      function() { $(this).addClass("hover"); },
+      function() { $(this).removeClass("hover"); });
   });
 }
 
