@@ -80,6 +80,16 @@ def cron(request):
     return render_to_response(request, 'domains/index.html', locals())
 
 
+def longest(request):
+    query = Domain.all(keys_only=True).order('-length')
+    query.filter('length > ', MAX_NAME_LENGTH)
+    names = [key.name() for key in query.fetch(100)]
+    db.delete([db.Key.from_path('domains_domain', name) for name in names])
+    db.delete([db.Key.from_path('dns_lookup', name) for name in names])
+    refresh_seconds = request.GET.get('refresh', 0)
+    return render_to_response(request, 'domains/longest.html', locals())
+
+
 def descending(request):
     start_name = request.GET.get('start', random_name())
     comparison = Comparison(

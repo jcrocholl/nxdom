@@ -11,6 +11,10 @@ cron:
   url: /domains/cron/
   schedule: every 1 minutes
   timezone: America/Los_Angeles
+- description: delete domain names longer than 12
+  url: /domains/longest/
+  schedule: every 1 minutes
+  timezone: America/Los_Angeles
 - description: update DNS lookups
   url: /dns/cron/
   schedule: every 1 minutes
