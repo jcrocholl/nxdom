@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Longest Domain Names{% endblock %}
+
+{% block content %}
+<h1>Longest Domain Names</h1>
+
+<p>
+Deleted {{ names|length }} domains:<br />
+{% for name in names %}{{ name }} {% endfor %}
+</p>
+{% endblock %}
