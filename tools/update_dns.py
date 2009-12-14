@@ -94,8 +94,8 @@ class NameServer(ADNS.QueryEngine):
             counters[ip] = counters.get(ip, 0) + 1
         pairs = [(counters[ip], ip) for ip in counters]
         pairs.sort(reverse=True)
-        threshold = max(5, self.queries - len(self.results))
-        if pairs[0][0] < threshold:
+        threshold = max(7, self.queries - len(self.results))
+        if pairs[0][0] <= threshold:
             print self.queries, "queries,", len(self.results), "results"
             return # No DNS hijacker found.
         hijacker = pairs[0][1]
@@ -207,6 +207,14 @@ def main():
             names = []
             for line in open(filename):
                 name = line.strip()
+                if ' ' in name and name[0] in '0123456789':
+                    name = name.split()[-1]
+                if '.' in name:
+                    name = name.split('.')[0]
+                if names and names[-1] == name:
+                    continue
+                if len(name) > MAX_NAME_LENGTH:
+                    continue
                 names.append(name)
             print "Loaded %d names from %s" % (len(names), filename)
             while names:
