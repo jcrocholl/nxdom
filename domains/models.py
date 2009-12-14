@@ -5,7 +5,7 @@ from google.appengine.ext import db
 from languages import english, spanish, german, french
 from languages.utils import word_score
 
-MAX_NAME_LENGTH = 16
+MAX_NAME_LENGTH = 12
 DOMAIN_CHARS = 'abcdefghijklmnopqrstuvwxyz-0123456789'
 OBSOLETE_ATTRIBUTES = """
 scowl com net org dns_com dns_net dns_org dns_timestamp
