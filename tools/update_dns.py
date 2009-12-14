@@ -94,7 +94,8 @@ class NameServer(ADNS.QueryEngine):
             counters[ip] = counters.get(ip, 0) + 1
         pairs = [(counters[ip], ip) for ip in counters]
         pairs.sort(reverse=True)
-        if pairs[0][0] < self.queries - len(self.results):
+        threshold = max(5, self.queries - len(self.results))
+        if pairs[0][0] < threshold:
             print self.queries, "queries,", len(self.results), "results"
             return # No DNS hijacker found.
         hijacker = pairs[0][1]
@@ -156,6 +157,32 @@ def update_dns(lookups, subdomain=None):
         lookup.timestamp = datetime.now()
 
 
+def update_oldest_lookups(batch=100):
+    print "Trying to fetch %d oldest DNS lookups" % batch
+    query = Lookup.all().order('timestamp')
+    lookups = retry(query.fetch, batch)
+    update_dns(lookups, 'www')
+    update_dns(lookups)
+    retry_objects(db.put, lookups)
+
+
+def upload_names(names):
+    domains = []
+    lookups = []
+    timestamp = datetime.now()
+    for name in names:
+        domain = Domain(key_name=name)
+        domain.before_put()
+        domains.append(domain)
+        lookup = Lookup(key_name=name, backwards=name[::-1],
+                        timestamp=timestamp)
+        lookups.append(lookup)
+    update_dns(lookups, 'www')
+    update_dns(lookups)
+    retry_objects(db.put, domains)
+    retry_objects(db.put, lookups)
+
+
 def main():
     for line in file('/etc/resolv.conf'):
         if line.startswith('nameserver'):
@@ -174,17 +201,17 @@ def main():
         'scoretool', '/remote_api_hidden', auth_func, options.server)
     if not args:
         while True:
-            print "Trying to fetch %d oldest DNS lookups" % options.batch
-            query = Lookup.all().order('timestamp')
-            lookups = retry(query.fetch, options.batch)
-            update_dns(lookups, 'www')
-            update_dns(lookups)
-            retry_objects(db.put, lookups)
+            update_oldest_lookups(options.batch)
     else:
         for filename in args:
-            names = [line.strip() for name in open(filename)]
+            names = []
+            for line in open(filename):
+                name = line.strip()
+                names.append(name)
             print "Loaded %d names from %s" % (len(names), filename)
-            lookup_names(names)
+            while names:
+                upload_names(names[:options.batch])
+                names = names[options.batch:]
 
 
 if __name__ == '__main__':
