@@ -13,6 +13,7 @@ scowl com net org dns_com dns_net dns_org dns_timestamp
 CACHE_ATTRIBUTES = """
 digits dashes
 english spanish french german
+prefix suffix score
 com net org biz info
 """.split()
 
@@ -43,20 +44,15 @@ class BaseModel(db.Expando):
         self.after_put()
 
 
-class UpgradeFloatProperty(db.FloatProperty):
-
-    def validate(self, value):
-        if isinstance(value, (int, long)):
-            value = float(value)
-        return value
-
-
 class Domain(BaseModel):
     """
     The datastore key name is the domain name, without top level.
     """
-    backwards = db.StringProperty() # For suffix matching, name[::-1].
-    timestamp = db.DateTimeProperty() # Automatically set in before_put.
+    # For suffix matching, name[::-1].
+    backwards = db.StringProperty()
+
+    # Last update, automatically set in before_put.
+    timestamp = db.DateTimeProperty()
 
     # Character counts.
     length = db.IntegerProperty()
@@ -64,10 +60,17 @@ class Domain(BaseModel):
     dashes = db.IntegerProperty()
 
     # Linguistic quality measurements.
-    english = UpgradeFloatProperty()
-    spanish = UpgradeFloatProperty()
-    french = UpgradeFloatProperty()
-    german = UpgradeFloatProperty()
+    english = db.FloatProperty()
+    spanish = db.FloatProperty()
+    french = db.FloatProperty()
+    german = db.FloatProperty()
+
+    # Popular prefixes and suffixes.
+    prefix = db.FloatProperty()
+    suffix = db.FloatProperty()
+
+    # The highest score from languages and popular prefix / suffix.
+    score = db.FloatProperty()
 
     # Prefixes for equality filters.
     left1 = db.StringProperty()
@@ -118,7 +121,7 @@ class Domain(BaseModel):
             if not hasattr(self, lang):
                 return True
             score = getattr(self, lang)
-            if score is None or score >= 1:
+            if score is None or score < 0.0 or score >= 1.0:
                 return True
         return False
 
