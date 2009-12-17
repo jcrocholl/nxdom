@@ -16,7 +16,8 @@ from prefixes.selectors import random_name
 from tests.models import Comparison
 
 BATCH_SIZE_FETCH = 100
-BATCH_SIZE_UPDATE = 100
+BATCH_SIZE_UPDATE = 50
+BATCH_SIZE_DELETE = 20
 
 
 def index(request):
@@ -46,8 +47,8 @@ def cron(request):
     count_obsolete = 0
     count_languages = 0
     for domain in domains:
-        if (len(deleted_domains) >= BATCH_SIZE_UPDATE or
-            len(updated_domains) >= BATCH_SIZE_UPDATE):
+        if (len(updated_domains) >= BATCH_SIZE_UPDATE or
+            len(deleted_domains) >= BATCH_SIZE_DELETE):
             break
         if len(domain.key().name()) > MAX_NAME_LENGTH:
             deleted_domains.append(domain)
