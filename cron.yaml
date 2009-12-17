@@ -5,14 +5,10 @@ cron:
   timezone: America/Los_Angeles
 - description: count popular prefixes and suffixes
   url: /prefixes/cron/popular/
-  schedule: every 1 minutes
+  schedule: every 10 minutes
   timezone: America/Los_Angeles
 - description: update domain names
   url: /domains/cron/
-  schedule: every 1 minutes
-  timezone: America/Los_Angeles
-- description: delete domain names longer than 12
-  url: /domains/longest/
   schedule: every 1 minutes
   timezone: America/Los_Angeles
 - description: update DNS lookups
@@ -21,9 +17,9 @@ cron:
   timezone: America/Los_Angeles
 - description: test Domain model's descending __key__ index
   url: /domains/descending/
-  schedule: every 5 minutes
+  schedule: every 10 minutes
   timezone: America/Los_Angeles
 - description: test Lookup model's descending __key__ index
   url: /dns/descending/
-  schedule: every 5 minutes
+  schedule: every 10 minutes
   timezone: America/Los_Angeles
