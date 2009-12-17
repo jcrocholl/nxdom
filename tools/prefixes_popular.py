@@ -44,7 +44,7 @@ def main():
                       help="connect to a different server")
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
-        'scoretool', '/remote_api', auth_func, options.server)
+        'scoretool', '/remote_api_hidden', auth_func, options.server)
     print 'PREFIX_SCORES = {}'
     for length in range(3, 11):
         most_popular(DotComPrefix.all().filter('length', length),
