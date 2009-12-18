@@ -154,16 +154,21 @@ class Domain(BaseModel):
     def to_cache(self):
         values = []
         for attr in CACHE_ATTRIBUTES:
-            if hasattr(self, attr):
-                values.append(str(getattr(self, attr)))
-            else:
-                values.append('None')
+            if not hasattr(self, attr):
+                continue
+            value = getattr(self, attr)
+            if isinstance(value, float):
+                value = '%.6f' % value
+            values.append('%s=%s' % (attr, value))
         return ' '.join(values)
 
     @classmethod
     def from_cache(cls, key, values):
         attributes = {}
-        for attr, value in zip(CACHE_ATTRIBUTES, values.split()):
+        for pair in values.split():
+            if '=' not in pair:
+                raise ValueError(pair)
+            attr, value = pair.split('=', 1)
             if value == 'None':
                 value = None
             elif value == 'True':

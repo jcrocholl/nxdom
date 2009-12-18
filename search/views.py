@@ -98,8 +98,12 @@ def get_domains_with_cache(names):
     if from_cache:
         logging.debug('get_domains_with_cache: memcache hit %d/%d domains' %
                       (len(from_cache), len(names)))
-    result = [Domain.from_cache(name, from_cache[name])
-              for name in from_cache]
+    result = []
+    for name, values in from_cache.items():
+        try:
+            result.append(Domain.from_cache(name, values))
+        except ValueError:
+            from_cache.pop(name)
     # Fetch missing domains from datastore.
     missing = [name for name in names if name not in from_cache]
     if missing:
@@ -161,7 +165,7 @@ def score_domains(cleaned_data, domain_list):
         score = 0
         # Available domain names.
         for tld in TOP_LEVEL_DOMAINS:
-            if getattr(domain, tld) == 0:
+            if hasattr(domain, tld) and getattr(domain, tld) == 0:
                 score += cleaned_data[tld]
         # Character counts.
         if domain.length is None:
