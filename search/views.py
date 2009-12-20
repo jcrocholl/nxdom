@@ -59,35 +59,38 @@ class SearchForm(forms.Form):
         return data
 
 
-def filter_domains(left, right, order='length'):
+def best_names_of_length(length, position='left', keyword=''):
+    query = Domain.all(keys_only=True)
+    if len(keyword) <= 5:
+        if keyword:
+            query.filter('%s%d' % (position, len(keyword)), keyword)
+        query.filter('length', length)
+        query.order('-english')
+    else:
+        query.filter('length', length)
+        query.order('__key__')
+        keyword_key = db.Key.from_path('domains_domain', keyword)
+        query.filter('__key__ >=', keyword_key)
+        next_keyword = increment_prefix(keyword)
+        next_key = db.Key.from_path('domains_domain', next_keyword)
+        query.filter('__key__ <', next_key)
+    return [key.name() for key in query.fetch(50)]
+
+
+def best_names(position='left', keyword=''):
     # Try to get names from memcache, to avoid datastore queries.
-    memcache_key = ','.join((left, right, order))
+    memcache_key = '%s=%s' % (position, keyword)
     names = memcache.get(memcache_key)
     if names:
         logging.debug('filter_domains: memcache hit for %s', memcache_key)
         return names.split()
     # If not found in cache, get names from the datastore.
-    domain_list = Domain.all(keys_only=True)
-    if 1 <= len(left) <= 6:
-        domain_list.filter('left%d' % len(left), left)
-    elif len(left) > 6:
-        domain_list.order('__key__')
-        domain_list.filter(
-            '__key__ >=', db.Key.from_path('domains_domain', left))
-        next = increment_prefix(left)
-        domain_list.filter(
-            '__key__ <', db.Key.from_path('domains_domain', next))
-    if 1 <= len(right) <=6:
-        domain_list.filter('right%d' % len(right), right)
-    elif len(right) > 6:
-        domain_list.order('backwards')
-        backwards = right[::-1]
-        domain_list.filter('backwards >=', backwards)
-        next = increment_prefix(backwards)
-        domain_list.filter('backwards <', next)
-    domain_list.order(order)
-    names = [key.name() for key in domain_list.fetch(50)]
-    # Cache results for one hour.
+    names = []
+    length = max(3, len(keyword) + 1)
+    while len(names) < 300 and length <= 12:
+        names.extend(best_names_of_length(length, position, keyword))
+        length += 1
+    # Cache results in memcache.
     memcache.set(memcache_key, ' '.join(names), MEMCACHE_TIMEOUT)
     return names
 
@@ -138,16 +141,10 @@ def index(request, template_name='search/index.html'):
             right = ''
         else:
             left = ''
-    names = set()
-    names.update(filter_domains(left, right, 'length'))
-    if cleaned_data['spanish'] > cleaned_data['english']:
-        names.update(filter_domains(left, right, '-spanish'))
-    elif cleaned_data['french'] > cleaned_data['english']:
-        names.update(filter_domains(left, right, '-french'))
-    elif cleaned_data['german'] > cleaned_data['english']:
-        names.update(filter_domains(left, right, '-german'))
+    if left:
+        names = best_names('left', left)
     else:
-        names.update(filter_domains(left, right, '-english'))
+        names = best_names('right', right)
     if cleaned_data['left'] and not left:
         left = cleaned_data['left']
         names = [name for name in names if name.startswith(left)]
