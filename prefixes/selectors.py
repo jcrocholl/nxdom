@@ -9,10 +9,14 @@ from prefixes import popular
 
 def random_prefix(position='left', length_choices=[3, 4, 5, 6]):
     length = random.choice(length_choices)
-    total = getattr(popular, '%s%d_TOTAL' % (position.upper(), length))
-    counters = getattr(popular, '%s%d' % (position.upper(), length))
+    if position == 'left':
+        total = popular.PREFIX_TOTALS[length]
+        counters = popular.PREFIX_SCORES[length]
+    elif position == 'right':
+        total = popular.SUFFIX_TOTALS[length]
+        counters = popular.SUFFIX_SCORES[length]
     index = random.randint(1, total)
-    for prefix, count in counters:
+    for prefix, count in counters.iteritems():
         index -= count
         if index <= 0:
             return prefix
