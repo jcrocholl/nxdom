@@ -59,7 +59,7 @@ def cron(request):
     db.delete(deleted_domains)
     count_updated = len(updated_domains)
     count_deleted = len(deleted_domains)
-    domain_list = updated_domains[:10] + [None] + deleted_domains[:10]
+    domain_list = updated_domains[:20] + [None] + deleted_domains[:10]
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'domains/index.html', locals())
 
