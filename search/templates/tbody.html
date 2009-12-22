@@ -8,8 +8,8 @@
 <td>{{ domain.spanish|floatformat:3 }}</td>
 <td>{{ domain.french|floatformat:3 }}</td>
 <td>{{ domain.german|floatformat:3 }}</td>
-<td>{{ domain.prefix|floatformat:3 }} {{ domain.best_prefix }}</td>
-<td>{{ domain.suffix|floatformat:3 }} {{ domain.best_suffix }}</td>
+<td>{{ domain.prefix|floatformat:3 }} {{ domain.get_best_prefix }}</td>
+<td>{{ domain.suffix|floatformat:3 }} {{ domain.get_best_suffix }}</td>
 <td class="{{ domain.com|yesno:"red,green,unknown" }}">{{ domain.com|yesno:"taken,free," }}</td>
 <td class="{{ domain.net|yesno:"red,green,unknown" }}">{{ domain.net|yesno:"taken,free," }}</td>
 <td class="{{ domain.org|yesno:"red,green,unknown" }}">{{ domain.org|yesno:"taken,free," }}</td>

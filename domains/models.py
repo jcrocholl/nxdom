@@ -69,7 +69,7 @@ class Domain(BaseModel):
     prefix = db.FloatProperty()
     suffix = db.FloatProperty()
 
-    # The highest score from languages and popular prefix / suffix.
+    # The average score from prefix/suffix popularity and the best language.
     score = db.FloatProperty()
 
     # Prefixes for equality filters.
@@ -98,11 +98,22 @@ class Domain(BaseModel):
         """
         Automatically update most properties.
         """
+        self.delete_obsolete_attributes()
         self.update_counts()
         self.update_language_scores()
         self.update_popularity_scores()
+        self.update_score()
         self.update_substrings()
         self.timestamp = datetime.now()
+
+    def delete_obsolete_attributes(self):
+        """
+        Find and remove for obselete attributes from previous versions
+        of the software.
+        """
+        for attr in OBSOLETE_ATTRIBUTES:
+            if hasattr(self, attr):
+                delattr(self, attr)
 
     def update_counts(self):
         """
@@ -143,8 +154,19 @@ class Domain(BaseModel):
 
     def update_popularity_scores(self):
         from prefixes.popular import prefix_score, suffix_score
-        self.prefix, self.best_prefix = prefix_score(self.key().name())
-        self.suffix, self.best_suffix = suffix_score(self.key().name())
+        self.prefix, self._best_prefix = prefix_score(self.key().name())
+        self.suffix, self._best_suffix = suffix_score(self.key().name())
+
+    def get_best_prefix(self):
+        return self._best_prefix
+
+    def get_best_suffix(self):
+        return self._best_suffix
+
+    def update_score(self):
+        best_language = max(self.english, self.spanish,
+                            self.french, self.german)
+        self.score = (self.prefix + self.suffix + best_language) / 3
 
     def update_substrings(self):
         """

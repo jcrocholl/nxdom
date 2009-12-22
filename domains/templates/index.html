@@ -20,6 +20,7 @@ Deleted {{ count_deleted }} domains.
 {% endif %}
 
 <table>
+<thead>
 <tr>
 <th>Name</th>
 <th>Backwards</th>
@@ -30,8 +31,13 @@ Deleted {{ count_deleted }} domains.
 <th>Spanish</th>
 <th>French</th>
 <th>German</th>
+<th>Prefix</th>
+<th>Suffix</th>
+<th>Score</th>
 <th>Timestamp</th>
 </tr>
+</thead>
+<tbody>
 {% for domain in domain_list %}
 {% if not domain %}
 <tr class="{% cycle 'row1' 'row2' %}"><td>...</td></tr>
@@ -46,9 +52,13 @@ Deleted {{ count_deleted }} domains.
 <td>{{ domain.spanish|floatformat:5 }}</td>
 <td>{{ domain.french|floatformat:5 }}</td>
 <td>{{ domain.german|floatformat:5 }}</td>
+<td>{{ domain.prefix|floatformat:5 }} {{ domain.get_best_prefix }}</td>
+<td>{{ domain.suffix|floatformat:5 }} {{ domain.get_best_suffix }}</td>
+<td>{{ domain.score|floatformat:5 }}</td>
 <td>{{ domain.timestamp|timesince }} ago</td>
 </tr>
 {% endif %}
 {% endfor %}
+</tbody>
 </table>
 {% endblock %}

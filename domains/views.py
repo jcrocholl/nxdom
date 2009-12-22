@@ -15,7 +15,7 @@ from domains.models import Domain
 from prefixes.selectors import Selector, random_name
 from tests.models import Comparison
 
-BATCH_SIZE_FETCH = 100
+BATCH_SIZE_FETCH = 50
 BATCH_SIZE_UPDATE = 50
 BATCH_SIZE_DELETE = 20
 
@@ -40,9 +40,8 @@ def detail(request, key_name):
 def cron(request):
     updated_domains = []
     deleted_domains = []
-    selector = Selector()
-    query = selector.select(Domain)
-    update_description = selector.description()
+    query = Domain.all().order('timestamp')
+    update_description = 'oldest domain names'
     domains = query.fetch(BATCH_SIZE_FETCH)
     count_random = len(domains)
     count_obsolete = 0
@@ -54,25 +53,8 @@ def cron(request):
         if len(domain.key().name()) > MAX_NAME_LENGTH:
             deleted_domains.append(domain)
             continue
-        updated = False
-        for attr in OBSOLETE_ATTRIBUTES:
-            if hasattr(domain, attr):
-                delattr(domain, attr)
-                updated = True
-        if updated:
-            count_obsolete += 1
-        if domain.language_scores_need_update():
-            domain.update_language_scores()
-            count_languages += 1
-            updated = True
-        if (len(domain.key().name()) > 6 and
-            domain.english == 0 and domain.spanish == 0 and
-            domain.french == 0 and domain.german == 0):
-            deleted_domains.append(domain)
-            continue
-        if updated:
-            domain.timestamp = datetime.now()
-            updated_domains.append(domain)
+        domain.before_put()
+        updated_domains.append(domain)
     db.put(updated_domains)
     db.delete(deleted_domains)
     count_updated = len(updated_domains)
