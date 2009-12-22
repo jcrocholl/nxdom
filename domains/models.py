@@ -100,6 +100,7 @@ class Domain(BaseModel):
         """
         self.update_counts()
         self.update_language_scores()
+        self.update_popularity_scores()
         self.update_substrings()
         self.timestamp = datetime.now()
 
@@ -130,6 +131,20 @@ class Domain(BaseModel):
         self.spanish = word_score(self.key().name(), spanish.TRIPLE_SCORES)
         self.german = word_score(self.key().name(), german.TRIPLE_SCORES)
         self.french = word_score(self.key().name(), french.TRIPLE_SCORES)
+
+    def popularity_scores_need_update(self):
+        for attr in 'prefix suffix'.split():
+            if not hasattr(self, attr):
+                return True
+            score = getattr(self, attr)
+            if score is None or score < 0.0 or score >= 1.0:
+                return True
+        return False
+
+    def update_popularity_scores(self):
+        from prefixes.popular import prefix_score, suffix_score
+        self.prefix, self.best_prefix = prefix_score(self.key().name())
+        self.suffix, self.best_suffix = suffix_score(self.key().name())
 
     def update_substrings(self):
         """
