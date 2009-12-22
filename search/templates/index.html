@@ -21,6 +21,8 @@ function get_form_data() {
     spanish: $("input#id_spanish").val(),
     french: $("input#id_french").val(),
     german: $("input#id_german").val(),
+    prefix: $("input#id_prefix").val(),
+    suffix: $("input#id_suffix").val(),
     com: $("input#id_com").val(),
     net: $("input#id_net").val(),
     org: $("input#id_org").val(),
@@ -79,10 +81,16 @@ Then adjust the score fields to sort the best names to the top of the list.
 <col class="int" />
 <col class="int" />
 <col class="int" />
-<col class="int" />
-<col class="int" />
-<col class="int" />
-<col class="int" />
+</colgroup>
+<colgroup>
+<col class="double" />
+<col class="double" />
+<col class="double" />
+<col class="double" />
+</colgroup>
+<colgroup>
+<col class="double" />
+<col class="double" />
 </colgroup>
 <colgroup>
 <col class="dns" />
@@ -101,6 +109,8 @@ Then adjust the score fields to sort the best names to the top of the list.
 <td>{{ search_form.spanish }}</td>
 <td>{{ search_form.french }}</td>
 <td>{{ search_form.german }}</td>
+<td>{{ search_form.prefix }}</td>
+<td>{{ search_form.suffix }}</td>
 <td>{{ search_form.com }}</td>
 <td>{{ search_form.net }}</td>
 <td>{{ search_form.org }}</td>
@@ -117,6 +127,8 @@ Then adjust the score fields to sort the best names to the top of the list.
 <th title="Letter combinations similar to Spanish words">Spanish</th>
 <th title="Letter combinations similar to French words">French</th>
 <th title="Letter combinations similar to German words">German</th>
+<th title="Popularity of the first few letters">Prefix</th>
+<th title="Popularity of the last few letters">Suffix</th>
 <th title="DNS result for domain name with .com">.com</th>
 <th title="DNS result for domain name with .net">.net</th>
 <th title="DNS result for domain name with .org">.org</th>

@@ -17,6 +17,7 @@ INITIAL = {
     'left': '', 'right': '',
     'len': -1, 'digits': -2, 'dashes': -5,
     'english': 3, 'spanish': 1, 'french': 1, 'german': 1,
+    'prefix': 3, 'suffix': 3,
     'com': 10, 'net': 5, 'org': 5, 'biz': 3, 'info': 3,
     }
 
@@ -39,6 +40,10 @@ class SearchForm(forms.Form):
     french = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
     german = forms.FloatField(required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    prefix = forms.FloatField(required=False,
+        widget=forms.TextInput(attrs={'class': 'text score'}))
+    suffix = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
     com = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
@@ -160,13 +165,7 @@ def score_domains(cleaned_data, domain_list):
     score_domain_list = []
     for domain in domain_list:
         score = 0
-        # Available domain names.
-        for tld in TOP_LEVEL_DOMAINS:
-            if hasattr(domain, tld) and getattr(domain, tld) == 0:
-                score += cleaned_data[tld]
         # Character counts.
-        if domain.length is None:
-            domain.count_chars()
         score += domain.length * cleaned_data['len']
         score += domain.digits * cleaned_data['digits']
         score += domain.dashes * cleaned_data['dashes']
@@ -177,7 +176,16 @@ def score_domains(cleaned_data, domain_list):
         score += domain.spanish * cleaned_data['spanish']
         score += domain.french * cleaned_data['french']
         score += domain.german * cleaned_data['german']
-        domain.score = score
+        # Popular prefixes and suffixes.
+        if domain.popularity_scores_need_update():
+            domain.update_popularity_scores()
+        score += domain.prefix * cleaned_data['prefix']
+        score += domain.suffix * cleaned_data['suffix']
+        # Available domain names.
+        for tld in TOP_LEVEL_DOMAINS:
+            if hasattr(domain, tld) and getattr(domain, tld) == 0:
+                score += cleaned_data[tld]
+        domain.weighted_score = score
     domain_list.sort(
-        key=lambda domain: (-domain.score, domain.key().name()))
+        key=lambda domain: (-domain.weighted_score, domain.key().name()))
     return domain_list[:50]
