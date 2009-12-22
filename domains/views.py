@@ -12,7 +12,7 @@ from ragendja.dbutils import get_object_or_404
 
 from domains.models import MAX_NAME_LENGTH, DOMAIN_CHARS, OBSOLETE_ATTRIBUTES
 from domains.models import Domain
-from prefixes.selectors import random_name
+from prefixes.selectors import Selector, random_name
 from tests.models import Comparison
 
 BATCH_SIZE_FETCH = 100
@@ -40,8 +40,9 @@ def detail(request, key_name):
 def cron(request):
     updated_domains = []
     deleted_domains = []
-    query = Domain.all().order('english').filter('english >', 0)
-    update_description = 'smallest language scores'
+    selector = Selector()
+    query = selector.select(Domain)
+    update_description = selector.description()
     domains = query.fetch(BATCH_SIZE_FETCH)
     count_random = len(domains)
     count_obsolete = 0
