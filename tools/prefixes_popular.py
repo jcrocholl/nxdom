@@ -70,7 +70,7 @@ def prefix_score(name):
         prefix = name[slice]
         score = PREFIX_SCORES[length].get(prefix, 0)
         score /= float(PREFIX_MAXIMUMS[length])
-        if score > best_score:
+        if score and score >= best_score:
             best_score = score
             best_prefix = prefix
     return best_score, best_prefix
