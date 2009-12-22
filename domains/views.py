@@ -54,6 +54,9 @@ def cron(request):
             deleted_domains.append(domain)
             continue
         domain.before_put()
+        if len(domain.key().name()) > 5 and not domain.score:
+            deleted_domains.append(domain)
+            continue
         updated_domains.append(domain)
     db.put(updated_domains)
     db.delete(deleted_domains)
