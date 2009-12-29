@@ -148,7 +148,7 @@ class Domain(BaseModel):
             if not hasattr(self, attr):
                 return True
             score = getattr(self, attr)
-            if score is None or score < 0.0 or score >= 1.0:
+            if score is None or score < 0.0 or score > 1.0:
                 return True
         return False
 
