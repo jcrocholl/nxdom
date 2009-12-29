@@ -70,7 +70,10 @@ def best_names_of_length(length, position='left', keyword=''):
         if keyword:
             query.filter('%s%d' % (position, len(keyword)), keyword)
         query.filter('length', length)
-        query.order('-english')
+        if position == 'left':
+            query.order('-english')
+        elif position == 'right':
+            query.order('-score')
     else:
         query.filter('length', length)
         query.order('__key__')
