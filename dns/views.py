@@ -42,7 +42,7 @@ def cron(request):
         domain_set = set(domain_names)
         lookup_set = set(lookup_names)
         if (domain_set != lookup_set or
-            len(attempts) >= 20 or len(domain_set) != BATCH_SIZE):
+            len(attempts) >= 10 or len(domain_set) != BATCH_SIZE):
             break
         attempts.append(selector.name)
         if selector.order == 'ascending':
