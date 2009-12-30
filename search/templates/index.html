@@ -2,64 +2,90 @@
 
 {% block extra-head %}
 <script type="text/javascript">
-function unchanged(x, y) {
-  for (var key in x) {
-    if (!(key in y)) return false;
-    if (x[key] !== y[key]) return false;
-  }
-  return true;
+function domain_score(domain) {
+  var score = 0.0;
+  score += domain.length * $("input#id_len").val();
+  score += domain.digits * $("input#id_digits").val();
+  score += domain.dashes * $("input#id_dashes").val();
+  score += domain.english * $("input#id_english").val();
+  score += domain.spanish * $("input#id_spanish").val();
+  score += domain.french * $("input#id_french").val();
+  score += domain.german * $("input#id_german").val();
+  score += domain.prefix * $("input#id_prefix").val();
+  score += domain.suffix * $("input#id_suffix").val();
+  score += domain.com * $("input#id_com").val();
+  score += domain.net * $("input#id_net").val();
+  score += domain.org * $("input#id_org").val();
+  score += domain.biz * $("input#id_biz").val();
+  score += domain.info * $("input#id_info").val();
+  return score;
 }
 
-function get_form_data() {
-  return {
-    left: $("input#id_left").val(),
-    right: $("input#id_right").val(),
-    len: $("input#id_len").val(),
-    digits: $("input#id_digits").val(),
-    dashes: $("input#id_dashes").val(),
-    english: $("input#id_english").val(),
-    spanish: $("input#id_spanish").val(),
-    french: $("input#id_french").val(),
-    german: $("input#id_german").val(),
-    prefix: $("input#id_prefix").val(),
-    suffix: $("input#id_suffix").val(),
-    com: $("input#id_com").val(),
-    net: $("input#id_net").val(),
-    org: $("input#id_org").val(),
-    biz: $("input#id_biz").val(),
-    info: $("input#id_info").val()
-  }
+function table_row(domain, row) {
+  var html = '';
+  html += '<tr class="row' + row + '">';
+  html += '<td>' + domain.name + '</td>';
+  html += '<td>' + domain.length + '</td>';
+  html += '<td>' + domain.digits + '</td>';
+  html += '<td>' + domain.dashes + '</td>';
+  html += '<td>' + (domain.english / 1000000) + '</td>';
+  html += '<td>' + (domain.spanish / 1000000) + '</td>';
+  html += '<td>' + (domain.french / 1000000) + '</td>';
+  html += '<td>' + (domain.german / 1000000) + '</td>';
+  html += '<td>' + (domain.prefix / 1000000) + '</td>';
+  html += '<td>' + (domain.suffix / 1000000) + '</td>';
+  html += '<td>' + domain.com + '</td>';
+  html += '<td>' + domain.net + '</td>';
+  html += '<td>' + domain.org + '</td>';
+  html += '<td>' + domain.biz + '</td>';
+  html += '<td>' + domain.info + '</td>';
+  html += '<td>' + domain.score + '</td>';
+  html += '</tr>';
+  return html;
 }
 
-function ajax_search(form_data) {
-  if (unchanged(form_data, $.ajax_search.data)) return;
-  $.ajax_search.data = form_data;
+function ajax_search(left, right) {
+  if ($.ajax_search.left == left && $.ajax_search.right == right) return;
+  $.ajax_search.left = left;
+  $.ajax_search.right = right;
   if ($.ajax_search.xhr) $.ajax_search.xhr.abort();
-  $.ajax_search.xhr = $.get("/search/ajax/", form_data, function(data) {
+  data = {"left": left, "right": right};
+  $.ajax_search.xhr = $.getJSON("/search/json/", data, function(json, status) {
     $.ajax_search.xhr = false;
-    $("tbody#results").html(data);
-    $("tbody tr").hover(
-      function() { $(this).addClass("hover"); },
-      function() { $(this).removeClass("hover"); });
+    var html = '';
+    var row = 1;
+    for (name in json) {
+      domain = json[name];
+      domain.name = name;
+      domain.length = name.length;
+      html += table_row(domain, row);
+      row = (row % 2) + 1;
+    }
+    $("tbody#results").html(html);
   });
 }
 
 $(document).ready(function() {
   $.ajax_search = Object();
   $.ajax_search.xhr = false;
-  $.ajax_search.data = get_form_data();
-  $("input.text").keypress(function(e) {
-    var form_data = get_form_data();
+  $.ajax_search.left = $("input#id_left").val();
+  $.ajax_search.right = $("input#id_right").val();
+  $("input#id_left").keypress(function(e) {
     if ((e.which >= 48 && e.which <= 57) ||
         (e.which >= 97 && e.which <= 122) || e.which == 45) {
-      form_data[this.name] =
+      var left =
 		this.value.substr(0, this.selectionStart) +
 		String.fromCharCode(e.which) +
 		this.value.substr(this.selectionEnd);
-      ajax_search(form_data);
+      var right = $("input#id_right").val();
+      ajax_search(left, right);
     }
   });
-  $("input.text").keyup(function() { ajax_search(get_form_data()); });
+  $("input#id_left").keyup(function() {
+    var left = $("input#id_left").val();
+    var right = $("input#id_right").val();
+    ajax_search(left, right);
+  });
 });
 </script>
 {% endblock %}
