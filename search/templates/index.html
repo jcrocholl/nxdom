@@ -70,18 +70,20 @@ $(document).ready(function() {
   $.ajax_search.xhr = false;
   $.ajax_search.left = $("input#id_left").val();
   $.ajax_search.right = $("input#id_right").val();
-  $("input#id_left").keypress(function(e) {
+  $("input.keyword").keypress(function(e) {
     if ((e.which >= 48 && e.which <= 57) ||
         (e.which >= 97 && e.which <= 122) || e.which == 45) {
-      var left =
+      var keywords = {
+        "left": $("input#id_left").val(),
+        "right": $("input#id_right").val()};
+      keywords[this.name] =
 		this.value.substr(0, this.selectionStart) +
 		String.fromCharCode(e.which) +
 		this.value.substr(this.selectionEnd);
-      var right = $("input#id_right").val();
-      ajax_search(left, right);
+      ajax_search(keywords["left"], keywords["right"]);
     }
   });
-  $("input#id_left").keyup(function() {
+  $("input.keyword").keyup(function() {
     var left = $("input#id_left").val();
     var right = $("input#id_right").val();
     ajax_search(left, right);

@@ -26,9 +26,9 @@ INITIAL = {
 
 class SearchForm(forms.Form):
     left = forms.CharField(max_length=40, required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-2 focus'}))
+        widget=forms.TextInput(attrs={'class': 'text keyword span-2 focus'}))
     right = forms.CharField(max_length=40, required=False,
-        widget=forms.TextInput(attrs={'class': 'text span-2 right'}))
+        widget=forms.TextInput(attrs={'class': 'text keyword span-2 right'}))
     len = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
     digits = forms.FloatField(required=False,
