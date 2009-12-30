@@ -2,6 +2,8 @@ from datetime import datetime
 
 from google.appengine.ext import db
 
+from django.core.urlresolvers import reverse
+
 from languages import english, spanish, german, french
 from languages.utils import word_score
 
@@ -92,7 +94,7 @@ class Domain(BaseModel):
         return self.key().name()
 
     def get_absolute_url(self):
-        return reverse('names.views.detail', args=[self.key().name()])
+        return reverse('domains.views.detail', args=[self.key().name()])
 
     def before_put(self):
         """
