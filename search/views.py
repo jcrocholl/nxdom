@@ -4,14 +4,16 @@ from google.appengine.ext import db
 from google.appengine.api import memcache
 
 from django import forms
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.utils import simplejson
 
 from ragendja.template import render_to_response
 
-from domains.models import Domain
+from domains.models import Domain, MAX_NAME_LENGTH
 from dns.models import Lookup, TOP_LEVEL_DOMAINS
 from prefixes.utils import increment_prefix
 
+JSON_FETCH_LIMIT = 100 # Domains for each length from 3 to 12.
 MEMCACHE_TIMEOUT = 24 * 60 * 60 # 24 hours.
 INITIAL = {
     'left': '', 'right': '',
@@ -192,3 +194,54 @@ def score_domains(cleaned_data, domain_list):
     domain_list.sort(
         key=lambda domain: (-domain.weighted_score, domain.key().name()))
     return domain_list[:50]
+
+
+def fetch_candidates(left, right, length):
+    query = Domain.all()
+    if len(right) > len(left):
+        query.filter('right%d' % len(right), right)
+    elif left:
+        query.filter('left%d' % len(left), left)
+    query.filter('length', length)
+    query.order('-score')
+    return query.fetch(JSON_FETCH_LIMIT)
+
+
+def fetch_dns_lookups(domains):
+    keys = [db.Key.from_path('dns_lookup', domain.key().name())
+            for domain in domains]
+    lookups = db.get(keys)
+    for domain, lookup in zip(domains, lookups):
+        for tld in TOP_LEVEL_DOMAINS:
+            value = getattr(lookup, tld) if lookup else None
+            setattr(domain, tld, value)
+
+
+def domains_to_dict(domains):
+    result = {}
+    for domain in domains:
+        properties = {}
+        for attr in 'english spanish french german prefix suffix'.split():
+            properties[attr] = int(getattr(domain, attr) * 1000000)
+        for attr in TOP_LEVEL_DOMAINS:
+            properties[attr] = int(bool(getattr(domain, attr)))
+        result[domain.key().name()] = properties
+    return result
+
+
+def json(request):
+    left = request.GET.get('left', '')
+    right = request.GET.get('right', '')
+    length = int(request.GET.get('length', MAX_NAME_LENGTH))
+    memcache_key = 'left=%s,right=%s,length=%d' % (left, right, length)
+    json = memcache.get(memcache_key)
+    if json:
+        logging.debug('json: memcache hit for %s', memcache_key)
+    else:
+        domains = fetch_candidates(left, right, length)
+        fetch_dns_lookups(domains)
+        result = domains_to_dict(domains)
+        json = simplejson.dumps(result, separators=(',',':'))
+        json = json.replace('},', '},\n ')
+        memcache.set(memcache_key, json, MEMCACHE_TIMEOUT)
+    return HttpResponse(json, mimetype='application/javascript')
