@@ -78,18 +78,21 @@ function ajax_result(json, status) {
 	var left = $("input#id_left").val();
 	var right = $("input#id_right").val();
 	var weights = form_weights();
+	var updated = false;
 	var length = 0;
 	for (name in json) {
 		domain = json[name];
 		domain.name = name;
 		domain.length = name.length;
 		domain.score = domain_score(domain, weights);
-		if (keyword_match(left, right, name))
+		if (keyword_match(left, right, name)) {
 			$.domains[name] = domain;
+			updated = true;
+		}
 		length = name.length;
 	}
 	$.ajax_search.xhr[length] = false;
-	update_html();
+	if (updated) update_html();
 }
 
 function ajax_search(left, right) {
@@ -100,6 +103,8 @@ function ajax_search(left, right) {
 		var length = SEARCH_LENGTHS[index];
 		if ($.ajax_search.xhr[length])
 			$.ajax_search.xhr[length].abort();
+		if (left.length > length || right.length > length)
+			continue;
 		$.ajax_search.xhr[length] = $.ajax({
 				type: "GET",
 				url: "/search/json/",
