@@ -1,4 +1,6 @@
 import logging
+import time
+import email.utils
 
 from google.appengine.ext import db
 from google.appengine.api import memcache
@@ -6,6 +8,7 @@ from google.appengine.api import memcache
 from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
+from django.views.decorators.cache import cache_control
 
 from ragendja.template import render_to_response
 
@@ -26,9 +29,9 @@ INITIAL = {
 
 class SearchForm(forms.Form):
     left = forms.CharField(max_length=40, required=False,
-        widget=forms.TextInput(attrs={'class': 'text keyword span-2 focus'}))
+        widget=forms.TextInput(attrs={'class': 'text keyword focus'}))
     right = forms.CharField(max_length=40, required=False,
-        widget=forms.TextInput(attrs={'class': 'text keyword span-2 right'}))
+        widget=forms.TextInput(attrs={'class': 'text keyword right'}))
     len = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
     digits = forms.FloatField(required=False,
@@ -231,6 +234,7 @@ def domains_to_dict(domains):
     return result
 
 
+@cache_control(public=True, max_age=MEMCACHE_TIMEOUT)
 def json(request):
     left = request.GET.get('left', '')
     right = request.GET.get('right', '')
@@ -246,4 +250,7 @@ def json(request):
         json = simplejson.dumps(result, separators=(',',':'))
         json = json.replace('},', '},\n ')
         memcache.set(memcache_key, json, MEMCACHE_TIMEOUT)
-    return HttpResponse(json, mimetype='application/javascript')
+    response = HttpResponse(json, mimetype='application/javascript')
+    expires = time.time() + MEMCACHE_TIMEOUT
+    response['Expires'] = email.utils.formatdate(expires)[:26] + 'GMT'
+    return response
