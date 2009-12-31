@@ -2,9 +2,10 @@
 
 p { padding: 0 4px; }
 
-col.name { width: 170px; }
-col.dns { width: 50px; }
-col.int { width: 50px; }
+col.name { width: 140px; }
+col.int { width: 40px; }
+col.double { width: 40px; }
+col.dns { width: 40px; }
 
 tr.row2 { background: #eee; }
 tr.hover { background: #ff8; }
@@ -20,6 +21,7 @@ tr.row1 td.best { background: #ff8; }
 tr.row2 td.best { background: #ee8; }
 
 .right { text-align: right; }
-input.score { width: 36px; }
+input.keyword { width: 40px; }
+input.score { width: 22px; }
 
 .sum { background: #def; }
