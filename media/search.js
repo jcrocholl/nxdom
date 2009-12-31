@@ -99,6 +99,9 @@ function ajax_search(left, right) {
 	if ($.ajax_search.left == left && $.ajax_search.right == right) return;
 	$.ajax_search.left = left;
 	$.ajax_search.right = right;
+	for (name in $.domains)
+		if (!keyword_match(left, right, name))
+			delete $.domains[name];
 	for (var index in SEARCH_LENGTHS) {
 		var length = SEARCH_LENGTHS[index];
 		if ($.ajax_search.xhr[length])
@@ -128,9 +131,6 @@ function keyword_keypress(e) {
 		this.value.substr(this.selectionEnd);
 	if (this.name == 'left') left = updated;
 	else if (this.name == 'right') right = updated;
-	for (name in $.domains)
-		if (!keyword_match(left, right, name))
-			delete $.domains[name];
 	update_html();
 	ajax_search(left, right);
 }
