@@ -2,6 +2,7 @@ DIRECT_PROPERTIES = ["name", "length", "digits", "dashes"];
 SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 					"prefix", "suffix"];
 TLD_PROPERTIES = ["com", "net", "org", "biz", "info"];
+SEARCH_LENGTHS = [7, 8, 6, 9, 5, 10, 4, 11, 3, 12]
 
 function form_weights() {
 	return {"length": $("input#id_len").val(),
@@ -74,10 +75,10 @@ function keyword_match(left, right, name) {
 }
 
 function ajax_result(json, status) {
-	$.ajax_search.xhr = false;
 	var left = $("input#id_left").val();
 	var right = $("input#id_right").val();
 	var weights = form_weights();
+	var length = 0;
 	for (name in json) {
 		domain = json[name];
 		domain.name = name;
@@ -85,7 +86,9 @@ function ajax_result(json, status) {
 		domain.score = domain_score(domain, weights);
 		if (keyword_match(left, right, name))
 			$.domains[name] = domain;
+		length = name.length;
 	}
+	$.ajax_search.xhr[length] = false;
 	update_html();
 }
 
@@ -93,9 +96,14 @@ function ajax_search(left, right) {
 	if ($.ajax_search.left == left && $.ajax_search.right == right) return;
 	$.ajax_search.left = left;
 	$.ajax_search.right = right;
-	if ($.ajax_search.xhr) $.ajax_search.xhr.abort();
-	data = {"left": left, "right": right};
-	$.ajax_search.xhr = $.getJSON("/search/json/", data, ajax_result);
+	for (var index in SEARCH_LENGTHS) {
+		var length = SEARCH_LENGTHS[index];
+		var data = {"left": left, "right": right, "length": length};
+		if ($.ajax_search.xhr[length])
+			$.ajax_search.xhr[length].abort();
+		$.ajax_search.xhr[length] =
+			$.getJSON("/search/json/", data, ajax_result);
+	}
 }
 
 function keyword_keypress(e) {
@@ -126,7 +134,7 @@ function keyword_keyup() {
 function document_ready() {
 	$.domains = {};
 	$.ajax_search = {};
-	$.ajax_search.xhr = false;
+	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.left = $("input#id_left").val();
 	$.ajax_search.right = $("input#id_right").val();
 	$("input.keyword").keypress(keyword_keypress);
