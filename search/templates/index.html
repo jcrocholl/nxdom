@@ -45,9 +45,9 @@ function table_row(domain, row) {
   }
   for (index in tld_properties) {
 	if (domain[tld_properties[index]])
-      html += '<td class="red">taken</td>';
-	else
       html += '<td class="green">free</td>';
+	else
+      html += '<td class="red">taken</td>';
   }
   html += '<td>' + domain.score.toFixed(1) + '</td>';
   html += '</tr>';

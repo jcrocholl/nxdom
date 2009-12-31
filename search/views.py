@@ -226,7 +226,7 @@ def domains_to_dict(domains):
         for attr in 'english spanish french german prefix suffix'.split():
             properties[attr] = int(getattr(domain, attr) * 1000000)
         for attr in TOP_LEVEL_DOMAINS:
-            properties[attr] = int(bool(getattr(domain, attr)))
+            properties[attr] = int(not getattr(domain, attr))
         result[domain.key().name()] = properties
     return result
 
