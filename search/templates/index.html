@@ -2,44 +2,54 @@
 
 {% block extra-head %}
 <script type="text/javascript">
-function domain_score(domain) {
+var direct_properties = ["name", "length", "digits", "dashes"];
+var score_properties = ["english", "spanish", "french", "german",
+"prefix", "suffix"];
+var tld_properties = ["com", "net", "org", "biz", "info"];
+
+function form_weights() {
+  return {
+    "length": $("input#id_len").val(),
+    "digits": $("input#id_digits").val(),
+    "dashes": $("input#id_dashes").val(),
+    "english": $("input#id_english").val() / 1000000,
+    "spanish": $("input#id_spanish").val() / 1000000,
+    "french": $("input#id_french").val() / 1000000,
+    "german": $("input#id_german").val() / 1000000,
+    "prefix": $("input#id_prefix").val() / 1000000,
+    "suffix": $("input#id_suffix").val() / 1000000,
+    "com": $("input#id_com").val(),
+    "net": $("input#id_net").val(),
+    "org": $("input#id_org").val(),
+    "biz": $("input#id_biz").val(),
+    "info": $("input#id_info").val()
+  }
+}
+
+function domain_score(domain, weights) {
   var score = 0.0;
-  score += domain.length * $("input#id_len").val();
-  score += domain.digits * $("input#id_digits").val();
-  score += domain.dashes * $("input#id_dashes").val();
-  score += domain.english * $("input#id_english").val();
-  score += domain.spanish * $("input#id_spanish").val();
-  score += domain.french * $("input#id_french").val();
-  score += domain.german * $("input#id_german").val();
-  score += domain.prefix * $("input#id_prefix").val();
-  score += domain.suffix * $("input#id_suffix").val();
-  score += domain.com * $("input#id_com").val();
-  score += domain.net * $("input#id_net").val();
-  score += domain.org * $("input#id_org").val();
-  score += domain.biz * $("input#id_biz").val();
-  score += domain.info * $("input#id_info").val();
+  for (attr in weights)
+    score += domain[attr] * weights[attr];
   return score;
 }
 
 function table_row(domain, row) {
-  var html = '';
-  html += '<tr class="row' + row + '">';
-  html += '<td>' + domain.name + '</td>';
-  html += '<td>' + domain.length + '</td>';
-  html += '<td>' + domain.digits + '</td>';
-  html += '<td>' + domain.dashes + '</td>';
-  html += '<td>' + (domain.english / 1000000) + '</td>';
-  html += '<td>' + (domain.spanish / 1000000) + '</td>';
-  html += '<td>' + (domain.french / 1000000) + '</td>';
-  html += '<td>' + (domain.german / 1000000) + '</td>';
-  html += '<td>' + (domain.prefix / 1000000) + '</td>';
-  html += '<td>' + (domain.suffix / 1000000) + '</td>';
-  html += '<td>' + domain.com + '</td>';
-  html += '<td>' + domain.net + '</td>';
-  html += '<td>' + domain.org + '</td>';
-  html += '<td>' + domain.biz + '</td>';
-  html += '<td>' + domain.info + '</td>';
-  html += '<td>' + domain.score + '</td>';
+  var html = '<tr class="row' + row + '">';
+  var index;
+  for (index in direct_properties) {
+	html += '<td>' + domain[direct_properties[index]] + '</td>';
+  }
+  for (index in score_properties) {
+    var score = domain[score_properties[index]] / 1000000;
+	html += '<td>' + score.toFixed(3) + '</td>';
+  }
+  for (index in tld_properties) {
+	if (domain[tld_properties[index]])
+      html += '<td class="red">taken</td>';
+	else
+      html += '<td class="green">free</td>';
+  }
+  html += '<td>' + domain.score.toFixed(1) + '</td>';
   html += '</tr>';
   return html;
 }
@@ -54,14 +64,19 @@ function ajax_search(left, right) {
     $.ajax_search.xhr = false;
     var html = '';
     var row = 1;
+    var weights = form_weights();
     for (name in json) {
       domain = json[name];
       domain.name = name;
       domain.length = name.length;
+      domain.score = domain_score(domain, weights);
       html += table_row(domain, row);
       row = (row % 2) + 1;
     }
     $("tbody#results").html(html);
+    $("tbody tr").hover(
+      function() { $(this).addClass("hover"); },
+      function() { $(this).removeClass("hover"); });
   });
 }
 
