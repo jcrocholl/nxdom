@@ -235,7 +235,7 @@ def json(request):
     left = request.GET.get('left', '')
     right = request.GET.get('right', '')
     length = int(request.GET.get('length', MAX_NAME_LENGTH))
-    memcache_key = 'left=%s,right=%s,length=%d' % (left, right, length)
+    memcache_key = 'json2,%s,%s,%d' % (left, right, length)
     json = memcache.get(memcache_key)
     if json:
         logging.debug('json: memcache hit for %s', memcache_key)
