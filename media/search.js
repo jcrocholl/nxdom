@@ -48,22 +48,45 @@ function table_row(domain, row) {
 	return html;
 }
 
+function update_html() {
+	var html = '';
+	var row = 1;
+	var names = [];
+	for (name in $.domains) names.push(name);
+	names.sort(function(a,b) {
+		return $.domains[b].score - $.domains[a].score });
+	names.length = 100;
+	for (index in names) {
+		domain = $.domains[names[index]];
+		html += table_row(domain, row);
+		row = (row % 2) + 1;
+	}
+	$("tbody#results").html(html);
+	$("tbody tr").hover(
+		function() { $(this).addClass("hover"); },
+		function() { $(this).removeClass("hover"); });
+}
+
+function keyword_match(left, right, name) {
+	if (left && name.substr(0, left.length) != left) return false;
+	if (right && name.substr(-right.length) != right) return false;
+	return true;
+}
+
 function ajax_result(json, status) {
 	$.ajax_search.xhr = false;
-	var html = '';
-    var row = 1;
-    var weights = form_weights();
-    for (name in json) {
+	var left = $("input#id_left").val();
+	var right = $("input#id_right").val();
+	var weights = form_weights();
+	for (name in json) {
 		domain = json[name];
 		domain.name = name;
 		domain.length = name.length;
 		domain.score = domain_score(domain, weights);
-		html += table_row(domain, row);
-		row = (row % 2) + 1;
-    }
-    $("tbody#results").html(html);
-    $("tbody tr").hover(function() { $(this).addClass("hover"); },
-						function() { $(this).removeClass("hover"); });
+		if (keyword_match(left, right, name))
+			$.domains[name] = domain;
+	}
+	update_html();
 }
 
 function ajax_search(left, right) {
@@ -79,14 +102,19 @@ function keyword_keypress(e) {
 	if ((e.which != 45) &&
 		(e.which < 48 || e.which > 57) &&
 		(e.which < 97 || e.which > 122)) return;
-	var keywords = {
-		"left": $("input#id_left").val(),
-		"right": $("input#id_right").val()};
-	keywords[this.name] =
+	var left = $("input#id_left").val();
+	var right = $("input#id_right").val();
+	var updated =
 		this.value.substr(0, this.selectionStart) +
 		String.fromCharCode(e.which) +
 		this.value.substr(this.selectionEnd);
-	ajax_search(keywords["left"], keywords["right"]);
+	if (this.name == 'left') left = updated;
+	else if (this.name == 'right') right = updated;
+	for (name in $.domains)
+		if (!keyword_match(left, right, name))
+			delete $.domains[name];
+	update_html();
+	ajax_search(left, right);
 }
 
 function keyword_keyup() {
@@ -96,7 +124,8 @@ function keyword_keyup() {
 }
 
 function document_ready() {
-    $.ajax_search = Object();
+	$.domains = {};
+	$.ajax_search = {};
 	$.ajax_search.xhr = false;
 	$.ajax_search.left = $("input#id_left").val();
 	$.ajax_search.right = $("input#id_right").val();
