@@ -98,11 +98,16 @@ function ajax_search(left, right) {
 	$.ajax_search.right = right;
 	for (var index in SEARCH_LENGTHS) {
 		var length = SEARCH_LENGTHS[index];
-		var data = {"left": left, "right": right, "length": length};
 		if ($.ajax_search.xhr[length])
 			$.ajax_search.xhr[length].abort();
-		$.ajax_search.xhr[length] =
-			$.getJSON("/search/json/", data, ajax_result);
+		$.ajax_search.xhr[length] = $.ajax({
+				type: "GET",
+				url: "/search/json/",
+				data: {left: left, right: right, length: length},
+				dataType: "json",
+				cache: true,
+				success: ajax_result,
+			});
 	}
 }
 
