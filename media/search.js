@@ -1,4 +1,4 @@
-DIRECT_PROPERTIES = ["name", "length", "digits", "dashes"];
+DIRECT_PROPERTIES = ["length", "digits", "dashes"];
 SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 					"prefix", "suffix"];
 TLD_PROPERTIES = ["com", "net", "org", "biz", "info"];
@@ -34,8 +34,25 @@ function domain_score(domain, weights) {
 	return score;
 }
 
+function affiliate_link(name, tld, text) {
+	var html = '<a href="';
+	if ($.registrar = 'moniker.com') {
+		html += 'http://affiliates.moniker.com/pub/Affiliates';
+		html += '?affiliate_id=3154&landingpage=domaincheck&domain=';
+		html += name + '.' + tld + '"';
+	} else {
+		html += 'https://www.godaddy.com/gdshop/registrar/search.asp';
+		html += '?domainToCheck=' + domain.name + '&tld=.' + tld;
+		html += '&isc=jcrocholl&checkavail=1"';
+	}
+	html += ' title="Check availability on ' + $.registrar + '"';
+	html += '>' + text + '</a>';
+	return html;
+}
+
 function table_row(domain, row) {
-	var html = '<tr class="row' + row + '">';
+	var html = '<tr class="row' + row + '"><td>';
+	html += affiliate_link(domain.name, 'com', domain.name) + '</td>';
 	for (var index in DIRECT_PROPERTIES) {
 		html += '<td>' + domain[DIRECT_PROPERTIES[index]] + '</td>';
 	}
@@ -44,10 +61,14 @@ function table_row(domain, row) {
 		html += '<td>' + score.toFixed(3) + '</td>';
 	}
 	for (var index in TLD_PROPERTIES) {
-		if (domain[TLD_PROPERTIES[index]])
-			html += '<td class="green">free</td>';
-		else
+		var tld = TLD_PROPERTIES[index];
+		if (domain[tld]) {
+			html += '<td class="green">';
+			html += affiliate_link(domain.name, tld, 'free');
+			html += '</td>';
+		} else {
 			html += '<td class="red">taken</td>';
+		}
 	}
 	html += '<td>' + domain.score.toFixed(1) + '</td>';
 	html += '</tr>';
@@ -171,6 +192,7 @@ function keyword_keyup() {
 function document_ready() {
 	$.domains = {};
 	$.weights = form_weights();
+	$.registrar = 'moniker.com';
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.left = $("input#id_left").val();
