@@ -28,7 +28,7 @@ lang="{% firstof LANGUAGE_CODE 'en' %}">
 		  $("tbody tr").hover(
 		    function() { $(this).addClass("hover"); },
 		    function() { $(this).removeClass("hover"); });
-		  $("#loading").hide()
+		  $("#loading")
 		    .ajaxStart(function() { $(this).show(); })
 		    .ajaxStop(function() { $(this).hide(); });
 		});
