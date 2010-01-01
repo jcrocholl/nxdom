@@ -2,23 +2,29 @@ DIRECT_PROPERTIES = ["name", "length", "digits", "dashes"];
 SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 					"prefix", "suffix"];
 TLD_PROPERTIES = ["com", "net", "org", "biz", "info"];
-SEARCH_LENGTHS = [7, 8, 6, 9, 5, 10, 4, 11, 3, 12]
+SEARCH_LENGTHS = [7, 8, 6, 9, 5, 10, 4, 11, 3, 12];
+
+function force_number(text) {
+	var number = parseFloat(text);
+	if (isNaN(number)) return 0;
+	return number;
+}
 
 function form_weights() {
-	return {"length": $("input#id_len").val(),
-			"digits": $("input#id_digits").val(),
-			"dashes": $("input#id_dashes").val(),
-			"english": $("input#id_english").val() / 1000000,
-			"spanish": $("input#id_spanish").val() / 1000000,
-			"french": $("input#id_french").val() / 1000000,
-			"german": $("input#id_german").val() / 1000000,
-			"prefix": $("input#id_prefix").val() / 1000000,
-			"suffix": $("input#id_suffix").val() / 1000000,
-			"com": $("input#id_com").val(),
-			"net": $("input#id_net").val(),
-			"org": $("input#id_org").val(),
-			"biz": $("input#id_biz").val(),
-			"info": $("input#id_info").val()}
+	return {"length": force_number($("input#id_len").val()),
+			"digits": force_number($("input#id_digits").val()),
+			"dashes": force_number($("input#id_dashes").val()),
+			"english": force_number($("input#id_english").val()) / 1000000,
+			"spanish": force_number($("input#id_spanish").val()) / 1000000,
+			"french": force_number($("input#id_french").val()) / 1000000,
+			"german": force_number($("input#id_german").val()) / 1000000,
+			"prefix": force_number($("input#id_prefix").val()) / 1000000,
+			"suffix": force_number($("input#id_suffix").val()) / 1000000,
+			"com": force_number($("input#id_com").val()),
+			"net": force_number($("input#id_net").val()),
+			"org": force_number($("input#id_org").val()),
+			"biz": force_number($("input#id_biz").val()),
+			"info": force_number($("input#id_info").val())}
 }
 
 function domain_score(domain, weights) {
@@ -57,7 +63,7 @@ function update_html() {
 	names.sort(function(a,b) {
 		return $.domains[b].score - $.domains[a].score });
 	names.length = 100;
-	for (index in names) {
+	for (var index in names) {
 		domain = $.domains[names[index]];
 		html += table_row(domain, row);
 		row = (row % 2) + 1;
@@ -66,6 +72,15 @@ function update_html() {
 	$("tbody tr").hover(
 		function() { $(this).addClass("hover"); },
 		function() { $(this).removeClass("hover"); });
+}
+
+function update_scores() {
+	var weights = form_weights();
+	for (var name in $.domains) {
+		var domain = $.domains[name];
+		domain.score = domain_score(domain, weights);
+	}
+	update_html();
 }
 
 function keyword_match(left, right, name) {
@@ -149,6 +164,7 @@ function document_ready() {
 	$.ajax_search.right = $("input#id_right").val();
 	$("input.keyword").keypress(keyword_keypress);
 	$("input.keyword").keyup(keyword_keyup);
+	$("input.score").keyup(update_scores);
 }
 
 $(document).ready(document_ready);
