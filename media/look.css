@@ -8,14 +8,15 @@ col.double { width: 40px; }
 col.dns { width: 40px; }
 
 tr.row2 { background: #eee; }
-tr.hover { background: #ff8; }
 
 tr.row1 td.red { color: #800; background: #fdd; }
 tr.row2 td.red { color: #800; background: #edd; }
-tr.hover td.red { color: #800; background: #faa; }
 tr.row1 td.green { color: #080; background: #dfd; }
 tr.row2 td.green { color: #080; background: #ded; }
-tr.hover td.green { color: #080; background: #afa; }
+
+table.ruler tr.hover { background: #ff8; }
+table.ruler tr.hover td.red { color: #800; background: #faa; }
+table.ruler tr.hover td.green { color: #080; background: #afa; }
 
 td.green a { color: #080; }
 td.red a { color: #800; }
