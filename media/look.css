@@ -17,6 +17,9 @@ tr.row1 td.green { color: #080; background: #dfd; }
 tr.row2 td.green { color: #080; background: #ded; }
 tr.hover td.green { color: #080; background: #afa; }
 
+td.green a { color: #080; }
+td.red a { color: #800; }
+
 tr.row1 td.best { background: #ff8; }
 tr.row2 td.best { background: #ee8; }
 

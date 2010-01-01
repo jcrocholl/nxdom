@@ -42,7 +42,7 @@ p img.right { float: right; margin: 1.5em 0 1.5em 1.5em; }
 
 a:focus,
 a:hover     { color: #000; text-decoration: underline; }
-a           { color: #666; text-decoration: none; }
+a           { color: #000; text-decoration: none; }
 
 blockquote  { margin: 1.5em; color: #666; font-style: italic; }
 strong      { font-weight: bold; }
