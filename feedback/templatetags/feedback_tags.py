@@ -21,8 +21,8 @@ def feedback_form(request):
 def feedback_recently(request):
     page = request.META['PATH_INFO']
     feedback_list = []
-    for feedback in (Feedback.all().filter('page', page)):
-        # .order('-points').order('-submitted')):
+    for feedback in (Feedback.all().filter('page', page)
+                     .order('-points').order('-submitted')):
         try:
             submitter = feedback.submitter # Attempt to dereference.
             feedback_list.append(feedback)
