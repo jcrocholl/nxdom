@@ -40,7 +40,7 @@ def index(request):
         return delete(request, delete_form.cleaned_data['delete'])
     # Otherwise, display recent feedback.
     feedback_list = Feedback.all()
-    feedback_list.order('-points').order('-submitted')
+    # feedback_list.order('-points').order('-submitted')
     already_voted = get_already_voted(request)
     return render_to_response(request, 'feedback/index.html', locals())
 
