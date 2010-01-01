@@ -20,7 +20,7 @@ JSON_FETCH_LIMIT = 100 # Domains for each length from 3 to 12.
 MEMCACHE_TIMEOUT = 24 * 60 * 60 # 24 hours.
 INITIAL = {
     'left': '', 'right': '',
-    'len': -1, 'digits': -2, 'dashes': -5,
+    'len': -2, 'digits': -3, 'dashes': -5,
     'english': 3, 'spanish': 1, 'french': 1, 'german': 1,
     'prefix': 3, 'suffix': 3,
     'com': 10, 'net': 5, 'org': 5, 'biz': 3, 'info': 3,
