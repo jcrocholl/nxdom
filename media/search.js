@@ -195,8 +195,9 @@ function document_ready() {
 	$.registrar = 'moniker.com';
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-	$.ajax_search.left = $("input#id_left").val();
-	$.ajax_search.right = $("input#id_right").val();
+	$.ajax_search.left = '*';
+	$.ajax_search.right = '*';
+	keyword_keyup();
 	$("input.keyword").keypress(keyword_keypress);
 	$("input.keyword").keyup(keyword_keyup);
 	$("input.score").keyup(update_scores);
