@@ -36,7 +36,11 @@
 Then adjust the score fields to sort the best names to the top of the list.
 </td></tr>
 <tr>
-<td>{{ search_form.left }} {{ search_form.right }}</td>
+<td>
+<div id="loading"><img src="/static/images/loading.gif" alt="" /></div>
+{{ search_form.left }}
+{{ search_form.right }}
+</td>
 <td>{{ search_form.len }}</td>
 <td>{{ search_form.digits }}</td>
 <td>{{ search_form.dashes }}</td>

@@ -2,7 +2,13 @@
 
 p { padding: 0 4px; }
 
-col.name { width: 140px; }
+div#loading {
+  position: absolute;
+  margin-left: -24px;
+  margin-top: 11px;
+}
+
+col.name { width: 130px; }
 col.int { width: 40px; }
 col.double { width: 40px; }
 col.dns { width: 40px; }
