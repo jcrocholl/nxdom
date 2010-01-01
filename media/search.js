@@ -74,8 +74,17 @@ function update_html() {
 		function() { $(this).removeClass("hover"); });
 }
 
+function array_unchanged(a, b) {
+	for (var index in a)
+		if (a[index] != b[index])
+			return false;
+	return true;
+}
+
 function update_scores() {
 	var weights = form_weights();
+	if (array_unchanged($.weights, weights)) return;
+	$.weights = weights;
 	for (var name in $.domains) {
 		var domain = $.domains[name];
 		domain.score = domain_score(domain, weights);
@@ -158,6 +167,7 @@ function keyword_keyup() {
 
 function document_ready() {
 	$.domains = {};
+	$.weights = form_weights();
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.left = $("input#id_left").val();
