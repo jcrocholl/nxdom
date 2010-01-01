@@ -29,22 +29,21 @@ function form_weights() {
 
 function domain_score(domain, weights) {
 	var score = 0.0;
-	for (attr in weights)
+	for (var attr in weights)
 		score += domain[attr] * weights[attr];
 	return score;
 }
 
 function table_row(domain, row) {
 	var html = '<tr class="row' + row + '">';
-	var index;
-	for (index in DIRECT_PROPERTIES) {
+	for (var index in DIRECT_PROPERTIES) {
 		html += '<td>' + domain[DIRECT_PROPERTIES[index]] + '</td>';
 	}
-	for (index in SCORE_PROPERTIES) {
+	for (var index in SCORE_PROPERTIES) {
 		var score = domain[SCORE_PROPERTIES[index]] / 1000000;
 		html += '<td>' + score.toFixed(3) + '</td>';
 	}
-	for (index in TLD_PROPERTIES) {
+	for (var index in TLD_PROPERTIES) {
 		if (domain[TLD_PROPERTIES[index]])
 			html += '<td class="green">free</td>';
 		else
@@ -59,7 +58,7 @@ function update_html() {
 	var html = '';
 	var row = 1;
 	var names = [];
-	for (name in $.domains) names.push(name);
+	for (var name in $.domains) names.push(name);
 	names.sort(function(a,b) {
 		return $.domains[b].score - $.domains[a].score });
 	names.length = 100;
@@ -98,6 +97,13 @@ function keyword_match(left, right, name) {
 	return true;
 }
 
+function delete_domains(left, right) {
+	for (var name in $.domains)
+		if (!keyword_match(left, right, name))
+			delete $.domains[name];
+	update_html();
+}
+
 function ajax_result(json, status) {
 	var left = $("input#id_left").val();
 	var right = $("input#id_right").val();
@@ -123,9 +129,7 @@ function ajax_search(left, right) {
 	if ($.ajax_search.left == left && $.ajax_search.right == right) return;
 	$.ajax_search.left = left;
 	$.ajax_search.right = right;
-	for (name in $.domains)
-		if (!keyword_match(left, right, name))
-			delete $.domains[name];
+	delete_domains(left, right);
 	for (var index in SEARCH_LENGTHS) {
 		var length = SEARCH_LENGTHS[index];
 		if ($.ajax_search.xhr[length])
@@ -155,7 +159,6 @@ function keyword_keypress(e) {
 		this.value.substr(this.selectionEnd);
 	if (this.name == 'left') left = updated;
 	else if (this.name == 'right') right = updated;
-	update_html();
 	ajax_search(left, right);
 }
 
