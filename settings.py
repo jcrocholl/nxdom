@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'dictionaries',
     'languages',
     'tests',
+    'feedback',
 )
 
 # List apps which should be left out from app settings and urlsauto loading

@@ -40,7 +40,7 @@ lang="{% firstof LANGUAGE_CODE 'en' %}">
 
   <body>
     <div class="container">
-      <div id="content" class="span-31 last">
+      <div id="content" class="span-21 last">
       {% block content-header %}
         {% if error %}<div class="error">{{ error }}</div>{% endif %}
         {% if info %}<div class="info">{{ info }}</div>{% endif %}
@@ -51,18 +51,23 @@ lang="{% firstof LANGUAGE_CODE 'en' %}">
         {% endif %}
       {% endblock %}
       {% block content %}{% endblock %}
-    </div>
-    <div id="footer" class="span-31 last">
-      <p>
-      <a href="/about/">About</a> |
-      <a href="/faq/">FAQ</a> |
-      <a href="/terms/">Terms of use</a> |
-      <a href="/privacy/">Privacy policy</a> |
-      <a href="http://validator.w3.org/check?uri=referer">XHTML</a> |
-      <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> |
-      <a href="mailto:johann@rocholl.net">johann@rocholl.net</a>
-      </p>
-    </div>
+      </div>
+      <div id="feedback" class="span-6 prepend-1 last">
+		{% load feedback_tags %}
+		{% feedback_form request %}
+		{% feedback_recently request %}
+	  </div>
+      <div id="footer" class="span-31 last">
+		<p>
+		  <a href="/about/">About</a> |
+		  <a href="/faq/">FAQ</a> |
+		  <a href="/terms/">Terms of use</a> |
+		  <a href="/privacy/">Privacy policy</a> |
+		  <a href="http://validator.w3.org/check?uri=referer">XHTML</a> |
+		  <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> |
+		  <a href="mailto:johann@rocholl.net">johann@rocholl.net</a>
+		</p>
+      </div>
     </div>
   </body>
 </html>

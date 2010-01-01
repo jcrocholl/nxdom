@@ -28,3 +28,5 @@ input.keyword { width: 40px; }
 input.score { width: 22px; }
 
 .sum { background: #def; }
+
+.image16x16 { vertical-align: top; }

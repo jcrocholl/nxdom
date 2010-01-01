@@ -77,7 +77,7 @@ dd          { margin-left: 1.5em;}
 /* Tables
 -------------------------------------------------------------- */
 
-table       { margin-bottom: 1.4em; }
+table       { margin: 1em 0; }
 th          { font-weight: bold; }
 thead th 	{ background: #eee; color: #000; }
 th,td,caption { padding: 1px 4px; }

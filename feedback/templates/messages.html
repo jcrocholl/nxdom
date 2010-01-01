@@ -1,0 +1,24 @@
+<form method="post" action="/feedback/">
+{% load feedback_tags %}
+{% for feedback in feedback_list %}
+<p>
+{{ feedback.message }}
+{% if not feedback.key.id|in_list:already_voted %}
+<input type="image" alt="vote" src="/static/images/vote.png"
+name="vote" value="{{ feedback.key.id }}" class="image16x16" />
+{% endif %}
+{% if request.META.REMOTE_ADDR|is_equal:feedback.ip or request.user.is_staff %}
+<input type="image" alt="delete" src="/static/images/delete.png"
+name="delete" value="{{ feedback.key.id }}" class="image16x16" />
+{% endif %}<br />
+<span class="small quiet">
+{{ feedback.points }} points
+{% if feedback.submitter %}by {{ feedback.submitter }}{% endif %}
+{{ feedback.submitted|timesince }} ago
+{% ifnotequal feedback.page page %}
+on <a href="{{ feedback.page }}">{{ feedback.page }}</a>
+{% endifnotequal %}
+</span>
+</p>
+{% endfor %}
+</form>
