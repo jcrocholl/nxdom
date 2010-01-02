@@ -60,6 +60,17 @@ def long_hash(text):
     return int(md5(text).hexdigest()[:15], 16)
 
 
+def already_uploaded(names):
+    random.shuffle(names)
+    hundred = names[:100]
+    domains = Domain.get_by_key_name(hundred)
+    found = [domain.key().name() for domain in domains if domain is not None]
+    if len(found) > len(hundred) / 2:
+        print len(found), 'of these names are already in the datastore:'
+        print ' '.join(found)
+        return True
+
+
 class NameServer(ADNS.QueryEngine):
 
     def __init__(self, ip):
@@ -184,10 +195,12 @@ def main():
                     name = name.split('.')[0]
                 if names and names[-1] == name:
                     continue
-                if len(name) > MAX_NAME_LENGTH:
+                if len(name) > 9:
                     continue
                 names.append(name)
             print "Loaded %d names from %s" % (len(names), filename)
+            if already_uploaded(names):
+                return 1
             while names:
                 upload_names(names[:options.batch])
                 names = names[options.batch:]
