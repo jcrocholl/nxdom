@@ -20,33 +20,7 @@ com net org biz info
 """.split()
 
 
-class BaseModel(db.Expando):
-
-    @classmethod
-    def get_or_insert_with_flag(cls, key_name, **kwds):
-        def txn():
-            created = False
-            entity = cls.get_by_key_name(key_name)
-            if entity is None:
-                created = True
-                entity = cls(key_name=key_name, **kwds)
-                entity.put()
-            return (entity, created)
-        return db.run_in_transaction(txn)
-
-    def before_put(self):
-        pass
-
-    def after_put(self):
-        pass
-
-    def put(self):
-        self.before_put()
-        super(BaseModel, self).put()
-        self.after_put()
-
-
-class Domain(BaseModel):
+class Domain(db.Model):
     """
     The datastore key name is the domain name, without top level.
     """
@@ -58,18 +32,18 @@ class Domain(BaseModel):
 
     # Character counts.
     length = db.IntegerProperty()
-    digits = db.IntegerProperty()
-    dashes = db.IntegerProperty()
+    digits = db.IntegerProperty(indexed=False)
+    dashes = db.IntegerProperty(indexed=False)
 
     # Linguistic quality measurements.
-    english = db.FloatProperty()
-    spanish = db.FloatProperty()
-    french = db.FloatProperty()
-    german = db.FloatProperty()
+    english = db.FloatProperty(indexed=False)
+    spanish = db.FloatProperty(indexed=False)
+    french = db.FloatProperty(indexed=False)
+    german = db.FloatProperty(indexed=False)
 
     # Popular prefixes and suffixes.
-    prefix = db.FloatProperty()
-    suffix = db.FloatProperty()
+    prefix = db.FloatProperty(indexed=False)
+    suffix = db.FloatProperty(indexed=False)
 
     # The average score from prefix/suffix popularity and the best language.
     score = db.FloatProperty()
