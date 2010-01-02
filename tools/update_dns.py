@@ -11,6 +11,7 @@ import time
 from datetime import datetime
 import urllib2
 import random
+from hashlib import md5
 
 import adns
 import ADNS
@@ -46,16 +47,17 @@ NAMESERVERS = """
 205.171.3.65
 """.split()
 
-KNOWN_HIJACKERS = set("""
-208.67.216.132
-208.67.219.132
-92.242.140.13
-63.123.155.104
-""".split())
-
 
 def auth_func():
     return open('.passwd').read().split(':')
+
+
+def long_hash(text):
+    """
+    Hash to long integer with 60 bits to fit 64 bit datastore field
+    without overflow.
+    """
+    return int(md5(text).hexdigest()[:15], 16)
 
 
 class NameServer(ADNS.QueryEngine):
@@ -69,60 +71,26 @@ class NameServer(ADNS.QueryEngine):
 
     def submit(self, name):
         self.queries += 1
-        ADNS.QueryEngine.submit(self, name, adns.rr.A, 0,
+        ADNS.QueryEngine.submit(self, name, adns.rr.SOA, 0,
                                 self.callback, self.results)
 
     def callback(self, answer, name, rr, flags, results):
         # print name, answer
-        ip_list = list(answer[3])
-        if not ip_list:
+        server_list = list(answer[3])
+        if not server_list:
             return
-        ip_list.sort()
-        ip = ip_list[0]
-        if ip in KNOWN_HIJACKERS:
-            return
-        results[name] = ip
-
-    def remove_hijacker(self):
-        print "Server %-16s" % self.ip,
-        if not self.results:
-            print self.queries, "queries"
-            return
-        counters = {}
-        for name in self.results:
-            ip = self.results[name]
-            counters[ip] = counters.get(ip, 0) + 1
-        pairs = [(counters[ip], ip) for ip in counters]
-        pairs.sort(reverse=True)
-        threshold = max(7, self.queries - len(self.results))
-        if pairs[0][0] <= threshold:
-            print self.queries, "queries,", len(self.results), "results"
-            return # No DNS hijacker found.
-        hijacker = pairs[0][1]
-        print self.queries, "queries,",
-        valid_results = len(self.results) - pairs[0][0]
-        if valid_results:
-            print valid_results, "results,",
-        print pairs[0][0], "hijacked by %s" % hijacker
-        for name in self.results.keys():
-            if self.results[name] == hijacker:
-                del self.results[name]
+        server_list.sort()
+        results[name] = server_list[0][0]
 
 
-def update_dns(lookups, subdomain=None):
-    if subdomain is None:
-        print "Sending requests to name servers (without subdomain)..."
-        prefix = ''
-    else:
-        print "Sending requests to name servers (subdomain %s)..." % subdomain
-        prefix = subdomain + '.'
+def update_dns(lookups):
     servers = [NameServer(ip) for ip in NAMESERVERS]
     for lookup in lookups:
         for tld in TOP_LEVEL_DOMAINS:
             old_ip = getattr(lookup, tld)
             if old_ip == -1 or not old_ip:
                 server = random.choice(servers)
-                domain_name = prefix + lookup.key().name() + '.' + tld
+                domain_name = lookup.key().name() + '.' + tld
                 server.submit(domain_name)
     print "Waiting for DNS results..."
     results = {}
@@ -137,22 +105,27 @@ def update_dns(lookups, subdomain=None):
                     finished = False # Keep trying for max 10 seconds.
                 else:
                     print "%-4.1fsec " % (time.time() - start),
-                    server.remove_hijacker()
+                    print "Server %-16s" % server.ip,
+                    print server.queries, "queries",
+                    if server.results:
+                        print "and", len(server.results), "results",
+                    print
                     results.update(server.results)
     for lookup in lookups:
         display = False
         name = lookup.key().name()
         for tld in TOP_LEVEL_DOMAINS:
-            domain_name = prefix + lookup.key().name() + '.' + tld
+            domain_name = lookup.key().name() + '.' + tld
             if domain_name in results:
-                setattr(lookup, tld, ip_to_int(results.get(domain_name)))
+                # Set negative hash to distinguish from older IP values.
+                setattr(lookup, tld, -long_hash(results.get(domain_name)))
                 display = True
             elif getattr(lookup, tld, None) is None:
                 setattr(lookup, tld, 0)
         if display:
             print '%-16s' % name,
             for tld in TOP_LEVEL_DOMAINS:
-                print '%-16s' % int_to_ip(getattr(lookup, tld)),
+                print '%-16s' % results.get(name + '.' + tld, '')[:16],
             print lookup.timestamp.strftime('%Y-%m-%d %H:%M')
         lookup.timestamp = datetime.now()
 
@@ -161,7 +134,6 @@ def update_oldest_lookups(batch=100):
     print "Trying to fetch %d oldest DNS lookups" % batch
     query = Lookup.all().order('timestamp')
     lookups = retry(query.fetch, batch)
-    update_dns(lookups, 'www')
     update_dns(lookups)
     retry_objects(db.put, lookups)
 
@@ -177,7 +149,6 @@ def upload_names(names):
         lookup = Lookup(key_name=name, backwards=name[::-1],
                         timestamp=timestamp)
         lookups.append(lookup)
-    update_dns(lookups, 'www')
     update_dns(lookups)
     retry_objects(db.put, domains)
     retry_objects(db.put, lookups)
