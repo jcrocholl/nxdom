@@ -175,7 +175,7 @@ def cron_popular(request):
     prefix_rows = []
     suffix_rows = []
     names = []
-    while True:
+    for attempt in range(10):
         chars = ''.join([random.choice(DOMAIN_CHARS) for i in range(3)])
         prefixes = count_popular_prefixes(chars, 'left', names)
         if prefixes:
