@@ -1,7 +1,7 @@
 DIRECT_PROPERTIES = ["length", "digits", "dashes"];
 SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 					"prefix", "suffix"];
-TLD_SCORES = {com: 3, net: 2, org: 2, biz: 1, info: 1};
+TLD_SCORES = {com: 10, net: 5, org: 5, biz: 3, info: 3};
 SEARCH_LENGTHS = [7, 8, 6, 9, 5, 10, 4, 11, 3, 12];
 
 function force_number(text) {
