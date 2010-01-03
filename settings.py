@@ -17,6 +17,7 @@ COMBINE_MEDIA = {
         # http://code.google.com/p/app-engine-patch/wiki/MediaGenerator
         '.site_data.js',
         'global/search.js',
+        'global/jquery.cookie.js',
     ),
     'combined-%(LANGUAGE_DIR)s.css': (
         'global/look.css',
