@@ -34,20 +34,27 @@ function domain_score(domain, weights) {
 function affiliate_link(name, tld, text) {
 	var html = '<a href="';
 	if ($.registrar == 'moniker') {
-		html += 'http://affiliates.moniker.com/pub/Affiliates';
-		html += '?affiliate_id=3154&landingpage=domaincheck&domain=';
-		html += name + '.' + tld;
+		html += "http://affiliates.moniker.com/pub/Affiliates";
+		html += "?affiliate_id=3154&landingpage=domaincheck&domain=";
+		html += name + "." + tld;
 	} else if ($.registrar == 'dotster') {
-		html += 'http://www.tkqlhce.com/interactive';
-		html += '?DomainName=' + name + '.' + tld;
-		html += '&siteid=4798&aid=10275199&pid=3770298';
-		html += '&url=https://secure.registerapi.com/dds2/index.php';
+		html += "http://www.tkqlhce.com/interactive";
+		html += "?DomainName=" + name + "." + tld + "&siteid=4798";
+		html += "&aid=10275199&pid=3770298";
+		html += "&url=https://secure.registerapi.com/dds2/index.php";
+	} else if ($.registrar == '1and1') {
+		html += "http://www.dpbolvw.net/interactive";
+		html += "?domain=" + name + "&tld=" + tld;
+		html += "&aid=10376103&pid=3770298";
+		html += "&url=http://order.1and1.com/dcjump";
+		html += "?ac=OM.US.US469K02463T2103a"
 	} else {
-		html += 'http://www.anrdoezrs.net/interactive';
-		html += '?domainToCheck=' + name + '&tld=.' + tld.toUpperCase();
-		html += '&checkAvail=1&aid=10390987&pid=3770298';
-		html += '&url=http://www.godaddy.com/gdshop/registrar/search.asp';
-		html += '?isc=0000000000';
+		html += "http://www.anrdoezrs.net/interactive";
+		html += "?domainToCheck=" + name + "&tld=." + tld.toUpperCase();
+		html += "&checkAvail=1";
+		html += "&aid=10390987&pid=3770298";
+		html += "&url=http://www.godaddy.com/gdshop/registrar/search.asp";
+		html += "?isc=0000000000";
 	}
 	html += '" title="Check availability on ' + $.registrar + '"';
 	html += '>' + text + '</a>';
