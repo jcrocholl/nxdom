@@ -1,3 +1,13 @@
+def reverse_name(fqdn):
+    """
+    >>> reverse_name('ns57.1and1.com')
+    'com.1and1.ns57'
+    """
+    parts = fqdn.split('.')
+    parts.reverse()
+    return '.'.join(parts)
+
+
 def ip_to_int(ip):
     """
     >>> ip_to_int(None)

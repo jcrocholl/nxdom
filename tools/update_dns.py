@@ -20,7 +20,7 @@ from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
 
 from dns.models import TOP_LEVEL_DOMAINS, Lookup
-from dns.utils import ip_to_int, int_to_ip
+from dns.utils import reverse_name
 from domains.models import MAX_NAME_LENGTH, Domain
 from domains.utils import random_domains
 from utils.retry import retry, retry_objects
@@ -52,21 +52,17 @@ def auth_func():
     return open('.passwd').read().split(':')
 
 
-def long_hash(text):
-    """
-    Hash to long integer with 60 bits to fit 64 bit datastore field
-    without overflow.
-    """
-    return int(md5(text).hexdigest()[:15], 16)
-
-
 def already_uploaded(names):
-    random.shuffle(names)
-    hundred = names[:100]
-    domains = Domain.get_by_key_name(hundred)
+    if len(names) < 10:
+        return False
+    sample = names[:]
+    random.shuffle(sample)
+    sample = sample[:100]
+    domains = Domain.get_by_key_name(sample)
     found = [domain.key().name() for domain in domains if domain is not None]
-    if len(found) > len(hundred) / 2:
-        print len(found), 'of these names are already in the datastore:'
+    if len(found) > len(sample) / 2:
+        print len(found) * 100 / len(sample),
+        print 'percent of these names are already in the datastore:'
         print ' '.join(found)
         return True
 
@@ -94,15 +90,13 @@ class NameServer(ADNS.QueryEngine):
         results[name] = server_list[0][0]
 
 
-def update_dns(lookups):
+def parallel_dns_lookup(names):
     servers = [NameServer(ip) for ip in NAMESERVERS]
-    for lookup in lookups:
+    for name in names:
         for tld in TOP_LEVEL_DOMAINS:
-            old_ip = getattr(lookup, tld)
-            if old_ip == -1 or not old_ip:
-                server = random.choice(servers)
-                domain_name = lookup.key().name() + '.' + tld
-                server.submit(domain_name)
+            server = random.choice(servers)
+            domain_name = name + '.' + tld
+            server.submit(domain_name)
     print "Waiting for DNS results..."
     results = {}
     start = time.time()
@@ -122,45 +116,44 @@ def update_dns(lookups):
                         print "and", len(server.results), "results",
                     print
                     results.update(server.results)
-    for lookup in lookups:
+    lookups = []
+    timestamp = datetime.now()
+    for name in names:
         display = False
-        name = lookup.key().name()
+        lookup = Lookup(key_name=name, backwards=name[::-1],
+                        timestamp=timestamp)
         for tld in TOP_LEVEL_DOMAINS:
             domain_name = lookup.key().name() + '.' + tld
             if domain_name in results:
                 # Set negative hash to distinguish from older IP values.
-                setattr(lookup, tld, -long_hash(results.get(domain_name)))
+                setattr(lookup, tld, reverse_name(results.get(domain_name)))
                 display = True
-            elif getattr(lookup, tld, None) is None:
-                setattr(lookup, tld, 0)
         if display:
-            print '%-16s' % name,
+            print '%-12s' % name,
             for tld in TOP_LEVEL_DOMAINS:
-                print '%-16s' % results.get(name + '.' + tld, '')[:16],
-            print lookup.timestamp.strftime('%Y-%m-%d %H:%M')
-        lookup.timestamp = datetime.now()
+                print tld if getattr(lookup, tld, None) else ' ' * len(tld),
+            print
+        lookups.append(lookup)
+    return lookups
 
 
 def update_oldest_lookups(batch=100):
-    print "Trying to fetch %d oldest DNS lookups" % batch
-    query = Lookup.all().order('timestamp')
-    lookups = retry(query.fetch, batch)
-    update_dns(lookups)
+    print "Trying to fetch names of %d oldest DNS lookups" % batch
+    query = Lookup.all(keys_only=True).order('timestamp')
+    keys = retry(query.fetch, batch)
+    names = [key.name() for key in keys]
+    lookups = parallel_dns_lookup(names)
     retry_objects(db.put, lookups)
 
 
 def upload_names(names):
-    domains = []
-    lookups = []
     timestamp = datetime.now()
+    domains = []
     for name in names:
         domain = Domain(key_name=name)
         domain.before_put()
         domains.append(domain)
-        lookup = Lookup(key_name=name, backwards=name[::-1],
-                        timestamp=timestamp)
-        lookups.append(lookup)
-    update_dns(lookups)
+    lookups = parallel_dns_lookup(names)
     retry_objects(db.put, domains)
     retry_objects(db.put, lookups)
 
@@ -200,7 +193,7 @@ def main():
                 names.append(name)
             print "Loaded %d names from %s" % (len(names), filename)
             if already_uploaded(names):
-                return 1
+                continue
             while names:
                 upload_names(names[:options.batch])
                 names = names[options.batch:]
