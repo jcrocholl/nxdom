@@ -56,7 +56,8 @@ lang="{% firstof LANGUAGE_CODE 'en' %}">
       {% endblock %}
       {% block content %}{% endblock %}
       </div>
-      <div id="feedback" class="span-6 last">
+      <div id="right" class="span-6 last">
+		{% block top-right %}{% endblock%}
 		{% load feedback_tags %}
 		{% feedback_form request %}
 		{% feedback_recently request %}
