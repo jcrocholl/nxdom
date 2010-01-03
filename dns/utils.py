@@ -8,6 +8,40 @@ def reverse_name(fqdn):
     return '.'.join(parts)
 
 
+def status_name(status):
+    """
+    >>> import adns
+    >>> status_name(adns.status.nxdomain)
+    'nxdomain'
+    """
+    import adns
+    return {
+        adns.status.ok: 'ok',
+        adns.status.nomemory: 'nomemory',
+        adns.status.unknownrrtype: 'unknownrrtype',
+        adns.status.systemfail: 'systemfail',
+        adns.status.timeout: 'timeout',
+        adns.status.allservfail: 'allservfail',
+        adns.status.norecurse: 'norecurse',
+        adns.status.invalidresponse: 'invalidresponse',
+        adns.status.unknownformat: 'unknownformat',
+        adns.status.rcodeservfail: 'rcodeservfail',
+        adns.status.rcodeformaterror: 'rcodeformaterror',
+        adns.status.rcodenotimplemented: 'rcodenotimplemented',
+        adns.status.rcoderefused: 'rcoderefused',
+        adns.status.rcodeunknown: 'rcodeunknown',
+        adns.status.inconsistent: 'inconsistent',
+        adns.status.prohibitedcname: 'prohibitedcname',
+        adns.status.answerdomaininvalid: 'answerdomaininvalid',
+        adns.status.invaliddata: 'invaliddata',
+        adns.status.querydomainwrong: 'querydomainwrong',
+        adns.status.querydomaininvalid: 'querydomaininvalid',
+        adns.status.querydomaintoolong: 'querydomaintoolong',
+        adns.status.nxdomain: 'nxdomain',
+        adns.status.nodata: 'nodata',
+        }.get(status, str(status))
+
+
 def ip_to_int(ip):
     """
     >>> ip_to_int(None)
