@@ -43,9 +43,11 @@ function affiliate_link(name, tld, text) {
 		html += '&siteid=4798&aid=10275199&pid=3770298';
 		html += '&url=https://secure.registerapi.com/dds2/index.php';
 	} else {
-		html += 'https://www.godaddy.com/gdshop/registrar/search.asp';
-		html += '?domainToCheck=' + name + '&tld=.' + tld;
-		html += '&isc=jcrocholl&checkavail=1';
+		html += 'http://www.anrdoezrs.net/interactive';
+		html += '?domainToCheck=' + name + '&tld=.' + tld.toUpperCase();
+		html += '&checkAvail=1&aid=10390987&pid=3770298';
+		html += '&url=http://www.godaddy.com/gdshop/registrar/search.asp';
+		html += '?isc=0000000000';
 	}
 	html += '" title="Check availability on ' + $.registrar + '"';
 	html += '>' + text + '</a>';
@@ -193,7 +195,7 @@ function keyword_keyup() {
 function document_ready() {
 	$.domains = {};
 	$.weights = form_weights();
-	$.registrar = 'dotster';
+	$.registrar = 'godaddy';
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.left = '*';
