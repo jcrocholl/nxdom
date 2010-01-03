@@ -149,7 +149,11 @@ def json(request):
     left = request.GET.get('left', '')
     right = request.GET.get('right', '')
     length = int(request.GET.get('length', MAX_NAME_LENGTH))
-    memcache_key = 'json2,%s,%s,%d' % (left, right, length)
+    current_version = 3
+    version = int(request.GET.get('version', current_version))
+    if version > current_version:
+        version = current_version
+    memcache_key = 'json%d,%s,%s,%d' % (version, left, right, length)
     json = memcache.get(memcache_key)
     if json:
         logging.debug('json: memcache hit for %s', memcache_key)
