@@ -111,7 +111,7 @@ def update_dns(lookups):
         for server in servers:
             if not server.finished():
                 server.run(0.1)
-                if time.time() - start < 10 and not server.finished():
+                if time.time() - start < 20 and not server.finished():
                     finished = False # Keep trying for max 10 seconds.
                 else:
                     print "%-4.1fsec " % (time.time() - start),
@@ -146,9 +146,28 @@ def lookup_names(names):
 
 
 def update_oldest_lookups(batch=100):
-    print "Trying to fetch %d oldest DNS lookups" % batch
+    print "Trying to fetch %d oldest names" % batch
     query = Lookup.all(keys_only=True).order('timestamp')
     keys = retry(query.fetch, batch)
+    lookups = lookup_names([key.name() for key in keys])
+    retry_objects(db.put, lookups)
+
+
+def update_best_names(position, keyword, length=12, batch=100):
+    print "Trying to fetch %d best names with" % batch,
+    if keyword and position == 'left':
+        print "prefix", keyword, "and",
+    if keyword and position == 'right':
+        print "suffix", keyword, "and",
+    print "length", length
+    query = Domain.all(keys_only=True)
+    if keyword:
+        query.filter('%s%d' % (position, len(keyword)), keyword)
+    query.filter('length', length)
+    query.order('-score')
+    keys = retry(query.fetch, batch)
+    if not keys:
+        return
     lookups = lookup_names([key.name() for key in keys])
     retry_objects(db.put, lookups)
 
@@ -165,6 +184,32 @@ def upload_names(names):
     retry_objects(db.put, lookups)
 
 
+def upload_files(filenames, options):
+    for filename in filenames:
+        names = []
+        for line in open(filename):
+            name = line.strip()
+            if ' ' in name and name[0] in '0123456789':
+                name = name.split()[-1]
+            if '.' in name:
+                name = name.split('.')[0]
+            if options.left and not name.startswith(options.left):
+                continue
+            if options.right and not name.startswith(options.right):
+                continue
+            if names and names[-1] == name:
+                continue
+            if len(name) > options.max:
+                continue
+            names.append(name)
+        print "Loaded %d names from %s" % (len(names), filename)
+        if already_uploaded(names):
+            continue
+        while names:
+            upload_names(names[:options.batch])
+            names = names[options.batch:]
+
+
 def main():
     for line in file('/etc/resolv.conf'):
         if line.startswith('nameserver'):
@@ -178,32 +223,26 @@ def main():
                       help="connect to a different server")
     parser.add_option('--batch', metavar='<size>', type="int", default=100,
                       help="adjust batch size (default 100)")
+    parser.add_option('--max', metavar='<length>', type="int", default=9,
+                      help="only names of this length or shorter (default 9)")
+    parser.add_option('--left', metavar='<keyword>', default=None,
+                      help="only names with this prefix")
+    parser.add_option('--right', metavar='<keyword>', default=None,
+                      help="only names with this suffix")
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api_hidden', auth_func, options.server)
-    if not args:
+    if args:
+        upload_files(args, options)
+    elif options.left is not None:
+        for length in range(max(3, len(options.left)), options.max + 1):
+            update_best_names('left', options.left, length, options.batch)
+    elif options.right is not None:
+        for length in range(max(3, len(options.right)), options.max + 1):
+            update_best_names('right', options.right, length, options.batch)
+    else:
         while True:
             update_oldest_lookups(options.batch)
-    else:
-        for filename in args:
-            names = []
-            for line in open(filename):
-                name = line.strip()
-                if ' ' in name and name[0] in '0123456789':
-                    name = name.split()[-1]
-                if '.' in name:
-                    name = name.split('.')[0]
-                if names and names[-1] == name:
-                    continue
-                if len(name) > 9:
-                    continue
-                names.append(name)
-            print "Loaded %d names from %s" % (len(names), filename)
-            if already_uploaded(names):
-                continue
-            while names:
-                upload_names(names[:options.batch])
-                names = names[options.batch:]
 
 
 if __name__ == '__main__':
