@@ -20,7 +20,7 @@ from google.appengine.ext import db
 from google.appengine.ext.remote_api import remote_api_stub
 
 from dns.models import TOP_LEVEL_DOMAINS, Lookup
-from dns.utils import reverse_name
+from dns.utils import status_name, reverse_name
 from domains.models import MAX_NAME_LENGTH, Domain
 from domains.utils import random_domains
 from utils.retry import retry, retry_objects
@@ -83,16 +83,21 @@ class NameServer(ADNS.QueryEngine):
 
     def callback(self, answer, name, rr, flags, results):
         # print name, answer
-        server_list = list(answer[3])
-        if not server_list:
+        status = answer[0]
+        if status == adns.status.nxdomain:
             return
-        server_list.sort()
-        results[name] = server_list[0][0]
+        server_list = list(answer[3])
+        if server_list:
+            server_list.sort()
+            results[name] = server_list[0][0]
+        else:
+            results[name] = 'status=' + status_name(status)
 
 
-def parallel_dns_lookup(names):
+def update_dns(lookups):
     servers = [NameServer(ip) for ip in NAMESERVERS]
-    for name in names:
+    for lookup in lookups:
+        name = lookup.key().name()
         for tld in TOP_LEVEL_DOMAINS:
             server = random.choice(servers)
             domain_name = name + '.' + tld
@@ -116,16 +121,12 @@ def parallel_dns_lookup(names):
                         print "and", len(server.results), "results",
                     print
                     results.update(server.results)
-    lookups = []
-    timestamp = datetime.now()
-    for name in names:
+    for lookup in lookups:
         display = False
-        lookup = Lookup(key_name=name, backwards=name[::-1],
-                        timestamp=timestamp)
+        name = lookup.key().name()
         for tld in TOP_LEVEL_DOMAINS:
-            domain_name = lookup.key().name() + '.' + tld
+            domain_name = name + '.' + tld
             if domain_name in results:
-                # Set negative hash to distinguish from older IP values.
                 setattr(lookup, tld, reverse_name(results.get(domain_name)))
                 display = True
         if display:
@@ -133,16 +134,22 @@ def parallel_dns_lookup(names):
             for tld in TOP_LEVEL_DOMAINS:
                 print tld if getattr(lookup, tld, None) else ' ' * len(tld),
             print
-        lookups.append(lookup)
+
+
+def lookup_names(names):
+    timestamp = datetime.now()
+    lookups = [Lookup(key_name=name,
+                      backwards=name[::-1],
+                      timestamp=timestamp) for name in names]
+    update_dns(lookups)
     return lookups
 
 
 def update_oldest_lookups(batch=100):
-    print "Trying to fetch names of %d oldest DNS lookups" % batch
+    print "Trying to fetch %d oldest DNS lookups" % batch
     query = Lookup.all(keys_only=True).order('timestamp')
     keys = retry(query.fetch, batch)
-    names = [key.name() for key in keys]
-    lookups = parallel_dns_lookup(names)
+    lookups = lookup_names([key.name() for key in keys])
     retry_objects(db.put, lookups)
 
 
@@ -153,7 +160,7 @@ def upload_names(names):
         domain = Domain(key_name=name)
         domain.before_put()
         domains.append(domain)
-    lookups = parallel_dns_lookup(names)
+    lookups = lookup_names(names)
     retry_objects(db.put, domains)
     retry_objects(db.put, lookups)
 
