@@ -24,7 +24,6 @@ INITIAL = {
     'len': -2, 'digits': -3, 'dashes': -5,
     'english': 3, 'spanish': 1, 'french': 1, 'german': 1,
     'prefix': 3, 'suffix': 3,
-    'com': 10, 'net': 5, 'org': 5, 'biz': 3, 'info': 3,
     }
 
 
@@ -50,16 +49,6 @@ class SearchForm(forms.Form):
     prefix = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
     suffix = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    com = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    net = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    org = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    biz = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    info = forms.FloatField(required=False,
         widget=forms.TextInput(attrs={'class': 'text score'}))
 
     def clean(self):
