@@ -14,6 +14,7 @@ from ragendja.template import render_to_response
 
 from domains.models import Domain, MAX_NAME_LENGTH
 from dns.models import Lookup, TOP_LEVEL_DOMAINS
+from dns.utils import reverse_name
 from prefixes.utils import increment_prefix
 
 JSON_FETCH_LIMIT = 100 # Domains for each length from 3 to 12.
@@ -120,9 +121,12 @@ def fetch_dns_lookups(domains):
             for domain in domains]
     lookups = db.get(keys)
     for domain, lookup in zip(domains, lookups):
+        if not lookup:
+            continue
         for tld in TOP_LEVEL_DOMAINS:
-            value = getattr(lookup, tld) if lookup else None
-            setattr(domain, tld, value)
+            backwards = getattr(lookup, tld, '')
+            if backwards:
+                setattr(domain, tld, reverse_name(backwards))
 
 
 def domains_to_dict(domains):
@@ -134,7 +138,8 @@ def domains_to_dict(domains):
         for attr in 'english spanish french german prefix suffix'.split():
             properties[attr] = int(getattr(domain, attr) * 1000000)
         for attr in TOP_LEVEL_DOMAINS:
-            properties[attr] = int(not getattr(domain, attr))
+            if hasattr(domain, attr):
+                properties[attr] = getattr(domain, attr)
         result[domain.key().name()] = properties
     return result
 
