@@ -113,9 +113,11 @@ def fetch_dns_lookups(domains):
         if not lookup:
             continue
         for tld in TOP_LEVEL_DOMAINS:
-            backwards = getattr(lookup, tld, '')
-            if backwards:
-                setattr(domain, tld, reverse_name(backwards))
+            value = getattr(lookup, tld, None)
+            if isinstance(value, basestring):
+                value = reverse_name(value)
+            if value:
+                setattr(domain, tld, value)
 
 
 def domains_to_dict(domains):
