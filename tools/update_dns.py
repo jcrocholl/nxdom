@@ -114,10 +114,8 @@ def update_dns(lookups, timeout=20):
                 else:
                     print "%-4.1fsec " % (time.time() - start),
                     print "Server %-16s" % server.ip,
-                    print server.queries, "queries",
-                    if server.results:
-                        print "and", len(server.results), "results",
-                    print
+                    print "returned", len(server.results),
+                    print "of", server.queries, "queries"
                     results.update(server.results)
     for lookup in lookups:
         display = False
