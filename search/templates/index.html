@@ -2,82 +2,22 @@
 
 {% block title %}Search and sort available domain names{% endblock %}
 
+{% block left %}
+<div id="loading"><img src="/static/images/loading.gif" alt="" /></div>
+<p>
+{{ search_form.left }}
+{{ search_form.right }}
+</p>
+{% endblock%}
+
 {% block content %}
 <form action="" method="get">
 <table class="ruler">
-<colgroup>
-<col class="name" />
-</colgroup>
-<colgroup>
-<col class="int" />
-<col class="int" />
-<col class="int" />
-</colgroup>
-<colgroup>
-<col class="double" />
-<col class="double" />
-<col class="double" />
-<col class="double" />
-</colgroup>
-<colgroup>
-<col class="double" />
-<col class="double" />
-</colgroup>
-<colgroup>
-<col class="dns" />
-<col class="dns" />
-<col class="dns" />
-<col class="dns" />
-<col class="dns" />
-</colgroup>
-<thead>
-<tr><td colspan="16">
-<b>Type a keyword to search for available domain names.</b>
-Then adjust the score fields to sort the best names to the top of the list.
-</td></tr>
-<tr>
-<td>
-<div id="loading"><img src="/static/images/loading.gif" alt="" /></div>
-{{ search_form.left }}
-{{ search_form.right }}
-</td>
-<td>{{ search_form.len }}</td>
-<td>{{ search_form.digits }}</td>
-<td>{{ search_form.dashes }}</td>
-<td>{{ search_form.english }}</td>
-<td>{{ search_form.spanish }}</td>
-<td>{{ search_form.french }}</td>
-<td>{{ search_form.german }}</td>
-<td>{{ search_form.prefix }}</td>
-<td>{{ search_form.suffix }}</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<th title="Domain name candidates">Name</th>
-<th title="How many characters in the name">Length</th>
-<th title="How many numbers in the name">Digits</th>
-<th title="How many minus signs in the name">Dashes</th>
-<th title="Letter combinations similar to English words">English</th>
-<th title="Letter combinations similar to Spanish words">Spanish</th>
-<th title="Letter combinations similar to French words">French</th>
-<th title="Letter combinations similar to German words">German</th>
-<th title="Popularity of the first few letters">Prefix</th>
-<th title="Popularity of the last few letters">Suffix</th>
-<th title="DNS result for domain name with .com">.com</th>
-<th title="DNS result for domain name with .net">.net</th>
-<th title="DNS result for domain name with .org">.org</th>
-<th title="DNS result for domain name with .biz">.biz</th>
-<th title="DNS result for domain name with .info">.info</th>
-<th title="Total weighted score for each name">Score</th>
-</tr>
-</thead>
 <tbody id="results">
-<tr><td>Loading...</td></tr>
+<tr><td colspan="16">
+<b>Type a keyword to search for available domain names.</b><br />
+Then adjust the sliders to sort the best names to the top of the list.
+</td></tr>
 </tbody>
 </table>
 </form>
