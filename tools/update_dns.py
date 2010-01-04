@@ -92,7 +92,7 @@ class NameServer(ADNS.QueryEngine):
             results[name] = 'status=' + status_name(status)
 
 
-def update_dns(lookups, timeout=20):
+def update_dns(lookups, options):
     servers = [NameServer(ip) for ip in NAMESERVERS]
     for lookup in lookups:
         name = lookup.key().name()
@@ -109,7 +109,8 @@ def update_dns(lookups, timeout=20):
         for server in servers:
             if not server.finished():
                 server.run(0.1)
-                if time.time() - start < timeout and not server.finished():
+                if (time.time() - start < options.timeout
+                    and not server.finished()):
                     finished = False # Keep trying for timeout seconds.
                 else:
                     print "%-4.1fsec " % (time.time() - start),
@@ -122,11 +123,11 @@ def update_dns(lookups, timeout=20):
         name = lookup.key().name()
         for tld in TOP_LEVEL_DOMAINS:
             domain_name = name + '.' + tld
-            result = results.get(domain_name, 'timeout=%d' % timeout)
+            result = results.get(domain_name, 'timeout=%d' % options.timeout)
             if result != 'status=nxdomain':
                 setattr(lookup, tld, reverse_name(result))
                 display = True
-        if display:
+        if display or options.verbose:
             print '%-12s' % name,
             for tld in TOP_LEVEL_DOMAINS:
                 print tld if getattr(lookup, tld, None) else ' ' * len(tld),
@@ -138,16 +139,16 @@ def update_dns(lookups, timeout=20):
                 if getattr(lookup, tld).startswith('timeout='):
                     timeouts.append(lookup.key().name() + '.' + tld)
     if timeouts:
-        print "timeout=%d for %d domains:" % (timeout, len(timeouts)),
+        print "timeout=%d for %d domains:" % (options.timeout, len(timeouts)),
         print ' '.join(timeouts)
 
 
-def lookup_names(names, timeout):
+def lookup_names(names, options):
     timestamp = datetime.now()
     lookups = [Lookup(key_name=name,
                       backwards=name[::-1],
                       timestamp=timestamp) for name in names]
-    update_dns(lookups, timeout)
+    update_dns(lookups, options)
     return lookups
 
 
@@ -155,7 +156,7 @@ def update_oldest_lookups(options):
     print "Trying to fetch %d oldest names" % options.batch
     query = Lookup.all(keys_only=True).order('timestamp')
     keys = retry(query.fetch, options.batch)
-    lookups = lookup_names([key.name() for key in keys], options.timeout)
+    lookups = lookup_names([key.name() for key in keys], options)
     retry_objects(db.put, lookups)
 
 
@@ -174,7 +175,7 @@ def update_best_names(position, keyword, length, options):
     keys = retry(query.fetch, options.batch)
     if not keys:
         return
-    lookups = lookup_names([key.name() for key in keys], options.timeout)
+    lookups = lookup_names([key.name() for key in keys], options)
     retry_objects(db.put, lookups)
 
 
@@ -185,7 +186,7 @@ def upload_names(names, options):
         domain = Domain(key_name=name)
         domain.before_put()
         domains.append(domain)
-    lookups = lookup_names(names, options.timeout)
+    lookups = lookup_names(names, options)
     retry_objects(db.put, domains)
     retry_objects(db.put, lookups)
 
@@ -224,6 +225,8 @@ def main():
                 NAMESERVERS.append(ip)
     from optparse import OptionParser
     parser = OptionParser()
+    parser.add_option('-v', '--verbose', action='store_true',
+                      help="output all names, not only existing")
     parser.add_option('--server', metavar='<hostname>',
                       default='scoretool.appspot.com',
                       help="connect to a different server")
