@@ -84,8 +84,6 @@ class NameServer(ADNS.QueryEngine):
     def callback(self, answer, name, rr, flags, results):
         # print name, answer
         status = answer[0]
-        if status == adns.status.nxdomain:
-            return
         server_list = list(answer[3])
         if server_list:
             server_list.sort()
@@ -94,7 +92,7 @@ class NameServer(ADNS.QueryEngine):
             results[name] = 'status=' + status_name(status)
 
 
-def update_dns(lookups):
+def update_dns(lookups, timeout=20):
     servers = [NameServer(ip) for ip in NAMESERVERS]
     for lookup in lookups:
         name = lookup.key().name()
@@ -111,8 +109,8 @@ def update_dns(lookups):
         for server in servers:
             if not server.finished():
                 server.run(0.1)
-                if time.time() - start < 20 and not server.finished():
-                    finished = False # Keep trying for max 10 seconds.
+                if time.time() - start < timeout and not server.finished():
+                    finished = False # Keep trying for timeout seconds.
                 else:
                     print "%-4.1fsec " % (time.time() - start),
                     print "Server %-16s" % server.ip,
@@ -126,35 +124,45 @@ def update_dns(lookups):
         name = lookup.key().name()
         for tld in TOP_LEVEL_DOMAINS:
             domain_name = name + '.' + tld
-            if domain_name in results:
-                setattr(lookup, tld, reverse_name(results.get(domain_name)))
+            result = results.get(domain_name, 'timeout=%d' % timeout)
+            if result != 'status=nxdomain':
+                setattr(lookup, tld, reverse_name(result))
                 display = True
         if display:
             print '%-12s' % name,
             for tld in TOP_LEVEL_DOMAINS:
                 print tld if getattr(lookup, tld, None) else ' ' * len(tld),
             print
+    timeouts = []
+    for lookup in lookups:
+        for tld in TOP_LEVEL_DOMAINS:
+            if hasattr(lookup, tld):
+                if getattr(lookup, tld).startswith('timeout='):
+                    timeouts.append(lookup.key().name() + '.' + tld)
+    if timeouts:
+        print "timeout=%d for %d domains:" % (timeout, len(timeouts)),
+        print ' '.join(timeouts)
 
 
-def lookup_names(names):
+def lookup_names(names, timeout):
     timestamp = datetime.now()
     lookups = [Lookup(key_name=name,
                       backwards=name[::-1],
                       timestamp=timestamp) for name in names]
-    update_dns(lookups)
+    update_dns(lookups, timeout)
     return lookups
 
 
-def update_oldest_lookups(batch=100):
-    print "Trying to fetch %d oldest names" % batch
+def update_oldest_lookups(options):
+    print "Trying to fetch %d oldest names" % options.batch
     query = Lookup.all(keys_only=True).order('timestamp')
-    keys = retry(query.fetch, batch)
-    lookups = lookup_names([key.name() for key in keys])
+    keys = retry(query.fetch, options.batch)
+    lookups = lookup_names([key.name() for key in keys], options.timeout)
     retry_objects(db.put, lookups)
 
 
-def update_best_names(position, keyword, length=12, batch=100):
-    print "Trying to fetch %d best names with" % batch,
+def update_best_names(position, keyword, length, options):
+    print "Trying to fetch %d best names with" % options.batch,
     if keyword and position == 'left':
         print "prefix", keyword, "and",
     if keyword and position == 'right':
@@ -165,21 +173,21 @@ def update_best_names(position, keyword, length=12, batch=100):
         query.filter('%s%d' % (position, len(keyword)), keyword)
     query.filter('length', length)
     query.order('-score')
-    keys = retry(query.fetch, batch)
+    keys = retry(query.fetch, options.batch)
     if not keys:
         return
-    lookups = lookup_names([key.name() for key in keys])
+    lookups = lookup_names([key.name() for key in keys], options.timeout)
     retry_objects(db.put, lookups)
 
 
-def upload_names(names):
+def upload_names(names, options):
     timestamp = datetime.now()
     domains = []
     for name in names:
         domain = Domain(key_name=name)
         domain.before_put()
         domains.append(domain)
-    lookups = lookup_names(names)
+    lookups = lookup_names(names, options.timeout)
     retry_objects(db.put, domains)
     retry_objects(db.put, lookups)
 
@@ -206,7 +214,7 @@ def upload_files(filenames, options):
         if already_uploaded(names):
             continue
         while names:
-            upload_names(names[:options.batch])
+            upload_names(names[:options.batch], options)
             names = names[options.batch:]
 
 
@@ -223,6 +231,8 @@ def main():
                       help="connect to a different server")
     parser.add_option('--batch', metavar='<size>', type="int", default=100,
                       help="adjust batch size (default 100)")
+    parser.add_option('--timeout', metavar='<seconds>', type="int", default=20,
+                      help="maximum wait time for DNS response (default 20)")
     parser.add_option('--max', metavar='<length>', type="int", default=9,
                       help="only names of this length or shorter (default 9)")
     parser.add_option('--left', metavar='<keyword>', default=None,
@@ -236,13 +246,13 @@ def main():
         upload_files(args, options)
     elif options.left is not None:
         for length in range(max(3, len(options.left)), options.max + 1):
-            update_best_names('left', options.left, length, options.batch)
+            update_best_names('left', options.left, length, options)
     elif options.right is not None:
         for length in range(max(3, len(options.right)), options.max + 1):
-            update_best_names('right', options.right, length, options.batch)
+            update_best_names('right', options.right, length, options)
     else:
         while True:
-            update_oldest_lookups(options.batch)
+            update_oldest_lookups(options)
 
 
 if __name__ == '__main__':
