@@ -59,8 +59,18 @@ class SearchForm(forms.Form):
         return data
 
 
+class RegistrarForm(forms.Form):
+    registrar = forms.ChoiceField(choices=[
+            ('godaddy', 'GoDaddy'),
+            ('moniker', 'Moniker'),
+            ('dotster', 'Dotster'),
+            ('1and1', '1&1'),
+            ])
+
+
 def index(request, template_name='search/index.html'):
     search_form = SearchForm(request.GET or None, initial=INITIAL)
+    registrar_form = RegistrarForm()
     return render_to_response(request, template_name, locals())
 
 
