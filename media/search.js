@@ -1,8 +1,14 @@
 DIRECT_PROPERTIES = ["length", "digits", "dashes"];
 SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 					"prefix", "suffix"];
-TLD_SCORES = {com: 10, net: 5, org: 5, biz: 3, info: 3};
-SEARCH_LENGTHS = [7, 8, 6, 9, 5, 10, 4, 11, 3, 12];
+TLD_SCORES = {
+	com: 10, net: 5, org: 5, biz: 3, info: 3,
+	mobi: 3, name: 3, tel: 3, travel: 3,
+	at: 1, be: 1, ch: 1, de: 1, es: 1, eu: 2, fm: 2,
+	"in": 1, is: 1, it: 1, la: 1, li: 1, ly: 2, ru: 1, se: 1,
+	to: 1, tv: 2, us: 1,
+};
+SEARCH_LENGTHS = [6, 7, 5, 8, 4, 9, 3];
 
 function force_number(text) {
 	var number = parseFloat(text);
@@ -62,21 +68,15 @@ function affiliate_link(name, tld, text) {
 }
 
 function table_row(domain, row) {
-	var html = '<tr class="row' + row + '"><td>';
-	html += affiliate_link(domain.name, 'com', domain.name) + '</td>';
-	for (var index in DIRECT_PROPERTIES) {
-		html += '<td>' + domain[DIRECT_PROPERTIES[index]] + '</td>';
-	}
-	for (var index in SCORE_PROPERTIES) {
-		var score = domain[SCORE_PROPERTIES[index]] / 1000000;
-		html += '<td>' + score.toFixed(3) + '</td>';
-	}
+	var html = '<tr class="row' + row + '">';
+	html += '<td>' + domain.length + '</td>';
+	html += '<td>' + affiliate_link(domain.key, 'com', domain.key) + '</td>';
 	for (var tld in TLD_SCORES) {
 		if (domain[tld]) {
-			html += '<td class="red">taken</td>';
+			html += '<td class="red" title="' + domain[tld] + '"></td>';
 		} else {
-			html += '<td class="green">';
-			html += affiliate_link(domain.name, tld, 'free');
+			html += '<td>';
+			html += affiliate_link(domain.key, tld, tld);
 			html += '</td>';
 		}
 	}
@@ -88,13 +88,13 @@ function table_row(domain, row) {
 function update_html() {
 	var html = '';
 	var row = 1;
-	var names = [];
-	for (var name in $.domains) names.push(name);
-	names.sort(function(a,b) {
+	var keys = [];
+	for (var key in $.domains) keys.push(key);
+	keys.sort(function(a,b) {
 		return $.domains[b].score - $.domains[a].score });
-	names.length = 100;
-	for (var index in names) {
-		domain = $.domains[names[index]];
+	keys.length = 100;
+	for (var index in keys) {
+		domain = $.domains[keys[index]];
 		html += table_row(domain, row);
 		row = (row % 2) + 1;
 	}
@@ -115,8 +115,8 @@ function update_scores() {
 	var weights = form_weights();
 	if (array_unchanged($.weights, weights)) return;
 	$.weights = weights;
-	for (var name in $.domains) {
-		var domain = $.domains[name];
+	for (var key in $.domains) {
+		var domain = $.domains[key];
 		domain.score = domain_score(domain, weights);
 	}
 	update_html();
@@ -129,9 +129,9 @@ function keyword_match(left, right, name) {
 }
 
 function delete_domains(left, right) {
-	for (var name in $.domains)
-		if (!keyword_match(left, right, name))
-			delete $.domains[name];
+	for (var key in $.domains)
+		if (!keyword_match(left, right, key))
+			delete $.domains[key];
 	update_html();
 }
 
@@ -141,16 +141,16 @@ function ajax_result(json, status) {
 	var weights = form_weights();
 	var updated = false;
 	var length = 0;
-	for (name in json) {
-		domain = json[name];
-		domain.name = name;
-		domain.length = name.length;
+	for (var key in json) {
+		domain = json[key];
+		domain.key = key;
+		domain.length = key.length;
 		domain.score = domain_score(domain, weights);
-		if (keyword_match(left, right, name)) {
-			$.domains[name] = domain;
+		if (keyword_match(left, right, key)) {
+			$.domains[key] = domain;
 			updated = true;
 		}
-		length = name.length;
+		length = key.length;
 	}
 	$.ajax_search.xhr[length] = false;
 	if (updated) update_html();
