@@ -39,28 +39,28 @@ function domain_score(domain, weights) {
 
 function affiliate_link(name, tld, text) {
 	var html = '<a href="';
-	if ($.registrar == 'moniker') {
-		html += "http://affiliates.moniker.com/pub/Affiliates";
-		html += "?affiliate_id=3154&landingpage=domaincheck&domain=";
-		html += name + "." + tld;
-	} else if ($.registrar == 'dotster') {
-		html += "http://www.tkqlhce.com/interactive";
-		html += "?DomainName=" + name + "." + tld + "&siteid=4798";
-		html += "&aid=10275199&pid=3770298";
-		html += "&url=https://secure.registerapi.com/dds2/index.php";
-	} else if ($.registrar == '1and1') {
-		html += "http://www.dpbolvw.net/interactive";
-		html += "?domain=" + name + "&tld=" + tld;
-		html += "&aid=10376103&pid=3770298";
-		html += "&url=http://order.1and1.com/dcjump";
-		html += "?ac=OM.US.US469K02463T2103a"
-	} else {
+	if ($.registrar == 'godaddy.com') {
 		html += "http://www.anrdoezrs.net/interactive";
 		html += "?domainToCheck=" + name + "&tld=." + tld.toUpperCase();
 		html += "&checkAvail=1";
 		html += "&aid=10390987&pid=3770298";
 		html += "&url=http://www.godaddy.com/gdshop/registrar/search.asp";
 		html += "?isc=0000000000";
+	} else if ($.registrar == 'dotster.com') {
+		html += "http://www.tkqlhce.com/interactive";
+		html += "?DomainName=" + name + "." + tld + "&siteid=4798";
+		html += "&aid=10275199&pid=3770298";
+		html += "&url=https://secure.registerapi.com/dds2/index.php";
+	} else if ($.registrar == '1and1.com') {
+		html += "http://www.dpbolvw.net/interactive";
+		html += "?domain=" + name + "&tld=" + tld;
+		html += "&aid=10376103&pid=3770298";
+		html += "&url=http://order.1and1.com/dcjump";
+		html += "?ac=OM.US.US469K02463T2103a";
+	} else { // moniker.com
+		html += "http://affiliates.moniker.com/pub/Affiliates";
+		html += "?affiliate_id=3154&landingpage=domaincheck&domain=";
+		html += name + "." + tld;
 	}
 	html += '" title="Check availability on ' + $.registrar + '"';
 	html += '>' + text + '</a>';
@@ -198,6 +198,11 @@ function keyword_keyup() {
 	ajax_search(left, right);
 }
 
+function registrar_change() {
+	$.registrar = this.value;
+	$.changed = true;
+}
+
 function update_if_changed(i) {
 	$(this).html(i);
 	if (!$.changed) return;
@@ -208,17 +213,17 @@ function update_if_changed(i) {
 function document_ready() {
 	$.domains = {};
 	$.weights = form_weights();
-	$.registrar = 'godaddy';
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.left = '*';
 	$.ajax_search.right = '*';
-	$.changed = false;
-	keyword_keyup();
 	$("input.keyword").keypress(keyword_keypress);
 	$("input.keyword").keyup(keyword_keyup);
-	$("input.score").keyup(update_scores);
+	$.registrar = $("select#id_registrar").val();
+	$("select#id_registrar").change(registrar_change);
+	$.changed = false;
 	$("span#timer").everyTime(100, update_if_changed);
+	keyword_keyup();
 }
 
 $(document).ready(document_ready);

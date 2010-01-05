@@ -3,12 +3,19 @@
 {% block title %}Search and sort available domain names{% endblock %}
 
 {% block left %}
+<form method="get" action="">
 <p>
 {{ search_form.left }}
 {{ search_form.right }}
 <img id="loading" src="/static/images/loading.gif" alt="" />
 <span id="timer" class="quiet small">0</span>
 </p>
+
+<p>
+Choose your registrar:
+{{ registrar_form.registrar }}
+</p>
+</form>
 {% endblock%}
 
 {% block content %}
@@ -16,8 +23,7 @@
 <table class="ruler">
 <tbody id="results">
 <tr><td colspan="16">
-<b>Type a keyword to search for available domain names.</b><br />
-Then adjust the sliders to sort the best names to the top of the list.
+Loading...
 </td></tr>
 </tbody>
 </table>

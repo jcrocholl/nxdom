@@ -25,6 +25,12 @@ INITIAL = {
     'english': 3, 'spanish': 1, 'french': 1, 'german': 1,
     'prefix': 3, 'suffix': 3,
     }
+REGISTRAR_CHOICES = [
+    ('godaddy.com', 'GoDaddy'),
+    ('moniker.com', 'Moniker'),
+    ('1and1.com', '1&1 (USA)'),
+    ('dotster.com', 'Dotster'),
+    ]
 
 
 class SearchForm(forms.Form):
@@ -60,12 +66,7 @@ class SearchForm(forms.Form):
 
 
 class RegistrarForm(forms.Form):
-    registrar = forms.ChoiceField(choices=[
-            ('godaddy', 'GoDaddy'),
-            ('moniker', 'Moniker'),
-            ('dotster', 'Dotster'),
-            ('1and1', '1&1'),
-            ])
+    registrar = forms.ChoiceField(choices=REGISTRAR_CHOICES)
 
 
 def index(request, template_name='search/index.html'):
