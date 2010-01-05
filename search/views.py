@@ -124,6 +124,7 @@ def fetch_dns_lookups(domains):
     for domain, lookup in zip(domains, lookups):
         if not lookup:
             continue
+        domain.updated = lookup.timestamp
         for tld in TOP_LEVEL_DOMAINS:
             value = getattr(lookup, tld, None)
             if isinstance(value, basestring):
@@ -143,6 +144,7 @@ def domains_to_dict(domains):
         for attr in TOP_LEVEL_DOMAINS:
             if hasattr(domain, attr):
                 properties[attr] = getattr(domain, attr)
+        properties['updated'] = domain.updated.strftime('%Y-%m-%dT%H:%M:%SZ')
         result[domain.key().name()] = properties
     return result
 
