@@ -18,6 +18,7 @@ COMBINE_MEDIA = {
         '.site_data.js',
         'global/search.js',
         'global/jquery.cookie.js',
+        'global/jquery.timers.js',
         'global/jquery.timeago.js',
     ),
     'combined-%(LANGUAGE_DIR)s.css': (

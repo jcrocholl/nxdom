@@ -119,7 +119,7 @@ function update_scores() {
 		var domain = $.domains[key];
 		domain.score = domain_score(domain, weights);
 	}
-	update_html();
+	$.changed = true;
 }
 
 function keyword_match(left, right, name) {
@@ -130,16 +130,16 @@ function keyword_match(left, right, name) {
 
 function delete_domains(left, right) {
 	for (var key in $.domains)
-		if (!keyword_match(left, right, key))
+		if (!keyword_match(left, right, key)) {
 			delete $.domains[key];
-	update_html();
+			$.changed = true;
+		}
 }
 
 function ajax_result(json, status) {
 	var left = $("input#id_left").val();
 	var right = $("input#id_right").val();
 	var weights = form_weights();
-	var updated = false;
 	var length = 0;
 	for (var key in json) {
 		domain = json[key];
@@ -148,12 +148,11 @@ function ajax_result(json, status) {
 		domain.score = domain_score(domain, weights);
 		if (keyword_match(left, right, key)) {
 			$.domains[key] = domain;
-			updated = true;
+			$.changed = true;
 		}
 		length = key.length;
 	}
 	$.ajax_search.xhr[length] = false;
-	if (updated) update_html();
 }
 
 function ajax_search(left, right) {
@@ -199,6 +198,13 @@ function keyword_keyup() {
 	ajax_search(left, right);
 }
 
+function update_if_changed(i) {
+	$(this).html(i);
+	if (!$.changed) return;
+	$.changed = false;
+	update_html();
+}
+
 function document_ready() {
 	$.domains = {};
 	$.weights = form_weights();
@@ -207,10 +213,12 @@ function document_ready() {
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.left = '*';
 	$.ajax_search.right = '*';
+	$.changed = false;
 	keyword_keyup();
 	$("input.keyword").keypress(keyword_keypress);
 	$("input.keyword").keyup(keyword_keyup);
 	$("input.score").keyup(update_scores);
+	$("span#timer").everyTime(100, update_if_changed);
 }
 
 $(document).ready(document_ready);
