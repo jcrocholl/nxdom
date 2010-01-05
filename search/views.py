@@ -97,8 +97,10 @@ def score_domains(cleaned_data, domain_list):
 def fetch_candidates(left, right, length):
     query = Domain.all()
     if len(right) > len(left):
+        right = right[:6]
         query.filter('right%d' % len(right), right)
     elif left:
+        left = left[:6]
         query.filter('left%d' % len(left), left)
     query.filter('length', length)
     query.order('-score')
