@@ -57,6 +57,10 @@ function affiliate_link(name, tld, text) {
 		html += "&aid=10376103&pid=3770298";
 		html += "&url=http://order.1and1.com/dcjump";
 		html += "?ac=OM.US.US469K02463T2103a";
+	} else if ($.registrar == 'namecheap.com') {
+		html += "http://www.namecheap.com/domain-name-search.asp";
+		html += "?formtype=domain&sld=" + name + "&tld=" + tld;
+		html += "&aff=5799";
 	} else { // moniker.com
 		html += "http://affiliates.moniker.com/pub/Affiliates";
 		html += "?affiliate_id=3154&landingpage=domaincheck&domain=";

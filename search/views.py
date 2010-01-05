@@ -28,6 +28,7 @@ INITIAL = {
 REGISTRAR_CHOICES = [
     ('godaddy.com', 'GoDaddy'),
     ('moniker.com', 'Moniker'),
+    ('namecheap.com', 'Namecheap'),
     ('1and1.com', '1&1 (USA)'),
     ('dotster.com', 'Dotster'),
     ]
