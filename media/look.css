@@ -2,10 +2,8 @@
 
 p { padding: 0 4px; }
 
-div#loading {
-  position: absolute;
-  margin-left: -24px;
-  margin-top: 11px;
+img#loading {
+  vertical-align: middle;
 }
 
 col.name { width: 130px; }
@@ -31,9 +29,11 @@ tr.row1 td.best { background: #ff8; }
 tr.row2 td.best { background: #ee8; }
 
 .right { text-align: right; }
-input.keyword { width: 40px; }
+input.keyword { width: 60px; }
 input.score { width: 22px; }
 
 .sum { background: #def; }
 
 .image16x16 { vertical-align: top; }
+
+div#footer { text-align: center; }
