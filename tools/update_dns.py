@@ -183,7 +183,7 @@ def update_best_names(position, keyword, length, options):
 def update_random(options):
     position = random.choice(('left', 'right'))
     keyword = random_prefix(position)
-    for length in range(max(3, len(keyword) + 1), MAX_NAME_LENGTH + 1):
+    for length in range(max(3, len(keyword) + 1), options.max + 1):
         update_best_names(position, keyword, length, options)
 
 
