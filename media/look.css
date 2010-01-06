@@ -5,6 +5,12 @@ img#loading {
   margin: 28px 0 0 214px;
 }
 
+div#timer {
+  position: absolute;
+  text-align: right;
+  visibility: hidden;
+}
+
 col.name { width: 130px; }
 col.int { width: 40px; }
 col.double { width: 40px; }
@@ -23,13 +29,13 @@ table.ruler tr.hover { background: #ff8; }
 table.ruler tr.hover td.red { color: #800; background: #faa; }
 table.ruler tr.hover td.green { color: #080; background: #afa; }
 
-table.radio { margin-top: -1em; }
-table.radio th,
-table.radio td {
+table.weights { margin-top: -1em; }
+table.weights th,
+table.weights td {
   padding-left: 0;
   padding-right: 0;
 }
-table.radio td { text-align: right; }
+table.weights td { text-align: right; }
 td.vertical { vertical-align: bottom; }
 span.vertical {
   position: absolute;
