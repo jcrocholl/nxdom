@@ -186,7 +186,7 @@ function ajax_search(left, right) {
 				type: "GET",
 				url: "/search/json/",
 				data: {left: left, right: right, length: length,
-					   version: $.media_version},
+					   version: $.json_version},
 				dataType: "json",
 				cache: true,
 				success: ajax_result,
