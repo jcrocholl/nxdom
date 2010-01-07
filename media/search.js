@@ -1,25 +1,35 @@
 DIRECT_PROPERTIES = ["length", "digits", "dashes"];
 SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 					"prefix", "suffix"];
-TLD_SCORES = {com: 10, net: 5, org: 5, biz: 3, info: 3};
-SEARCH_LENGTHS = [7, 8, 6, 9, 5, 10, 4, 11, 3, 12];
+TLD_SCORES = {
+	com: 10, net: 5, org: 5, biz: 3, info: 3,
+	mobi: 3, name: 3, tel: 3, travel: 3,
+	at: 1, be: 1, ch: 1, de: 1, es: 1, eu: 2, fm: 2,
+	"in": 1, is: 1, it: 1, la: 1, li: 1, ly: 2, ru: 1, se: 1,
+	to: 1, tv: 2, us: 1,
+};
+SEARCH_LENGTHS = [7, 6, 8, 5, 9, 4, 10, 3, 11, 12];
 
 function force_number(text) {
-	var number = parseFloat(text);
+	var number = parseInt(text);
 	if (isNaN(number)) return 0;
 	return number;
 }
 
+function force_million(text) {
+	return force_number(text) / 1000000;
+}
+
 function form_weights() {
-	return {length: force_number($("input#id_len").val()),
-			digits: force_number($("input#id_digits").val()),
-			dashes: force_number($("input#id_dashes").val()),
-			english: force_number($("input#id_english").val()) / 1000000,
-			spanish: force_number($("input#id_spanish").val()) / 1000000,
-			french: force_number($("input#id_french").val()) / 1000000,
-			german: force_number($("input#id_german").val()) / 1000000,
-			prefix: force_number($("input#id_prefix").val()) / 1000000,
-			suffix: force_number($("input#id_suffix").val()) / 1000000};
+	return {length: force_number($("input[name=len]:checked").val()),
+			digits: force_number($("input[name=digits]:checked").val()),
+			dashes: force_number($("input[name=dashes]:checked").val()),
+			english: force_million($("input[name=english]:checked").val()),
+			spanish: force_million($("input[name=spanish]:checked").val()),
+			french: force_million($("input[name=french]:checked").val()),
+			german: force_million($("input[name=german]:checked").val()),
+			prefix: force_million($("input[name=prefix]:checked").val()),
+			suffix: force_million($("input[name=suffix]:checked").val())}
 }
 
 function domain_score(domain, weights) {
@@ -33,28 +43,32 @@ function domain_score(domain, weights) {
 
 function affiliate_link(name, tld, text) {
 	var html = '<a href="';
-	if ($.registrar == 'moniker') {
-		html += "http://affiliates.moniker.com/pub/Affiliates";
-		html += "?affiliate_id=3154&landingpage=domaincheck&domain=";
-		html += name + "." + tld;
-	} else if ($.registrar == 'dotster') {
-		html += "http://www.tkqlhce.com/interactive";
-		html += "?DomainName=" + name + "." + tld + "&siteid=4798";
-		html += "&aid=10275199&pid=3770298";
-		html += "&url=https://secure.registerapi.com/dds2/index.php";
-	} else if ($.registrar == '1and1') {
-		html += "http://www.dpbolvw.net/interactive";
-		html += "?domain=" + name + "&tld=" + tld;
-		html += "&aid=10376103&pid=3770298";
-		html += "&url=http://order.1and1.com/dcjump";
-		html += "?ac=OM.US.US469K02463T2103a"
-	} else {
+	if ($.registrar == 'godaddy.com') {
 		html += "http://www.anrdoezrs.net/interactive";
 		html += "?domainToCheck=" + name + "&tld=." + tld.toUpperCase();
 		html += "&checkAvail=1";
 		html += "&aid=10390987&pid=3770298";
 		html += "&url=http://www.godaddy.com/gdshop/registrar/search.asp";
 		html += "?isc=0000000000";
+	} else if ($.registrar == 'dotster.com') {
+		html += "http://www.tkqlhce.com/interactive";
+		html += "?DomainName=" + name + "." + tld + "&siteid=4798";
+		html += "&aid=10275199&pid=3770298";
+		html += "&url=https://secure.registerapi.com/dds2/index.php";
+	} else if ($.registrar == '1and1.com') {
+		html += "http://www.dpbolvw.net/interactive";
+		html += "?domain=" + name + "&tld=" + tld;
+		html += "&aid=10376103&pid=3770298";
+		html += "&url=http://order.1and1.com/dcjump";
+		html += "?ac=OM.US.US469K02463T2103a";
+	} else if ($.registrar == 'namecheap.com') {
+		html += "http://www.namecheap.com/domain-name-search.asp";
+		html += "?formtype=domain&sld=" + name + "&tld=" + tld;
+		html += "&aff=5799";
+	} else { // moniker.com
+		html += "http://affiliates.moniker.com/pub/Affiliates";
+		html += "?affiliate_id=3154&landingpage=domaincheck&domain=";
+		html += name + "." + tld;
 	}
 	html += '" title="Check availability on ' + $.registrar + '"';
 	html += '>' + text + '</a>';
@@ -62,21 +76,15 @@ function affiliate_link(name, tld, text) {
 }
 
 function table_row(domain, row) {
-	var html = '<tr class="row' + row + '"><td>';
-	html += affiliate_link(domain.name, 'com', domain.name) + '</td>';
-	for (var index in DIRECT_PROPERTIES) {
-		html += '<td>' + domain[DIRECT_PROPERTIES[index]] + '</td>';
-	}
-	for (var index in SCORE_PROPERTIES) {
-		var score = domain[SCORE_PROPERTIES[index]] / 1000000;
-		html += '<td>' + score.toFixed(3) + '</td>';
-	}
+	var html = '<tr class="row' + row + '">';
+	html += '<td>' + domain.length + '</td>';
+	html += '<td>' + affiliate_link(domain.key, 'com', domain.key) + '</td>';
 	for (var tld in TLD_SCORES) {
 		if (domain[tld]) {
-			html += '<td class="red">taken</td>';
+			html += '<td class="red" title="' + domain[tld] + '"></td>';
 		} else {
-			html += '<td class="green">';
-			html += affiliate_link(domain.name, tld, 'free');
+			html += '<td>';
+			html += affiliate_link(domain.key, tld, tld);
 			html += '</td>';
 		}
 	}
@@ -88,13 +96,13 @@ function table_row(domain, row) {
 function update_html() {
 	var html = '';
 	var row = 1;
-	var names = [];
-	for (var name in $.domains) names.push(name);
-	names.sort(function(a,b) {
+	var keys = [];
+	for (var key in $.domains) keys.push(key);
+	keys.sort(function(a,b) {
 		return $.domains[b].score - $.domains[a].score });
-	names.length = 100;
-	for (var index in names) {
-		domain = $.domains[names[index]];
+	keys.length = 100;
+	for (var index in keys) {
+		domain = $.domains[keys[index]];
 		html += table_row(domain, row);
 		row = (row % 2) + 1;
 	}
@@ -102,6 +110,7 @@ function update_html() {
 	$("tbody tr").hover(
 		function() { $(this).addClass("hover"); },
 		function() { $(this).removeClass("hover"); });
+	$.changed = false;
 }
 
 function array_unchanged(a, b) {
@@ -111,12 +120,17 @@ function array_unchanged(a, b) {
 	return true;
 }
 
+function update_registrar() {
+	$.registrar = this.value;
+	$.changed = true;
+}
+
 function update_scores() {
 	var weights = form_weights();
 	if (array_unchanged($.weights, weights)) return;
 	$.weights = weights;
-	for (var name in $.domains) {
-		var domain = $.domains[name];
+	for (var key in $.domains) {
+		var domain = $.domains[key];
 		domain.score = domain_score(domain, weights);
 	}
 	update_html();
@@ -129,31 +143,30 @@ function keyword_match(left, right, name) {
 }
 
 function delete_domains(left, right) {
-	for (var name in $.domains)
-		if (!keyword_match(left, right, name))
-			delete $.domains[name];
-	update_html();
+	for (var key in $.domains)
+		if (!keyword_match(left, right, key)) {
+			delete $.domains[key];
+			$.changed = true;
+		}
 }
 
 function ajax_result(json, status) {
 	var left = $("input#id_left").val();
 	var right = $("input#id_right").val();
 	var weights = form_weights();
-	var updated = false;
 	var length = 0;
-	for (name in json) {
-		domain = json[name];
-		domain.name = name;
-		domain.length = name.length;
+	for (var key in json) {
+		domain = json[key];
+		domain.key = key;
+		domain.length = key.length;
 		domain.score = domain_score(domain, weights);
-		if (keyword_match(left, right, name)) {
-			$.domains[name] = domain;
-			updated = true;
+		if (keyword_match(left, right, key)) {
+			$.domains[key] = domain;
+			$.changed = true;
 		}
-		length = name.length;
+		length = key.length;
 	}
 	$.ajax_search.xhr[length] = false;
-	if (updated) update_html();
 }
 
 function ajax_search(left, right) {
@@ -199,18 +212,27 @@ function keyword_keyup() {
 	ajax_search(left, right);
 }
 
+function update_if_changed(i) {
+	$(this).html(i);
+	if (!$.changed) return;
+	update_html();
+}
+
 function document_ready() {
 	$.domains = {};
 	$.weights = form_weights();
-	$.registrar = 'godaddy';
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.left = '*';
 	$.ajax_search.right = '*';
-	keyword_keyup();
 	$("input.keyword").keypress(keyword_keypress);
 	$("input.keyword").keyup(keyword_keyup);
-	$("input.score").keyup(update_scores);
+	$.registrar = $("select#id_registrar").val();
+	$("select#id_registrar").change(update_registrar);
+	$("table.weights input").change(update_scores);
+	$.changed = false;
+	$("div#timer").everyTime(200, update_if_changed);
+	keyword_keyup();
 }
 
 $(document).ready(document_ready);

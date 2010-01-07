@@ -24,6 +24,7 @@ from dns.utils import status_name, reverse_name
 from domains.models import MAX_NAME_LENGTH, Domain
 from domains.utils import random_domains
 from utils.retry import retry, retry_objects
+from prefixes.selectors import random_prefix
 
 NAMESERVERS = """
 208.67.222.222
@@ -179,6 +180,13 @@ def update_best_names(position, keyword, length, options):
     retry_objects(db.put, lookups)
 
 
+def update_random(options):
+    position = random.choice(('left', 'right'))
+    keyword = random_prefix(position)
+    for length in range(max(3, len(keyword) + 1), options.max + 1):
+        update_best_names(position, keyword, length, options)
+
+
 def upload_names(names, options):
     timestamp = datetime.now()
     domains = []
@@ -240,11 +248,16 @@ def main():
                       help="only names with this prefix")
     parser.add_option('--right', metavar='<keyword>', default=None,
                       help="only names with this suffix")
+    parser.add_option('--random', action='store_true',
+                      help="update random popular prefixes and suffixes")
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api_hidden', auth_func, options.server)
     if args:
         upload_files(args, options)
+    elif options.random:
+        while True:
+            update_random(options)
     elif options.left is not None:
         for length in range(max(3, len(options.left)), options.max + 1):
             update_best_names('left', options.left, length, options)

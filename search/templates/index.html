@@ -2,83 +2,49 @@
 
 {% block title %}Search and sort available domain names{% endblock %}
 
-{% block content %}
-<form action="" method="get">
-<table class="ruler">
-<colgroup>
-<col class="name" />
-</colgroup>
-<colgroup>
-<col class="int" />
-<col class="int" />
-<col class="int" />
-</colgroup>
-<colgroup>
-<col class="double" />
-<col class="double" />
-<col class="double" />
-<col class="double" />
-</colgroup>
-<colgroup>
-<col class="double" />
-<col class="double" />
-</colgroup>
-<colgroup>
-<col class="dns" />
-<col class="dns" />
-<col class="dns" />
-<col class="dns" />
-<col class="dns" />
-</colgroup>
-<thead>
-<tr><td colspan="16">
-<b>Type a keyword to search for available domain names.</b>
-Then adjust the score fields to sort the best names to the top of the list.
-</td></tr>
+{% block left %}
+<form method="get" action="">
+<img id="loading" src="/static/images/loading.gif" alt="" />
+<div id="timer" class="span-6 quiet small"></div>
+<h1>Find available domain names</h1>
+<div class="span-3">{{ search_form.left }}</div>
+<div class="span-3 last right">{{ search_form.right }}</div>
+
+<p>Registrar: {{ registrar_form.registrar }}</p>
+
+<table class="weights wide">
 <tr>
-<td>
-<div id="loading"><img src="/static/images/loading.gif" alt="" /></div>
-{{ search_form.left }}
-{{ search_form.right }}
-</td>
-<td>{{ search_form.len }}</td>
-<td>{{ search_form.digits }}</td>
-<td>{{ search_form.dashes }}</td>
-<td>{{ search_form.english }}</td>
-<td>{{ search_form.spanish }}</td>
-<td>{{ search_form.french }}</td>
-<td>{{ search_form.german }}</td>
-<td>{{ search_form.prefix }}</td>
-<td>{{ search_form.suffix }}</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<th class="bottom">Characters</th>
+<td class="bottom right"><img src="/static/images/negative.png" alt="Negative" /></td>
+<td class="bottom right"><img src="/static/images/neutral.png" alt="Neutral" /></td>
+<td class="bottom right"><img src="/static/images/interesting.png" alt="Interesting" /></td>
+<td class="bottom right"><img src="/static/images/important.png" alt="Important" /></td>
+<td class="bottom right"><img src="/static/images/critical.png" alt="Critical" /></td>
+<tr>{% for field in weights_form %}
+{% ifequal field.name "english" %}
+<tr><th colspan="6">Readability<th><tr>
+{% endifequal %}
+{% ifequal field.name "prefix" %}
+<tr><th colspan="6">Popularity<th><tr>
+{% endifequal %}
+<tr><td>{{ field.label|safe }}</td>
+{% for value, text in field.field.choices %}<td><input name="{{ field.name }}" value="{{ value }}" type="radio" {% ifequal value field.field.initial %}checked="checked" {% endifequal %}/></td>
+{% endfor %}
 </tr>
-<tr>
-<th title="Domain name candidates">Name</th>
-<th title="How many characters in the name">Length</th>
-<th title="How many numbers in the name">Digits</th>
-<th title="How many minus signs in the name">Dashes</th>
-<th title="Letter combinations similar to English words">English</th>
-<th title="Letter combinations similar to Spanish words">Spanish</th>
-<th title="Letter combinations similar to French words">French</th>
-<th title="Letter combinations similar to German words">German</th>
-<th title="Popularity of the first few letters">Prefix</th>
-<th title="Popularity of the last few letters">Suffix</th>
-<th title="DNS result for domain name with .com">.com</th>
-<th title="DNS result for domain name with .net">.net</th>
-<th title="DNS result for domain name with .org">.org</th>
-<th title="DNS result for domain name with .biz">.biz</th>
-<th title="DNS result for domain name with .info">.info</th>
-<th title="Total weighted score for each name">Score</th>
-</tr>
-</thead>
-<tbody id="results">
-<tr><td>Loading...</td></tr>
-</tbody>
+{% endfor %}
 </table>
 </form>
+
+<hr />
+{% endblock%}
+
+{% block content %}
+<table class="ruler wide">
+<thead></thead>
+<tbody id="results">
+<tr><td colspan="16">
+Loading...
+</td></tr>
+</tbody>
+</table>
 {% endblock %}

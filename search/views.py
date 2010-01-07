@@ -17,50 +17,58 @@ from dns.models import Lookup, TOP_LEVEL_DOMAINS
 from dns.utils import reverse_name
 from prefixes.utils import increment_prefix
 
-JSON_FETCH_LIMIT = 100 # Domains for each length from 3 to 12.
+JSON_FETCH_LIMIT = 60 # Domains for each length from 3 to 12.
 MEMCACHE_TIMEOUT = 24 * 60 * 60 # 24 hours.
-INITIAL = {
-    'left': '', 'right': '',
-    'len': -2, 'digits': -3, 'dashes': -5,
-    'english': 3, 'spanish': 1, 'french': 1, 'german': 1,
-    'prefix': 3, 'suffix': 3,
-    }
+REGISTRAR_CHOICES = [
+    ('godaddy.com', 'GoDaddy'),
+    ('moniker.com', 'Moniker'),
+    ('namecheap.com', 'Namecheap'),
+    ('1and1.com', '1&1 (USA)'),
+    ('dotster.com', 'Dotster'),
+    ]
 
 
 class SearchForm(forms.Form):
     left = forms.CharField(max_length=40, required=False,
-        widget=forms.TextInput(attrs={'class': 'text keyword focus'}))
+        widget=forms.TextInput(attrs={
+                'class': 'text keyword focus',
+                'title': "Find names that start with this prefix"}))
     right = forms.CharField(max_length=40, required=False,
-        widget=forms.TextInput(attrs={'class': 'text keyword right'}))
-    len = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    digits = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    dashes = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    english = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    spanish = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    french = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    german = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    prefix = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
-    suffix = forms.FloatField(required=False,
-        widget=forms.TextInput(attrs={'class': 'text score'}))
+        widget=forms.TextInput(attrs={
+                'class': 'text keyword right',
+                'title': "Find names that end with this suffix"}))
 
-    def clean(self):
-        data = self.cleaned_data
-        for key in data:
-            if data[key] is None:
-                data[key] = 0.0
-        return data
+
+class WeightsForm(forms.Form):
+    len = forms.ChoiceField(initial=-3, label="Short names",
+        choices=[(1, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
+    digits = forms.ChoiceField(initial=-2, label="Without numbers",
+        choices=[(1, ''), (0, ''), (-1, ''), (-2, ''), (-5, '')])
+    dashes = forms.ChoiceField(initial=-5, label="Without dashes",
+        choices=[(1, ''), (0, ''), (-1, ''), (-2, ''), (-5, '')])
+    english = forms.ChoiceField(initial=3, label="English",
+        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+    spanish = forms.ChoiceField(initial=1, label="Spanish (Espa&ntilde;ol)",
+        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+    french = forms.ChoiceField(initial=1, label="French (Fran&ccedil;ais)",
+        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+    german = forms.ChoiceField(initial=1, label="German (Deutsch)",
+        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+    prefix = forms.ChoiceField(initial=3, label="Popular prefixes",
+        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+    suffix = forms.ChoiceField(initial=3, label="Popular suffixes",
+        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+
+
+class RegistrarForm(forms.Form):
+    registrar = forms.ChoiceField(choices=REGISTRAR_CHOICES)
 
 
 def index(request, template_name='search/index.html'):
-    search_form = SearchForm(request.GET or None, initial=INITIAL)
+    search_form = SearchForm(request.GET or None)
+    weights_form = WeightsForm(request.GET or None)
+    registrar_form = RegistrarForm(request.GET or
+                                   {'registrar': 'moniker.com'})
     return render_to_response(request, template_name, locals())
 
 
@@ -114,6 +122,7 @@ def fetch_dns_lookups(domains):
     for domain, lookup in zip(domains, lookups):
         if not lookup:
             continue
+        domain.updated = lookup.timestamp
         for tld in TOP_LEVEL_DOMAINS:
             value = getattr(lookup, tld, None)
             if isinstance(value, basestring):
@@ -133,6 +142,7 @@ def domains_to_dict(domains):
         for attr in TOP_LEVEL_DOMAINS:
             if hasattr(domain, attr):
                 properties[attr] = getattr(domain, attr)
+        properties['updated'] = domain.updated.strftime('%Y-%m-%dT%H:%M:%SZ')
         result[domain.key().name()] = properties
     return result
 
