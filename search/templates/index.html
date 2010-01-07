@@ -2,6 +2,24 @@
 
 {% block title %}Search and sort available domain names{% endblock %}
 
+{% block extra-head %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#loading")
+      .ajaxStart(function() { $(this).show(); })
+      .ajaxStop(function() { $(this).hide(); });
+    $("input.keyword").keypress(keyword_keypress);
+    $("input.keyword").keyup(keyword_keyup);
+    $.registrar = $("select#id_registrar").val();
+    $("select#id_registrar").change(update_registrar);
+    $("table.weights input").change(update_scores);
+    $("div#timer").everyTime(200, update_if_changed);
+    keyword_keyup();
+  });
+</script>
+{% endblock %}
+
+
 {% block left %}
 <form method="get" action="">
 <img id="loading" src="/static/images/loading.gif" alt="" />

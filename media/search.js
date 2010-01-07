@@ -228,14 +228,7 @@ function document_ready() {
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.left = '*';
 	$.ajax_search.right = '*';
-	$("input.keyword").keypress(keyword_keypress);
-	$("input.keyword").keyup(keyword_keyup);
-	$.registrar = $("select#id_registrar").val();
-	$("select#id_registrar").change(update_registrar);
-	$("table.weights input").change(update_scores);
 	$.changed = false;
-	$("div#timer").everyTime(200, update_if_changed);
-	keyword_keyup();
 }
 
 $(document).ready(document_ready);
