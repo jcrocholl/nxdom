@@ -6,6 +6,7 @@ from google.appengine.ext import db
 from google.appengine.api import memcache
 
 from django import forms
+from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
 from django.views.decorators.cache import cache_control
@@ -152,10 +153,8 @@ def json(request):
     left = request.GET.get('left', '')
     right = request.GET.get('right', '')
     length = int(request.GET.get('length', MAX_NAME_LENGTH))
-    current_version = 3
-    version = int(request.GET.get('version', current_version))
-    if version > current_version:
-        version = current_version
+    version = int(request.GET.get('version', settings.MEDIA_VERSION))
+    version = min(version, settings.MEDIA_VERSION)
     memcache_key = 'json%d,%s,%s,%d' % (version, left, right, length)
     json = memcache.get(memcache_key)
     if json:

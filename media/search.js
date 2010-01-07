@@ -185,7 +185,8 @@ function ajax_search(left, right) {
 		$.ajax_search.xhr[length] = $.ajax({
 				type: "GET",
 				url: "/search/json/",
-				data: {left: left, right: right, length: length, version: 3},
+				data: {left: left, right: right, length: length,
+					   version: $.media_version},
 				dataType: "json",
 				cache: true,
 				success: ajax_result,
