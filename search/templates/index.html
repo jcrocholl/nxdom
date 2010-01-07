@@ -4,28 +4,47 @@
 
 {% block left %}
 <form method="get" action="">
-<p>
-{{ search_form.left }}
-{{ search_form.right }}
 <img id="loading" src="/static/images/loading.gif" alt="" />
-<span id="timer" class="quiet small">0</span>
-</p>
+<div id="timer" class="span-6 quiet small"></div>
+<h1>Find available domain names</h1>
+<div class="span-3">{{ search_form.left }}</div>
+<div class="span-3 last right">{{ search_form.right }}</div>
 
-<p>
-Choose your registrar:
-{{ registrar_form.registrar }}
-</p>
+<p>Registrar: {{ registrar_form.registrar }}</p>
+
+<table class="weights wide">
+<tr>
+<th class="bottom">Characters</th>
+<td class="bottom right"><img src="/static/images/negative.png" alt="Negative" /></td>
+<td class="bottom right"><img src="/static/images/neutral.png" alt="Neutral" /></td>
+<td class="bottom right"><img src="/static/images/interesting.png" alt="Interesting" /></td>
+<td class="bottom right"><img src="/static/images/important.png" alt="Important" /></td>
+<td class="bottom right"><img src="/static/images/critical.png" alt="Critical" /></td>
+<tr>{% for field in weights_form %}
+{% ifequal field.name "english" %}
+<tr><th colspan="6">Readability<th><tr>
+{% endifequal %}
+{% ifequal field.name "prefix" %}
+<tr><th colspan="6">Popularity<th><tr>
+{% endifequal %}
+<tr><td>{{ field.label|safe }}</td>
+{% for value, text in field.field.choices %}<td><input name="{{ field.name }}" value="{{ value }}" type="radio" {% ifequal value field.field.initial %}checked="checked" {% endifequal %}/></td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
 </form>
+
+<hr />
 {% endblock%}
 
 {% block content %}
-<form action="" method="get">
-<table class="ruler">
+<table class="ruler wide">
+<thead></thead>
 <tbody id="results">
 <tr><td colspan="16">
 Loading...
 </td></tr>
 </tbody>
 </table>
-</form>
 {% endblock %}

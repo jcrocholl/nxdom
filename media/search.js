@@ -8,24 +8,28 @@ TLD_SCORES = {
 	"in": 1, is: 1, it: 1, la: 1, li: 1, ly: 2, ru: 1, se: 1,
 	to: 1, tv: 2, us: 1,
 };
-SEARCH_LENGTHS = [6, 7, 5, 8, 4, 9, 3];
+SEARCH_LENGTHS = [7, 6, 8, 5, 9, 4, 10, 3, 11, 12];
 
 function force_number(text) {
-	var number = parseFloat(text);
+	var number = parseInt(text);
 	if (isNaN(number)) return 0;
 	return number;
 }
 
+function force_million(text) {
+	return force_number(text) / 1000000;
+}
+
 function form_weights() {
-	return {length: force_number($("input#id_len").val()),
-			digits: force_number($("input#id_digits").val()),
-			dashes: force_number($("input#id_dashes").val()),
-			english: force_number($("input#id_english").val()) / 1000000,
-			spanish: force_number($("input#id_spanish").val()) / 1000000,
-			french: force_number($("input#id_french").val()) / 1000000,
-			german: force_number($("input#id_german").val()) / 1000000,
-			prefix: force_number($("input#id_prefix").val()) / 1000000,
-			suffix: force_number($("input#id_suffix").val()) / 1000000};
+	return {length: force_number($("input[name=len]:checked").val()),
+			digits: force_number($("input[name=digits]:checked").val()),
+			dashes: force_number($("input[name=dashes]:checked").val()),
+			english: force_million($("input[name=english]:checked").val()),
+			spanish: force_million($("input[name=spanish]:checked").val()),
+			french: force_million($("input[name=french]:checked").val()),
+			german: force_million($("input[name=german]:checked").val()),
+			prefix: force_million($("input[name=prefix]:checked").val()),
+			suffix: force_million($("input[name=suffix]:checked").val())}
 }
 
 function domain_score(domain, weights) {
@@ -106,6 +110,7 @@ function update_html() {
 	$("tbody tr").hover(
 		function() { $(this).addClass("hover"); },
 		function() { $(this).removeClass("hover"); });
+	$.changed = false;
 }
 
 function array_unchanged(a, b) {
@@ -113,6 +118,11 @@ function array_unchanged(a, b) {
 		if (a[index] != b[index])
 			return false;
 	return true;
+}
+
+function update_registrar() {
+	$.registrar = this.value;
+	$.changed = true;
 }
 
 function update_scores() {
@@ -123,7 +133,7 @@ function update_scores() {
 		var domain = $.domains[key];
 		domain.score = domain_score(domain, weights);
 	}
-	$.changed = true;
+	update_html();
 }
 
 function keyword_match(left, right, name) {
@@ -202,15 +212,9 @@ function keyword_keyup() {
 	ajax_search(left, right);
 }
 
-function registrar_change() {
-	$.registrar = this.value;
-	$.changed = true;
-}
-
 function update_if_changed(i) {
 	$(this).html(i);
 	if (!$.changed) return;
-	$.changed = false;
 	update_html();
 }
 
@@ -224,9 +228,10 @@ function document_ready() {
 	$("input.keyword").keypress(keyword_keypress);
 	$("input.keyword").keyup(keyword_keyup);
 	$.registrar = $("select#id_registrar").val();
-	$("select#id_registrar").change(registrar_change);
+	$("select#id_registrar").change(update_registrar);
+	$("table.weights input").change(update_scores);
 	$.changed = false;
-	$("span#timer").everyTime(100, update_if_changed);
+	$("div#timer").everyTime(200, update_if_changed);
 	keyword_keyup();
 }
 
