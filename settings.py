@@ -3,7 +3,7 @@ from ragendja.settings_pre import *
 # Increase this when you update your media on the production site, so users
 # don't have to refresh their cache. By setting this your MEDIA_URL
 # automatically becomes /media/MEDIA_VERSION/
-MEDIA_VERSION = 6
+MEDIA_VERSION = 7
 
 # By hosting media on a different domain we can get a speedup (more parallel
 # browser connections).
@@ -59,6 +59,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.request',
     'django.core.context_processors.i18n',
+    'utils.context_processors.settings',
 )
 
 MIDDLEWARE_CLASSES = (
