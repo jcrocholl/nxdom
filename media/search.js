@@ -151,8 +151,8 @@ function delete_domains(left, right) {
 }
 
 function ajax_result(json, status) {
-	var left = $("input#id_left").val();
-	var right = $("input#id_right").val();
+	var left = jQuery.trim($("input#id_left").val());
+	var right = jQuery.trim($("input#id_right").val());
 	var weights = form_weights();
 	var length = 0;
 	for (var key in json) {
@@ -170,6 +170,8 @@ function ajax_result(json, status) {
 }
 
 function ajax_search(left, right) {
+	left = jQuery.trim(left);
+	right = jQuery.trim(right);
 	if ($.ajax_search.left == left && $.ajax_search.right == right) return;
 	$.ajax_search.left = left;
 	$.ajax_search.right = right;
