@@ -22,13 +22,12 @@ def feedback_recently(request):
     page = request.META['PATH_INFO']
     feedback_list = []
     for feedback in (Feedback.all().filter('page', page)
-                     .order('-points').order('-submitted')):
+                     .order('-points').order('-submitted').fetch(10)):
         try:
             submitter = feedback.submitter # Attempt to dereference.
             feedback_list.append(feedback)
         except datastore_errors.Error:
             pass # Ignore feedback if the submitter doesn't exist.
-    feedback_list
     already_voted = get_already_voted(request)
     return render_to_string('feedback/messages.html', locals())
 
