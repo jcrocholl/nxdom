@@ -59,7 +59,7 @@ def already_uploaded(names):
     sample = names[:]
     random.shuffle(sample)
     sample = sample[:100]
-    domains = Domain.get_by_key_name(sample)
+    domains = retry(Domain.get_by_key_name, sample)
     found = [domain.key().name() for domain in domains if domain is not None]
     if len(found) > len(sample) / 2:
         print len(found) * 100 / len(sample),
