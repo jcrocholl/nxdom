@@ -56,6 +56,7 @@ tr.row2 td.best { background: #ee8; }
 input.keyword { width: 99px; }
 input.score { width: 22px; }
 
+p.highlight { padding: 4px; background: #fed; }
 .sum { background: #def; }
 .white { color: white; }
 
