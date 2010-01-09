@@ -1,7 +1,7 @@
 <form method="post" action="/feedback/">
 {% load feedback_tags %}
 {% for feedback in feedback_list %}
-<p>
+<p{% ifequal feedback.key.id|stringformat:"d" request.GET.feedback %} class="highlight"{% endifequal%}>
 {% if not feedback.key.id|in_list:already_voted %}
 <input type="image" alt="vote" src="/static/images/vote.png"
 name="vote" value="{{ feedback.key.id }}" class="image16x16" />

@@ -40,7 +40,7 @@ def index(request):
         return delete(request, delete_form.cleaned_data['delete'])
     # Otherwise, display recent feedback.
     feedback_list = Feedback.all()
-    feedback_list.order('-points').order('-submitted')
+    feedback_list.order('-points').order('-submitted').fetch(50)
     already_voted = get_already_voted(request)
     return render_to_response(request, 'feedback/index.html', locals())
 
@@ -55,6 +55,9 @@ def submit(request, page, message):
     feedback = Feedback(page=page, message=message, submitter=submitter,
                         ip=request.META.get('REMOTE_ADDR', '0.0.0.0'))
     feedback.put()
+    if page == '/':
+        page = '/feedback/'
+    page += '?feedback=%d' % feedback.key().id()
     return HttpResponseRedirect(page)
 
 
@@ -67,13 +70,13 @@ def delete(request, id):
     redirect = HttpResponseRedirect(referer)
     feedback = Feedback.get_by_id(int(id))
     if feedback is None:
-        logging.debug("Feedback '%s' not found." % id)
+        logging.info("Feedback '%s' not found." % id)
         return redirect
     if feedback.ip == request.META.get('REMOTE_ADDR', '0.0.0.0'):
-        logging.debug("Feedback '%s' deleted by same IP." % id)
+        logging.info("Feedback '%s' deleted by same IP." % id)
         feedback.delete()
     elif request.user.is_staff:
-        logging.debug("Feedback '%s' deleted by staff member." % id)
+        logging.info("Feedback '%s' deleted by staff member." % id)
         feedback.delete()
     return redirect
 
@@ -87,18 +90,18 @@ def vote(request, id):
     # Check if the selected feedback exists.
     feedback = Feedback.get_by_id(int(id))
     if feedback is None:
-        logging.debug("Feedback '%s' not found." % id)
+        logging.info("Feedback '%s' not found." % id)
         return redirect
     # Check if this feedback was posted from the same IP.
     ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
     if feedback.ip == ip:
-        logging.debug("Feedback '%s' was posted from the same IP." % id)
+        logging.info("Feedback '%s' was posted from the same IP." % id)
         return redirect
     # Check if this IP has already voted for this feedback.
     already = Vote.all().filter('feedback', feedback).filter('ip', ip).count()
     if already:
-        logging.debug("Feedback '%s' was already voted %d times from this IP."
-                      % (id, already))
+        logging.info("Feedback '%s' was already voted %d times from this IP."
+                     % (id, already))
         return redirect
     # Register this vote to prevent double voting.
     vote = Vote(feedback=feedback, ip=ip)

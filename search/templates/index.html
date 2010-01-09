@@ -21,6 +21,7 @@
 
 
 {% block left %}
+<div id="left" class="span-6 append-1">
 <form method="get" action="">
 <img id="loading" src="/static/images/loading.gif" alt="" />
 <div id="timer" class="span-6 quiet small"></div>
@@ -54,7 +55,14 @@
 </form>
 
 <hr />
+{% load feedback_tags %}
+{% feedback_form request %}
+{% feedback_recently request %}
+</div>
 {% endblock%}
+
+{% block right %}{% endblock %}
+{% block content-class %} search last{% endblock %}
 
 {% block content %}
 <table class="ruler wide">
