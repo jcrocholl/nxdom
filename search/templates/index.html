@@ -38,17 +38,17 @@
 <td class="bottom right"><img src="/static/images/interesting.png" alt="Interesting" /></td>
 <td class="bottom right"><img src="/static/images/important.png" alt="Important" /></td>
 <td class="bottom right"><img src="/static/images/critical.png" alt="Critical" /></td>
-<tr>{% for field in weights_form %}
+</tr>
+{% for field in weights_form %}
 {% ifequal field.name "english" %}
-<tr><th colspan="6">Readability<th><tr>
+<tr><th colspan="6">Readability</th></tr>
 {% endifequal %}
 {% ifequal field.name "prefix" %}
-<tr><th colspan="6">Popularity<th><tr>
+<tr><th colspan="6">Popularity</th></tr>
 {% endifequal %}
 <tr><td>{{ field.label|safe }}</td>
 {% for value, text in field.field.choices %}<td><input name="{{ field.name }}" value="{{ value }}" type="radio" {% ifequal value field.field.initial %}checked="checked" {% endifequal %}/></td>
-{% endfor %}
-</tr>
+{% endfor %}</tr>
 {% endfor %}
 </table>
 </form>
@@ -58,7 +58,6 @@
 
 {% block content %}
 <table class="ruler wide">
-<thead></thead>
 <tbody id="results">
 <tr><td colspan="16">
 Loading...
