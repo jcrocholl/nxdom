@@ -7,7 +7,7 @@ from google.appengine.api import memcache
 
 from django import forms
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.utils import simplejson
 from django.views.decorators.cache import cache_control
 
@@ -66,6 +66,12 @@ class RegistrarForm(forms.Form):
 
 
 def index(request, template_name='search/index.html'):
+    if (request.method == 'GET' and
+        request.META['SERVER_NAME'] == 'scoretool.appspot.com'):
+        url = 'http://www.nxdom.com' + request.META['PATH_INFO']
+        if request.META['QUERY_STRING']:
+            url += '?' + request.META['QUERY_STRING']
+        return HttpResponsePermanentRedirect(url)
     search_form = SearchForm(request.GET or None)
     weights_form = WeightsForm(request.GET or None)
     registrar_form = RegistrarForm(request.GET or
