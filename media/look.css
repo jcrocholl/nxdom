@@ -30,6 +30,10 @@ tr.row2 td.parking { background: #bbf; }
 tr.hover td.parking { background: #aaf; }
 td.parking a { color: #008; }
 
+tr.row1 td.status { background: #ccc; }
+tr.row2 td.status { background: #bbb; }
+tr.hover td.status { background: #aaa; }
+
 table.weights { margin-top: -1em; }
 table.weights th,
 table.weights td {

@@ -88,9 +88,13 @@ function table_row(domain, row) {
 			var color = 'taken';
 			if (domain[tld].indexOf('parking') >= 0 ||
 				domain[tld].indexOf('parked') >= 0 ||
+				domain[tld].indexOf('hitfarm.com') >= 0 ||
 				domain[tld].indexOf('fastpark.net') >= 0 ||
 				domain[tld].indexOf('buydomains.com') >= 0)
 				color = 'parking';
+			if (domain[tld].substr(0, 7) == 'status=' ||
+				domain[tld].substr(0, 8) == 'timeout=')
+				color = 'status';
 			html += '<td class="' + color + '" title="' + domain[tld] + '">';
 			html += domain_link(domain.key, tld, tld);
 			html += '</td>';
