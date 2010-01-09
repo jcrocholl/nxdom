@@ -87,6 +87,8 @@ function table_row(domain, row) {
 		if (domain[tld]) {
 			var color = 'taken';
 			if (domain[tld].indexOf('parking') >= 0 ||
+				domain[tld].indexOf('parked') >= 0 ||
+				domain[tld].indexOf('fastpark.net') >= 0 ||
 				domain[tld].indexOf('buydomains.com') >= 0)
 				color = 'parking';
 			html += '<td class="' + color + '" title="' + domain[tld] + '">';
