@@ -103,6 +103,12 @@ function table_row(domain, row) {
 	return html;
 }
 
+function activate_ruler() {
+	$("table.ruler tbody tr").hover(
+		function() { $(this).addClass("hover"); },
+		function() { $(this).removeClass("hover"); });
+}
+
 function update_html() {
 	var html = '';
 	var row = 1;
@@ -117,9 +123,7 @@ function update_html() {
 		row = (row % 2) + 1;
 	}
 	$("tbody#results").html(html);
-	$("tbody tr").hover(
-		function() { $(this).addClass("hover"); },
-		function() { $(this).removeClass("hover"); });
+	activate_ruler();
 	$.changed = false;
 }
 
@@ -239,6 +243,7 @@ function document_ready() {
 	$.ajax_search.left = '*';
 	$.ajax_search.right = '*';
 	$.changed = false;
+	activate_ruler();
 }
 
 $(document).ready(document_ready);
