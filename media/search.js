@@ -75,13 +75,23 @@ function affiliate_link(name, tld, text) {
 	return html;
 }
 
+function domain_link(name, tld, text) {
+	return '<a href="http://' + name + '.' + tld + '/">' + text + '</a>';
+}
+
 function table_row(domain, row) {
 	var html = '<tr class="row' + row + '">';
 	html += '<td>' + domain.length + '</td>';
 	html += '<td>' + affiliate_link(domain.key, 'com', domain.key) + '</td>';
 	for (var tld in TLD_SCORES) {
 		if (domain[tld]) {
-			html += '<td class="red" title="' + domain[tld] + '"></td>';
+			var color = 'taken';
+			if (domain[tld].indexOf('parking') >= 0 ||
+				domain[tld].indexOf('buydomains.com') >= 0)
+				color = 'parking';
+			html += '<td class="' + color + '" title="' + domain[tld] + '">';
+			html += domain_link(domain.key, tld, tld);
+			html += '</td>';
 		} else {
 			html += '<td>';
 			html += affiliate_link(domain.key, tld, tld);
