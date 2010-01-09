@@ -79,10 +79,15 @@ function domain_link(name, tld, text) {
 	return '<a href="http://' + name + '.' + tld + '/">' + text + '</a>';
 }
 
+function google_link(name) {
+	return '<a href="http://www.google.com/search?q=' + name + '">'
+		+ name + '</a>';
+}
+
 function table_row(domain, row) {
 	var html = '<tr class="row' + row + '">';
 	html += '<td>' + domain.length + '</td>';
-	html += '<td>' + affiliate_link(domain.key, 'com', domain.key) + '</td>';
+	html += '<td title="Web search">' + google_link(domain.key) + '</td>';
 	for (var tld in TLD_SCORES) {
 		if (domain[tld]) {
 			var color = 'taken';
