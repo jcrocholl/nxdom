@@ -41,7 +41,6 @@ def index(request):
     # Otherwise, display recent feedback.
     feedback_list = Feedback.all()
     feedback_list.order('-points').order('-submitted').fetch(50)
-    added = int(request.GET.get('added', None))
     already_voted = get_already_voted(request)
     return render_to_response(request, 'feedback/index.html', locals())
 
@@ -56,7 +55,10 @@ def submit(request, page, message):
     feedback = Feedback(page=page, message=message, submitter=submitter,
                         ip=request.META.get('REMOTE_ADDR', '0.0.0.0'))
     feedback.put()
-    return HttpResponseRedirect('/feedback/?added=%d' % feedback.key().id())
+    if page == '/':
+        page = '/feedback/'
+    page += '?feedback=%d' % feedback.key().id()
+    return HttpResponseRedirect(page)
 
 
 def delete(request, id):
