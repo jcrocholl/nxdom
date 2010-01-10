@@ -46,6 +46,11 @@ def main():
         parser.error("Too many command line arguments.")
     app_yaml = load_app_yaml()
     update_app_yaml(app_yaml, version=options.version)
+    exclude = ['.git', 'common', 'popular.py',
+               'english.py', 'french.py', 'spanish.py', 'german.py']
+    attempt('pep8 --repeat --exclude %s .' % ','.join(exclude))
+    attempt('.git/hooks/pre-commit')
+    attempt('./manage.py test')
     attempt('./manage.py update')
     update_app_yaml(app_yaml)
 
