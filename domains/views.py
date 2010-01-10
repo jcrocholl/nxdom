@@ -32,11 +32,9 @@ def index(request):
     return render_to_response(request, 'domains/index.html', locals())
 
 
-
 def detail(request, key_name):
     domain = get_object_or_404(Domain, key_name=key_name)
     return render_to_response(request, 'domains/detail.html', locals())
-
 
 
 def cron(request):

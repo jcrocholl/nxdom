@@ -34,9 +34,9 @@ def feedback_recently(request):
 
 @register.filter
 def in_list(value, arg):
-   return value in arg
+    return value in arg
 
 
 @register.filter
 def is_equal(value, arg):
-   return value == arg
+    return value == arg

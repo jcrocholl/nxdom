@@ -169,7 +169,7 @@ def json(request):
         domains = fetch_candidates(left, right, length)
         fetch_dns_lookups(domains)
         result = domains_to_dict(domains)
-        json = simplejson.dumps(result, separators=(',',':'))
+        json = simplejson.dumps(result, separators=(',', ':'))
         json = json.replace('},', '},\n ')
         memcache.set(memcache_key, json, MEMCACHE_TIMEOUT)
     response = HttpResponse(json, mimetype='application/javascript')

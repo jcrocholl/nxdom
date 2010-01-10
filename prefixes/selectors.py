@@ -113,14 +113,18 @@ class Selector:
             compare = lambda a, b: cmp(a[::-1], b[::-1])
         if self.order == 'ascending':
             if compare(a[-1], b[-1]) > 0:
-                while a and compare(a[-1], b[-1]) > 0: del a[-1]
+                while a and compare(a[-1], b[-1]) > 0:
+                    del a[-1]
             else:
-                while b and compare(a[-1], b[-1]) < 0: del b[-1]
+                while b and compare(a[-1], b[-1]) < 0:
+                    del b[-1]
         elif self.order == 'descending':
             if compare(a[0], b[0]) < 0:
-                while a and compare(a[0], b[0]) < 0: del a[0]
+                while a and compare(a[0], b[0]) < 0:
+                    del a[0]
             else:
-                while b and compare(a[0], b[0]) > 0: del b[0]
+                while b and compare(a[0], b[0]) > 0:
+                    del b[0]
 
 
 def demo():

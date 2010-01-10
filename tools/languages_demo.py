@@ -16,7 +16,8 @@ Python beautiful illusionist Antidisestablishmentarianism
 """.split()
 
 
-print '%-8s %-8s %-8s %-8s %s' % tuple('english spanish french german word'.split())
+print '%-8s %-8s %-8s %-8s %s' % tuple(
+    'english spanish french german word'.split())
 
 for word in WORDS:
     print '%-8d %-8d %-8d %-8d %s' % (

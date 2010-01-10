@@ -29,7 +29,7 @@ def pythonize_wordlist(constant, wordlist):
             print line
             line = ''
         if line:
-          line += ' '
+            line += ' '
         line += word
     if line:
         print line
