@@ -10,4 +10,4 @@ class ClientTest(TestCase):
     def test_anonymous(self):
         response = self.client.post('/feedback/',
             {'page': '/', 'message': 'test message'})
-        self.assertRedirects(response, '/')
+        self.assertRedirects(response, '/feedback/?feedback=1')
