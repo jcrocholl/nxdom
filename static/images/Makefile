@@ -1,12 +1,22 @@
+WIDTH=20
+
 .SECONDARY :
 
-all : negative.png neutral.png interesting.png important.png critical.png
+vertical.png : vertical.ppm
+	pnmtopng $< > $@
 
-important.png : important.orig.png
-	pngtopnm $< | pnmcrop | pnmpad -white -width 14 -halign 0 -bottom 4 | pnmtopng > $@
+vertical.ppm : negative.ppm neutral.ppm interesting.ppm \
+important.ppm critical.ppm
+	pnmcat -leftright -white -jbottom $^ > $@
 
-interesting.png : interesting.orig.png
-	pngtopnm $< | pnmcrop | pnmpad -white -width 14 -halign 0 -bottom 4 | pnmtopng > $@
+important.ppm : important.orig.png
+	pngtopnm $< | pnmcrop \
+	| pnmpad -white -width $(WIDTH) -halign 0 -bottom 4 > $@
 
-%.png : %.orig.png
-	pngtopnm $< | pnmcrop | pnmpad -white -width 14 -halign 0 -bottom 3 | pnmtopng > $@
+interesting.ppm : interesting.orig.png
+	pngtopnm $< | pnmcrop \
+	| pnmpad -white -width $(WIDTH) -halign 0 -bottom 4 > $@
+
+%.ppm : %.orig.png
+	pngtopnm $< | pnmcrop \
+	| pnmpad -white -width $(WIDTH) -halign 0 -bottom 3 > $@
