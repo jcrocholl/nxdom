@@ -66,7 +66,6 @@ class RegistrarForm(forms.Form):
 
 
 @cache_control(public=True, max_age=MEMCACHE_TIMEOUT)
-@cache_page(MEMCACHE_TIMEOUT)
 def index(request):
     if (request.method == 'GET' and
         request.META['SERVER_NAME'] == 'scoretool.appspot.com'):
