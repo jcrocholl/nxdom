@@ -230,6 +230,7 @@ function ajax_search(left, right) {
 }
 
 function keyword_keypress(e) {
+	if (e.altKey || e.ctrlKey || e.metaKey) return;
 	if ((e.which != 45) &&
 		(e.which < 48 || e.which > 57) &&
 		(e.which < 97 || e.which > 122)) return;
