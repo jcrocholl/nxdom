@@ -1,5 +1,3 @@
-:root { overflow-y: scroll; }
-
 img#loading {
   position: absolute;
   margin: 21px 0 0 216px;
@@ -10,11 +8,6 @@ div#timer {
   text-align: right;
   visibility: hidden;
 }
-
-col.name { width: 130px; }
-col.int { width: 40px; }
-col.double { width: 40px; }
-col.dns { width: 40px; }
 
 table.wide { width: 100%; }
 tr.row2 { background: #eee; }
@@ -41,11 +34,10 @@ table.weights td {
   padding-right: 0;
 }
 table.weights td { text-align: right; }
-td.vertical { vertical-align: bottom; }
-span.vertical {
-  position: absolute;
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
+td.vertical {
+  width: 16px;
+  height: 64px;
+  background: url("/static/images/vertical.png") no-repeat bottom;
 }
 
 tr.row1 td.best { background: #ff8; }
@@ -53,8 +45,7 @@ tr.row2 td.best { background: #ee8; }
 
 .right { text-align: right; }
 .bottom { vertical-align: bottom; }
-input.keyword { width: 99px; }
-input.score { width: 22px; }
+input.keyword { width: 97px; }
 
 p.highlight { padding: 4px; background: #fed; }
 .sum { background: #def; }
