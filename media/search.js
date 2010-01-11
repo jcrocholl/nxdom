@@ -41,6 +41,13 @@ function domain_score(domain, weights) {
 	return score;
 }
 
+function slow_click(registrar, name, tld, that) {
+	var path = "/outgoing/" + registrar + "/";
+	$.pageTracker._trackPageview(path);
+	$("h1").html(path + name + '.' + tld);
+	$(that).oneTime(100, function() { document.location = that.href; });
+}
+
 function affiliate_link(name, tld, text) {
 	var html = '<a href="';
 	if ($.registrar == 'godaddy.com') {
@@ -71,9 +78,8 @@ function affiliate_link(name, tld, text) {
 		html += name + "." + tld;
 	}
 	html += '" title="Check availability on ' + $.registrar + '"';
-	javascript = "$.pageTracker._trackPageview('/outgoing/" + $.registrar + "/'); ";
-	javascript += "$('input#id_message').val('" + name + '.' + tld + "'); ";
-	javascript += "return false;"
+	javascript = "slow_click('" + $.registrar + "', '" +
+		name + "', '" + tld + "', this); return false;";
 	html += ' onClick="javascript: ' + javascript + '"';
 	html += '>' + text + '</a>';
 	return html;
