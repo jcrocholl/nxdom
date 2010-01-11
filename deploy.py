@@ -51,7 +51,6 @@ def main():
     attempt('pep8 --repeat --exclude %s .' % ','.join(exclude))
     attempt('.git/hooks/pre-commit')
     attempt('./manage.py test')
-    attempt('head -n4 app.yaml')
     attempt('./manage.py update')
     update_app_yaml(app_yaml)
 
