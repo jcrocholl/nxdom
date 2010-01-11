@@ -41,7 +41,15 @@ function domain_score(domain, weights) {
 	return score;
 }
 
-function affiliate_link(name, tld, text) {
+function mouse_down_track(one, two, three) {
+	var path = '/' + one + '/';
+	if (two) path += two + '/';
+	if (three) path += three + '/';
+	var javascript = "$.ga.trackPageview('" + path + "');";
+	return 'onMouseDown="' + javascript + '"';
+}
+
+function affiliate_link(name, tld) {
 	var html = '<a href="';
 	if ($.registrar == 'godaddy.com') {
 		html += "http://www.anrdoezrs.net/interactive";
@@ -70,21 +78,20 @@ function affiliate_link(name, tld, text) {
 		html += "?affiliate_id=3154&landingpage=domaincheck&domain=";
 		html += name + "." + tld;
 	}
-	html += '" title="Check availability on ' + $.registrar + '"';
-	var path = "/outgoing/" + $.registrar + "/";
-	var javascript = "$.ga.trackPageview('" + path + "');";
-	html += ' onMouseDown="' + javascript + '"';
-	html += '>' + text + '</a>';
+	html += '" title="Check availability on ' + $.registrar + '" ';
+	html += mouse_down_track('outgoing', $.registrar, tld);
+	html += '>' + tld + '</a>';
 	return html;
 }
 
-function domain_link(name, tld, text) {
-	return '<a href="http://' + name + '.' + tld + '/">' + text + '</a>';
+function domain_link(name, tld) {
+	return '<a href="http://' + name + '.' + tld + '/" ' +
+		mouse_down_track('outgoing', 'website', tld) + '>' + tld + '</a>';
 }
 
 function google_link(name) {
-	return '<a href="http://www.google.com/search?q=' + name + '">'
-		+ name + '</a>';
+	return '<a href="http://www.google.com/search?q=' + name + '" ' +
+		mouse_down_track('outgoing', 'google') + '>' + name + '</a>';
 }
 
 function table_row(domain, row) {
@@ -104,11 +111,11 @@ function table_row(domain, row) {
 				domain[tld].substr(0, 8) == 'timeout=')
 				color = 'status';
 			html += '<td class="' + color + '" title="' + domain[tld] + '">';
-			html += domain_link(domain.key, tld, tld);
+			html += domain_link(domain.key, tld);
 			html += '</td>';
 		} else {
 			html += '<td>';
-			html += affiliate_link(domain.key, tld, tld);
+			html += affiliate_link(domain.key, tld);
 			html += '</td>';
 		}
 	}
