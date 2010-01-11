@@ -21,6 +21,7 @@ COMBINE_MEDIA = {
         'global/jquery.cookie.js',
         'global/jquery.timers.js',
         'global/jquery.timeago.js',
+        'global/jquery.ga.js',
     ),
     'combined-%(LANGUAGE_DIR)s.css': (
         'global/look.css',
