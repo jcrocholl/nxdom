@@ -71,6 +71,10 @@ function affiliate_link(name, tld, text) {
 		html += name + "." + tld;
 	}
 	html += '" title="Check availability on ' + $.registrar + '"';
+	javascript = "$.pageTracker._trackPageview('/outgoing/" + $.registrar + "/'); ";
+	javascript += "$('input#id_message').val('" + name + '.' + tld + "'); ";
+	javascript += "return false;"
+	html += ' onClick="javascript: ' + javascript + '"';
 	html += '>' + text + '</a>';
 	return html;
 }
