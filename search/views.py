@@ -9,7 +9,7 @@ from django import forms
 from django.conf import settings
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.utils import simplejson
-from django.views.decorators.cache import cache_control
+from django.views.decorators.cache import cache_control, cache_page
 
 from ragendja.template import render_to_response
 
@@ -65,18 +65,21 @@ class RegistrarForm(forms.Form):
     registrar = forms.ChoiceField(choices=REGISTRAR_CHOICES)
 
 
-def index(request, template_name='search/index.html'):
+@cache_control(public=True, max_age=MEMCACHE_TIMEOUT)
+@cache_page(MEMCACHE_TIMEOUT)
+def index(request):
     if (request.method == 'GET' and
         request.META['SERVER_NAME'] == 'scoretool.appspot.com'):
         url = 'http://www.nxdom.com' + request.META['PATH_INFO']
         if request.META['QUERY_STRING']:
             url += '?' + request.META['QUERY_STRING']
         return HttpResponsePermanentRedirect(url)
+    logging.info("Generating home page")
     search_form = SearchForm(request.GET or None)
     weights_form = WeightsForm(request.GET or None)
     registrar_form = RegistrarForm(request.GET or
                                    {'registrar': 'moniker.com'})
-    return render_to_response(request, template_name, locals())
+    return render_to_response(request, 'search/index.html', locals())
 
 
 def score_domains(cleaned_data, domain_list):
@@ -163,15 +166,15 @@ def json(request):
     version = min(version, settings.MEDIA_VERSION)
     memcache_key = 'json%d,%s,%s,%d' % (version, left, right, length)
     json = memcache.get(memcache_key)
-    if json:
-        logging.debug('json: memcache hit for %s', memcache_key)
-    else:
+    if json is None:
         domains = fetch_candidates(left, right, length)
         fetch_dns_lookups(domains)
         result = domains_to_dict(domains)
         json = simplejson.dumps(result, separators=(',', ':'))
         json = json.replace('},', '},\n ')
         memcache.set(memcache_key, json, MEMCACHE_TIMEOUT)
+    # else:
+    #     logging.debug('json: memcache hit for %s', memcache_key)
     response = HttpResponse(json, mimetype='application/javascript')
     expires = time.time() + MEMCACHE_TIMEOUT
     response['Expires'] = email.utils.formatdate(expires)[:26] + 'GMT'
