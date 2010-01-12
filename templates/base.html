@@ -42,15 +42,6 @@ $(document).ready(function() {
   <div class="container">
     {% block left %}{% endblock%}
     <div id="content" class="span-20{% block content-class %}{% endblock %}">
-      {% block content-header %}
-        {% if error %}<div class="error">{{ error }}</div>{% endif %}
-        {% if info %}<div class="info">{{ info }}</div>{% endif %}
-        {% if messages %}
-          {% for message in messages %}
-            <div class="info">{{ message }}</div>
-          {% endfor %}
-        {% endif %}
-      {% endblock %}
       {% block content %}{% endblock %}
     </div>
     {% block right %}
