@@ -14,14 +14,11 @@ JSON_VERSION = 3
 # Add base media (jquery can be easily added via INSTALLED_APPS)
 COMBINE_MEDIA = {
     'combined-%(LANGUAGE_CODE)s.js': (
-        # See documentation why site_data can be useful:
-        # http://code.google.com/p/app-engine-patch/wiki/MediaGenerator
-        '.site_data.js',
-        'global/search.js',
         'global/jquery.cookie.js',
         'global/jquery.timers.js',
         'global/jquery.timeago.js',
         'global/jquery.ga.js',
+        'global/search.js',
     ),
     'combined-%(LANGUAGE_DIR)s.css': (
         'global/look.css',
@@ -76,8 +73,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'ragendja.sites.dynamicsite.DynamicSiteIDMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    #'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    #'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 )
 
 # Google authentication
@@ -91,16 +88,7 @@ LOGOUT_URL = '/account/logout/'
 LOGIN_REDIRECT_URL = '/'
 
 INSTALLED_APPS = (
-    # Add jquery support (app is in "common" folder). This automatically
-    # adds jquery to your COMBINE_MEDIA['combined-%(LANGUAGE_CODE)s.js']
-    # Note: the order of your INSTALLED_APPS specifies the order in which
-    # your app-specific media files get combined, so jquery should normally
-    # come first.
-    'jquery',
-
-    # Add blueprint CSS (http://blueprintcss.org/)
     'blueprintcss',
-
     'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.admin',
