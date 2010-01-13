@@ -12,7 +12,8 @@ class Prefix(db.Expando):
     """
     length = db.IntegerProperty(required=True)
     count = db.IntegerProperty(required=True, default=0)
-    com = db.IntegerProperty(default=0)
+    com = db.IntegerProperty()
+    percentage = db.FloatProperty()
     timestamp = db.DateTimeProperty()
 
 
@@ -23,7 +24,8 @@ class Suffix(db.Expando):
     """
     length = db.IntegerProperty(required=True)
     count = db.IntegerProperty(required=True, default=0)
-    com = db.IntegerProperty(default=0)
+    com = db.IntegerProperty()
+    percentage = db.FloatProperty()
     timestamp = db.DateTimeProperty()
 
 

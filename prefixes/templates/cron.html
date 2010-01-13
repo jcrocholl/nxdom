@@ -3,9 +3,9 @@
 {% block title %}Updated prefixes{% endblock %}
 
 {% block content %}
-<h1>Updated prefixes for {{ chars }}</h1>
+<h1>Updated prefixes and suffixes for {{ chars }}</h1>
 {% if prefixes %}
-<h2>Prefixes</h2>
+<div class="span-10">
 <table>
 {% for prefix in prefixes %}
 <tr class="{% cycle 'row1' 'row2' %}">
@@ -13,15 +13,17 @@
 <td>{{ prefix.key.name }}</td>
 <td>{{ prefix.count }}</td>
 <td>{{ prefix.com }}</td>
+<td>{{ prefix.percentage|floatformat:1 }}%</td>
 <td>{{ prefix.resume }}</td>
 <td>{{ prefix.timestamp|timesince }}</td>
 </tr>
 {% endfor %}
 </table>
+</div>
 {% endif %}
 
 {% if suffixes %}
-<h2>Suffixes</h2>
+<div class="span-10 last">
 <table>
 {% for suffix in suffixes %}
 <tr class="{% cycle 'row1' 'row2' %}">
@@ -29,11 +31,13 @@
 <td>{{ suffix.key.name }}</td>
 <td>{{ suffix.count }}</td>
 <td>{{ suffix.com }}</td>
-<td>{{ prefix.resume }}</td>
+<td>{{ suffix.percentage|floatformat:1 }}%</td>
+<td>{{ suffix.resume }}</td>
 <td>{{ suffix.timestamp|timesince }}</td>
 </tr>
 {% endfor %}
 </table>
+</div>
 {% endif %}
 
 <p>{% for name in names %}{{ name }} {% endfor %}</p>

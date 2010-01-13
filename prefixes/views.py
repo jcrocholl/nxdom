@@ -175,8 +175,8 @@ def cron(request):
         com = com_counters.get(name, 0)
         if length > 3 and com < POPULAR_COUNT:
             continue
-        prefix = Prefix(key_name=name, length=length,
-                        count=count, com=com, timestamp=timestamp)
+        prefix = Prefix(key_name=name, length=length, timestamp=timestamp,
+                        count=count, com=com, percentage=100.0 * com / count)
         if resume.startswith(name):
             prefix.resume = resume # Resume from this prefix later.
         prefixes.append(prefix)
