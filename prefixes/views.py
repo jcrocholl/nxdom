@@ -90,9 +90,14 @@ def need_update():
     return result
 
 
-def count(chars, lookups, Model, cut_prefix):
+def count(chars, resume, lookups, Model, cut_prefix):
     counters = {}
     com_counters = {}
+    if resume:
+        incomplete = Model.all().filter('resume', resume).fetch(20)
+        for prefix in incomplete:
+            counters[prefix.key().name()] = prefix.count
+            com_counters[prefix.key().name()] = prefix.com
     for lookup in lookups:
         name = lookup.key().name()
         for length in range(len(chars), min(12, len(name)) + 1):
@@ -100,17 +105,18 @@ def count(chars, lookups, Model, cut_prefix):
             counters[prefix] = counters.get(prefix, 0) + 1
             if hasattr(lookup, 'com') and '.' in lookup.com:
                 com_counters[prefix] = com_counters.get(prefix, 0) + 1
-    resume = None
+    resume = False
     if len(lookups) == BATCH_SIZE:
-        resume =lookups[-1].key().name()
+        resume = lookups[-1].key().name()
     timestamp = datetime.now()
     prefixes = []
     for name in counters:
         length = len(name)
         count = counters.get(name, 0)
         com = com_counters.get(name, 0)
-        if length > 3 and com < POPULAR_COUNT:
-            continue
+        if length > 2 and com < POPULAR_COUNT:
+            if not resume or name != cut_prefix(resume, len(name)):
+                continue
         prefix = Model(key_name=name, length=length, timestamp=timestamp,
                        count=count, com=com, percentage=100.0 * com / count)
         if resume and name == cut_prefix(resume, len(name)):
@@ -125,13 +131,21 @@ def count(chars, lookups, Model, cut_prefix):
 def cron(request):
     refresh_seconds = request.GET.get('refresh', 0)
     prefix = request.GET.get('prefix', random_prefix(2))
+    resume = False
+    greater = '>='
     start = db.Key.from_path('dns_lookup', prefix)
     stop = db.Key.from_path('dns_lookup', increment_prefix(prefix))
+    previous = Prefix.get_by_key_name(prefix)
+    if previous and hasattr(previous, 'resume'):
+        resume = previous.resume
+        logging.info("resuming prefix %s count from %s", prefix, resume)
+        greater = '>'
+        start = db.Key.from_path('dns_lookup', previous.resume)
     query = Lookup.all().order('__key__')
-    query.filter('__key__ >=', start)
+    query.filter('__key__ ' + greater, start)
     query.filter('__key__ <', stop)
     lookups = retry(query.fetch, BATCH_SIZE)
-    prefixes = count(prefix, lookups, Prefix,
+    prefixes = count(prefix, resume, lookups, Prefix,
                      lambda name, length: name[:length])
     return render_to_response(request, 'prefixes/cron.html', locals())
 
@@ -139,12 +153,20 @@ def cron(request):
 def cron_suffixes(request):
     refresh_seconds = request.GET.get('refresh', 0)
     suffix = request.GET.get('suffix', random_prefix(2))
+    resume = False
+    greater = '>='
     start = suffix[::-1]
     stop = increment_prefix(start)
+    previous = Suffix.get_by_key_name(suffix)
+    if previous and hasattr(previous, 'resume'):
+        resume = previous.resume
+        logging.info("resuming suffix %s count from %s", suffix, resume)
+        greater = '>'
+        start = previous.resume[::-1]
     query = Lookup.all().order('backwards')
-    query.filter('backwards >=', start)
+    query.filter('backwards ' + greater, start)
     query.filter('backwards <', stop)
     lookups = retry(query.fetch, BATCH_SIZE)
-    suffixes = count(suffix, lookups, Suffix,
+    suffixes = count(suffix, resume, lookups, Suffix,
                      lambda name, length: name[-length:])
     return render_to_response(request, 'prefixes/cron.html', locals())

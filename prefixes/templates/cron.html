@@ -7,6 +7,12 @@
 {% if prefixes %}{{ prefixes|length }} prefixes starting with {{ prefix }}{% endif %}
 {% if suffixes %}{{ suffixes|length }} suffixes ending with {{ suffix }}{% endif %}
 </h1>
+{% if previous %}<p>
+Previous count for {{ previous.key.name }} was {{ previous.count }}{% if previous.com %}
+with {{ previous.com }} existing .com domains{% endif %}.
+{% if previous.resume %}Resumed from {{ previous.resume }}.{% endif %}
+</p>{% endif %}
+
 {% if prefixes %}
 <table>
 {% for prefix in prefixes %}
