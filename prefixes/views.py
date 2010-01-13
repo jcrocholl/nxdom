@@ -132,19 +132,18 @@ def suffix_lookups(suffix):
 def count(chars, lookups, Model, cut_prefix):
     counters = {}
     com_counters = {}
-    resume = ''
-    try:
-        for lookup in lookups:
-            name = lookup.key().name()
-            for length in range(len(chars), min(12, len(name)) + 1):
-                prefix = cut_prefix(name, length)
-                counters[prefix] = counters.get(prefix, 0) + 1
-                if hasattr(lookup, 'com') and '.' in lookup.com:
-                    com_counters[prefix] = com_counters.get(prefix, 0) + 1
-    except TooMany:
-        resume = name
-    prefixes = []
+    for lookup in lookups:
+        name = lookup.key().name()
+        for length in range(len(chars), min(12, len(name)) + 1):
+            prefix = cut_prefix(name, length)
+            counters[prefix] = counters.get(prefix, 0) + 1
+            if hasattr(lookup, 'com') and '.' in lookup.com:
+                com_counters[prefix] = com_counters.get(prefix, 0) + 1
+    resume = None
+    if len(lookups) == BATCH_SIZE:
+        resume =lookups[-1].key().name()
     timestamp = datetime.now()
+    prefixes = []
     for name in counters:
         length = len(name)
         count = counters.get(name, 0)
@@ -153,7 +152,7 @@ def count(chars, lookups, Model, cut_prefix):
             continue
         prefix = Model(key_name=name, length=length, timestamp=timestamp,
                        count=count, com=com, percentage=100.0 * com / count)
-        if name == cut_prefix(resume, len(name)):
+        if resume and name == cut_prefix(resume, len(name)):
             # This counter is incomplete, continue later.
             prefix.resume = resume
         prefixes.append(prefix)
@@ -166,7 +165,5 @@ def cron(request):
     chars = request.GET.get('chars', random_prefix(2))
     prefixes = count(chars, prefix_lookups(chars), Prefix,
                      lambda name, length: name[:length])
-    suffixes = count(chars, suffix_lookups(chars), Suffix,
-                     lambda name, length: name[-length:])
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'prefixes/cron.html', locals())
