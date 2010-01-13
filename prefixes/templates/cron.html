@@ -4,17 +4,24 @@
 
 {% block content %}
 <h1>Updated
-{% if prefixes %}{{ prefixes|length }} prefixes starting with {{ prefix }}{% endif %}
-{% if suffixes %}{{ suffixes|length }} suffixes ending with {{ suffix }}{% endif %}
+{% if prefixes %}{{ prefixes|length }} prefixes starting with{% endif %}
+{% if suffixes %}{{ suffixes|length }} suffixes ending with{% endif %}
+{{ prefix }} {{ suffix }}
 </h1>
-{% if previous %}<p>
-Previous count for {{ previous.key.name }} was {{ previous.count }}{% if previous.com %}
-with {{ previous.com }} existing .com domains{% endif %}.
-{% if previous.resume %}Resumed from {{ previous.resume }}.{% endif %}
-</p>{% endif %}
 
 {% if prefixes %}
 <table>
+{% if previous %}
+<tr class="row2">
+<td>{{ previous.length }}</td>
+<td>{{ previous.key.name }}</td>
+<td>{{ previous.count }}</td>
+<td>{{ previous.com }}</td>
+<td>{{ previous.percentage|floatformat:1 }}%</td>
+<td>{{ previous.resume }}</td>
+<td>{{ previous.timestamp|timesince }}</td>
+</tr>
+{% endif %}
 {% for prefix in prefixes %}
 <tr class="{% cycle 'row1' 'row2' %}">
 <td>{{ prefix.length }}</td>
@@ -31,6 +38,17 @@ with {{ previous.com }} existing .com domains{% endif %}.
 
 {% if suffixes %}
 <table>
+{% if previous %}
+<tr class="row2">
+<td>{{ previous.length }}</td>
+<td>{{ previous.key.name }}</td>
+<td>{{ previous.count }}</td>
+<td>{{ previous.com }}</td>
+<td>{{ previous.percentage|floatformat:1 }}%</td>
+<td>{{ previous.resume }}</td>
+<td>{{ previous.timestamp|timesince }}</td>
+</tr>
+{% endif %}
 {% for suffix in suffixes %}
 <tr class="{% cycle 'row1' 'row2' %}">
 <td>{{ suffix.length }}</td>
