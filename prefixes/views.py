@@ -15,8 +15,7 @@ from dns.models import Lookup
 from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
 from prefixes.utils import increment_prefix, random_prefix
 
-BATCH_SIZE = 400
-MAX_TOTAL = 2000
+BATCH_SIZE = 1000
 POPULAR_COUNT = 10 if on_production_server else 1
 
 
@@ -112,54 +111,30 @@ class TooMany(Exception):
     pass
 
 
-def iterate_prefix(prefix):
+def prefix_lookups(prefix):
     start = db.Key.from_path('dns_lookup', prefix)
     stop = db.Key.from_path('dns_lookup', increment_prefix(prefix))
-    greater = '>='
-    total = 0
-    while True:
-        query = Lookup.all().order('__key__')
-        query.filter('__key__ ' + greater, start)
-        query.filter('__key__ <', stop)
-        lookups = query.fetch(BATCH_SIZE)
-        for lookup in lookups:
-            yield lookup
-        if len(lookups) < BATCH_SIZE:
-            break
-        total += len(lookups)
-        if total >= MAX_TOTAL:
-            raise TooMany()
-        start = lookups[-1].key()
-        greater = '>'
+    query = Lookup.all().order('__key__')
+    query.filter('__key__ >=', start)
+    query.filter('__key__ <', stop)
+    return query.fetch(BATCH_SIZE)
 
 
-def iterate_suffix(suffix):
+def suffix_lookups(suffix):
     start = suffix[::-1]
     stop = increment_prefix(start)
-    greater = '>='
-    total = 0
-    while True:
-        query = Lookup.all().order('backwards')
-        query.filter('backwards ' + greater, start)
-        query.filter('backwards <', stop)
-        lookups = query.fetch(BATCH_SIZE)
-        for lookup in lookups:
-            yield lookup
-        if len(lookups) < BATCH_SIZE:
-            break
-        total += len(lookups)
-        if total >= MAX_TOTAL:
-            raise TooMany()
-        start = lookups[-1].key().name()[::-1]
-        greater = '>'
+    query = Lookup.all().order('backwards')
+    query.filter('backwards >=', start)
+    query.filter('backwards <', stop)
+    return query.fetch(BATCH_SIZE)
 
 
-def count(chars, iterator, Model, cut_prefix):
+def count(chars, lookups, Model, cut_prefix):
     counters = {}
     com_counters = {}
     resume = ''
     try:
-        for lookup in iterator:
+        for lookup in lookups:
             name = lookup.key().name()
             for length in range(len(chars), min(12, len(name)) + 1):
                 prefix = cut_prefix(name, length)
@@ -178,8 +153,9 @@ def count(chars, iterator, Model, cut_prefix):
             continue
         prefix = Model(key_name=name, length=length, timestamp=timestamp,
                        count=count, com=com, percentage=100.0 * com / count)
-        if resume.startswith(name):
-            prefix.resume = resume # Resume from this prefix later.
+        if name == cut_prefix(resume, len(name)):
+            # This counter is incomplete, continue later.
+            prefix.resume = resume
         prefixes.append(prefix)
     db.put(prefixes)
     prefixes.sort(key=lambda lookup: (-lookup.count, lookup.key().name()))
@@ -188,9 +164,9 @@ def count(chars, iterator, Model, cut_prefix):
 
 def cron(request):
     chars = request.GET.get('chars', random_prefix(2))
-    prefixes = count(chars, iterate_prefix(chars), Prefix,
+    prefixes = count(chars, prefix_lookups(chars), Prefix,
                      lambda name, length: name[:length])
-    suffixes = count(chars, iterate_suffix(chars), Suffix,
+    suffixes = count(chars, suffix_lookups(chars), Suffix,
                      lambda name, length: name[-length:])
     refresh_seconds = request.GET.get('refresh', 0)
     return render_to_response(request, 'prefixes/cron.html', locals())
