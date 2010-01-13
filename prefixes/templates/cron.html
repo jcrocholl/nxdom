@@ -3,29 +3,34 @@
 {% block title %}Updated prefixes{% endblock %}
 
 {% block content %}
-{% if prefix_rows %}
-<h1>Updated prefixes</h1>
+<h1>Updated prefixes for {{ chars }}</h1>
+{% if prefixes %}
+<h2>Prefixes</h2>
 <table>
-{% for row in prefix_rows %}
+{% for prefix in prefixes %}
 <tr class="{% cycle 'row1' 'row2' %}">
-{% for prefix in row %}
-<td class="right{% firstof prefix.class_extra %}">{{ prefix.count }}x</td>
-<td class="left{% firstof prefix.class_extra %}">{{ prefix.key.name }}</td>
-{% endfor %}
+<td>{{ prefix.length }}</td>
+<td>{{ prefix.key.name }}</td>
+<td>{{ prefix.count }}</td>
+<td>{{ prefix.com }}</td>
+<td>{{ prefix.resume }}</td>
+<td>{{ prefix.timestamp|timesince }}</td>
 </tr>
 {% endfor %}
 </table>
 {% endif %}
 
-{% if suffix_rows %}
-<h1>Updated suffixes</h1>
+{% if suffixes %}
+<h2>Suffixes</h2>
 <table>
-{% for row in suffix_rows %}
+{% for suffix in suffixes %}
 <tr class="{% cycle 'row1' 'row2' %}">
-{% for suffix in row %}
-<td class="right{% firstof suffix.class_extra %}">{{ suffix.count }}x</td>
-<td class="left{% firstof suffix.class_extra %}">{{ suffix.key.name }}</td>
-{% endfor %}
+<td>{{ suffix.length }}</td>
+<td>{{ suffix.key.name }}</td>
+<td>{{ suffix.count }}</td>
+<td>{{ suffix.com }}</td>
+<td>{{ prefix.resume }}</td>
+<td>{{ suffix.timestamp|timesince }}</td>
 </tr>
 {% endfor %}
 </table>

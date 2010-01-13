@@ -1,11 +1,7 @@
 cron:
 - description: count domains for some prefixes
   url: /prefixes/cron/
-  schedule: every 10 minutes
-  timezone: America/Los_Angeles
-- description: count popular prefixes and suffixes
-  url: /prefixes/cron/popular/
-  schedule: every 10 minutes
+  schedule: every 1 minutes
   timezone: America/Los_Angeles
 - description: update domain names
   url: /domains/cron/
