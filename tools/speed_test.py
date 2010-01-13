@@ -16,7 +16,7 @@ def main():
     url = 'http://www.nxdom.com/'
     if len(sys.argv) > 1:
         url = sys.argv[1]
-    results = [milliseconds(url) for i in range(14)]
+    results = [milliseconds(url) for i in range(10)]
     results.sort()
     print time.strftime('%Y-%m-%d %H:%M:%S'),
     print ' '.join([str(i) for i in results])
