@@ -89,46 +89,6 @@ def need_update():
     return result
 
 
-def update_prefix(prefix):
-    field = 'left%d' % len(prefix)
-    keys = Domain.all(keys_only=True).order('__key__')
-    keys.filter(field, prefix)
-    keys = keys.fetch(1000)
-    count = len(keys)
-    while len(keys) == 1000:
-        previous = keys[-1]
-        keys = Domain.all(keys_only=True).order('__key__')
-        keys.filter(field, prefix).filter('__key__ >', previous)
-        keys = keys.fetch(1000)
-        count += len(keys)
-    prefix = Prefix(key_name=prefix, length=len(prefix),
-                    count=count, timestamp=datetime.now())
-    prefix.put()
-    return prefix
-
-
-class TooMany(Exception):
-    pass
-
-
-def prefix_lookups(prefix):
-    start = db.Key.from_path('dns_lookup', prefix)
-    stop = db.Key.from_path('dns_lookup', increment_prefix(prefix))
-    query = Lookup.all().order('__key__')
-    query.filter('__key__ >=', start)
-    query.filter('__key__ <', stop)
-    return query.fetch(BATCH_SIZE)
-
-
-def suffix_lookups(suffix):
-    start = suffix[::-1]
-    stop = increment_prefix(start)
-    query = Lookup.all().order('backwards')
-    query.filter('backwards >=', start)
-    query.filter('backwards <', stop)
-    return query.fetch(BATCH_SIZE)
-
-
 def count(chars, lookups, Model, cut_prefix):
     counters = {}
     com_counters = {}
@@ -162,8 +122,28 @@ def count(chars, lookups, Model, cut_prefix):
 
 
 def cron(request):
-    chars = request.GET.get('chars', random_prefix(2))
-    prefixes = count(chars, prefix_lookups(chars), Prefix,
-                     lambda name, length: name[:length])
     refresh_seconds = request.GET.get('refresh', 0)
+    prefix = request.GET.get('prefix', random_prefix(2))
+    start = db.Key.from_path('dns_lookup', prefix)
+    stop = db.Key.from_path('dns_lookup', increment_prefix(prefix))
+    query = Lookup.all().order('__key__')
+    query.filter('__key__ >=', start)
+    query.filter('__key__ <', stop)
+    lookups = query.fetch(BATCH_SIZE)
+    prefixes = count(prefix, lookups, Prefix,
+                     lambda name, length: name[:length])
+    return render_to_response(request, 'prefixes/cron.html', locals())
+
+
+def cron_suffixes(request):
+    refresh_seconds = request.GET.get('refresh', 0)
+    suffix = request.GET.get('suffix', random_prefix(2))
+    start = suffix[::-1]
+    stop = increment_prefix(start)
+    query = Lookup.all().order('backwards')
+    query.filter('backwards >=', start)
+    query.filter('backwards <', stop)
+    lookups = query.fetch(BATCH_SIZE)
+    suffixes = count(suffix, lookups, Suffix,
+                     lambda name, length: name[-length:])
     return render_to_response(request, 'prefixes/cron.html', locals())

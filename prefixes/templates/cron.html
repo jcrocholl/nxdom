@@ -3,9 +3,11 @@
 {% block title %}Updated prefixes{% endblock %}
 
 {% block content %}
-<h1>Updated prefixes and suffixes for {{ chars }}</h1>
+<h1>Updated
+{% if prefixes %}{{ prefixes|length }} prefixes starting with {{ prefix }}{% endif %}
+{% if suffixes %}{{ suffixes|length }} suffixes ending with {{ suffix }}{% endif %}
+</h1>
 {% if prefixes %}
-<div class="span-10">
 <table>
 {% for prefix in prefixes %}
 <tr class="{% cycle 'row1' 'row2' %}">
@@ -19,11 +21,9 @@
 </tr>
 {% endfor %}
 </table>
-</div>
 {% endif %}
 
 {% if suffixes %}
-<div class="span-10 last">
 <table>
 {% for suffix in suffixes %}
 <tr class="{% cycle 'row1' 'row2' %}">
@@ -37,8 +37,5 @@
 </tr>
 {% endfor %}
 </table>
-</div>
 {% endif %}
-
-<p>{% for name in names %}{{ name }} {% endfor %}</p>
 {% endblock %}
