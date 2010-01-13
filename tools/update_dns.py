@@ -241,8 +241,8 @@ def main():
     parser.add_option('--server', metavar='<hostname>',
                       default='scoretool.appspot.com',
                       help="connect to a different server")
-    parser.add_option('--batch', metavar='<size>', type="int", default=100,
-                      help="adjust batch size (default 100)")
+    parser.add_option('--batch', metavar='<size>', type="int", default=60,
+                      help="adjust batch size (default 60)")
     parser.add_option('--timeout', metavar='<seconds>', type="int", default=20,
                       help="maximum wait time for DNS response (default 20)")
     parser.add_option('--max', metavar='<length>', type="int", default=9,
