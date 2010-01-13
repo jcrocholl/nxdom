@@ -14,7 +14,7 @@ from google.appengine.ext.remote_api import remote_api_stub
 from google.appengine.api.datastore_errors import Timeout
 
 from prefixes.models import DotComPrefix, DotComSuffix
-from utils.retry import retry
+from tools.retry import retry
 
 LENGTHS = range(3, 10)
 

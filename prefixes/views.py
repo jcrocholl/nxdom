@@ -14,6 +14,7 @@ from domains.models import Domain, DOMAIN_CHARS
 from dns.models import Lookup
 from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
 from prefixes.utils import increment_prefix, random_prefix
+from tools.retry import retry
 
 BATCH_SIZE = 1000
 POPULAR_COUNT = 10 if on_production_server else 1
@@ -129,7 +130,7 @@ def cron(request):
     query = Lookup.all().order('__key__')
     query.filter('__key__ >=', start)
     query.filter('__key__ <', stop)
-    lookups = query.fetch(BATCH_SIZE)
+    lookups = retry(query.fetch, BATCH_SIZE)
     prefixes = count(prefix, lookups, Prefix,
                      lambda name, length: name[:length])
     return render_to_response(request, 'prefixes/cron.html', locals())
@@ -143,7 +144,7 @@ def cron_suffixes(request):
     query = Lookup.all().order('backwards')
     query.filter('backwards >=', start)
     query.filter('backwards <', stop)
-    lookups = query.fetch(BATCH_SIZE)
+    lookups = retry(query.fetch, BATCH_SIZE)
     suffixes = count(suffix, lookups, Suffix,
                      lambda name, length: name[-length:])
     return render_to_response(request, 'prefixes/cron.html', locals())

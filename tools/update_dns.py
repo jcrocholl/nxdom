@@ -23,7 +23,7 @@ from dns.models import TOP_LEVEL_DOMAINS, Lookup
 from dns.utils import status_name, reverse_name
 from domains.models import MAX_NAME_LENGTH, Domain
 from domains.utils import random_domains
-from utils.retry import retry, retry_objects
+from tools.retry import retry, retry_objects
 from prefixes.selectors import random_prefix
 
 NAMESERVERS = """
