@@ -19,7 +19,7 @@
 <td>{{ previous.com }}</td>
 <td>{{ previous.percentage|floatformat:1 }}%</td>
 <td>{{ previous.resume }}</td>
-<td>{{ previous.timestamp|timesince }}</td>
+<td>{{ previous.timestamp|timesince }} ago</td>
 </tr>
 {% endif %}
 {% for prefix in prefixes %}
@@ -30,7 +30,6 @@
 <td>{{ prefix.com }}</td>
 <td>{{ prefix.percentage|floatformat:1 }}%</td>
 <td>{{ prefix.resume }}</td>
-<td>{{ prefix.timestamp|timesince }}</td>
 </tr>
 {% endfor %}
 </table>
@@ -46,7 +45,7 @@
 <td>{{ previous.com }}</td>
 <td>{{ previous.percentage|floatformat:1 }}%</td>
 <td>{{ previous.resume }}</td>
-<td>{{ previous.timestamp|timesince }}</td>
+<td>{{ previous.timestamp|timesince }} ago</td>
 </tr>
 {% endif %}
 {% for suffix in suffixes %}
@@ -57,7 +56,6 @@
 <td>{{ suffix.com }}</td>
 <td>{{ suffix.percentage|floatformat:1 }}%</td>
 <td>{{ suffix.resume }}</td>
-<td>{{ suffix.timestamp|timesince }}</td>
 </tr>
 {% endfor %}
 </table>
