@@ -12,7 +12,7 @@ from appenginepatcher import on_production_server
 
 from domains.models import Domain, DOMAIN_CHARS
 from dns.models import Lookup
-from prefixes.models import Prefix, Suffix, DotComPrefix, DotComSuffix
+from prefixes.models import Prefix, Suffix
 from prefixes.utils import increment_prefix, random_prefix
 from tools.retry import retry
 
@@ -132,47 +132,56 @@ def count(chars, resume, lookups, Model, cut_prefix):
     return prefixes
 
 
+def resume_previous(request, Model):
+    if 'chars' in request.GET:
+        chars = request.GET['chars']
+    else:
+        incomplete = Model.all().filter('length', 2).order('resume').fetch(20)
+        if len(incomplete) > 10:
+            return random.choice(incomplete)
+        chars = random_prefix(2)
+    return (Model.get_by_key_name('.' + chars) or
+            Model.get_by_key_name(chars) or
+            Model(key_name=chars, length=len(chars), count=0))
+
+
 def cron(request):
     refresh_seconds = request.GET.get('refresh', 0)
-    prefix = request.GET.get('prefix', random_prefix(2))
+    previous = resume_previous(request, Prefix)
+    chars = previous.key().name().lstrip('.')
     resume = False
     greater = '>='
-    start = db.Key.from_path('dns_lookup', prefix)
-    stop = db.Key.from_path('dns_lookup', increment_prefix(prefix))
-    previous = (Prefix.get_by_key_name('.' + prefix) or
-                Prefix.get_by_key_name(prefix))
-    if previous and hasattr(previous, 'resume'):
+    start = db.Key.from_path('dns_lookup', chars)
+    stop = db.Key.from_path('dns_lookup', increment_prefix(chars))
+    if hasattr(previous, 'resume'):
         resume = previous.resume
-        logging.info("resuming prefix %s count from %s", prefix, resume)
         greater = '>'
         start = db.Key.from_path('dns_lookup', previous.resume)
     query = Lookup.all().order('__key__')
     query.filter('__key__ ' + greater, start)
     query.filter('__key__ <', stop)
     lookups = retry(query.fetch, BATCH_SIZE)
-    prefixes = count(prefix, resume, lookups, Prefix,
+    prefixes = count(chars, resume, lookups, Prefix,
                      lambda name, length: name[:length])
     return render_to_response(request, 'prefixes/cron.html', locals())
 
 
 def cron_suffixes(request):
     refresh_seconds = request.GET.get('refresh', 0)
-    suffix = request.GET.get('suffix', random_prefix(2))
+    previous = resume_previous(request, Suffix)
+    chars = previous.key().name().lstrip('.')
     resume = False
     greater = '>='
-    start = suffix[::-1]
+    start = chars[::-1]
     stop = increment_prefix(start)
-    previous = (Suffix.get_by_key_name('.' + suffix) or
-                Suffix.get_by_key_name(suffix))
-    if previous and hasattr(previous, 'resume'):
+    if hasattr(previous, 'resume'):
         resume = previous.resume
-        logging.info("resuming suffix %s count from %s", suffix, resume)
         greater = '>'
         start = previous.resume[::-1]
     query = Lookup.all().order('backwards')
     query.filter('backwards ' + greater, start)
     query.filter('backwards <', stop)
     lookups = retry(query.fetch, BATCH_SIZE)
-    suffixes = count(suffix, resume, lookups, Suffix,
+    suffixes = count(chars, resume, lookups, Suffix,
                      lambda name, length: name[-length:])
     return render_to_response(request, 'prefixes/cron.html', locals())
