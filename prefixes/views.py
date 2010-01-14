@@ -96,8 +96,10 @@ def count(chars, resume, lookups, Model, cut_prefix):
     if resume:
         incomplete = Model.all().filter('resume', resume).fetch(20)
         for prefix in incomplete:
-            counters[prefix.key().name()] = prefix.count
-            com_counters[prefix.key().name()] = prefix.com
+            name = prefix.key().name().lstrip('.')
+            counters[name] = prefix.count
+            com_counters[name] = prefix.com
+        db.delete(incomplete)
     for lookup in lookups:
         name = lookup.key().name()
         for length in range(len(chars), min(12, len(name)) + 1):
@@ -105,23 +107,25 @@ def count(chars, resume, lookups, Model, cut_prefix):
             counters[prefix] = counters.get(prefix, 0) + 1
             if hasattr(lookup, 'com') and '.' in lookup.com:
                 com_counters[prefix] = com_counters.get(prefix, 0) + 1
-    resume = False
+    last = None
     if len(lookups) == BATCH_SIZE:
-        resume = lookups[-1].key().name()
+        last = lookups[-1].key().name()
     timestamp = datetime.now()
     prefixes = []
     for name in counters:
+        key_name = name
         length = len(name)
         count = counters.get(name, 0)
         com = com_counters.get(name, 0)
-        if length > 2 and com < POPULAR_COUNT:
-            if not resume or name != cut_prefix(resume, len(name)):
-                continue
-        prefix = Model(key_name=name, length=length, timestamp=timestamp,
-                       count=count, com=com, percentage=100.0 * com / count)
-        if resume and name == cut_prefix(resume, len(name)):
-            # This counter is incomplete, continue later.
-            prefix.resume = resume
+        percentage = 100.0 * com / count
+        if last and name == cut_prefix(last, len(name)):
+            key_name = '.' + name
+        elif length > 2 and com < POPULAR_COUNT:
+            continue
+        prefix = Model(key_name=key_name, length=length, timestamp=timestamp,
+                       count=count, com=com, percentage=percentage)
+        if key_name.startswith('.'):
+            prefix.resume = last
         prefixes.append(prefix)
     db.put(prefixes)
     prefixes.sort(key=lambda lookup: (-lookup.count, lookup.key().name()))
@@ -135,7 +139,8 @@ def cron(request):
     greater = '>='
     start = db.Key.from_path('dns_lookup', prefix)
     stop = db.Key.from_path('dns_lookup', increment_prefix(prefix))
-    previous = Prefix.get_by_key_name(prefix)
+    previous = (Prefix.get_by_key_name('.' + prefix) or
+                Prefix.get_by_key_name(prefix))
     if previous and hasattr(previous, 'resume'):
         resume = previous.resume
         logging.info("resuming prefix %s count from %s", prefix, resume)
@@ -157,7 +162,8 @@ def cron_suffixes(request):
     greater = '>='
     start = suffix[::-1]
     stop = increment_prefix(start)
-    previous = Suffix.get_by_key_name(suffix)
+    previous = (Suffix.get_by_key_name('.' + suffix) or
+                Suffix.get_by_key_name(suffix))
     if previous and hasattr(previous, 'resume'):
         resume = previous.resume
         logging.info("resuming suffix %s count from %s", suffix, resume)
