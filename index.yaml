@@ -23,17 +23,32 @@ indexes:
   - name: length
   - name: timestamp
 
-- kind: prefixes_dotcomprefix
+- kind: prefixes_prefix
   properties:
   - name: length
-  - name: count
+  - name: com
     direction: desc
 
-- kind: prefixes_dotcomsuffix
+- kind: prefixes_prefix
   properties:
   - name: length
-  - name: count
+  - name: resume
+
+- kind: prefixes_suffix
+  properties:
+  - name: length
+  - name: timestamp
+
+- kind: prefixes_suffix
+  properties:
+  - name: length
+  - name: com
     direction: desc
+
+- kind: prefixes_suffix
+  properties:
+  - name: length
+  - name: resume
 
 - kind: tests_comparison
   properties:
