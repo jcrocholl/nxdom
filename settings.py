@@ -42,6 +42,7 @@ SECRET_KEY = '1234567890'
 
 # Enable I18N and set default language to 'en'
 USE_I18N = False
+USE_ETAGS = True
 LANGUAGE_CODE = 'en'
 
 # Restrict supported languages (and JS media generation)
@@ -54,7 +55,7 @@ LANGUAGES = (
 TIME_ZONE = 'UTC'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+    #'django.core.context_processors.auth',
     'django.core.context_processors.media',
     'django.core.context_processors.request',
     'django.core.context_processors.i18n',
@@ -63,9 +64,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 MIDDLEWARE_CLASSES = (
     'ragendja.middleware.ErrorMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.contrib.sessions.middleware.SessionMiddleware',
     # Django authentication
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    #'django.contrib.auth.middleware.AuthenticationMiddleware',
     # Google authentication
     #'ragendja.auth.middleware.GoogleAuthenticationMiddleware',
     # Hybrid Django/Google authentication
