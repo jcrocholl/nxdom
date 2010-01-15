@@ -41,10 +41,11 @@ function domain_score(domain, weights) {
 	return score;
 }
 
-function mouse_down_track(one, two, three) {
+function mouse_down_track(one, two, three, four) {
 	var path = '/' + one + '/';
 	if (two) path += two + '/';
 	if (three) path += three + '/';
+	if (four) path += four + '/';
 	var javascript = "$.ga.trackPageview('" + path + "');";
 	return 'onMouseDown="' + javascript + '"';
 }
@@ -79,7 +80,7 @@ function affiliate_link(name, tld) {
 		html += name + "." + tld;
 	}
 	html += '" title="Check availability on ' + $.registrar + '" ';
-	html += mouse_down_track('outgoing', $.registrar, tld);
+	html += mouse_down_track('outgoing', $.registrar, tld, name.length);
 	html += '>' + tld + '</a>';
 	return html;
 }
