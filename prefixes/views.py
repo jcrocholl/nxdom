@@ -17,7 +17,7 @@ from prefixes.utils import increment_prefix, random_prefix
 from tools.retry import retry
 
 BATCH_SIZE = 1000
-POPULAR_COUNT = 10 if on_production_server else 1
+POPULAR_COUNT = 10 if on_production_server else 2
 
 
 class PrefixForm(forms.Form):
@@ -90,7 +90,7 @@ def need_update():
     return result
 
 
-def count(chars, resume, lookups, Model, cut_prefix):
+def count(chars, resume, lookups, Model):
     counters = {}
     com_counters = {}
     if resume:
@@ -103,13 +103,13 @@ def count(chars, resume, lookups, Model, cut_prefix):
     for lookup in lookups:
         name = lookup.key().name()
         for length in range(len(chars), min(12, len(name)) + 1):
-            prefix = cut_prefix(name, length)
+            prefix = Model.name_cut(name, length)
             counters[prefix] = counters.get(prefix, 0) + 1
             if hasattr(lookup, 'com') and '.' in lookup.com:
                 com_counters[prefix] = com_counters.get(prefix, 0) + 1
     last = None
     if len(lookups) == BATCH_SIZE:
-        last = lookups[-1].key().name()
+        last = Model.name_cut(lookups[-1].key().name())
     timestamp = datetime.now()
     prefixes = []
     for name in counters:
@@ -118,7 +118,7 @@ def count(chars, resume, lookups, Model, cut_prefix):
         count = counters.get(name, 0)
         com = com_counters.get(name, 0)
         percentage = 100.0 * com / count
-        if last and name == cut_prefix(last, len(name)):
+        if last and last.startswith(name):
             key_name = '.' + name
         elif length > 2 and com < POPULAR_COUNT:
             continue
@@ -161,8 +161,7 @@ def cron(request):
     query.filter('__key__ ' + greater, start)
     query.filter('__key__ <', stop)
     lookups = retry(query.fetch, BATCH_SIZE)
-    prefixes = count(chars, resume, lookups, Prefix,
-                     lambda name, length: name[:length])
+    prefixes = count(chars, resume, lookups, Prefix)
     return render_to_response(request, 'prefixes/cron.html', locals())
 
 
@@ -172,16 +171,15 @@ def cron_suffixes(request):
     chars = previous.key().name().lstrip('.')
     resume = False
     greater = '>='
-    start = chars[::-1]
+    start = chars
     stop = increment_prefix(start)
     if hasattr(previous, 'resume'):
         resume = previous.resume
         greater = '>'
-        start = previous.resume[::-1]
+        start = previous.resume
     query = Lookup.all().order('backwards')
     query.filter('backwards ' + greater, start)
     query.filter('backwards <', stop)
     lookups = retry(query.fetch, BATCH_SIZE)
-    suffixes = count(chars, resume, lookups, Suffix,
-                     lambda name, length: name[-length:])
+    suffixes = count(chars, resume, lookups, Suffix)
     return render_to_response(request, 'prefixes/cron.html', locals())

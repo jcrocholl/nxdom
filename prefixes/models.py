@@ -17,6 +17,19 @@ class Prefix(db.Expando):
     percentage = db.FloatProperty()
     timestamp = db.DateTimeProperty()
 
+    @classmethod
+    def name_cut(cls, name, length=None):
+        """
+        >>> Prefix.name_cut('123456789')
+        '123456789'
+        >>> Prefix.name_cut('123456789', 3)
+        '123'
+        """
+        if length is None:
+            return name
+        else:
+            return name[:length]
+
 
 class Suffix(db.Expando):
     """
@@ -29,3 +42,16 @@ class Suffix(db.Expando):
     com = db.IntegerProperty()
     percentage = db.FloatProperty()
     timestamp = db.DateTimeProperty()
+
+    @classmethod
+    def name_cut(cls, name, length=None):
+        """
+        >>> Suffix.name_cut('123456789')
+        '987654321'
+        >>> Suffix.name_cut('123456789', 3)
+        '987'
+        """
+        if length is None:
+            return name[::-1]
+        else:
+            return name[::-1][:length]
