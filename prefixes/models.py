@@ -7,8 +7,9 @@ from domains.models import Domain
 
 class Prefix(db.Expando):
     """
-    Count all domains in the datastore that start with the same prefix
-    as the key name of the counter.
+    Count all domains in the datastore that start with the same
+    prefix. The key name is the prefix, with a leading dot and
+    optional property 'resume' if incomplete.
     """
     length = db.IntegerProperty(required=True)
     count = db.IntegerProperty(required=True, default=0)
@@ -19,8 +20,9 @@ class Prefix(db.Expando):
 
 class Suffix(db.Expando):
     """
-    Count all domains in the datastore that end with the same suffix
-    as the key name of the counter.
+    Count all domains in the datastore that end with the same suffix.
+    The key name is the suffix backwards, with a leading dot
+    and optional property 'resume' if incomplete.
     """
     length = db.IntegerProperty(required=True)
     count = db.IntegerProperty(required=True, default=0)
