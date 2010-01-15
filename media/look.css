@@ -35,7 +35,7 @@ table.weights td {
 }
 table.weights td { text-align: right; }
 td.vertical {
-  width: 16px;
+  width: 21px;
   height: 64px;
   background: url("/static/images/vertical.png") no-repeat bottom;
 }
