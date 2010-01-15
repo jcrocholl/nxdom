@@ -49,9 +49,9 @@ def submit(request, page, message):
     """
     Save a new feedback message in the database.
     """
-    submitter = request.user
-    if submitter.is_anonymous():
-        submitter = None
+    # submitter = request.user
+    # if submitter.is_anonymous():
+    submitter = None
     feedback = Feedback(page=page, message=message, submitter=submitter,
                         ip=request.META.get('REMOTE_ADDR', '0.0.0.0'))
     feedback.put()
@@ -75,9 +75,9 @@ def delete(request, id):
     if feedback.ip == request.META.get('REMOTE_ADDR', '0.0.0.0'):
         logging.info("Feedback '%s' deleted by same IP." % id)
         feedback.delete()
-    elif request.user.is_staff:
-        logging.info("Feedback '%s' deleted by staff member." % id)
-        feedback.delete()
+    # elif request.user.is_staff:
+    #     logging.info("Feedback '%s' deleted by staff member." % id)
+    #     feedback.delete()
     return redirect
 
 
