@@ -132,14 +132,21 @@ def count(chars, resume, lookups, Model):
     return prefixes
 
 
-def resume_previous(request, Model):
+def resume_chars(request, Model):
     if 'chars' in request.GET:
-        chars = request.GET['chars']
-    else:
-        incomplete = Model.all().filter('length', 2).order('resume').fetch(20)
-        if len(incomplete) > 10:
-            return random.choice(incomplete)
-        chars = random_prefix(2)
+        return request.GET['chars']
+    rand = random.randint(1, 20)
+    if rand > 10:
+        oldest = Model.all().filter('length', 2).order('timestamp')
+        return random.choice(oldest.fetch(20)).key().name()
+    incomplete = Model.all().filter('length', 2).order('resume').fetch(20)
+    if len(incomplete) > rand:
+        return random.choice(incomplete).key().name()
+    return random_prefix(2)
+
+
+def resume_previous(request, Model):
+    chars = resume_chars(request, Model)
     return (Model.get_by_key_name('.' + chars) or
             Model.get_by_key_name(chars) or
             Model(key_name=chars, length=len(chars), count=0))
