@@ -128,7 +128,7 @@ def count(chars, resume, lookups, Model):
             prefix.resume = last
         prefixes.append(prefix)
     db.put(prefixes)
-    prefixes.sort(key=lambda lookup: (-lookup.count, lookup.key().name()))
+    prefixes.sort(key=lambda lookup: lookup.key().name())
     return prefixes
 
 
