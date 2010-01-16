@@ -68,12 +68,6 @@ class RegistrarForm(forms.Form):
 @cache_control(public=True, max_age=MEMCACHE_TIMEOUT)
 @cache_page(15 * 60) # Server side cache for 15 minutes.
 def index(request):
-    if (request.method == 'GET' and
-        request.META['SERVER_NAME'] == 'scoretool.appspot.com'):
-        url = 'http://www.nxdom.com' + request.META['PATH_INFO']
-        if request.META['QUERY_STRING']:
-            url += '?' + request.META['QUERY_STRING']
-        return HttpResponsePermanentRedirect(url)
     logging.info("Generating home page")
     search_form = SearchForm(request.GET or None)
     weights_form = WeightsForm(request.GET or None)

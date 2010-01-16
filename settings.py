@@ -63,6 +63,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'tools.middleware.DomainRedirectMiddleware',
     'ragendja.middleware.ErrorMiddleware',
     #'django.contrib.sessions.middleware.SessionMiddleware',
     # Django authentication
