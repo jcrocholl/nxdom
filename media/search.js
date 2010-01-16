@@ -87,12 +87,14 @@ function affiliate_link(name, tld) {
 
 function domain_link(name, tld) {
 	return '<a href="http://' + name + '.' + tld + '/" ' +
-		mouse_down_track('outgoing', 'website', tld) + '>' + tld + '</a>';
+		mouse_down_track('outgoing', 'website', tld, name.length) + '>' +
+		tld + '</a>';
 }
 
 function google_link(name) {
 	return '<a href="http://www.google.com/search?q=' + name + '" ' +
-		mouse_down_track('outgoing', 'google') + '>' + name + '</a>';
+		mouse_down_track('outgoing', 'google', name.length) + '>' +
+		name + '</a>';
 }
 
 function table_row(domain, row) {
