@@ -205,12 +205,21 @@ function ajax_result(json, status) {
 		length = key.length;
 	}
 	$.ajax_search.xhr[length] = false;
+	for (var index in $.ajax_search.xhr)
+		if ($.ajax_search.xhr[index]) return;
+	var now = new Date();
+	var milliseconds = now.getTime() - $.ajax_search.start;
+	var seconds = (milliseconds / 1000).toFixed(1);
+	$.ga.trackPageview('/search/' + left.length + '/' + right.length + '/' +
+					   seconds + '/');
 }
 
 function ajax_search(left, right) {
 	left = jQuery.trim(left);
 	right = jQuery.trim(right);
 	if ($.ajax_search.left == left && $.ajax_search.right == right) return;
+	var now = new Date();
+	$.ajax_search.start = now.getTime();
 	$.ajax_search.left = left;
 	$.ajax_search.right = right;
 	delete_domains(left, right);
