@@ -218,16 +218,20 @@ function ajax_stop() {
 	var now = new Date();
 	var milliseconds = now.getTime() - $.ajax_search.start;
 	var seconds = (milliseconds / 1000).toFixed(1);
-	var left = jQuery.trim($("input#id_left").val());
-	var right = jQuery.trim($("input#id_right").val());
-	$.ga.trackPageview('/search/' + left.length + '/' + right.length + '/' +
-					   seconds + '/');
+	if ($.ajax_search.left || $.ajax_search.right) {
+		$.ga.trackPageview('/search/' +
+						   $.ajax_search.left.length + '/' +
+						   $.ajax_search.right.length + '/' +
+						   seconds + '/');
+	}
 }
 
 function ajax_search(left, right) {
 	left = jQuery.trim(left);
 	right = jQuery.trim(right);
 	if ($.ajax_search.left == left && $.ajax_search.right == right) return;
+	var now = new Date();
+	$.ajax_search.start = now.getTime();
 	$.ajax_search.left = left;
 	$.ajax_search.right = right;
 	delete_domains(left, right);
