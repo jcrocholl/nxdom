@@ -1,22 +1,16 @@
 #!/usr/bin/env python
 
-# Setup project environment in the parent directory.
 import os
 import sys
 sys.path[0] = os.path.dirname(sys.path[0])
 from common.appenginepatch.aecmd import setup_env
 setup_env()
 
-from pprint import pprint
+import textwrap
 
-from google.appengine.ext import db
-from google.appengine.ext.remote_api import remote_api_stub
-from google.appengine.api.datastore_errors import Timeout
+from prefixes.models import Prefix, Suffix
 
-from prefixes.models import DotComPrefix, DotComSuffix
-from tools.retry import retry
-
-LENGTHS = range(3, 10)
+LENGTHS = range(2, 7)
 
 
 def auth_func():
@@ -46,18 +40,28 @@ def most_popular(model, variable, length, maximums, totals):
     maximums[length] = int(maximum)
 
 
-def all_lengths(model, variable, lengths):
-    # Fetch and format popular prefixes.
-    totals = {}
-    maximums = {}
-    print '%s_SCORES = {}' % variable
+def sort_prefixes(filename):
+    counters = {}
+    for line in open(filename):
+        parts = line.strip().split()
+        if len(parts) == 2:
+            counters[parts[1]] = int(parts[0])
+    names = counters.keys()
+    names.sort(key=lambda name: -counters[name])
+    return names
+
+
+def all_lengths(Model, lengths):
+    variable = Model.kind().split('_')[-1].upper() + '_SCORES'
+    print variable, '= {}'
     for length in lengths:
-        most_popular(model, '%s_SCORES' % variable,
-                     length, maximums, totals)
-    print '%s_MAXIMUMS = ' % variable,
-    pprint(maximums)
-    print '%s_TOTALS = ' % variable,
-    pprint(totals)
+        names = sort_prefixes('data/popular/%ses.%d.txt' % (
+                Model.kind().split('_')[-1], length))
+        print 'for index, name in enumerate("""'
+        print textwrap.fill(' '.join(names))
+        print '""".split()): %s[name] = (%d - index) / %.1f' % (
+            variable, len(names), len(names) * (length + 1) / length)
+        print
 
 
 def score_function(variable, slice):
@@ -66,11 +70,10 @@ def score_function(variable, slice):
 def prefix_score(name):
     best_score = 0.0
     best_prefix = ''
-    for length in range(3, min(10, len(name) + 1)):
+    for length in range(2, min(6, len(name)) + 1):
         prefix = name[slice]
-        score = PREFIX_SCORES[length].get(prefix, 0)
-        score /= float(PREFIX_MAXIMUMS[length])
-        if score and score >= best_score:
+        score = PREFIX_SCORES.get(prefix, None)
+        if score > best_score:
             best_score = score
             best_prefix = prefix
     return best_score, best_prefix
@@ -82,17 +85,8 @@ def prefix_score(name):
 
 
 def main():
-    from optparse import OptionParser
-    parser = OptionParser()
-    parser.add_option('--server', metavar='<hostname>',
-                      default='scoretool.appspot.com',
-                      help="connect to a different server")
-    (options, args) = parser.parse_args()
-    remote_api_stub.ConfigureRemoteDatastore(
-        'scoretool', '/remote_api_hidden', auth_func, options.server)
-    all_lengths(DotComPrefix, 'PREFIX', LENGTHS)
-    print
-    all_lengths(DotComSuffix, 'SUFFIX', LENGTHS)
+    all_lengths(Prefix, LENGTHS)
+    all_lengths(Suffix, LENGTHS)
     score_function('PREFIX', '[:length]')
     score_function('SUFFIX', '[-length:]')
 

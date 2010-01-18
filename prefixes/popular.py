@@ -1,8969 +1,3022 @@
 PREFIX_SCORES = {}
-PREFIX_SCORES[3] = {
-'the': 2374,
-'car': 1825,
-'for': 1225,
-'sho': 1173,
-'pla': 1164,
-'new': 1159,
-'hot': 1056,
-'see': 1054,
-'fun': 1009,
-'fin': 1004,
-'sex': 996,
-'ban': 977,
-'dea': 968,
-'man': 954,
-'job': 940,
-'tea': 931,
-'top': 920,
-'par': 911,
-'goo': 899,
-'all': 890,
-'eas': 880,
-'get': 880,
-'lin': 875,
-'pop': 874,
-'art': 872,
-'buy': 871,
-'big': 870,
-'win': 869,
-'rea': 863,
-'sta': 852,
-'you': 852,
-'tra': 848,
-'net': 835,
-'use': 804,
-'hea': 786,
-'bar': 775,
-'dat': 766,
-'mad': 766,
-'bet': 758,
-'got': 751,
-'boo': 748,
-'sto': 744,
-'red': 743,
-'mod': 734,
-'bid': 726,
-'not': 725,
-'met': 721,
-'sun': 721,
-'fre': 720,
-'gre': 720,
-'hel': 718,
-'one': 718,
-'fil': 712,
-'min': 705,
-'cat': 700,
-'mar': 700,
-'tru': 700,
-'chi': 699,
-'her': 698,
-'pro': 698,
-'lea': 694,
-'key': 692,
-'can': 689,
-'bit': 688,
-'sit': 686,
-'far': 684,
-'pay': 682,
-'fan': 681,
-'eye': 677,
-'war': 672,
-'web': 672,
-'cha': 668,
-'thi': 663,
-'dog': 658,
-'she': 657,
-'fir': 656,
-'foo': 655,
-'bus': 653,
-'map': 648,
-'bes': 647,
-'kin': 647,
-'fee': 639,
-'gam': 638,
-'sel': 634,
-'air': 626,
-'fla': 626,
-'wil': 626,
-'kid': 624,
-'day': 617,
-'law': 611,
-'fly': 608,
-'wor': 605,
-'fit': 600,
-'now': 600,
-'liv': 599,
-'han': 598,
-'our': 593,
-'hit': 591,
-'jus': 589,
-'pri': 589,
-'ten': 585,
-'any': 583,
-'mai': 574,
-'tri': 573,
-'loa': 567,
-'log': 566,
-'run': 566,
-'clu': 558,
-'out': 555,
-'ask': 548,
-'tax': 548,
-'loo': 544,
-'add': 540,
-'che': 540,
-'wan': 540,
-'two': 536,
-'fac': 533,
-'who': 533,
-'and': 529,
-'lov': 528,
-'bad': 526,
-'spo': 524,
-'box': 521,
-'onl': 518,
-'hom': 515,
-'joy': 514,
-'let': 513,
-'lif': 511,
-'bea': 507,
-'pen': 504,
-'flo': 503,
-'ide': 498,
-'nor': 495,
-'van': 494,
-'ice': 492,
-'inf': 492,
-'its': 491,
-'old': 491,
-'tim': 491,
-'fai': 490,
-'wal': 490,
-'nam': 489,
-'act': 488,
-'fas': 486,
-'com': 485,
-'too': 484,
-'roo': 482,
-'sal': 482,
-'men': 477,
-'sha': 473,
-'fix': 471,
-'gro': 471,
-'mix': 471,
-'how': 469,
-'per': 468,
-'arm': 467,
-'mus': 467,
-'shi': 467,
-'leg': 464,
-'por': 463,
-'hal': 459,
-'bug': 457,
-'wes': 457,
-'hos': 455,
-'why': 455,
-'dis': 453,
-'cal': 452,
-'cas': 451,
-'dar': 451,
-'way': 450,
-'lan': 449,
-'sof': 449,
-'say': 447,
-'sen': 447,
-'mov': 444,
-'cit': 443,
-'mor': 441,
-'set': 441,
-'may': 438,
-'wel': 435,
-'cor': 430,
-'low': 429,
-'cel': 427,
-'pai': 427,
-'har': 425,
-'try': 425,
-'ste': 423,
-'gas': 422,
-'hat': 421,
-'oil': 420,
-'age': 419,
-'blu': 419,
-'odd': 417,
-'vie': 416,
-'are': 415,
-'sur': 414,
-'led': 413,
-'via': 413,
-'boy': 409,
-'raw': 409,
-'sav': 409,
-'loc': 407,
-'cod': 406,
-'qui': 406,
-'gun': 405,
-'pic': 405,
-'col': 404,
-'was': 404,
-'mis': 403,
-'six': 403,
-'mas': 399,
-'nic': 398,
-'uni': 398,
-'los': 397,
-'cut': 396,
-'plu': 396,
-'off': 395,
-'own': 395,
-'bed': 394,
-'des': 394,
-'hig': 394,
-'sol': 390,
-'gir': 388,
-'las': 388,
-'saf': 388,
-'tal': 388,
-'pur': 386,
-'tha': 386,
-'tre': 386,
-'pos': 384,
-'son': 383,
-'bas': 382,
-'pas': 382,
-'bil': 379,
-'int': 379,
-'lot': 379,
-'sat': 378,
-'bod': 377,
-'eat': 376,
-'ove': 375,
-'ope': 373,
-'blo': 371,
-'nex': 370,
-'ful': 366,
-'sig': 366,
-'gra': 364,
-'lon': 363,
-'kee': 360,
-'his': 359,
-'lis': 359,
-'end': 357,
-'mon': 356,
-'yes': 354,
-'tex': 353,
-'wha': 353,
-'fis': 350,
-'rat': 349,
-'stu': 347,
-'spe': 346,
-'luc': 344,
-'tin': 343,
-'boa': 342,
-'pre': 341,
-'bra': 340,
-'cop': 337,
-'ver': 336,
-'res': 335,
-'www': 335,
-'dre': 334,
-'dry': 333,
-'rai': 332,
-'rac': 331,
-'rid': 331,
-'aim': 330,
-'dow': 329,
-'med': 329,
-'hol': 328,
-'mil': 328,
-'ran': 325,
-'tes': 325,
-'ris': 324,
-'tie': 324,
-'mak': 323,
-'joi': 321,
-'hou': 320,
-'kno': 320,
-'bac': 317,
-'dee': 316,
-'die': 312,
-'dro': 312,
-'poo': 311,
-'sum': 310,
-'wat': 310,
-'fou': 308,
-'tur': 308,
-'ind': 307,
-'lad': 307,
-'pho': 307,
-'sca': 305,
-'guy': 302,
-'bal': 300,
-'pag': 300,
-'pea': 297,
-'sou': 297,
-'hai': 293,
-'pat': 293,
-'tow': 288,
-'som': 287,
-'tel': 286,
-'hun': 282,
-'tak': 281,
-'wea': 281,
-'doo': 279,
-'whe': 279,
-'cre': 278,
-'bla': 275,
-'sma': 275,
-'mee': 274,
-'tun': 271,
-'tas': 270,
-'cra': 269,
-'don': 269,
-'fed': 269,
-'gla': 268,
-'pac': 268,
-'rol': 268,
-'byt': 266,
-'vot': 265,
-'cos': 264,
-'lik': 264,
-'roa': 264,
-'con': 261,
-'nin': 261,
-'sid': 261,
-'vid': 261,
-'has': 260,
-'spa': 259,
-'cle': 254,
-'nee': 254,
-'jum': 253,
-'aut': 252,
-'put': 251,
-'gap': 250,
-'dra': 249,
-'tan': 247,
-'pol': 246,
-'rin': 246,
-'cla': 243,
-'glo': 243,
-'hop': 243,
-'sad': 241,
-'sam': 240,
-'cup': 238,
-'edg': 237,
-'fro': 237,
-'cur': 236,
-'whi': 235,
-'gol': 234,
-'tot': 234,
-'dum': 232,
-'bul': 231,
-'hug': 231,
-'lat': 230,
-'wid': 230,
-'cam': 227,
-'mes': 227,
-'pus': 226,
-'mos': 225,
-'rus': 225,
-'fiv': 223,
-'hac': 223,
-'laz': 223,
-'ang': 222,
-'mat': 220,
-'won': 220,
-'dri': 218,
-'ite': 218,
-'mer': 218,
-'vis': 218,
-'fal': 217,
-'hid': 217,
-'app': 216,
-'cou': 216,
-'ter': 216,
-'val': 216,
-'ill': 215,
-'saw': 215,
-'typ': 215,
-'bri': 213,
-'wee': 213,
-'wis': 213,
-'ali': 212,
-'mys': 210,
-'sti': 210,
-'cen': 209,
-'had': 209,
-'lay': 209,
-'but': 208,
-'les': 208,
-'dir': 207,
-'eco': 207,
-'dai': 205,
-'mag': 203,
-'ant': 202,
-'hil': 202,
-'slo': 202,
-'aid': 201,
-'bro': 201,
-'ima': 200,
-'san': 200,
-'gai': 199,
-'cry': 196,
-'sai': 196,
-'giv': 195,
-'pip': 195,
-'sil': 195,
-'edi': 194,
-'ins': 194,
-'ser': 194,
-'cli': 193,
-'kil': 193,
-'rar': 193,
-'jun': 192,
-'rad': 192,
-'sin': 191,
-'abl': 190,
-'dig': 189,
-'hav': 189,
-'jok': 187,
-'did': 186,
-'clo': 185,
-'mea': 185,
-'pin': 185,
-'abo': 184,
-'sco': 184,
-'ate': 182,
-'bab': 182,
-'len': 182,
-'sor': 182,
-'sup': 181,
-'pet': 180,
-'pow': 179,
-'poe': 177,
-'awa': 176,
-'inc': 176,
-'ame': 175,
-'soo': 175,
-'tou': 172,
-'row': 170,
-'dan': 168,
-'hor': 168,
-'thr': 168,
-'vir': 168,
-'nea': 167,
-'rou': 166,
-'sli': 166,
-'fat': 165,
-'ext': 164,
-'coo': 163,
-'fol': 163,
-'lef': 163,
-'pul': 163,
-'bui': 162,
-'del': 162,
-'chr': 161,
-'ear': 161,
-'hap': 161,
-'sea': 161,
-'sec': 160,
-'lie': 158,
-'ont': 158,
-'wer': 158,
-'rap': 157,
-'ren': 156,
-'fra': 155,
-'tod': 154,
-'bel': 152,
-'ent': 151,
-'ele': 150,
-'usa': 150,
-'bee': 149,
-'cro': 149,
-'doe': 149,
-'fry': 149,
-'ref': 149,
-'lig': 148,
-'ala': 147,
-'mot': 147,
-'sch': 147,
-'sui': 147,
-'tap': 145,
-'exp': 144,
-'fel': 144,
-'zer': 144,
-'rel': 143,
-'soc': 143,
-'pap': 142,
-'tec': 142,
-'tee': 142,
-'gar': 141,
-'kar': 141,
-'sty': 141,
-'wif': 141,
-'eur': 140,
-'onc': 140,
-'doc': 139,
-'him': 139,
-'vit': 139,
-'dom': 137,
-'gon': 137,
-'org': 137,
-'ret': 137,
-'asi': 136,
-'muc': 136,
-'bre': 135,
-'gui': 135,
-'ski': 135,
-'eac': 134,
-'lar': 134,
-'dia': 133,
-'non': 132,
-'ugl': 132,
-'few': 131,
-'hum': 131,
-'sev': 130,
-'smi': 130,
-'vas': 130,
-'ama': 129,
-'rep': 129,
-'ass': 128,
-'sim': 127,
-'ale': 126,
-'pok': 126,
-'nat': 125,
-'ken': 124,
-'scr': 124,
-'mob': 123,
-'str': 123,
-'plo': 122,
-'vic': 121,
-'wir': 121,
-'ani': 120,
-'fea': 120,
-'rob': 120,
-'lab': 119,
-'rig': 119,
-'mac': 118,
-'myt': 118,
-'nec': 118,
-'nev': 118,
-'nov': 118,
-'siz': 118,
-'bin': 117,
-'den': 117,
-'ord': 117,
-'bur': 116,
-'gos': 116,
-'ben': 115,
-'due': 115,
-'tab': 115,
-'und': 115,
-'wed': 115,
-'tor': 114,
-'ana': 113,
-'cho': 113,
-'dav': 113,
-'poi': 113,
-'wei': 113,
-'mal': 112,
-'pil': 112,
-'wai': 112,
-'inn': 110,
-'mic': 110,
-'rul': 110,
-'myf': 109,
-'tom': 109,
-'voi': 109,
-'ago': 108,
-'ara': 108,
-'nig': 108,
-'qua': 108,
-'tit': 108,
-'ann': 107,
-'mel': 107,
-'alb': 106,
-'bor': 106,
-'dol': 106,
-'reg': 106,
-'wit': 106,
-'gen': 105,
-'sle': 105,
-'suc': 105,
-'sug': 105,
-'vin': 105,
-'riv': 104,
-'roc': 104,
-'spi': 104,
-'ton': 104,
-'cap': 103,
-'emp': 103,
-'pan': 103,
-'gri': 102,
-'jin': 102,
-'rem': 102,
-'tol': 102,
-'ast': 101,
-'gay': 101,
-'meg': 101,
-'myc': 101,
-'nas': 101,
-'nos': 101,
-'pha': 101,
-'rec': 101,
-'ven': 101,
-'wen': 101,
-'fig': 100,
-'als': 99,
-'ari': 99,
-'max': 99,
-'mym': 99,
-'gal': 98,
-'quo': 98,
-'alt': 97,
-'lun': 97,
-'shu': 96,
-'dos': 95,
-'nan': 95,
-'bio': 94,
-'bot': 94,
-'cov': 94,
-'ups': 94,
-'alo': 93,
-'enj': 93,
-'err': 93,
-'mem': 93,
-'myg': 93,
-'pra': 93,
-'sar': 93,
-'swe': 93,
-'ora': 92,
-'pal': 92,
-'sak': 92,
-'tam': 92,
-'ada': 91,
-'fot': 91,
-'hab': 91,
-'sos': 91,
-'fli': 90,
-'sky': 90,
-'iss': 89,
-'bei': 88,
-'lev': 88,
-'ric': 88,
-'tok': 88,
-'adu': 87,
-'cyc': 87,
-'mik': 87,
-'myp': 87,
-'tro': 87,
-'uss': 87,
-'gua': 86,
-'jam': 86,
-'noi': 86,
-'bon': 85,
-'dec': 85,
-'dot': 85,
-'ita': 85,
-'reb': 85,
-'acc': 84,
-'amo': 84,
-'biz': 84,
-'cin': 84,
-'deb': 84,
-'god': 84,
-'lit': 84,
-'aft': 83,
-'ber': 83,
-'fle': 83,
-'cus': 82,
-'eli': 82,
-'fri': 82,
-'yet': 82,
-'div': 81,
-'kan': 81,
-'thu': 81,
-'woo': 81,
-'amb': 80,
-'fie': 80,
-'goe': 80,
-'joh': 80,
-'ons': 80,
-'swi': 80,
-'twi': 80,
-'upp': 80,
-'wom': 80,
-'ans': 79,
-'asp': 79,
-'lac': 79,
-'ros': 79,
-'var': 79,
-'ado': 78,
-'ash': 78,
-'ene': 78,
-'ero': 78,
-'mya': 78,
-'pau': 78,
-'ath': 77,
-'ham': 77,
-'lim': 77,
-'sop': 77,
-'til': 77,
-'tos': 77,
-'vil': 77,
-'vip': 77,
-'wet': 77,
-'cri': 76,
-'edu': 76,
-'moo': 76,
-'owe': 76,
-'100': 75,
-'atl': 75,
-'beg': 75,
-'dut': 75,
-'eri': 75,
-'hua': 75,
-'inv': 75,
-'ira': 75,
-'upo': 75,
-'ano': 74,
-'bat': 74,
-'mid': 74,
-'myl': 74,
-'rev': 74,
-'veg': 74,
-'wow': 74,
-'dor': 73,
-'dou': 73,
-'myh': 73,
-'nob': 73,
-'gor': 72,
-'myd': 72,
-'myr': 72,
-'que': 72,
-'ams': 71,
-'hes': 71,
-'mei': 71,
-'sce': 71,
-'tar': 71,
-'123': 70,
-'ami': 70,
-'arc': 70,
-'ata': 70,
-'fer': 70,
-'geo': 70,
-'isl': 70,
-'kne': 70,
-'mom': 70,
-'myb': 70,
-'obe': 70,
-'soh': 70,
-'xin': 70,
-'bai': 69,
-'css': 69,
-'cum': 69,
-'equ': 69,
-'xxx': 69,
-'ace': 68,
-'ats': 68,
-'bli': 68,
-'cyb': 68,
-'ema': 68,
-'jan': 68,
-'kor': 68,
-'mec': 68,
-'bys': 67,
-'der': 67,
-'gog': 67,
-'goi': 67,
-'ine': 67,
-'kat': 67,
-'lux': 67,
-'nom': 67,
-'num': 67,
-'tob': 67,
-'ult': 67,
-'upt': 67,
-'hin': 66,
-'hon': 66,
-'kit': 66,
-'bay': 65,
-'bec': 65,
-'dem': 65,
-'goa': 65,
-'gop': 65,
-'hep': 65,
-'isa': 65,
-'mul': 65,
-'nol': 65,
-'pis': 65,
-'din': 64,
-'dub': 64,
-'inp': 64,
-'jud': 64,
-'kel': 64,
-'sob': 64,
-'ust': 64,
-'viv': 64,
-'aca': 63,
-'apa': 63,
-'ato': 63,
-'chu': 63,
-'dru': 63,
-'jac': 63,
-'pit': 63,
-'sot': 63,
-'zen': 63,
-'adv': 62,
-'dop': 62,
-'ebo': 62,
-'fam': 62,
-'fut': 62,
-'ori': 62,
-'spl': 62,
-'sub': 62,
-'tig': 62,
-'toy': 62,
-'urb': 62,
-'att': 61,
-'cru': 61,
-'els': 61,
-'jen': 61,
-'jes': 61,
-'kim': 61,
-'maj': 61,
-'mou': 61,
-'myw': 61,
-'phi': 61,
-'pub': 61,
-'amp': 60,
-'ane': 60,
-'aqu': 60,
-'ase': 60,
-'hen': 60,
-'inb': 60,
-'mol': 60,
-'seo': 60,
-'yea': 60,
-'yog': 60,
-'bou': 59,
-'coc': 59,
-'exa': 59,
-'fur': 59,
-'ina': 59,
-'lap': 59,
-'mir': 59,
-'tem': 59,
-'beb': 58,
-'bef': 58,
-'cer': 58,
-'dam': 58,
-'dev': 58,
-'gom': 58,
-'ilo': 58,
-'ist': 58,
-'jas': 58,
-'nof': 58,
-'oth': 58,
-'pim': 58,
-'roy': 58,
-'soa': 58,
-'ava': 57,
-'avi': 57,
-'bol': 57,
-'caf': 57,
-'cul': 57,
-'est': 57,
-'neo': 57,
-'ron': 57,
-'sus': 57,
-'tic': 57,
-'usb': 57,
-'bir': 56,
-'cab': 56,
-'esc': 56,
-'gof': 56,
-'gru': 56,
-'kon': 56,
-'lam': 56,
-'agr': 55,
-'gul': 55,
-'hem': 55,
-'hip': 55,
-'imp': 55,
-'jer': 55,
-'mia': 55,
-'noc': 55,
-'pir': 55,
-'yan': 55,
-'aga': 54,
-'asa': 54,
-'dal': 54,
-'dob': 54,
-'iso': 54,
-'itc': 54,
-'lol': 54,
-'mun': 54,
-'nur': 54,
-'rew': 54,
-'ses': 54,
-'tat': 54,
-'upl': 54,
-'wik': 54,
-'beh': 53,
-'bos': 53,
-'doi': 53,
-'fen': 53,
-'gan': 53,
-'hoo': 53,
-'iro': 53,
-'mig': 53,
-'mye': 53,
-'rom': 53,
-'tho': 53,
-'amu': 52,
-'bob': 52,
-'eba': 52,
-'ede': 52,
-'ell': 52,
-'jos': 52,
-'lak': 52,
-'mit': 52,
-'nav': 52,
-'ohs': 52,
-'ort': 52,
-'pie': 52,
-'tof': 52,
-'wri': 52,
-'abe': 51,
-'bew': 51,
-'coa': 51,
-'dod': 51,
-'gob': 51,
-'itb': 51,
-'kur': 51,
-'lee': 51,
-'ram': 51,
-'reh': 51,
-'sno': 51,
-'upf': 51,
-'ade': 50,
-'atr': 50,
-'bik': 50,
-'ing': 50,
-'itf': 50,
-'jon': 50,
-'ker': 50,
-'meb': 50,
-'mew': 50,
-'myo': 50,
-'nod': 50,
-'ona': 50,
-'ple': 50,
-'tek': 50,
-'bru': 49,
-'cau': 49,
-'ela': 49,
-'goh': 49,
-'het': 49,
-'itm': 49,
-'itt': 49,
-'kal': 49,
-'lib': 49,
-'lou': 49,
-'mef': 49,
-'noh': 49,
-'nud': 49,
-'pix': 49,
-'ree': 49,
-'usf': 49,
-'wef': 49,
-'amt': 48,
-'aro': 48,
-'ave': 48,
-'fuc': 48,
-'gat': 48,
-'ger': 48,
-'gue': 48,
-'haw': 48,
-'inl': 48,
-'oce': 48,
-'ush': 48,
-'zon': 48,
-'alp': 47,
-'anc': 47,
-'bag': 47,
-'cir': 47,
-'esp': 47,
-'gif': 47,
-'meh': 47,
-'ome': 47,
-}
-PREFIX_SCORES[4] = {
-'good': 726,
-'game': 593,
-'just': 576,
-'shop': 554,
-'best': 553,
-'live': 534,
-'free': 520,
-'love': 514,
-'plan': 488,
-'book': 485,
-'deal': 485,
-'home': 482,
-'find': 471,
-'link': 467,
-'idea': 460,
-'play': 459,
-'team': 457,
-'name': 452,
-'club': 451,
-'time': 440,
-'site': 438,
-'news': 434,
-'card': 431,
-'fast': 430,
-'host': 424,
-'king': 421,
-'part': 419,
-'want': 419,
-'easy': 409,
-'info': 404,
-'city': 402,
-'real': 402,
-'food': 390,
-'code': 389,
-'sale': 388,
-'show': 387,
-'soft': 386,
-'data': 385,
-'gree': 383,
-'blue': 382,
-'high': 378,
-'call': 377,
-'west': 374,
-'loan': 371,
-'over': 370,
-'girl': 369,
-'sell': 367,
-'trip': 364,
-'safe': 362,
-'thin': 362,
-'cell': 360,
-'fine': 359,
-'mark': 359,
-'save': 358,
-'post': 357,
-'hand': 356,
-'land': 356,
-'your': 353,
-'loop': 352,
-'face': 350,
-'life': 350,
-'well': 350,
-'read': 349,
-'full': 347,
-'care': 345,
-'body': 343,
-'open': 343,
-'bank': 341,
-'only': 340,
-'lead': 338,
-'mind': 338,
-'miss': 338,
-'talk': 338,
-'file': 337,
-'help': 337,
-'next': 337,
-'park': 335,
-'bill': 334,
-'true': 334,
-'view': 333,
-'what': 330,
-'pure': 329,
-'nice': 327,
-'rate': 325,
-'fire': 324,
-'jobs': 323,
-'fish': 322,
-'date': 321,
-'list': 321,
-'east': 320,
-'long': 319,
-'join': 316,
-'line': 316,
-'mode': 316,
-'more': 314,
-'wild': 312,
-'spot': 311,
-'luck': 309,
-'mail': 307,
-'last': 304,
-'sure': 304,
-'text': 303,
-'pick': 300,
-'sign': 298,
-'bear': 296,
-'seek': 296,
-'will': 295,
-'char': 294,
-'hard': 294,
-'test': 291,
-'band': 289,
-'back': 288,
-'flow': 288,
-'stop': 287,
-'note': 286,
-'page': 285,
-'fair': 284,
-'farm': 282,
-'port': 281,
-'race': 280,
-'form': 279,
-'lady': 279,
-'down': 276,
-'meta': 275,
-'drop': 273,
-'dark': 271,
-'rain': 270,
-'make': 269,
-'move': 269,
-'tree': 268,
-'core': 267,
-'lets': 266,
-'boat': 265,
-'wall': 264,
-'feed': 262,
-'ship': 262,
-'know': 261,
-'like': 261,
-'chea': 260,
-'room': 260,
-'deep': 259,
-'hell': 259,
-'road': 258,
-'mass': 257,
-'fund': 255,
-'half': 253,
-'grea': 252,
-'grow': 252,
-'hair': 252,
-'vote': 252,
-'cold': 251,
-'four': 251,
-'foot': 250,
-'take': 250,
-'copy': 245,
-'feel': 245,
-'star': 245,
-'need': 244,
-'meet': 243,
-'chip': 242,
-'lock': 242,
-'jump': 240,
-'side': 237,
-'flat': 236,
-'come': 235,
-'edge': 233,
-'step': 233,
-'very': 233,
-'head': 232,
-'them': 232,
-'tune': 232,
-'chin': 231,
-'medi': 231,
-'musi': 231,
-'town': 231,
-'ball': 230,
-'ring': 230,
-'some': 229,
-'clea': 228,
-'self': 228,
-'send': 227,
-'scan': 225,
-'unit': 225,
-'dead': 224,
-'door': 224,
-'ride': 223,
-'shar': 223,
-'this': 223,
-'hope': 222,
-'pack': 222,
-'byte': 221,
-'five': 220,
-'desk': 218,
-'hack': 218,
-'hear': 218,
-'pass': 218,
-'auto': 217,
-'user': 217,
-'huge': 216,
-'disc': 215,
-'hote': 215,
-'that': 215,
-'main': 214,
-'pool': 214,
-'wide': 213,
-'plus': 211,
-'case': 209,
-'cost': 209,
-'film': 208,
-'base': 207,
-'stud': 205,
-'type': 205,
-'wind': 205,
-'nine': 203,
-'used': 203,
-'work': 203,
-'lazy': 202,
-'lost': 202,
-'trac': 200,
-'push': 199,
-'vide': 199,
-'drea': 198,
-'tell': 197,
-'here': 196,
-'peak': 195,
-'stay': 193,
-'boot': 192,
-'bulk': 192,
-'load': 192,
-'worl': 192,
-'give': 191,
-'rare': 191,
-'wear': 191,
-'keep': 189,
-'made': 189,
-'mine': 189,
-'hous': 188,
-'hunt': 188,
-'cent': 187,
-'thes': 187,
-'turn': 187,
-'draw': 186,
-'glob': 186,
-'busy': 185,
-'eyes': 185,
-'most': 185,
-'must': 184,
-'firm': 183,
-'flag': 183,
-'gain': 183,
-'walk': 183,
-'area': 182,
-'joke': 182,
-'mone': 182,
-'root': 182,
-'task': 182,
-'lega': 180,
-'able': 179,
-'hill': 178,
-'roll': 178,
-'pain': 176,
-'cure': 175,
-'warm': 175,
-'dear': 174,
-'mile': 174,
-'slow': 174,
-'have': 172,
-'wash': 172,
-'dail': 171,
-'item': 171,
-'kind': 171,
-'many': 171,
-'rest': 171,
-'days': 170,
-'fall': 169,
-'kill': 169,
-'risk': 169,
-'into': 168,
-'rush': 168,
-'week': 168,
-'bran': 165,
-'fact': 165,
-'path': 164,
-'prim': 164,
-'blac': 163,
-'heat': 163,
-'hold': 163,
-'late': 163,
-'prin': 163,
-'stoc': 163,
-'tank': 163,
-'tota': 163,
-'movi': 162,
-'imag': 161,
-'powe': 161,
-'disk': 159,
-'edit': 159,
-'plug': 159,
-'wate': 159,
-'keen': 158,
-'bids': 157,
-'pipe': 157,
-'radi': 157,
-'army': 155,
-'digi': 154,
-'leaf': 154,
-'ther': 154,
-'trav': 154,
-'appl': 153,
-'gran': 153,
-'ones': 153,
-'paid': 153,
-'pric': 153,
-'less': 152,
-'stor': 152,
-'bets': 150,
-'buil': 150,
-'happ': 150,
-'keys': 150,
-'left': 149,
-'lift': 149,
-'near': 149,
-'they': 149,
-'buys': 148,
-'quic': 147,
-'then': 146,
-'wine': 146,
-'word': 145,
-'hits': 144,
-'loca': 144,
-'theb': 144,
-'visi': 144,
-'extr': 143,
-'gets': 143,
-'junk': 143,
-'hall': 142,
-'lend': 142,
-'blow': 141,
-'done': 141,
-'phon': 141,
-'ease': 140,
-'grou': 140,
-'hang': 140,
-'onli': 140,
-'spor': 140,
-'amer': 139,
-'soon': 139,
-'flas': 138,
-'mean': 138,
-'poll': 138,
-'quit': 138,
-'bits': 136,
-'pres': 136,
-'firs': 135,
-'fore': 135,
-'porn': 134,
-'shel': 133,
-'styl': 133,
-'each': 132,
-'fres': 132,
-'from': 132,
-'pull': 132,
-'whit': 132,
-'ugly': 131,
-'watc': 131,
-'ligh': 130,
-'magi': 130,
-'past': 130,
-'crea': 129,
-'baby': 128,
-'phot': 128,
-'same': 128,
-'fail': 127,
-'inte': 126,
-'suit': 126,
-'valu': 126,
-'dumb': 125,
-'fina': 125,
-'hour': 125,
-'nort': 125,
-'odds': 125,
-'supe': 125,
-'term': 125,
-'bugs': 124,
-'chri': 124,
-'laws': 124,
-'smar': 124,
-'euro': 123,
-'sees': 123,
-'spee': 123,
-'wife': 123,
-'feet': 122,
-'glad': 122,
-'rise': 122,
-'slip': 122,
-'smal': 122,
-'zero': 122,
-'abou': 121,
-'dare': 121,
-'much': 121,
-'folk': 120,
-'vita': 120,
-'clas': 119,
-'comp': 119,
-'hate': 119,
-'craz': 118,
-'fill': 118,
-'funn': 118,
-'rapi': 117,
-'serv': 117,
-'bite': 116,
-'sold': 116,
-'thec': 116,
-'cars': 115,
-'hors': 115,
-'pape': 115,
-'truc': 115,
-'lear': 113,
-'ours': 113,
-'tape': 113,
-'logi': 112,
-'orga': 112,
-'thep': 112,
-'were': 112,
-'fort': 110,
-'kids': 110,
-'mess': 110,
-'poke': 110,
-'wire': 110,
-'fits': 109,
-'glas': 109,
-'gold': 109,
-'catc': 108,
-'fanc': 108,
-'fear': 108,
-'poin': 108,
-'smil': 108,
-'soun': 108,
-'trap': 108,
-'trus': 108,
-'hide': 107,
-'seve': 107,
-'bars': 106,
-'forc': 106,
-'size': 106,
-'spac': 106,
-'ston': 106,
-'webs': 106,
-'wise': 105,
-'chil': 104,
-'pops': 104,
-'seen': 104,
-'thel': 104,
-'vast': 104,
-'came': 103,
-'carr': 103,
-'tech': 103,
-'blog': 102,
-'desi': 102,
-'indi': 102,
-'righ': 102,
-'stat': 102,
-'basi': 101,
-'cool': 101,
-'rule': 101,
-'thef': 101,
-'unde': 101,
-'cred': 100,
-'drew': 100,
-'plot': 100,
-'thea': 100,
-'touc': 100,
-'when': 100,
-'ente': 99,
-'pays': 99,
-'theh': 99,
-'wait': 99,
-'whol': 99,
-'chai': 98,
-'dirt': 98,
-'driv': 98,
-'lose': 98,
-'sort': 98,
-'trai': 98,
-'adds': 97,
-'dire': 97,
-'huma': 97,
-'matc': 97,
-'popt': 97,
-'thre': 97,
-'quot': 96,
-'runs': 96,
-'sout': 96,
-'thed': 96,
-'drin': 95,
-'gone': 95,
-'suga': 95,
-'theg': 95,
-'cart': 94,
-'clic': 94,
-'look': 94,
-'once': 94,
-'sexs': 94,
-'enjo': 93,
-'hots': 93,
-'teac': 93,
-'than': 93,
-'virt': 93,
-'inde': 92,
-'neck': 92,
-'onto': 92,
-'orde': 92,
-'rive': 92,
-'anti': 91,
-'bigs': 91,
-'dump': 91,
-'mobi': 91,
-'nigh': 91,
-'stic': 91,
-'ange': 90,
-'arts': 90,
-'sent': 90,
-'thet': 90,
-'tops': 90,
-'figh': 89,
-'poem': 89,
-'hole': 88,
-'moto': 88,
-'neve': 88,
-'spea': 88,
-'wins': 88,
-'andr': 87,
-'arti': 87,
-'cove': 87,
-'eart': 87,
-'fors': 87,
-'seem': 87,
-'shor': 87,
-'cros': 86,
-'brea': 85,
-'clue': 85,
-'lots': 85,
-'maps': 85,
-'reds': 85,
-'rock': 85,
-'toda': 85,
-'wher': 85,
-'wish': 85,
-'poet': 84,
-'slee': 84,
-'soli': 84,
-'suns': 84,
-'thew': 84,
-'floo': 83,
-'foto': 83,
-'mere': 83,
-'pair': 83,
-'says': 83,
-'teen': 83,
-'with': 83,
-'asia': 82,
-'cash': 82,
-'elec': 82,
-'sext': 82,
-'tabl': 82,
-'trad': 82,
-'alls': 81,
-'barb': 81,
-'cycl': 81,
-'dogs': 81,
-'prop': 81,
-'sexy': 81,
-'tran': 81,
-'ways': 81,
-'whee': 81,
-'fate': 80,
-'proj': 80,
-'scor': 80,
-'vice': 80,
-'voic': 80,
-'beau': 79,
-'heal': 79,
-'plac': 79,
-'afte': 78,
-'carb': 78,
-'chat': 78,
-'inch': 78,
-'metr': 78,
-'poor': 78,
-'sens': 78,
-'stil': 78,
-'brow': 77,
-'carl': 77,
-'guid': 77,
-'larg': 77,
-'nets': 77,
-'nett': 77,
-'stan': 77,
-'coun': 76,
-'doma': 76,
-'john': 76,
-'logs': 76,
-'goog': 75,
-'peac': 75,
-'sing': 75,
-'away': 74,
-'bloc': 74,
-'davi': 74,
-'labe': 74,
-'scra': 74,
-'skil': 74,
-'bigb': 73,
-'bigt': 73,
-'boar': 73,
-'mari': 73,
-'nows': 73,
-'sets': 73,
-'viet': 73,
-'cats': 72,
-'fait': 72,
-'fans': 72,
-'fant': 72,
-'fram': 72,
-'popl': 72,
-'been': 71,
-'bett': 71,
-'cloc': 71,
-'foru': 71,
-'wedd': 71,
-'also': 70,
-'anys': 70,
-'busi': 70,
-'heav': 70,
-'popw': 70,
-'rent': 70,
-'such': 70,
-'tend': 70,
-'carp': 69,
-'outs': 69,
-'perf': 69,
-'popp': 69,
-'reac': 69,
-'spar': 69,
-'boxs': 68,
-'camp': 68,
-'cans': 68,
-'hott': 68,
-'legs': 68,
-'mans': 68,
-'role': 68,
-'sain': 68,
-'stag': 68,
-'whos': 68,
-'acts': 67,
-'aims': 67,
-'hung': 67,
-'none': 67,
-'sake': 67,
-'simp': 67,
-'adul': 66,
-'bigf': 66,
-'felt': 66,
-'funs': 66,
-'ices': 66,
-'loos': 66,
-'cust': 65,
-'diet': 65,
-'fiel': 65,
-'joys': 65,
-'mini': 65,
-'stuf': 65,
-'topl': 65,
-'topt': 65,
-'bind': 64,
-'buyt': 64,
-'goth': 64,
-'guar': 64,
-'inne': 64,
-'marc': 64,
-'mayb': 64,
-'mega': 64,
-'nois': 64,
-'pers': 64,
-'roun': 64,
-'said': 64,
-'scho': 64,
-'secu': 64,
-'wast': 64,
-'anim': 63,
-'cand': 63,
-'cuts': 63,
-'cybe': 63,
-'fron': 63,
-'gett': 63,
-'gots': 63,
-'herb': 63,
-'hotc': 63,
-'leve': 63,
-'prov': 63,
-'silv': 63,
-'sola': 63,
-'tast': 63,
-'till': 63,
-'airs': 62,
-'albu': 62,
-'both': 62,
-'crys': 62,
-'flor': 62,
-'offe': 62,
-'shif': 62,
-'staf': 62,
-'thei': 62,
-'alte': 61,
-'cour': 61,
-'mike': 61,
-'paul': 61,
-'quie': 61,
-'trut': 61,
-'agen': 60,
-'allt': 60,
-'boys': 60,
-'clos': 60,
-'geta': 60,
-'mana': 60,
-'pens': 60,
-'popu': 60,
-'shes': 60,
-'sunt': 60,
-'the-': 60,
-'asks': 59,
-'eats': 59,
-'nove': 59,
-'para': 59,
-'putt': 59,
-'sexf': 59,
-'alla': 58,
-'cras': 58,
-'grap': 58,
-'hows': 58,
-'loss': 58,
-'lunc': 58,
-'mens': 58,
-'netw': 58,
-'poph': 58,
-'popm': 58,
-'rout': 58,
-'tria': 58,
-'beth': 57,
-'duty': 57,
-'sexp': 57,
-'shoo': 57,
-'ties': 57,
-'urba': 57,
-'year': 57,
-'ages': 56,
-'bart': 56,
-'bigl': 56,
-'flys': 56,
-'pink': 56,
-'scen': 56,
-'scot': 56,
-'sexb': 56,
-'spli': 56,
-'swee': 56,
-'tens': 56,
-'alar': 55,
-'allb': 55,
-'anyt': 55,
-'bigp': 55,
-'exac': 55,
-'getb': 55,
-'knew': 55,
-'mang': 55,
-'mont': 55,
-'pent': 55,
-'tele': 55,
-'tric': 55,
-'twos': 55,
-'allp': 54,
-'arte': 54,
-'artt': 54,
-'bads': 54,
-'buyb': 54,
-'colo': 54,
-'deat': 54,
-'does': 54,
-'funt': 54,
-'majo': 54,
-'mand': 54,
-'nast': 54,
-'newm': 54,
-'othe': 54,
-'pile': 54,
-'prom': 54,
-'surf': 54,
-'taxs': 54,
-'topc': 54,
-'wars': 54,
-'whys': 54,
-'youn': 54,
-'aliv': 53,
-'artf': 53,
-'awar': 53,
-'bidt': 53,
-'cath': 53,
-'cont': 53,
-'doct': 53,
-'getf': 53,
-'golf': 53,
-'mads': 53,
-'newc': 53,
-'newt': 53,
-'numb': 53,
-'prod': 53,
-'redt': 53,
-'refe': 53,
-'sear': 53,
-'theo': 53,
-'tool': 53,
-'topi': 53,
-'trys': 53,
-'vans': 53,
-'vega': 53,
-'alex': 52,
-'alll': 52,
-'angr': 52,
-'cana': 52,
-'canc': 52,
-'cons': 52,
-'dogt': 52,
-'ends': 52,
-'gott': 52,
-'hotp': 52,
-'hotw': 52,
-'natu': 52,
-'popr': 52,
-'tras': 52,
-'vias': 52,
-'went': 52,
-'whic': 52,
-'allf': 51,
-'artb': 51,
-'beds': 51,
-'bigc': 51,
-'carf': 51,
-'casi': 51,
-'catt': 51,
-'chic': 51,
-'cope': 51,
-'earl': 51,
-'fars': 51,
-'fell': 51,
-'foun': 51,
-'getp': 51,
-'hers': 51,
-'netp': 51,
-'olds': 51,
-'outd': 51,
-'payt': 51,
-'rang': 51,
-'redf': 51,
-'sara': 51,
-'sexc': 51,
-'topa': 51,
-'topb': 51,
-'topr': 51,
-'upon': 51,
-'vill': 51,
-'barc': 50,
-'beta': 50,
-'brai': 50,
-'caro': 50,
-'chan': 50,
-'fixe': 50,
-'funf': 50,
-'hotf': 50,
-'iran': 50,
-'livi': 50,
-'mapf': 50,
-'mods': 50,
-'netf': 50,
-'offi': 50,
-'plai': 50,
-'prem': 50,
-'prof': 50,
-'rand': 50,
-'titl': 50,
-'turk': 50,
-'angl': 49,
-'bein': 49,
-'buyf': 49,
-'buyp': 49,
-'cant': 49,
-'cari': 49,
-'flyf': 49,
-'getc': 49,
-'goes': 49,
-'goto': 49,
-'hero': 49,
-'hint': 49,
-'jobf': 49,
-'litt': 49,
-'lott': 49,
-'ment': 49,
-'newf': 49,
-'payp': 49,
-'popf': 49,
-'sand': 49,
-'seet': 49,
-'teas': 49,
-'toot': 49,
-'tour': 49,
-'univ': 49,
-'airf': 48,
-'cara': 48,
-'carc': 48,
-'fanf': 48,
-'fash': 48,
-'forb': 48,
-'jobt': 48,
-'lows': 48,
-'mant': 48,
-'mapl': 48,
-'neta': 48,
-'onet': 48,
-'outl': 48,
-'payl': 48,
-'sexl': 48,
-'thir': 48,
-'topp': 48,
-'yoga': 48,
-'airt': 47,
-'ands': 47,
-'arab': 47,
-'bang': 47,
-'bidf': 47,
-'bust': 47,
-'carm': 47,
-'chec': 47,
-'doga': 47,
-'empt': 47,
-'goin': 47,
-'hota': 47,
-'hotb': 47,
-'mays': 47,
-'newl': 47,
-'shan': 47,
-'tied': 47,
-'toph': 47,
-'allo': 46,
-'brok': 46,
-'buyc': 46,
-'buym': 46,
-'casa': 46,
-'eyep': 46,
-'getm': 46,
-'gotb': 46,
-'gotr': 46,
-'keyp': 46,
-'keyw': 46,
-'leds': 46,
-'mast': 46,
-'netb': 46,
-'netc': 46,
-'nota': 46,
-'outb': 46,
-'prot': 46,
-'sixs': 46,
-'spen': 46,
-'stre': 46,
-'summ': 46,
-'topf': 46,
-'webe': 46,
-'allm': 45,
-'aqua': 45,
-'bigm': 45,
-'brin': 45,
-'buyl': 45,
-'cata': 45,
-'funb': 45,
-'gotl': 45,
-'hotl': 45,
-'jobb': 45,
-'keyf': 45,
-'manf': 45,
-'meri': 45,
-'micr': 45,
-'ourt': 45,
-'pint': 45,
-'popc': 45,
-'scal': 45,
-'sexh': 45,
-'thai': 45,
-'twol': 45,
-'uses': 45,
-'wood': 45,
-'airb': 44,
-'airl': 44,
-'arta': 44,
-'blan': 44,
-}
-PREFIX_SCORES[5] = {
-'green': 343,
-'great': 245,
-'cheap': 244,
-'music': 212,
-'china': 198,
-'hotel': 195,
-'dream': 193,
-'video': 193,
-'world': 189,
-'money': 176,
-'daily': 169,
-'stock': 163,
-'black': 160,
-'power': 160,
-'globa': 158,
-'water': 158,
-'brand': 157,
-'goods': 156,
-'media': 154,
-'total': 154,
-'image': 152,
-'price': 149,
-'happy': 147,
-'legal': 147,
-'party': 147,
-'quick': 147,
-'radio': 147,
-'house': 146,
-'think': 143,
-'metal': 142,
-'prime': 141,
-'print': 140,
-'trave': 140,
-'movie': 138,
-'flash': 137,
-'local': 136,
-'phone': 134,
-'first': 132,
-'watch': 131,
-'light': 130,
-'onlin': 130,
-'group': 129,
-'model': 129,
-'magic': 125,
-'plane': 125,
-'style': 125,
-'digit': 124,
-'fresh': 124,
-'ameri': 123,
-'photo': 123,
-'super': 123,
-'white': 123,
-'chris': 122,
-'sport': 122,
-'smart': 121,
-'build': 120,
-'start': 120,
-'track': 120,
-'about': 119,
-'clean': 119,
-'speed': 119,
-'value': 119,
-'small': 118,
-'lucky': 117,
-'share': 117,
-'crazy': 116,
-'apple': 115,
-'class': 115,
-'sales': 115,
-'deals': 114,
-'games': 113,
-'horse': 113,
-'ideal': 113,
-'paper': 113,
-'rapid': 112,
-'extra': 111,
-'learn': 111,
-'truck': 111,
-'visit': 110,
-'clear': 109,
-'creat': 107,
-'sound': 107,
-'grand': 106,
-'point': 106,
-'north': 105,
-'smile': 105,
-'store': 105,
-'links': 104,
-'space': 104,
-'trust': 104,
-'glass': 103,
-'stone': 103,
-'vital': 103,
-'right': 102,
-'seven': 102,
-'study': 102,
-'funny': 101,
-'plant': 101,
-'books': 100,
-'touch': 99,
-'under': 99,
-'enter': 97,
-'organ': 97,
-'human': 96,
-'south': 96,
-'unite': 96,
-'match': 95,
-'poker': 95,
-'credi': 94,
-'drink': 94,
-'drive': 94,
-'quote': 94,
-'sugar': 93,
-'direc': 92,
-'enjoy': 92,
-'hello': 92,
-'river': 91,
-'final': 90,
-'logic': 90,
-'night': 90,
-'times': 90,
-'click': 89,
-'event': 89,
-'fight': 89,
-'inter': 89,
-'three': 88,
-'ideas': 87,
-'names': 87,
-'press': 87,
-'speak': 87,
-'stick': 87,
-'virtu': 87,
-'order': 86,
-'earth': 85,
-'there': 85,
-'never': 84,
-'where': 84,
-'angel': 83,
-'cards': 83,
-'cross': 83,
-'dirty': 83,
-'basic': 81,
-'serve': 81,
-'sleep': 80,
-'voice': 80,
-'catch': 79,
-'elect': 79,
-'proje': 79,
-'ready': 79,
-'short': 79,
-'today': 79,
-'train': 79,
-'wheel': 79,
-'cover': 78,
-'fancy': 78,
-'table': 78,
-'after': 77,
-'beaut': 77,
-'state': 77,
-'floor': 76,
-'parts': 76,
-'place': 76,
-'solid': 76,
-'still': 76,
-'guide': 75,
-'large': 75,
-'sites': 75,
-'child': 74,
-'lives': 74,
-'sharp': 74,
-'block': 73,
-'board': 73,
-'break': 73,
-'cycle': 73,
-'desig': 73,
-'count': 72,
-'force': 72,
-'joint': 72,
-'label': 72,
-'skill': 72,
-'whole': 72,
-'faith': 71,
-'clock': 70,
-'index': 70,
-'score': 70,
-'teach': 70,
-'weddi': 70,
-'brown': 69,
-'frame': 69,
-'heart': 69,
-'scrap': 69,
-'girls': 68,
-'goodp': 68,
-'googl': 68,
-'homes': 68,
-'shops': 68,
-'leads': 66,
-'stage': 66,
-'domai': 65,
-'field': 65,
-'forum': 64,
-'round': 64,
-'sense': 64,
-'adult': 63,
-'handy': 63,
-'healt': 63,
-'notes': 63,
-'stuff': 63,
-'busin': 62,
-'cyber': 62,
-'india': 62,
-'loose': 62,
-'stand': 62,
-'trade': 62,
-'album': 61,
-'andre': 61,
-'custo': 61,
-'front': 61,
-'mobil': 61,
-'saint': 61,
-'shift': 61,
-'simpl': 61,
-'heavy': 60,
-'peace': 60,
-'trace': 60,
-'david': 59,
-'guard': 59,
-'level': 59,
-'staff': 59,
-'truth': 59,
-'frees': 58,
-'lunch': 58,
-'miles': 58,
-'plays': 58,
-'quiet': 58,
-'studi': 58,
-'trans': 58,
-'alter': 57,
-'bears': 57,
-'close': 57,
-'goodf': 57,
-'inner': 57,
-'secur': 57,
-'codes': 56,
-'crash': 56,
-'lands': 56,
-'split': 56,
-'silve': 55,
-'urban': 55,
-'exact': 54,
-'safer': 54,
-'shell': 54,
-'court': 53,
-'death': 53,
-'looks': 53,
-'other': 53,
-'route': 53,
-'shoot': 53,
-'signs': 53,
-'sweet': 53,
-'trees': 53,
-'calls': 52,
-'files': 52,
-'finds': 52,
-'goodh': 52,
-'goodt': 52,
-'graph': 52,
-'motor': 52,
-'novel': 52,
-'offer': 52,
-'reach': 52,
-'which': 52,
-'chain': 51,
-'docto': 51,
-'hands': 51,
-'nasty': 51,
-'singl': 51,
-'alive': 50,
-'charl': 50,
-'early': 50,
-'loans': 50,
-'major': 50,
-'natur': 50,
-'schoo': 50,
-'shows': 50,
-'cryst': 49,
-'drops': 49,
-'found': 49,
-'livin': 49,
-'minds': 49,
-'porno': 49,
-'rooms': 49,
-'scene': 49,
-'spots': 49,
-'taste': 49,
-'brain': 48,
-'flowe': 48,
-'goodl': 48,
-'justm': 48,
-'kings': 48,
-'marks': 48,
-'plain': 48,
-'trash': 48,
-'views': 48,
-'villa': 48,
-'wants': 48,
-'alarm': 47,
-'angry': 47,
-'empty': 47,
-'fashi': 47,
-'moves': 47,
-'picks': 47,
-'searc': 47,
-'thema': 47,
-'title': 47,
-'trial': 47,
-'angle': 46,
-'caree': 46,
-'carry': 46,
-'compu': 46,
-'littl': 46,
-'prope': 46,
-'trick': 46,
-'young': 46,
-'being': 45,
-'forex': 45,
-'lines': 45,
-'refer': 45,
-'saves': 45,
-'thing': 45,
-'unive': 45,
-'waste': 45,
-'bests': 44,
-'blues': 44,
-'check': 44,
-'fanta': 44,
-'metro': 44,
-'micro': 44,
-'solar': 44,
-'weird': 44,
-'your-': 44,
-'broke': 43,
-'casin': 43,
-'chair': 43,
-'equal': 43,
-'faceb': 43,
-'foods': 43,
-'going': 43,
-'lists': 43,
-'noteb': 43,
-'scott': 43,
-'sight': 43,
-'cares': 42,
-'dealt': 42,
-'europ': 42,
-'gamer': 42,
-'goodm': 42,
-'lookt': 42,
-'loves': 42,
-'premi': 42,
-'rainb': 42,
-'realt': 42,
-'rober': 42,
-'steve': 42,
-'talks': 42,
-'themo': 42,
-'these': 42,
-'whats': 42,
-'bring': 41,
-'doors': 41,
-'ilove': 41,
-'justb': 41,
-'marke': 41,
-'medic': 41,
-'opens': 41,
-'pages': 41,
-'patch': 41,
-'rates': 41,
-'treat': 41,
-'upper': 41,
-'vegas': 41,
-'wills': 41,
-'artis': 40,
-'chips': 40,
-'flori': 40,
-'footb': 40,
-'forma': 40,
-'maybe': 40,
-'silly': 40,
-'spare': 40,
-'bankr': 39,
-'blank': 39,
-'clubs': 39,
-'fastl': 39,
-'float': 39,
-'forth': 39,
-'gameb': 39,
-'goodw': 39,
-'moder': 39,
-'plans': 39,
-'porta': 39,
-'range': 39,
-'scale': 39,
-'spell': 39,
-'stops': 39,
-'adopt': 38,
-'bestb': 38,
-'bestf': 38,
-'bestp': 38,
-'charm': 38,
-'chart': 38,
-'dates': 38,
-'energ': 38,
-'feeds': 38,
-'finda': 38,
-'firef': 38,
-'freed': 38,
-'funds': 38,
-'limit': 38,
-'loopt': 38,
-'march': 38,
-'multi': 38,
-'noise': 38,
-'posts': 38,
-'saved': 38,
-'shopt': 38,
-'stude': 38,
-'third': 38,
-'truly': 38,
-'windo': 38,
-'claim': 37,
-'clubf': 37,
-'heads': 37,
-'homel': 37,
-'justs': 37,
-'justt': 37,
-'newst': 37,
-'rough': 37,
-'sells': 37,
-'shopf': 37,
-'socia': 37,
-'topic': 37,
-'women': 37,
-'backs': 36,
-'bestt': 36,
-'downl': 36,
-'easys': 36,
-'eight': 36,
-'fines': 36,
-'futur': 36,
-'goodb': 36,
-'joins': 36,
-'kingf': 36,
-'lovep': 36,
-'maste': 36,
-'paint': 36,
-'prote': 36,
-'prove': 36,
-'royal': 36,
-'shape': 36,
-'takes': 36,
-'wellb': 36,
-'award': 35,
-'fixed': 35,
-'gross': 35,
-'helps': 35,
-'hopes': 35,
-'livel': 35,
-'loveb': 35,
-'missi': 35,
-'parks': 35,
-'perfe': 35,
-'peter': 35,
-'priva': 35,
-'secre': 35,
-'shopb': 35,
-'shopl': 35,
-'texas': 35,
-'tripl': 35,
-'uniqu': 35,
-'bluef': 34,
-'bookb': 34,
-'cause': 34,
-'color': 34,
-'findf': 34,
-'freeh': 34,
-'golde': 34,
-'highs': 34,
-'infos': 34,
-'james': 34,
-'justf': 34,
-'justl': 34,
-'produ': 34,
-'profi': 34,
-'seeks': 34,
-'teamf': 34,
-'thank': 34,
-'tight': 34,
-'timet': 34,
-'trips': 34,
-'wallp': 34,
-'wantf': 34,
-'clubb': 33,
-'colle': 33,
-'grind': 33,
-'highl': 33,
-'homef': 33,
-'infob': 33,
-'iphon': 33,
-'lovel': 33,
-'makes': 33,
-'namep': 33,
-'ocean': 33,
-'offic': 33,
-'playh': 33,
-'progr': 33,
-'safet': 33,
-'steel': 33,
-'tests': 33,
-'websi': 33,
-'wells': 33,
-'asian': 32,
-'backb': 32,
-'beach': 32,
-'besth': 32,
-'billb': 32,
-'bodyb': 32,
-'centr': 32,
-'citys': 32,
-'comes': 32,
-'eagle': 32,
-'educa': 32,
-'extre': 32,
-'famil': 32,
-'findb': 32,
-'freem': 32,
-'fullb': 32,
-'fulls': 32,
-'gamef': 32,
-'goodr': 32,
-'grant': 32,
-'guess': 32,
-'hostb': 32,
-'houst': 32,
-'items': 32,
-'justc': 32,
-'justp': 32,
-'knock': 32,
-'korea': 32,
-'likes': 32,
-'liveb': 32,
-'livep': 32,
-'lookw': 32,
-'loopl': 32,
-'loops': 32,
-'lovef': 32,
-'overb': 32,
-'plast': 32,
-'raise': 32,
-'ratem': 32,
-'realb': 32,
-'shelf': 32,
-'shopp': 32,
-'sides': 32,
-'spend': 32,
-'steph': 32,
-'trues': 32,
-'ultim': 32,
-'whose': 32,
-'xtrem': 32,
-'agent': 31,
-'anima': 31,
-'bearb': 31,
-'begin': 31,
-'bills': 31,
-'datab': 31,
-'datin': 31,
-'dealb': 31,
-'easyt': 31,
-'falls': 31,
-'finan': 31,
-'finef': 31,
-'forms': 31,
-'fundr': 31,
-'helpf': 31,
-'homet': 31,
-'infop': 31,
-'jason': 31,
-'ladyb': 31,
-'latin': 31,
-'makem': 31,
-'markf': 31,
-'onlys': 31,
-'outdo': 31,
-'peopl': 31,
-'playl': 31,
-'pound': 31,
-'sellb': 31,
-'siteb': 31,
-'solve': 31,
-'suits': 31,
-'teamh': 31,
-'teams': 31,
-'theco': 31,
-'tripf': 31,
-'trueb': 31,
-'wanta': 31,
-'westb': 31,
-'westf': 31,
-'allth': 30,
-'boats': 30,
-'bodyf': 30,
-'carlo': 30,
-'carol': 30,
-'cells': 30,
-'cityf': 30,
-'coded': 30,
-'disco': 30,
-'doing': 30,
-'eastf': 30,
-'easyb': 30,
-'easyf': 30,
-'facef': 30,
-'fasts': 30,
-'findl': 30,
-'freew': 30,
-'habit': 30,
-'hight': 30,
-'homeb': 30,
-'hosts': 30,
-'judge': 30,
-'jumps': 30,
-'justa': 30,
-'justd': 30,
-'knows': 30,
-'locks': 30,
-'lovem': 30,
-'lover': 30,
-'lovet': 30,
-'mailb': 30,
-'merit': 30,
-'moral': 30,
-'newsa': 30,
-'newsp': 30,
-'niceb': 30,
-'overt': 30,
-'postb': 30,
-'puref': 30,
-'servi': 30,
-'shopc': 30,
-'shoph': 30,
-'showb': 30,
-'sitef': 30,
-'teamb': 30,
-'ultra': 30,
-'users': 30,
-'westc': 30,
-'weste': 30,
-'aucti': 29,
-'bandb': 29,
-'baseb': 29,
-'bestl': 29,
-'bluet': 29,
-'bookf': 29,
-'built': 29,
-'callf': 29,
-'carbo': 29,
-'cardi': 29,
-'comme': 29,
-'dataf': 29,
-'easyh': 29,
-'easyl': 29,
-'farma': 29,
-'freep': 29,
-'freet': 29,
-'garde': 29,
-'girlf': 29,
-'grows': 29,
-'grupo': 29,
-'hairb': 29,
-'handb': 29,
-'hardb': 29,
-'highf': 29,
-'hostf': 29,
-'jobst': 29,
-'justw': 29,
-'kingb': 29,
-'kingp': 29,
-'lasts': 29,
-'lifes': 29,
-'linkb': 29,
-'linkf': 29,
-'lived': 29,
-'marry': 29,
-'miami': 29,
-'mortg': 29,
-'namel': 29,
-'onlyf': 29,
-'playf': 29,
-'playp': 29,
-'promo': 29,
-'rainf': 29,
-'sellf': 29,
-'ships': 29,
-'shopm': 29,
-'sures': 29,
-'teamt': 29,
-'theme': 29,
-'throw': 29,
-'timel': 29,
-'visio': 29,
-'wildb': 29,
-'apply': 28,
-'besta': 28,
-'bestm': 28,
-'bette': 28,
-'bookm': 28,
-'bound': 28,
-'cardb': 28,
-'cellb': 28,
-'cityl': 28,
-'cityt': 28,
-'datas': 28,
-'datef': 28,
-'dealf': 28,
-'dubai': 28,
-'ebook': 28,
-'explo': 28,
-'facet': 28,
-'fastb': 28,
-'fastp': 28,
-'fileb': 28,
-'findp': 28,
-'fishf': 28,
-'foodf': 28,
-'forec': 28,
-'formf': 28,
-'freeb': 28,
-'frien': 28,
-'gamep': 28,
-'gamew': 28,
-'heave': 28,
-'homew': 28,
-'hosti': 28,
-'infot': 28,
-'inves': 28,
-'jobsa': 28,
-'justi': 28,
-'kingt': 28,
-'known': 28,
-'livet': 28,
-'loads': 28,
-'longs': 28,
-'lower': 28,
-'missf': 28,
-'nameb': 28,
-'needs': 28,
-'newsh': 28,
-'nexts': 28,
-'openp': 28,
-'overf': 28,
-'popul': 28,
-'purep': 28,
-'scanb': 28,
-'showf': 28,
-'since': 28,
-'softs': 28,
-'softw': 28,
-'stree': 28,
-'stuck': 28,
-'sureb': 28,
-'techn': 28,
-'traff': 28,
-'truep': 28,
-'viewf': 28,
-'voteb': 28,
-'walls': 28,
-'wantb': 28,
-'wanth': 28,
-'webho': 28,
-'willf': 28,
-'alias': 27,
-'anime': 27,
-'awake': 27,
-'bankl': 27,
-'barba': 27,
-'bestr': 27,
-'bestw': 27,
-'blueb': 27,
-'bodyp': 27,
-'bookh': 27,
-'bookt': 27,
-'bytes': 27,
-'callb': 27,
-'capit': 27,
-'caref': 27,
-'cellf': 27,
-'cellp': 27,
-'citym': 27,
-'clubd': 27,
-'clubt': 27,
-'commu': 27,
-'compa': 27,
-'danie': 27,
-'dateh': 27,
-'fairb': 27,
-'fastf': 27,
-'fineb': 27,
-'fires': 27,
-'fisht': 27,
-'fours': 27,
-'gamel': 27,
-'girlb': 27,
-'hardf': 27,
-'heres': 27,
-'highp': 27,
-'hostp': 27,
-'issue': 27,
-'justh': 27,
-'kingd': 27,
-'landf': 27,
-'leadf': 27,
-'letsp': 27,
-'lineb': 27,
-'linkt': 27,
-'liqui': 27,
-'livec': 27,
-'livef': 27,
-'livew': 27,
-'lookl': 27,
-'massa': 27,
-'might': 27,
-'mixed': 27,
-'moreb': 27,
-'mouth': 27,
-'namef': 27,
-'newsb': 27,
-'newsf': 27,
-'nextf': 27,
-'norma': 27,
-'onlyb': 27,
-'owner': 27,
-'playb': 27,
-'proof': 27,
-'realh': 27,
-'roads': 27,
-'robot': 27,
-'sheet': 27,
-'sitep': 27,
-'softf': 27,
-'spoke': 27,
-'syste': 27,
-'tells': 27,
-'theca': 27,
-'thefi': 27,
-'their': 27,
-'token': 27,
-'tooth': 27,
-'truef': 27,
-'trueh': 27,
-'viewb': 27,
-'afric': 26,
-'apart': 26,
-'bluel': 26,
-'bodyl': 26,
-'brief': 26,
-'cardl': 26,
-'cellw': 26,
-'citya': 26,
-'clubh': 26,
-'clubl': 26,
-'clubp': 26,
-'codep': 26,
-'codet': 26,
-'coffe': 26,
-'dance': 26,
-'datat': 26,
-'dealp': 26,
-'downs': 26,
-'eastb': 26,
-'entry': 26,
-'escor': 26,
-'fastw': 26,
-'feelf': 26,
-'findm': 26,
-'findt': 26,
-'finel': 26,
-'foodp': 26,
-'freel': 26,
-'freer': 26,
-'fullf': 26,
-'hairs': 26,
-'herba': 26,
-'highb': 26,
-'hugeb': 26,
-'japan': 26,
-'lastb': 26,
-'later': 26,
-'leadb': 26,
-'leave': 26,
-'likel': 26,
-'linkm': 26,
-'loopb': 26,
-'loveh': 26,
-'mains': 26,
-'mindt': 26,
-'moref': 26,
-'moret': 26,
-'myspa': 26,
-'nameh': 26,
-'namet': 26,
-'namew': 26,
-'needf': 26,
-'nicef': 26,
-'nices': 26,
-'overc': 26,
-'overs': 26,
-'playw': 26,
-'pools': 26,
-'poplo': 26,
-'popst': 26,
-'posta': 26,
-'postp': 26,
-'publi': 26,
-'pures': 26,
-'racef': 26,
-'ratef': 26,
-'renta': 26,
-'salef': 26,
-'saveb': 26,
-'sellm': 26,
-'sitew': 26,
-'stays': 26,
-'suref': 26,
-'surel': 26,
-'teama': 26,
-'textb': 26,
-'thats': 26,
-'thebe': 26,
-'thela': 26,
-'thelo': 26,
-'thisf': 26,
-'ticke': 26,
-'timeb': 26,
-'timef': 26,
-'timew': 26,
-'tript': 26,
-'truel': 26,
-'wantl': 26,
-'wealt': 26,
-'westp': 26,
-'woman': 26,
-'works': 26,
-'write': 26,
-'amuse': 25,
-'billf': 25,
-'blueh': 25,
-'brian': 25,
-'calif': 25,
-'callt': 25,
-'camer': 25,
-'cityb': 25,
-'clubw': 25,
-'codef': 25,
-'copyb': 25,
-'dolla': 25,
-'dynam': 25,
-'edges': 25,
-'exper': 25,
-'facts': 25,
-'fairs': 25,
-'faste': 25,
-'fastt': 25,
-'firel': 25,
-'fishl': 25,
-'fishs': 25,
-'flowb': 25,
-'freec': 25,
-'gamec': 25,
-'gamed': 25,
-'gamem': 25,
-'grace': 25,
-'heard': 25,
-'helpb': 25,
-'ideab': 25,
-'ideaf': 25,
-'infof': 25,
-'infor': 25,
-'insta': 25,
-'jobsf': 25,
-'kingh': 25,
-'landb': 25,
-'liveh': 25,
-'liver': 25,
-'loanl': 25,
-'loanp': 25,
-'loant': 25,
-'longf': 25,
-'longl': 25,
-'markl': 25,
-}
-PREFIX_SCORES[6] = {
-'global': 157,
-'travel': 134,
-'online': 125,
-'americ': 109,
-'organi': 95,
-'credit': 90,
-'direct': 89,
-'christ': 82,
-'virtua': 80,
-'planet': 73,
-'projec': 71,
-'design': 70,
-'weddin': 70,
-'creati': 66,
-'sports': 65,
-'health': 63,
-'digita': 62,
-'busine': 61,
-'united': 61,
-'custom': 60,
-'domain': 60,
-'google': 58,
-'studio': 56,
-'silver': 55,
-'beauty': 52,
-'doctor': 50,
-'school': 50,
-'single': 50,
-'living': 48,
-'fashio': 47,
-'mobile': 47,
-'musica': 46,
-'search': 46,
-'univer': 45,
-'flower': 44,
-'little': 44,
-'proper': 44,
-'casino': 42,
-'crysta': 42,
-'robert': 42,
-'china-': 40,
-'studen': 38,
-'greens': 37,
-'indian': 36,
-'master': 36,
-'social': 36,
-'allsta': 35,
-'career': 35,
-'celebr': 35,
-'florid': 35,
-'secure': 35,
-'unique': 35,
-'videos': 34,
-'energy': 33,
-'secret': 33,
-'fantas': 32,
-'hotels': 32,
-'iphone': 32,
-'worldw': 32,
-'create': 31,
-'dating': 31,
-'discov': 31,
-'extrem': 31,
-'housto': 31,
-'people': 31,
-'window': 31,
-'comput': 30,
-'electr': 30,
-'europe': 30,
-'future': 30,
-'market': 30,
-'modern': 30,
-'perfec': 30,
-'photos': 30,
-'privat': 30,
-'simply': 30,
-'ultima': 30,
-'andrew': 29,
-'auctio': 29,
-'golden': 29,
-'greenb': 29,
-'naught': 29,
-'simple': 29,
-'websit': 29,
-'xtreme': 29,
-'artist': 28,
-'colleg': 28,
-'friend': 28,
-'garden': 28,
-'heaven': 28,
-'houseo': 28,
-'invest': 28,
-'family': 27,
-'liquid': 27,
-'mortga': 27,
-'produc': 27,
-'system': 27,
-'daniel': 26,
-'educat': 26,
-'greate': 26,
-'justmy': 26,
-'natura': 26,
-'outdoo': 26,
-'street': 26,
-'webhos': 26,
-'animal': 25,
-'better': 25,
-'commun': 25,
-'escort': 25,
-'orange': 25,
-'traffi': 25,
-'wealth': 25,
-'africa': 24,
-'beauti': 24,
-'cheapb': 24,
-'commer': 24,
-'dynami': 24,
-'expres': 24,
-'footba': 24,
-'goodpa': 24,
-'hostin': 24,
-'innova': 24,
-'office': 24,
-'portal': 24,
-'ticket': 24,
-'vision': 24,
-'carbon': 23,
-'cheapc': 23,
-'coffee': 23,
-'dollar': 23,
-'exotic': 23,
-'greenl': 23,
-'myspac': 23,
-'plasti': 23,
-'protec': 23,
-'rainbo': 23,
-'reales': 23,
-'vietna': 23,
-'willia': 23,
-'califo': 22,
-'downlo': 22,
-'forecl': 22,
-'goodsa': 22,
-'goodso': 22,
-'greenw': 22,
-'harmon': 22,
-'hollyw': 22,
-'phoeni': 22,
-'popula': 22,
-'server': 22,
-'silent': 22,
-'smallb': 22,
-'soccer': 22,
-'summer': 22,
-'virgin': 22,
-'wester': 22,
-'bankru': 21,
-'blackb': 21,
-'capita': 21,
-'diamon': 21,
-'intern': 21,
-'justin': 21,
-'movies': 21,
-'nation': 21,
-'orient': 21,
-'pocket': 21,
-'premiu': 21,
-'profit': 21,
-'sohbet': 21,
-'weight': 21,
-'buildi': 20,
-'colora': 20,
-'compan': 20,
-'cultur': 20,
-'double': 20,
-'dragon': 20,
-'dreams': 20,
-'hawaii': 20,
-'london': 20,
-'matthe': 20,
-'medica': 20,
-'missio': 20,
-'models': 20,
-'notebo': 20,
-'securi': 20,
-'spirit': 20,
-'thomas': 20,
-'wirele': 20,
-'world-': 20,
-'absolu': 19,
-'cruise': 19,
-'expert': 19,
-'fitnes': 19,
-'freedo': 19,
-'gadget': 19,
-'genera': 19,
-'green-': 19,
-'homelo': 19,
-'inside': 19,
-'island': 19,
-'jessic': 19,
-'northe': 19,
-'pacifi': 19,
-'partyp': 19,
-'pictur': 19,
-'premie': 19,
-'pretty': 19,
-'prints': 19,
-'servic': 19,
-'supers': 19,
-'techno': 19,
-'triple': 19,
-'ventur': 19,
-'wicked': 19,
-'andrea': 18,
-'atlant': 18,
-'awesom': 18,
-'cheape': 18,
-'chipsi': 18,
-'comple': 18,
-'countr': 18,
-'dealsa': 18,
-'driver': 18,
-'facelo': 18,
-'facema': 18,
-'financ': 18,
-'foreve': 18,
-'furnit': 18,
-'galler': 18,
-'goodfa': 18,
-'greata': 18,
-'greena': 18,
-'greene': 18,
-'greenr': 18,
-'harley': 18,
-'harris': 18,
-'helple': 18,
-'images': 18,
-'legala': 18,
-'lights': 18,
-'luxury': 18,
-'milfhu': 18,
-'moneyt': 18,
-'nature': 18,
-'partys': 18,
-'pharma': 18,
-'powera': 18,
-'powers': 18,
-'prince': 18,
-'progre': 18,
-'qualit': 18,
-'realty': 18,
-'second': 18,
-'senior': 18,
-'trader': 18,
-'vacati': 18,
-'vintag': 18,
-'westco': 18,
-'yellow': 18,
-'advent': 17,
-'affili': 17,
-'bargai': 17,
-'basket': 17,
-'blacks': 17,
-'center': 17,
-'cheapt': 17,
-'chines': 17,
-'classi': 17,
-'costar': 17,
-'denver': 17,
-'elegan': 17,
-'gamesa': 17,
-'greenp': 17,
-'guitar': 17,
-'invent': 17,
-'jackso': 17,
-'legacy': 17,
-'legend': 17,
-'linksa': 17,
-'magica': 17,
-'making': 17,
-'networ': 17,
-'paradi': 17,
-'partya': 17,
-'pokers': 17,
-'promot': 17,
-'prospe': 17,
-'recycl': 17,
-'shoplo': 17,
-'source': 17,
-'spacet': 17,
-'speake': 17,
-'stepha': 17,
-'stockb': 17,
-'succes': 17,
-'totall': 17,
-'trinit': 17,
-'waterp': 17,
-'wellne': 17,
-'worldo': 17,
-'abouta': 16,
-'ashley': 16,
-'birthd': 16,
-'bright': 16,
-'campus': 16,
-'canadi': 16,
-'cattle': 16,
-'cheapa': 16,
-'cheaps': 16,
-'childr': 16,
-'chinas': 16,
-'chrome': 16,
-'divorc': 16,
-'erotic': 16,
-'explor': 16,
-'famous': 16,
-'filter': 16,
-'flight': 16,
-'forest': 16,
-'galaxy': 16,
-'goodfi': 16,
-'goodha': 16,
-'goodma': 16,
-'greats': 16,
-'greenm': 16,
-'greent': 16,
-'hardco': 16,
-'helpfi': 16,
-'helplo': 16,
-'helpsa': 16,
-'hotelb': 16,
-'houses': 16,
-'integr': 16,
-'intell': 16,
-'laptop': 16,
-'libert': 16,
-'makemo': 16,
-'motorc': 16,
-'musicc': 16,
-'musics': 16,
-'patcha': 16,
-'phones': 16,
-'planta': 16,
-'positi': 16,
-'prices': 16,
-'printe': 16,
-'quicks': 16,
-'realit': 16,
-'sharem': 16,
-'sharpa': 16,
-'sharpb': 16,
-'smalls': 16,
-'spacec': 16,
-'sparta': 16,
-'stephe': 16,
-'superm': 16,
-'themon': 16,
-'therea': 16,
-'timesa': 16,
-'totala': 16,
-'victor': 16,
-'waterf': 16,
-'webcam': 16,
-'workin': 16,
-'worldc': 16,
-'advanc': 15,
-'barbar': 15,
-'batter': 15,
-'battle': 15,
-'beijin': 15,
-'beyond': 15,
-'bookin': 15,
-'booksa': 15,
-'carlos': 15,
-'caroli': 15,
-'cashin': 15,
-'castle': 15,
-'cathol': 15,
-'cherry': 15,
-'cityof': 15,
-'concep': 15,
-'connec': 15,
-'corona': 15,
-'corpor': 15,
-'dallas': 15,
-'discre': 15,
-'dreamt': 15,
-'enviro': 15,
-'facebo': 15,
-'firsta': 15,
-'goodwi': 15,
-'greatb': 15,
-'groupa': 15,
-'handba': 15,
-'hotela': 15,
-'inform': 15,
-'knowle': 15,
-'lawyer': 15,
-'luckya': 15,
-'origin': 15,
-'partne': 15,
-'passio': 15,
-'police': 15,
-'printa': 15,
-'progra': 15,
-'quickb': 15,
-'radios': 15,
-'rapids': 15,
-'ratemy': 15,
-'regist': 15,
-'rental': 15,
-'report': 15,
-'restau': 15,
-'retail': 15,
-'reward': 15,
-'select': 15,
-'smart-': 15,
-'spacef': 15,
-'sparkl': 15,
-'stocks': 15,
-'stream': 15,
-'stylea': 15,
-'superi': 15,
-'sydney': 15,
-'tennis': 15,
-'thunde': 15,
-'treasu': 15,
-'videog': 15,
-'visita': 15,
-'vitals': 15,
-'wallpa': 15,
-'welcom': 15,
-'wonder': 15,
-'worlds': 15,
-'aboutb': 14,
-'access': 14,
-'adult-': 14,
-'alexan': 14,
-'allthi': 14,
-'always': 14,
-'amateu': 14,
-'angela': 14,
-'antivi': 14,
-'appleb': 14,
-'armypa': 14,
-'articl': 14,
-'aurora': 14,
-'banklo': 14,
-'boston': 14,
-'brandb': 14,
-'brando': 14,
-'bridge': 14,
-'buysel': 14,
-'candle': 14,
-'cartoo': 14,
-'charge': 14,
-'charli': 14,
-'choice': 14,
-'choose': 14,
-'clubwa': 14,
-'dailya': 14,
-'dailyt': 14,
-'decora': 14,
-'dental': 14,
-'deskfi': 14,
-'desper': 14,
-'elektr': 14,
-'empire': 14,
-'essent': 14,
-'excell': 14,
-'famili': 14,
-'fastlo': 14,
-'fishin': 14,
-'flasha': 14,
-'forums': 14,
-'freebi': 14,
-'freeho': 14,
-'freemo': 14,
-'goodhe': 14,
-'goodle': 14,
-'goodli': 14,
-'goodne': 14,
-'greatc': 14,
-'greatt': 14,
-'greenh': 14,
-'harves': 14,
-'hellob': 14,
-'helppa': 14,
-'herbal': 14,
-'holida': 14,
-'homesa': 14,
-'horseb': 14,
-'income': 14,
-'inspir': 14,
-'insure': 14,
-'jennif': 14,
-'jewish': 14,
-'jonath': 14,
-'kinder': 14,
-'kingdo': 14,
-'leathe': 14,
-'lookwi': 14,
-'machin': 14,
-'madiso': 14,
-'manage': 14,
-'mediaa': 14,
-'memory': 14,
-'mexico': 14,
-'money-': 14,
-'monste': 14,
-'moviea': 14,
-'nicole': 14,
-'number': 14,
-'platin': 14,
-'playlo': 14,
-'priceb': 14,
-'public': 14,
-'queens': 14,
-'rapida': 14,
-'retire': 14,
-'salesa': 14,
-'sandra': 14,
-'screen': 14,
-'shared': 14,
-'sharpe': 14,
-'spaceo': 14,
-'spanis': 14,
-'spywar': 14,
-'standa': 14,
-'stockm': 14,
-'stockt': 14,
-'stones': 14,
-'sunset': 14,
-'superb': 14,
-'swinge': 14,
-'target': 14,
-'taylor': 14,
-'thepro': 14,
-'tropic': 14,
-'valley': 14,
-'villag': 14,
-'visits': 14,
-'watchs': 14,
-'waters': 14,
-'action': 13,
-'airlin': 13,
-'alaska': 13,
-'alumin': 13,
-'angeli': 13,
-'angels': 13,
-'apprai': 13,
-'arcade': 13,
-'archit': 13,
-'arizon': 13,
-'attorn': 13,
-'automo': 13,
-'baseba': 13,
-'baseme': 13,
-'basica': 13,
-'bicycl': 13,
-'blacka': 13,
-'border': 13,
-'brazil': 13,
-'britis': 13,
-'broker': 13,
-'builda': 13,
-'camera': 13,
-'cancer': 13,
-'centra': 13,
-'change': 13,
-'cheapo': 13,
-'cleana': 13,
-'clearb': 13,
-'collec': 13,
-'common': 13,
-'contac': 13,
-'costum': 13,
-'cougar': 13,
-'coupon': 13,
-'crashb': 13,
-'dealer': 13,
-'dirtyb': 13,
-'domini': 13,
-'dropse': 13,
-'eterna': 13,
-'execut': 13,
-'extrab': 13,
-'female': 13,
-'findan': 13,
-'firstt': 13,
-'flashs': 13,
-'fortun': 13,
-'france': 13,
-'freela': 13,
-'freepo': 13,
-'freese': 13,
-'fresha': 13,
-'fundra': 13,
-'garage': 13,
-'georgi': 13,
-'glassb': 13,
-'gogree': 13,
-'gourme': 13,
-'greatl': 13,
-'greenc': 13,
-'greenf': 13,
-'greeno': 13,
-'handsa': 13,
-'hardwa': 13,
-'healin': 13,
-'hearts': 13,
-'hiphop': 13,
-'homema': 13,
-'horizo': 13,
-'hotell': 13,
-'imperi': 13,
-'infini': 13,
-'instan': 13,
-'insura': 13,
-'interi': 13,
-'justba': 13,
-'justlo': 13,
-'kansas': 13,
-'kristi': 13,
-'livese': 13,
-'loanlo': 13,
-'locala': 13,
-'logica': 13,
-'madein': 13,
-'magico': 13,
-'magnet': 13,
-'massag': 13,
-'massiv': 13,
-'meetin': 13,
-'meliss': 13,
-'michae': 13,
-'michig': 13,
-'moneyb': 13,
-'moneym': 13,
-'moneys': 13,
-'moving': 13,
-'nevada': 13,
-'patrio': 13,
-'photoc': 13,
-'placeb': 13,
-'points': 13,
-'pricel': 13,
-'primea': 13,
-'psycho': 13,
-'purple': 13,
-'puzzle': 13,
-'quotes': 13,
-'rachel': 13,
-'radiob': 13,
-'radioc': 13,
-'rebecc': 13,
-'rising': 13,
-'sharep': 13,
-'shoppi': 13,
-'shopsa': 13,
-'smarts': 13,
-'sounda': 13,
-'sounds': 13,
-'specia': 13,
-'sticka': 13,
-'stocka': 13,
-'stocki': 13,
-'studya': 13,
-'studyb': 13,
-'super-': 13,
-'survey': 13,
-'theres': 13,
-'threes': 13,
-'toyota': 13,
-'tracka': 13,
-'tracks': 13,
-'tucson': 13,
-'uptown': 13,
-'values': 13,
-'vetera': 13,
-'video-': 13,
-'videoc': 13,
-'videot': 13,
-'visual': 13,
-'voicea': 13,
-'weathe': 13,
-'wheres': 13,
-'wholes': 13,
-'windre': 13,
-'winnin': 13,
-'winter': 13,
-'writin': 13,
-'123exp': 12,
-'academ': 12,
-'albert': 12,
-'allowa': 12,
-'allpla': 12,
-'allsho': 12,
-'allthe': 12,
-'alltra': 12,
-'allyou': 12,
-'amanda': 12,
-'ankara': 12,
-'apartm': 12,
-'armybo': 12,
-'asians': 12,
-'athlet': 12,
-'austra': 12,
-'backgr': 12,
-'benjam': 12,
-'bestse': 12,
-'blackl': 12,
-'blockb': 12,
-'branda': 12,
-'brands': 12,
-'bridal': 12,
-'carpet': 12,
-'casade': 12,
-'catpla': 12,
-'cellph': 12,
-'celtic': 12,
-'channe': 12,
-'charlo': 12,
-'charme': 12,
-'chicag': 12,
-'chinab': 12,
-'chinap': 12,
-'church': 12,
-'circle': 12,
-'cleani': 12,
-'closet': 12,
-'clubsa': 12,
-'cluste': 12,
-'codesa': 12,
-'concre': 12,
-'constr': 12,
-'consul': 12,
-'contra': 12,
-'cynthi': 12,
-'dayslo': 12,
-'daysta': 12,
-'desert': 12,
-'deskba': 12,
-'deskca': 12,
-'desklo': 12,
-'deskpa': 12,
-'detroi': 12,
-'diabet': 12,
-'disney': 12,
-'dream-': 12,
-'dreama': 12,
-'elemen': 12,
-'entera': 12,
-'equity': 12,
-'exerci': 12,
-'facefi': 12,
-'facele': 12,
-'faceli': 12,
-'facepo': 12,
-'facete': 12,
-'factor': 12,
-'federa': 12,
-'festiv': 12,
-'findme': 12,
-'firstb': 12,
-'firsts': 12,
-'fivest': 12,
-'flashb': 12,
-'foodsa': 12,
-'fotogr': 12,
-'freecr': 12,
-'freega': 12,
-'freema': 12,
-'freewa': 12,
-'freewe': 12,
-'french': 12,
-'funnyb': 12,
-'gambli': 12,
-'gaming': 12,
-'george': 12,
-'goodfe': 12,
-'goodlo': 12,
-'goodpo': 12,
-'goodse': 12,
-'goodsi': 12,
-'goodsu': 12,
-'goodwa': 12,
-'graphi': 12,
-'greatf': 12,
-'groupt': 12,
-'happyb': 12,
-'helpbi': 12,
-'helpbu': 12,
-'helpca': 12,
-'helpfo': 12,
-'helpse': 12,
-'helpwa': 12,
-'histor': 12,
-'homebi': 12,
-'homebu': 12,
-'horses': 12,
-'hospit': 12,
-'hotelr': 12,
-'hotelt': 12,
-'hotsta': 12,
-'huntin': 12,
-'hurric': 12,
-'hybrid': 12,
-'ideala': 12,
-'imagin': 12,
-'impact': 12,
-'import': 12,
-'interm': 12,
-'istanb': 12,
-'japane': 12,
-'jersey': 12,
-'jewelr': 12,
-'juegos': 12,
-'ladies': 12,
-'lastmi': 12,
-'learni': 12,
-'legalb': 12,
-'lesbia': 12,
-'lifewi': 12,
-'localb': 12,
-'locals': 12,
-'lookte': 12,
-'loopba': 12,
-'loopli': 12,
-'matchb': 12,
-'mature': 12,
-'medias': 12,
-'medici': 12,
-'metall': 12,
-'mexica': 12,
-'midwes': 12,
-'millio': 12,
-'modelo': 12,
-'moneyc': 12,
-'mother': 12,
-'multim': 12,
-'music-': 12,
-'musicb': 12,
-'mystic': 12,
-'newcar': 12,
-'newyor': 12,
-'offici': 12,
-'oldwor': 12,
-'oregon': 12,
-'paperb': 12,
-'parent': 12,
-'patric': 12,
-'perfum': 12,
-'persia': 12,
-'phonea': 12,
-'phoneb': 12,
-'pimpmy': 12,
-'playpa': 12,
-'poppla': 12,
-'powert': 12,
-'pricea': 12,
-'pricet': 12,
-'publis': 12,
-'quicka': 12,
-'quickt': 12,
-'random': 12,
-'remote': 12,
-'resort': 12,
-'resume': 12,
-'review': 12,
-'royalt': 12,
-'russia': 12,
-'safety': 12,
-'sandie': 12,
-'saving': 12,
-'scotts': 12,
-'sellin': 12,
-'sevent': 12,
-'shareb': 12,
-'sharec': 12,
-'sharew': 12,
-'sharps': 12,
-'shemal': 12,
-'shopse': 12,
-'silico': 12,
-'skillb': 12,
-'smartc': 12,
-'smokin': 12,
-'softwa': 12,
-'southw': 12,
-'spaces': 12,
-'sparea': 12,
-'spider': 12,
-'spring': 12,
-'stella': 12,
-'stopth': 12,
-'techni': 12,
-'thaila': 12,
-'thegra': 12,
-'thehea': 12,
-'thinka': 12,
-'thrill': 12,
-'toucha': 12,
-'trades': 12,
-'transp': 12,
-'trusta': 12,
-'unitea': 12,
-'valueb': 12,
-'videob': 12,
-'viewlo': 12,
-'visitm': 12,
-'wantfi': 12,
-'wantpa': 12,
-'wantsa': 12,
-'waterb': 12,
-'wheels': 12,
-'whiteb': 12,
-'1-800-': 11,
-'adults': 11,
-'allabo': 11,
-'allerg': 11,
-'amazin': 11,
-'amazon': 11,
-'answer': 11,
-'anthon': 11,
-'antoni': 11,
-'appare': 11,
-'applea': 11,
-'apples': 11,
-'arctic': 11,
-'argent': 11,
-'artwor': 11,
-'atomic': 11,
-'august': 11,
-'austin': 11,
-'author': 11,
-'bamboo': 11,
-'bankin': 11,
-'bankof': 11,
-'bestfo': 11,
-'besthe': 11,
-'bestma': 11,
-'bestre': 11,
-'black-': 11,
-'blackc': 11,
-'blissf': 11,
-'bodylo': 11,
-'bookma': 11,
-'brandm': 11,
-'breakb': 11,
-'brookl': 11,
-'butter': 11,
-'callsa': 11,
-'captai': 11,
-'cardlo': 11,
-'cardsa': 11,
-'cascad': 11,
-'cheap-': 11,
-'cheapg': 11,
-'cheapl': 11,
-'chinam': 11,
-'chocol': 11,
-'cinema': 11,
-'citize': 11,
-'cleanb': 11,
-'cleara': 11,
-'clears': 11,
-'client': 11,
-'clubfi': 11,
-'clublo': 11,
-'clubse': 11,
-'coasta': 11,
-'compar': 11,
-'concer': 11,
-'consol': 11,
-'covers': 11,
-'crazyc': 11,
-'culver': 11,
-'dailyb': 11,
-'dailyd': 11,
-'dailys': 11,
-'dayspa': 11,
-'dealsb': 11,
-'deluxe': 11,
-'discou': 11,
-'divine': 11,
-'eartha': 11,
-'econom': 11,
-'engine': 11,
-'englis': 11,
-'enterp': 11,
-'entert': 11,
-'escape': 11,
-'ethnic': 11,
-'faithf': 11,
-'fastwi': 11,
-'favori': 11,
-'filema': 11,
-'findlo': 11,
-'finelo': 11,
-}
-PREFIX_SCORES[7] = {
-'america': 105,
-'organic': 93,
-'virtual': 76,
-'project': 71,
-'wedding': 70,
-'busines': 60,
-'digital': 54,
-'creativ': 52,
-'fashion': 47,
-'discoun': 45,
-'univers': 45,
-'christi': 43,
-'crystal': 39,
-'propert': 39,
-'student': 38,
-'florida': 34,
-'celebri': 32,
-'discove': 31,
-'houston': 31,
-'perfect': 30,
-'auction': 29,
-'extreme': 29,
-'ultimat': 29,
-'website': 29,
-'college': 28,
-'compute': 27,
-'marketi': 27,
-'allabou': 26,
-'infinit': 26,
-'naughty': 26,
-'outdoor': 26,
-'private': 26,
-'worldwi': 26,
-'traffic': 25,
-'designe': 24,
-'desktop': 24,
-'express': 24,
-'mortgag': 24,
-'webhost': 24,
-'central': 23,
-'commerc': 23,
-'communi': 23,
-'fantasy': 23,
-'healthy': 23,
-'olympic': 23,
-'online-': 23,
-'product': 23,
-'vietnam': 23,
-'william': 23,
-'califor': 22,
-'foreclo': 22,
-'hollywo': 22,
-'hosting': 22,
-'natural': 22,
-'popular': 22,
-'realest': 22,
-'beautif': 21,
-'creditc': 21,
-'myspace': 21,
-'plastic': 21,
-'premium': 21,
-'western': 21,
-'wholesa': 21,
-'allstar': 20,
-'capital': 20,
-'diamond': 20,
-'kingdom': 20,
-'matthew': 20,
-'phoenix': 20,
-'securit': 20,
-'windows': 20,
-'colorad': 19,
-'company': 19,
-'directo': 19,
-'dynamic': 19,
-'educati': 19,
-'fitness': 19,
-'houseof': 19,
-'italian': 19,
-'jessica': 19,
-'mission': 19,
-'motorcy': 19,
-'onlined': 19,
-'persona': 19,
-'premier': 19,
-'rainbow': 19,
-'wireles': 19,
-'absolut': 18,
-'destiny': 18,
-'furnitu': 18,
-'innovat': 18,
-'medical': 18,
-'milfhun': 18,
-'noteboo': 18,
-'onlinep': 18,
-'onlines': 18,
-'pacific': 18,
-'protect': 18,
-'vacatio': 18,
-'awesome': 17,
-'bargain': 17,
-'footbal': 17,
-'forever': 17,
-'freedom': 17,
-'graphic': 17,
-'healthc': 17,
-'jackson': 17,
-'network': 17,
-'patrick': 17,
-'service': 17,
-'singles': 17,
-'success': 17,
-'venture': 17,
-'vintage': 17,
-'buildin': 16,
-'canadia': 16,
-'carbonf': 16,
-'country': 16,
-'downloa': 16,
-'elegant': 16,
-'interne': 16,
-'musical': 16,
-'picture': 16,
-'quality': 16,
-'spartan': 16,
-'tickets': 16,
-'trinity': 16,
-'advance': 15,
-'adventu': 15,
-'atlanti': 15,
-'bankrup': 15,
-'beijing': 15,
-'birthda': 15,
-'carolin': 15,
-'childre': 15,
-'chinese': 15,
-'compare': 15,
-'complet': 15,
-'concept': 15,
-'connect': 15,
-'corpora': 15,
-'diabete': 15,
-'diabeti': 15,
-'divorce': 15,
-'electri': 15,
-'global-': 15,
-'globalp': 15,
-'liberty': 15,
-'onlineb': 15,
-'passion': 15,
-'princes': 15,
-'progres': 15,
-'restaur': 15,
-'shangha': 15,
-'souther': 15,
-'thunder': 15,
-'trainin': 15,
-'treasur': 15,
-'affilia': 14,
-'alexand': 14,
-'allthin': 14,
-'amateur': 14,
-'antivir': 14,
-'article': 14,
-'casino-': 14,
-'christm': 14,
-'control': 14,
-'culture': 14,
-'despera': 14,
-'destina': 14,
-'directv': 14,
-'escorts': 14,
-'essenti': 14,
-'explore': 14,
-'financi': 14,
-'freepor': 14,
-'gallery': 14,
-'hardcor': 14,
-'harvest': 14,
-'holiday': 14,
-'indiana': 14,
-'intelli': 14,
-'jennife': 14,
-'leather': 14,
-'madison': 14,
-'patrici': 14,
-'spanish': 14,
-'spyware': 14,
-'stephan': 14,
-'swinger': 14,
-'uniteda': 14,
-'welcome': 14,
-'wellnes': 14,
-'working': 14,
-'worldof': 14,
-'africa-': 13,
-'airline': 13,
-'apprais': 13,
-'archite': 13,
-'attorne': 13,
-'battery': 13,
-'bicycle': 13,
-'british': 13,
-'buysell': 13,
-'collect': 13,
-'costari': 13,
-'design-': 13,
-'executi': 13,
-'flights': 13,
-'flowers': 13,
-'gogreen': 13,
-'gourmet': 13,
-'greates': 13,
-'healing': 13,
-'health-': 13,
-'horizon': 13,
-'magical': 13,
-'massive': 13,
-'michael': 13,
-'monster': 13,
-'onlinet': 13,
-'orienta': 13,
-'paradis': 13,
-'patriot': 13,
-'program': 13,
-'reality': 13,
-'rebecca': 13,
-'russian': 13,
-'searchf': 13,
-'seniors': 13,
-'special': 13,
-'standar': 13,
-'superio': 13,
-'travel-': 13,
-'veteran': 13,
-'victori': 13,
-'village': 13,
-'washing': 13,
-'weather': 13,
-'writing': 13,
-'123exp-': 12,
-'arizona': 12,
-'austral': 12,
-'backgro': 12,
-'booking': 12,
-'cartoon': 12,
-'catholi': 12,
-'cellpho': 12,
-'channel': 12,
-'classic': 12,
-'cluster': 12,
-'constru': 12,
-'contact': 12,
-'creatio': 12,
-'cynthia': 12,
-'decorat': 12,
-'designs': 12,
-'detroit': 12,
-'domains': 12,
-'element': 12,
-'europea': 12,
-'faceboo': 12,
-'fantast': 12,
-'fishing': 12,
-'fotogra': 12,
-'friends': 12,
-'gamblin': 12,
-'general': 12,
-'globalc': 12,
-'globalt': 12,
-'homeloa': 12,
-'hurrica': 12,
-'informa': 12,
-'istanbu': 12,
-'jonatha': 12,
-'lesbian': 12,
-'littleb': 12,
-'machine': 12,
-'makemon': 12,
-'massage': 12,
-'meeting': 12,
-'melissa': 12,
-'mexican': 12,
-'michiga': 12,
-'midwest': 12,
-'million': 12,
-'newyork': 12,
-'norther': 12,
-'onlinec': 12,
-'onlinem': 12,
-'origina': 12,
-'partner': 12,
-'perfume': 12,
-'portlan': 12,
-'present': 12,
-'printer': 12,
-'shemale': 12,
-'stephen': 12,
-'thailan': 12,
-'twitter': 12,
-'winning': 12,
-'andrews': 11,
-'anthony': 11,
-'apartme': 11,
-'apparel': 11,
-'artisti': 11,
-'barbara': 11,
-'basebal': 11,
-'benjami': 11,
-'blissfu': 11,
-'blogger': 11,
-'chicago': 11,
-'chocola': 11,
-'christo': 11,
-'citizen': 11,
-'coastal': 11,
-'concret': 11,
-'contrac': 11,
-'costume': 11,
-'currenc': 11,
-'electro': 11,
-'elektro': 11,
-'english': 11,
-'eternal': 11,
-'exercis': 11,
-'finance': 11,
-'freepho': 11,
-'friendl': 11,
-'georgia': 11,
-'glamour': 11,
-'glitter': 11,
-'goodbye': 11,
-'greenba': 11,
-'heavenl': 11,
-'hospita': 11,
-'hunting': 11,
-'industr': 11,
-'inspire': 11,
-'integra': 11,
-'investi': 11,
-'kitchen': 11,
-'knowled': 11,
-'kristin': 11,
-'leisure': 11,
-'magazin': 11,
-'medicin': 11,
-'memphis': 11,
-'miracle': 11,
-'multime': 11,
-'nationa': 11,
-'nutriti': 11,
-'officia': 11,
-'patient': 11,
-'persian': 11,
-'pharmac': 11,
-'platinu': 11,
-'politic': 11,
-'prepaid': 11,
-'promoti': 11,
-'publish': 11,
-'quantum': 11,
-'researc': 11,
-'rington': 11,
-'sandieg': 11,
-'shirley': 11,
-'skyline': 11,
-'softwar': 11,
-'sparkle': 11,
-'speaker': 11,
-'streets': 11,
-'support': 11,
-'thebest': 11,
-'thegree': 11,
-'toronto': 11,
-'torrent': 11,
-'totally': 11,
-'tourism': 11,
-'uniques': 11,
-'virgini': 11,
-'youtube': 11,
-'account': 10,
-'adverti': 10,
-'african': 10,
-'alabama': 10,
-'allianc': 10,
-'amazing': 10,
-'antique': 10,
-'arlingt': 10,
-'atlanta': 10,
-'automat': 10,
-'backyar': 10,
-'basemen': 10,
-'bayarea': 10,
-'bowling': 10,
-'brazili': 10,
-'captain': 10,
-'cashing': 10,
-'cheapca': 10,
-'clevela': 10,
-'clothin': 10,
-'comfort': 10,
-'concert': 10,
-'consult': 10,
-'consume': 10,
-'cosmeti': 10,
-'daniell': 10,
-'designa': 10,
-'doctors': 10,
-'downtow': 10,
-'enchant': 10,
-'endless': 10,
-'energys': 10,
-'excelle': 10,
-'exclusi': 10,
-'fivesta': 10,
-'fortune': 10,
-'franchi': 10,
-'freecre': 10,
-'freeweb': 10,
-'fundrai': 10,
-'future-': 10,
-'getting': 10,
-'globalh': 10,
-'greenwi': 10,
-'hardwar': 10,
-'harmony': 10,
-'healthi': 10,
-'helpful': 10,
-'heritag': 10,
-'hongkon': 10,
-'hustler': 10,
-'illinoi': 10,
-'imperia': 10,
-'instant': 10,
-'insuran': 10,
-'interio': 10,
-'investm': 10,
-'japanes': 10,
-'jewelry': 10,
-'journal': 10,
-'juegosd': 10,
-'kentuck': 10,
-'lastmin': 10,
-'lasvega': 10,
-'learnin': 10,
-'lonesta': 10,
-'militar': 10,
-'mobilep': 10,
-'montrea': 10,
-'mountai': 10,
-'noticia': 10,
-'oklahom': 10,
-'onlineg': 10,
-'onlinel': 10,
-'onliner': 10,
-'orlando': 10,
-'parking': 10,
-'payment': 10,
-'peoples': 10,
-'pleasur': 10,
-'positiv': 10,
-'precisi': 10,
-'prestig': 10,
-'prosper': 10,
-'realtor': 10,
-'richard': 10,
-'richmon': 10,
-'sanjose': 10,
-'satelli': 10,
-'scarlet': 10,
-'scooter': 10,
-'seattle': 10,
-'selling': 10,
-'serious': 10,
-'sharema': 10,
-'sharpei': 10,
-'shoppin': 10,
-'shortsa': 10,
-'silicon': 10,
-'smallbu': 10,
-'spiritu': 10,
-'sportsb': 10,
-'stellar': 10,
-'stlouis': 10,
-'stockto': 10,
-'stopthe': 10,
-'straigh': 10,
-'superst': 10,
-'supreme': 10,
-'telecom': 10,
-'telepho': 10,
-'tenness': 10,
-'themone': 10,
-'thought': 10,
-'trading': 10,
-'travelc': 10,
-'travell': 10,
-'travelp': 10,
-'tropica': 10,
-'turkish': 10,
-'unitedt': 10,
-'unlimit': 10,
-'victory': 10,
-'videoga': 10,
-'weekend': 10,
-'windrea': 10,
-'workout': 10,
-}
-PREFIX_SCORES[8] = {
-'american': 63,
-'business': 55,
-'discount': 45,
-'creative': 44,
-'property': 36,
-'organicc': 32,
-'discover': 31,
-'celebrit': 29,
-'organics': 29,
-'christia': 28,
-'ultimate': 27,
-'allabout': 26,
-'computer': 26,
-'marketin': 26,
-'bicyclec': 24,
-'organicb': 24,
-'californ': 22,
-'designer': 22,
-'foreclos': 22,
-'hollywoo': 22,
-'realesta': 22,
-'worldwid': 22,
-'wholesal': 21,
-'beautifu': 20,
-'mortgage': 20,
-'security': 20,
-'software': 20,
-'educatio': 19,
-'motorcyc': 19,
-'personal': 19,
-'wireless': 19,
-'colorado': 18,
-'communit': 18,
-'furnitur': 18,
-'milfhunt': 18,
-'organicm': 18,
-'shopping': 18,
-'universa': 18,
-'universi': 18,
-'vacation': 18,
-'football': 17,
-'notebook': 17,
-'canadian': 16,
-'internet': 16,
-'absolute': 15,
-'adventur': 15,
-'bankrupt': 15,
-'complete': 15,
-'diabetes': 15,
-'digital-': 15,
-'download': 15,
-'electron': 15,
-'innovati': 15,
-'organicp': 15,
-'shanghai': 15,
-'southern': 15,
-'williams': 15,
-'affiliat': 14,
-'antiviru': 14,
-'birthday': 14,
-'building': 14,
-'carbonfi': 14,
-'christma': 14,
-'commerci': 14,
-'corporat': 14,
-'desperat': 14,
-'diabetic': 14,
-'director': 14,
-'essentia': 14,
-'financia': 14,
-'hardcore': 14,
-'infinite': 14,
-'jennifer': 14,
-'princess': 14,
-'training': 14,
-'wellness': 14,
-'advertis': 13,
-'amateurs': 13,
-'attorney': 13,
-'children': 13,
-'collecti': 13,
-'colleges': 13,
-'consumer': 13,
-'costaric': 13,
-'creditca': 13,
-'electric': 13,
-'greatest': 13,
-'learning': 13,
-'magazine': 13,
-'organicr': 13,
-'oriental': 13,
-'patricia': 13,
-'progress': 13,
-'restaura': 13,
-'superior': 13,
-'virginia': 13,
-'weddingc': 13,
-'advanced': 12,
-'america-': 12,
-'catholic': 12,
-'cellphon': 12,
-'christin': 12,
-'creation': 12,
-'digitals': 12,
-'escortsi': 12,
-'executiv': 12,
-'floridac': 12,
-'hurrican': 12,
-'industri': 12,
-'istanbul': 12,
-'jonathan': 12,
-'makemone': 12,
-'michigan': 12,
-'original': 12,
-'paradise': 12,
-'portland': 12,
-'treasure': 12,
-'victoria': 12,
-'virtuals': 12,
-'webhosti': 12,
-'australi': 11,
-'backgrou': 11,
-'baseball': 11,
-'benjamin': 11,
-'blissful': 11,
-'chocolat': 11,
-'concrete': 11,
-'contract': 11,
-'currency': 11,
-'european': 11,
-'exercise': 11,
-'facebook': 11,
-'fotograf': 11,
-'freeporn': 11,
-'gambling': 11,
-'healthca': 11,
-'homeloan': 11,
-'hospital': 11,
-'inspired': 11,
-'northern': 11,
-'nutritio': 11,
-'official': 11,
-'organic-': 11,
-'organict': 11,
-'platinum': 11,
-'research': 11,
-'sandiego': 11,
-'spiritua': 11,
-'standard': 11,
-'thailand': 11,
-'thegreen': 11,
-'washingt': 11,
-'alexande': 10,
-'alliance': 10,
-'allthing': 10,
-'arlingto': 10,
-'backyard': 10,
-'carolina': 10,
-'clevelan': 10,
-'clothing': 10,
-'collegec': 10,
-'cosmetic': 10,
-'designsb': 10,
-'destinat': 10,
-'downtown': 10,
-'exclusiv': 10,
-'fantasti': 10,
-'fivestar': 10,
-'franchis': 10,
-'hardware': 10,
-'heavenly': 10,
-'heritage': 10,
-'hongkong': 10,
-'illinois': 10,
-'insuranc': 10,
-'japanese': 10,
-'juegosde': 10,
-'kentucky': 10,
-'knowledg': 10,
-'lasvegas': 10,
-'lonestar': 10,
-'medicine': 10,
-'military': 10,
-'mountain': 10,
-'multimed': 10,
-'national': 10,
-'noticias': 10,
-'oklahoma': 10,
-'outdoors': 10,
-'precisio': 10,
-'prestige': 10,
-'richmond': 10,
-'ringtone': 10,
-'satellit': 10,
-'spanishp': 10,
-'stephani': 10,
-'straight': 10,
-'tennesse': 10,
-'unlimite': 10,
-'veterans': 10,
-'weddings': 10,
-'windreal': 10,
-}
-PREFIX_SCORES[9] = {
-'celebrity': 28,
-'christian': 27,
-'marketing': 25,
-'bicycleci': 24,
-'californi': 22,
-'hollywood': 22,
-'realestat': 22,
-'worldwide': 22,
-'wholesale': 21,
-'foreclosu': 20,
-'beautiful': 19,
-'education': 19,
-'motorcycl': 19,
-'furniture': 18,
-'milfhunte': 18,
-'universal': 18,
-'computers': 17,
-'universit': 16,
-'adventure': 15,
-'affiliate': 14,
-'antivirus': 14,
-'carbonfib': 14,
-'christmas': 14,
-'commercia': 14,
-'community': 14,
-'corporate': 14,
-'desperate': 14,
-'essential': 14,
-'financial': 14,
-'costarica': 13,
-'creditcar': 13,
-'electroni': 13,
-'restauran': 13,
-'cellphone': 12,
-'escortsin': 12,
-'executive': 12,
-'makemoney': 12,
-'webhostin': 12,
-'australia': 11,
-'directory': 11,
-'hurricane': 11,
-'organicpe': 11,
-'spiritual': 11,
-'washingto': 11,
-'alexander': 10,
-'allthings': 10,
-'arlington': 10,
-'backgroun': 10,
-'chocolate': 10,
-'cleveland': 10,
-'designsby': 10,
-'destinati': 10,
-'discovery': 10,
-'industria': 10,
-'insurance': 10,
-'knowledge': 10,
-'multimedi': 10,
-'nutrition': 10,
-'organicca': 10,
-'precision': 10,
-'stephanie': 10,
-'unlimited': 10,
-}
-PREFIX_MAXIMUMS = {3: 2374, 4: 726, 5: 343, 6: 157, 7: 105, 8: 63, 9: 28}
-PREFIX_TOTALS = {3: 243615, 4: 137313, 5: 49069, 6: 17622, 7: 7647, 8: 2944, 9: 890}
+for index, name in enumerate("""
+ma se lo pa co re li ne th be te la me mo to fa bo so go po de tr le
+st da al do in he ta we mi bu ch fo su an ar jo wi ga ro my di hi no
+ki vi si on pe fl as pi gr fu na ge dr sp cl us pl ra ea ke fr wh it
+ri fe bl ad ho ai ka pu ju wo yo sa ru ti va ni am cr ac fi br cu en
+mu ce at sc gi pr ou ja hu tu ci is ab el lu sh ve ev un ex ko ed qu
+ag vo ph ic by im sl up wa ap je tw ol gl of ec or du ye bi au op sm
+es er gu ww sk em ji ha ba ze cs ey ca ya e- il cn nu od nx za ku oh
+av ir sw ow oi kn if xi af sy id zo ov 51 12 zi ip cy sz ty et dj eu
+cc yu ur eb om hy sn aa aw zh bj pc 52 mr ok mc ak mm ep ib os eg ah
+ob ly ot i- kr ms ez az oc ps cd ia xx sd tv 3d cp yi ug ae mp ny ut
+ss 11 gp xe 36 ul 17 dy qq bb kl ig 99 gz 88 xa hd mt 20 cm um ay ef
+js qi uc wr dn ts 10 dv pp ub uk sf oz gs 24 02 ds ct io dc ei 18 kh
+hn zu 05 hs aq iv ax tc 13 ik nb tt 91 dm gd sb 16 hk rs eq gh fs ek
+00 a- dl wu ao md ky hb nj xy dd mb db nc zj xu bm ht vu sr zz ry 07
+cb gy jc ns hr bs tm 77 jp gm iz bc aj py ie gt xp sj jj pt zg ml ee
+ks dg bt oo og rc 66 iw m- jm 55 21 eh 80 rh qa gg tx ew cq ih ox gc
+yn fx xm dh cf xt ls xo tj ll yt fc hz ua 33 bd yl df ys hc s- jx nh
+t- jd cg cz zy sq 22 ii hh nt b- oa c- wy yy xs 50 bh sx sg pd km lc
+gn rt 19 jn tn g- xj 56 kk bp wm hp tl dt 01 ud 92 lv ym rm x- jl wz
+58 hm jh bg ft 15 nd mv fm yc oy mn rp nw ff qd vs fz 86 jk nn gw zs
+3g sv 23 d- hl tb 30 mk mj nf gf 1s wc rr kt jr jb ws dz dp cv pb fj
+xc lg wp pm 59 j- ng tg td vr ej gx gb xl pk mg lt eo k- nr fy jy cw
+bn oj kw dw kc qo jz uf a1 rx 31 yz wx jt h- hw pg uu 90 03 ue vl wt
+xb 57 lh nm hx zb 97 08 yr np tz fh yd rd vc u- wl lp lb vn yb yx rv
+xh bf mx kb 09 5i fb 25 yw rb wf tf zd mh yp cj oe ld f- xz nv 32 mf
+jw jf pn bk n- rf vv pv 40 zx kf vp tp lm 89 wb cx ui nl yh 53 hf wd
+ix uv tk xd ql vb iq b2 hg vt mz ln lz kd ck 78 dx qs qe bz yg xf 14
+kp 39 38 35 98 xr lf zm vm rj r- hj mw fp 04 p- o- 37 26 rg rl h2 44
+nz 28 lj pj zq fd lx pf vd iu bw xg 68 vg 54 gv gk zc w- qz qc 60 iy
+41 zl xn xw 70 dk 45 rn wj ij zw 82 qw wg uw uh zt v- 81 rw kj qh 69
+hq gq fw qt uo 3s kv 67 3r gj 96 vw yk yf q8 dq qy vy pw ux yj zn kg
+jg fg 1- nk bv 95 rk vf c2 rz uz a2 lw 2s 85 jv px wv 76 75 pz zp 72
+w3 bx vk 94 vh l- l2 73 5a uy z- 2b 83 87 1a 1m qp 42 zr 3a fn lr 1c
+71 wn 61 34 wk f1 kz qv y- hv 4s q- 65 lk zf 93 yq xk 06 vj tq m1 2d
+qr 43 4c g1 2n d3 62 63 5s 2m 1p 1b kx 4m vx e3 m2 fk 2c d2 5d zv fv
+29 xq 79 jq zk 3w yv 1t k9 4f 4d lq qb qn 4t 4p 4a 3c 3f 3e e2 s2 xv
+1d d1 qm oq 4- 2a qx p2 uj 48 4g 4b 3p 3b 3- s3 84 7c 74 4e 2- 1f 7l
+4w e0 fq 2t v3 1k 7- qg qf p3 c3 3t 3l vz m3 mq 2p 8m kq 64 pq c4 5t
+5f g2 3k 3n 9i 9a 27 r8 7a qj i2 5l 46 4x 4u 4r g3 3m 9s 2e 1w 1i 7s
+k1 0d vq o2 49 2l r1 r2 7o 7k 7t 0c b4 b1 4y 3x s1 2w e8 1r 7d w1 6r
+5u n2 4j 4h g4 9t s7 2f 2g 8s r3 1g 1h 1o 7f qk i0 i3 5k 5j l7 h1 47
+a8 4v 4n t2 t1 3h 9m 2h rq e7 1l x1 0- i7 h5 u2 uq nq 3y 9l 2r 8i 8g
+8d 8t 1y 1e 7g 7b 7i 7r q2 w2 0a 6d 6f p1 v9 5p 5c 5b o1 a7 4i 9r n1
+2i 2j 2k 8b e9 1j 7h k3 k2 0p 6h p4 i4 v8 n0 b0 u8 a6 4l t7 z1 9d wq
+e5 r7 1u 7e k8 d0 j1 0b i1 v2 v5 5y 5m bq u5 u1 m0 a3 t8 t0 3q 3j 3i
+f4 s8 s6 2y 1x 1z 1n k6 d4 d5 q1 j5 6a 6g 6t c6 i5 5h 5e 5- l9 h4 u7
+a5 a4 a9 4k c1 g5 3z 3v l1 9k 9c 9b 9e 9f 9p m4 f7 s5 2u 2q 2x 8- 8n
+8f 8y r0 7p 7y d8 q3 0w 6s 6w i9 5z o6 l3 h0 t3 3o 9x 9u 9w e1 m7 m6
+m8 f2 s4 y9 y2 2o 8k 8l 8w r4 u6 7x k0 d7 w5 6p p8 i6 v1 v6 v7 5r 5n
+b7 b3 l6 h8 h9 h3 h6 a0 g7 g8 t6 z6 z3 9j 9n 9y 9q m5 f6 s0 2v 8c 8a
+8r 8p u0 j0 x3 x6 x4 n4 7n 7m 7w j2 w0 t9 w8 0r 0q 0x 6- 6k 6q c5 p0
+p6 l0 5x 5w 5o y1 b5 l4 u3 n8 n3 g6 g0 z5 z0 9h 9g e4 9v e6 f0 s9 y8
+8h 8o 8x 1q x2 7v k5 d6 q6 j3 0s 0u 0k 6l 6m 6n 5g c8 v4 b6 o8 h7 t4
+9z 9- y3 y5 2z 8j 8e 8z 8u x0 x7 x5 7j 7z k4 q4 j9 j6 c9 0n 0l 6b 6c
+6e 6u 6y c0 i8 b9 o9 w6 4z g9 o0 3u 9o m9 f3 f8 y7 n9 r6 1v x8 7u k7
+d9 q5 j8 w9 0z 0f 0g 0j 0m 6i 6o 6v c7 p9 l5 o3 l8 4q n6 z9 z4 z2 f5
+y0 y6 8q r9 q0 q7 w7 w4 y4 0v 0t 0h 6j 6x p5 v0 f9 8v r5 7q j4 j7 0y
+0i 0o p7 5v b8 n5 u9 u4 4o t5 z8 z7 q9 0e 6z 5q x9 o7 o5 o4 n7
+""".split()): PREFIX_SCORES[name] = (1332 - index) / 1998.0
+
+for index, name in enumerate("""
+the car sho new for sex pla hot fun net you chi all mar ban par fin
+man job see art lin sta rea dea top tea eas get tra fre buy hea win
+web min big gam bar cha dat sun boo bet red hel got han sto met mad
+one use can eve tru com kin lea not bes mod her tri thi bit air war
+goo fir key far sha fan gre lov sel foo dog now mai pay wil inf map
+cas fla por kid clu eye che pop bus ask fee log our hit sal lif www
+fly law nam blo fac per int out wor shi fit jus ten sol liv cal any
+day tax loo dar mon spo ide gra lan med run and add bea let roo van
+bad cit hos pen blu men sen act too fil nor gro who its dis des mor
+onl mas col flo cor old cel box joy loa two uni ste har sur hal sof
+are ice hom fai how nic loc ver mov mis tre guy pai fas pur pic arm
+cod qui tal los son bra pos age bas plu hat may fix tha wel las ind
+pas pre gas mix saf leg vie spa bil off ope via hol try oil sav led
+stu bug res set tel odd kee bal san sat boy bod tur tex nex gun low
+cut eat end yes lon why con tin luc gol ful sam bed raw mil sou lis
+eco sca spe hai dre pho was lot sig cla own mat bla gir aim cra six
+pol hig ove die cam ran don vid lad wan fis aut bac cop pac rai mus
+pat tes pag dee sum rat mak tas rac tie dan poo tec hun pet vis hou
+tak wat pea dow kno his ris doo gla wha dra boa tan rid sin cli coo
+ali cle rin pin dro cos sup rad ins ser dry mer lil mag sea val joi
+del cre ter ren app bri fou tow som sma mos tun ima mob vot rus nin
+mac ala nee pro bio mee rol lat ang jun say ant wea bul roa bro glo
+dri dig gen kar byt fed fro jum sid sim mys les mes lik sad cen whe
+pus cur wis usa sli hid tot hug has tou way dai bel wee fra mal str
+hop cup kil max dom biz slo sti ski whi eur nan edi tee ite asi clo
+wes rap fal ill gap laz pow put pip ear hap aid edg ben dia den ani
+sil won hil ara mea giv pan ale nat ama cho ent mot typ wid bee mic
+pok cro hor ele abo sco ate cou saw moo rar ana fiv sai sor gai len
+tom bab vip vit dir 123 pri bon roc gui sch lay tod inc rou gar bre
+alt did pal abl wal jok ton doc lab fli meg lar fol kan soc sar rob
+sky but awa wow soo spi geo zer gay ken bor bur nea eli pul ass ric
+100 nov xin sty fot poe fat tap sit mel dot vir tab dav sui smi woo
+pap cry thu alb sec non pha god lie exp rel sos seo bai tor ann dev
+gri pra vin bin ber vas ext myt ont myc jin fel wer mym ros cap onc
+twi inn gos lig myb sev ret gon fri ame lef qua joh hao cin tro row
+kat wei ref hum mom ast voi ira org tam neo mei ero zen xxx kor rec
+swi rem wif jam hab edu pil acc chu rev ada hon bob ari tar jan lam
+lim poi que dec mik adu dol als der ita ven dem cri ora kim ace alo
+nas rep gal caf deb scr him bot ene doe cyb swe lac fry abc wir tit
+cat ugl thr mir nig toy suc rig bui joe din jac und wen nec lux nev
+div alm chr eri coc bos wit mya aqu reg eac muc wik had tek sug lun
+myp kit sub plo gua ago fle tol dor viv dvd inv sle pix kal rul ema
+hen arc fer sms hua tao siz tok wai bol alp pub gan dos dou jen fea
+nos gif kon my- jim amb riv bir myg myl bay emp tim ron mam due mul
+avi myf dub kam til hoo nob bli ash gog few dru lap sna sak gru nav
+est ham iam pau ami fig cov zoo al- asp kai bei var lev jos mem enj
+goa iso imp kur dal mye atl cab vic gor bag yog dam ilo isa equ tho
+jia zon mp3 cer gul cum tai ine mid amo myh att cyc phi ado esc rei
+bou kel sus lit swa tat myr adv err ato rom wet fam asa hip sem lee
+ava ads lol xia coa gee aca hin evi myd ata wap veg sas mol wed aus
+iss ori mia ist num tig sno nom roy spr urb aer nar ses ans vil wom
+gat ree nik fox opt jes dut aft jav kol 365 kis ase agr syn fen bud
+pim isl ger tub ker alf tag quo beg myn yan nol mun mou aud ups bru
+eng sce gop jet cru sla afr ray ela sop ons ane abe rub exa tob soh
+bec jon reb ram epi exi pis noi fut mec goe tia eba tem nur ome yet
+sot ams tos pie adm vol lai gig maj hes css pun apa pit ade ina gom
+ico amp fur fuc nak ebo lak pot kas uss ede beb jay esp gob ano zha
+aba def nap sir myo dic 200 jul sys ape kra ath sab kir ell sac jud
+kne aga mah lor fie ing lou tic vel 520 fab hem php cub cir das iro
+adi upp dod mur ple pod hep kay spl sis iri ish goi ise nud hav koo
+aro gof ion owe bun imm gin sob abi bis lau nut els ort sag pia kom
+kos ult jap usb ink mig she lib myw diy ipo noo shu sap nai wol upo
+dob emo go- lip kaz sic reh soa ere cot yea gia pon dep leo evo flu
+myi inp obe moj gem hyp ska dad jas yar sci ats doi 360 haw gil fon
+cai cac zhu oto jer arg rot buz avo noc ust lal atr det itc e-s gab
+bid neu ida maz ino pir bao ica gur ito wri jew hir dun ido eth eko
+tip sod ble tut isi 888 apo 999 hay ner hyd exe lum spy amu aco cep
+kab cul eva upl upt lav goc oma oba 1st abs isp asc zip emi rag ras
+oli pou pak aci mma iti aaa tof pee bys beh inb dop mut cow nod hei
+yoo exc arr dur pig myk rav muz kli hey alu jef lia lic pel kak lex
+zin us- rod hac sau kha gel abu agi ave psy oce bam rit ore dyn cst
+cus sib zap bef bew jar jor ohi meh imo sog vet nog sed heb ego e-c
+bib bia wii mim jaz fus goh ati isc nit elo mit nxd sud nok anc mrs
+mmo tac gaz hed lei ess kun meb era gou bak fru uma cau ach twe aso
+sek e-m sep awe eta ini eca elc cn- dil nyc hob nof nop pup moc abb
+itm gps vod rew ibe buc aka eni gow toc dov emu dit orb ona pam oro
+acu ves weg ped daw wiz ebi ese la- env eme cof cnc soy rum bom iph
+oni ege itt kot exo uta wec omn bbs kum lag smo rak baz sow bog usd
+iwa itp joo it- amc wag ted aar idi fet lec usp mep iba yam mef gli
+lao sme mau zan hur hus poc ohs xtr asm kap afa oth inl inm inh sh-
+scu ire coi dim gle noa nes cct igo alc ith asl wep fem sei jad bum
+hak elm usf ono ond pom tet itr gav lem apr usi ush yao gov rab foc
+noh img abr itl itb usc zar jal luv ohm kro vac in- upf bah sah jea
+hui tul acr het ism itf duc rio vor cis sul nad mew bem liu 114 bux
+slu wew zam ili una 168 epa aha squ sni mud orc amy yas toa gad pes
+rud nag ibi lep api reo yah inw aur atc tog cog haz yel boi onb anh
+nis ime eig paw pad cpa alk ald pum isb rip pif bie pep fei usw cic
+leb ura mum lus ete unt kri 057 piz atm toh mca ola ich rya no1 shy
+orl yum axi kei b2b liq seg sym gsm kad edo wef afi lio jag xen esa
+eag dna onf yin tum wak alg deg asd jee saa sia byb mav ech hec eto
+bub atw raj sue cob kic 800 rer ahe ipa cav gho mba hul aml oyu itw
+cem kok duo rut usl cim zhi bym dac ila ubi aja 247 emm tid dip msn
+201 ges tuc seb amt e-b nau kni bic ode byp dah 021 weh ube kus atp
+omi epo elf opi wac rog diz cak maa djs noe sko ors tus amf unc jui
+yon peo dew wav ega itd wra rui rug idc cia byl bey jai une phe oft
+adr ske pik cms zel fib smu emb ais ole boc maf onh usr pc- jue teh
+kla csc ced koc dua fue lyr eda lel wic byc jak ebe joa eti myv esh
+kre akt ena atf nha toe kep wad gha anu kev moe 911 hyb dek egy go2
+asw kob 180 arb ark e-t e-p apl byf re- bep jab yun lub nen zac gok
+isf raz dok doa dof mcc aki opa tis tik tib yor bow psp onp ank joc
+500 iva amr jur fak fad ded csp ifs asb asf jel kac 666 ard fuz apt
+nac nep tah rek iha bev upa 101 mex ens ket soi uno gis gim syr ost
+gue aya spu hog gea ord hub anl sew nek ccc amh moh fav fau csh sut
+ces ifl upb ars mog wim bim voc zho fes cig uti nab sip dag dab 111
+esi neg myj uph isw nir raf kul cns git osa tep nou usm nei amm ota
+alh csm csl asr ifi e-k civ sie byr no- luk jog xue vag inr dns laf
+upd doh 163 yen rim azi ipe djm ony ute imi csa ifa ifo i-s e-a dul
+xan liz lyn 333 tay byw byd nfl url myu avt ofs oly swo vat pio upw
+104 enc zeb oct 075 gus onm ong oca zhe amd amw hew lok aln fax cec
+oka kop efe hib hic sku yal cun pec von ler shr dao lob ad- eso upg
+upc mlm meo zee fic fif isr nil nix gio qin kho dio guo yuk anf usu
+tud bmw ein amg hex lom eho heh oha deh csf csb cet asu le- gao cip
+tad aff miz heg ure lul jol ott ile upe nem pid mip fos azu fog kyl
+onw anw zir viz ifr gum efi 777 hi- aru dui dud 008 yur lop beo uro
+yak esl upm gna drs atd atv xie gym kik glu cng obi aho qia tif txt
+gec jil dj- uso anb anm anp zom zor kem wro fid suk nao aly alw vib
+isu itv itu ife jed lid eff kah pda 007 010 uae byh rex rss phy wem
+kru oas auc mcs 051 uca atb bau pru ait ail ain 073 vig sne aza nxt
+bok hoc onr ive naa bjh eha ict csr itg e-d gag voo peg kao cib odi
+bya oze fuk mi- uri vam ilu neb 059 pib eno ims fha hau cnt cnh kle
+klo cad shs orf 518 onu hud kaw uto keb imu ccs bjs hef yac ohb oht
+iga sua dej egg ceo izl hik psi 300 suz nal xbo agu mug tau szj 138
+rej zig sok pyr ebu inu 555 rif yua zet zab nun irs mua coe drm eld
+elv cnn fsb ved dib gut mao dje sov orm kes pao tv- acn ohl alv csi
+cse ifp kod sjz iki fuj jiu mop cuc vox chn dae beu szs oke dap adt
+adc 053 laa 24h nip ems co- cok bij kib elu opu el- soe gib nxb ksa
+cao mae hoa 517 uns pav paz eze acs hee nxs 192 deu pcs asg 3d- ary
+ika moz ewa afe daz ece jat lud jot ote isk kut kua meu ake ozo hag
+ova 400 tox wod rah baj nus opo cnp ppc ahi kou ose ruc ibo cag yil
+ukr axa ici odo ohc yos vio dex atu xer xun isd ift dfw kav kau stl
+oxi e-r duk vos ewe kaf rur lyg nah naz tug syl wig zim afo byg ecu
+be- cyn 321 awi uru jaw lui jig oho ofi sss bry szh ria lax yue zal
+zai nie nba seh nul omo coz coh yap elp kiw cnw aze nxg htt kyo gzh
+ssa tnt mok ged gei ivy moi ezy sik ige uga alr rop wre pcm aap hif
+crm ike dup vog rib upr xpe tyr cil h2o ulu ohw uli lek zil sri byo
+oxy lod mih mie jod tsu phu adh esk icu aug nel ned aks ofe rau kna
+oci occ kuk nue nuc kwi nim kia elk zag cne obs 222 nxi roz oso epe
+521 ipt lah 51s ian zol hdt ivi cci ez- jub nxz 198 dei efu exu hiv
+e-l riz syd 001 wot cui rho sdc cie rhi vee 028 eu- eci sey szc shm
+jie yaz avs adp umi yoy ign we- isn buk mls dnd erg atg 176 toi raa
+tyl suv hrb bap aic aib kip kie elb xiu cna wam rik nxe nxc oss osi
+dif djc mrt tui fik ivo ccm acm bjj jua nxw ohp yol alz faz vik egi
+itn cea gud jem bha lir cds 678 ror fzl lym sef oda apu sif siv dak
+027 ecl jax wok 126 shj jou ked 110 vad aun upi kup drf eru enf oks
+zei dsl nia nif isg piv rox haj haf dha epr elt cny twa obo mvp nxu
+nxr ipi cah geb orp orn 515 axe xml irc naw loh ohh ohf ohg alj csg
+ceb pug mms 188 fum boe moa cif edd vla i-t ula ocu daf 411 mab lug
+jom etc unl cmc dr- mev hok goj niu nxa doy ude oco koi omg mey kiz
+koz cnd cnb cnl ahm emr wax nxj osh vec ipl rup msp msc orw onn anr
+zoe imc vul hds pab cco amn msa bjy jug yag nxy gr8 rok zio icr ryu
+yok ifb shb puc i-m aas ofo efo kag ugu e-n e-h e-w woa fug 000 eee
+ohe zao vse ovi wib 591 usg afl qat eml sza uco ofm dma myy myx cma
+mek drb drd 171 bsa irr iru drp drc yer hah olo olu pli zum snu nxf
+nxl nxo nxn veh dix htm eki ips gta dja 51d zaz suo huo iwe lur poz
+oza oku ccr ccb wyn nxv nxp taw csw pcb koh e-v wek wev gac ril wie
+bip ruh fec sds cid zak 592 ctr ibu haa emc ecc lof iho cyr mif szx
+szy wos 037 lup uci ofl ofp gma unb cme scs kuc kub dnf ers enu zep
+zeu zat niv teg piw doz baa frm aix 079 elr cnf obj tiv llo pem dik
+htc boz ayu ma- gzs hoe usn orh ume yul 511 hue hut uk- anz mr- gep
+kek tup unu pog cca ucu tvs tva bjt yad cbc 600 igi fah al3 cso yla
+pct jit cef cei okc oki ifu ifc ifm cdc yma 315 e-g e-o dug ewo syt
+mof ipr up- zzz sax evr bds ibr voy 131 rez rey ogu oga shh sze szt
+lut rpg yay sbs hms unf ofb dau ofw skr jma hod zes 178 teo stc nef
+nuk thy kog lcd cnj plr giz gid azo sql rie nxm nxh fom klu 52s ipc
+caz cay ssi wab 3rd oru 513 onk zad anj mrc gew gez zis pov ezi sre
+acl acq loi jup suh yab hwa wah nbc zjj waw egu pcp pch iff gfx 3ds
+kof i-d aam rhe i-c oxe e-f sts ley dus mow liy rua sdr lyc zit sve
+edm tav byn 020 fag hlj sz- aes shz jid etu pih bbw oti whs adn adl
+a-s 118 vap bue oak hnj hns eja 108 106 mez roi erd fay hof enl enn
+en- fiz upn loy zib nib ds- tei 177 173 mcm mcd sae aip qwe nih yee
+fob cni zah umu szl rue ayo ays caa cae ulo djt djb 51c orr yis zod
+iwi mrd nlp imb tuf hdf yaa ohr xyz teb abd abh aby vim de- dez csd
+pca cee ifw tov jeu ncc i-b yno hiz utu e-j boh lds ozg oem idl msh
+sdh lys naj nay 668 cdm leu iii dwa afu siy 139 weo 023 reu cyt awo
+szk szw jah 125 shk ebr luo etr jis jip ilc iow igr umo psa esu esm
+owa buf iny ubu pii cmo ssl drh 055 erc laj mds at- ajo xil aty osc
+yiy jxs do- och nup omy scc ai- aig nid kig oll wwe cnz tvb gic nxx
+rof szb tvm gup guz xxl ooo ibm spc maw obu djd dji eje ory 512 ule
+zem 202 mrm axo tux eis 21c ezs bjl bjx dss hyg muk 900 vif puz deo
+qqq pcg asy jeb gp2 crs iko gaw syb bi- bik qwi kaj rov tuk edc goz
+hk- lew aps aph wip chy xco gcc bye 029 ogi rfi cyp bek soj mij mio
+dba dbs aec jop kec joj myq bbq ilg eup xel tch gmc adb 567 dmc inj
+ubo nwa aub aul ptc kud 588 aku drk vom ofc enr ovo zia 24- atn gyp
+to- bae nuv 366 unk kwa aia 077 epu ely ops zul pps qic khi nxk osu
+fod foa 52d ipp mst ibl nym zuo hoh djr kaa 51h 51p ork yuz iac hks
+zou mrf mts mtg imt odu hdd am- moy mox tvt ezg ddd bjc bjz alq pek
+faq mub sbc csn ifd izm asn jep koe jej aal i-r ex- sf1 hie hih arv
+stp woc iku gaf gae mla fuy ewi jp- cud ru- pei ruf naf edw cts 045
+dwi da- nya loe cys udi hek mib szz jae 128 shc jir yot mhs tma dcm
+owi mcg uba kuw akr drr erm m-s cze nmg zea zed fio mda kif 17s tym
+suf bsc wob c2c ilk mc- mo- 2nd sao 076 opp opr bpo fop icc cnm hss
+zun gie mtc lla szm gug nga bop ca- dxs gzx zas aol gek djk 51m 51g
+yuu iat iap waz rma zot mrp zec qoo dys dyl dym qhd jow tuo gwa 789
+qil eid cc- pae ccn ezc loj ehe heo jut g-s ohn ohd xpr faw edr hym
+hys osm puk pue ics vix sbi veo isv qqs itz nyl ceg gub ftp izo sba
+3dt st- aab aan dtv 886 eft jsa yli ugi yaf i-g arp ikl i-n pdf tgp
+xal gau gaj upu syc 5st wou idr trs sd- sdj tua sva eds tyd cfs yco
+444 apc chl chs 135 580 ect ecr cym mii miy b-b jaj shw muh aei tlc
+uce jiv jiz 1-8 phl phr ofa ofd tcm mpe igl dc- 116 vah vai eal bcc
+hcc aux 103 ako rir ery jha lae zeg zev wuh fia ung ruy yom mde zav
+dst goy atk 175 kew lbs rae on- bst v-s jcc xoo nuf 369 aiy 071 gly
+eps eln bpa 420 gip mtv mtn mta azt mte khu qiu mrk 086 icl mra kov
+vpn icy vex ybe pvc tvl xac 52c 52m 52h sph sly gzy nys zid nyt ghe
+hoi jif jib djf ppm uge 51k 51j 51x 516 waa huz anv mrb xma gwe vun
+p2p hva sxy ccp cch ps- oko ezl tvo ezd tds acg yaw bjb bja bjm bjp
+nxq cbs igu yob t-s cpu tef pud zie isy ziz uvi pcr pcc cev okm ifg
+xam mmt 3dd slc 3dc jeg nci aac i-l i-p 889 fu- bhu efa lix kae scp
+cde cda hij arq wog uuu nri gaa vau fup eke vok 898 ufo unr bif biy
+pey yri idy idu yle nsi ixi xps tvr lyt jcs gry yra vov xat vra sdt
+ms- leh ctc cti gzb iin tae taf taa gco afs byu byi 025 024 700 ihe
+oge bej miu sfc sfa urg urs szg sht aet aed guc 035 luz 578 wtf rpm
+bbb eut otr avu avr ofu daq adw esd dca dcs vak vab ean ziy hnh req
+ovu eju cmi ak- aky drt drl akc erw 558 m-c hya ssc aju yid yif go4
+zic ukb uka rao tyc co2 mup oms unp cox saj 166 gnu drw tst 808 eph
+elg hax icb hsc pyt hst mbi ahl ahs sox az- azz azr 158 089 roh mdc
+ydi woh eka fbc fbi msu ool tta djl noj yro 51b 51f 51w mrr mrl mrh
+ss- xis pti uts ok- yto stb pob gtr cqs bmx pax pah yu- ccg ccf gdy
+ezw kma mpi bjd hej juk bj- p30 g-m ryo cp1 unm cpi cps is- mps tev
+abm xon mmm qqd qqm zik sns yni ifh izi xim 3di i-a aad gp8 gp5 bhs
+liw jsc jst exb tse cdn cdr ies iec ymo cd- geh fuq fud qal gsp gsa
+cue u-s ees id- cgs mss tyt mcr usv sda lyl jca dvi agg edl yre flp
+lez umb 1to hae afg yca kbs tsi yyy vca yuc qun uda 6rb miv sfs fx-
+ksp ngo jic se- ysa yse cvc i-f phx xed tcs adg 115 esb kry nde ead
+myz bcs 345 mcp pds me- neh kug ywa vps erp erk m-a enk yub vou wus
+wun wul clc fim tys okr dsm gox nti gyn gyr ypo rst bat nuo irm muj
+omu 388 256 xxs mck mci aio gno bna cnx cnk hsb hov obl zug ppi so-
+azm mtr azb qis tir stm fst roj vem fok jdc mmc 525 zri ufc 52y bof
+m-t zur ip- oop wwt ibs gzm sps maq aob aon aok gef 099 djh djo gbc
+oya 51a 51z 51t ks- yuy yim yiq ukg hup huy anx yup fcc mri azh geg
+yte 927 kej ytb ylo poh pta hd- hdc rwa paa oin nsa ccd gdf ps3 tio
+ezp tvp tvc ddi 918 ddl uch 910 s-c acp bjo bjk bjw juc juv yoh cp3
+oh- otc cpp fap faj faf hyh tew c-s puf mmp x-s vij mme qq5 hho cs-
+egr pcf cey yna as- fta guv zjg kuz 3dw 3df 3da dfs 181 aag jsl jsm
+jsz cdt cdp xec hia arn e-e e-i 18t roe imr duf duv eks gsh pex pef
+feg ppl sdy sdg cik lyd jch agl vow vlo rre kij jde cto unw apn usy
+ch- dwe 133 136 566 tsh eus ec- emt ecm rs- cyg jjc aws sfo awh szd
+jaf jaa sp- shp shx shn ebl dls luf jov keg ets etf 579 yat bba gts
+ild ilm ofh xem nca tcc wto nvi foi njj dch 568 buh dmi lvy wxh my1
+my2 pss eos scm mcu qur aij 102 akb txd qzo 052 xte ert szo m-o eny
+mpr fij 24c 399 hyo dsc upv nta syu nhl toz ral ypi ull bsn bsb doj
+c-c hrt wzj ocs okb bax nuw nub muy mue bnt prc koa mcw aie dhi nii
+a2z kiv 801 xjy epc yem opc yeu elh bni opy tvd zuz waf 228 3gs 151
+nnn 156 khe tix mro 083 ump fsd nu- fsh pew 3st lle 818 szp tnb 52a
+52t boj ayd oos fls gzj 234 235 fps m-b nyf nyg ghi tts lst djw kkk
+stf 51y yux yus sst usk 510 onv iq- iai yib uks yip uke huf huu koy
+prz zos iwo an- wut xit ssu dyg dyb ums uve tuv vur vus cqy bma hdv
+hdm okt oit yho nae gdl ezt ezm ddo acf bje heu hez ehi cbr cp- yop
+mpg pbc osl xom vew ggg mmd icp dey hhh csj csu qqy u-t ffi ffa hzd
+pcd okh yne ifn s-a zjy gph aa- imv stt gp6 gp3 tsm 881 884 778 jsj
+exh cdl ymh oxf arf vvv yde leq pcl ady duz swt nre jpo jpe bov hbb
+21s qar 3gt zgc jbc hbs knu rhy jsf peb ids idg idd nse mkt sdx msg
+sdf pwn 041 edt tmc trv bdf fll feb fev iit iis kys gzw taj afc saz
+jns eum eun byj daj zui gz- 581 pga seq rsc cye bez bex ybo fxs awf
+b-a dbl szr nge mgs vma mui qtr ebs lua kea bt- ett etn eua tsc euc
+bbe bbc bbt tsp x-t sa- tcp zgb ior phd tcl adj xst 4my sk- a-a njl
+113 a-p 119 esy rcs eaz bua dmo i-w syg ejo bca scl vcl xta scg hch
+sso rix dnn zjd keh jmc ssh czy yga 556 mvc enp hoy yug wur wux loz
+wuc wuj fip 401 mdi dsh smc nts upy jjs nhs xid 066 rax ype tyn bsd
+pbx ocm em- wzs hrm hra kui bav nug omc omf yba 389 frc prm mcn vsi
+mct 160 slt aik kih yeh opl bpm 531 vdo foy hsm ths ppa mbe ppp ahu
+224 mti mtm mtb 155 qih fs- mrg jdm zzy pse 528 msm nds oot caw caj
+gzl kya gzz kyu aod aor zna lsp tte jih djg tti t-h 3rb 51l xih 519
+zax yit ukc ias huc yge pne zsh zsj 20l vei h-s xmt yti dyr dyi dyd
+ko- zey smp kef jtf tuq tue imd vut iml cqj cqh bmi bms hdp paf paj
+gdr okn s-t ezh eza ddr s-m s-d dzi bjg cba rx- yoc sih uan rxm cpm
+nss unn cpr ots osp mpa hyc hye teq suw abt ab- jrs sls zjl csy pr-
+itj itk ity hzc pcj pce ceh okl it1 hz- sb- jja izz asv jez 3dp ueo
+3de 3dm jec 3d3 xiy 866 jsh jsp wex exs cdb rti cdi cdj nce yme ymi
+868 97s ie- 311 tca gp9 gmi kbc vav dum duy 966 52b mlo jpc jps dgh
+syo 002 dgt okd gsc lih 766 bix eem iji peq cgi sjc sdm uth utt tve
+lyb lyo tvg nax rds tjt tms svi ags sc- edh edp zaf rts rri flt cfp
+bdc hkc cte ctf xvi chc usj fey ack taz sro gci sii sio hiw si- gcl
+byk daa nfa ok1 oxo ecs ecp ihu yuh fxd whf wey muv xpo mne urp 99w
+dbo 998 jna aea dpa ebc bto 031 bti dla luy ety 575 ucc lga hmo otu
+cvm avm ilt zgh iot jpr wym ofy xee yod tco dax adz zyg k-m mha a-m
+njo dcc dct dcp es- xar owl vaz rcc eam bup buj ssm rc- nrg hnt hp-
+hnx
+""".split()): PREFIX_SCORES[name] = (4693 - index) / 6257.0
+
+for index, name in enumerate("""
+game shop free love best just info team real club live easy link good
+name plan deal host play book news home idea find chin life king city
+mark blue ever part card data hand soft code sale bank food show sell
+call fast thin safe gree open trip jobs face cell post your full pure
+land fire mind over read body high medi date care well talk girl file
+help bill next fine true only lead star park mail save long look loan
+nice miss more fish wild east dark page view auto luck meta list mode
+hair lady hell will text line port what wall sure note last test join
+rate back spot hard bear sign even pick form room seek porn tree ring
+band farm core fund down shar fair lets hear stop feed flow clea deep
+pack drop race rain know stud blog vote mass hote take scan very need
+road foot make tech ship grow plus unit lock base inte send like move
+boat half lost this cold char come chip ball jump keep main four vide
+copy them feel area tune meet edge pass door user side flat town step
+byte huge hunt desk dead radi ride drea that some hope mone supe self
+comp gran case disc want five pool happ movi give euro used heat cent
+west mine push chea blac powe mobi trac work type pain cool kill task
+bran peak here cost most digi turn tell wide stor spor loca root lazy
+visi grea draw nine rare gets thes wear boot poke hous warm joke cash
+made wine roll stay keys bulk flag dail gold slow fact dear hill firm
+able pipe wind rush load phot eyes mile styl busy risk into loop gain
+appl rest item theb days sexy many magi cure ones disk junk worl stoc
+serv edit trav fres week indi ther lega wash hits grou late hang path
+kind firs pric walk prin desi quic paid fall zero glob flas leaf buys
+phon bets plug tota foto teen rock pres bits tank word keen army smar
+hold asia vita mean bids says john mega then same fina must less lift
+near ease suit cars onli wate craz clic nort spac chil spee hall mini
+logi bite extr poll blow rapi left they odds watc bars shel term past
+truc from glad clas ways ugly hide sola kids whit chat poin funn slip
+stat prov fail ligh quit each moto thec foru mari thep fore glas rent
+buil dumb abou folk soon tele cybe dare golf eart fill hour wise sees
+done hate lear pink tran site ours valu pull trus ente anim soun lend
+sold ston thea ange trai orga smil anti wire hors driv bugs vast laws
+fort unde wiki pape musi adul feet simp hole nets cafe heal camp much
+tape trad size inde metr enjo shor rise mess smal doma chan nano the-
+para fanc seve suga chai rule theg drin crea soli spar aqua arts wife
+nigh drew marc dirt were touc goog gift prom thel adds suns fits theh
+fear davi rive than basi once righ dump tabl sexs herb arab trap came
+tops micr carr cand cove mike lots webs brea plot onto sara catc seen
+sout arte matc wish lose viet colo stan surf wins alls rich stic tour
+cros reds sort cycl brow sand sent cart mont thre diet arti whol toda
+sear thed tast teac thef pays hots sens bigs wait thet when clan slee
+urba neck elec fran paul dogs guid huma thai seem cana runs carb forc
+stil floo turk gone jack acti figh nett away clue poet spea bett thew
+casi poem aims with poor iran maps casa ilov logo labe afte fors shin
+pair ener whee bloc mere peac cred goto virt web- sext yoga yout offe
+barb such quot airs chic carl natu neve andr cine dell plac bigb swee
+voic pers whos bell time larg hott perf alex chri stre gene fate skil
+coco fram tria mans baby stag hung comm elit grup scor terr song mana
+shan fans tool heav hero mand alla bang kara eats expo amer gett fait
+inve cons carp asks nows texa tric acts allt cloc role funs cats tend
+alte netw beau flor wher scra netb logs till beta mart mast offi newc
+topt inno bigt fuck beth shoo mult summ inst roya leve java robo reac
+inne coll skin felt fant matt alar inch scen sant alle hana albu boar
+ital rand newt anys pros proj getb topl vega guar sets maca shes sain
+phil sunt tian agen frie wood solo prop mens audi chao boxs ties both
+coun grap scho loss staf putt cans shif toot fron roun geta mang mary
+theo goth outs ages buyt rose sex- wast nove mant also sing anal airt
+nova none pops newp bart prof getm allb allo ends mayb trut dire eco-
+joys mill gots pens silv stuf been poli numb sexp legs bust sana slim
+brai bore opti youn cras quie cuts thei astr maxi geek moon hotp sexo
+mads majo topc hotc nois soci alfa sake shoe lati boys insu duty isla
+ices fiel funt admi busi netf neta webt cara aero todo indo deco canc
+soul nick marr oran alma pent howt publ viva pixe alph buya rout dent
+jobb alli cont bigf demo immo newm tens clos prod sexf lott topi knew
+said meri netc netp bigp bigl caro cour fars cant spli agel vans bind
+newb guns juli deli blan taxi lunc stra airf payp ware pets cute gott
+artt twin tube lake rang anyt buym hint prot prem sexc voip dave bada
+funf chen josh alba buzz cele sund snap clip topb scal allc allm hotb
+ment net- tony evil kore stee wars pile mapl secu dani debt topp jobt
+jobf allp doct taxs sher jame nude deat guys vill dian atla aliv flys
+adam equi prox sexb getf year went gogo mort allf xiao intr aska cher
+yous afri stea ecos mods kiss shen outl sunn hows futu goin beer cook
+prog redt olds tren topr brok mich brin hotm shut chec angr bigc kino
+stev moda shee seet pete ford artb flip newl buyb pro- tras refe wing
+bads emai thir earl omni netl thee fixe angl iron cosm cari jeff jenn
+pint bein cris eyep arta artf howl flyt newf acce vias vice sexa redf
+flex exac getc temp foun mani equa plai ipho does tang arch airb payt
+sham econ entr butt dies fell art- vali airl sexe snow ands alan buyc
+scot getp barr bara nast redb japa wang trea nota drug ultr stro dogt
+awar webc beds zone carf else infi duba eric wwwa ourt leds fanf hers
+zoom andy turb tent buyp empt onet kidd pimp clar carm nors laur hotf
+hotl bloo linu mays whys youl mist shap uses gotb othe mapf dong sill
+keyf beat cope reno rede redh onep hong dati exit mora brid lase funb
+funk uppe twos phar neth carc quan cata titl flyb tiny gotr artl sunr
+mapt myma oils hats popt jean kell bidt hack buyf itst holy whic topa
+mall hota babe spen spec netd crys gass drag flyf warn sats artr doll
+sunp pars retr vant keyp sino limi revi insi took neww webi cast clou
+boun weir sexh sexl sigh trys jobp mala fami tied chee doga airp cond
+sixt erot habi danc ecom indy doub artc coac dogg mama alia popc popb
+newh newa newd batt goes icon wome esco redp getl toph circ joba mali
+allw funp lang writ merc chef jess bigm lowe taxt youp nowt forb anna
+omeg gotc arth grin sunl ocea offs baid rela jazz poly pola fash bigd
+sexm getr mada top- topf jane teas manf hotw func ebay maya webb weba
+gian youf bali upon hype shad grac petr roma sala gotw outd oyun mein
+fanb boss nake bria comi buye harm soni goal reda oneb getd delt wint
+mena topw citi bitt clai asse alll hotr palm priv spel stri netm thek
+rune conn webd webe sixs litt veri regi joyf sail patc nowa foro forw
+gotf mund arto pari keyl myco mixe math have anyw rely devi buyl lisa
+sole whom proc madf madd madm topm pand all- funa swis ling hydr bird
+boxb twol twot iris netr runl tone remo conc webp payl habe youb mysp
+wwws flyl barc owne navi seeb salo pron peru pert gros gotl outf sunm
+fang sunb gate dayt amaz blin roug madp drys topd holl bitb nots tryt
+nord buyw chas mets lili askt spin fixs runt bigg forl cath pear gast
+heli owns seed forf badb milf gota gotp artw sunf keyt chro toos popf
+newg anyp anyb pret 1000 bare barl solv redd boob oldb hone cali teat
+spam bitf lawy jobw jobl reso norm seep tige lind xing cust meth payf
+bigw biga halo carg mond mona sesl taxp catt spri iraq toys gasp shal
+feds tick dyna joyb ming seel lies lows peri sour eyet memo betl artd
+jewe sunh sunc sung airc dogf keyw epic floa bing vent popp nike anyl
+bidf grad bida hitt gard eden tekn barf liqu redc redm icet refi inco
+obey kidb vary jobm manc carw brit hoth funm cham twop sits dogb paym
+dive carh fora nurs catl wwwc joyc mint askf askb askl nowp canp burn
+addf ourd eyef shou dial penn dogc vina lion keyb beac bull mixt new-
+bidr jaso alas tenf gulf hiss comb rick wifi sons getw gala redr onec
+onef leas madc boom hert kidt kidc oldt olde oldf bitc bitp lawn badp
+jobc mann male hot- funl simo boxp fitf fitt phat ting chem dogp woma
+payb paya trul bigr yama ruby youh youa juic reco rawb greg zhan ecot
+flyc seef askp anne eyeb outp mapb mapp penf popw toke flig dayb mixl
+anyf bidc begi buyr dish mira caus vial baro oner madt topo melo domi
+manp manl myli allh hotd coff funw tigh boxt fitl lily spir dogw brad
+giga bigh taxf choc catb bass muzi kare quee wwwm www- hitp wwwb mino
+tint nowl nowf luxu perm ping ourc ourp betr repl sean thev outb diab
+fana keyc cctv oilb dayc mixs newr corp bidl troo glam barp sexi icep
+itsf deni onem doin mend busc myho lawf manh rese toto alld belo tara
+poun wolf fitc twob twoc endl ches bana aira runf webh payd ares gasb
+gasf dana wwwl ryan genc flym flya flyp grav graf joyp teng ourl hitf
+loos milk perl betp betf kool artp artm sama outw diam mapa mapw silk
+fand sinc abcd lamp fred mixf bidw rene jian lack barn icel onea oneg
+onel madl kidp uniq tami zhao spok lawb manu manb eigh oldp tecn fitb
+spic amus nutr dogm bebe runp runb bras gods visa adve ambe habb youd
+rawf viat coup soso joyl magn sheb shem warp askw canf soma addp addb
+ourf gotm eyec seat sams mara mapr dogl fanm sina lime reve matr weal
+neur dayf toon popl pizz webl bidp trib momo tenb gunb barm prob nico
+sexd redl icec icef itss itsm oneh onew dela kidf meng lego bush tama
+puss nott lawp mano resi assi mash sang scar allg allr invi pian twof
+phas huan tina mayf sixb payc lowb lowc susa youm toyo hele kate wave
+iwan envi maga hitc nati jing warr warc aske nowb nowc betw shir badl
+addt alta ourm gotd eyel maro sunw boya 2008 insp smok newe sono corn
+webo 1800 prep moms supp hist buyh aust scre flam sexr sexw iceb itsa
+kidw exce esta buss bitl notl badf lawt tryb manm anta russ norw miam
+sele educ xian twom ohio adop nete bans banc aire jose bedb wayl taxb
+swin youw vert labo raws mach craf vidi ward aids seew cang canb canl
+jesu adda cutt ourb manw oute film suna mapc maph penp peng fanp vanc
+vand keyr keym myca mout alic toma kick apar span mood gunt myre rave
+luxe proo nich redw traf geor oned madh ates kidl winh winf oldc menb
+obam teab socc lawa badc jobd mons nora agro nomo hotg plas plat rais
+atom boxc mete metl lila vist myfa bala dest luna fixt fixf airm hans
+webu payw zona buck livi erro wond taxl catf hire myst ques dann wwwt
+geni dove joyt fata warw warb seec askm bold ledp bobb betc dick repo
+thej outr outc seco penc pare reta vanp vanf taxh boyp popo crow oilf
+oilp mate yard mesa rans toob coin webm andb judg actu tenm nobl wayb
+buyd viap esca brig gang sexg itse madw herp kidz kidh winb wina taob
+oldl herm topg tope teap punk hybr bita myne ledf tryc resu masa sans
+hash pant myba fith hawa fitw fitp visu kevi logm fixb airw webg whyl
+yaho horn carn forp mono catp vers held myso rawp viac ecoc ecol farf
+mywe gray quiz shep psyc whob arms warf bonu peti lowp betb bete lian
+actf dona vanb vang vanh sumi papa oilt uplo smit inse dayw popa popm
+kali bost anyc plum sayt anda actp gaps eagl wayt tenn buyi lett ross
+gary ding gall bibl itsp soph madi madr cake dryb oldm novo kont avia
+soca noti noth badt robe trya jobh mane sums norc baba issu avan neti
+logf tong rema whyt focu big- kang taxc choi avto lyri bugp grey viaf
+kath ecop farb fart modl dubl rega joym hitb hitm armo wart doug cano
+deai adde addc perc guyf betm pill grid mapm mymo fanl alon tall limo
+matu bead sett setp flyw mesh dayp onth mixb poph bail anya mayp bidh
+teet andf secr trun wayf oddf sayf bari inet itsw itso itsh ipod geti
+knoc winn winc vivi teaf torr badm twit bron puls norb pics mybe thom
+fung funh noki boxl metb crui mura dizi arca logt logl airr guit kept
+born payr whyw beda syst diva qual taxa youg catm catw bugb karm hipp
+dang reel ecob farl modp modb hitl ownt shew arma lucy bond usel uset
+earn askd nowr maki elle taka kaza addl perp tale yesf yest eyew beto
+outt harr xtre keyh germ boyc alis insa lapt ills yell hath echo dayd
+daya rank expe gave cube tera acco soho hisp trin sona usef cups tatt
+aman amar bard barg andt kris sexk redi glen dual geth mytr dora kida
+menp menf sixl baza teal orde mela fake bitm bitw lawc lawr tryf norf
+pica brie funr mote bio- bene metf twow endf dese netg logp fixl aird
+airh dogr air- rund guia cape neva whyb cole taxd youc gash gasc mysa
+rawl wwwp ster neko modt modf lond rebe tenl hitr shef shea warl bone
+agre seeh askc nowm savi pino ledb tryl seas cabl outa acto penw pend
+penl dogh vana vani vanl semi boyf oilc stuc athe nail lain toom mixm
+popr anym reli sayb saya andl accu seri sohb tenp com- budd eboo loli
+viab whot meds red- itsl hobb getg leav aaro jung cult dryf hurr wass
+oldw bomb busp hera notw badg espa jobr jobg resp peop pasa alln allu
+alsa jade beli inti inth bios lanc seni rach boxe fitm twod lill gues
+fuji pier inpu told mojo dogd runc runm guil kyle mayc mayl jueg whyp
+wedd quad monk taxw macr afro gami fara flyh flyd grab joyw hita dema
+cale wara satp satc agri nowo noww canh canw groo leda yesp repa theu
+deem towe acta eatb eata lava pena aget nola oill alie toky gear vend
+vira setb sofi tomo viag hata patt offl muse fren sage anyh amon bath
+bidm kami ande andw apex ferr supr buy- oddl pray noma sayl whof abov
+meda tuto sorr clim gete winp winw busf herw mimi notf notb noto lawl
+manr broo clay pict yang sims chad chap twee boxd fitn fita meto tier
+lotl netv mydo myde loga runa whyh ebon car- viam neon aspe buga myse
+rawt rawh kart wwwf thri tita aria cran crai farw oasi fuel joyh joyd
+ownc sche vida shed dama arml satt wwwd tins chun canr elli bury berr
+forg salt addw addm purp ourr yesb dash feng rady artg mars sune nong
+acte dont howc twoh frog boyl lama seta reha dura hatf patr sun- toop
+popd orth capt corr sixp bidd kama kent rena tenc tena buyn letr blon
+scri gunf useb usea aiml aimf aimc amat cota barh whow brun redo iceh
+icem siam avoi myta dryl univ holi winl lotu unio armc lays teaw saws
+dids plea ante hass gost elev boxm impa menh phoe aren lala endt endo
+sada neto fixa awak conf webf posh bedm bigo advi adva divi kana scoo
+hent catd aret nana gasm bugt shab stel flyr wick guyp hite ownf ownb
+ownl utah rota warh roof sata wwwh crew cann agor dean boll badr addr
+addi mais oura ourw pock yesh yess eyea twis almo vall actl mymi sile
+fanh reti howw sema goma boyb lens cert feti sist kite rust toms derm
+offt aler dayl bobo mixp mixa newy depo atti sixf andm eatp wayp hish
+wayn gara oddb gund gunp dine aimp font barw whoh anni proa prec sexu
+one- inca myte ahea dryp kaya camb pris menl meno saud herl gadg bizi
+succ toro alwa bitr notm bade wayw ambi tryw anto resh kola dawn nore
+nori pana bric goli mybi leon orbi biom biot impo migh menu boxh beni
+fitd fitr tieb twor soap enda sita sads tinh izle netn netk bant logb
+airg remi reme mayt xbox webw web2 bedf bign bige tamp lite taxm taxg
+cate nanc ninj bugf eros mysh wwwi shah infa uber aris gent ecor modm
+tenh hitd schu shec shet hatt armf satu aida cums usep hood seer eyem
+cane forh soup guyh cutb ledt oliv ledl yesl yesw pupp joan outm outo
+asta mapo eatw donn ageb vanw vanm howf howh suma icer boyt sine oilm
+oilw revo yeni kitt setl sofa lumi daym ranc rant tood seks acad rele
+sayw ando cuba actw momm gapt alam ghos surg trop arom buyo oddt sont
+gunc guna hoto dans lowl whod myto lowt icea guru itsb blis get- myth
+madb lord herf dryw 1001 elma legi olda busl herc deba maha teah sawt
+webr notr dome mylo pico gosh taxe moti chal boxa busb mene lamb gay-
+catr myfi phan lesb hori chez tole logc fixp kiwi braz kala maym capi
+whyf whyc whya bedl bedr bedt lowf lawm moni choo youo hims gasl gasa
+bugc raww paci yuan infe crac ecof fare farh farp modr modw flyg hitw
+hito orio quin quik sheg sheh erin arro stac meal digg peta puta askh
+chur nowh nowd forr badh anno asma guym guyc cutf cutc ledc ledm gotn
+yesi pump samp grip filt fsbo mapg eatt eatl eate penb hart agef fanr
+boyh moun velo kita kitc venu setf setm setr hatb myga myla alem toof
+tooc glor mixw popu clin anyr anyg anyd bati relo bide kenn bubb hisc
+jeep oddp ican sony usec aimw saym whor mypa dvd- rows sexv itsc sick
+apps mado sass hdtv heri dryt winm ampl este apri squi hond bizz layb
+lees notc lawe trym tryh jobi twic defe resc resa navy norp elco xxx-
+guan golo bela boxi boxf tiep metw mett gays ichi endb drum piec emma
+mera logr fixm fixc payh bede chik chie divo cola wwwe taxr arel cato
+hiro gasw rawc rawm ebiz fedf lipo celi nara illa tire joya hith ownp
+usam wima arme satf sati satl wwwg deck wend useh mina pett askr aski
+nowi canm sava fori lowm shit mede mila addh perb guyl cutl cutp ourh
+ledh crim eyed domo jobo sami pilo gore vale mape mapq actc penh myme
+dons agep agec fanw keya keyd howr howd howm mavi lara qian vips oilg
+oilh alin frag ista upse virg setc seth tomm flir hatp mygo pati offb
+dodo rail tooh expl mixi isho andi deve kend alpi wool tenr tenw polo
+oddw dist sond gunl gunr mirc wego bark dall vict badw chir icew itsd
+bois denv atel kidm dryc wini lege menw menm squa doth unic telc tear
+meli mell sibe sawa tora oper bith wino laww slot robi waym jets mick
+gong civi kabu sync hasb hast zhen mybu swim pali pala alna boxr meni
+syri metc twoa rein sadh tinf chel bamb banl fixh runr sky- runw runh
+cone baha payg bedp kura coli henr ditt cati nerd phys anan mysi kari
+hiph vian wwwn usew skat itma acha flyi indu ownw dost homo usag stam
+swap dres cres usem seea tinw cani maka rome ethi bado died alti weig
+pere gotu yesm yesc eyeg wake samm cabi outg outh fals usin cock mapd
+eato penm airo dogu agew esse rete howb howi saas iced smut mych croc
+cere vip- libe lapa emla kaix mygr pate offp offm musc yong hama tris
+actr uncl surv whyd pole sonl sonm gunh azur pran aimh toxi andp sexn
+redg sora geto sayp appa herh atea kidr holo oldr legl oldh haya estr
+topu topn kron unis biz- timb webn kral spai citr badd tryp jobn tinc
+assa egyp synt gosp dood hotn ohmy moth unti inta impe ustr babi lemo
+hawk tiet metm shun lile bren logh fixd conv cong aran awes sixw sixc
+peer payo paye bean raku amba lawh sush taxo tobe isma kims mysu bask
+asco kink viar dand shaw fedc fedm fedl coul farc farr modc inda gras
+demi nata usa- hatc satw sato tinp idol askj jena forn lowr shim diep
+perd guyt cuti ourg thus goti gotg gote eyer bobs sumo nose anth marg
+acro noni dayh penr peni aged agea luke vine boyd kira 2000 joel joey
+enet fard mata myad agai jaco offc syne toor maxm glow mixd pope popi
+kaka newk anyo amor coro inmo node kame andh andc acth sere hisb hisl
+hism buyg clot deto laca sonf gunm prac aimt mypo akti proe onco jimm
+redn itsi geoc onen mcaf lean ashe asha appr boon lore kidn unib itha
+vari legb apro doit cams prio lotw fema spit frui armp calc mele sate
+sock abus myna robb tryg jobe blaz dart luci gose upto pano hoti leth
+funo owen biop spas usta bruc buse brew abby endp endc ende endi endm
+drun goha juan dust banf banb banh airi fest raid hann godo yoyo mayo
+payn emil whyn bedc chit noco chim evol wons kera carv baja lowh ciga
+neop swif youk catn spre bugm grew gali fedb usen kata naru illi rebo
+grat gram joyr welo schi dogi swan coas oman armb satb sath deca hook
+hidd tinb askn chuc zeni diem skip pero perr guyb auct crit eyeo shot
+artn jake ansa falc aste e-co mapi actb samo eath goon hara dogo cupr
+finn vano vann engl xtra keyg nole howa howg elde sind oilr alib foxy
+seto setw alka glit hatw al-a offr gato meso dayr dayg rana newo naka
+mayd dada anyn abel sixm atto sixd jord actm nama copa hisf wayc atta
+dutc weed letm moos moor sonp prat scop dino viad viaw aime aima lowa
+whoi wein pira tetr flew onei thum ashl dele herd drym arge uni- ofte
+wand wink saha howp priz dorm biza soto jers tead didi bitd acqu tryd
+myle 8888 mank blam defi suml luca frys norl cach mehr bris pang pane
+blas tana plaz famo mybo olym letl bion biol lane rewa coda saba boxg
+slin paws dock metp tien tiel reis lotf endw goho sitb sitf bald sadl
+puts huay hepa dota spid tant gofi netu banp logd fixw runn brav mayw
+payi mold bedo bedw wedo anch yume auro scou scub ladi chor youx you-
+verd gasg bugg todd rawr cave anon saka tofi katy ridg suda modu modi
+sota hads joyo aqui ownm http ugur scha nate hust whop stal baya yach
+abor tips tiec bonn bona bong hoop buts acne bert berg dieb dief pera
+ledr ledw ledi ajax yesa espo seal maru samb samu dolo goro vila asto
+e-ca eatm cupp cupt agem mosh meil sili vino atlo vanr vane itch keyo
+gomi boym isra curr reva vibe stun beam kais hatl zing beck tail amin
+frea toow expa mixc gogr isha newn vive trie hamb sayc sayn judy mome
+tere zomb copi frid eatc hisw supa buyu rosa letp aces oddc hema aven
+dina aimb sals inge ingr whog e-se empl nash sori elif dena onee boog
+kido whis wasa legf nuev busw busa lotb dore top1 sixh novi pest pion
+boca sawb spoo kong tori bitn woai notp myno wayh wayo jobk antr wesh
+otto rfid zion sumw sumt sumb kolo tote tinl noro hasp xxxt all4 viol
+gole nopa leta lasi elem biof rewi birt ibiz boxw loco bend fito fitg
+docs doco tief twog lilb lilo eter faci aval tudo rama ador sith sitt
+sade sado crus mero stup zhon biki tolo netz bann logw logg airn bebo
+skyl alda mepa rung toni fusi gode whym moll bedd bizs bigi chia argo
+keit heng adri xeno neo- aref arem anar emul laba nina albe bugh helo
+reca miso rawa queu viaj isol napa mexi stei kora ipla celt sost mywa
+obje itra meco meca usas usap myus armt satr mp3- fifa meat nava seeo
+koko my-c koto ella bura burs lien ihat bere loww shik badi aspi perw
+saku guyg guyw cutw ouro ledo agil yesd rowl betg artu artk myow gril
+cabo dola gori suno almu valo valv nono eatr eatf haoy cupc tedd mamm
+essa fini sobe wage duck boyr boyw sink skys usho lame mats tidy letf
+asso gaze viru uswi tram e-ma rall adap beco mest amig balk cibe toog
+expr mixh popn niko joom anye cork bata bido bidn bidi tril coop sayo
+bake sayh kamp weco klik raja tene woor nobu 1920 cass beyo lace laco
+sonb sonh ozon myro emre lola mech amst dosh atra atre atri solu whoo
+whoa mypr kash prol orla qing usfi bele acid sexx itsg york pipi walt
+thun sopa madg june nige aten atet kide kidg unif wana winr wasw rong
+oldg oldi oldn cami camo busn busm beso bese lotm heps dott slam bizb
+jana myha layl dida webv byth wayr beha elan roba tryr pima wesa tind
+libr noon upda rage maso mask sani hasf hasa mori caca doom malo scam
+ally hotv aver hotj gola thor belt fune simi siri intu bioc impr tari
+sene rack bena busd aplu 2012 areb arep gayp bree wow- bylo endr endd
+maui sitc lust myfl balt paus putl tinm zhou sogo uspa arco safa fixo
+moja airv dog- skyp hebe noel goda mayg mayh capr mayr capa sixa trum
+tess bedh inlo wonl quar goba onlo befo aura bia2 tobi swit asap feli
+arew vera vero khan bugl bugd neil reci recr kine pist bota dami wwwo
+shak fede itme watt itpa ecoa purs farg fari tala indr iptv mage hiti
+orie orig sari ownd ownh anka weli onde usac usad erik stab abra jami
+waro anis aidl dima esho blur asko nown tani nowe nowg anwa subs ethe
+shiz shis diel diec tali cuta cutm oure yese lone butl eyeh eyen shoc
+sea- bags nosh cabe mare orac suni inwa actt eati iden cupf jogo bema
+ager meis orch aloo soba keyi sump bach larr tiff caff cstr bait mous
+sint sins luis cera bina toki seos istr myas myar lele dobo reba fabu
+noho flye flin flie deri dere mese sevg soda maxe max- popg goge arac
+acai cort inma trim towi prev judo axis ghan gapf gapl gapw kens turf
+sera ulti noba nobe hisd bidg coma sodi vest buyk leto auss xiny garm
+oddh oddm disp kuma 0755 myra smas miro pony pont dane buff gill amal
+salv whoc weid brus moch dale jims cozy redu gera heid itsu taco mafi
+fuzz geom clie faux wils kuku refl getn leat slut juni delo delu ater
+herr doro dryd unix ilik acme whil legr oldo cama loto lota pitc uslo
+dots dotr doto alum adel wrap jang bdsm myhe duel layt layp asli thro
+juri affi suck avis bitg sali lawg gour job- 3000 wese bewo darr assu
+masc ahme iams elca hasl hasm hase gosi morg atma mian alsh gabb kadi
+wron fame thou funi pale bioe targ boxo slid rice bent fite mutu gayl
+lils abbe endh sitl 5sta sadc mert bumb haha wort sone myda dogn lulu
+skye cici brac tona webk sixr sixe ceda cryf anew moli bedi gigi inli
+kuro voca hali wont wong wona wonb ecar layd befi ambu mong asal chon
+chop youy anas spra hima sito igni gasd gasr sadd rech inha inhi mish
+misc pisa naps wwwv moba coug swed infr puzz evan kati arie octa fibe
+modn modo illf ille tuni gest hadh joyg deme hest usar jinh jiny arra
+stad abri ajan armh armi cala wari cree aidm aidf laze pet- askg dvds
+burg kwik tosh zent dien diea dieg swea milo aspa addg addo myin perv
+puri cuth cutr maid lede ledd ledg degr cric rowa mema lick beti tout
+grim nost doli outn marl shre deer fili oral actd goos doge cupl dono
+mami rogu ageh mosc gopl moss finc vinc vint aloh bilg engi enga ruth
+noli tasa howe lari gomo iceg curt saga mewa vipc oild oila oiln oilo
+alim rabb wows wowp wowa sack fuku atha athi mazi illb hatm risi myge
+hidr zach beca offd bunn nitr ranf maxx ishi newi beet nikk alga attr
+bidb furr furn deng rast levi devo nami gapp alab coal wooo hisa wayg
+como comf goca lata html ween letw tri- xinh alco lach sonc hemo gune
+myri humi thug goat nume teks deja dant amad empi medc pref dali onca
+fold elis geos mebe ince getv abso mits asho kawa scie sash lori ateb
+dori kidi unim unir dryr seda tyle knig oldd trek tres prid clev besp
+slas dotc bizn suba acor calo teli leet zang jerr teaa atas exot didt
+cobr kuai bito emer notd notg lawd salu tiki qata bewa sumr dari dara
+sumc itfi exis ushe goco fryb kaba masr medr sany sanc sanj pani rona
+kobe nomi sela ethn acur tobo mybl lasv funv edus eleg pals biog spat
+chac itba lank lans prim cody boxn nexu babo sabi thic bens benn tieh
+apla alha twoj onsa onst endn dude sitw dush sadi sadw merr merk inpa
+sper bike ergo nogo tola vogu wors gofa bano banj kale godi mayi bord
+payu cryb flav dach jone bigv cupa divx kurt kuru kank argu caru lowd
+anco beri kiki zebr lawi neoc toba chos catg cat- tima poop onho deko
+verk kimo kimb gase bugr 6666 rawg rawd jour iber macs maci queb hypn
+viah dame pach useg fedt fedp somo stem reef drac ecod ecog hock auti
+modg modh flyn illm taba tuna grai itre teno quil owna owni schm hesi
+dosa dais miha gaia izmi stai bays tibe eves wode jama telo satd deci
+aidp kiev favo loui seeg minu stol myke myki petp chua chum neat canv
+bolo oreg wepa shiv annu addn altr perh cisc tile guya buta mixr shok
+shon artv pila theq pili nosa outi filo answ wetr actg sect goof harl
+hari cupi cupo pard ageg gopa jobj bile bild bili itco keyn keye nolo
+sumf volu peli bisn noso glos mycl mycr papi joes boda vipt wowt byma
+midw sach isto upst dobe fabr setn sofo atho hail e-mo illu flix flic
+derb offw musl iowa usma alen mixg baix newj newz newv myer loft blit
+anyi hund cora cori duke ferm usst snip 123s andg weca dopa deva fern
+gapr keno serg alpa fris suri pcma soha trol buyj ikla letb rosi hind
+odda disn sonn sonw atpa gung cind cinc cupm upfi aimm igot gale exec
+exer whon togo myph mypi kast rhin pren tati preg shev pyra foli sexj
+raps myvi geop geo- denn naut avon abst mita sobo dryh dryg mcca whiz
+taok myju myjo wasb ronc buso besi bles hern lotc myhu myhi layf gowi
+jere teag avid didb dido punt webz notu taks myni tinr domu onfi yogi
+jell norh pich goss gosa bian malt bogo hugh panc allv mumb nome bypa
+miao arya loja fun- yetl eure sima bioa biod upma lant byro biro emon
+rico busg thie pawn nada doca metg meti shub arec twon icha onso lilm
+lotp adob sitp myfr myfo balo sadb sadp desp desc amha onur hedi sogr
+rekl gofo stru pega loge fixr fixg tunn csha skyc skyb alde runi erec
+brat jaya pubs hany godf mayn caps borg posi cryp cryl whyg isim mole
+humo bigk noca opto wonp wonf kani kane carj gobu slav ambr sess iglo
+1-80 rear csfi chou youv wefi boke nann spro himp cowb bugw atst adre
+rece basa swor inho misa rawi rawn wata csst quer bott wwwk fedd feda
+moby ruff lips achi reed kork asen ariz octo ekon crap crab isar rids
+nari faro farn fark onsi auth flyv illc jill sosp tabo regr cime arou
+joyn joye hitg tuls sard ownr schn onda dosi hese dose natt vids paga
+usan usab usaw bayo inbu enti asid hatd armr calv tela rook dece tiem
+anic anit aide cump zapp memb doha canu cany agog savv savo kazu unse
+erra dowa etha bern shib zenc 0086 dier dieh segu medy pern omer cuto
+ouri ourn beij ledn 1717 gotv rowb eyek puma betd seac rado arty e-pa
+gord fila weth weta sunk koma kome bewi sodo sms- lavi ispa omit cuph
+roge mosa gopi augu atle fano fann pamp aloe ampa sume snoo volt lare
+amwa bish boyn kirk lena zama 2009 bodi alig lami lamo insh haka toko
+smoo seo- seou seob lapi pifi hava iste doba ruma gazi setd seti reho
+qwik hain wack illt baob al-m amit fade kuwa ranb hao1 maxs orto nika
+dads kele cors bidu furu trit sixg nodi pork sayg 123e sayd pedi pixi
+peep andd bega ussa gapa gapg gaph rend frig trou toco ifli coms comc
+zhua buyv islo letc leti brya xins jiaj garr buda adsp rica adsl alca
+oddi abit disa heme rath gunn gunw flar refo cina elpa hila aimr rugb
+cott ravi mypu gemi med- elre nica mock dala itla itlo tutt volk sore
+itsn elim sydn flee byca edil viny cema cliq faul clif naug exam 0731
+madn madu sica herg heru sedu elmo koch rond idle esto estu wewa lube
+isfi isfa menc besh blea debi debr usle onyx dote topv topk topj bizf
+bizw acom laya layo layw asla timi sigm alch sawp sawl sawf datu spon
+e-de tore avit didd biti emed tryo espe manj bros blad broc vamp daru
+sumh e-bo tinn wasp fryf masi norg sane paso hasd goso moro xxxs bowl
+amsi tata upho bypl rita opal thon edu- mins ivan hexa linc chav itbu
+taro toha xinl sowi raci menr menn nexo beno isse issi youj bump metd
+uppa shua inre vaca foss lilc vish bret paki reik yasi sadf sadm cssh
+desa upli moha zipp putr amho puti hedg chew toli cslo shui worn mydr
+mydi banr banm bani ango angi angu aunt bier vaga byha hank hani aras
+boro peek otel pay- emin jona sote bedg hume buch inla chis wonh kand
+yeah nepa rudy gobe gobo loka lown fory onla zeno rubb tost foam neob
+wize wiza hoga rude erol atsa atsi recl rawe macc maco mack weha damn
+elsa pace amfi null wwwu wwwr fedh tico gama lipi xang tofu titt dram
+kato jumb gens gend crav fibr ecoh rida modd fly- itop sose hehe sosi
+tabi rash gust teni owng anot isco fath fatt roto itin itis stas swat
+vash armw armm akin satm egol wwww creo usee zapa usco meme sowa alza
+petf petb cank taki nudi gyps lieb atfi subm fork lawo forv shil die-
+tosa itex addd alto perg sous pina pine puro mait yeso yesr dega butw
+lich betu fenc rada alve baga bage caba dolp symb anse bevi qzon inov
+mull spla raff astu ispo towa eatg eniy peno fisc fist harv haru mymu
+cupd donc ageo 1314 fane alos nofa reto sobi enge hown snac flux baca
+jago gome grun curv vela cron oile klas frau wowh toku toka mati coed
+desh seop midi midd uple pott pote lape myal witc hifi apol vene vort
+foxs abas rehe onre awfu ifor ozgu amtr tome gsm- illd gece hatr ders
+mygi naiv hids blus bech offa musk musu bund gath amic vite aleg alea
+frei haoh ranl rano ranp my-f nofo nofi csma mixn mixo ishe bose orte
+dofa huna algo fera batu opus atth trio smel tees porc jorg riot pre-
+bego smsm devs gapb turi alai serr klip frit troy e-wa iflo hisn waya
+comt kaos casc hami nest clov letg rost deta xinb doze jiao amco acer
+ilan disi init hemp smac edel teke ecli cade danb parr fone ingo inga
+atro bar- chlo mype alst proy prou orli lexi nasc jimb itli zeit foll
+badu icen heil soro kosm trak geog cain anlo anli isbe yule wuha dopo
+dope amen thur refa inci getu suzu jare myti tema funu boos sasa elvi
+edub blen usba atec atem sedi weds taot waso wasf old- kays effe busr
+lotr loth dotb urge flug sotr dyin jans jand 24hr dueb layh duet duep
+sohu timo gowa teav teak teao ordo sawh sawo skul requ eski atak 360s
+kons itdi exod didw welc kras bytr mimo soco salm epro beho behi tryi
+ibra broa darm sumg itfa grub itfo tots noor usha diba mica frya fryt
+iama sanm sank syna osca gosu cact doon dool meha upti uptr pans liet
+hotu hoty zeus rons ohma seli kilo lass lasu thos ohpa seev belg sinf
+letu piao iweb eles wewe i-re palo vipl biov atoz lins tohe tarp uste
+biri riva sire fit- benr benz benc edwa tiea tiew issa 2010 docu docl
+pigg areo areh ying twoo gaym vacu onse fews lali reid yash rams ramb
+adon lush sadt otak desm cruz jojo doeb ace- doel putp putf putb upra
+putn alja chev chey noga snea coho cnji gofe arct jaba bane tiao vets
+fixi airk ofis itwa cice bray usre cona miya fuse dril godp aram slic
+hefi bors borr phel opin dewa cryc whyr whyo doyo bedn amle amlo xpre
+alfi bolt noch chib ohca kurd halt hale kero woni fewb gaso pomp tams
+gobi lowg slac lowo onle laye befa mon- mefa odev sket sese rube scul
+hena sust liti reas yaki asan chok chot youi youe onhe catv nero upgr
+anat nani nang kima himo himi toyc iona atse helm lire atwo byfi mysc
+labs kund rawk karo weho ikon gela piso piss napl loon rope shat shau
+wwwj fedr mobs gamb itmo somi sten perk tofa titi evas asea dran ostr
+tom- duni poka geng ecov ridd voce sudo rays ifre asmo sosa sosh mywi
+hadi hada itro yosh waps magu magg hitn isca isch schl nath fati fats
+losc pago shek ifpa jind jins swal toca inbe inbo asig jams warg oled
+cal- satv mp3s anin isea wene cuma aidr aidw aidt bepa umut loun loud
+seei hida liza stoo petm chub tany canj deaf vedi burr dowh bero tosi
+mili aspo bast lixi xero guyn jail jock ourv olim yesg butc eyev buth
+eyei lice betv betn fene muni asra asre the2 waka myor myon ohst net2
+nosi anst ansi wett fala beve rera amre iswa mapj eatn eatd lave soyo
+hare nach dond bemo hibe hiba daha gopu fing meid orca vind fani fany
+pame ohli vanv ampe howo byst bist boyg mycu curs curi seki kiri kire
+csto cste us-c velv lima alit frac inso kaku hake rabi wowo wowb wade
+seog bymo sacr pifa eres myan kito naga nago beas upso upsh asst zeng
+weat gazo agap utop sete abac e-me noha tomi nohe nohi tomb tomd coke
+hane mizu sued derr hati zinc al-s roys pats mush spyc dodg mesi sevd
+sevi rejo nite onte rani ranh haos enig e-ka my-i my-s tooo tooi arbo
+maxo maxa flop voya newu myex myes orta beea dofi acar cord corl usse
+feri lagu hams trig baku baki pedo sayi andn heth stin stim haus mapv
+kena 100k kenk amma ammo acci alat sode klin kush woot nobi nobo hise
+hisr wayd casu zhuo isle lete dete mool budg harb acec adsa odde oddg
+kava gunu nene miri arda isno boul mefi bout bour cadd weld viaa kint
+aimd riff nylo barj solt asde javi qich dvdc empo prow medo weis orlo
+pred lexu rowt rowm pire usfo leng dalu gand gani gina redv icee iceo
+kosh kost rape itsv itsr tact leco edis tray geol geof meba rous afla
+dens oneo spur wald mika refu knox onma pika nuke appe madv phpm
+""".split()): PREFIX_SCORES[name] = (6915 - index) / 8643.0
+
+for index, name in enumerate("""
+china green hotel video super games media dream power radio black
+money happy great cheap brand daily local think movie inter stock
+world sport first magic poker photo house quick flash price party
+style group fresh metal total smart print lucky clean crazy water
+hello speed event share phone watch trave onlin plane apple space
+clear light prime start click point rapid model ideal class truck
+sales visit grand about legal learn heart cyber track digit glass
+earth forum deals sound white extra studi north stone music drive
+links trust smile funny horse under paper adult enter globa desig
+value store small mobil study enjoy night sugar simpl plant drink
+seven angel touch serve handy final logic right porno books solar
+every river build short press shops organ vital south match times
+micro ready domai trans stick table healt cross fight state human
+solid names homes ideas three train trade speak today dirty guide
+elect ilove sleep searc urban unite cover brown label cards after
+wheel goods cycle googl realt voice there sites sharp fancy quote
+block natur parts never child basic large david break skill marks
+place floor index compu offer frame still chris leads joint teach
+sweet clock stage casin where faith frees girls porta virtu india
+catch taste metro board credi round texas gamer elite royal energ
+score shift peace staff sense blues whole album heavy front multi
+codes truth stuff count lives scrap level proje medic bears inner
+field hands anime kings force marke lands guard color alter notes
+brain miles safer stand crash split pages creat saint scene forex
+quiet shell graph plays visio lunch paint files motor direc trick
+alpha asian publi sells beaut major rooms trial close grant pixel
+route trace dates maste clubs bests calls loans spots offic anima
+death trees novel futur faceb techn reach docto promo forma minds
+loves alive court finds silve alarm grupo shows broke busin shoot
+shopp funds chain freed james ameri lovel socia looks exact found
+young email thing centr servi frien steve chips thema angry waste
+ultra korea iphon plain bestb check latin finda other easys opens
+nasty early empty march lovem club- hosti doors chair title going
+intel steel linux foods infos views walls lines terra orang weird
+your- shopt trash schoo chaos angle spare sight upper whats villa
+flowe compa range which renta signs picks saves omega cares cloud
+limit silly infob secur scale helps equal inves coach bestf rainb
+theme films activ being refer these laser vegas drops golde infor
+needs justb gameb ocean shopf freem blank dealt whose patch marry
+japan europ datin turbo peter women maybe talks shape justs lovep
+insur lifes stops freet robot bring insta perfe colle valid wills
+treat howto charm eroti safet loveb lover teams trips dubai bestp
+naked famil sesli tripl celeb santa rough audio feeds andre third
+carry chang stree teamt habit bestt shopb plans proxy warez bette
+auto- sarah topic moves fines lists astro facts infot parks homel
+pharm clubf brian shopm shopc grace saved indie firef fixed banks
+blogs info- agent delta fanta solve jobst justm lovet noise newst
+newsa baidu bestm trueb tiger shopl freep knows story easyb littl
+mundo tight custo rates float tooth shine suits downl merit claim
+thank teens goodb gross team- gamep newsf gamef gamet besta trend
+freel free- carbo jewel haber easyp wants freeh write showt truly
+caree bankr singl flori infoc infop farma justa justp jason namep
+loved clubb posta joins lifet citys cityt backs fligh easyf fastl
+bluef pound fashi reals dance prove purep takes fullb hyper likes
+livep linkt lawye dataf windo beach premi salon chart swiss justd
+justl justt spell eight teamb summe charl bills easyt wells theca
+siteb shoph makem makes frank award forth reall realb softw softs
+comes prote artis loose fulls livel livet playb cause bearb kingb
+kingd blogg disco nameb love- teamf homef gamew gamec gamem freef
+intra storm findl hosts wellb themo filmb goodp tript herba bookb
+owner autos netwo mailb begin playl cosmo linkf scott finan cells
+marin datas overb condo profi mortg justc goodf safes namel teamh
+homer tests gameh clubp darks shopa admin freec woman cityf backb
+simon hostb hostp easyh fasts locks bluem bluet thats coder bookw
+cryst items bound forms tekno lived liveb cityl asia- foodb bodyb
+bodyf bodyp bella theba highs hight lovef evers seeks gamel craft
+afric besth bestc bestr posts sends ideab lifep freeb findf users
+noteb billb fundr cellb liqui suret chill priva keeps westb sitep
+missf tripf blueb sides diamo showb caref throw month grind boots
+citym kingf kingp datab troop hybri drago pizza sprin doing spend
+jobsp justf safeb named namet areas econo works newsp everf facef
+judge clubd clubt bestl eagle callt retro shelf trues onlyf spoke
+cinem easyc easyl fastf wellt steph goodt niceb westf spark surel
+kelly girlf codef bookm danie jesus built coffe ratem realh realm
+phase mails pures puref finef fullt fullf lasts playp linkb georg
+mindt weare overc markf shoes ladyb giant chrom knock franc pussy
+teama newsb newsh eastb faces poste grows sellb moder freew jumps
+dealf onlys types mouth sitel shopd obama sures bytes openp codet
+bookf linda sexy- votes panda quant realp campu softa acces formf
+firet sheet pureb gamea escor fullm habbo moreb playm playh linkm
+timet tunes cityb homep moral maria datat overs thelo infom markp
+kevin westo socce mixed talkt ladys wallp raise entry wildb scanb
+homeb chica everb nutri facet footb leadf hairb swing sellm later
+thera known sanal lower dealb hardf luxur chine alias ringb adopt
+foodf massa tripp atlan shopr signa bluel bluep longf coded doubl
+bookh marti calle secre ebook hugeb fires showf nextf garde fours
+bankl macao bonus fishf fisht mores sohbe livin cellp cellf selec
+wealt honey tells whatb laura markl datef wildp token justh goodl
+hopes helpf namef trail highw highf loveh parkw homed facew newsc
+bandb clubl leadb focus truel cardb falls amber callf islam findm
+findb fileb deall dealp proof lookl trueh onlyb easyd fastb ringt
+loads nicep nicef missi tripb guita nurse longs iwant carol petro
+boats reali reald steal showm overt salef polar banko bankt fairb
+fully fairl issue norma livec livea liveh moref morel uniqu timed
+mindf kingt willf likel everl foodh thene datac folks shame overf
+thebi talkb blood xtrem jobsa goodm helpb linep teamd homeh newss
+bosto deepf clubc clubh techi bestw best- hairs brief citya cityp
+roman canal filef apply hards ships truep hostf hostd yahoo easym
+fastt shall wellp wonde dubli nices sitem sitef edges misst blueh
+bluec guess sureb suref towns opent freer bookt yello saleb paula
+roads comic softf firel trunk stude fairs maple rando feelf live-
+lastl peopl heath moret playw playt playf linkw pools timeb basel
+kingh kingl kingm cellw foodp downs helen datal datah growt yourm
+cool- cruis vista tokyo viewb westl lotto wilda landb landf landl
+ladyp wallf carlo namem nameh namew bethe parkf teamp teamm homec
+newsr newsl eastf paris everw julie game- facep stuck besto sourc
+tanks spiri cardl sellf sellt sellw ables lifel numbe kills thepa
+tecno filet billf camer smith onlyh onlyw miami hostm hostl selfs
+easyr wellf hotma taoba stays radyo filmf justr outle conne pagel
+westc sitew costs missb gifts cable perso sunny longh picka quest
+copyb stars autom loant saveb porn- above boatl realr grave softp
+showe craig nextl noble puret purel rules saleh monta evens livef
+reads fishl hydro linkl handl timel timef tuneb sorry datap letss
+overl infof teeth markt heres viewf rainf rocke wildw talkl ladyf
+facel weddi choco somes jobsf justi helpm highp wildf scant parkb
+teamc nokia testb apart footl cluba darkf postb hairf gives ideap
+brigh lapto killb stopf callb callm ticke islan gains findt findp
+flowb karma halfb hostw jenny fastr fastp austi rings denta alice
+steps leave theco foodm progr pageb keyst sitet sitec sitea triph
+agree roots girlt easyw racer error openm openb codeb freeg balls
+ballf roadb spott callc order texts getsh softb hears shown mains
+nexts fourb rober bankb banke fineb ninja juice treef thewe lastb
+avoid poolb listp verys passi cityc mindh candy resto foodl foodt
+bodyl bodys datam letsp cools overd yourt plast infow holly markh
+bites lyric zhang titan landw farme talkp plusb bible ladyl youth
+parad jobsc traff goodh myspa safel safec highl highb linef insid
+loveg lovea lovec teamr teaml home- gamed easts easte evert seekb
+metas queen deeps darkp darkb bestd postl postf cases amuse cardi
+cardt neuro aaron textf minor barba susan might hangs dayst findh
+canad matri rains backt onest hardb billr their truef truew hoste
+hostt mines shang awake syste websi ringf alask stepf warma filmp
+filmw filmt goodc goodd deads deadl nicet massf massb archi lotus
+fives fiveb caret shopn thegr blond racef racem longt longl longb
+input copys codeh hells booka roomf loanl votew feeda allst reala
+realf sames turns softl extre softh heard means fireb maint nextc
+careb purew pureh pocke artic salet moved salem taket taken hurry
+bankf since readl older lastf fishs playr dropf linke treel timew
+listb veryf mindp kingw partn thehi londo weekl infin datad dataw
+growb overh yours yourp psych thela infoh infoa infod excel markb
+datew sunse backf landp talkm farms torre shark portl compr jobsl
+helpt pipes safew inthe linec wilds scans areal homew homem senio
+ebony usedb danny karen bingo bands footf leadl besti reply oasis
+cardh carda sella ideat jokes lifec lifeb lifea lifeh life- shopw
+freea flatf calla textb dealc deale hardl lookp shipt shipf onlyl
+hostc hosta hostr surem fastw faste ringl goodw lockf lockl visua
+nicew actio weste edgeb edgef lifer missm hours pearl thego signf
+girlp girlb townb chase openw codep secon bookp loanp milli loanm
+loanf union roadf savel voteb galax ratef rateb realc reale realw
+busyb mailt maill mailm cargo softd fireh mainb nextb nexth starb
+corel messy takef advan feels juego liver lastp heats farmp playc
+playa chann noisy linko treet handb globe timec listl listf baseb
+baset mindb willt revie theha cellt twist cheng niche colds weeks
+downt downb bodyc bodyr bodyw datar prett thebe infog grafi amazo
+viewl thebo westp innov datea dateh macro landt landm spice plusp
+wallt dealm dealw deskt flagf gooda justw helpl safem safef linkp
+holds linet linea parkc teamo homea testf newse seekl kitch deeph
+banda foots clubw adver techs hairl battl hitst vitam cardf lifef
+kingc whata flatb flats musta textt loopt cance cityw micha flows
+deala notel lookf billt words truet onlyt minef keepf keepc selfl
+fasth chile emlak quite lazyl pager keysh costa cotai tripa signl
+bluer surep longw races pickt aroma openh openf myweb codec codel
+holes webde firma maket ballb bookl bookr havet kaixi crisp roadp
+spotb irish ghost savet votef smoke feedm feedb baby- youre realg
+prope drawn terms hills sendl onthe mailw mailf turnb softt firep
+showh maine hawai jeans explo thest purec movel cores banka finel
+finec finet bridg macau treec packs livem livew packf fishi fishp
+playe dropb dropt linkr handf handt veryl bases tunet willo vieww
+andro foodi coldb tenni bodyt letst theli infol petit avant viewt
+funky datep gadge landc wired farmf alien needb dealh mikes itali
+deskb someb jobss fatal namer curef scanl lovew buyst parki teamw
+turki webca eastm eastc everh bidst seekt julia nextp rides twice
+faceh drugs deepl peaks bandf darkt sendb postr hairt basec haird
+capit truec carde sellh uploa ablef lifew lifem shopo gamin cityh
+cityr findc thatb filel outdo hardw lookb lookm lookt billp piano
+tutor denve typef pimpm keepl keept easyg fastm fastc wellh bliss
+ringp fotos fotol filmd lockt muzik manga joker nicel masst lazyb
+pagef autob westm siteh tripm fivef shop- missl mapqu signb girlw
+topse byteb bulks raceb townl racel hipho longc opena openr copyw
+lostb freev makeh nearb nancy townf sexys allow lucks crack spotl
+viral boatb boatf domin feedt overm scand steam getst hugel softo
+softc provi dynam formo whatf fired firew nextt nextw comed purer
+star- coreb corep takeb bankh bankm bankc fineh finer fullp fairp
+fullh fairy syria webho feelw treeb toyot likef readb readf thewi
+fishb fishw dropp linka linki natio brook handp timep timer listw
+arcad passt passa phill thehe succe cella packa voter golds foodc
+foodr foodw bodyh letsg letsf conce meets yourb carto whatp victo
+viewp thins gotta fills wests datel talkf ninef plust maroc needa
+needf newyo walla wallw porto ports rated notec youtu paypa purpl
+busca jobsm jobsh paren hopel pushf highc linew wildc sunma babyt
+lovei lovek parkt billy newsm easta everc seekf useds usedf orion
+facer deepw hotca bandp bandh clube clubm uncle darkw darkm leadp
+beste postp stell given circu cardp sellp ideaf agest huntb henta
+tasty everd texta textm textp thepo daysa findw jumpf filed userf
+notet onesa hardp shipl thisb thish thist showl relax tango easy-
+easya wellc honda alone fooda tasks taskf filmc filme deadw barst
+nicer pagem paget hopet mondo siter autoa thear edgel copyf lostl
+flirt tripw shopi mount persi planf planb keens bluew egypt bytep
+bulkl longp raceh racep pickp openl sideb firmf thatf makeb bigti
+hobby mille autoc spain loanw spotf spotc savew savem indig cures
+greek ratel ratet draws widef wides hillb mailc softm whatw babyb
+firea firec showo showa mainc nexte nextm nextr carea carel fourt
+fourl thesi joinf purem gameo euro- hacke hackf fullc salep salel
+movet ahead banki finew finep likeb likew lasth loanb dropl linkh
+poolf winea bearh veryd verym veryt newca newco based basep hitsh
+raref mindl mindc willm parti sonic cande toplo artre buddy votet
+hotse coldt coldp coldh downf thena tatto tellt letsc grown meetw
+yourh yourc whati matur surew dutch thint thinb thinl thebu thebl
+germa dated sunsh lotte again talka saudi plusl ladyt ladyw dolla
+impac portf notep lease chars thefi cents italy desks somet jobsb
+jobsw diskb getti helpp atlas safed safep nameg highe highd lovee
+parkp parke wicke areaf areab teame outpa gameg prosp testp newsw
+everp seekw deepb peakf ridep forst madei madel peakp bandl footp
+ditto footw techt sendf leadr leadt valle joinw lateb deser coupo
+lifed hunts seema killf tower stopt freen stopa stopb therm flatl
+texth textr hanga thepi rares findr topla demon flowl flowf jumpl
+filem raint rainh madma notef onesh hardm perma halfs shipb allin
+junkb cellm miner thisf below kindl wimax twitt selfr easye easyo
+fasta doorf pickf aucti ringm phoen taskp logos lockp nicec pagea
+pushp missh pulls plana planh rootb shopg blued bytef educa openi
+jacks open- codem sidel sidef firmb tools ballp ballc ballh bookd
+mega- biker autop luckb salew roomb roomt loand callp savep saver
+savec consu feedf feedp feedr forte ratep realo babys busym diese
+newma hillf sendt mailp oursh hugef huges softr inspi showp seese
+blind biglo comel euros coref corew pacif bankp finem fined fairf
+cashc livee readm readw marco getfi fisha heatb heatl morew morep
+mored play- linkc bigfa treep outer wines timea bearl lista veryb
+basef joinm slowb joinp slowf buyer mindr mindm admit kingr theho
+sextr eyesh cellg regal bloga quali flora downp manda dataa letsm
+coast discs allen growf meetb youra maxim whatt marka markm markw
+dateb datem sunst backl landa strip talkw plusw contr ladyh needl
+wallh rushf somew jobse jobsr uglyb strea bolly lineb mosts scanf
+betsp homeg raven testa testl glads newso eastw eastl choic diana
+ridet facem airst monst deepc mades madef peakl clubg yacht leade
+bestg postt posth postd hairh casep keyfi joinb opera cardc cardr
+cardw selll selld diabe ideaw latel jokef lifeo shope huntf bigma
+stopl freeo fetis calld telec callh musts textw knowf divin react
+raret findd flowp sheng jumpb filec userb metri galle halfp halfl
+halfm lookw shipp billi formb swift makin telco onlyp prest hosth
+thisi thisw firem slips sunda woods resum selfb fastd doorb wella
+themi ringw ringh asked fotog josep resta tunel stepw stayf queue
+taskl filmh mango lazyf massi pagec pagep sited berry carst copyl
+wikip wikit missc missp tripc groov tours prior hottr planc plano
+planm rootf signt armyb girld bulkb gotlo racet townw thatp canst
+opend easel lostf losth lostw sidep stopd thath booki bookn booko
+banan could false siste autol ihate crist allma savin jacob indir
+feedl overr patri carin babyc drawl widel wideb wider buysh buyse
+getsa senda cloth hugec hugep gener forml formt nextd comeb cared
+fourp thesh thesa fruit hackb arabi corec monte fullw dearp elder
+randy feelb dalla likem packl donna lastc lastt rolls heatf morer
+farmh bootb playd playo clark linkd poolp timeh bearw liste veryw
+screw passp joinl willi willh willb candi eyest eyeso filma cellu
+cellh celll piece celld packw barte falco tapet quits porns coldw
+coldf coldc theno optim talen girlh chess letsl discf weart sushi
+growa coolb overw factf carte zhong russi markr johns viewr viewa
+carro backw rocks wildt funma agora ninet nineb betlo scout plush
+needt wallm portb hispa monke rateh paths rushb weigh thefa lifei
+centa deskl flags jobso justg justo jimmy gettr pushb helph helpw
+redco piper thedo namec linel movef mostl mostb mostc rache parka
+siber termo gamee dieta worki sandi bitst eastt casad evere getpa
+tampa henry toxic truem getmy bearf metap facec deepm darkh darkl
+darkc tech- hairp hairm hairc flyto casef givet ideam idead fallf
+webma topho fails summi tamil hunti hunte oursa modef modem legac
+stopc callw knowt knowl riskf gainb city- cityd finde buyba flowt
+jumpt filep filew backp dealr noted billl billc billd usedc thoma
+fundp chipl chipb chipp manyb truer unity camel onlyd onlyc thism
+thisp fundt funda racec pulse keepb tetra keeph selft surec sureh
+wellw wellm welll fitlo tapes stepl warmw spide hotpa stayp loadb
+attic filmo filmm goodr lockb goodg polic stroy stron deadp deadb
+nicem lazys pageh keyse buylo siteo westw edget sexsa autor penta
+regio pushc walke walkf walkl resor palin funlo hotte planl ortho
+bluea blueg bubbl zerot wayne bytet drunk longr townt decor alert
+pickl pickb openc copyt codeg copyc coden sideh losts lostp freek
+keenc makea thatt balla jobma frenc pause netsh youle room1 buytr
+loana roadr roadw roadt spoth ciber expre saveh savea savef boatw
+fortu ratew meetm intot artma sendm mailr luckl artof ourlo firer
+showc showw seesh forwa bankw maina nexta bigli blame comet theso
+euroc fairc envir overp faird redha fullr fulll thecr redst liket
+stamp packm reade readp netlo thewa lastd lastm lastw rolle fishh
+larry youxi nevad farml morec loanc clari lockc hydra dropd treew
+handa handc handw sandr amate bearp beart bearc westr veryc prepa
+slows tunec mindw shema willa parta partc partf sexha viewh likeh
+lendl youpo eyesp nicol cello aqua- restr hotst foodd coldl coldd
+colda bigba girll tellm antiv churc mario marie wearw wears tiany
+basis growl coolc overa yourl facto feetf thele infoe moveb markc
+marko amazi herem bazar viewc carri westh datet daten barra buyme
+paras carpa newli talkh talkd nines farmw plusf ladyr prodi bloom
+walll portw portr carsa painf least pains rusht compl thefl deskp
+deskf deskc flagl flagt somef hardh jobsi goodi helpa safeh thedi
+clima namea highr scanp funtr buysp parkl parko joblo betst aread
+areap teamn teamg huang mafia prost choos testr testh worka easec
+webco miste bitsh eastp everm everg venus seekh seeka seekp toptr
+leafc ridel ridef ridec metac faceg madeb bandw bandt clubr growm
+bambo postw posto postm postc colin hairw suppl caset dogst busty
+giveb circl cardm selli ideac cheat nettr nette lifeg lifen mailh
+flatt calll calli mustf cultu loops silen remot riskp thepr gainf
+findo topli brick minim flowr flowd divor barlo mommy johnd freak
+peach backh backa userp pleas hardc unive halft looka shipw billh
+forfi tommy chiph chipt thetr theto thete units gastr ashle onlya
+hostg mined pasto fundi funde kinds kinde fitne prize until typed
+webst wellr themu ringc auror gaspa suntr ourst warmc teatr cooki
+filmr deadc deada deadf barsh aller niced niceh massp massm pagew
+leath weeke wanta polls pollt edgec carso edgep costb costc losta
+glamo missd misss walkm puppy touri harry redfa dress rootl signh
+signw armyp topsh bytec bulkt bulkf longa pickw pickn pickh using
+poptr eshop hellt hellb beyon modes keenw freee sunlo bigtr nears
+letsh commo templ haveb sexyb netse luckw roomw sexfa sexfo manti
+theyw roadc jessi telem votep votel conso speci lessb repor bugsh
+boatc warmf ratea bigpa merca busyw drawb intof intob bikin widew
+netwa getsc maila mailg turnc redlo soft- autof eyelo forme thril
+seesa seesi rescu allwa comef comer carew carep carer carec caren
+foura pured hackw hackl hackh fulld starf satur movem movec coreh
+corem corea coret takem takeh grill redho finea fulla dearw deard
+dearl metho bride juicy cashp cashf feela feelp redsh mycar packb
+reada readt optic plugp stein freez lasta fishc fearf heatc topca
+orbit farmi morem suite kitty meant lawsh playg locka dropc hides
+bigfi handm handh timem spotp listo listc scree passf baser virgi
+joinc golfb tunep mindd minda viewe bigdi eyesa cellr cellc liveo
+pornh sevgi 10000 polit downh bodym bodya letsd letsb boise growp
+meetp meetf meetl youri massd feetl cartr clien sexpo hotlo sexpa
+whatl infon netde oldma laure markd marki iraqi olive agenc kidsa
+kidsc senti thebr hidde buyma doggy woori landr landh lando gotre
+castl pluss conta memor mylif liber ladyc portp houst keypa lifts
+pathl winte verti sexse kathy disks diskf scrip whoma justk pusht
+hopeb hopef uglyp doggi helpe helpc helpr carla pipel holde holdf
+highh saysa wildr horny labor toppa wildd wildm wildl curec scana
+loveo babym whath areat teami deniz gamen homeo testw testc testm
+chick workt newsg eastr alllo bidsh seeke bigst strat usedl edita
+newlo getme netpa leafb leafl jerse hitma deepp legen peakb civil
+darkd leadc posti haira basem suppo paids needw givel givem selle
+sellr ideaa lates payst ablet ablep failt shop4 darkr shopk huntw
+killw luckf stopm thero flatm flatp mento mustl textl alpin knowp
+knowa actua shado alltr loopl youro fromf riska risks daysp cityn
+rarel findg chees jumpp jumpd chari filer rainr userl windi hardr
+hardt halfh paidp lookc looko holid manyc manyf trued manym manys
+prome nanoc onlyg onlym minel pasta musik typel typew keepw jorda
+topfa giveh airlo airli mybes flagb doorp topre ringa login sexwi
+ecolo crown sunta hallo hallb halls warms machi loadl thech taska
+filml thumb disne anti- sunri boxin scuba nicea lazyw massw lazyp
+mapst mapse westa siten theal wantf edger integ manag pushs pushl
+ilike missa sunpa herbs thegi planp fitfi signm signp guest funse
+bytel bulkc movil easyn devil racew buypa robin longm longd funfa
+cigar thatw sampl welld erica codew copyh copym lostm sidew hellw
+ballt twink twins neara anytr flylo megab havel netsa autod meand
+antar rater gotha audit nowpa roomh roomp kiddi theys spotr spotm
+menta payme jesse lessf icest boath boata boatp boatt boxsh dumbb
+wegot ventu blowf newpo fortr sakur allse acade bruce real- factl
+carma drawd termf newmi bunny hillw hillp getsp getsi sendh getse
+oddst detox huged hugew turnf triad formc seeso maind nextg sexlo
+anyli bigle comec carem fourh fourf thesc sophi soldl purea eurot
+hacks hacka bittr starw salec takea aweso fairm fairw fairt evenb
+xiang nowma syner cashg cash- feelt treeg likep packe readd readh
+readr plugt qatar lastr fishe fishd fishr buyca moreh bootc droph
+linkg netba handi fanlo pooll slide sandy winet listt listm listd
+mothe passw passs passl fores hitsf tunem tunef tuner kingo kinga
+willr willc willd king- runlo thehu sexta viewm eyese blogi blogm
+surve votem foode defen weekb downd sexvi gospe bigbu bigbo homee
+netfi girly bodyd tellb tella data- discb brazi zone- meett meeth
+mynew clan- herew herea heref insan bitef respe sunho pitch viewd
+thinf thinc askfi squar magne dateo among wifel lande wildh chat-
+chatt meili carpe flyin escap ninel plusa plusc conte ladym ladyd
+sharo produ socal derma runsh quadr liftb conve deskm somer ridew
+diskl often just- juste hopec fivel bigwa cando helpu shock murat
+pipep pipeb theda thede flyma olymp onema lineh mostf curel myown
+cabin buyso parkh buysa empir intoh walkb testt workb billa glory
+newsu bitse bitsp easth tweet pride bidso seekm bigsh emily catal
+usedo mysti salsa editl edits cantr chuck carhi penca flame rideb
+ridea inven faced nowse redma bandr bandm footc chuan 5star artlo
+getso darka dearm techc leadh leadm leadw barfi bestk miche caseb
+geeks paidf airte cardo idear theta jokew forlo cafed colon hunth
+wallb manst seems sexma theri flatc flatw payda callr knowd knowh
+iklan barbe loopf fromt riskc riskw thepe netma cameo rareb annie
+mixlo airfa softn jumpw jumph fileh lemon rainw raini athen usera
+winda netco notea netca harde halfw halfc lookd shipc washo chipc
+manya junkf junkl web-s eyepa unitr webuy onlyo onlyr hostn minet
+sexco champ thisl fundl fundf lance blogf digis rusty typet keepd
+cherr arrow allab selfw selfp airle yoush easyi doorm doorl flagr
+hotre welle topra themp addre pinoy denti restl tapel newhe treeh
+birth stepa stepp leftb leftl sunte waits verde exist nowfi dogma
+hotpo stayb stayc stayl loadf itsma gotwa aimsh viagr lockd locke
+lockr momen outlo quitt recor sunra masss aside lazyg keysa keyso
+keysp mapsh prima primo netth airho wanth wantl pollf pinks carse
+edgew sexsh sexso betma fivec fivem pushh wikis autot tripg tripd
+walkp walks cream runpa pullp gotst planr paysa armyf carle artes
+boxma retai wholi rekla townh townc reddi pickm airto aloha sidec
+sider hellf firml anton firmp thatl makeu doubt dayca newto newtr
+nearc delay nones redbu comme bookc bookg blowb megas megat haven
+sayst netst luckt smash youlo arabs guyli newro izmir cedar sexfi
+mantr loanr bigre roadl theym spotw spota saveo votec conse getlo
+lessl lesst itemp topro bilgi aware boato boatm badpa renew jobfa
+guild betpa haves mustw yourw drawt drawf newme harmo caffe hillt
+shout buysi jobtr diner catli sameb hotba mail- songs hugeh fanda
+turnt genes softg cowbo formp weblo babyd showr guyfi rebel blink
+breez deald sexli sexle seens bursa netha fanfa madho comeo mensh
+amand fourd celti penfi traps eurob bryan hackt artin barco donet
+coreg cored messa hotfa arena canba takel thequ gunst fineg airma
+dears dearb dearf newgr maplo topma topmo barma cash4 itsta liked
+dogtr buyre popco plots rollt washi washa answe shish bootl booth
+bootf hidea dropa kidho ibiza netbu netbi handd handr poold menin
+wineb timeg listi veryh passe passb forev hitsp sassy hitsl golfs
+willw partb partm parto sexte lends cocoa celle liveg blog- blogo
+blogc appar getbo getba restm restb getbu worth foodg irani weekw
+downw downm netfa girlm zeros girlc zero- tellf datao datan sorts
+webpa farse coolf boxst overg overe actst agile lazyc rever manfi
+infoi madtr thund herel bugst biteb allfi allfa equit bomba naugh
+tropi vogue couga zombi keith thinw carre fillb westt achat dater
+rugby backd anysh anyse userm talki talkn talkc ninep ninec nineh
+canli farmt washb needh portm porte runst wireb painl lifth rushs
+chara rushl thefo itsfi gotpa cleve slipf cente deskd deska entre
+somel flagp somec jobsg hateb ontos newwi good- justn bored jokeh
+pipet safeg lawsa popst canpa highm chief lined artfi mostw mostm
+cureb curet youma scanh funta parkr parkm parkd versa betsh betsb
+keylo areaw teamk viast diete payle paylo icetr fusio gasfi teste
+worko widep netre gladt ridge newsd newsi newsn bitsb bidse bidsa
+seekc seekr mixma delld usedt winne netpr ridem metam metar facea
+nowst deepa peakw hotco vicel clubo dialo tunne netvi yougo golf-
+allpa caseh casec batte nexus dogsa paidt paidl slowh soont sexch
+mysho givef cardd sello sellc ideah ideag pengu latef failb hunta
+parsi supre mansi seemo killd oddli tribe willl orien telep carba
+offsh warwi knowb knowm barbi allte abbey loopb turna famou 1-800
+riskl added the-p gainl daysh daysi rarec cityg citye rarep findi
+tople airfi minic flowm flowh cheer barli hosto plaza johnn filea
+rally fanma rainl usert hypno noter dealo onesp metra halfr halfa
+lookh jobco seeth easef bytew joyst shelo chipm chipf artst april
+fitsh unita proma nanop halfo mineb poets surge thisa thisc alexa
+synth fundw kindf targe hanar whosa goget netgr typeh typeb keepa
+ledpa dumpl herho websa getco adapt lesbi selfd ownlo youse fasto
+longn doord doora doorc doort airta kidpa wello welln wellg thems
+shepa bigca ringd hatel carwa stupi twofi beiji penpa addma foto-
+bobby leftw kissm hallf warml warmo boypa skate staym stayh loadh
+loadt renti joyma taskt taskb taskc taskd filmg oldlo hidef muzic
+flyst updat troll typec poems antic barsa barsi massl lazym massh
+vastl vasta cobra espor corre spart teddy theac wantb purse pinkt
+carsh geniu costp costu costw sexsp pushm accou essen missw missr
+tripo shop2 walki terre alban fresn ajans harri huntc anypa pullt
+blaze hotta hotto jobin thega armyc vantr bluen blue- zerom girlr
+girla youha virus byteh bytea bulka movin sured pirat wholo nomor
+funfi glitt manma copyp codea lostc lostr sidet holeb stoph menfi
+keenb firms firmt krist makel thatc maker makep toolo ballw newte
+neart keymo valve blowc megac carmi carme winsh sexyt sexym topwa
+topwi switc meanl mapfa mapfi eyefi horiz marty saler jobpa mayma
+incom capta buyto loanh airpo roadh spotd spotg madfi madfa porna
+getla spect oilfi artco bugsb eleve feedh feedc feedw jobfi rateg
+scanr carib busys busyl dryfi termi netwe jerry perfa norca bitpa
+sendp getsm catlo oddsi oddse oddsp maild ourse sexbu hotbo turnh
+turni softe mobic qzone hearw meanb youfi formw formu warpa magaz
+firen engin mainf nexti nethi comew comep fourw thesu thesp twota
+eurod faira fairr starl liang moveh movea saleo salea core- wordb
+rogue louis seeli seelo flyfi takep addfi onepo arttr fairh evenh
+getdo mapli brida aussi morga noval mixli cashd roomc feeli feelh
+treed redse bigho liven dogte packh while readi netli plugs savvy
+catst onefi rollf rolld rollb fishm scope heati heatw moren washe
+booto playn meanw lazer kenny link- treer hande poolc poolw globo
+sydne armor winer winec winem winen etern musli prone listr listh
+veryp perlo slowr slowl tunea jobbe setst willy partp joypa sofia
+sexth sonia sizes madpa wendy celln packp dayto sinem gator allba
+voted airca addso addsi downr bidlo downc thent adobe milan mando
+bigbi tellc tellp datag folkf folkp sunwa letsr discl discp discr
+disct ledst wearf wearb wearl erect exoti buyin boysh mouse growh
+belle cooli meeta meeti dogca yourn maptr yourg factb coron assis
+askdr whatr whatm hotle infok infoj addlo sling gaslo keysc markg
+heret hereb hered allfo hotwi rabbi youpa alook vinyl thinp loglo
+senta gotth scien dotco woool onego payth payto milet ateli sunso
+whois buymy adams raing mappa anyst lions safar gotra talko talke
+farmb distr plusm prode needp bleac arian wallc housi pink- painc
+painb painp viaca liftl pathb pathf topta charg eniyi manli paran
+slipp slipc keysi centl centc boyfi jobsd diskp modsh justj goodk
+goodn hopeh hoped hopep clips anywi fitca askle carli asklo pipec
+nameo betha twoma holdw higho higha artfa wildg mosta anyfi facil
+lovev asksh betsl betse areac bedst bruno janet tensh homet payla
+testd netra dayfi newsk bitsa hitca easto criti talkr prati engli
+naive usedd badlo aimlo canta jooml taxfi motel puzzl nordi getma
+getmo topte leafw leafp leafs inver dayda getra aplus gamev airso
+deept forsa werem forsh madea madec madem moose peakc expor bando
+bande adria mexic ecore curre carfi leada melod tankb washl warst
+casem casel casea gossi eachf buste payfi cardu mater fallo latex
+webte tradi rooth topha jokeb joket cafe- summa cafem moore coupl
+lifee ourma pilot hunto darkn ranch modeb seeme kille sexmo triba
+whato flath grass onewa telev awful oilma textc texte knowg ethni
+vegan allth lowca loopc fiber froma hangt fitwi netme hothe daysl
+dayse find- cityo rarem buybi minin flowa flowc liftp redre shaba
+tenda rainc backc twolo twoli winds notew notem onesc oneso newba
+thais topba abuse billm billo billw kidtr allia comba worda chipd
+wordp chipw artso exper theth junkd fitst fitsi madsh richa unitc
+allca allco buyfi doglo endlo minew endle shane fundb zebra kindb
+wwwle sunde atomi muscl phant typem wrong typep menlo proca getch
+selfm selfc vietn keywo mapwa fastg doorh topri bidca themb plati
+poplo ringo toled oddfi argue oldba chili desti outba lucas madwi
+stepd stepm leftf alber sunti happi topdi hallw rawbo warmh actor
+mixfi fabri loren stayw loadm loadc loadp gotwi drewl drewb drewd
+along catse taske addsh hidem hideh lockw drama busfi muchf mucht
+almas antig rehab niceg niceo massg paged ozgur arche vasts gourm
+youwa youwi roger diver westi teenp dogfi viale theat wantw wantt
+wante forle polle pinkp shutt edged costf costl costt logma drylo
+sexsi silic regis pente pushr fivep fiver suchs andli appli miss-
+tripr walka gotno ghana nursi shopv redfi knigh lotse lotst thege
+lawpa senso otaku plang taxtr rootm paysh signi signr roott rootp
+oneba armyl nothe keenp denni zerob pairs pairt pairf gazet topsu
+topst fitpa endsi firmh tryst wishb artea wayle bytem lawst bulkd
+surea gotli thedr devin filte townm raceo buypl longe airtr pickr
+lawre manna hayat vinta ownca onela askma openo openg jackp intim
+copya lostg lostd sidea lostt hellc hella hellh dover hellm essay
+webdo keent sunli maked capri newta bigte teali fixfi askpa redbo
+anyti anyta betty flyli outwi outwa davis blowd havea haveh winsa
+winst longo sexyp linem sexyc topwe netso luckp meanh notar youli
+oncel objec funwa sayma cumsh pauls toppo arizo roomd rooml buyth
+kiddo loang manth roada roadg badmo spoti onehe payma const pornd
+pornt voteh pornp getle getli lessa seaso fitbo itemn itemf youbo
+youba dumbd dumba dumbl tenma valor feedd rocki newpi espac forti
+allsh jobfl ratec merce haver outst hanna yourr redne busyt busyd
+busyf twopa doyou drawh termt terma intow intos intop babyl wideh
+widem widec ident eyebo campi campe hilla hillh jobta getsl sendc
+samec samed oddsh hitlo nowlo dying songa flybe datum blast turnp
+onetr oneta oneto argen jobla hearf hearb luckd metlo ourle showd
+baran seest seesp allwh mainh maing anyle bigla seena seeno nethe
+fanfi comea outca careg careh fourm trapt pureg stunt cisco hackm
+bless orego stara funwi toner saleg mover colla colli modfi ledli
+coren bidto fence vanlo samar taker redhe artte artto bankn bankd
+fineo evenm evenf heave dearc dearh bumbl methe buyan topme tubes
+cashm cashi feelc feeld feell feeln treem withb numer spray sexho
+packt dogta readc madlo madle netla grann plugb fanba kolay wings
+bitmo herme lasto lasti infra onere rollh rolli rollw daypa buyco
+buych topco heatr heatp washt morea lawso boott bootp bootd chanc
+cosme dropm dropw twomo bigfo scoot quebe fittr hando fanli banco
+ricky armon fansh penho whyno bearg lasve verya jorge passd passc
+basew slowp joind slowt slowc slowm hitsi golfe tuned stats jobbo
+mindi mindk minde thana willp wille engag parth partl partt partw
+runli penst sizel qiang tiest broad eyesc astra whylo penny barto
+blogu blogn packc baske aquas sixlo aquac wuhan goldl goldt hotsa
+kidwi tatil hotsh hotsp nowca flore addse foodn weekf askbo thenw
+journ skins bigbe popma netfo bodyi body- deai- tellw proba letsa
+letsi discm ancho wearh concr teawa boyst coolw coold coole pictu
+groww meetc jobfo meetd smoki yourf yourd massr warli youru mapto
+kinky factp feetw bedma carti carta joyle joylo penwi hotli manfa
+infov netdi ourta limew cutsh barpa hereh herec warco bitel bitea
+wayst gasse logsa logst equin hotwe dogal jobdo groun johnr buyla
+flexi mapra befor dumbf carra gottr advis fillt sigma andma icele
+taxlo taxli siteg milel magna dateg ultim beenb eleme backr ellis
+seeca agele rockb chats bidfi casti ninew niner canlo washw outof
+ladyn needc needd walle wallo funpa funpo portc princ mayfi betwi
+warfi topth pathw pathc rushw rusha genie jenan thefr gotpl centp
+cento flagd someh boxlo hatew newbo disko fault diske newwa impor
+goodo perpa allhe pushw allho maddi getto seria anywa jobno actfi
+bigwi uglyc uglyf helpg thejo askli pipef namee namen bethi holdt
+highg linen pyram mostp scanm scanc scanw babya lovex asksi betso
+betsa aream keyli keyle teamv turke oldpa vanst dones tensi manha
+prose workm workf workp workw metco panel netro gladh gladf chung
+sayli lolit eastd allle evera bidsi verif seekn bigse lotli stran
+garag outra asses asset badli edith edito carhe newle beard pathp
+mytax rende allre getri getre gamez nowso nowsh forse wereb peaka
+peakh menpa aktiv trini bandi bandc footr flyca clubj clubv rhino
+artli artla darki techp techd bestn bestv bestu tanka tankl postn
+hairr hairo wwwma bidwi allpo casew catmo hitsb webto soons soonl
+truen eachw eachm eachb eachc seoul giveg givep cardn cardg aspen
+fallw falla fallb witch hedge joked jokep netto netta ablec ableb
+hepsi huntl huntp huntt gotca modet hustl fitso modea killt killc
+stopp stopr freei stopn kidca karas madis brass callo newfi newfe
+newfa narut arthu artha textd texto voyag nowli knoww knowr tankf
+hugem redtr herse allta tenfi dogwa foott hangh riskb weref reise
+artwi artwh thepu the-c gaint gaine gaina gainh origi sexto rarew
+michi webin airfr shirt minib darel daref dares paten tende theka
+theki jumpa jumpg rusho johnb fries rainy rainp backn raina userw
+userr usere usero risin norwe norwa winde madmo onese newbi harda
+hearl bitla bitlo annoy toobe topbi halfd halfg lookn seeta shipm
+shipd shipa billk redpa funba byted lawfi thein sheli wordo chipa
+usepa trueg manyl manyt artse artsa artsh junks junkc fitsa outfa
+amigo armle richm motiv unitl dryst promi buyfa loseb kindw airba
+minep minem minec paste sakes fireg fundm bidma jenni theon towna
+kindh """.split()): PREFIX_SCORES[name] = (6238 - index) / 7485.0
+
+for index, name in enumerate("""
+travel online global studio design organi health planet domain search
+mobile casino sports china- google credit virtua master direct doctor
+busine social beauty silver energy vision simply projec digita simple
+iphone portal school friend market videos musica orange future united
+dating invest flower golden office hotels hostin greens street better
+perfec custom single animal server little comput flight fashio natura
+electr summer techno supers colleg family americ diamon lawyer dragon
+nature medica daniel soccer liquid networ sohbet hybrid garden africa
+window living escort indian green- carbon active chrome select servic
+mortga erotic movies public chinac double greenb superb guitar career
+secret pokers secure luxury people wealth campus atlant bright studen
+source pharma coffee blackb weddin crysta creati cinema spirit gamesa
+laptop intern freedo island spring unique number yellow christ access
+realty boston inside ticket alaska london xtreme downlo robert classi
+centra realto senior pocket artist greenc moneyt facebo wonder rainbo
+taobao chinab extrem cruise austin review amazon fantas photos hawaii
+battle partyp myspac chines denver gadget rental kaixin superm radios
+pretty greena cancer create driver action privat vitami gaming blacks
+quicks houses firstb safety system matrix modern florid victor greenw
+greenm bankru super- kingdo infini homelo nation toyota purple models
+cheapt chinas change hotelb tennis upload marine mediam person firsta
+bridge smart- visual impact greenh missio succes triple powers traffi
+martin dental coupon choice chinam dealsa marksa stream galaxy flasha
+canada greeno phoeni phones insura powera powert hentai hiphop graphi
+channe greent europe parent second clearb pimpmy pacifi italia brandb
+desert medias compan chinat chinar chinae chinag prints hotela musict
+happyb trader profit stella houseo greenl prospe georgi galler jewelr
+dallas points stones german timesa financ greene chicag expert herbal
+fishin videot inspir advert lovely moneyb moneys planta gameso insure
+juegos shopsa tablet dreamt proper instan websit arcade mature wicked
+clicks auctio dollar cheapb shoplo happyt flashb groupe groupa french
+chinah dailyt countr camera hotel- softwa stockb partne musics tattoo
+waterb cyberm premiu spider worlds gamers mediat advanc thinks black-
+shorts appleb dynami random nevada crazyc blogge russia pricel priceb
+michae hellob playlo falcon highwa dreams divorc thinka intera partya
+broker newyor thomas premie joseph madein extrab stocki articl partys
+happys northb lightb resume fetish chinal chinaj printa printe hotelr
+booksa suppor huntin crashb underb funnyb startb expres connec world-
+twitte thrill plasti happym magica rachel monkey radioc watchs grandc
+aboutb kitche codesa mister circle rapids wester locala legacy screen
+tracks church totala andrew videob events justba trucks stylea justmy
+entert threeb entera dreamb styleb luckya amazin promot bamboo smalls
+visita logica outdoo rapida monste cultur metala branda brands lovema
+script summit prices cheapc aurora partyc passio fortun drinks dealer
+sharet shares chinay dailyb digito stocka smallb forums parkin thebig
+stateo forest stephe theweb greats leathe resort magico hunter northa
+habita worldc thinkt offici beyond matchm quickb silent cheese george
+linksa fundra jordan mylife fastlo powero powerm glassb latina truckb
+capita awesom abouta bestpo outlet report mediaa diabet medial greend
+greenf footba locals video- studyb whites jersey strong legend moneya
+findan gamest saving videoc player eventa sakura spacet realit ashley
+client clears webhos indigo findlo rescue shopse shadow enviro empire
+luckyb vitals cleans mybest banker handsa progra bubble pointa poster
+buildi metall brando brandt todays radiob cheaps happyh happyc alpine
+skillb reklam lighta lightf compar lights chinad talent dailya dailys
+hotelt freese cougar torren retail shopha ventur moviea tunnel watcht
+moviem values housto traini musicb answer comedy harmon grandb easyca
+radiop greata radiof choose farmer banklo loanlo greenr sugarb blackr
+blacka houseb radioa speedy castle virgin finest firstp sounds earths
+kinder ratemy banana solida freeze kindle powerp univer legala doggie
+spaceb lyrics radiot quickt famous saturn youtub mediaf protec tracka
+brazil parkwi ilovem solars groupt pricec gamesb triplo eventb survey
+thenew porno- qualit academ dream- patric foreve cherry formal enterm
+dreamm dreama livese fusion livesa breakb signal gamewa freshb freshc
+escape interg totalb royalt deskto cowboy cleanb charli quantu valley
+adults idealt videoa metalb toucha stocks remote stoneb celebr gossip
+primes mediar sevent standa cheapl sevena pricet happyd handym freewi
+bleach skills basica appare totalc leadst flashs rivers publis chinaz
+webcam dailyd salesa hotell manage franch massag horses forum- clever
+photoc markpa linkwi justin guarda valueb visitb clubba moviet making
+workin everlo salesb boxing blockb landwi bookma innova shopma fresno
+greatc cybers greate offera moneyf hidden stupid looksa greenp shopco
+mounta localb horizo worlde worldo square indexa whitec blackl superp
+houset speeda landsa magicb freela earthb wheres automa fullba consol
+magic- money- justlo applea amateu voicea captai westco switch worldw
+hostpa nightb infose timest inteli police olympi crazyt crazyb crazyf
+cycleb firefo greatg gospel freeto easyle legalm genius europa placeb
+holida wheels groups threes infoba grants blonde chinai thinkb lovelo
+newsfi pricea ultras allabo citylo hostma bestha touris sitesa moment
+moving luckyc ringto cleara mother hotelm callsa storeb buyers enters
+ratelo tableb sydney securi dreamc pressb pokerb glamou eastba freshs
+ideala paradi fresha export luckyt totals pokerp everwa leader cardlo
+inter- barbar phoneb joomla cleana trusta shoppa smartc matcha shoppi
+whatsa weight naught antivi sunris everyb nameso ideals growth cosmos
+groove photob curren goodpa synerg covers homesi videom thunde brandm
+smilea stockt clubse mailse childs happy- primea invent westfi blackf
+thiswi cheapd cheapa partyb heaven infoma knight rights leadfi flasht
+cellfi china0 quebec phonea riverb sharea trackb muslim smokin clubpa
+activa dailyg dailyf foodsa shopfi lasveg heatin gamema dailyw dealso
+dailyp dealsb esport purema forume boatlo printb genesi booksb willsa
+angela catcha angels horsea moviec movied namewi fancyb sample videog
+filefi hotelc bluema scoote musico stillb stonea shiplo waterp charma
+sharon grands findme eventi corona inform radiow ladypa greatb trucka
+greato whitea unders offers dirtyb safari goodso letsgo videol worldd
+reallo crossf diesel thisis blackh trustb showsa housel smalla quickc
+compra speedo startr speedb filter beijin firsts videop linksb eartha
+saleso vintag localf hostbi lifelo target powerc powerb trendy philly
+lifema linklo norman combat centro cardsa music- cardse kingma pointb
+bestba mobili sunset allian rocker bestbu spacec accoun aboutm ground
+micros greatt kingpa handle genera shared royal- bestpa powerh integr
+namelo surema ideast bestlo radiol superc learni learnm shopto pagelo
+region arizon sinema studys gourme electa kingwi naruto moneyc photol
+engage gameha notebo missfi safewa handyb gamesd gamesm gamesi gamesh
+sticka destin totall bodyfa hellos evento marklo safelo driven southa
+celtic hearto justma hearta clublo quotes hearts playpa justpa rocket
+hotelo facefi thinki bridal stylet dreame dreamg things dreamp gamewi
+idealf thinkf idealo interc teampa platin luckyl fastwi aussie newspa
+visitm actual glitte sleepb cleant libert jobspa womens smarts puzzle
+bestre lastlo matchb steven interl salest makeme flying sugars jenand
+magazi purepa shopla lifewi wholes namema record builda multis weston
+homepa dropse playma videon clickn thermo orient thinkl hacker stockm
+finalf stockf modelt smileb deallo modela housin clubso goodfi lovemy
+""".split()): PREFIX_SCORES[name] = (1120 - index) / 1306.0
 
 SUFFIX_SCORES = {}
-SUFFIX_SCORES[3] = {
-'ine': 2374,
-'ing': 1823,
-'ear': 1387,
-'ace': 1213,
-'all': 1047,
-'its': 1018,
-'ion': 853,
-'ers': 828,
-'and': 798,
-'ead': 770,
-'age': 762,
-'art': 730,
-'air': 654,
-'ter': 649,
-'low': 622,
-'ise': 589,
-'eed': 585,
-'lan': 583,
-'als': 571,
-'are': 568,
-'ate': 566,
-'boy': 554,
-'fun': 554,
-'tch': 530,
-'one': 519,
-'ess': 510,
-'ack': 507,
-'ice': 505,
-'ong': 504,
-'bet': 497,
-'est': 493,
-'ard': 489,
-'mes': 487,
-'alk': 486,
-'tes': 485,
-'ons': 484,
-'ies': 483,
-'ive': 465,
-'eye': 458,
-'les': 448,
-'ent': 440,
-'ata': 438,
-'for': 430,
-'ain': 427,
-'ore': 417,
-'ill': 415,
-'any': 411,
-'ase': 399,
-'rks': 397,
-'ell': 396,
-'hot': 389,
-'guy': 384,
-'act': 381,
-'ide': 378,
-'ite': 372,
-'aid': 371,
-'iew': 362,
-'eep': 358,
-'ght': 356,
-'afe': 352,
-'day': 347,
-'box': 346,
-'nce': 344,
-'ble': 341,
-'ost': 341,
-'bar': 337,
-'nds': 333,
-'ver': 333,
-'row': 332,
-'arm': 330,
-'rts': 330,
-'law': 329,
-'net': 327,
-'ero': 325,
-'ity': 324,
-'tal': 323,
-'sit': 322,
-'man': 321,
-'ump': 321,
-'ank': 319,
-'his': 319,
-'ome': 319,
-'use': 319,
-'ign': 318,
-'oks': 315,
-'way': 315,
-'ars': 313,
-'ets': 313,
-'dia': 312,
-'ind': 300,
-'oup': 300,
-'ews': 299,
-'der': 297,
-'nes': 296,
-'ame': 289,
-'gic': 289,
-'ile': 288,
-'pot': 287,
-'hop': 284,
-'ang': 282,
-'ook': 282,
-'two': 281,
-'int': 278,
-'ort': 278,
-'nts': 277,
-'log': 275,
-'ock': 272,
-'own': 272,
-'ran': 272,
-'ics': 271,
-'ord': 266,
-'ure': 266,
-'yte': 266,
-'ast': 265,
-'rds': 265,
-'usa': 264,
-'our': 262,
-'ass': 261,
-'tor': 261,
-'ife': 257,
-'sic': 257,
-'try': 257,
-'now': 253,
-'lub': 251,
-'ree': 250,
-'ark': 249,
-'eat': 245,
-'ges': 243,
-'inc': 243,
-'ans': 242,
-'igh': 242,
-'deo': 241,
-'ays': 236,
-'een': 235,
-'dio': 234,
-'irm': 233,
-'ove': 231,
-'ads': 230,
-'nch': 228,
-'ash': 227,
-'hat': 226,
-'und': 226,
-'buy': 225,
-'eam': 224,
-'ods': 224,
-'web': 224,
-'gap': 223,
-'ist': 223,
-'lls': 223,
-'res': 222,
-'ick': 221,
-'ood': 218,
-'bid': 217,
-'ale': 216,
-'ker': 216,
-'esk': 215,
-'car': 213,
-'ors': 213,
-'rea': 213,
-'ect': 212,
-'ses': 212,
-'opy': 211,
-'bit': 208,
-'ina': 208,
-'old': 206,
-'rld': 206,
-'tep': 206,
-'lue': 205,
-'ail': 204,
-'ote': 204,
-'can': 203,
-'mod': 203,
-'eal': 201,
-'ant': 200,
-'tel': 200,
-'ech': 199,
-'ink': 197,
-'une': 197,
-'ask': 196,
-'ere': 196,
-'uff': 196,
-'you': 196,
-'isc': 195,
-'son': 195,
-'ins': 194,
-'ner': 194,
-'ire': 191,
-'vel': 191,
-'ugs': 186,
-'nse': 185,
-'ool': 185,
-'per': 185,
-'eme': 184,
-'ids': 184,
-'add': 183,
-'oot': 181,
-'out': 181,
-'rms': 180,
-'her': 178,
-'ngs': 178,
-'end': 177,
-'ork': 177,
-'pro': 177,
-'ery': 176,
-'ave': 175,
-'lie': 173,
-'aim': 172,
-'ein': 170,
-'ish': 170,
-'nit': 167,
-'ady': 166,
-'cks': 166,
-'del': 166,
-'ler': 165,
-'nfo': 165,
-'ype': 165,
-'ach': 164,
-'els': 164,
-'oad': 164,
-'obs': 164,
-'ade': 163,
-'bed': 163,
-'hen': 163,
-'rum': 163,
-'bug': 162,
-'ild': 161,
-'men': 161,
-'rse': 161,
-'ean': 160,
-'ago': 159,
-'rth': 159,
-'cat': 158,
-'ces': 158,
-'ize': 158,
-'ego': 157,
-'lay': 157,
-'ney': 156,
-'oon': 156,
-'rst': 156,
-'job': 155,
-'key': 155,
-'orp': 154,
-'eon': 153,
-'ake': 152,
-'cts': 152,
-'lks': 149,
-'eek': 148,
-'ian': 148,
-'ica': 148,
-'ime': 148,
-'big': 147,
-'eet': 147,
-'eit': 146,
-'ene': 146,
-'gns': 146,
-'ode': 146,
-'red': 146,
-'cle': 145,
-'dex': 145,
-'eaf': 145,
-'irl': 145,
-'ily': 144,
-'wer': 144,
-'bus': 143,
-'eas': 143,
-'lus': 143,
-'oms': 143,
-'ont': 141,
-'tay': 141,
-'pen': 138,
-'biz': 137,
-'eck': 137,
-'oor': 137,
-'fed': 136,
-'tan': 136,
-'nge': 135,
-'rty': 135,
-'yes': 135,
-'dge': 134,
-'rgy': 134,
-'ems': 133,
-'emy': 132,
-'ial': 132,
-'tle': 132,
-'eup': 131,
-'gal': 131,
-'ama': 130,
-'dog': 130,
-'rch': 130,
-'sts': 130,
-'ute': 130,
-'eft': 129,
-'ens': 129,
-'ten': 129,
-'udy': 129,
-'oom': 128,
-'oft': 127,
-'rve': 127,
-'ppy': 126,
-'ves': 126,
-'olk': 125,
-'rus': 125,
-'eng': 124,
-'eto': 124,
-'rue': 124,
-'ste': 124,
-'oll': 123,
-'pic': 123,
-'rls': 123,
-'sis': 123,
-'ung': 123,
-'fan': 122,
-'ier': 122,
-'era': 121,
-'esh': 121,
-'how': 121,
-'ncy': 121,
-'ats': 120,
-'des': 120,
-'fer': 120,
-'iet': 120,
-'iss': 120,
-'ket': 120,
-'oto': 120,
-'ple': 120,
-'sex': 120,
-'ada': 119,
-'ban': 119,
-'aff': 118,
-'eel': 118,
-'esi': 118,
-'rmy': 118,
-'san': 118,
-'ari': 117,
-'eak': 117,
-'leg': 117,
-'ole': 117,
-'uto': 117,
-'eos': 116,
-'joy': 116,
-'hin': 115,
-'rry': 115,
-'ton': 115,
-'unt': 115,
-'ust': 115,
-'nny': 114,
-'oan': 114,
-'oat': 114,
-'top': 114,
-'ams': 113,
-'ana': 113,
-'eap': 113,
-'rge': 113,
-'ser': 113,
-'sor': 113,
-'urs': 113,
-'ath': 112,
-'den': 112,
-'edo': 112,
-'eis': 112,
-'oss': 112,
-'sin': 112,
-'don': 111,
-'gar': 111,
-'led': 111,
-'nic': 111,
-'ral': 111,
-'bal': 110,
-'eys': 110,
-'fit': 110,
-'fly': 110,
-'ino': 110,
-'rce': 110,
-'rop': 110,
-'ody': 109,
-'ory': 109,
-'ult': 109,
-'uth': 109,
-'bad': 108,
-'bel': 108,
-'ken': 108,
-'oil': 108,
-'uck': 108,
-'gas': 107,
-'lin': 107,
-'tit': 107,
-'ddy': 106,
-'has': 106,
-'ilm': 106,
-'ber': 105,
-'eus': 105,
-'ger': 105,
-'nks': 105,
-'ope': 105,
-'tem': 105,
-'hem': 104,
-'sus': 104,
-'ven': 104,
-'dor': 103,
-'kid': 103,
-'lon': 103,
-'sme': 103,
-'ose': 102,
-'war': 102,
-'yer': 102,
-'ron': 101,
-'eds': 100,
-'ngo': 100,
-'sup': 100,
-'usy': 100,
-'yet': 100,
-'dit': 99,
-'eno': 99,
-'nal': 99,
-'van': 99,
-'cal': 98,
-'dds': 98,
-'han': 98,
-'ico': 98,
-'ike': 98,
-'lis': 98,
-'ops': 98,
-'ted': 98,
-'tre': 98,
-'ley': 97,
-'lit': 97,
-'oem': 97,
-'sam': 97,
-'com': 96,
-'nto': 96,
-'sen': 96,
-'tat': 96,
-'tus': 96,
-'pan': 95,
-'pon': 95,
-'urt': 95,
-'hip': 94,
-'med': 94,
-'ots': 94,
-'ros': 94,
-'aph': 93,
-'aps': 93,
-'ecs': 93,
-'lab': 93,
-'let': 93,
-'off': 93,
-'ous': 93,
-'tos': 93,
-'uan': 93,
-'cup': 92,
-'ips': 92,
-'lam': 92,
-'oes': 92,
-'ram': 92,
-'set': 92,
-'arp': 91,
-'ita': 91,
-'olf': 91,
-'ren': 91,
-'cut': 90,
-'ond': 90,
-'ows': 90,
-'rit': 90,
-'eby': 89,
-'get': 89,
-'isk': 89,
-'ium': 89,
-'new': 89,
-'yle': 89,
-'aby': 88,
-'eof': 88,
-'lar': 88,
-'nda': 88,
-'ria': 88,
-'ull': 88,
-'was': 88,
-'dan': 87,
-'din': 87,
-'ift': 87,
-'kit': 87,
-'llo': 87,
-'lth': 87,
-'nia': 87,
-'nor': 87,
-'oys': 87,
-'ras': 87,
-'ape': 86,
-'eri': 86,
-'eso': 86,
-'ief': 86,
-'oof': 86,
-'ply': 86,
-'tup': 86,
-'abs': 85,
-'aws': 85,
-'git': 85,
-'gun': 85,
-'ham': 85,
-'kes': 85,
-'lor': 85,
-'ogy': 85,
-'run': 85,
-'ane': 84,
-'ani': 84,
-'fix': 84,
-'hit': 84,
-'lot': 84,
-'ndy': 84,
-'orm': 84,
-'ush': 84,
-'ala': 83,
-'orn': 83,
-'ret': 83,
-'ual': 83,
-'ege': 82,
-'ext': 82,
-'gen': 82,
-'ith': 82,
-'mag': 82,
-'que': 82,
-'sun': 82,
-'tas': 82,
-'win': 82,
-'ado': 81,
-'cam': 81,
-'das': 81,
-'ogo': 81,
-'rap': 81,
-'raw': 81,
-'tar': 81,
-'tax': 81,
-'ara': 80,
-'bum': 80,
-'ebe': 80,
-'epi': 80,
-'erm': 80,
-'iki': 80,
-'mas': 80,
-'mps': 80,
-'nis': 80,
-'non': 80,
-'oke': 80,
-'sta': 80,
-'unk': 80,
-'cky': 79,
-'con': 79,
-'ena': 79,
-'ese': 79,
-'ini': 79,
-'tra': 79,
-'ali': 78,
-'gle': 78,
-'hes': 78,
-'ils': 78,
-'max': 78,
-'ror': 78,
-'sed': 78,
-'tic': 78,
-'vie': 78,
-'amp': 77,
-'dea': 77,
-'mix': 77,
-'nas': 77,
-'ona': 77,
-'too': 77,
-'ube': 77,
-'uit': 77,
-'oet': 76,
-'ora': 76,
-'ami': 75,
-'ece': 75,
-'elp': 75,
-'lik': 75,
-'lms': 75,
-'map': 75,
-'nly': 75,
-'rat': 75,
-'sia': 75,
-'sky': 75,
-'ert': 74,
-'fts': 74,
-'ilt': 74,
-'pin': 74,
-'rin': 74,
-'sas': 74,
-'tme': 74,
-'che': 73,
-'kin': 73,
-'ola': 73,
-'sgo': 73,
-'008': 72,
-'ary': 72,
-'azy': 72,
-'eth': 72,
-'ida': 72,
-'lty': 72,
-'ols': 72,
-'tgo': 72,
-'uch': 72,
-'doe': 71,
-'edu': 71,
-'esa': 71,
-'ewe': 71,
-'gel': 71,
-'hub': 71,
-'ika': 71,
-'ios': 71,
-'kan': 71,
-'las': 71,
-'pay': 71,
-'sty': 71,
-'asy': 70,
-'ich': 70,
-'min': 70,
-'pas': 70,
-'who': 70,
-'888': 69,
-'dus': 69,
-'eld': 69,
-'ito': 69,
-'mer': 69,
-'nel': 69,
-'ogs': 69,
-'tec': 69,
-'ude': 69,
-'uys': 69,
-'xxx': 69,
-'000': 68,
-'ano': 68,
-'dat': 68,
-'lle': 68,
-'mit': 68,
-'nus': 68,
-'shi': 68,
-'365': 67,
-'arn': 67,
-'irs': 67,
-'pes': 67,
-'pet': 67,
-'ris': 67,
-'123': 66,
-'dam': 66,
-'nan': 66,
-'ony': 66,
-'tam': 66,
-'via': 66,
-'bag': 65,
-'dis': 65,
-'dos': 65,
-'ias': 65,
-'lve': 65,
-'pop': 65,
-'rno': 65,
-'tif': 65,
-'tro': 65,
-'uns': 65,
-'acy': 64,
-'ked': 64,
-'lia': 64,
-'llc': 64,
-'pid': 64,
-'tby': 64,
-'tin': 64,
-'yan': 64,
-'ybe': 64,
-'yme': 64,
-'cia': 63,
-'dup': 63,
-'lak': 63,
-'sat': 63,
-'sys': 63,
-'100': 62,
-'dme': 62,
-'eli': 62,
-'ism': 62,
-'lat': 62,
-'nam': 62,
-'nat': 62,
-'rip': 62,
-'spa': 62,
-'ssy': 62,
-'sto': 62,
-'ati': 61,
-'eer': 61,
-'ela': 61,
-'elf': 61,
-'iva': 61,
-'zen': 61,
-'eco': 60,
-'ete': 60,
-'isa': 60,
-'obe': 60,
-'pia': 60,
-'rup': 60,
-'aft': 59,
-'avi': 59,
-'eta': 59,
-'ipe': 59,
-'lts': 59,
-'mon': 59,
-'tdo': 59,
-'tex': 59,
-'uru': 59,
-'awn': 58,
-'dby': 58,
-'dgo': 58,
-'ila': 58,
-'lex': 58,
-'lid': 58,
-'met': 58,
-'nte': 58,
-'tek': 58,
-'tis': 58,
-'tmy': 58,
-'ura': 58,
-'eda': 57,
-'emo': 57,
-'ima': 57,
-'nik': 57,
-'nin': 57,
-'nos': 57,
-'not': 57,
-'ric': 57,
-'rid': 57,
-'uri': 57,
-'aos': 56,
-'bes': 56,
-'cus': 56,
-'ees': 56,
-'imo': 56,
-'ndo': 56,
-'oin': 56,
-'oma': 56,
-'rgo': 56,
-'sks': 56,
-'tik': 56,
-'tof': 56,
-'ups': 56,
-'uty': 56,
-'ygo': 56,
-'yon': 56,
-'asi': 55,
-'dre': 55,
-'eor': 55,
-'gon': 55,
-'lic': 55,
-'rex': 55,
-'say': 55,
-'yat': 55,
-'asa': 54,
-'bay': 54,
-'cer': 54,
-'hai': 54,
-'ird': 54,
-'kup': 54,
-'mor': 54,
-'sim': 54,
-'sum': 54,
-'ums': 54,
-'yit': 54,
-'ato': 53,
-'bbs': 53,
-'dom': 53,
-'ern': 53,
-'lag': 53,
-'oni': 53,
-'sby': 53,
-'sco': 53,
-'tea': 53,
-'xes': 53,
-'chi': 52,
-'eur': 52,
-'lee': 52,
-'oda': 52,
-'osa': 52,
-'stv': 52,
-'tte': 52,
-'ule': 52,
-'xed': 52,
-'dto': 51,
-'etv': 51,
-'far': 51,
-'gos': 51,
-'hut': 51,
-'iao': 51,
-'nup': 51,
-'pix': 51,
-'uts': 51,
-'vip': 51,
-'-it': 50,
-'aza': 50,
-'die': 50,
-'iti': 50,
-'mos': 50,
-'sad': 50,
-'scs': 50,
-'see': 50,
-'999': 49,
-'aya': 49,
-'eti': 49,
-'inn': 49,
-'kon': 49,
-'len': 49,
-'ltd': 49,
-'rew': 49,
-'sue': 49,
-'tno': 49,
-'wan': 49,
-'zer': 49,
-'911': 48,
-'abe': 48,
-'eva': 48,
-'gly': 48,
-'hon': 48,
-'hus': 48,
-'isi': 48,
-'lla': 48,
-'may': 48,
-'nta': 48,
-'pat': 48,
-'put': 48,
-'rer': 48,
-'rez': 48,
-'rod': 48,
-'sol': 48,
-'ula': 48,
-'yre': 48,
-'360': 47,
-'aat': 47,
-'ema': 47,
-'eru': 47,
-'hey': 47,
-'ior': 47,
-'ira': 47,
-'nna': 47,
-'nth': 47,
-'odo': 47,
-'oop': 47,
-'oxy': 47,
-'rel': 47,
-'seo': 47,
-'toh': 47,
-'yus': 47,
-'god': 46,
-'lup': 46,
-'mic': 46,
-'nme': 46,
-'oru': 46,
-'rme': 46,
-'tso': 46,
-'ume': 46,
-'err': 45,
-'ety': 45,
-'gan': 45,
-'ims': 45,
-'ius': 45,
-'kat': 45,
-'lly': 45,
-'los': 45,
-'oga': 45,
-'omo': 45,
-'rol': 45,
-'the': 45,
-'ubs': 45,
-'alo': 44,
-'ava': 44,
-'cry': 44,
-'kor': 44,
-'mat': 44,
-'nie': 44,
-'oth': 44,
-'pub': 44,
-'sof': 44,
-'sre': 44,
-'tbe': 44,
-'tcs': 44,
-'won': 44,
-'aly': 43,
-'cha': 43,
-'him': 43,
-'jor': 43,
-'lim': 43,
-'mad': 43,
-'oli': 43,
-'ono': 43,
-'ray': 43,
-'rix': 43,
-'rly': 43,
-'rns': 43,
-'rte': 43,
-'she': 43,
-'six': 43,
-'tie': 43,
-'ury': 43,
-'aro': 42,
-'but': 42,
-'dev': 42,
-'dir': 42,
-'ely': 42,
-'kas': 42,
-'kis': 42,
-'odd': 42,
-'rma': 42,
-'sms': 42,
-'yby': 42,
-'dot': 41,
-'eif': 41,
-'erd': 41,
-'gue': 41,
-'kus': 41,
-'lds': 41,
-'mom': 41,
-'pal': 41,
-'sel': 41,
-'sil': 41,
-'ues': 41,
-'vil': 41,
-'yin': 41,
-'aca': 40,
-'aki': 40,
-'avy': 40,
-'bot': 40,
-'dmy': 40,
-'dry': 40,
-'edy': 40,
-'eks': 40,
-'elo': 40,
-'fox': 40,
-'ict': 40,
-'ied': 40,
-'ien': 40,
-'igo': 40,
-'kam': 40,
-'lme': 40,
-'oro': 40,
-'por': 40,
-'rne': 40,
-'saw': 40,
-'sea': 40,
-'tum': 40,
-'uce': 40,
-'url': 40,
-'yto': 40,
-'abo': 39,
-'aga': 39,
-'ags': 39,
-'atv': 39,
-'cas': 39,
-'cos': 39,
-'dle': 39,
-'ehe': 39,
-'imi': 39,
-'ldo': 39,
-'mp3': 39,
-'nix': 39,
-'oca': 39,
-'ota': 39,
-'rep': 39,
-'rie': 39,
-'rim': 39,
-'rre': 39,
-'tai': 39,
-'tpi': 39,
-'twe': 39,
-'urn': 39,
-'zes': 39,
-'-uk': 38,
-'168': 38,
-'ait': 38,
-'ddo': 38,
-'emi': 38,
-'eoh': 38,
-'har': 38,
-'hic': 38,
-'iri': 38,
-'irt': 38,
-'lya': 38,
-'nso': 38,
-'osh': 38,
-'oul': 38,
-'pad': 38,
-'pus': 38,
-'tom': 38,
-'tty': 38,
-'why': 38,
-'wow': 38,
-'yis': 38,
-'amy': 37,
-'did': 37,
-'doh': 37,
-'hts': 37,
-'hun': 37,
-'lix': 37,
-'nga': 37,
-'oba': 37,
-'oco': 37,
-'omy': 37,
-'sse': 37,
-'tim': 37,
-'tto': 37,
-}
-SUFFIX_SCORES[4] = {
-'line': 1326,
-'tion': 601,
-'atch': 456,
-'ting': 439,
-'plan': 401,
-'ions': 398,
-'wear': 391,
-'data': 376,
-'view': 362,
-'ight': 346,
-'talk': 326,
-'sign': 311,
-'ooks': 310,
-'able': 306,
-'face': 297,
-'head': 291,
-'roup': 290,
-'feed': 289,
-'lace': 281,
-'shop': 278,
-'bits': 272,
-'race': 268,
-'orks': 264,
-'pace': 264,
-'bear': 257,
-'bank': 253,
-'byte': 252,
-'ames': 251,
-'club': 250,
-'zero': 244,
-'flow': 237,
-'ball': 236,
-'ideo': 235,
-'eals': 234,
-'high': 234,
-'firm': 231,
-'long': 231,
-'edia': 227,
-'this': 227,
-'rise': 226,
-'spot': 224,
-'ance': 221,
-'usic': 221,
-'land': 217,
-'safe': 217,
-'ages': 215,
-'band': 214,
-'desk': 214,
-'life': 214,
-'news': 214,
-'home': 212,
-'mine': 212,
-'hits': 210,
-'port': 208,
-'copy': 206,
-'orld': 206,
-'step': 206,
-'base': 199,
-'live': 199,
-'read': 198,
-'book': 197,
-'king': 196,
-'oday': 196,
-'word': 190,
-'tech': 188,
-'ates': 187,
-'oods': 183,
-'disc': 181,
-'back': 178,
-'area': 174,
-'nter': 174,
-'jump': 173,
-'away': 171,
-'best': 171,
-'fine': 171,
-'nine': 170,
-'tune': 170,
-'lead': 166,
-'card': 165,
-'info': 164,
-'tore': 163,
-'work': 163,
-'bugs': 162,
-'ense': 162,
-'ents': 162,
-'ouse': 162,
-'type': 162,
-'ters': 160,
-'blog': 159,
-'tuff': 159,
-'host': 158,
-'ings': 158,
-'ound': 158,
-'walk': 158,
-'year': 158,
-'otel': 157,
-'site': 157,
-'jobs': 156,
-'ware': 156,
-'agic': 155,
-'ress': 154,
-'deep': 153,
-'ring': 151,
-'city': 150,
-'corp': 150,
-'vice': 150,
-'ards': 149,
-'orts': 149,
-'eads': 147,
-'wine': 146,
-'igns': 145,
-'lock': 145,
-'wise': 145,
-'girl': 143,
-'grow': 143,
-'leaf': 143,
-'ment': 143,
-'omes': 143,
-'odel': 141,
-'irst': 140,
-'uide': 139,
-'avel': 137,
-'hair': 137,
-'ales': 136,
-'ater': 136,
-'care': 136,
-'stay': 136,
-'orum': 135,
-'ones': 133,
-'dump': 132,
-'need': 132,
-'ogic': 132,
-'sale': 131,
-'lass': 130,
-'mail': 130,
-'here': 129,
-'size': 129,
-'ster': 129,
-'ding': 128,
-'arts': 127,
-'each': 127,
-'ergy': 127,
-'ital': 127,
-'ndex': 127,
-'ower': 126,
-'plus': 126,
-'cafe': 125,
-'free': 124,
-'true': 123,
-'udio': 123,
-'keep': 122,
-'left': 122,
-'sion': 122,
-'soft': 122,
-'fear': 121,
-'game': 121,
-'park': 119,
-'blue': 118,
-'iles': 118,
-'ture': 118,
-'over': 117,
-'erve': 116,
-'love': 116,
-'ness': 116,
-'oney': 116,
-'arks': 115,
-'eart': 115,
-'ites': 115,
-'list': 115,
-'rain': 115,
-'army': 114,
-'ning': 114,
-'peed': 114,
-'hear': 113,
-'link': 113,
-'oint': 113,
-'ords': 113,
-'egal': 112,
-'ries': 112,
-'unit': 112,
-'ands': 111,
-'call': 111,
-'page': 110,
-'aste': 109,
-'less': 109,
-'part': 109,
-'tudy': 109,
-'cene': 108,
-'folk': 108,
-'hing': 108,
-'irls': 108,
-'ties': 108,
-'adio': 107,
-'bars': 107,
-'core': 107,
-'ines': 107,
-'reen': 107,
-'tors': 107,
-'eboy': 106,
-'film': 106,
-'deos': 105,
-'heap': 105,
-'room': 105,
-'team': 105,
-'gain': 104,
-'lady': 104,
-'near': 104,
-'tage': 104,
-'tems': 104,
-'alks': 103,
-'appy': 103,
-'ours': 103,
-'acts': 102,
-'alls': 102,
-'rate': 102,
-'wall': 102,
-'arch': 101,
-'hina': 101,
-'loan': 101,
-'pany': 101,
-'ream': 101,
-'dead': 100,
-'efun': 100,
-'body': 99,
-'orth': 99,
-'resh': 99,
-'ycle': 99,
-'ange': 98,
-'date': 98,
-'rand': 98,
-'zine': 97,
-'mall': 96,
-'ntry': 96,
-'oard': 96,
-'otes': 96,
-'taff': 96,
-'auto': 95,
-'food': 95,
-'ices': 95,
-'tate': 95,
-'post': 94,
-'ront': 94,
-'blow': 93,
-'orse': 93,
-'west': 93,
-'ebet': 92,
-'farm': 92,
-'fits': 92,
-'oker': 92,
-'poem': 92,
-'abel': 91,
-'cell': 91,
-'hone': 91,
-'unch': 91,
-'bids': 90,
-'ehot': 90,
-'case': 89,
-'ders': 89,
-'boat': 88,
-'many': 88,
-'orms': 88,
-'tone': 88,
-'ures': 87,
-'alth': 86,
-'deal': 86,
-'ming': 86,
-'play': 86,
-'ways': 86,
-'bill': 85,
-'keys': 85,
-'ling': 85,
-'nder': 85,
-'busy': 84,
-'code': 84,
-'lack': 84,
-'mage': 84,
-'ears': 83,
-'tart': 83,
-'town': 83,
-'well': 83,
-'dear': 82,
-'eace': 82,
-'inks': 82,
-'obal': 82,
-'ooms': 82,
-'real': 82,
-'road': 82,
-'rage': 81,
-'eeye': 80,
-'more': 79,
-'show': 79,
-'tory': 79,
-'tyle': 79,
-'baby': 78,
-'ever': 78,
-'load': 78,
-'oice': 78,
-'pack': 78,
-'rint': 78,
-'tals': 78,
-'uild': 78,
-'unny': 78,
-'bets': 77,
-'down': 77,
-'efor': 77,
-'fish': 77,
-'rect': 77,
-'ride': 77,
-'soon': 77,
-'time': 77,
-'ebar': 76,
-'edit': 76,
-'file': 76,
-'good': 76,
-'lear': 76,
-'raph': 76,
-'diet': 75,
-'fast': 75,
-'golf': 75,
-'hall': 75,
-'idea': 75,
-'iews': 75,
-'lbum': 75,
-'poet': 75,
-'term': 75,
-'thin': 75,
-'tics': 75,
-'ugar': 75,
-'ains': 74,
-'door': 74,
-'eall': 74,
-'ease': 74,
-'find': 74,
-'lege': 74,
-'mark': 74,
-'oute': 74,
-'roof': 74,
-'tree': 74,
-'uard': 74,
-'week': 74,
-'deas': 73,
-'hack': 73,
-'help': 73,
-'inds': 73,
-'ners': 73,
-'oman': 73,
-'ourt': 73,
-'rket': 73,
-'ther': 73,
-'zone': 73,
-'andy': 72,
-'arty': 72,
-'clan': 72,
-'fair': 72,
-'iver': 72,
-'mily': 72,
-'miss': 72,
-'name': 72,
-'rade': 72,
-'rive': 72,
-'sing': 72,
-'hoto': 71,
-'only': 71,
-'ovie': 71,
-'reat': 71,
-'them': 71,
-'tive': 71,
-'ants': 70,
-'bout': 70,
-'eeds': 70,
-'elow': 70,
-'hand': 70,
-'hell': 70,
-'laws': 70,
-'pple': 70,
-'tboy': 70,
-'tour': 70,
-'cing': 69,
-'days': 69,
-'etwo': 69,
-'harp': 69,
-'hool': 69,
-'kill': 69,
-'ndia': 69,
-'open': 69,
-'peak': 69,
-'prop': 69,
-'wire': 69,
-'ancy': 68,
-'eact': 68,
-'easy': 68,
-'eguy': 68,
-'kers': 68,
-'know': 68,
-'leep': 68,
-'outh': 68,
-'pair': 68,
-'save': 68,
-'aper': 67,
-'ello': 67,
-'rice': 67,
-'wide': 67,
-'ctor': 66,
-'ence': 66,
-'form': 66,
-'gear': 66,
-'imes': 66,
-'late': 66,
-'lean': 66,
-'logy': 66,
-'mind': 66,
-'neck': 66,
-'opic': 66,
-'rica': 66,
-'roll': 66,
-'rong': 66,
-'upon': 66,
-'anch': 65,
-'ator': 65,
-'ebox': 65,
-'lies': 65,
-'unds': 65,
-'ills': 64,
-'itle': 64,
-'pool': 64,
-'alty': 63,
-'alue': 63,
-'ends': 63,
-'ffer': 63,
-'fund': 63,
-'ilms': 63,
-'main': 63,
-'orce': 63,
-'ucky': 63,
-'very': 63,
-'vote': 63,
-'will': 63,
-'aily': 62,
-'cial': 62,
-'larm': 62,
-'made': 62,
-'mile': 62,
-'omen': 62,
-'porn': 62,
-'star': 62,
-'test': 62,
-'adds': 61,
-'bile': 61,
-'buys': 61,
-'eair': 61,
-'etal': 61,
-'eyes': 61,
-'hill': 61,
-'mart': 61,
-'note': 61,
-'uote': 61,
-'edge': 60,
-'even': 60,
-'rder': 60,
-'scan': 60,
-'vent': 60,
-'wash': 60,
-'cess': 59,
-'eage': 59,
-'hine': 59,
-'ises': 59,
-'isit': 59,
-'ists': 59,
-'nice': 59,
-'oise': 59,
-'ools': 59,
-'pass': 59,
-'path': 59,
-'boot': 58,
-'fire': 58,
-'gals': 58,
-'hare': 58,
-'lash': 58,
-'lers': 58,
-'ving': 58,
-'2008': 57,
-'cars': 57,
-'eaid': 57,
-'junk': 57,
-'kids': 57,
-'ping': 57,
-'sell': 57,
-'tfun': 57,
-'user': 57,
-'when': 57,
-'anet': 56,
-'arth': 56,
-'east': 56,
-'hunt': 56,
-'ross': 56,
-'tels': 56,
-'tock': 56,
-'uses': 56,
-'esit': 55,
-'hole': 55,
-'ials': 55,
-'iece': 55,
-'igit': 55,
-'olve': 55,
-'tguy': 55,
-'trip': 55,
-'tube': 55,
-'your': 55,
-'akes': 54,
-'eady': 54,
-'eeth': 54,
-'foot': 54,
-'hard': 54,
-'heat': 54,
-'ield': 54,
-'lans': 54,
-'pply': 54,
-'rief': 54,
-'sure': 54,
-'tall': 54,
-'tbet': 54,
-'want': 54,
-'arge': 53,
-'arms': 53,
-'bite': 53,
-'cent': 53,
-'haos': 53,
-'ical': 53,
-'ifts': 53,
-'look': 53,
-'ngle': 53,
-'ount': 53,
-'rest': 53,
-'tair': 53,
-'tand': 53,
-'what': 53,
-'ails': 52,
-'chat': 52,
-'feel': 52,
-'meet': 52,
-'move': 52,
-'nits': 52,
-'rack': 52,
-'teye': 52,
-'tfor': 52,
-'uilt': 52,
-'five': 51,
-'ives': 51,
-'like': 51,
-'logs': 51,
-'mlak': 51,
-'mode': 51,
-'nics': 51,
-'oung': 51,
-'rity': 51,
-'rown': 51,
-'ship': 51,
-'side': 51,
-'stem': 51,
-'uick': 51,
-'wang': 51,
-'apan': 50,
-'apid': 50,
-'ency': 50,
-'epot': 50,
-'itch': 50,
-'odes': 50,
-'rant': 50,
-'rush': 50,
-'camp': 49,
-'dboy': 49,
-'dies': 49,
-'dits': 49,
-'fact': 49,
-'gone': 49,
-'hops': 49,
-'ntal': 49,
-'oans': 49,
-'ocks': 49,
-'pipe': 49,
-'risk': 49,
-'rror': 49,
-'shot': 49,
-'tran': 49,
-'addy': 48,
-'asks': 48,
-'ault': 48,
-'boys': 48,
-'come': 48,
-'eats': 48,
-'ebid': 48,
-'kets': 48,
-'lery': 48,
-'oors': 48,
-'paid': 48,
-'stry': 48,
-'task': 48,
-'-web': 47,
-'cure': 47,
-'earn': 47,
-'eran': 47,
-'hite': 47,
-'inch': 47,
-'item': 47,
-'ixed': 47,
-'last': 47,
-'oing': 47,
-'pain': 47,
-'sage': 47,
-'slow': 47,
-'sult': 47,
-'tact': 47,
-'tral': 47,
-'vers': 47,
-'ares': 46,
-'done': 46,
-'ique': 46,
-'nner': 46,
-'oken': 46,
-'pick': 46,
-'razy': 46,
-'rtal': 46,
-'that': 46,
-'ugly': 46,
-'uits': 46,
-'ward': 46,
-'airs': 45,
-'ania': 45,
-'asty': 45,
-'dfun': 45,
-'egap': 45,
-'full': 45,
-'gage': 45,
-'hope': 45,
-'kind': 45,
-'labs': 45,
-'lant': 45,
-'lift': 45,
-'luck': 45,
-'make': 45,
-'sino': 45,
-'then': 45,
-'uddy': 45,
-'wers': 45,
-'wind': 45,
-'ader': 44,
-'cash': 44,
-'ebit': 44,
-'erty': 44,
-'ista': 44,
-'join': 44,
-'just': 44,
-'lair': 44,
-'lose': 44,
-'next': 44,
-'runs': 44,
-'ssue': 44,
-'ches': 43,
-'eadd': 43,
-'flag': 43,
-'heel': 43,
-'lage': 43,
-'onth': 43,
-'reak': 43,
-'root': 43,
-'seek': 43,
-'self': 43,
-'send': 43,
-'sfor': 43,
-'stop': 43,
-'they': 43,
-'tits': 43,
-'uman': 43,
-'vies': 43,
-'ajor': 42,
-'chip': 42,
-'dage': 42,
-'dart': 42,
-'four': 42,
-'gold': 42,
-'hang': 42,
-'once': 42,
-'plit': 42,
-'rame': 42,
-'wild': 42,
-'wish': 42,
-'ybet': 42,
-'yers': 42,
-'aise': 41,
-'cker': 41,
-'erts': 41,
-'hion': 41,
-'icks': 41,
-'ller': 41,
-'lots': 41,
-'oads': 41,
-'olks': 41,
-'otos': 41,
-'rial': 41,
-'rime': 41,
-'rust': 41,
-'rver': 41,
-'used': 41,
-'ytes': 41,
-'dare': 40,
-'eens': 40,
-'eits': 40,
-'fall': 40,
-'guru': 40,
-'heng': 40,
-'hold': 40,
-'laim': 40,
-'lect': 40,
-'lone': 40,
-'ndon': 40,
-'nity': 40,
-'ouch': 40,
-'poll': 40,
-'pper': 40,
-'raft': 40,
-'rash': 40,
-'tsit': 40,
-'xtra': 40,
-'yboy': 40,
-'acks': 39,
-'arry': 39,
-'dios': 39,
-'ebuy': 39,
-'ells': 39,
-'etry': 39,
-'ject': 39,
-'lane': 39,
-'lets': 39,
-'nesi': 39,
-'orno': 39,
-'osts': 39,
-'pics': 39,
-'sers': 39,
-'slaw': 39,
-'stan': 39,
-'taid': 39,
-'ules': 39,
-'yfun': 39,
-'-net': 38,
-'anda': 38,
-'asia': 38,
-'auty': 38,
-'chen': 38,
-'disk': 38,
-'erit': 38,
-'hbet': 38,
-'hour': 38,
-'isor': 38,
-'loor': 38,
-'loss': 38,
-'mber': 38,
-'onal': 38,
-'oxes': 38,
-'reme': 38,
-'seye': 38,
-'some': 38,
-'umps': 38,
-'2000': 37,
-'aine': 37,
-'asis': 37,
-'ause': 37,
-'dall': 37,
-'dark': 37,
-'drop': 37,
-'eams': 37,
-'fill': 37,
-'hild': 37,
-'hong': 37,
-'ider': 37,
-'ille': 37,
-'lbet': 37,
-'lend': 37,
-'lias': 37,
-'nada': 37,
-'ngel': 37,
-'ocal': 37,
-'olid': 37,
-'pure': 37,
-'rall': 37,
-'ruck': 37,
-'said': 37,
-'tany': 37,
-'text': 37,
-'ttle': 37,
-'warm': 37,
-'yeye': 37,
-'aker': 36,
-'ases': 36,
-'dbet': 36,
-'deye': 36,
-'eeks': 36,
-'fans': 36,
-'feet': 36,
-'give': 36,
-'hain': 36,
-'heck': 36,
-'ingo': 36,
-'joke': 36,
-'kboy': 36,
-'lain': 36,
-'lder': 36,
-'mate': 36,
-'njoy': 36,
-'opia': 36,
-'ould': 36,
-'oves': 36,
-'rite': 36,
-'rums': 36,
-'ruth': 36,
-'sent': 36,
-'sits': 36,
-'tter': 36,
-'wife': 36,
-'alia': 35,
-'cost': 35,
-'dfor': 35,
-'elaw': 35,
-'fice': 35,
-'gets': 35,
-'ious': 35,
-'keen': 35,
-'lfun': 35,
-'llow': 35,
-'loop': 35,
-'maps': 35,
-'mass': 35,
-'nart': 35,
-'nlaw': 35,
-'odds': 35,
-'pers': 35,
-'tbox': 35,
-'toys': 35,
-'trap': 35,
-'urce': 35,
-'wiki': 35,
-'yair': 35,
-'cher': 34,
-'dact': 34,
-'dair': 34,
-'ebed': 34,
-'eman': 34,
-'emod': 34,
-'ette': 34,
-'fail': 34,
-'ford': 34,
-'hers': 34,
-'into': 34,
-'ited': 34,
-'leye': 34,
-'lley': 34,
-'ores': 34,
-'orne': 34,
-'rboy': 34,
-'rink': 34,
-'sfun': 34,
-'sort': 34,
-'thot': 34,
-'vest': 34,
-'wing': 34,
-'yoga': 34,
-'yuan': 34,
-'amps': 33,
-'cale': 33,
-'cast': 33,
-'cold': 33,
-'daid': 33,
-'dguy': 33,
-'eand': 33,
-'eway': 33,
-'ging': 33,
-'inic': 33,
-'lboy': 33,
-'llis': 33,
-'nall': 33,
-'nfor': 33,
-'orex': 33,
-'plug': 33,
-'pull': 33,
-'rner': 33,
-'rson': 33,
-'tape': 33,
-'togo': 33,
-'tong': 33,
-'alon': 32,
-'dise': 32,
-'eany': 32,
-'erms': 32,
-'eusa': 32,
-'hart': 32,
-'imit': 32,
-'itor': 32,
-'kits': 32,
-'lick': 32,
-'nfun': 32,
-'nger': 32,
-'pile': 32,
-'rart': 32,
-'rbet': 32,
-'rfun': 32,
-'rule': 32,
-'sinc': 32,
-'susa': 32,
-'take': 32,
-'tare': 32,
-'tell': 32,
-'ussy': 32,
-'wins': 32,
-'with': 32,
-'yguy': 32,
-'arly': 31,
-'bulk': 31,
-'dhot': 31,
-'draw': 31,
-'eath': 31,
-'ebug': 31,
-'ecar': 31,
-'erry': 31,
-'gram': 31,
-'harm': 31,
-'hics': 31,
-'idge': 31,
-'kfun': 31,
-'lays': 31,
-'laza': 31,
-'lity': 31,
-'llas': 31,
-'lter': 31,
-'nboy': 31,
-'nion': 31,
-'rick': 31,
-'rium': 31,
-'saat': 31,
-'seen': 31,
-'soul': 31,
-'tbar': 31,
-'tein': 31,
-'turk': 31,
-'ueue': 31,
-'urse': 31,
-'uter': 31,
-'-inc': 30,
-'-usa': 30,
-'apes': 30,
-'ayer': 30,
-'cine': 30,
-'dbar': 30,
-'ecat': 30,
-'elie': 30,
-'erse': 30,
-'evel': 30,
-'ghts': 30,
-'hoes': 30,
-'ides': 30,
-'navi': 30,
-'nbet': 30,
-'ndor': 30,
-'ocus': 30,
-'ople': 30,
-'putt': 30,
-'rals': 30,
-'rare': 30,
-'rock': 30,
-'shut': 30,
-'sold': 30,
-'turn': 30,
-'ucts': 30,
-'ults': 30,
-'wait': 30,
-'yfor': 30,
-'yhot': 30,
-'ylaw': 30,
-'2009': 29,
-'4you': 29,
-'ador': 29,
-'asic': 29,
-'bove': 29,
-'char': 29,
-'dbox': 29,
-'elps': 29,
-'erow': 29,
-'hows': 29,
-'kage': 29,
-'lart': 29,
-'nect': 29,
-'nnel': 29,
-'nows': 29,
-'onto': 29,
-'quit': 29,
-'rent': 29,
-'rman': 29,
-'role': 29,
-'urns': 29,
-'yage': 29,
-'aims': 28,
-'ango': 28,
-}
-SUFFIX_SCORES[5] = {
-'nline': 869,
-'tions': 351,
-'ation': 292,
-'group': 290,
-'space': 260,
-'works': 258,
-'esign': 253,
-'books': 243,
-'place': 242,
-'video': 232,
-'deals': 220,
-'music': 220,
-'world': 205,
-'media': 196,
-'today': 194,
-'watch': 164,
-'games': 160,
-'ction': 158,
-'store': 158,
-'stuff': 158,
-'house': 154,
-'magic': 153,
-'eview': 152,
-'match': 147,
-'hotel': 143,
-'signs': 143,
-'guide': 139,
-'model': 139,
-'first': 138,
-'press': 135,
-'ravel': 135,
-'homes': 131,
-'logic': 129,
-'sense': 128,
-'index': 127,
-'nergy': 125,
-'forum': 123,
-'sales': 119,
-'enter': 118,
-'sting': 114,
-'goods': 113,
-'pages': 113,
-'ports': 113,
-'serve': 112,
-'legal': 111,
-'speed': 110,
-'money': 109,
-'girls': 108,
-'scene': 108,
-'study': 108,
-'radio': 106,
-'ideos': 105,
-'cheap': 104,
-'light': 104,
-'happy': 102,
-'cycle': 98,
-'water': 98,
-'china': 97,
-'fresh': 97,
-'green': 97,
-'board': 96,
-'staff': 95,
-'cards': 93,
-'front': 91,
-'trace': 91,
-'tudio': 91,
-'mpany': 90,
-'phone': 89,
-'forms': 86,
-'marks': 86,
-'twork': 86,
-'ealth': 85,
-'eline': 85,
-'lting': 84,
-'label': 83,
-'point': 83,
-'state': 83,
-'horse': 82,
-'azine': 81,
-'eting': 81,
-'rvice': 81,
-'lobal': 79,
-'peace': 79,
-'power': 79,
-'style': 79,
-'parts': 78,
-'rooms': 78,
-'glass': 77,
-'dream': 76,
-'edata': 76,
-'image': 76,
-'patch': 75,
-'print': 75,
-'views': 75,
-'album': 74,
-'clear': 74,
-'graph': 74,
-'guard': 74,
-'irect': 74,
-'route': 74,
-'table': 74,
-'alive': 73,
-'court': 73,
-'earch': 73,
-'names': 73,
-'sites': 73,
-'arket': 72,
-'etalk': 72,
-'party': 72,
-'rance': 72,
-'funny': 71,
-'ideas': 71,
-'photo': 71,
-'sugar': 71,
-'vices': 71,
-'amily': 70,
-'drive': 70,
-'lines': 70,
-'movie': 70,
-'talks': 70,
-'tline': 70,
-'links': 69,
-'poker': 69,
-'about': 68,
-'apple': 68,
-'chool': 68,
-'llege': 68,
-'sleep': 68,
-'stems': 68,
-'stone': 68,
-'thing': 67,
-'eplan': 66,
-'india': 66,
-'leads': 66,
-'sharp': 66,
-'ranch': 65,
-'sport': 65,
-'lunch': 64,
-'tures': 64,
-'ewear': 63,
-'notes': 63,
-'right': 63,
-'title': 63,
-'topic': 63,
-'value': 63,
-'ahead': 62,
-'films': 62,
-'lands': 62,
-'lucky': 62,
-'paper': 62,
-'price': 62,
-'proof': 62,
-'voice': 62,
-'again': 61,
-'alarm': 61,
-'catch': 61,
-'daily': 61,
-'files': 61,
-'ntals': 61,
-'offer': 61,
-'quote': 61,
-'river': 61,
-'trade': 61,
-'clean': 60,
-'ealty': 60,
-'woman': 60,
-'ments': 59,
-'night': 59,
-'obile': 59,
-'times': 59,
-'aming': 57,
-'cords': 57,
-'metal': 57,
-'ology': 57,
-'ution': 57,
-'earth': 56,
-'event': 56,
-'order': 56,
-'pital': 56,
-'black': 55,
-'brand': 55,
-'espot': 55,
-'force': 55,
-'share': 55,
-'stock': 55,
-'tplan': 55,
-'ttalk': 55,
-'tware': 55,
-'twear': 55,
-'visit': 55,
-'waste': 55,
-'entry': 54,
-'otels': 54,
-'solve': 54,
-'teeth': 54,
-'women': 54,
-'brief': 53,
-'etype': 53,
-'piece': 53,
-'build': 52,
-'chaos': 52,
-'eball': 52,
-'ebits': 52,
-'ision': 52,
-'noise': 52,
-'ready': 52,
-'sound': 52,
-'vents': 52,
-'emlak': 51,
-'fancy': 51,
-'looks': 51,
-'rates': 51,
-'reach': 51,
-'words': 51,
-'young': 51,
-'built': 50,
-'chair': 50,
-'ctory': 50,
-'efeed': 50,
-'emine': 50,
-'facts': 50,
-'flash': 50,
-'nting': 50,
-'plans': 50,
-'quick': 50,
-'tball': 50,
-'ystem': 50,
-'block': 49,
-'class': 49,
-'digit': 49,
-'ebank': 49,
-'eflow': 49,
-'hello': 49,
-'ining': 49,
-'range': 49,
-'rapid': 49,
-'shops': 49,
-'along': 48,
-'count': 48,
-'efine': 48,
-'eword': 48,
-'gifts': 48,
-'handy': 48,
-'iness': 48,
-'loans': 48,
-'nding': 48,
-'prise': 48,
-'depot': 47,
-'ebear': 47,
-'eface': 47,
-'ental': 47,
-'erica': 47,
-'north': 47,
-'tdata': 47,
-'ccess': 46,
-'japan': 46,
-'ntral': 46,
-'tries': 46,
-'white': 46,
-'buddy': 45,
-'ehits': 45,
-'ement': 45,
-'field': 45,
-'learn': 45,
-'rises': 45,
-'taste': 45,
-'acing': 44,
-'crazy': 44,
-'doors': 44,
-'esafe': 44,
-'issue': 44,
-'ortal': 44,
-'where': 44,
-'-shop': 43,
-'angle': 43,
-'clock': 43,
-'efirm': 43,
-'foods': 43,
-'great': 43,
-'hange': 43,
-'large': 43,
-'month': 43,
-'nasty': 43,
-'ouses': 43,
-'plant': 43,
-'train': 43,
-'asino': 42,
-'codes': 42,
-'cover': 42,
-'ecopy': 42,
-'frame': 42,
-'funds': 42,
-'ition': 42,
-'major': 42,
-'rties': 42,
-'wheel': 42,
-'aster': 41,
-'aware': 41,
-'eband': 41,
-'ebook': 41,
-'ebyte': 41,
-'ering': 41,
-'erver': 41,
-'estep': 41,
-'folks': 41,
-'iving': 41,
-'shion': 41,
-'tours': 41,
-'track': 41,
-'daddy': 40,
-'eback': 40,
-'eight': 40,
-'erise': 40,
-'esize': 40,
-'lists': 40,
-'loads': 40,
-'miles': 40,
-'ovies': 40,
-'split': 40,
-'tfeed': 40,
-'token': 40,
-'apart': 39,
-'bytes': 39,
-'ehigh': 39,
-'error': 39,
-'llery': 39,
-'touch': 39,
-'trust': 39,
-'tsafe': 39,
-'ating': 38,
-'chine': 38,
-'eable': 38,
-'extra': 38,
-'floor': 38,
-'lanet': 38,
-'mania': 38,
-'perty': 38,
-'pping': 38,
-'prime': 38,
-'raise': 38,
-'score': 38,
-'there': 38,
-'brown': 37,
-'child': 37,
-'eauty': 37,
-'ebase': 37,
-'edisc': 37,
-'ehead': 37,
-'heart': 37,
-'human': 37,
-'iates': 37,
-'mains': 37,
-'oject': 37,
-'round': 37,
-'stage': 37,
-'truck': 37,
-'units': 37,
-'worth': 37,
-'boxes': 36,
-'calls': 36,
-'chain': 36,
-'check': 36,
-'dates': 36,
-'eport': 36,
-'heads': 36,
-'ional': 36,
-'items': 36,
-'lders': 36,
-'local': 36,
-'nsult': 36,
-'sland': 36,
-'splan': 36,
-'start': 36,
-'sters': 36,
-'tbear': 36,
-'tools': 36,
-'truth': 36,
-'walls': 36,
-'ading': 35,
-'anesi': 35,
-'angel': 35,
-'dview': 35,
-'dwear': 35,
-'elect': 35,
-'farms': 35,
-'gency': 35,
-'gital': 35,
-'grant': 35,
-'inder': 35,
-'ncial': 35,
-'onics': 35,
-'rules': 35,
-'solid': 35,
-'teens': 35,
-'visor': 35,
-'dtalk': 34,
-'edesk': 34,
-'elong': 34,
-'needs': 34,
-'ource': 34,
-'redit': 34,
-'tness': 34,
-'tzero': 34,
-'udios': 34,
-'urity': 34,
-'anada': 33,
-'break': 33,
-'elead': 33,
-'estay': 33,
-'forex': 33,
-'llage': 33,
-'otors': 33,
-'porno': 33,
-'rline': 33,
-'seven': 33,
-'stand': 33,
-'tface': 33,
-'tgage': 33,
-'walks': 33,
-'alone': 32,
-'ather': 32,
-'below': 32,
-'cross': 32,
-'ctors': 32,
-'ebest': 32,
-'eside': 32,
-'ffice': 32,
-'fight': 32,
-'hotos': 32,
-'nlong': 32,
-'owers': 32,
-'pussy': 32,
-'reads': 32,
-'tdesk': 32,
-'tings': 32,
-'tners': 32,
-'unity': 32,
-'vital': 32,
-'claim': 31,
-'drink': 31,
-'ebugs': 31,
-'ejump': 31,
-'limit': 31,
-'linic': 31,
-'nking': 31,
-'plays': 31,
-'queue': 31,
-'reams': 31,
-'suits': 31,
-'tbyte': 31,
-'terms': 31,
-'tstep': 31,
-'tthis': 31,
-'yplan': 31,
-'ctive': 30,
-'dable': 30,
-'ducts': 30,
-'early': 30,
-'edeep': 30,
-'eland': 30,
-'epair': 30,
-'etics': 30,
-'feeds': 30,
-'grand': 30,
-'jumps': 30,
-'level': 30,
-'ndata': 30,
-'orums': 30,
-'phics': 30,
-'ridge': 30,
-'scale': 30,
-'shell': 30,
-'speak': 30,
-'tasks': 30,
-'teach': 30,
-'thome': 30,
-'tones': 30,
-'tread': 30,
-'unter': 30,
-'ville': 30,
-'write': 30,
-'yline': 30,
-'above': 29,
-'audio': 29,
-'bears': 29,
-'borne': 29,
-'ckers': 29,
-'dance': 29,
-'ddata': 29,
-'dline': 29,
-'earea': 29,
-'eaway': 29,
-'eclub': 29,
-'edits': 29,
-'ehome': 29,
-'eople': 29,
-'eshop': 29,
-'helps': 29,
-'joint': 29,
-'knows': 29,
-'lower': 29,
-'minds': 29,
-'nnect': 29,
-'plaza': 29,
-'shoes': 29,
-'shows': 29,
-'smile': 29,
-'south': 29,
-'tfirm': 29,
-'-tech': 28,
-'abuse': 28,
-'alias': 28,
-'alley': 28,
-'basic': 28,
-'close': 28,
-'dplan': 28,
-'ekeep': 28,
-'eyear': 28,
-'ights': 28,
-'istry': 28,
-'nance': 28,
-'nface': 28,
-'nload': 28,
-'nplan': 28,
-'ories': 28,
-'pairs': 28,
-'pedia': 28,
-'picks': 28,
-'pport': 28,
-'tcopy': 28,
-'texas': 28,
-'tnine': 28,
-'untry': 28,
-'upply': 28,
-'uters': 28,
-'years': 28,
-'after': 27,
-'alace': 27,
-'ative': 27,
-'bound': 27,
-'craft': 27,
-'death': 27,
-'dhead': 27,
-'dword': 27,
-'eleft': 27,
-'enjoy': 27,
-'faith': 27,
-'fixed': 27,
-'hands': 27,
-'heavy': 27,
-'korea': 27,
-'nbear': 27,
-'nthis': 27,
-'reply': 27,
-'thigh': 27,
-'tjump': 27,
-'topia': 27,
-'trong': 27,
-'welry': 27,
-'yours': 27,
-'-club': 26,
-'adise': 26,
-'alert': 26,
-'apply': 26,
-'aprop': 26,
-'award': 26,
-'ckets': 26,
-'dings': 26,
-'egrow': 26,
-'eless': 26,
-'etnam': 26,
-'ezero': 26,
-'going': 26,
-'guild': 26,
-'ideal': 26,
-'judge': 26,
-'merit': 26,
-'nable': 26,
-'nsaat': 26,
-'nvest': 26,
-'nwear': 26,
-'overs': 26,
-'owner': 26,
-'sions': 26,
-'sults': 26,
-'verse': 26,
-'votes': 26,
-'-info': 25,
-'blogs': 25,
-'dbits': 25,
-'dhits': 25,
-'dzero': 25,
-'ecret': 25,
-'eleaf': 25,
-'erace': 25,
-'erapy': 25,
-'eread': 25,
-'esale': 25,
-'fault': 25,
-'focus': 25,
-'grind': 25,
-'iance': 25,
-'iends': 25,
-'lives': 25,
-'mages': 25,
-'ondon': 25,
-'plane': 25,
-'shape': 25,
-'tbank': 25,
-'three': 25,
-'total': 25,
-'urvey': 25,
-'users': 25,
-'which': 25,
-'-life': 24,
-'arden': 24,
-'awyer': 24,
-'cases': 24,
-'click': 24,
-'dbyte': 24,
-'dcopy': 24,
-'discs': 24,
-'dvice': 24,
-'earmy': 24,
-'elief': 24,
-'ethis': 24,
-'found': 24,
-'hurch': 24,
-'ities': 24,
-'lline': 24,
-'lplan': 24,
-'moves': 24,
-'nders': 24,
-'nhigh': 24,
-'octor': 24,
-'oking': 24,
-'otech': 24,
-'other': 24,
-'pment': 24,
-'puter': 24,
-'rtune': 24,
-'ruise': 24,
-'rwear': 24,
-'scrap': 24,
-'shing': 24,
-'sight': 24,
-'small': 24,
-'sshop': 24,
-'taway': 24,
-'tband': 24,
-'thead': 24,
-'throw': 24,
-'tment': 24,
-'trial': 24,
-'turns': 24,
-'using': 24,
-'wrong': 24,
-'yface': 24,
-'-line': 23,
-'altor': 23,
-'anews': 23,
-'arise': 23,
-'basis': 23,
-'beach': 23,
-'being': 23,
-'cares': 23,
-'cause': 23,
-'crash': 23,
-'ddesk': 23,
-'dfeed': 23,
-'dflow': 23,
-'dtype': 23,
-'edump': 23,
-'ehear': 23,
-'email': 23,
-'eneed': 23,
-'enews': 23,
-'erson': 23,
-'eunit': 23,
-'gains': 23,
-'grace': 23,
-'inter': 23,
-'locks': 23,
-'nbits': 23,
-'ofits': 23,
-'omain': 23,
-'orage': 23,
-'otion': 23,
-'rials': 23,
-'sells': 23,
-'shirt': 23,
-'ssage': 23,
-'ssion': 23,
-'stick': 23,
-'tants': 23,
-'tates': 23,
-'tbits': 23,
-'tdeep': 23,
-'treet': 23,
-'uture': 23,
-'venue': 23,
-'ydata': 23,
-'ywear': 23,
-'actor': 22,
-'adopt': 22,
-'attle': 22,
-'bites': 22,
-'drace': 22,
-'dstep': 22,
-'ebars': 22,
-'eblue': 22,
-'eries': 22,
-'ewise': 22,
-'guess': 22,
-'haber': 22,
-'ircle': 22,
-'iture': 22,
-'kline': 22,
-'kwear': 22,
-'ldata': 22,
-'lwear': 22,
-'mouth': 22,
-'nshop': 22,
-'nstep': 22,
-'ntune': 22,
-'parks': 22,
-'quiet': 22,
-'rasil': 22,
-'rface': 22,
-'rplan': 22,
-'stars': 22,
-'tarea': 22,
-'tback': 22,
-'treme': 22,
-'trick': 22,
-'ttrue': 22,
-'tview': 22,
-'wants': 22,
-'wards': 22,
-'wfirm': 22,
-'yball': 22,
-'ybank': 22,
-'acker': 21,
-'agent': 21,
-'ality': 21,
-'babes': 21,
-'chips': 21,
-'clips': 21,
-'dback': 21,
-'dband': 21,
-'dface': 21,
-'dfirm': 21,
-'dhigh': 21,
-'enine': 21,
-'ernet': 21,
-'every': 21,
-'habit': 21,
-'idays': 21,
-'iller': 21,
-'later': 21,
-'lland': 21,
-'march': 21,
-'marry': 21,
-'mited': 21,
-'nclub': 21,
-'nfeed': 21,
-'nhead': 21,
-'nrise': 21,
-'oline': 21,
-'ounds': 21,
-'pline': 21,
-'rader': 21,
-'raphy': 21,
-'skill': 21,
-'story': 21,
-'swear': 21,
-'tbase': 21,
-'tbugs': 21,
-'tdisc': 21,
-'tflow': 21,
-'think': 21,
-'tjobs': 21,
-'union': 21,
-'vista': 21,
-'yhead': 21,
-'ytalk': 21,
-'4life': 20,
-'amera': 20,
-'ature': 20,
-'blank': 20,
-'dbank': 20,
-'doing': 20,
-'dozen': 20,
-'dwide': 20,
-'eboat': 20,
-'ecity': 20,
-'efolk': 20,
-'epark': 20,
-'erage': 20,
-'etown': 20,
-'etrue': 20,
-'final': 20,
-'finds': 20,
-'ierge': 20,
-'jones': 20,
-'kdata': 20,
-'kills': 20,
-'lable': 20,
-'lding': 20,
-'llbet': 20,
-'mance': 20,
-'maybe': 20,
-'nbank': 20,
-'nbyte': 20,
-'ntalk': 20,
-'odels': 20,
-'ounge': 20,
-'pirit': 20,
-'pizza': 20,
-'polis': 20,
-'posts': 20,
-'sline': 20,
-'slist': 20,
-'stalk': 20,
-'tapes': 20,
-'tdoor': 20,
-'tneed': 20,
-'trees': 20,
-'tspot': 20,
-'under': 20,
-'woods': 20,
-'ybear': 20,
-'yread': 20,
-'yzero': 20,
-'annel': 19,
-'anner': 19,
-'broke': 19,
-'cking': 19,
-'dbear': 19,
-'dbook': 19,
-'dical': 19,
-'ecall': 19,
-'ecard': 19,
-'ejobs': 19,
-'eking': 19,
-'epage': 19,
-'epoet': 19,
-'ewine': 19,
-'hones': 19,
-'inner': 19,
-'kspot': 19,
-'lbits': 19,
-'lfeed': 19,
-'maker': 19,
-'mixed': 19,
-'narea': 19,
-'nbest': 19,
-'nitor': 19,
-'novel': 19,
-'nread': 19,
-'nture': 19,
-'nview': 19,
-'offee': 19,
-'onkey': 19,
-'oster': 19,
-'ourse': 19,
-'owing': 19,
-'proxy': 19,
-'rbear': 19,
-'scafe': 19,
-'sdata': 19,
-'shine': 19,
-'sizes': 19,
-'talia': 19,
-'tfine': 19,
-'these': 19,
-'tkeep': 19,
-'tleaf': 19,
-'tlife': 19,
-'tooth': 19,
-'tores': 19,
-'traps': 19,
-'urnal': 19,
-'vings': 19,
-'ybits': 19,
-'ybyte': 19,
-'yfeed': 19,
-'yjump': 19,
-'yking': 19,
-'yshop': 19,
-'-clan': 18,
-'-host': 18,
-'althy': 18,
-'arage': 18,
-'bilya': 18,
-'bsite': 18,
-'cious': 18,
-'coach': 18,
-'daway': 18,
-'dleaf': 18,
-'drops': 18,
-'dubai': 18,
-'ebids': 18,
-'eblog': 18,
-'eblow': 18,
-'ebody': 18,
-'ecorp': 18,
-'efear': 18,
-'elife': 18,
-'ender': 18,
-'enear': 18,
-'entre': 18,
-'epoem': 18,
-'esort': 18,
-'ewalk': 18,
-'hting': 18,
-'ising': 18,
-'itech': 18,
-'kface': 18,
-'layer': 18,
-'llair': 18,
-'lview': 18,
-'mwear': 18,
-'nband': 18,
-'nment': 18,
-'nters': 18,
-'ohbet': 18,
-'orida': 18,
-'refer': 18,
-'rhigh': 18,
-'rning': 18,
-'sfeed': 18,
-'shall': 18,
-'smith': 18,
-'spots': 18,
-'stics': 18,
-'tcard': 18,
-'tchen': 18,
-'tclub': 18,
-'tdump': 18,
-'tlong': 18,
-'tmine': 18,
-'urces': 18,
-'useum': 18,
-'weeks': 18,
-'weird': 18,
-'whole': 18,
-'would': 18,
-'yclub': 18,
-'yhigh': 18,
-'alter': 17,
-'astle': 17,
-'ators': 17,
-'bingo': 17,
-'bliss': 17,
-'caret': 17,
-'cheng': 17,
-'corts': 17,
-'crete': 17,
-'crisp': 17,
-'dbugs': 17,
-'dmine': 17,
-'dsize': 17,
-'dwine': 17,
-'ebill': 17,
-'ecafe': 17,
-'ecare': 17,
-'ector': 17,
-'egypt': 17,
-'ehelp': 17,
-'einfo': 17,
-'eloan': 17,
-'eneck': 17,
-'equal': 17,
-'erate': 17,
-'erman': 17,
-'etune': 17,
-'falls': 17,
-'frica': 17,
-'globe': 17,
-'gross': 17,
-'harma': 17,
-'holes': 17,
-'holic': 17,
-'ilder': 17,
-'inema': 17,
-'kings': 17,
-'kplan': 17,
-'lbear': 17,
-'lbyte': 17,
-'lease': 17,
-'lleye': 17,
-'llfun': 17,
-'lzero': 17,
-'nball': 17,
-'ncard': 17,
-'ndesk': 17,
-'nique': 17,
-'nnews': 17,
-'ntage': 17,
-}
-SUFFIX_SCORES[6] = {
-'online': 835,
-'design': 247,
-'travel': 135,
-'utions': 123,
-'energy': 111,
-'esigns': 110,
-'videos': 105,
-'ations': 98,
-'review': 95,
-'ctions': 91,
-'osting': 90,
-'studio': 90,
-'ompany': 89,
-'sports': 86,
-'center': 84,
-'ulting': 82,
-'gazine': 81,
-'global': 78,
-'ervice': 75,
-'direct': 74,
-'etwork': 74,
-'search': 73,
-'market': 72,
-'family': 70,
-'rvices': 70,
-'tworks': 70,
-'school': 68,
-'ollege': 67,
-'health': 66,
-'keting': 66,
-'ystems': 66,
-'ection': 62,
-'entals': 61,
-'realty': 60,
-'mobile': 58,
-'cation': 57,
-'ecords': 57,
-'xpress': 56,
-'lution': 55,
-'uction': 55,
-'ftware': 54,
-'hotels': 52,
-'urance': 52,
-'events': 50,
-'system': 50,
-'gaming': 49,
-'siness': 47,
-'vision': 47,
-'entral': 46,
-'apital': 45,
-'nation': 45,
-'prises': 45,
-'racing': 44,
-'merica': 43,
-'portal': 43,
-'tation': 42,
-'change': 41,
-'ebooks': 41,
-'estate': 41,
-'server': 41,
-'ashion': 40,
-'casino': 40,
-'movies': 40,
-'stoday': 40,
-'stries': 40,
-'yspace': 40,
-'houses': 39,
-'operty': 38,
-'achine': 37,
-'aining': 37,
-'beauty': 37,
-'ration': 37,
-'roject': 37,
-'splace': 37,
-'onsult': 36,
-'utique': 36,
-'ancial': 35,
-'igital': 35,
-'omains': 35,
-'rprise': 35,
-'allery': 34,
-'erties': 34,
-'tudios': 34,
-'curity': 33,
-'dvisor': 33,
-'inting': 33,
-'motors': 33,
-'rtgage': 33,
-'source': 33,
-'-group': 32,
-'agency': 32,
-'finder': 32,
-'itness': 32,
-'office': 32,
-'othing': 32,
-'photos': 32,
-'planet': 32,
-'clinic': 31,
-'report': 31,
-'rtners': 31,
-'tional': 31,
-'zanesi': 31,
-'aphics': 30,
-'forums': 30,
-'living': 30,
-'oducts': 30,
-'tdeals': 30,
-'canada': 29,
-'credit': 29,
-'eworks': 29,
-'onnect': 29,
-'rading': 29,
-'tments': 29,
-'tspace': 29,
-'tvideo': 29,
-'edeals': 28,
-'eworld': 28,
-'ilders': 28,
-'people': 28,
-'puters': 28,
-'supply': 28,
-'eather': 27,
-'eplace': 27,
-'espace': 27,
-'ewelry': 27,
-'master': 27,
-'munity': 27,
-'palace': 27,
-'strong': 27,
-'sworld': 27,
-'tbooks': 27,
-'upport': 27,
-'ciates': 26,
-'ending': 26,
-'estore': 26,
-'evideo': 26,
-'ietnam': 26,
-'inance': 26,
-'insaat': 26,
-'invest': 26,
-'lowers': 26,
-'ronics': 26,
-'tplace': 26,
-'uccess': 26,
-'actory': 25,
-'ctures': 25,
-'dreams': 25,
-'ectory': 25,
-'ehouse': 25,
-'etoday': 25,
-'eviews': 25,
-'herapy': 25,
-'hunter': 25,
-'london': 25,
-'mation': 25,
-'ngroup': 25,
-'radise': 25,
-'rspace': 25,
-'secret': 25,
-'survey': 25,
-'ydeals': 25,
-'action': 24,
-'church': 24,
-'cruise': 24,
-'doctor': 24,
-'esults': 24,
-'lawyer': 24,
-'liance': 24,
-'nbooks': 24,
-'nspace': 24,
-'opping': 24,
-'ountry': 24,
-'riends': 24,
-'ealtor': 23,
-'emusic': 23,
-'gement': 23,
-'island': 23,
-'mputer': 23,
-'nmusic': 23,
-'ntures': 23,
-'sgroup': 23,
-'street': 23,
-'wnload': 23,
-'-world': 22,
-'brasil': 22,
-'circle': 22,
-'garden': 22,
-'relief': 22,
-'repair': 22,
-'states': 22,
-'tscene': 22,
-'tstuff': 22,
-'xtreme': 22,
-'-hotel': 21,
-'active': 21,
-'ddeals': 21,
-'egroup': 21,
-'estyle': 21,
-'imited': 21,
-'niture': 21,
-'nology': 21,
-'rental': 21,
-'tering': 21,
-'tgroup': 21,
-'yplace': 21,
-'ystuff': 21,
-'access': 20,
-'advice': 20,
-'agroup': 20,
-'dation': 20,
-'dental': 20,
-'illage': 20,
-'images': 20,
-'ishing': 20,
-'lounge': 20,
-'models': 20,
-'nstuff': 20,
-'spirit': 20,
-'trader': 20,
-'wpages': 20,
-'-china': 19,
-'-music': 19,
-'anking': 19,
-'camera': 19,
-'dbooks': 19,
-'domain': 19,
-'dplace': 19,
-'dworks': 19,
-'emedia': 19,
-'eserve': 19,
-'flower': 19,
-'graphy': 19,
-'hannel': 19,
-'iverse': 19,
-'motion': 19,
-'nworks': 19,
-'reless': 19,
-'sstore': 19,
-'tfirst': 19,
-'torage': 19,
-'twatch': 19,
-'valley': 19,
-'wealth': 19,
-'avenue': 18,
-'cierge': 18,
-'coffee': 18,
-'ealthy': 18,
-'edical': 18,
-'egames': 18,
-'elegal': 18,
-'enture': 18,
-'ewatch': 18,
-'lidays': 18,
-'lorida': 18,
-'museum': 18,
-'nvideo': 18,
-'obilya': 18,
-'ogroup': 18,
-'onitor': 18,
-'ources': 18,
-'phones': 18,
-'rofits': 18,
-'tindex': 18,
-'tmoney': 18,
-'tmusic': 18,
-'tstudy': 18,
-'ytoday': 18,
-'ywatch': 18,
-'-books': 17,
-'africa': 17,
-'asters': 17,
-'avings': 17,
-'awyers': 17,
-'broker': 17,
-'castle': 17,
-'centre': 17,
-'dating': 17,
-'dspace': 17,
-'ebsite': 17,
-'eguide': 17,
-'elogic': 17,
-'emagic': 17,
-'esense': 17,
-'europe': 17,
-'france': 17,
-'ghting': 17,
-'icaret': 17,
-'iphone': 17,
-'itchen': 17,
-'logies': 17,
-'ndeals': 17,
-'nloads': 17,
-'nlogic': 17,
-'nplace': 17,
-'ournal': 17,
-'rworks': 17,
-'sbooks': 17,
-'scorts': 17,
-'sfirst': 17,
-'smusic': 17,
-'sohbet': 17,
-'ternet': 17,
-'tmatch': 17,
-'tsense': 17,
-'ttoday': 17,
-'ybooks': 17,
-'ymagic': 17,
-'ymatch': 17,
-'yworks': 17,
-'-forum': 16,
-'awfirm': 16,
-'bridge': 16,
-'course': 16,
-'dicine': 16,
-'driver': 16,
-'eative': 16,
-'elecom': 16,
-'engine': 16,
-'ersity': 16,
-'gtoday': 16,
-'iamond': 16,
-'iation': 16,
-'ickets': 16,
-'irtual': 16,
-'ltants': 16,
-'method': 16,
-'mexico': 16,
-'ngames': 16,
-'nmedia': 16,
-'nmodel': 16,
-'ntable': 16,
-'racker': 16,
-'rdeals': 16,
-'resort': 16,
-'rplace': 16,
-'safety': 16,
-'seball': 16,
-'svideo': 16,
-'tgoods': 16,
-'tguide': 16,
-'thotel': 16,
-'tlogic': 16,
-'tories': 16,
-'tserve': 16,
-'weekly': 16,
-'xperts': 16,
-'yfirst': 16,
-'yvideo': 16,
-'altors': 15,
-'anager': 15,
-'arning': 15,
-'cademy': 15,
-'condos': 15,
-'corner': 15,
-'dvideo': 15,
-'ectric': 15,
-'efirst': 15,
-'eforum': 15,
-'emoney': 15,
-'estuff': 15,
-'garcia': 15,
-'heatre': 15,
-'heaven': 15,
-'italia': 15,
-'ldings': 15,
-'lldata': 15,
-'marine': 15,
-'matrix': 15,
-'ncepts': 15,
-'nerals': 15,
-'nhouse': 15,
-'nsport': 15,
-'nworld': 15,
-'omedia': 15,
-'ontrol': 15,
-'ooking': 15,
-'ortune': 15,
-'otball': 15,
-'pharma': 15,
-'reklam': 15,
-'rlines': 15,
-'rpeace': 15,
-'select': 15,
-'sguide': 15,
-'strace': 15,
-'stream': 15,
-'sttalk': 15,
-'taylor': 15,
-'tfresh': 15,
-'thappy': 15,
-'things': 15,
-'tmagic': 15,
-'tmedia': 15,
-'torney': 15,
-'towing': 15,
-'trooms': 15,
-'turkey': 15,
-'ustoms': 15,
-'ygirls': 15,
-'ysense': 15,
-'-japan': 14,
-'-media': 14,
-'-video': 14,
-'amusic': 14,
-'armacy': 14,
-'artner': 14,
-'athome': 14,
-'attoos': 14,
-'bazaar': 14,
-'chools': 14,
-'dealer': 14,
-'dgroup': 14,
-'dizayn': 14,
-'dlogic': 14,
-'dmagic': 14,
-'ematch': 14,
-'emodel': 14,
-'esales': 14,
-'expert': 14,
-'future': 14,
-'galaxy': 14,
-'garage': 14,
-'genius': 14,
-'hoenix': 14,
-'iaprop': 14,
-'ilisim': 14,
-'lgroup': 14,
-'llwear': 14,
-'logger': 14,
-'mateur': 14,
-'nhomes': 14,
-'nmagic': 14,
-'ospace': 14,
-'others': 14,
-'otions': 14,
-'pparel': 14,
-'rescue': 14,
-'rganic': 14,
-'rhouse': 14,
-'rizona': 14,
-'rmance': 14,
-'rmatch': 14,
-'script': 14,
-'shoppe': 14,
-'stline': 14,
-'tlucky': 14,
-'tphone': 14,
-'tstaff': 14,
-'ulture': 14,
-'unding': 14,
-'ygoods': 14,
-'ygroup': 14,
-'yradio': 14,
-'-board': 13,
-'-store': 13,
-'actors': 13,
-'angels': 13,
-'atches': 13,
-'aurant': 13,
-'career': 13,
-'dmodel': 13,
-'dtoday': 13,
-'dustry': 13,
-'dwatch': 13,
-'echeap': 13,
-'ecrets': 13,
-'ecycle': 13,
-'ehomes': 13,
-'ehotel': 13,
-'emovie': 13,
-'eports': 13,
-'esting': 13,
-'ewater': 13,
-'export': 13,
-'foryou': 13,
-'gamers': 13,
-'gplace': 13,
-'icious': 13,
-'isayar': 13,
-'kansas': 13,
-'ldwide': 13,
-'lights': 13,
-'miller': 13,
-'monkey': 13,
-'nalbum': 13,
-'nature': 13,
-'ncycle': 13,
-'nguide': 13,
-'nserve': 13,
-'nspeed': 13,
-'ntalks': 13,
-'ntials': 13,
-'nwater': 13,
-'omotiv': 13,
-'omusic': 13,
-'oncept': 13,
-'onight': 13,
-'opolis': 13,
-'orever': 13,
-'ostore': 13,
-'otline': 13,
-'ourism': 13,
-'player': 13,
-'rhomes': 13,
-'ritasi': 13,
-'rition': 13,
-'scards': 13,
-'shomes': 13,
-'soccer': 13,
-'stores': 13,
-'tcheap': 13,
-'tdrive': 13,
-'tgraph': 13,
-'tguard': 13,
-'tising': 13,
-'tlanta': 13,
-'tmodel': 13,
-'tsales': 13,
-'tspeed': 13,
-'tstore': 13,
-'twater': 13,
-'urkiye': 13,
-'ymusic': 13,
-'yworld': 13,
-'-games': 12,
-'-girls': 12,
-'affair': 12,
-'ahomes': 12,
-'anlong': 12,
-'antage': 12,
-'areers': 12,
-'arkets': 12,
-'assage': 12,
-'ateway': 12,
-'carpet': 12,
-'cinema': 12,
-'ciones': 12,
-'dpress': 12,
-'dscene': 12,
-'dsense': 12,
-'eality': 12,
-'eating': 12,
-'eboard': 12,
-'efense': 12,
-'ekstil': 12,
-'eorgia': 12,
-'epatch': 12,
-'george': 12,
-'ground': 12,
-'groups': 12,
-'herbal': 12,
-'ichael': 12,
-'ingdom': 12,
-'ingles': 12,
-'inment': 12,
-'ipment': 12,
-'irport': 12,
-'ission': 12,
-'llable': 12,
-'llbits': 12,
-'llfeed': 12,
-'lliams': 12,
-'llline': 12,
-'llness': 12,
-'llplan': 12,
-'llzero': 12,
-'lorado': 12,
-'ncrete': 12,
-'ndmore': 12,
-'nfirst': 12,
-'ngoods': 12,
-'nhotel': 12,
-'nmatch': 12,
-'nsense': 12,
-'octors': 12,
-'ogames': 12,
-'oofing': 12,
-'opment': 12,
-'orsale': 12,
-'otwear': 12,
-'owatch': 12,
-'prayer': 12,
-'raffic': 12,
-'rategy': 12,
-'ravels': 12,
-'rchive': 12,
-'reedom': 12,
-'rgirls': 12,
-'rgoods': 12,
-'rgroup': 12,
-'rlogic': 12,
-'rmagic': 12,
-'sgames': 12,
-'signer': 12,
-'sstuff': 12,
-'stable': 12,
-'stbear': 12,
-'stdata': 12,
-'stings': 12,
-'stival': 12,
-'tahead': 12,
-'tanbul': 12,
-'tclear': 12,
-'tfunny': 12,
-'tgirls': 12,
-'tlands': 12,
-'tlight': 12,
-'tmarks': 12,
-'tronic': 12,
-'tsharp': 12,
-'uilder': 12,
-'united': 12,
-'yfresh': 12,
-'yfront': 12,
-'ymodel': 12,
-'ystaff': 12,
-'ystudy': 12,
-'aching': 11,
-'addict': 11,
-'agents': 11,
-'ailers': 11,
-'alaska': 11,
-'amedia': 11,
-'anclub': 11,
-'ardens': 11,
-'asting': 11,
-'atalog': 11,
-'attack': 11,
-'avideo': 11,
-'cgroup': 11,
-'choice': 11,
-'counts': 11,
-'cripts': 11,
-'dcheap': 11,
-'deluxe': 11,
-'diesel': 11,
-'dmusic': 11,
-'dragon': 11,
-'eaners': 11,
-'edepot': 11,
-'elight': 11,
-'ements': 11,
-'epages': 11,
-'epairs': 11,
-'epoker': 11,
-'eradio': 11,
-'eranch': 11,
-'estock': 11,
-'filter': 11,
-'flight': 11,
-'galore': 11,
-'growth': 11,
-'hamber': 11,
-'iction': 11,
-'idence': 11,
-'indows': 11,
-'ington': 11,
-'ipping': 11,
-'israel': 11,
-'jersey': 11,
-'latino': 11,
-'ldeals': 11,
-'liates': 11,
-'llbyte': 11,
-'llhigh': 11,
-'llview': 11,
-'lovers': 11,
-'lplace': 11,
-'lyrics': 11,
-'nandez': 11,
-'nfresh': 11,
-'nglish': 11,
-'ngraph': 11,
-'nindex': 11,
-'nistry': 11,
-'nlabel': 11,
-'nlinea': 11,
-'npress': 11,
-'nsales': 11,
-'nswers': 11,
-'nzalez': 11,
-'offers': 11,
-'oguide': 11,
-'onster': 11,
-'orange': 11,
-'orlife': 11,
-'orocco': 11,
-'ouncil': 11,
-'oupons': 11,
-'outlet': 11,
-'oworld': 11,
-'ptions': 11,
-'puting': 11,
-'raphic': 11,
-'rcourt': 11,
-'result': 11,
-'rfront': 11,
-'rhotel': 11,
-'rindex': 11,
-'rmusic': 11,
-'rogram': 11,
-'rparts': 11,
-'rstore': 11,
-'rstuff': 11,
-'rvideo': 11,
-'sdeals': 11,
-'sex911': 11,
-'spital': 11,
-'stfeed': 11,
-'stment': 11,
-'ststep': 11,
-'stwear': 11,
-'swatch': 11,
-'tabout': 11,
-'talarm': 11,
-'tattoo': 11,
-'tcards': 11,
-'tcatch': 11,
-'tdream': 11,
-'tforms': 11,
-'tgames': 11,
-'thandy': 11,
-'timage': 11,
-'tlabel': 11,
-'tlegal': 11,
-'tlunch': 11,
-'tpoint': 11,
-'tralia': 11,
-'trapid': 11,
-'troute': 11,
-'ttitle': 11,
-'ttopic': 11,
-'utdoor': 11,
-'visors': 11,
-'window': 11,
-'yclear': 11,
-'ycycle': 11,
-'yhappy': 11,
-'yindex': 11,
-'ylegal': 11,
-'ylight': 11,
-'ylogic': 11,
-'ynames': 11,
-'ynergy': 11,
-'ypoint': 11,
-'yscene': 11,
-'yspeed': 11,
-'ystore': 11,
-'ywoman': 11,
-'-audio': 10,
-'-guide': 10,
-'-guild': 10,
-'-house': 10,
-'-india': 10,
-'-model': 10,
-'ackers': 10,
-'adtalk': 10,
-'ailand': 10,
-'amonds': 10,
-'anning': 10,
-'arwear': 10,
-'assist': 10,
-'asures': 10,
-'atings': 10,
-'atplan': 10,
-'attery': 10,
-'atural': 10,
-'bakery': 10,
-'beyond': 10,
-'bility': 10,
-'boards': 10,
-'brazil': 10,
-'bsites': 10,
-'burada': 10,
-'campus': 10,
-'ccount': 10,
-'celebs': 10,
-'colate': 10,
-'comics': 10,
-'county': 10,
-'crafts': 10,
-'dayspa': 10,
-'deling': 10,
-'dfirst': 10,
-'dgoods': 10,
-'dguard': 10,
-'dguide': 10,
-'dmatch': 10,
-'dstaff': 10,
-'ealers': 10,
-'eaning': 10,
-'eapple': 10,
-'edding': 10,
-'edikal': 10,
-'eeting': 10,
-'efilms': 10,
-'efresh': 10,
-'efront': 10,
-'egifts': 10,
-'ehappy': 10,
-'ehberi': 10,
-'eindex': 10,
-'elabel': 10,
-'elinks': 10,
-'eloans': 10,
-'emarks': 10,
-'emetal': 10,
-'enames': 10,
-'enders': 10,
-'ension': 10,
-'epress': 10,
-'erblog': 10,
-'ercial': 10,
-'erials': 10,
-'erline': 10,
-'ervers': 10,
-'esolve': 10,
-'esorts': 10,
-'esplan': 10,
-'etball': 10,
-'etrade': 10,
-'exikon': 10,
-'factor': 10,
-'fusion': 10,
-'gratis': 10,
-'greece': 10,
-'gworks': 10,
-'hawaii': 10,
-'heater': 10,
-'hinese': 10,
-'hopper': 10,
-'ibrary': 10,
-'income': 10,
-'insesi': 10,
-'irline': 10,
-'irways': 10,
-'istory': 10,
-'ivirus': 10,
-'jewels': 10,
-'junkie': 10,
-'kontor': 10,
-'lasses': 10,
-'launch': 10,
-'leader': 10,
-'legacy': 10,
-'livery': 10,
-'llaway': 10,
-'llbear': 10,
-'llenge': 10,
-'llface': 10,
-'logist': 10,
-'lombia': 10,
-'lookup': 10,
-'lothes': 10,
-'makeup': 10,
-'martin': 10,
-'mories': 10,
-'mworks': 10,
-'nagain': 10,
-'ncheap': 10,
-'nchina': 10,
-'ngerie': 10,
-'nhorse': 10,
-'nights': 10,
-'nlegal': 10,
-'nmarks': 10,
-'nnames': 10,
-'nrooms': 10,
-'nscene': 10,
-'nstudy': 10,
-'nsugar': 10,
-'nwatch': 10,
-'ociety': 10,
-'ograms': 10,
-'ograph': 10,
-'olding': 10,
-'olight': 10,
-'ooring': 10,
-'oparts': 10,
-'osales': 10,
-'ottery': 10,
-'peline': 10,
-'plates': 10,
-'plorer': 10,
-'pplier': 10,
-'pplies': 10,
-'prices': 10,
-'public': 10,
-'redisc': 10,
-'rehber': 10,
-'remium': 10,
-'rgames': 10,
-'ridges': 10,
-'rights': 10,
-'rkshop': 10,
-'roduct': 10,
-'rokers': 10,
-'rspeed': 10,
-'scount': 10,
-'sepeti': 10,
-'sitesi': 10,
-'skills': 10,
-'smedia': 10,
-'smiles': 10,
-'spider': 10,
-'square': 10,
-'ssions': 10,
-'stbyte': 10,
-'stones': 10,
-'stplan': 10,
-'strict': 10,
-'stsafe': 10,
-'sworks': 10,
-'talong': 10,
-'tavern': 10,
-'tennis': 10,
-'tglass': 10,
-'thomas': 10,
-'titute': 10,
-'tlooks': 10,
-'tpages': 10,
-'tpaper': 10,
-'tproof': 10,
-'trails': 10,
-'trucks': 10,
-'tshirt': 10,
-'turizm': 10,
-'tvoice': 10,
-'umbing': 10,
-'untain': 10,
-'unters': 10,
-'unting': 10,
-'unyasi': 10,
-'yachts': 10,
-'ycheap': 10,
-'ygames': 10,
-'ygreen': 10,
-'yhouse': 10,
-'ymedia': 10,
-'ymoney': 10,
-'ysales': 10,
-'ything': 10,
-'ytimes': 10,
-}
-SUFFIX_SCORES[7] = {
-'sonline': 152,
-'-online': 125,
-'company': 89,
-'agazine': 80,
-'college': 67,
-'eonline': 67,
-'rentals': 61,
-'nonline': 50,
-'tonline': 47,
-'aonline': 46,
-'etworks': 45,
-'ronline': 42,
-'machine': 37,
-'yonline': 37,
-'consult': 36,
-'outique': 35,
-'studios': 34,
-'advisor': 33,
-'erprise': 32,
-'czanesi': 31,
-'jewelry': 27,
-'donline': 26,
-'vietnam': 26,
-'aradise': 25,
-'therapy': 25,
-'country': 24,
-'results': 24,
-'konline': 23,
-'myspace': 23,
-'lonline': 22,
-'channel': 19,
-'ereview': 18,
-'florida': 18,
-'hnology': 18,
-'ionline': 18,
-'mobilya': 18,
-'ncierge': 18,
-'profits': 18,
-'conline': 17,
-'gonline': 17,
-'kitchen': 17,
-'monline': 17,
-'niverse': 17,
-'ticaret': 17,
-'-videos': 16,
-'diamond': 16,
-'edicine': 16,
-'extreme': 16,
-'honline': 16,
-'oonline': 16,
-'virtual': 16,
-'academy': 15,
-'healthy': 15,
-'lawfirm': 15,
-'lectric': 15,
-'ography': 15,
-'oncepts': 15,
-'theatre': 15,
-'-energy': 14,
-'apparel': 14,
-'arizona': 14,
-'bilisim': 14,
-'control': 14,
-'harmacy': 14,
-'organic': 14,
-'phoenix': 14,
-'renergy': 14,
-'tattoos': 14,
-'amateur': 13,
-'aritasi': 13,
-'atlanta': 13,
-'customs': 13,
-'eenergy': 13,
-'entials': 13,
-'epublic': 13,
-'evideos': 13,
-'gisayar': 13,
-'licious': 13,
-'ndustry': 13,
-'tomotiv': 13,
-'tourism': 13,
-'turkiye': 13,
-'wonline': 13,
-'xonline': 13,
-'zonline': 13,
-'defense': 12,
-'fortune': 12,
-'freedom': 12,
-'georgia': 12,
-'kingdom': 12,
-'michael': 12,
-'olorado': 12,
-'rvideos': 12,
-'tekstil': 12,
-'traffic': 12,
-'trategy': 12,
-'council': 11,
-'erspace': 11,
-'graphic': 11,
-'inistry': 11,
-'morocco': 11,
-'onzalez': 11,
-'program': 11,
-'rnandez': 11,
-'scripts': 11,
-'stanbul': 11,
-'stralia': 11,
-'synergy': 11,
-'uonline': 11,
-'-review': 10,
-'airline': 10,
-'chinese': 10,
-'dunyasi': 10,
-'enlinea': 10,
-'estival': 10,
-'etplace': 10,
-'fonline': 10,
-'ingerie': 10,
-'lexikon': 10,
-'medikal': 10,
-'olombia': 10,
-'oncrete': 10,
-'ponline': 10,
-'premium': 10,
-'product': 10,
-'rehberi': 10,
-'society': 10,
-'stitute': 10,
-'upplier': 10,
-'xplorer': 10,
-}
-SUFFIX_SCORES[8] = {
-'magazine': 80,
-'tography': 60,
-'networks': 41,
-'boutique': 35,
-'terprise': 32,
-'eczanesi': 31,
-'eronline': 26,
-'paradise': 25,
-'esonline': 23,
-'s-online': 22,
-'tsonline': 21,
-'chnology': 18,
-'oncierge': 18,
-'universe': 17,
-'medicine': 16,
-'concepts': 15,
-'e-online': 15,
-'electric': 15,
-'lsonline': 14,
-'pharmacy': 14,
-'anonline': 13,
-'haritasi': 13,
-'industry': 13,
-'lgisayar': 13,
-'n-online': 13,
-'otomotiv': 13,
-'-company': 12,
-'colorado': 12,
-'strategy': 12,
-'asonline': 11,
-'ernandez': 11,
-'gonzalez': 11,
-'ministry': 11,
-'nsonline': 11,
-'reonline': 11,
-'rsonline': 11,
-'scompany': 11,
-'stonline': 11,
-'ustralia': 11,
-'colombia': 10,
-'concrete': 10,
-'etonline': 10,
-'explorer': 10,
-'eyonline': 10,
-'festival': 10,
-'iaonline': 10,
-'istanbul': 10,
-'lingerie': 10,
-'neonline': 10,
-'ngonline': 10,
-'ononline': 10,
-'republic': 10,
-'sentials': 10,
-'supplier': 10,
-}
-SUFFIX_SCORES[9] = {
-'otography': 60,
-'nterprise': 32,
-'concierge': 18,
-'echnology': 18,
-'ilgisayar': 13,
-'emagazine': 12,
-'australia': 11,
-'hernandez': 10,
-'ssentials': 10,
-'ymagazine': 10,
-}
-SUFFIX_MAXIMUMS = {3: 2374, 4: 1326, 5: 869, 6: 835, 7: 152, 8: 80, 9: 60}
-SUFFIX_TOTALS = {3: 135235, 4: 78709, 5: 41818, 6: 18478, 7: 2701, 8: 912, 9: 194}
+for index, name in enumerate("""
+es er an ll re et st ng ar te nd in en on le it ay me at ce se ed ck
+ow op rt al ve ts ot ds ad de us or nt rs ss ia ch as ge ns id am sh
+is il up ee ic ly og ks ix nk ry ir rd ys ty om ex rk ap aw ut el os
+ip rm na ro fe ta ie ke ms ey ea ra ft sa ok pe ur dy ew ps oy ol ue
+ox ws gs um ou co go ub wn bs im sk uy ct em no be la do eb io cs da
+ma nc ob ax lk ff ak ny my ep 88 he by ca ht ag ka ai rn ri ni ug so
+sy fo ab ao eo ec gn ya rl ig ki ye ac ti mo lo xt ik ba si of pa ga
+lf lt ze py to lm ha va rp ho hi mi lp ky ah ez dd wo we ul 99 uk ei
+24 ru di 4u tt sc cy cn du gy bo oc ci hy az nn 11 68 xx za lc ko 23
+pc if 01 po gh lu 20 zy af vi 66 tz 08 aa pt ef ku cc oe 10 18 xy sm
+ov ua 14 zz 21 tu wa ev ji 65 sp gi mm ud ui ja rc rr 77 zi ii td sf
+dc fa au xi rg tr mb fi 60 ib vo tc 58 nu dz fm hu oz yo pp nz hs gg
+yu oa bc 55 av ae 98 89 xe bb vy bu 69 cu ph yy 09 pr uo 33 rz fy tl
+12 oi eh eu iv 15 yn vd 80 yi 07 iu wl aj fs md lz fu sl 78 mc 86 56
+2u yz rv jo sd dj zx bt uz je 28 hr 22 fc ym xs vn sw yc tx rb wi -s
+rf cd 63 3d kj ww wy aq pu yr db iq sj yw 19 p3 uc yl jp ju 13 jx hk
+zu mx kk bg mt 16 hd nx 50 47 gp zs cw kt js bd uu vu xl qq pm nh 38
+yt gm vs 30 yd -x 35 51 45 mg 17 cr xa 04 cg iy dr 06 tm e1 pl sb gz
+dl br kz dm cm pk -i tg eq 44 zl 34 91 xp dn wu hl tp ml sn zw bl 26
+kr cl bz gc jc cp nj 05 bj fw gt mn 02 nb dt yp dh dx pg vc sr 67 -m
+90 sg mw hc mz 95 xo 03 wg -1 fr qi hh n1 tw jd 52 -c zh lv ej 79 nw
+uh 32 31 s1 lr 73 wd yj tb 37 jw 76 qu pw lw 82 e2 hm 48 -t 87 a1 tn
+96 27 kc qe lb hw 85 qa px wz 36 lg lx yk 75 kd cb 40 sx 39 df cq gr
+sq wx uf nl zc mr yh zj cv ih -n yg 71 70 dg 2b 54 hg bw yb qo jt o1
+gd jr -p 83 xc dv bh uv a2 t1 29 dp wm pz fg e8 jz gl -o zt 81 xu dw
+dq 59 qw jk hx 4h -b tk zm s2 qc wj -r iw rw cf pd 57 uw vv oj rh xh
+61 vb bq tj fz lh yf rq r1 xz bk hb 97 ln wh jn 53 mv u8 93 fh xd wc
+zg zb pn o8 o2 n2 gf 92 rj wk hz hj gb zd 3g fp qs jm jh cj bx tf fj
+kh i8 cx g1 wb wp jg uq 49 46 -7 zp mh vt wr fb fd lq xj xm kf dk qy
+ql nm 43 nr wt 62 ij -l 74 vp -f zk yq 84 wv 72 kx bn bv hf uj g8 mk
+vx r2 xf bm zf d1 wq vm vr gk t2 t3 94 km jl -2 e3 fk kb 64 42 41 nq
+n8 zn s8 x4 qt zq xn k8 kl q8 qp pb 2c np e4 e7 d3 pj p4 jq bp a8 n3
+gv vw e6 qj jf vl a3 n5 -8 m1 m2 mj y1 qh bf u2 vz sv kg wf jb x1 d2
+qm 0s vf vj a4 gx s7 yv 2s l2 k2 p2 i3 a7 tq r3 r8 xq kp qv p1 o9 o3
+-v -9 m8 -z y8 l8 qn jv i5 o5 o4 2k gq mq fq xr xv 0k m3 fv 2p l3 l1
+r7 xk qf s4 l4 k9 qr qz qk i7 v8 o7 n4 g2 t8 -4 zr 3a s5 1k d8 vg vh
+n9 n7 -6 3w y4 k3 0x 0n vk i1 pq hv 3r e9 xb x8 vq i2 4f n6 t7 zv 9x
+y7 2z r4 r0 p8 o6 h1 t4 -5 -0 3s 3c y5 5u h8 u3 a9 4e f8 s0 y3 8r 7a
+c2 a6 g3 t9 3x 3n 4s z1 l9 1c x7 d4 qg 0r 0u c8 2d h2 u5 u1 t5 s6 y6
+8m r5 r6 d5 2a w1 w8 0t 0a 6c 6w i4 v3 5s 5k 4d 4m g5 3k z2 8s m5 8t
+y9 2x 2m 2i 1u 1z 1a d9 p7 p5 v2 v4 b1 b2 h3 3z 3m 9n 9y m0 f3 f4 s9
+8g e0 1w 1e 7b 7x k1 0b 0c 0g 0e 0h 0m 6d 6g c3 c4 p0 p9 i9 v1 v6 5g
+b8 u9 u6 a0 g7 t0 3t 3i z8 9a 9e 9g m7 f7 l7 l5 8d 8x 1x 1d 1h x9 x3
+7f 7u k7 k4 q1 0q 0d 0i 6e 6f 6m 0y 5z 5q 5l 2f h0 h7 h4 u7 4b 4k g9
+3e 9f 9p 8w m4 f5 f6 2t 8c r9 1y 7c 7t j8 w2 4a 0o 6n c9 6v c0 p6 5x
+5w 5v 5h 5c b7 o0 4i g6 4w 3q 3l 3f z5 9c m6 m9 y0 l6 l0 8l 1p 1s 1t
+1b 7k 7s 7y q3 0f 0l 6b 6k 6l 6o 6u c5 i6 v5 5t 5m 5a b4 b3 h9 4y 4t
+4p 6y t6 3p 3j 3h 9b 9s 9r 9w 4n f2 8j 8o 1g 1f 1m 1n x6 7e 7h k5 d6
+q5 j6 j0 j3 w7 w5 w9 0z 6h 6i 6t c6 5r 5n 5i 5j b6 b0 b9 9t 4c 4j 3y
+z0 z3 9i 9d 9z 9q 8u f9 2v 2q 2n 8i 8n 8f 8e 1r 1v x0 x5 7i 7r 7p q0
+q7 q9 w0 6j i0 5b h6 h5 u4 u0 4x 4r 8y z9 8p 8q 6x 2h 8h 8b 8a 6s 1o
+7g 7d 7l 7v d0 q4 j5 j2 0v 0j 6q v9 5o 5d 2y 2g 2j 6r 3u 3b 9h 9j 9o
+9v 2w 1q 1j 1l 7o 7n 7m 7j 7w 7z k0 k6 j9 j4 j1 w6 6p 6z c7 v0 v7 5y
+5e b5 2e 4q g0 3v z7 9l 8v 4o 2r q2 j7 5p 5f z4 z6 f0 4v q6 w4
+""".split()): SUFFIX_SCORES[name] = (1240 - index) / 1860.0
+
+for index, name in enumerate("""
+ing all and art net ate ell ost est age are ear ill air ore ace ite
+ive ack ice ain ter ers ard ide ame ind man ome log now own hop ark
+law day ail ook ent ast ess ase way ver web its ead ile ion tes hat
+mes les ock ree ire ife our ies ove box ure top dia ets ass ews you
+ort ity inc ink lub use ank eal eam ong sex lan ang arm oft oup ash
+ays end car low ght ars ise eat bar int ish und ist son ale ere job
+ech out ode how ote can alk men ick eed ool ans nes ign der ime buy
+ake aid nfo act een ave oot ker lus nds boy dog ade lay pen oad rts
+key eet pay win afe ina ata red yes tal map lot sic tch fly her ble
+cat obs set ext fan nce fit lue hot ids oom ads pot mix usa ork bit
+bet tel dio oll per off tor com cks ins oor ten bid led fix hip guy
+pop oil ero irl hit joy bus new eye let rds iew ask ole oto gas ler
+tax ner row res uck kid ord get eep bug ady see ube ant elp ots ush
+for nts dge oon ons tea his war ics oan ilm sit any unt ike ean ges
+sat isk ran rea ope rks ats eak rip orm pro vel ull asy oss ift ney
+cut ect two ian tin cup dit rum eel van ser ton ape ana ust ach rop
+orp try wer ose ops des six raw dea bed big tar ody sts ens oks rap
+gic han ogs tie ven ica yle ily oat ery 888 urs nks oop tem ips orn
+uch the met ors ara ger not nit ves ods ses mad nto eas nly ize ngs
+eng ama yte ino lab deo aim say rch uit ung oke tec lar eds eys ype
+unk via ban hen 123 ada ago tic ipe nia era sum ket ert rus rty add
+ees nch ems uts ndo uto tos fer sis lat who igh max llc eme irm den
+elf opy ron uys esk nor him uff urn mer gns cts tep rry san nge ple
+cal hem won eck ber rce uan iss oes med ari bad ugs ory ris ted vie
+kes lla tan ren lip 114 lin 365 may ani oys con gap edu ows yer rmy
+sky ule ein ego ros dex tra ary ams eon rms rom ial oms rse ken aby
+lle abs del gle lag cam ces tas aws nic far eaf dry ico lug dds lie
+eit hin mag gen lon ala rew isc ita sin sed 999 bal ngo eco ria iki
+azy ier ste rue sia saw ogo nda erm tay esh olf tis she ini 168 nal
+ley las ral sta nse lly arn pic eer oin aps die vip ras gal pan 008
+ute lex cle ida tto rid ltd fed que bay ddy kin ult tus pes uty ont
+rst bbs lis mit nny eto ncy sen shi put ora lia iet pet lee ous ola
+ano spa sys ppy pia fts chi ags min dor sad eta nis eno iao bel xes
+aya egs udy eup lam lks 001 ndy ami tex dvd ury ram eri ena kit emy
+ona asa eft che tle ado edo lor why ova 360 elt eus dan yan ply ika
+ray yet wan das olk rve llo cer ums lms ito has lit lty sol don mas
+ium rin isa -it avi uns gan aff ima hub kan sms rit dom ich gar tre
+bag tit ura ati ond rat pon bao xxx ios ism lik seo rge rup bot oof
+sas iva rgy uru ese eap oma hut sus tro cry ude hes ied cha ira mon
+tat pin dev urt esi ait sam rex err zen sme ela ecs sup din nas oga
+ski eis nel eso dos fry wap dis gel ato nus oni did eks 666 odd pix
+nie oda ebe uge ims nte emo gin tte non got rte imo tom mar sor ias
+asi len ece ete olo ori pal lad gon due ogy inn gly ird omo ele ham
+mac iya but rno was lim uri ila ann tup mos ava hai lic ien rez lak
+520 aco 777 wow rix har eos ups nta xin una nix cia iro oem oco fox
+gue aft esa ema bes aze mps lix arp nam ual mp3 eda bum nik oet ula
+rma bio ely git ked owe ulk ony kon ief mat tme hon ius osa eby 009
+cus sco eru ric 007 101 dot obe aza nos aph isi usy tam dam mir uro
+dir jia aba hid dus ret vis cap pub yme rio bin ett 411 pas ded dat
+nat los aki erv -uk tik hus ege fee ilt irt omm had ibe alf mor rim
+mic awa nga umb toy lid aro url zer uni tur mom oro sks ues sea urk
+sha aus nan 911 rie ota uba rad nin tty pad yon gos oul cky dle mex
+ern cor igo sty ror sim sel ubs aka ono nna hao jet app eva sgo tai
+eni doc lse s4u alo iti rgo aga oxy rab tix oid abe exy tgo ido adi
+lve nka imi uzz elo cos org utt rer ebs igs pit ned 688 zar axi tee
+ega awn urf aku ntl irs uma eem osh hua gay odo aos ety sso erd mba
+aca aly ifi eve xpo uel dar pid eof erz 247 ept eps tim cas mai yin
+ssa tum acy nco kat doe ume oba vet jin nar rep dns nti kup nya tti
+ssy rme pat abc idc tag gou tip oso 188 kar rel yat wen vin 315 ewe
+ndi dme eca aks oca 163 sar zon sec gps dup 2go 010 ska dgo rol iba
+amo lum eur val mus tta acs abo itz uss rra few bee nde nex -co ocs
+kor kai zza apa eti 555 ais sof tif hts pps hui pos pac ved dee mia
+mei ict jie sse iga sil ben bul scs bai nyc vil isp asp mmy hic dad
+lup avy emi sos vid att mma exe rec mis jam 120 ior fin por kie tby
+mal cpa dem lio 333 oud yre oru omi rog dic bon ici alt lts dre obo
+yit cel pus aat bia kus lem owl tof xed 4me lax cho olt idi iri hey
+oya oka wei sik dal ybe ygo vac nen lah rak rah ilo cai tdo gov sby
+mmo aan cad dby amy hou mel hor gym aha gia e4u par ois oip ify nme
+hed oku ojo lds edi tso uce ott rax nup ful kam kis www lso vas sto
+evi rre uda erg uad ovo ilk hal umi aru roc enu pol 988 sue kas rox
+ped rto tao cow rey eny rac bat omb sal rns lco oos lsa ebt zle srl
+bby aty ifa idz omy owa pie eor hos fic iso atz kim oit sch alu kom
+678 ulu 588 arz shu yam uno zes til rly eze mme lib uga iel bil uta
+nap rde tac dao tcs lme tia eka hoe cms anz ged 789 pai ige aar iko
+cum nso cio edy tap udo leo 111 tmy erk fax epa bob yus uki -me aci
+igi rot rta dto -jp pec chs ede qua lgo ymy glu bra uae aja tha bas
+num oly azz mak 518 uke ivo mob xer cin lea lec wis rem udi mil oty
+110 dco pig bre enz rag nut osi vey gem jor oki izz arc sem gam sip
+bor xel xia cht sou tno yto pam uji sre rka e24 nca kal opa pex spy
+lut xas rug rco rca bro nty dol ldo yen cao pak cco bey alm kle arl
+bis eez dai kel dou nim opt ydo cab tts pup iny -pc xis yas loc gor
+iye sdo nak fen eba ebo hab dig gus diy bol ipt sai sac sur oyu yno
+evo 668 itt tab uds yst wed 118 txt fat ypt yby oby sap ehe pts eya
+det iff ugh crm ija pel zip nsa uti lya zin tah sie lta oge tbe etc
+dow abu epo rna rof gis yup dya sca tet aso atu agi uer rso cka oti
+rby 119 eau dna lai lac tox raz irc thy nno rob hup cis mpa fam twe
+arr rib cil lps ddo rdo kee wel dmy 24h mez icy azi 158 818 eko eil
+gby lew fei uku nai gra odi rei ogi pis nja -cn nki smy sma hom och
+soc bow ibo anu axx gee cca lok sbe egg pcs ync izi hia hil gro lez
+zik tsa rev lto tco nez zed fil nhe yis oce aii tio -us uly mbo nol
+eji dso lap suk b2b nre iji nac nah ulo ibs wit tad eum reo sey bei
+luk rps nci s24 pil nea eci nky -up ovi xie raf epc fon umo ipa inx
+iam uka 788 eif ggs ncs aaa iks tgp nox roy 004 lys 012 lka yco rtz
+580 mie ksa etz yso oze nee ako dro dra erb tol raj cop anh a24 epe
+xus 222 lry 521 bos oob mam wat anc dys ptc ivi uca hef oho sci faq
+nby nbe xon mms sti dec cen asm oji aas apy eue cro rsa vox 998 hme
+var bud aul sss rae dof oci kia ths som lop mao rys tub nmy acc hel
+oha oyz egy ceo iza efi kay iku duo lby n24 ewa yla ref lou 321 iry
+awi jan liu ael uco yal cox dcs oam oal -bg bak nio 234 onu ccc uct
+pez kme pta cet ifu xit chu rig rti rro wes het awe urg dly enn tys
+lox tok ipo nue col dim geo hum dka grp mov fab oko phy lig ril 006
+idu -in lei rda usi sio 020 ndu owo inh enc fia aia nil fos ppe gie
+tiv nyi nom nov zan iac -ro eza pto rke efe ycs hie rar rik kno lde
+idy chy nji cik cim zhi tri apo bec jar wto avo neo mee nko hoa gol
+nha 173 nza sub olu obb wal gil kos tir dix eki eke -on lmy onn oir
+hee otu mpo mum vic itu gul hio utu sya hgo bie bic eef ahs sir dwe
+awl joe etu yao rcs nwe fus upa xue nho ilf pre nig nir gio sno rou
+lre dif ayo iat 918 lom llz ynn ncn hix pda xam vor ixi fes cit sif
+rss yse iot esy uby oap mec kgo hof lal yue aji hol hra 369 mco ywe
+rok gua gum t24 1st aye uxe eha yor vit oyd egi lir rif nst ixe zhe
+lyn nag hka euk haw cot rbs hog sko 345 alz lau sho smo kto gna opo
+cnc pla axy tid vee pme bok onk onz iad huo axe eid ezi lol lov uin
+igg nba ced yna efm hir cre gat ruk ruz nad naz ugo yca afa oua qui
+pgo mah inu rbe gui adu kre owy vat cme meo img ntu isy 178 nzi t4u
+efy lca elu wag msa lur ssi vue uxi gry psa zit mni sul 886 efa exx
+868 stu swe sak 005 cue wii maz eee fzl nab umy yce zil dox tou mim
+y4u ofe 989 ndz pik 558 lao rai mup iru -ad 808 hah lcs kly zzy kyo
+ghe pur nof uso yip iaz ebu lno ivy pax uip teo uve cem eff tow exo
+exi sei cuk rul yro evy odu lev tak afm ecy jon ilu gma ubo scn nry
+fur 4x4 kul dno erc hoy zam 176 hre bau nur coc tho sfm vex gup ayi
+sns shy ecu kov inz iar hug wns 920 uny psp uis oyo ffe izm xiu lil
+exp arg adv gad mlm 002 mol zzz rub zzi yra lep cta usk zia zim sig
+dah arb mid dbe ngi ng8 kei rbo 566 pim oak nem mem lma zel fid lbe
+thi bab bam bah nif nid yed ahi mbs nni 086 osy guo yde bom ekt cak
+ibu 128 nok orb sag tka nla eia lob lof tez ggy dep pco -tr kof exa
+oja vol amb 898 899 gsm rov cie nav nax gri uen zie gco apt npc ecn
+sew 456 ebb lud bbq ofa aad gme lva pir oar aum aut upe iyi aky fis
+imy dsa kip mur sao 4us sle yee hak osk jas ipp rut ooz cac ppa aer
+kka blu on1 zor mot tkd zhu eir acn uid tei 858 dez cko 866 880 uet
+bac ymo utz dui amz ppo yly kdo leh rdi iem dak mio kso kby p24 llu
+u88 ysa rba tcn esp ayu owi oas ubu nec mea glo erp -ua aje toz toc
+emd mug 258 hay mbe sok wad gig nxi oer dyn nob bly eja rla gno iwa
+luv eho gda flo ddd css igy fad ffs cea fty 889 tpc ugi leu ewi lda
+wil pee tvs oza baz -fr awk cki 126 -ya xen aam eah hno gai aud nke
+nku laa wup zee vvy dsl ntr l4u equ raq kut ocn ocy mud 166 sla bim
+opp dha epy hac g24 uze ayz 2me djs noe kki iak cid eim pao cci psi
+amm pty tew yny atr rwe sbo tov upy kok 186 str iez mfg wor gab von
+rir bix lki aho rur fdc cds -24 444 wig gop iii gcn npo 139 iit e88
+bex luz etr rpg bbb yar yah yak wee vam 568 bur buk bcn a4u nei rlz
+nze nuo cob sah 169 zio saz niq hag vds gix cke tig 080 gur uza fle
+nyu nyl maa lsh mbh noy ovy iah pra sab vka nip tuk unu orr ccs pso
+src srv uil 758 hmy ftp 198 ntz xor mmm rkt vio csc ffy cee tot jee
+stl yma iec oxx aab oxe arq 314 duc dur gac ewo cul cic cip nju gre
+kmy leb rdz wie wid fem ocu xco taz ndt 138 567 dax lfs -do ngg 121
+shw tla otz avu mya s2u ofi oen ubt aur scc er1 lwe hoc lav wus mdo
+smc tog -sy raa sud abl mut elz r4u -sh opu opr lcd opc y24 icc plc
+obu wai mtg vez gut spo nys no1 ejo blo zap yif iai oxi zou uya mre
+ehy gea ssc tud hew pap nma ohe yof mpe hya pby roz vim def e2u csa
+rya ifo koy lif yms adz duk gaz rav iyu cur bir pea rui rud oed ylo
+fet cix nay -go vos lel spc o21 siv rsi mik jax jak ixs kea bba jay
+tcc 288 nje eaz in1 mcs xxl upt gla riv vps uai hob oky rao ypc tyr
+hur 388 cog unn hap lch icn gid tii roe dik dip bou uzu mae jiu noi
+noc sox eju hco zas fme pno uyu axs xml ssl p2p pom nmd hea yzx iuk
+fac ggo deh wet nkz uha cep fta izu kol jen aah kah ozi hby cto gsa
+idd nsi kir kcs ulf apu tav kys afi sid nfu hep m24 ogg awy ckr ngz
+e-s mul kbe shr gbo epu lul pha dap 263 268 mgo aal eok xxi cma 108
+vpn hoi fas fig fie 399 gom o88 bsa kur nuk 368 cub elm fog fol icu
+ahl iqi mto 088 i88 vea dil hto uzi ayn cay flu spr r24 ovu zal uko
+mop uye fco rmo fir pok paa oie ucu moz psy moc mog rpc loy jus uia
+ysy sui uar csi oyi ffa 189 efo kaz ugg pdo ewy rgi ixx cig agy ohy
+edc 011 n88 rny hki rdy wim apc zic ouw reh u99 g4u -eu urd vre jim
+bbo yaz ksi ofs tca esf rcw vad rci pio y88 tnt laz zai imm aju jos
+069 dok neh occ 699 bax 250 dhe haa mbu wam gir wax gim nnu nns kou
+tna boa msn oog aon maj nog kko kkk rkz mow fcu iwu an2 dyy rmd niu
+4-7 ivx pab oia cce uhy pse ehi hex bmw sce alc scu alp hys 199 tef
+abz gga vik vix eyo paw asc n4u 180 wyt stx liv -ks ymi dum gao iyo
+969 878 eky gso 265 ldi efu rga cir llp naw rri uwu apr taa o24 133
+tsi tsy daa 021 nfa ecc lti sny rsh mig 991 a88 -ex bys ucn yaa ysc
+nva nvn 987 esd esc ndc fou ucy etx meh mey ne1 p4u enk hok zem smd
+isd n21 xim toe kta sut bem baa nub 366 c24 fra aio aie aic niv eph
+yea rky lcn jyw 530 oln olz yka yke noz roi htc pmy ipc 238 nye 099
+usb xyz ppl ovs soy 798 orc zak saj saa uyi axa nle o4u tky tut azu
+pox pow bmx ivu paz 211 wby dda nmo acu loe wgo zmo wme mpg mpc uwa
+teb nbc abr eyu d4u oye t88 -id tob kad jsj -4u sep xan nrg gag z4u
+efs g88 iju ipu pei oel svc iby ycn ozy fel chr fex jzx sib afu npa
+xjx 137 x24 gcs dac 028 vcd reb re1 cys bez awo awg dba jah rpa gto
+cbd pho xec tci nvy 115 117 ouk owd n-x bub eot mgt reu auf auk fha
+r88 upu zda kum tny erh yge enx mpt zet imb clc smt atl atm toa tey
+nul co2 coy coa kwe fre sly a21 kil thm -sa rni uez olm thu ykj sop
+sot wah qiu roa osf umm hty jer ulp spb maw aok zna ahe bla ng1 rlo
+rle orf 512 515 -ed zad saf sav fcw yty mri yti pov poa uxy uja gdo
+amx moi tly yyy yap loa 755 yok yos hez cpr teh rki pcb yni yns pug
+dfw ncu stc kab ieu iev hik wol wok dub nri 968 003 766 pss ijn pem
+ufu nsc nsf mka sdc xat -is 599 ych fla l24 wik 130 bye dab daz lfe
+-fm 589 -10 ecr yjx sef nqi mii urb urr dpc gyo luc kem lgi lge hma
+phi phe iom nop wex 266 xsw 116 yri vaz rcn pif hna bco neu erl 556
+hox 371 ajo xic xid toi 066 gyi i4u nzu oqe bst lpe dov hri zsw emc
+irk frm r3d mcc 160 -az dhi -st vig hax haz lcc wwe mbc sow sov wak
+wab 150 kha sql nxx vec vem -pr hta ufo yda ekk ipy mso cah b4u dxs
+dxc ehr snc sna gho ghi eje orz yuk yum zat yim sax fcs 4u2 sst ssh
+ssf tui tul yzs yze gww cct yhe uje gde mof wbe ezu tvn ddl hwl nss
+cpc pti scy faz nbo ggi 909 vir kla e21 lhi cex mmi evs tfm std stt
+exu ugy uky 311 zko wos gah nau rii i24 eku ohi ijo s10 uwy wno sde
+lyw sxx nao 018 ehu kco -ic odz l2u cau ycy ctr usd iis iin -hd dae
+p10 oui oum n99 req ltz aor mep sev ehd 658 jzw pip ngc ttr e-x liq
+bbc bbw lga coz cja ske 112 tms eac -de eav 721 eoz xto hst cmo upo
+me2 neb hru 104 wdo tml -cd 551 enj uci gog goa dsm isf 175 kfm xir
+gyu gys kti lba tyl uju tya gex hro ymx muz s99 gni tza -am anx uvy
+nib yem yey hau 420 pys hso obz zuo ppc ahr ppp s88 waa zco mty iqe
+tiq axo lll veo lro fom div dew bog msi ooy caa gzi sps nyr ghs -ok
+ttc xyy kky aes nou yxx hcs blm yuu zaa onx iag iaa huk t3d zos iwi
+an1 dyw dyr n12 n10 lny 838 yta tug pof bme eii zis 958 cew ccu mby
+218 cey gji ezz -ms 910 dde yys loi gfu rji uir hwe hwa cpm d24 hmo
+scr osp fah mpu hyd wso pbe sug gge hdo sbd viv eyz deb 618 pri itm
+itr hzx cez ynx izy r-x pum pud sba asd koi 979 kot i-s -te ofm h20
+rhe 358 e18 e11 iep crc rff sez wot zka wof iky lbs fuk voz 890 syn
+rgs cua bik bip lja ije pew ufa nsk ezy aqo vot naa nae 016 lko evn
+598 rdu rdc ctc 336 us1 spl dwi 131 135 bya dag bap nfm lfm 707 vco
+vak lte ihu ihi s3d udd yba -dj mif jaw jat 122 qtr luo jou tsd ucs
+yay bbe 8sf ysh tss rpo yss wka avn uqo cje 980 113 mox xar n-s hly
+-da lvo mys oai oaz bcc nwa aui alb fut cmy 109 105 -ch bri o99 erf
+ygg ssj laj ovn cpu zey fik uoi fio uol 398 dsy smi ntx hyy xup 177
+aol kif eqa eqe cyw jxx bss doz 768 mew ofy emb ngy 389 c21 bew goz
+mcn mca 165 161 gnz -ac tze tvo 677 kio drc epr epp i99 yez vii lci
+afy olv umc hss hsy jew zul soe eln soz wac iqu khi -re fot osm 3sf
+528 boi msg kye gzs r21 147 xzx xdj lsi ppr xle 828 lmo 799 lmi onc
+mkt zsc prc zol uyo mrs mra nlp tki xme xmy gep gey mts yts itp tuo
+tua nnn 0sf eiq eie -fu 212 amc mok moe tvu -mo tvb ddz kma 919 tda
+nmi 848 xno yya hev hei yol yzw wmy smm fav mph fak faa gow dsc nbb
+osc sua m88 hhh ryn cso rym csp ffi wre okc fte gmt asf zjx gpc 181
+aag 860 aai aak kac vnn kao 778 vax g99 -ko iee hib cri oxa arf e-n
+wom pdx dul dua gaa mla adj skj syo gsy amt eea xsy pep ylw nsy ixa
+bsc zha lyt lyr lym 955 agg sva agz oju tma h4u ttt tmo cav bdo cte
+voy k4u sri afo 949 2sc daw 023 lfa hle ecd emr iho iha clo 655 udu
+mip pya urc wop jal syy jab jac 995 993 tbc aen ebc ebr dla omz yad
+otr avs uqe ofc ilz 350 sku adc nvi dey mhe 985 esl tmm owu rck -dc
+dmc dms hns hny
+""".split()): SUFFIX_SCORES[name] = (3846 - index) / 5128.0
+
+for index, name in enumerate("""
+shop club soft life ight news roup mail host home tech live land site
+sign info edia port book city game team love king plus lock blog card
+link jobs list ames bank free here town work usic show girl time talk
+sale park view atch data deal able wear core ting care spot tore help
+tion plan page room band film oday mark code post play ring ound hair
+date over best loan test name wire call fish head rain down more ball
+base well ouse face fire less find pack farm fast easy corp race rate
+cell trip blue file stop tree sell ages ster pass otel wise safe ooks
+mall pace tube door fund look mind west idea away side road ones part
+wall text form note ower back this word lady gain arts long ress orum
+pool save ance feed ates ales ites hina flow nter oney scan eyes edit
+ever sure ride edge load hill zero ards ease body tyle real ware case
+area ship ways fair hunt hand hell only wind ours five that ideo bear
+lace ater udio mode lass byte open hits eads hack cafe iles read tour
+bill mart hall roll peak reen uide adio each oker avel star type orks
+next eart rush lead hole wide will made firm ties desk rade omes days
+heat igns cure logs mile walk meet drop high move rand ings nice boat
+oint send like step pain auto orts ines vice full loop rise pick ream
+ndia ents foot main ding cash bars east vote otes sion inks luck tart
+keys pipe cost bids ters know lots task lift copy hope porn hare tell
+chip nder rint kill hoto poll tate chat make buys arch anet four bets
+what ands unit fact oods hard disk cent tank user wish leaf soon army
+enet tape size feel turn kids tuff risk acts ovie clan true mage even
+feet rest take some trap wash rice pair snow hing mass oard lies tage
+tock root arty deep cars ions imes draw ture disc come late bite plug
+junk flat lets item grow agic enow rack need stay oman ming snet self
+baby ning ords ling boot eeds pure eats oice flag sort eman bugs vent
+last lash hour ogic your ital icks ange rive inds ense lean ocks ears
+lack etal suit -web bits them ther fill ndex wins reat deas hang year
+aily fall omen laws cuts paid wife odel sets tory slaw pile lend dark
+ania tand golf kind most term ness ross -net ebox uard 2008 cast irst
+hops iver keep shot gear aper esex rock elaw ouch obal rule want rown
+rket orce rust rite sart from ends rder hool join fail ifts loss aste
+tems wang into unds eway push tudy plot left dies sage ders hite peed
+tors erve alty fans rent many ejob ares labs rect give bile eyou once
+sent ebar ller folk fear appy lick ilms seen egal egas emix eout lost
+joke lose used pple cing 4you till alue resh emap ergy ecat odes vers
+ward cker akes ries razy edog orse arks ists elog dare pics osts ving
+legs ment stem uote ount ains reak rash asia ocal mate rime tnow fate
+eboy ffer pull etop ered ecar very toys mily epay ruck emen rage eday
+ebuy heap lans pays warm andy kers nlaw odds ctor taff ping tnet otos
+ator lite ille earn alks hide nner hink miss ycle sinc oing prop acks
+much slip tick sing aker hear cool eset rame efix -inc wiki rica eweb
+tall wing ader role ules dead ewin rver efit ives shit iews poet bulk
+lant orms ides hows rnet abel rick eall eens eoff eady illa cher orea
+enew oans sman ints heng roof ugly boys onet thin opia ners tbox ebid
+tend near just oors ando cope efly ntry ooms past tter logy larm apan
+ebit ases olar rman poem ence mess unch inet guru tcar efan said diet
+eair blow rial ytes ekey rink loor anks cale tbar sweb neck epop heel
+gate eace eage sbox ause ront chan tics tman ourt tlaw erry seat sino
+oves gets slow fits njoy fest oxes xtra tars ejoy eguy unny lear ebus
+foto ique 2009 tool esee rson tair ehot elet rtal pper ello oads ngle
+rare eson ntal half sake hain gift vest uman nger ucks bike ebug bury
+ency tout oute tlog ista when tsex eten ants -art eled then runs tong
+raft etwo sers harm serv ugar scar aven lips pets ella dear pots heet
+turk nion tran ebet aweb aint tice ekid tips crew lbum nnet harp raph
+lect busy tdog comm yoga hips sbar eget ider lain tjob hint ices leep
+sall rlaw oung upon dlaw evan nart dnet hart keen eact clue elow ancy
+yers navi sand teen tbuy adds cket eaid mlak hate rant amer bout ewar
+eans otal wave tlet evel felt hape duty moon rong hong ylaw hoes huge
+cess mers auty sway ecut addy eeye itch 4all -usa rose arry ests dart
+esit ical dogs deos lder alia oise nite expo yday urce orno tops elot
+pply ehit ayer ores syou alon bind have rums rans anda eoil etax nova
+elay ette ryou uses yuan asic uick rner says eeks lson intl ecan efor
+tive buzz ebig lice bags laim epot itle twin tkey opic tfit tpay skin
+sout same uddy lion onic rank hung song togo inch tees aves nada chem
+imit taxi arez ecom tfix arms oles elle wait lnet tyou ures ingo fice
+cube asis slot mean ches tmap crap nkey ecup nweb soul arte dman yart
+tfly ngel tred lays ying chen lity isit eice char dbox ynet sbuy rops
+aris euse hift onto esat ject moto tguy tbid ybox dout asks nson nity
+dian iler sexy dent inal uest esix hase etry hree toff einc lert must
+lair djob apes tact tway rich otor ikes arge anch tboy rees gent pert
+yman fang eing quit oweb rway pany emad ethe uilt ebed rama bang vids
+ston surf aces gers eher oken eand tare cial ango soil tits dway wner
+stic boss cape dcar xing lish tmix dget grup rsex shut iece cart rkey
+tten erts ford wers lers nits eter enot igit iner cams mann ucky atic
+kets rail ainc iran sson hoot ydog maps dnow lery muse heck webs sjob
+tron ault uits ogle otto taid putt olve dios arma dice haos tcat ovel
+nbox aber smap esay ging hero ntop bird hort dits ynow ninc rope aria
+fuel tfor lazy pers peru dwin were nsex goes tbus rief iweb ycat 8888
+tail oose mere plit nage lbox eits kart tmen ited pint rror toil lter
+eams rall epen ssex tjoy glad etea mber ysex mics rity thit teye does
+rind helf reet lley rart tbet pill stin nway dumb pros yway ghts slog
+eran oach than hion poor yair sten nara ires drew orex apid dbuy tson
+trix icon kins nate vast ycar knew gger ehow eply tday roxy rter dsex
+eadd hire tbit llaw llas ypay tile gage nday ason lian ager tbug etin
+quad yboy yage aser ento uter dall mama tsix illy tnew urch flex ntor
+plex tcut eets ally airs evia bore swin seye itor ondo tled sher voip
+mill iang tfan olor ymen rbox ocus ious soff tery nnel dmin casa nics
+unes sday pell udge debt kiss raid ades ybuy quan thai sfor hbet skey
+tpop lart kits nair aise lage tset aver ague dyou hers teel ttax yfan
+yyou rden eros dult gram erit eria stor ybar sair esum rnow -pro tkid
+took sfly rbar hile dinc dpay ehat lege sdog dkey ttop tats bell 2010
+visa njob tica dage dboy ofit beat uang erow gnet lsex tcan tent stat
+stax tang idge ople nwin amed lman endo reme ewho dfit shan dair ndon
+uite ente tgas azar laza ians olid nbuy gang sset eate lake smix yang
+zoom yjob aims dfly raps ehim stan eask anta irty thot fers lank dbid
+ador ncar dset rinc dbar rweb else kate rove demo deco -sex olks anna
+feng ybet they pend tsit rave ewon nton iary yhot spay dson sits kman
+nets hana ybus nall ssue cats ison izza stom lnow limo rbit tsee nman
+nbar kyou sons clip esto ddog umps oglu ante rset klaw otec rtop eron
+roke yfly sees egap guys nect orge hlaw wyer amps rbid jack ible abes
+enor rget edry orry lbar tral viet came tweb etie ixed knet tcup rmen
+eler dkid dguy llis rill ular argo wolf ykid torm -car anic ttle ymap
+immo tlot eusa nfly dmap iger ldog been rena abit tsat cean mnet tein
+urus apps oner lway ntin wars teal spop ywin lfix lcar stry tian anel
+chic itto hirt srus dfix inda ajor sfan berg asty itas tvan rnal nnow
+oinc nail nboy uess rend cinc lfan yson ated dtop ttie kout obao oper
+emet hman urse docs dbit koff npay rten anga eban evil aran anes llow
+susa nput yeye rtin dlog dred lout loud elly nlog agon shin maid fing
+lare rboy kage aken enie doff acar smen coop icom rium demy esaw unge
+aman nica unet rian dhot yred acom yguy meds dhat ract babe ichi ttea
+logo tcom ebay mmer arab nerd tbig sfit pact nyou erie ypen asil lday
+nows thus afer oral tyes dnew pare tlow ypop nbit iend utos rjob oats
+tsay mple gems rout nies loat lbet erus esis erse dtax ixes ngas dpop
+opes aday deye weet ytop lyou ados tinc nfor aire ytea rair ykey tuse
+odge nema ntre ybid tpen iter pink olic tbed liao alog lens lent dbug
+runk toon rcat alaw wifi pire rvey elie cake kbar doil ljob ycan dday
+tsum ushi kbuy nfan also roff ylog emon buse slim tied cles noil nten
+ntea dago eend bies dsee diva oder lcat ybit tmet wice mint rbuy rbug
+romo esus efer erra dfan ksex fell lias lbuy oins nnis aler dmen nsee
+dcat rcar ycup yjoy eden yweb twar dell arly bles epro xico lfit emay
+tget lina kdog rpay dact dsat anon erms rday dude llet ueen nown ribe
+hnet iano fuck tadd sult eave ybed eaim sbid onia beer nmix lmap nusa
+lton ygas dish tnot oart exas ilot ttwo lore ongs obar teat such lboy
+owin ysee scat -law atis ebad ncan dled rina slam llon tmad eraw bots
+dwar lled rmap erks daid itis eris stas warn eshe minc tany rada wake
+doll oran uice ient nact para sllc sbet pnet irts traw flix kair iper
+djoy kboy rbet dmix ycut lwin inic obot dong atel erup atec esin ixel
+sguy dyes rmet etro haus oset chef ktop ybug sfix egin reed zhan iton
+rdog roid oria onds swap swar enti pnow ubai mini ynew lfly soup anto
+olog rfly neye cert alin bing lbug dbus hose eper ymix erde ltop tags
+java abox ckup elry gles kbox ince dcup lubs went ffee sana lein male
+emax ptop lang sled nfit loil dlet reas itty iman imax leye ache ased
+ryan rpop undo rker indo lcom urns yact nmen seed eare lpay oups beta
+shoe ousa olaw omic stwo uare lmix rred naid inor -now noff glow rely
+lsat nime trol sboy tago yvan rlog esan rugs lmen rhit mond lwar inas
+ntie esta ntos dome mans erty dhit 2012 hrow hjob hore cons oter lpop
+ared bove todd ybig dbet poke nhat sbig fare moda kjob ccer tvia uity
+kfly rist iser seem nbid ored kset ogos ndco iana nsit reye ocar mani
+oots hnow lobe utor oops nguy inos rang orte loff nmap moms trow dfor
+hinc ausa nhot ilan ough onda ntwo anny ywar ndog xact cpas boom eeat
+lker rled jazz otic rfix rfit sync fter ntan euro npen tico stro nett
+ncat tusa -com rpen eras ncer yfor lcan mega shat ecor aqua anka efar
+erid dlot cion ypes oshi tino olis snew grid laid ckey rris alis bama
+iday bean ishi ueue cook tual yall iled andi nnew dgas obox elps hots
+rgas ntax kidz lver yhit dcut kaya ects ytwo rics spin elab dher rguy
+yset udes adas tain iami eton hbox thow elec irus eany ylot linc tarm
+baba chon dsix sper enny rtax ytax spro 2you cave nbet yfix lper shed
+ndor bond rbus neat gypt kwin skid stea taly olio ndas ltax twho lues
+eaks rnot kson alot lars hway -box lset leri nset dcan rion rger ixin
+scom dpen duck tist trax sian yice mike enus aart nget yled lkey bomb
+ysat edon kfix kcar -ltd lweb bros dten taim rcle plaw leon eers cusa
+-lab yinc pies mera onus spen rtea arat uyer ntra scut cate nher rips
+6666 gree isor hbar pset reer arim nlet vibe -edu yfit syes mpus vida
+jing sltd anie meat dweb earm obby kled pens hive cade agen keye saat
+lark urry meup klog kpop rbed cort prep rior reno inka nred nuse nest
+rosa gart guns amas ddie edin lcut wrap avis punk bada alla thon kmen
+yyes thim lall dsit osex kmap worn orus bebe eren bras tons nock kbus
+lits yout anal llan anos kway achi zzle arin llen oast ndie kday nout
+roil sare iscs ocom enta tthe kies sail tana nude eker efed erre gman
+ywho eyet eavy kpay klet nwar ults yard iste aked abar lsee enia ully
+gogo nsen gave yget ussy koyu itup lguy acer imed ocha lkid ural edic
+rfan dend npop 2day lfor acon edor lbit atan ulse iven dtea pice tton
+llus belt ntai unts ncom rses etta uppy ytie reit yher rsat ican gies
+kall pher pson chin rake anco kbug eral anas milk khat duse anor hoff
+sted econ hlog ndit gest tire rass aroc isco utah nker ddle tina burg
+burn died waii nuts olik nhit mare ocan rcom nbug zing asts itan snap
+icro ener lbus -job sist flew vita rana cord tric ogan rcan kend alan
+hsex ltor onow jian ugby umor obil gina -llc frog tack esme cuba knot
+enue edup lord fect hfan ilia tura yoil hmen alab menu pits atex kbet
+ngan ples rsix mask adam sget scam kkey lask owen yask lust sity ntec
+huan -man yten tpro rmix zona lier ndry jans qual rpet mont inja dsay
+nand llar mack orme ttry cout dtwo fart eput rego nhow rwin tgap ayan
+gnow foru pinc tale nkid dict seal izes nbus cept ruit 2007 mour oore
+xnet sina ozen rjoy ythe hats rnew hyou anya amos viva oyou bowl nesi
+kbid hday ysix pray onal dand sexe hdog obey ashi dsum ntis hcar anis
+ften yhat tres ntas gbox asan etty twon gays iche atin ript oses iris
+irit uren horn mojo atus atum nfix rwar aret lbid anat labo sbus yaid
+mist iber ques tlab dbed asex ario nare mods ayes aron erin nthe wart
+esup idia mair ndan ymay rrow wman hout sses enix hara nbig ymet lima
+lame idas eres ommy bull ogen tome flip alem enis kguy yand nama tera
+alas lhit nese onor rban rier dale lred tish ndus sics oool ngen inar
+inan ttin dave ycom aden eour rkid ncup rney plet emes eown elan espa
+ecry rmer aved reus elee linx rsee pout etti dial soap enda eira mper
+nius hank fuse borg cola llog llor aren vera bass afts stel nled lles
+quip oons kice imer ndos omas aids cums mina nyes iety rome dean lief
+ksee lown fort hwin ssit iant cute tfar izen mara ssee ndgo hark esso
+ngon lari icer rcia eese alid lama yhow izon nsat nago lynn seit rism
+risp coin bees iley bate eago orps kbit gard rvan -max etas dtie svan
+rhot echs etes ylet yles aten pboy osis lcup ysay dhim iart kcat ixer
+ncut opez pman nsix elco hich raze xian ival ylor aton tara ngit asys
+edya ntel owan stre khot maya buck dler yama kerr ibao slab opro vert
+inha tiva esad ikon psex e123 iwan lgas pins lpen gray imex shes kweb
+dlow cnet tban cret earl eard milf aspa koil itel werk dash pdog otus
+rado mary cabs itar ssen esse silk mbox engo 2006 lime klam binc etch
+vens mnow ises odle onix uweb maxx dmet ipes 9999 lhot lago enon nmay
+nvia iinc jeep jiao ilar liss rlot esas kfan luxe nico redo elin wawa
+dges -bar geon echo etec dens dopt rlin rvis ntit okie rico ffic sual
+rgia oban kfit 5678 ylay spor kong tori elax mand anti odka zion rsit
+gong kred emag rits edue atos bush etto aybe brew luna khit idol erso
+arco kcup hani aras uyen isis ewhy dles cole rino bers tmay efry suse
+neon mson arel ysum kare kwar erme rdan isan pjob rida iren soso ndir
+rcut hese kjoy wnet dvan deck sham afee ndme ybad nlot roma bert shim
+iten nban rein coco stit coat cken omix rius rete yate boyz neys lsix
+mlaw bnet osys sbit unda lnew tner 1234 nmad ande 2222 alam dium icos
+poly kvan heme rata ysit gyou barn atre hage kmix owto uran lbed edid
+hpop okes ewas pbar sica drow leat terr rary pods atea lego apro kfor
+meng pads -fan ljoy erby pest edom rhat ywon atar avia avip pmap stle
+arus otin gout yuse ibre fame mice mash hick allc olds sthe nper spas
+emos pweb dbig oost mble atik lyon iker dusa nted oway ergo spec eird
+plog izle neto awan caps aram born pose erch dive ngin kand hcat llot
+hcan scup scue mman ryes ynot umni grew nsum nhas ired kher lide itos
+ndis omer kten ajob omar tele -ads erto zart omed yoff asol osta ksat
+sung hweb enit iden rett seme etup ssat idal idan nsay uiet rbig naim
+snot flog nran nika rsay svip fman nbad kent grad inis icar nend pond
+tsaw cott lmet uise inga slut ktwo yadd e365 blic exam npro bble vans
+agle heye unix ehab ntic tecs anhe etic rfer elon rlet rmay rael wlaw
+hmap sred eram axis nfar agro guan rble mpro dder xiao tary lani sens
+8114 ptic rfor etit atie lala ohio 5555 llit llin hvac seum zhou ssan
+abia rton stra pway obuy obus iron erer kept drid xbox o123 zaar gllc
+ntro ndra ecam iyat erat youa 6888 lusa sbug bash reco aair oobs anow
+loom rpro ltwo olab fari ogue yong ssoc tabs indy ktea sara daim arra
+stad ppen yper ypet olet egot afia ecks nspa aidu nski egan lied dows
+tlie itec wair rdie -int rads mway ytry hbuy oras stie tyet cked eill
+nden lten ltea oair pkey ongo dmad yarm i123 sact hten abay klot heer
+haid tsin hfly nrow kaid nmet dera beck mesh alen vada ayou rany hguy
+loft dadd lhow fera heal 1004 ewis ngry sjoy pole lete lisa rats rati
+pons tsad rika rlow kina dang solo pfit tdry gins iest lsit elis trac
+trak teon spub onex amen cweb kgas tdie hpay yhim ndle -top poff ewel
+novo pall axes esky pbox phil yusa tego dwho otte anit toto pbid rusa
+rago mbuy mbus rize rher alsa ouji hboy ivas ylow lins exus asat hfix
+leme loco nads eeps ptin tude luse phat ijie desi emme aits irin nium
+ngus nwho oted beds nemy hale wong thas uper dbad mong mono sket utts
+khan dthe oppe yaim dams gner xist ijia iers enki gend rids gion rsum
+orin rtie rtis welt dfed nlar tles llgo shen usan ndow eric uito omax
+tbad rtwo cres isen lget lour tini ktax nlow ssip pera laxy olin lica
+dask imos sean alve cock gway nany outs ymad slet hbug anse ydry usik
+mule hari essy essa vina rets gacy ppop mweb dwon alim kaku stus mato
+nghe sein ckon pwin musa onik pkid aled alee kkid enin moke acao trim
+hame e-it pred kker ured icas lism neng eder htop kinc kino amax s365
+lbad empo ried pguy qing esco gmbh inex elia mpay edis yraw opay mons
+asha owon herb onga vary cipe s-uk meno ewer leet sgas teas kcan rmat
+atal atas avid rsky xury jets mana gfan darm claw nook lyer ruse leit
+otop 2buy mori digi llup simo inta span spam tect tari esgo raca eeze
+hawk ebel hkey avan lvia reis bala iage paul glue ntes ygap puts adin
+sive thes ckle airy pter raim oten otea aner isim chit nish ndre ihua
+oded litz ladd rean nlab edby edoe asas asam hiro peat lwho recs rawn
+kara karm arkt macy ouxi occo imai ekly acht acha ubed dran nkan arie
+arit pday nari illo ndid rdon erno pcat owns ecia utan itim acle stam
+rook akin enya aide obid lous agra sown yban laze aska tant nsky dvds
+oren alta uzik idis aoil anus dick seas tuck deem pbuy dcom idee bber
+ooty -you inus mboy bach papa ssay mata gson ipan yend pifa kita yder
+asso gler wboy okyo lure rces gida alex sago isha nike acan mory smet
+3333 epal oids lmad troy polo hset ckit kbig inin rato pong rbal ardo
+nian kini nbed dana gall hkid lmer aboy ebut ysky rows lldo elix irds
+afan cini inco oyal tern esof owed osit teca lube yvia uche hony tama
+kget lbig rley zhao rmad lvan pled busa nshe lino otis tika tllc tmag
+isex s2go dour lyes njia sany sang alle allo odia ngda kadd eier rita
+es4u ikan thor pian piao mote audi sims ivan ucts tarz mjob hfit phot
+opop issa meta ylie noir drug icus wski pmix lush cruz ttes lact oyle
+arca isme ofix atur 6688 opin otex llme gigs erce chis colo yeat iban
+teks anca 2net avvy aura mony ptax lito nces lada oble asap todo iraq
+5888 gren ibes tlay ubes pjoy narm hock pfly rcup gusa aque hita oris
+onde kick tler teur itin nego akid anin mins keat ipro t365 zard -dev
+ssia raya riya ynch auce memo imon amix ench izer ized mari yber myou
+lden maru lher hbus pyou zers enas asta iens omit 2020 alor ehub vang
+enge tasy epic uart nded ibus lena kpen lhat klan pcut nvan seon sack
+-boy apon wbox wout keup toms tomo esys amin gpro rere glog seks -pet
+igan amon atte coon edas -med teri turf swho nell tays amez ltry ckin
+yrow cove smag goal okan rbad -sky sole tnor pcar oyes abor medy rowe
+ywhy dill uner ummy peye hmix edie tray rthe rgen mcar sden mfan kang
+rias sice sask nges lves inam okit alat ysad mens ngco cult hpen kbed
+ngap n123 t123 emed lawn phim salt reso assa assy adar teer ofan ncia
+pand uong zlaw nome reup 1688 ahot sink funk osan migo udit pour pawn
+paws nado cago cage gars oosh lily adog dsin llie ntex pier veit wore
+worm adis hbit rtex aira -lee srow anza erez guia ilya hans kala gods
+tbut rtus emia ivia keme chie reon halo rper sesi fnet nlay itta ynor
+hird orst yshe vere anan llam hred asco ktie arke ibet poil afor imal
+cllc shaw ppay azon asen olan oron n365 elus wick lebs utas asik asit
+cred erta navy saim lnot cana deat dfar ihan ydvd phix hled hlet ssin
+ssix xusa mais nkie pusa sbad repo enco tous itgo ocam arto ndar ymag
+egen deer alms diaz vale 24-7 itai mbit lave otti peng goon nack agel
+nhub 1314 vino vinc vana ogin ampa nola tsme rkit okup 2002 oall swon
+fety tput mday idat omms nsad mica nnor agan yads klow oget twhy -vip
+smin seis dnot derm rish apay ndin oved vite hanh tgot icka icky coil
+htax nseo rima nses yung yspa atti node edat pres yria ovil trom gulf
+itus dmit enme ltra anbe weed gxin abin init icam chno rmed mirc glam
+oboy svet dina esam dany teve amap font bart inge whow obin kthe nash
+gans oche ubbs oare volt rapy mlog tras york ndue gcar nedu yeah kany
+boon lora ilin sedu lsum pmen ehas ttic iate ebra etip loto sque esia
+niya inkz bizz oson osol mpty zang nllc olly rdue avie cite emex elas
+osms doma tsup ceus gget 7777 pbit njin 1114 eigh hice aphy scap vity
+pana zhen rlay wfly vnet kado jade ehis thos owes kmet spar chas lano
+racy shup shub dpro mmit ohit ened reid endi drum ozer adom sadd iken
+ffin vein erge nfos chel mpex tnam tshe adia ncry hbid bana rtec angi
+angs ober onna aldo 1818 arah webb wson trum ycry hnew ibar yown tobe
+lade idus raum dvia dsaw nera pear ibox anam nana rora stgo inho grey
+kari hype ropa psee igon -dvd urbo eong olas gens mguy msex hada rask
+mhit graf gits ndom stal enty kova omap arme uban oled tfed shka agri
+en24 msat s4me gweb idos cans ynes roms zari 0086 ngbo dien itea ssis
+iani neco ipts meme shou radd azer ndam wyou mkey zinc kler rala nver
+itat stil stik sser stix stis rnor dons dona ydie sill wnow -way tash
+wage nwon ndes edto boyd yany etus 2005 cers inst nvas tide akey wpay
+icia enko maze cson dere omos pati onin onis amia ksit oven iowa rani
+enim neer igar anyi amor plum gbuy atta ibbs edan epad svia gdog abet
+tero nami amma cted iosk alad kusa kuse ovia nvip atto ckis leto gary
+ofly umar alco dgap glaw tsam rike tcry llby vian rgan s360 whom buch
+ahat obio obig anno ojoy teto nask ginc stdo sexo redu inea rarm kyes
+1888 leco trat ixon gfit rtho rfar onew unky eece amet ilon mcat lors
+rlie esor gpay wand wink rona rons edme ntia este prix etix sera pita
+ngcn dots krow alus vate aded kour ahin epix ecap ngam pler emer abuy
+phit otik tiki gged -seo -air rmax sume tltd ohot masa dyet hcup -tec
+mfix axin ncil 4web d888 emas emat ollo etre dded osay wcar eles sima
+pton sock lint lini rewe pthe thid nadd dock psix hjoy blet ytin mies
+dust otax ijin oser osee lthy tins mero veis matt dlay rnia eodd rsan
+plow goff gtop hgas banc ovka pwar vets lula ofil odan 9988 runa anzi
+oxin peer emin tesi mira ilde erco umba neme divx yfar ukan slan tsan
+anci llos dban ambo amba aero bian lita mmap dsad isms llah gics gasm
+yits dirt azil 2114 macs orma onar ejia teup imas tlas shas usen xcel
+iere itme athe erma stes rtry aset ekor isas lgap lund -dom ayed tens
+sarm dems ejet hess nata imei remy wned itic erio mtop -cat pped void
+nked g123 ubao egos iset hook nyet ayat tano cang maki kask gjob veda
+efew ltie hoil ssic rdin xers ohub dojo iggs nkit bbit lnor sbay reps
+nize asrl yago mtec ocat ksin gsex ndai prus nsor olot obbs ymac anso
+vill utie blaw soda seco rshe pent lata dney hars cado llto ngor nchi
+alos reto arby ldit rgue 2004 xion alik alie bins hwar stup pllc taco
+ckam htea nsas kite beam edvd ggle agas seto gher athy e-me adat ckor
+hany derz neus hida moil meso lume amic wbit fred inon pfan lpro tsky
+yana nraw vlog ishu orta beef acat ygen corn cide hama rios esel lius
+erbs soho dtry nren luts onot teps dist dise icat nent smad flaw goat
+rbag numb ysis a001 lsay dino nomy gill amag mbar lban exxx aham obia
+mred rhim teit prom bela vica 1069 acil duct erly 2345 elik gled ndup
+orna clix yran clic rous onez wala cino wred enup obed mada anji dhow
+esol dore 2web ammy inat rvia iwei teck ysaw bust mend ceit bleu etik
+esim ucha u123 soto ndby wful elos iyan obad rola rspa sgap ossa lida
+gtax plea mimi ulsa loon urin cita phis sdom owit anty gist ived etme
+resa u168 uden noob ohow rsin asse gons 1111 adan hics -tea -tel mala
+etox odis ngme vion atme eque gola e001 ehid ikal sinn azza osat eleb
+unty cman bios atop ifer taro lana lany phop opon bums meto bler veon
+mmix nist endy adot wjoy sads otan osen owar hief hvan ttel spel 1999
+i114 adix rtel kcut sxxx ptea ytel icle awar awap cfan ncai toni ngup
+vage ryin ryit yoyo acia arak nwhy oubt fizz anew enso advd -con reof
+kura hala raku kery nism rini ancs aina llof dbag iola hend foam leen
+ohat ohas rear chor nuri arer nere vern efox nang nant llat nina ific
+uler eddy raws tivo gtwo etra anov imap leys tper wdog esby keji ermy
+reef reel uber orow deon isar n360 nary owup illz bare mset envy arot
+xbet mags quid ekit rift ledo gair itit tyme gmen mium eves omad pnot
+oler nlin t-it oola anim erte sfar mllc eshi fnow gboy stof xton idor
+chup gfly odvd eken bolt orer wtwo lowe phic beri shis sego ogot gmap
+swer sour pura idin omeo omex olie owho afes eyer rdry inyl netz kool
+ptwo pups e4me artz eval arta mars deen oove alme a123 rera inox enan
+pget ilva kact omia nace -gen hiba aged suck -all orca ncha sbed ls4u
+engg amp3 nxin hown ldin epit ndel iusa 6114 ltec crow vely cera cero
+ovan lamb ypro pcup enes pgas ssam dmax ipai omme nsaw elim ereo oand
+azin abad aban sofa lsen edir wist ltin ruly onit bung amis mbid onte
+hica snor bobo nsel rims weat ckme msee acam rran umen ilet anup inme
+atty lsaw tris ogap toad itam nong tuan edam -bio andu riot ueno kens
+cops duit mbet ovip coms hino zayn w123 abid kuma wtea ldus smay ensa
+xuan wlog tata niac rgap amad amar dtin bari 3721 mtax lfed geme kash
+prox medi prof lons pfor heim ocup ntum tism -bag cain twas bois blin
+lope afly deng oned ng24 anje epts inca onme leas mits tdid dela -eco
+nawa dori itha ithe dsup ilis kvia osix rvip knik ehan ntil trex teco
+sies rfed unow tuna inky urka liya adet sshe laya edot yeri raja tear
+mela affe vego atam ycam opet adge taku abus yfry xman dwhy chai clay
+meal wits pbig rags t101 nore rizm mget mfit anre pano brid gcom atmy
+wled nddo ikai xlaw ntat ntam edus osas osad dity elen -bus palm veme
+odog ytoy yton chao mjoy usta wser wset sier sire beni rods isse aple
+psit shus icha rmin atit abbs yasi ende rams adow hfor sada phan 9888
+emma oseo iway kmad khim idon tted ifan ryon gton neta hgap ijob 0999
+rtes veto ebag lulu -led xweb bien chka ngue ayon pubs evis udou josh
+bora cedu a365 emic isio oltd ccom oaks ercs clup tfry enna kana ukai
+ldry pect tham iska leur oque psat ambu mona nile moni odev odem utto
+yfox wize rque igen ismo anak 8588 iral llab toyz iong i365 ifix mach
+g360 g365 rawl isol mego anol -sol 2580 shad shah uset iera aths neko
+ypal asee katz izzy kata nler nley ecos anmy anme nard undi atax itop
+yond atat nyan ssor wday ught elhi mago orid sari isch dost vidi huse
+wnew moff itie ndoe ocos -cam ngyi asin ipps fboy roon nlie dlab tbay
+eiro liga tfew nife mino lize ybag pete asky chus tans ugou fork lows
+utes a168 -ent skip alto saka omet nkin -ind -ing olia s123 crib 5666
+dego lics hcom dico xcom arti t114 sama ndat grip cbox othe ymax apia
+egel wbar ndto shme enat asti noni dcry zeit ranz omin auge eyin meit
+mavi ldis alre tify boya uson y520 pnew mwar auer mous mout vela cern
+alit raba psum dmay sace idam hter nsan ruma setc abal enka oger einn
+-xxx glia 1188 izmo rnes neup znet lere gwin nora ksay ksix eise nita
+inow onts dayz enic toos hcut usia e360 yani hsat egra nser dade nkus
+jean acai ghat aben opus lsan fury trid ogas wway enos bake nmax andt
+momo 1001 utus lmag klip urge hact osse amel erdo epos anba isle blox
+buds ilab ilas ilaw inio lisi lise s411 glas edes pony ardi bweb etat
+gale buff amat cote u888 pbet reby bara pcan atro tium ssme mfly obit
+tsch medo emp3 ckus nick dala bcom tute ochi ewow icel uras lsin wwin
+wkey ntup ntur ipos echt elta clik etex rour eted avor ygot thub cina
+wtop leap obet lfar rwho otry ylee atee dora holt wana ilik ilim ilio
+yhis sedo ogix ombo rcry roni toit hson okid alai okin cein ceis etim
+padd 7114 herd rgin renz tung ctic gado gads adev adel chts ahit edoc
+puse lary rhan fbox olee ooka ooke vega ngad ylas ylan tora avin pmad
+citi adgo nshi iyou ntme afix doms tsus oage inxi awon exit wade raga
+kabu iamo ckdo llso -pay dodd mora teez uffs nzen dedu odid zlar awin
+vior ng88 noma hifi asus ucom ritz opan opat rofi olle wjob aude elex
+-buy alno inte atoz lind lput tard tarr usty rsey ulis lyan rsen ysam
+raco urst rchi emom boxx hget phow lems tien l-it pigs mute movs ebec
+ofer ptik ylin suki suke atio atix xart peto abby ngis ryme hpro adon
+2016 stto op24 nero ppro lesh otas osed lung seup r-it ssas chee reka
+rsaw yfed haha 5188 uken mgmt wsit sler airo wbus mcup pten erex ulos
+cong conn hant peel ggin ggie uery rmor chid erro 4989 kerz uake cara
+rins thad slay ooff hber ihui imag psaw monk ilfs ruba ruby ssum eite
+ladi y101 dite kulu chow arex nery orsa lcam a-co oody -sms anah nano
+iras -360 cows ignz 3114 atso rren lirt adre neit dung enry chme ltur
+mact onas scle gnew otam dime iero gbar soma lipo heji mhot nlee oros
+nhac tcam naro etby inen dika ndig yons -dog rcon inde grab teng 4sex
+torg aqui wpop orit y999 nour uego ooni vidz nati imen pago wmix ngfu
+erim arro tvip xsex ngyu mdog idme dres omac n888 cala olen oole wend
+hequ aida dawg dawn utch hoop ngdo digs iets lero ayam lico tink idom
+chum tani neas ellc xbar s101 e888 buro imin otwo toss shid boke stew
+ypic fyou leds roco ceto u365 wert cuit loyd r365 dica rady azen gset
+pegs nose nbul olos apit pbug zina utit dias fora asto raff towe coal
+iaju lats idel gday omie neby mami ubin agem veby mein ngla -war inup
+inum -ken gact tsms uchi oems epia cnow ndee cura elds roes qiao kper
+oora sins boda cere alix revo ngji insa llmy dbut pgap dmag yare ckat
+ckan idao isto omma nsai lfry dfry vend veno ythm nnot meus pbus eame
+heep wkid 1988 wiss kaim ayus derr dero rned risa ogul o365 nnie mesa
+amil imum imus adus erka alet aleh mbia sani daya arbe flor ulla bait
+s911 orto tzer naka olum ymom niki xnow eems rray algo oput rell -win
+rras trio 8999 fied smed snis kami rber tcha nmac gguy irlz llno bogo
+leva yule nima tere 7788 cter alah sert serr sere reng ghot swhy ovin
+itur 1920 ixit ndso kfed hhim ipin hhit html nsys cego ckie onos wift
+lyst abis inia icai pvan e-up guna lpha toes atry edev uana arda hton
+lola llbe dink cchi benz igou gala galo exec bark mbat ahal rhis x911
+emps rien pron fico hevy aike gana aguy ng4u sexx obei reds gere gery
+sors osum pfix rape itsa ocut flet ntus -bay okey rhow teor elts etel
+nier esms coll amex uces ndof opal ngzi inci uros lsky acka arsh oyan
+oski nedo ssmy leak pike nney
+""".split()): SUFFIX_SCORES[name] = (6040 - index) / 7550.0
+
+for index, name in enumerate("""
+group media music store today esign house space games china forum
+style hotel money video books guide radio ravel works press sales
+signs place green power homes trade india print photo light ation
+share links pages stuff tudio movie ports enter point cards sport
+board sites stock watch poker party water dream magic image times
+logic names state parts email metal drive index brand eshop sound
+ideas model event daily tours sting match clean guard files notes
+first train table shops price start glass twork night flash eview
+tions arket lobal sense earch right voice study chool woman force
+thing lines trust gifts track touch films order speed ealty serve
+obile women class score irect ebook happy paper block white legal
+eport value goods facts alive crazy apple fresh mania nergy quote
+eland smile -tech stand river shell words truck cheap codes amily
+-shop black staff heart local trace eclub brown ision there ehome
+cover count cycle esoft sight aming think offer vents seven funds
+prime plans ystem stage views leads clock horse enews speak shows
+stick esite loans story lists frame erver pedia elive again small
+forms click dates plant chair aware ehost marks round aster court
+learn ecard korea rates fight front alarm floor sland write ville
+label smart rance elife bytes rooms boxes sshop egame acing cross
+doors japan wheel extra rules einfo chain ready esale lands scale
+ortal elove blogs ental peace ction clear route epark range hotos
+heads feeds album ering where lanet etime break graph sheet ecare
+ecity miles young great audio eking epage elist thome emlak etown
+eplus drink edata sugar sleep ology asino tclub shape espot picks
+egirl eauty skill level redit reach patch teens ating efree stars
+sharp tshop ideos ource eshow inder spots emark eroom thost talks
+eight quick ideal etalk ading total tones minds tcard elect solar
+tmail -info elink erate eteam title trick hands buddy eband ebank
+about proof tlife loads tsite eplan stems epair esort teach rvice
+tsoft eplay -club eball human shoes esafe noise chips ecall otech
+epost funny porno trial itech overs shift otors eless tnews slist
+trans ahead ewell basic ecure ecode ejobs emore ehelp taste eeasy
+ewire sters locks iving tspot award mages ehere efire tinfo eways
+bites eblue ewear gency efish eface eform ecell limit nshop eloan
+catch cases etest ffice alert ebest dance topic moves plays nvest
+lunch omain ethis spain items tlive epass topia angel close 4life
+ovies tlist under nclub depot efarm ework ranch efile sclub yshop
+found ashop cares asoft three tests posts tbank needs edown ename
+orums ewise shack drops nding pital epack emind enjoy efund finds
+anada owner tjobs bound hange xpert ewall nsite piece tcode visit
+dshop nsoft shome shoot atech tball warez union dlife ebase claim
+nking tcity apart ecore check vital trash chaos entry scope hello
+oject lucky yclub lives scrap tplan craft eaway eback oshop fancy
+ccess twell taway efast enote tland acker edate daddy nting elady
+edoor epart twear eblog efind angle dhost inter etree enext mpany
+ebits grant eside estop edeal solve osoft -team lease clips eller
+ylife lover tpark tfilm tplus tlink short tband users sinfo shelf
+bears etrip -clan esell splus ishop erman ehand mains handy twise
+slife nlove teasy tbook smail etype brief tbase shion digit tpost
+going ehead scape ezero etech eidea efive built snews tpage ehair
+tface rapid efilm lower elook tlove along efeed ttalk tfast quest
+ewind etext sblog -news ights ining trees grand epool eting foods
+tgirl troom tdeal slive rader elock tring unter rshop anews looks
+crash twire tdata tgame treet elong esave ylove forex treat novel
+tsale nnews jones aclub ewide escan ttime ehunt eload coach reply
+motor layer split ntime spark sbook emode proxy hurch stech steam
+thelp ernet reads agent cause joint tteam gamer tbest ebody tking
+dlive oogle tasks ntown doing nhome octor vegas grind eonly admin
+eover enice tdown yhome shall tmark ewest waste erson tmore ssite
+tname tdoor -mail ncity eturn tcare esure tshow tlook spell eride
+large urope eroad ebear ecase ynews -life zilla pound holes ymail
+tpass scare steel llery elite tsign suits ethat nmore rlife edrop
+eread dclub -home tcall udios erise stalk njobs tfree epipe sfree
+lshop maker folks -soft eroll phase eries still issue march stats
+efour otion sjobs ereal tport banks esome tfind troad emove nmail
+pping iness plaza tview eword troll tstop nance eople eflow votes
+amers ebyte eable tsave etell adult owers dnews squad ebets lland
+ehigh tware focus efull eloop -host other haber tings alley thead
+arden being color hours eluck ndate erica ninfo nside eship rocks
+etask pport tlady ttown yhost salon tblue raise tfarm ridge every
+tcell reams stops tbill epick ather dhome unite dvice earea llege
+ttrip tless error tback nfree ehard pizza erush ncard inner tform
+elike ysoft thill token ygirl solid awyer ewhat uture cords tloan
+ehits tlock tdate rland major guess ttree sgirl babes tcore ehill
+swell erace ebuys slink dlist matic ewalk treal emade elead tease
+nhost ebids ablog erlaw kshop ecopy vices ntech judge tload shirt
+efill epoll elift tures ylist ebars ehack lsoft tsure oland whole
+spage dcard ender esize alife kings tapes ehole thunt twalk twall
+wards tfair dsoft frica yland blank storm 4ever efair ttext etank
+echip iller phere tnote ndeal inger nlive evice ewish trate final
+tunes efirm evote plast vista eopen talia dpark -city strip ement
+paint eedge eunit ejunk ality nnect dinfo twide tflow egain later
+berry earmy knows units ckers splan ution nbook urvey tfeed orner
+ngame actor -love dirty -plus tsafe thair ttest nasty sbank broke
+shost tfire estep farms tream ntral stown ester aobao rning yours
+tpack roker eedit nlife chart ademy tloop tfile rhost tsell pharm
+tside edesk erisk dking ewill nblog nbest upply tarea dband dcore
+years efeet owing dwire diary yking dress nroom saint dsale sides
+oryou pause autos emost nland tword dmail tlike omics float sband
+eboat ddata sgame ssage dpost gital sview etape tdrop erain ctory
+ouses lotto ecuts nplus rteam nteam tcost ahost tanks dmark eease
+apply promo nlong yshow tcase tlift djobs rmail esend aprop dplus
+epile tscan eplug nmark tidea sbest erest terms llage tways dback
+tfive esnow asite lking loose takes bsite oking nplay tmode etrue
+slots never etter dwear oblog ncome gross thall tedge efoot spend
+nshow pride nlink queen trush esoon ennis etrap dtown tdesk ncall
+dview tplay ygame tpool dspot slate dloan efact dbank theat walks
+sfast utlet eslaw dlink linfo lecom dname tfull emake tfund ecost
+aland oclub juice dgame etake rsite thand texas ysite -blog omail
+epeak yinfo lhost tlead glish ounge nbank habit dbook emass tmind
+dgirl tboat ssoft tfish nsale backs ekeys ebill sroom tpipe dsite
+nders tonly nwork tbear dsell rcity dmore ecafe tight anner ndata
+twest acorp twill input ybook marry laser emeet rofit edisk beach
+welry thole early rrent older mshop dfind inema edeep esnet topen
+astic lhome dshow dhere riend ekind tpart plain nwire yloan nball
+scity tpoll urity dsign ywork sonly shelp holic below eneed ohome
+-porn elots mates eties wants tnext dfish reyes nsure rclub arter
+rking ncode bikes ition -site dring egrow eboot steal lteam harma
+tbody ddate begin using arena rsale dfilm npark ebite dfast tfirm
+plots ylive pixel ysell kmail dcity uning carry dding daway edraw
+eflat dland occer shair yteam ttype rasil dface safer hints epain
+dcode panel nblue ktalk yjobs ngirl exico tness bingo clubs ylink
+ybank tores tride deasy jumps ckets oster abuse dtime nable ister
+eleft onics efeel dless refer ohost tgain rless ycare tlong hirts
+ature elets tmove acafe above yblog fever eeyes ities jeans traps
+onkey etail eague tread ahome ypark rever rinfo kclub tbuys ayday
+dfire rnews yfilm helps tship iends arage pilot dtext flies slove
+ytown pdate types scorp etics klife iclub dlock queue ytalk cable
+ydate twins atour tzero eyour haven ybest ndoor edisc splay epaid
+ohbet eader brain estay yfish verse ebugs anlaw dfile shing suite
+nited cloud edark dpass wines eterm linic cheng hones ntest silly
+dbest rhome dword nedge rwear ytime dfund tover -link entre emall
+andco ewash rbook dable tmeet nband shots ocean rlist ncell gains
+knews miami esuit droom kinfo 4sale lance shere ycity ysale puter
+offee leave edays eknow ltalk tsize annel licks pairs tpick robot
+dmind ewins ffers tkeys saves ehall tcopy anime tstep dpack lnews
+dwise throw ddeal ypage dhead ywear nload tthat khost lclub bucks
+ehour esart nlook dwell lgame wears nwell olive dwork dwide npack
+dbase dfree rplan onews euser npost dplan dubai nspot tters itnow
+dlook dhelp stime ntext ljobs dnote egypt ksoft tique unity hosts
+woods tbids yspot nhelp ocity nture dsafe dtalk exact dstop eself
+ddoor costs lcard tfour dflow pload yroom nfish tcure decor ecome
+ycard trail ssion dings emain thard boats after ywire yview yname
+dpage dcare tyour lplus might ejoke trunk ntalk ersex rsoft tblog
+globe based kland rbank urkey rdown -game ntree tluck cking llife
+sword abook pring ndown nfire urnal meter tplug lsite ledge nlist
+ncare tflat ttery dlove ehell nthis rfilm amuse acity usion eitem
+ycall yplay rtown dteam dical kcity efail didea dwest rfree ehope
+dcall ofile kpost ynote ernow eheat yhill ydata grace lbank narea
+neyes scard kmark twash means ircle rcard erole rlive yfire -corp
+ounds nstop yroad tmade nwise lmail klive -auto tchip rcent roups
+rcare ycode nhere nsult nlock nplan nfilm yplus npage eleaf nhead
+teyes ondon erart ealer drain sfarm trisk nface cents itall nwest
+onweb tbits dplay tbyte ssale dhand edits tflag drate ybody rtree
+twice aplus elogs ecorp tsend dloop tiger spost sloan lders nidea
+yball tarmy sweet dfarm sheng eever pulse alias scort elaws dscan
+rents rblog spare lllaw dcell aders mlife ajobs ttell -free etube
+etour tdisk makes delay tever lpost nport pussy -navi alker rtalk
+olink ytree quare nlady efall yless lbook tunit eater opper nview
+nstar rplus nloan buyer e-web erbar elegs saver aging yfile weeks
+tedit sking rcode troot discs pnews basis yfund meets ybear eporn
+pshop ptrip 4free emile maroc nhair otube lmore ydeal ytech esets
+dship lfire aking nsave smark eyear venue ymind nsion rport uster
+rshow phost nfast ocial mclub ycell ogger freak ylady tutor swear
+sdata eonce dedge ncorp ogame ypass rings leman kfree arate verde
+ginfo utube nhand ntour ancer ltown devil awake isoft nhope awaii
+rlady bring tbets dhunt ghost dstep rhelp treme nform nreal nitor
+klock songs turns upper cargo deyes nbody nstep heavy tches react
+kteam elost acard lding visor tsnow nhill droll nfair ttech yfarm
+erway eplot dpart rugby tloss yhelp trise kwear sucks nname nsaat
+kwork acher italy knock tleaf xport dfact lodge dmode tbite ewife
+rfish ysign dwill paris iance efate fault rtech kplus dlead psoft
+sdeal islam tfact icket -mall dport entor dsure donly spoke 4less
+tlots nwill alice ldata ntell ktown lstop tgage ywest genie rover
+eones kshow ajans elend untry ehide arson dways twind llion dhits
+mtech nroad lable plist kfind ilder llink blast atrix ejoin ctive
+kbook yboat nmade ninja tbars sfilm lfilm nbits epays lfish ekeep
+dbyte edare epure stour ecent lwear iland stest tvote ethem gland
+villa klove lspot sback tthis rname epull tboot ustin micro ywall
+dunit rlink cript ocare tnice neasy areas fixed tates ander ywise
+baker mnews strap kcare smore nship ycore areer yaway eaven witch
+sedge lpark onlaw rship dgets scafe olife dnext yplan yband ydays
+alter ttask eeast klink darea candy ymade remix tfoot spool metro
+epush twish ainfo rpack shang hoice rbear llout ltime wrong dball
+lsign dwall lshow tkind ercar nword trong esent ypost yhead nsoon
+polis kbank oteam tting ysafe lball ldeal mundo dsend dtest dbids
+tknow nhigh eshot coder bhost tdisc lmark thigh hobby scent rints
+ddown ytrip ltech seasy ustom comic lfeed llive stube tinto moore
+oards mobil yface medic tdays taken dtrip lpool efelt ampus nfarm
+eseen dvote nfind rdate swire yfind thits dtree sonic likes elate
+lride ctors iblog lplan thell lgirl tjunk dzero nbase rable efolk
+nflow npool least hopes nsign ncept kgame nkeys emany parks ktree
+asset ocket kcard beads tcent trest techs ncase dcase tpaid tlogs
+tpain medya sshow tower rgame inlaw rband mwear nrise kdeal ytest
+ecash tocks rafts gclub owell thack dhair tcome tmake dtank kstop
+dload llars dmove tfeel tlaws lcode yfast dtype oving nhall illas
+quity allen dcopy ntrip edout tpays narmy terra tfrom rfire erbug
+dbill nways alove lview phome esman crisp lcity droad oring saved
+renet dopen huang stake amall pgame ypack twife amera yblue dhigh
+artin toner dgain corps dpoll alent dread dreal yfeet kbase nless
+knote bride vault rtext stein wings hings lface ewant ndbox dbits
+clark tmass dcure nover folio rfeed tuser tdeep dfair sfeed dover
+mpire ldown dfive eklam pshow lsale prise rblue pless seyes kfast
+swise titem ndays lback reate rwire altor lling cmail llday amail
+ogram motel rends psite eroot ddies ysave inews ganic dnice yhere
+ments aring dtech known rring arise slook -asia kface ksite dwind
+oints tmost lenet -star usoft elast gmail nwear krate sauto ching
+sdate ncore tcash dride nters ybyte tmain chile ylong kpack adopt
+rmind ystop thope merit sname eflag tneed sroad rways ngrow trips
+rmark yhair orage ywell kedit rtime ragon twhat scars kspot sdesk
+rgirl orama ooper kwire coins lerts nbear ypool grave ative ilson
+yside swest ydoor james aptop ybars erbid dlong sfire tsome nster
+elson nbyte eloss elief ydown tbugs liday dbody beats nfile asure
+egive rlove eraid enius lumni tales nfund eruns pster bella lebox
+agame ylook ditem yeasy dcost swork orest yroll lljob erinc -tube
+lpack nfive thalf ycles nhunt rface scout erweb shark llyou awang
+tshot rloan rides msoft yzero rzero opark nease einto orall faces
+dfoot kgirl -crew dsave dhill tself tpile nmind ditto ypoll lscan
+dfeet dfeed kking nfeed geeks aylor oshow escue oasis llock lword
+lwork nsell tlets quiet erock oodle ncent kroom imail yword yfree
+-mart lhall ntact imate shits npass dpool swarm dfull ertop sfund
+mbook ymode -book mpage pbook nwind tires efear tfeet relax sorry
+yreal ntake efrom dozen tsoon erday ercat osite tpeak mhost dcorp
+ttank nager dpick logos nlead kband aside sable eling kaway lcare
+nmeet dmeet eused otour lband rmore rvers kfilm nwide kplay llbet
+tsuit lbits davis rpark erbox erjob ublic renew ntrue ptest nread
+ucket esson pplus resex alink anger rbody comes dhour eseat sstop
+skate ilife tries yfeel xiang dheat spray erbet pfish tered forge
+mland kitty tlast edart ricks eters owall sizes lfree nloop ndesk
+dlady llnow lfund skins tsnet llwin coast yport menow erule mport
+lopez rbase ynext ywind cious twant cture lcell lhead dfirm ycase
+yrace rplay sfind lfarm nthat rwork s4you ktest msite tmuch llsex
+rades plive gurus tfail neast ammer equal wclub chick ecret seeks
+alace ylock urner kpass klist rider ddrop rfind drugs ayers rspot
+weird saway dthat yfirm pfilm tners glife kblue scode tribe thers
+mhome akers ranet yfive lpass condo deast dease fries rdeal obook
+hbook nuser adata kname riter ystar utter drace anesi kdown pdata
+gsite sbase yread nsafe chlaw dwalk llart ybits plate ypick dboat
+pjobs kball lwell pgirl mblog ddesk droid yform aller smind tleft
+ehear spart umber ndare yluck lsell ehuge atino wfirm lnote erbuy
+lcall virus affic chase mteam rucks esage nties oping kwell yhunt
+eware ogirl rwise tjoke rcore sthis ymake ronic icity kpark lname
+tturn owear yride lblog shead tstay itube kloan eodds lmake adget
+dside erfly duser epoet heard dsnow stair trule dpipe estar dblue
+these otest hacks yring stare lhelp kfish lcore rbits rpage mited
+yfeed nheat sfile erset lhere lroom llnet tfill kedge ksafe ciety
+nstay renow lfind ekill hines s-inc bases ywife rwall rsafe yback
+kport drisk moral erair honey rejob gents tpush grade wyers lpage
+nhack dmade sorts lfair belle kdata eryou iture pspot thank thang
+yarea dlike lwind okers mhelp -tour perty spass ingle ngers mixes
+hshop baidu bible thour ywill tsets assoc ycash obank mtalk often
+scall slock parel stree yhall kroad nfoot pinfo yopen sions ksave
+ltrip llcat yarmy dones stcar ybill srule ockey rsave yable ropen
+dwife anair nrate cnews ility teway senet emiss dleaf drush nbill
+tpull kfire tmiss esays pteam nmake ybase erpay ttrue ories tkeep
+llson osure nboat icker ndraw ssist pdeal tplot asing yship tpure
+mommy lzero rains entos ebind lette ndman rflow ngain ecast droot
+dthis which ltest nners asart erlog gnews puppy relaw efits -cafe
+kcell allas icorp gator bliss nsome gteam tvice hsoft ebulk ktext
+ofilm nscan abase ppers muzik manga hcity rtest ookie rcher atalk
+scase ihome kless kfarm lfast sdown kjobs nmode nonly kplan tcuts
+antop hnews cksex ewarm rcorp lrace erboy arker ytext yhits eekly
+-time eugly rtner -land ndway ifeng lbest ourse rkets orate dlift
+khelp arget prove forme etish llpop nring ckson dwish sthat llers
+ilter odies lhill boost while bonus lbase etill youxi heats ylike
+dbite elies ktube stout adies nwall obase ndnet yneed broad dcuts
+phunt whost neway pside nware minfo vodka yhard ypart ashow dkeys
+disco yhigh rroom grown pclub alnet llway markt llove pwork yfull
+maybe llbar ennet afree nzero estor sdoor amond ntank ckyou arcia
+pmark gates kscan teast yidea yleaf rlock ervis npeak lheat yvote
+ctech s4all eaker erkey lring astar named ocars llist iting loves
+lways kship llcar drawn tcafe seats lmind kbest rmeet alaxy stran
+dform ydrop ypipe tterm oston eason rwind lsafe rhand dhope ybets
+lever trend nfeel anart -jobs atown entai swing khair oplan rlook
+dhell ables -cash ndrop ooker dbuys lfive minor sfish stbuy stall
+rcall udent sreal charm nback ehint pfire rhead pcity uters werks
+lture kpage dsize hoppe gshow gshop jewel pzero musik nique aving
+mason ygain azaar ishes fotos istan ydisc exist yonly ldate stays
+ymeet srael nleaf sgear lwire ndies sitem erare dchip ofing llboy
+ndeep esake ybuys pedit krace llate plink pearl ablue kfund darts
+itour kcore kwalk kwall plock nluck -bank nknow pview dhole scell
+elper mplus imple rdlaw anfan valve eshit psale teria dbear ermen
+rough xshop ecipe tenow stsex ckout pfeed arpet kcase nnote dbugs
+llfix tyear itten rsign ermap bunny ebaby paces ytask datum ybids
+npick ncial mpass eract bling ndisk rpost erred keyes emart nrain
+fruit rlong wsoft leach kpool laway sfirm lroad hurry fully -kids
+nedit rview yscan vings lfile ossip tcher savvy ndyou dsnet etlog
+iyuan rands ttape ntrol outer timed plove lside libre pflow ttake
+tonce emess ecars emate innet tfolk dsome esfor icare ywide tused
+khome dsets njoin rbill yfair useum tlies kdate ducts yrain esand
+kview kidea kolik bazar tokyo craze eduty tonic 4kids dsuit ndbuy
+woool ksell ynice abies tlost ellis aiwan lmode ngnow redge uitar
+nroll nfact nchip senow nhits peasy nflag hlife swish glove whome
+stbar dturn drama parea mcity lbyte kmore twarm ddict rpass scoop
+ymore ktime rcost schat raway ngman tejob ackup nauto kwise lebuy
+dseen tdraw redog asses stogo andgo karea sclan swill yload yfoot
+yrics keasy ssets ncash ndkey ecker slead yrate eblow dtape flyer
+oplay lpart naked nette kable mspot kdoor pcode odate orris kmind
+egear yflow llkey stask kform atson llook tjoin eneck lnext ichan
+rarea ofits epast rally tfear swide rgain enear ntage dever ycafe
+nfall cklaw illon ngart lwall xlive atube khole tkill mdata edbox
+relay eslip agirl oware orman pmail llbox -data pirit bates theme
+pcore dslip ytell wgame kback mpact kflow ylost kfeed erall lsave
+lrate dgrow nwhat esame npipe pcase chman rehab allet llies mtown
+pfree psave eslow llair annet lship awear leart pland lflow sauce
+blues psell esaid apers lblue ykill emean tfall rform kfile mbank
+e4you -sale stext retop ytube racks htime rfive teven jects taxes
+ttrap atest dlaws ssell onnet nride zheng yrush dster urism tjust
+todds tstar yedge kload igame rator olbox ehalf ckman rwest reset
+rones lidea e-net wlink birds recat rthis ndbid gging rfast erbit
+nlogs 4arab ndpay ntype indow klady kfour lcorp -girl grill ytrap
+pidea rnote evens sults kblog ngxin ience nmove ndfit ndcar lcopy
+tchen ppage anova nbite npain eauto mcard stbox orbit esday boots
+rmade ntjob rdata bitch cinfo llbuy nwalk npure lthis rrate arnet
+rcell astro lelaw asian rscan yplug e-art sfair iling eylaw erhit
+nrush ksale olove shame mouse sever hsite tthem kcode nfull tlegs
+-town ysuit pcard ewere tporn anson klets ntask reaks esall ondos
+llfly rmall ytrue lwise ymark adams ednet oplus kbyte lcase wjobs
+rhits nlift oball ysure yfour evada ymove ebury attle urses ndows
+pread rload eupon rword ontor unews unkie ansex shock reway anage
+talog osale liner ocard tical btech uxury khunt ensex nopen mafia
+rknow glist yhand ptime lport noted ltree inbox dlots dblog inart
+yself pazar ewhen tgrow arble llmix erpen tadds ppost nsend kease
+rwill alsex leyes snote rfile eagle srate tsaid ivera shope admit
+ghome ogolf ptown phelp gblog rybox ekids esway stice yhack tages
+enson erlin mjobs ermix tural ornot lying inese egacy wshow wshop
+ypure ktrip filed lbars tchat tpair plead itnet rtual tyles s-web
+ollar -chat smade lbear ncopy ndall opage chers ybugs reers nwash
+nyuan capes honda veyou lleye llfit refit creen rebuy rebus elebs
+nlike -immo lrain ndice yuser ntape rdoor ndlaw dplug kcall dflag
+nanet yrisk yrise yjunk yfact ewman pplay ocell psend kthis llfan
+itown llbit ebate ploan dbars drule rbars corts rfarm glive waves
+scott shand ehate obama urada rdays ookup ckdog rabia ctric iwang
+otown mbers stdog sidea kwind ocash gfree wares -tips allow sboat
+gplay ypeak ultra pfarm audit dmile klook kside alabs swiki stoys
+ptalk -help pcell crets icago ydark pband sease smoke uides ndjoy
+bread pfast sball ababy alore dfolk sspot nwish mlist zhang eeats
+ldrop epoem llits alist nvote spack thong xcorp lform infos ratis
+aband estax caret -cars ndage ndago valid hlive repay ntcar ltext
+hfree popen arent turbo lflat anlar brary bnews psafe khits pider
+since erage lebar blend tenet winfo ydesk empty ysend ddisc aview
+epoor rhigh gbank elcom ereye afety gbase rsell hemes itong nrace
+lgain dsoon shill 2shop llbug ndbar esyou pdown cknow rwalk lsoon
+howto iming -king mpost stroy plies third eedom ytype lauto marie
+maria onext ycure lhack ethen ether lplay pwire royal pship yloop
+ngbox rmode dknow yunit sread lesex impex itcar wtime kvote tgive
+ddays kdesk ntana kchip mixed nbuys ldays hound lthat rcade ylead
+eness ksend mfree bloom kword nslaw nsize rbids aints entro reart
+ridea stype hting esbar rpool yfrom kover ption kiosk oview ejust
+alite llsee nbids dpoem oninc fixes tsort caddy akina elabs nbars
+ksign kpick hcard icafe seart dtrue urban hloan oenix tress rfair
+pdisk stend apark kstar meyes tbulk stuck oloan orter lldog given
+lhand pfile ankey ilver kbuys -rock nnext odata llmen perry ewait
+ndjob pfind tmile rtube anjob ycent rback lbody dthem ndits tedog
+dedit ssafe lwalk ateam kfoot ledit ykeys rtour eeven perks dhard
+tlend rheat sfans pking ttube piano echat mking dwhat urger plife
+erdog lings remen temap pinto vance yhope nhell ycome lknow ywash
+grove nturn itbox asket argue esbox wfair obest telog istas ebusy
+ylate utech teats ocode ingin afilm remap dwash shigh itage itbar
+rekey lstom antin nbugs lotus teart mondo bgame measy amore ndark
+pmind ofind 88888 reasy eslot kfull nning enlaw nenow dodds ising
+ordan unner dmake rfirm aplay roots nroot erbus ector elnet e4all
+sebox celet lhope urmet khigh thave toons larea ihost eclan pcall
+erget rease coded erout lchip enbox tebug thate uotes neart mwell
+comms ecool jesus osell rpart nenet spaid crack oyage oporn neman
+ncost maven rauto nmall messy pbank tcorp coinc -body sheat shear
+ssend ripts emuch lloff lewis wmind llguy ngren snext camps elman
+slady anted sring wbits ptube dcars ppool itoff hoops sblue lcafe
+llcan ethin alism recar pform lhard mwork abank pluck klike ernew
+worry tclue aixin lboat dluck -card pfund dmass llpay obits lhell
+icons kwest phead lepop -test ryart npart egion toyou dware sface
+mhere omore ypaid erguy angry ekeen hares kbear ksnow booty olice
+rself csoft egree xtile odian acres lmeet dpeak tecat equip eputt
+erbal antra ummit eatre gcity dpain ecame reboy wcard strom yhole
+efuel andia stled wroom tiles stbit otime leaid rbest ssign dtrap
+infor esinc ksure dlets edies veman leboy edear pitch pplan inity
+ndsex tdead ltape andme pface ofarm yhour ywant nddog nlots skids
+yflag dpush rmany inwin arian towin lfour rious leasy ahelp ywalk
+sopen rmass ofeed stnet lcars isten nfirm adair rdesk ronly dpile
+ndout smove ilove -ware lhigh reats sejob rtrip enses clive ensen
+nmass reday ydeep ktank dfear igner oetry uwang rhunt ionet ywish
+rting kraft mtime gtree kmeet lfoot sbody ckair stmap rhall salsa
+seyou oname anvas xnews tshit urces ostop inway kfive racle ailer
+leout lloan nfour ngnet ooter -live eadds gwang tpoem leven ndfly
+ional reece iform rites inavi ayoga adoor midea ospot rlead fmail
+lates ncing pants sence xgirl -spot ibook necat chive amber lrush
+arina seall ndmen stbug rwell lwash pmode wlive khead dkind pwest
+ndnew ptree roman mpark wspot demos inion bster yways urfer stics
+yknow tends mflow izzle karma nfang khack chost smode sways izard
+proom tsent dtube dfall abbit ystay hance sscan ndred grain hicks
+ushop usage llice loset paste lones othes nboot laims teman esweb
+onica ertea atdog erten ndher tcast wfilm luser kelly leoff runit
+kdisc nterm ercan dents lemap isher athon chill srace owork steps
+albet otter naway ltank afish kster attic ybaby lenow paway nnett
+reman rmake wmark trole ndlet alman scuba dself pthat kyour monds
+ntent thear apage aroad hayes lator ronto wtalk ohead isnet ergas
+dlogs essex arlaw sarim ldoor cream wtest ssnow reson nurse prior
+anbar blaze erapy otake lanka seout ortho neral pwear mance aperu
+ppark arten pdesk lpipe movil ysome olist tslot cator guang pdrop
+rcopy ingon azari ndtop etbox lefit rtnow ehave erice reast wlife
+dstay yboot nejob anton tnear rkeys lisim althy atart ysoon doubt
+mwall s-net eeper npoll ymain ymost tsout knice ddraw avers rtell
+chong irror ishow etbar ggame pball eward dneck atbar eator idget
+lrisk ylaws rpick sbill obaby yover igest ibaby crete ascan wnews
+oreal omart repop indir yever wcity rebar gbook mring flock twhen
+-park reall lewin itter wbest dtask atron ndwar tizen atjob xclub
+ident edman ndtax cenow atcat kdrop dused iking itude pblue plady
+otnet lelog abyte rdisc lmain bonds olate mcorp artop llhot esout
+blink ndisc staid afari kzero orida medit wheat whead wsite starz
+djunk ndnow alend ators rdraw reens dgive thman kroll wpage -cool
+asion ktech harge opool stape rebid rebit ndair sesex ipper acall
+kluck wfarm fleet esten dtake -wear a2008 ypain lhunt acion ndwin
+enwin ndset yjoke abest selaw enver wplus yones otica eluxe sless
+esees rluck chang nitem tmall arang phair -gmbh stlaw wbook sneed
+tecar llbus laska -gate kbill lhole sages nkeep nesex ocafe aslaw
+rotic drise oinfo dtell llcut wpark andie andit ettes xmail stbig
+gcode sushi ndbet leair rewin aloan assic reoil ebore houji excel
+iters llwar lkeys yease ediet oupon erfan pcare pword dshot rroad
+otalk bshop ckbar rturn nthem ltell achat wsign odown srisk mlove
+mpson ansit ysize mixer pdoor nebox spick spice nkill yhell szero
+casts anlog rbuys ythis lbill shard iders izayn pstop reeye giant
+anday -toys ltube razil rmost smeet rants atlas rices ythem flair
+aters cabin enate geman teams eshut rtype wball nchat ehung kwhat
+ryday emory dkeep odoor alsat ycopy gtime teout wland ocker enten
+relog rfund msell kfair xsoft rjobs darmy dhall ssure ityou bands
+nsent rside ojobs tpoet ckfix khill tesex dcast opera krush boobs
+gives gwork pwell anker pnote cepts llady smake kways arose etnam
+mlive rbyte lless tacts anama erpop tugly roses gpack rbets ostar
+anjoy lpick seman shore dhack swhat retty slave ystep icken eeker
+pable e2008 adeal owski added anweb pname gjobs tsbox ichat kmall
+whelp dudes mming wking othat hplan atway stfor iques peach wfast
+acasa lloil rmacy reled xblog opack pleaf kfact yboys telaw onder
+stjoy pbase ckits npush astle tewin ptext eclue rreal arsex etoys
+arris whore anbit tdark ljunk arway teoff cshop erlot mmail ktrue
+ckoff athat chinc mlink nseen pmeet rhope prize wnote ltrue mdown
+tango llare divas lused rroll rtist pcorp tatus rooks esbuy reguy
+celog ldeep rmain wride refix wtype idian klift obyte wblue snice
+tanet ntnet pover khere -room mfish onart gtown myers desex yhear
+-expo mango egolf celaw mcafe mcode itesi sepay quite esmap guyen
+ndmix antie dflat antic teyou gebar reten neats rages rseen ntend
+lanes costa lemen lself ntart eslog skeys ances llbid opoly groom
+ngles -talk incar tslip rmart areye erpro ytank celeb dpure knext
+oices t-net ckfly yeyes hecks ntlog cblog tslow agear races lltax
+atfix tgoes maids kring lmart rhair kboat opens okeys ndear lypay
+ndlog -band lcure ldesk ancar ancat nones lgrow alfan ckeye ssing
+tempo david ptank linda mball gking hjobs rlike labor kopen harts
+wdeal onner yitem seeds roads aroom kpart sejoy ljoin 4host adown
+nbets panda ckart pscan kdraw tebid ijing ggirl ycost lltop gfilm
+ohere merce inton intop ikaku widea netwo lness -intl wname tebox
+ckmap sfive sgain ikini ppies lient gfind ygrow tduty lider reyou
+oknow letop rynow sefit atrip lefan akeup ehang orain iteam dloss
+owboy pfull anice teady dfour ngcar llets truly kbids ndoil ppack
+oride rfans leweb aauto ltype stten uises ckmen rkids enbuy ghong
+rence ohelp tseat argas pheat menus stkey trare hfile mplan mplay
+iners selog syria elder rizon roids orbox nrisk mmark rando ndfix
+ndcat kcure llnew rsend lived danet llend optic ddisk rynet egend
+amart lepay ffect ummer gthis wlove owout ewang lhair cesex lcome
+anmix ndboy csite renot linkz ckbit htech nswer imall upset ltake
+flife cteam lfull sarea ecart lkids eando wpost tsjob rtman wback
+chnet erite refly nabox estin hteam egoes lbids alook penny proll
+nfill sbuys insex aidea ycuts rsnow ngyou nanny raphy rfeet rebox
+enart mform astop -pack stwin sluts scost itred ffair alart etend
+etart nrest ckset pstep rfect eyond super aroff dsort erwar ktape
+nyour gsoft dsage tclan hplus pflag utong edead rfoot anmap ennel
+cknet onomy tfate rpure lfact eston stoms ocall lopen dated among
+cclub tlose dmain mones ttack atall dmost -serv hshow phits onear
+yflat sbets mable bilya sload mfilm yfate nhide peast ckpop nflat
+-haus homas dyour andan perts pback xhost mtree enavi sgolf chome
+lfirm atair eeder ylogs admap stlog encia llall djoin mlook opart
+ssjob vejob ridal facil erfit ylift lbets dpoet seday altop isdom
+areal rrace hlove reaid ylegs blove wthat usual dekor nneck -golf
+ntway iones wstep dsaid hclub iddle tpint veris rcase yment ntube
+forus cebit stman wbank prace tsame ychat lvote usica nnies thlog
+flame nimal wroad inpay gamez teair scher sship adrid lefly scure
+ckbug ckbus eaver curry dfeel nista yacht ryboy nnice cyber rpair
+edoes ckwin anyou alway dties nmain anwar dlies swind nself sform
+cheat meout heasy oface kdays sflow ivers tkids sedit ntong loors
+delhi tolog eorge stany kroot hgame rwhat grass wteam kbars lekid
+crest awful odays reinc anbox lmade shnow islaw rylaw kleaf ndoff
+stfix erkid lcost itjob ychip tepay n-net amics lpoll ntman stmix
+cheer itart wwire aysex rtape alfly hroom illis llmap stgas ncafe
+orial dbets ntpay oluck ckage adate stjob usnet ertax leyou rwide
+pnext sjunk lpure -chan ither lroll dsman sebar ndrew amigo telco
+wview hking iches ounts beast ntair -blue pchat kride otask kinds
+emust lsize atbox wimax rdeep mdate slike fense idnow ornet nefix
+kwide weast ntsex lique naweb stpen tmate wsome erand arity n-web
+thbar gxing ksbox nlegs entum rloop antwo llkid stmen adart -fans
+tlate psign kstep rstay elton areus ayway hidea kreal kread lular
+elain llfor muser olabs -sexy pedge rches nicer ymass alled arart
+agger ndhat msure zblog nonce erent yedit mwind pfive leats ndart
+onate istry esoil cjobs oroom dlend mopen ndpop llaid kbets bored
+mhair opaid dsent wless ussia ofast ykind trics yroot etsex wfire
+silva ncure rstep arock aplan lejob pmore waway lsend athis srain
+ccorp lties etees temix kwill htour ygolf dsinc enemy tscar gpass
+kturn imber racer stact rmate eages rjunk irage meart mband vebid
+lefix refan eknik ocast -call ancan ndcup sdisk inhas rdrop tents
+tpast temps jiaju anity khand ownet trike ehber t2008 wface punit
+hcall esled ifang omall ddark xteam almix cejoy rehim ghelp thart
+-pics anher resit nporn oport gfund xlist rmove twait grate -list
+pfeet tsall sfera ygear dpair regas lwest ergia spect seast pfair
+stoff omark dneed agons llbad mfarm rhell rehot 4cash okids putts
+ingen emple ktype ohang -moto draws tival gable isson adise brake
+biles ucker shour rchip ndact ykids ixing tsbuy nator olike wrush
+nglow osave ceway rstop ketch ftech ardin emaps rvote gmark elazy
+reget sfour dclan oraid fnews mping ssdog rdisk gface pporn gfish
+llhow dyman ersix anges inkey pwall pwalk ngoes alfix retwo tment
+anall gdate erbig pwise -comm tefix omove aphix noble ndsay deats
+gless klead oxing kmart ruise ploop styou sbids resay fence ocorp
+nemix iewer awest anote pgain idwin ybulk hnson heros plore olong
+rkill larts nhole fblog lboot dfill lemix tquit alpha kjunk randa
+tmany ckjob lroot lwide ffing packs ckbox ought whill exusa rdens
+ciler hpark marco amark whair a2009 ypair secat tebar ottle alues
+yterm neill lasik ntbar ndcan alnow kmode acare mdoor brook ypoem
+mwire tblow agles mpart aners liste spure asics edway wread oauto
+dodge rthat joins neinc tauto tuner ddead tupon oover adnet phill
+heese rnear ample tchar inyou wlist lters lyour erhot erbag neset
+twist orart oduct llask c-net ckboy o-net sbear rfeel ellon anmen
+setup psoon strow agina ybags ckbet andis girlz ckcar etten tella
+emium owman wdraw o-web stbid lebid klots amous amour grows awire
+lfeel plash yporn reuse carts aopen yblow obets phack echno tlazy
+kpipe lynch shave -rose rotec apper orgia enall dyear inbar lljoy
+nudes atics atice thint nkind orium pturn pbest innow ohair obots
+nther stkid sbaby sdays urney owlaw injob lyman nefly those login
+gname ndfan mgame onova mwise olors ryyou mfind atnew anred cetwo
+elion inage rfact xcity hspot escar lcash orsex anguy ssave veair
+atent groll oform gpark ylazy pbits pbyte blitz wplan wplay gemen
+sbits msafe chars rtage chjob teday lecar -film otsit btube kever
+lingo tfelt kdisk wdata inson dsake gtalk mfair ckwar ckway tkeen
+uenow stred query eroil wcall ezlaw wmore a-web aloil efest drums
+nhung holds wsale rlogs xsite nlend inboy mfast xplus erfix lmass
+henry ldisk ykeep klong agree oblue sical dlegs inday gwise iesel
+ntkey adfly ditor alpay stcan htest aninc semix jacks gcard atfly
+mtrip arout okies oming ellas ytape binet prate adjob reout opost
+wband orway aldog mpics rhill rered ohunt ythat etips llsix llsit
+earts wknow sunit denet ycorp ymile etnet nslip ktrap swall utton
+lwhat wscan pdisc teboy nfrom rfull ckbuy meyer asexy itate mloan
+ltrap ckfit rnice einch otcom erled spire nfeet swers tewar altax
+dcash mview rinks icomm krest riage sknow oarea donce stell ptech
+entan msale dsart rayer orrow crime kdeep nsuit signz dmany kmass
+hmark lmove ercom toweb orker legas omedy pthis ewing ngton aname
+ushan llmet ibaba wsafe lrest worst crush obars lfall uyers rgrow
+plong berts epics ledog rette ylets kthem fiber erkit wable stfit
+aunch rrain dslaw ldlaw arsat hwear arren ptask neout lstar psure
+ntfly eamer dporn reoff xinfo ceyou s2009 canal thlaw etman npull
+ndguy anfly celik ilian rwash lecat deven sedog n-usa rince lenew
+kthat rread wdeep entin eknew rlies isted glock anoil recan antry
+lster ecinc rsuit oting enact a-inc sties pgrow brush wcase gspot
+glink shers clife sroot
+""".split()): SUFFIX_SCORES[name] = (5922 - index) / 7106.0
+
+for index, name in enumerate("""
+design travel studio sports market global search school direct mobile
+realty esigns family center system events gaming osting -group server
+energy vision etwork racing stoday portal photos beauty xpress planet
+videos casino source review sgroup report motors ystems master office
+invest credit movies forums ervice agency agroup egroup nation domain
+rading ngroup finder roject change images ompany canada -china ebooks
+ashion apital street estore sstore utions omains trader doctor expert
+church emusic tudios -media europe ogroup etoday living estyle hunter
+omedia tgroup people tworks ecords lawyer ollege emedia nmusic estate
+splace inance -music dental resort repair merica tation island allery
+garden rvices entral -forum france gamers africa supply onnect cademy
+ehouse nhouse broker survey -hotel igital motion tstore lgroup lution
+nmedia ftware corner outlet yspace aining ntoday rgroup stream ytoday
+nglish dreams amusic lounge friend ewelry italia dating smusic foryou
+ations player cation tspace upport urance siness shirts emoney soccer
+eather nstore evideo ebsite tmedia rental tgames mexico profit keting
+yhouse tmoney advice flower houses ttoday itness united tmusic clinic
+lights -store brasil asters ngames centre nspace stores series riends
+tguide future driver curity lovers select access tlinks sohbet opping
+nstyle eviews pharma coffee tsales action google tennis onsult groups
+uccess egames anking hannel circle elecom seller omusic -power inting
+edical london phones ending fusion amedia inside square tuning dtoday
+league eguide smedia actory tvideo mgroup dspace ymedia tlight shouse
+bridge igroup tstyle sguide eplace turkey income mputer dgroup insaat
+garage logger tpower secure orrent pgroup tplace edding ytimes nshare
+tbooks valley cinema heaven social dhouse ournal tstuff cgroup thotel
+arning career sindia imedia sgifts tnames eboard uction enture prints
+unding oncept offers -style comics stocks strong ymusic nguide tcards
+astore tpoint stable nchina -trade yhotel ystore othing rspace boards
+ystuff ostore egreen towing esales ephoto nlogic spoker etrade onitor
+gtoday espace script tguard ealtor rmedia tgreen custom npress eradio
+taobao matrix export llsoft assage ysales dlight rescue reklam -house
+dealer choice hawaii xtreme lowers rhouse states ension escort nwater
+tevent rmusic ection dpower ticket sphere anclub tpages ymoney sforum
+movers rtgage tbrand nprint tradio tprint rtoday dmedia nsport monkey
+elinks -japan dstore cycles racker ickets hacker reland yvideo ywoman
+dhotel estock points estuff things ollars alerts update ygroup liance
+rtners dvisor ehomes epages awards tfirst etours -games heater arshop
+athome dmusic public yguard lmusic stones writer factor secret dplace
+sgames orever emetal tserve ahomes nparty alumni walker dguide camera
+rganic orange eworks retail eserve nhotel dlinks nstock mentor erland
+schina tvalue ndream palace llshop ypages raffic string imited nworks
+tshops genius nboard strain sprint nsales taylor ervers shotel assist
+twatch illion remail epress ewhite hgroup tshare lmedia ansoft ahotel
+oliday dpress tparty smiles -radio nstuff ngreen ndmore tprice latino
+ltoday trucks awyers iotech ntrade anager tcrazy dshare tdream campus
+tindex elight elogic ywatch ntrust dstock smoney tmovie ehotel dprint
+tagain ymagic eguard tmetal emagic ooking dvideo edaily dwater yblock
+nvideo operty nsites ilders bucket -india thouse devent edrive artner
+tforum avenue llinfo llnews astyle dsales ulture arkets -photo tpaper
+wilson nhomes hopper ywhite weekly pparel ishing ershop flight yclass
+dcards ountry dworks ygames nplace knight iaprop talent ybooks dnames
+ociety twoman galaxy illage tnotes equity tdaily ipedia insure aphoto
+tsites shoppe timage esense ydrive upload oparts uality tthink tstart
+scards ndshop tsound ontrol yfirst pmedia tlogic tclean addict laptop
+bgroup llstop ttable tforms atours dprice eshare torage ptions sounds
+tsense eports atwork crafts recipe ground kgroup ewatch -video guitar
+esites igames istory stlist eshops anshop yheart tdrive assets etimes
+raders filter iamond nmetal pmusic elegal tudent relief garcia opolis
+enshop person eacher ctions eforce ystyle ecover lldata enotes tright
+nnames tstudy orlife carter payday talarm rstore tseven reless ackers
+ospace oducts -poker strace lljobs arking oofing olding ercent nradio
+empire museum stbest ourism temail nbooks miller omania fetish cheats
+achina ypoint anlove tmagic ygreen tlines trooms ission erteam lyrics
+ethere tmatch echeap tdoors llspot ottery babies unting rplace ywater
+tbrown ehappy tquote tfresh tchina aforum indows window lltown ntimes
+ecycle nmodel ldings sbooks ydaily tcodes dgreen spaces utdoor tsigns
+spirit llwear rparts ntable rstyle lledge styles stours dideas tapple
+tchair bazaar nsound ladies etrain llball efacts llface brands llable
+dollar ohouse gossip ydream tpress israel llbook yfiles dmoney dragon
+munity yclean ecards atches ancial tscore ssales llplus ohotel others
+agents tspeed create tering tstate ymovie trends martin nmagic nparts
+dmagic llking emovie ething eshows archer irtual austin torder stclub
+tindia ypress legacy easure yprint buster nnotes svideo npoint llsite
+leader ewater yradio kmedia ystock nforum llcard active nbrand agames
+condos ronics llclub emodel textra silver spider ncrazy eprint reader
+twater hentai scapes luxury twords -books nevada onight nature lltrip
+icaret s-shop servis dforum tdrink wright stnews yglass meters nmoney
+stdata hoenix epoker taware eforum tforce nwomen llhost celebs themes
+tlands mtoday ymatch maging lastic hockey etrack ibrary llsign switch
+tglass tfiles killer ttrack tcheap thomes rimage dlogic dwords icture
+lldeal tlocal ystate yvoice yguide eglass cforum ectric sgreen istore
+easing tsshop yevent guides sfirst llgame uilder resale carpet oolbox
+burger tronic ytruck ancity llpack marble ogames dfacts return nimage
+bility tvoice safety atcher rguide ygoods eapple ecodes sstyle banner
+epaper fgroup boston moving spring eating edlife llfeed llhall ndaily
+reshop tsport -guide junkie llfive ingnow nthing zanesi elines otball
+inlove device agreen ternet ylight tspots eblack helper arabia atural
+oguide tsmile tstaff dtrain dstart rsales nloads ynames epower dparty
+llmore tplans nfresh oworks -homes dstyle llteam eideas llbits llease
+ycrazy tviews tstand llland llmark -money nclean rpower avings reload
+rstock isting eative ynight ystudy ybrand osales llport egoods octors
+stmail tlabel quotes yflash talive puters mstore ostyle napple llshow
+olight ematch cebook tleads owatch dbooks nvalue llfile twheel ewomen
+lindia sradio llsell rlogic yshare nlinks esport stdown nlines ypower
+estudy refund course onster ateway cradio rgames dpages trates otspot
+rchive escore anlong mylife alstom enames tframe tpoker dmetal cripts
+screen annews cancer dnight mhouse sideas sphoto tshack ntrack erinfo
+-space llfish treach ourmet itchen nelson ttrust tblock seball tideas
+arties surfer llhead npages ontact reight yspeed orless rogram orsale
+ncodes etrust ypoker reedom ysense wnload esting tsharp hicago -movie
+impact kontor rstand tsight ghting stfind simple mindia dnotes nights
+tsmall llcode tebook epoint rvideo yboard esults yframe ohomes ources
+ssport awfirm summit eville arhost ntalks degree llwork yscore outure
+meshop ethost yimage dstate nemail andate triver nsmile rmoney tfacts
+dallas eparty stshop llcell nalive ogreen winner lltime ttimes ngland
+yoffer vestor tboard llride galore lothes forall stbank esound nshell
+nmatch ecrets twrite erbank erblog dboard nmovie echina xmedia nblack
+lltalk morris ybrown nevent dbrand nglass clicks intown tabout senews
+eprice oplast dizayn amania ojects isplay yindex berlin nphoto aworks
+ebuddy oprint digest denver onnews rewall llside oradio netics dclass
+tsland letter tclear efirst lllink twhite tideal brazil ousing htoday
+ndtime rprint anjobs aycare ebhost scorts rokers oclick etouch -links
+eparts -mania oforum rmagic teplus dheads tsheet covers tmodel imusic
+charge llfilm leshop dmatch nvoice nbrown aemlak rindex tspain extile
+dsheet basket llhere safari llscan canvas ecrazy ichina yorder asarim
+nstate llfast eevent rideas dvoice toffer eindia yworks llhome spoint
+herbal cities atoday nlocal etcity cmedia ttotal trades rehome npower
+ealthy llview struck ddream anfree porter shouji backup nriver ncepts
+tlegal llhill ndhost stview areers dvalue twomen llbase inhome nblock
+stidea iverse lassic llpool onsite nlegal llfire nprice tprime rforum
+tgraph tsnews ttrick sthelp stroom tboxes -model tscale castle tcourt
+ingart llband stlive tbreak rocket gratis dtrack renews dpoint llpass
+tfight dradio icious dguard mirror tparts ysites llmind tstage nquote
+eclock dplant llmake ietnam stplan lllist tlevel estart stwear ysound
+tclock llroom gmedia stfilm llword tesoft rabbit egreat efresh rofile
+dwatch mspace ndpost dthing poetry rpress eclass ycross nhands papers
+nflash ysigns dwoman herapy edream tories llsafe nshows ntruck scount
+eseven llcall oporno osport lgames ndrive llzero nserve closet reform
+ilisim teshop stband nhorse stcard tcases ywheel ngwang tplays -party
+ything stsite -sport slight nsight atrade tready nagain tblack tbites
+stscan stblue a-shop ontime ntrain ipping oglass ndrops cindia yparty
+xmusic ngsite stlook iforum osters tgoods ntouch tplant nesoft dscape
+strate attery wanted rstart stluck floors nsense llcase wisdom rcourt
+whouse yshell nsigns stpage a-club anhome yright dflash llpost tflash
+ensite sworks ncover lllock hammer rhotel dimage eflash asales dshows
+refill obooks evalue wgroup dfiles dtimes nstand nghong etting xperts
+erates yprice remind adhost adsite rgreen elists tfound itfast yideas
+seeker aradio stinfo taward incode tesite ochina oodies erhost llgirl
+dparts nchain ehorse llsale freaks nomics ttests memory nguyen terman
+wmedia niture makina echain -board xvideo gitech inform police answer
+adclub replay hitech stgain nindia george estand dmovie dboxes llaway
+turner spower yhorse lorida llnext ccount steady atings tlists eeting
+llmail ttruck ntures artist yplant itsoft incity llfree checks sthost
+llback ystaff nshops yphoto llfarm yfront itteam eality tcross itmail
+intime ywhere -works lender shomes around inabox ywords lledit tchain
+-audio ration stpark sthunt avideo -place stcell myhome ysmall ywomen
+tricks tastic stpost ylists legend stsale ystart atalog gnames tskill
+lldrop dframe recall manlaw dready ealive dclean dstaff dsigns ingman
+arsite anball etones weight llbars ngraph ttitle antime llring option
+ewards jordan dcrazy obilya ndfire arfish llbank itclub lehost tshell
+thomas asport pretty twhere nstudy llthat leclub ebytes rscore ncards
+hinese ngoods nstart ansite nrules aindia nstage llplan rwomen tlocks
+tclass bridal ltrade ypaper amonds lhouse abroad arcade tology tmarks
+eloans dchina -green erfect llpart llhelp ethink aspace wizard tshape
+ermail afilms nguard rbrand reclub tstock remark stlift stlife ndwire
+aylist llnote equote esmile apress lltext estick mmusic gforum efiles
+rebook opress stride fmedia attack dminds yblack lplace graphy ycheap
+stteam dmodel atroom ingbox ylogic andbox tenter stfair llwire ndoors
+tecard stcity tfunds stwise elocal ythink ewoman ytrack dright ttrade
+rworks dprime rinter tehome treads efunds ardlaw rpoint ewants ysight
+signer nforce indate stwell nlabel stdoor ithere sclass ytouch eriver
+lspace ndsoft stboat inwork anroom tthere adloan refree llcare llbyte
+panama dquote starea tthing psites awater mation mmerce ycause -sales
+sthits llwell stball chines inplus nindex better alking ologic yfinds
+sspace atlive rsound owtime enders ertown intalk icheng anbase arbear
+inshow pstore heatre claims ndmail rpages yfeeds oshops nspeed voyage
+oplist yquote llfund llcore lforum atshop aylive stface tissue etlife
+anlife evital patent arcard llness etsite adgets eroute buyers arnews
+escape cooper stdate ndlook e4life asting stlink dinner tscrap meclub
+editor espark stshow prayer ndates stfarm tahead tstalk regame stform
+layers thands dyoung lchina ynotes ndlink nchair llmode roduct pgames
+gindia saints ddaily ndbank etrace ibooks slinks yfresh ycycle values
+dsmile echair streal ytalks hmedia teaway stdeal -times obrand owhere
+atbook theads eimage arwear itters theart wmusic denews atplan cheese
+mehome smatch teland ssence tneeds karate russia esplan cklock anland
+omovie anhead lldown etaway efolks import yplans eagain nsshop stbase
+tsplus ugroup dtouch nfloor etable ypeace thuman rspeed region tegame
+stloan itours status mmedia ventos armail aunion teclub ndsend anshow
+madrid dcourt nglife yalive dpoker stport fmusic otours dextra ytrade
+erooms illing tquick ndback espeak resell deluxe llover eclean tenews
+xgroup tbrief efront stcode inmail ctures nwoman reroom stpass stbuys
+ndwise lement abooks pradio rlight llheat tfloor tester apedia dcover
+ggroup ndface arcode stword artree tspeak ystick musica inlink ydrink
+idnews gadget lllove nstick nalbum lllive tsleep xhouse cookie ndlive
+ymetal ansign dcycle yfunds ebears opedia emarks rtrain eplans thappy
+atable dforce rehber stspot eation ebound nehome orning llhard llrace
+tbasic efense innews recare ruises gstore stname tecall reside stopen
+tapart nology adlife prices tepage adtown ndview odrive dshops tlearn
+etruck rradio dgames stmode lllife nfight otrade yboxes sdrive sthome
+teknik stplus tproof yclock llblue temple ntrial llcity lesson anreal
+stlead poster singer eorder mature aholic llbill llpark rshare tlucky
+ohnson ybytes dsites ashnow etmail stitem wishes talong stjobs yvalue
+telife stlots enclub alaska nyoung eagles eshoes rebank stedge yshops
+forest ontent itcard -dream dthink villas rkshop gspace llpage cruise
+stmark newman nswers kaixin anhost erclub dblock edates nscore rboard
+nsugar omoney ylinks llbest nelive pshare odream tnight edgirl dmarks
+nsmall viewer ostock tcover ysmart ntours vation flicks ysport burada
+aninfo kstore stcare stflow ayclub smovie retime n-tech finity toshop
+isheng dscore effect ewords telink ustoms llwind sstuff lltape npaper
+ythere eoffer gmusic eready troute arteam nwatch rwatch otwear kstock
+lvideo lltell llthis andeal rlines stwalk sitesi tcatch stless dstand
+""".split()): SUFFIX_SCORES[name] = (2020 - index) / 2356.0
+
 
 
 def prefix_score(name):
     best_score = 0.0
     best_prefix = ''
-    for length in range(3, min(10, len(name) + 1)):
+    length = min(6, len(name))
+    while length >= 2:
         prefix = name[:length]
-        score = PREFIX_SCORES[length].get(prefix, 0)
-        score /= float(PREFIX_MAXIMUMS[length])
-        if score and score >= best_score:
+        score = PREFIX_SCORES.get(prefix, None)
+        if score > best_score:
             best_score = score
             best_prefix = prefix
+        length -= 1
     return best_score, best_prefix
 
 
 def suffix_score(name):
     best_score = 0.0
     best_suffix = ''
-    for length in range(3, min(10, len(name) + 1)):
+    length = min(6, len(name))
+    while length >= 2:
         suffix = name[-length:]
-        score = SUFFIX_SCORES[length].get(suffix, 0)
-        score /= float(SUFFIX_MAXIMUMS[length])
-        if score and score >= best_score:
+        score = SUFFIX_SCORES.get(suffix, None)
+        if score > best_score:
             best_score = score
             best_suffix = suffix
+        length -= 1
     return best_score, best_suffix

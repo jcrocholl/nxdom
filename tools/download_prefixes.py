@@ -16,7 +16,7 @@ from tools.retry import retry
 
 def fetch_file(Model, length):
     kind = Model.kind()
-    filename = '%ses.%d.txt' % (kind.split('_')[-1], length)
+    filename = 'data/popular/%ses.%d.txt' % (kind.split('_')[-1], length)
     outfile = open(filename, 'w')
     start = db.Key.from_path(kind, '-')
     while True:
