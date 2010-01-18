@@ -1,5 +1,6 @@
 import logging
 import random
+import math
 
 from google.appengine.ext import db
 
@@ -7,20 +8,14 @@ from domains.models import Domain, MAX_NAME_LENGTH
 from prefixes import popular
 
 
-def random_prefix(position='left', length_choices=[3, 4, 5, 6]):
+def random_prefix(position='left', length_choices=[1, 2, 3, 4, 5, 6]):
     length = random.choice(length_choices)
     if position == 'left':
-        total = popular.PREFIX_TOTALS[length]
-        counters = popular.PREFIX_SCORES[length]
+        prefixes = popular.POPULAR_PREFIXES[max(2, length)]
     elif position == 'right':
-        total = popular.SUFFIX_TOTALS[length]
-        counters = popular.SUFFIX_SCORES[length]
-    index = random.randint(1, total)
-    for prefix, count in counters.iteritems():
-        index -= count
-        if index <= 0:
-            return prefix
-    return '0' * length
+        prefixes = popular.POPULAR_SUFFIXES[max(2, length)]
+    prefix = prefixes[int(len(prefixes) * math.sqrt(random.random()))]
+    return prefix[:length]
 
 
 def random_letters(length, letter_choices='abcdefghijklmnopqrstuvwxyz'):

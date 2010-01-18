@@ -52,22 +52,26 @@ def sort_prefixes(filename):
 
 
 def all_lengths(Model, lengths):
-    variable = Model.kind().split('_')[-1].upper() + '_SCORES'
-    print variable, '= {}'
+    lower = Model.kind().split('_')[-1]
+    upper = lower.upper()
+    print 'POPULAR_' + upper + 'ES = {}'
+    print upper + '_SCORES = {}'
     for length in lengths:
+        print
         names = sort_prefixes('data/popular/%ses.%d.txt' % (
                 Model.kind().split('_')[-1], length))
-        print 'for index, name in enumerate("""'
+        print 'POPULAR_%sES[%d] = """' % (upper, length)
         print textwrap.fill(' '.join(names))
+        print '""".split()'
         max_score = float(length) / max(lengths)
-        print '""".split()): %s[name] = (%d - index) / %.1f' % (
-            variable, len(names), len(names) / max_score)
-        print
+        print 'for index, name in enumerate(POPULAR_%sES[%d]):' % (
+            upper, length)
+        print '    %s_SCORES[name] = (%d - index) / %.1f' % (
+            upper, len(names), len(names) / max_score)
 
 
 def score_function(variable, slice):
     func = """
-
 def prefix_score(name):
     best_score = 0.0
     best_prefix = ''
@@ -78,15 +82,16 @@ def prefix_score(name):
             best_score = score
             best_prefix = prefix
     return best_score, best_prefix
-"""
+""".strip()
     func = func.replace('PREFIX', variable)
     func = func.replace('prefix', variable.lower())
     func = func.replace('[slice]', slice)
-    print func.rstrip()
+    print '\n\n' + func
 
 
 def main():
     all_lengths(Prefix, LENGTHS)
+    print
     all_lengths(Suffix, LENGTHS)
     score_function('PREFIX', '[:length]')
     score_function('SUFFIX', '[-length:]')

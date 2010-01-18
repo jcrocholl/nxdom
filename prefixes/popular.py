@@ -1,5 +1,7 @@
+POPULAR_PREFIXES = {}
 PREFIX_SCORES = {}
-for index, name in enumerate("""
+
+POPULAR_PREFIXES[2] = """
 ma se lo pa co re li ne th be te la me mo to fa bo so go po de tr ba
 le st da al do in he ta we mi ch fo an ar jo wi ga ro my su hi no ki
 vi si on pe fl as pi gr fu na ge dr cl sp us pl ra ea ke fr wh it ri
@@ -58,9 +60,11 @@ p6 l0 5x 5w 5o y1 b5 l4 u3 n8 n3 g6 g0 z5 z0 9h 9g e4 9v e6 f0 s9 y8
 d9 q5 j8 w9 0z 0f 0g 0j 0m 6i 6o 6v c7 p9 l5 o3 l8 4q n6 z9 z4 z2 f5
 y0 y6 8q r9 q0 q7 w7 w4 y4 0v 0t 0h 6j 6x p5 v0 f9 8v r5 7q j4 j7 0y
 0i 0o p7 5v b8 n5 u9 u4 4o t5 z8 z7 q9 0e 6z 5q x9 o7 o5 o4 n7
-""".split()): PREFIX_SCORES[name] = (1332 - index) / 3996.0
+""".split()
+for index, name in enumerate(POPULAR_PREFIXES[2]):
+    PREFIX_SCORES[name] = (1332 - index) / 3996.0
 
-for index, name in enumerate("""
+POPULAR_PREFIXES[3] = """
 the car sho new for sex pla hot fun net you chi all mar par fin man
 job see art lin sta rea dea top tea eas get ban tra fre hea win web
 min big gam bar cha dat sun boo bet red got hel han sto met mad one
@@ -338,9 +342,11 @@ fxd whf wey muv xpo mne urp 99w dbo 998 jna aea dpa ebc bto 031 bti
 dla luy ety 575 ucc lga hmo otu cvm avm ilt zgh iot jpr wym ofy xee
 yod tco dax adz zyg k-m mha a-m njo dcc dct dcp es- xar owl vaz rcc
 eam bup buj ssm rc- nrg hp- hnx
-""".split()): PREFIX_SCORES[name] = (4700 - index) / 9400.0
+""".split()
+for index, name in enumerate(POPULAR_PREFIXES[3]):
+    PREFIX_SCORES[name] = (4700 - index) / 9400.0
 
-for index, name in enumerate("""
+POPULAR_PREFIXES[4] = """
 game shop just free love best info team real club live easy link good
 name plan deal host play book news home idea find chin site life king
 city mark blue ever part card data hand soft code bank sale food show
@@ -836,9 +842,11 @@ nylo barj solt asde javi qich dvdc empo prow medo weis orlo pred lexu
 rowt rowm pire usfo leng dalu gand gani gina redv icee iceo kosh kost
 rape itsv itsr tact leco edis tray geol geof meba rous afla dens oneo
 spur wald mika refu knox onma pika nuke appe madv phpm
-""".split()): PREFIX_SCORES[name] = (6927 - index) / 10390.5
+""".split()
+for index, name in enumerate(POPULAR_PREFIXES[4]):
+    PREFIX_SCORES[name] = (6927 - index) / 10390.5
 
-for index, name in enumerate("""
+POPULAR_PREFIXES[5] = """
 china green hotel video super games media dream power radio black
 money happy great cheap brand daily image local think movie inter
 stock world sport first poker magic photo house quick flash price
@@ -1408,9 +1416,11 @@ byted lawfi thein sheli wordo chipa usepa trueg manyl manyt artse
 artsa artsh junks junkc fitsa outfa amigo armle richm motiv unitl
 dryst promi buyfa loseb kindw airba minep minem minec paste sakes
 fireg fundm bidma jenni theon towna kindh
-""".split()): PREFIX_SCORES[name] = (6255 - index) / 7506.0
+""".split()
+for index, name in enumerate(POPULAR_PREFIXES[5]):
+    PREFIX_SCORES[name] = (6255 - index) / 7506.0
 
-for index, name in enumerate("""
+POPULAR_PREFIXES[6] = """
 travel online global studio design organi health planet domain search
 mobile casino sports china- google credit virtua master direct doctor
 busine social beauty silver energy vision simply projec digita simple
@@ -1524,10 +1534,14 @@ steven interl salest makeme flying sugars jenand magazi purepa shopla
 lifewi wholes namema record builda multis weston homepa dropse playma
 videon clickn thermo orient thinkl hacker stockm finalf stockf modelt
 smileb deallo modela housin clubso goodfi lovemy
-""".split()): PREFIX_SCORES[name] = (1127 - index) / 1127.0
+""".split()
+for index, name in enumerate(POPULAR_PREFIXES[6]):
+    PREFIX_SCORES[name] = (1127 - index) / 1127.0
 
+POPULAR_SUFFIXES = {}
 SUFFIX_SCORES = {}
-for index, name in enumerate("""
+
+POPULAR_SUFFIXES[2] = """
 es er an ll re et st ng ar te nd in en on le it ay me at ce se ed ck
 ow op rt al ve ts ot ds ad de us or nt rs ss ia ch as ge el ns id am
 sh is il up ee ic og ly to ks ix nk ry ir rd ys ty om ex rk ap aw ut
@@ -1583,9 +1597,11 @@ x5 7i 7r 7p q0 q7 q9 w0 6j i0 5b h6 h5 u4 u0 4x 4r 8y z9 8p 8q 6x 8h
 3b 9h 9j 9o 9v 2w 1q 1j 1l 7o 7n 7m 7j 7w 7z k0 k6 j9 j4 j1 w6 6p 6z
 c7 v0 v7 5y 5e b5 2e 4q g0 3v z7 9l 8v 4o 2r q2 j7 5p 5f z4 z6 f0 4v
 q6 w4
-""".split()): SUFFIX_SCORES[name] = (1244 - index) / 3732.0
+""".split()
+for index, name in enumerate(POPULAR_SUFFIXES[2]):
+    SUFFIX_SCORES[name] = (1244 - index) / 3732.0
 
-for index, name in enumerate("""
+POPULAR_SUFFIXES[3] = """
 ing all and art net ate ell ost est age are ear ill air ore ace ite
 ive ack ice ain ter ers ard ide ame ind man ome log now own its hop
 ark law day ail ook ent ast ess ase way ver web ead ile ion tes hat
@@ -1813,9 +1829,11 @@ oju tma h4u ttt tmo cav bdo cte voy k4u sri afo 949 2sc daw 023 lfa
 hle ecd emr iho iha clo 655 udu cyy mip pya urc wop jal syy jab jac
 995 993 tbc aen ebc ebr dla omz yad otr avs uqe ofc ilz 350 sku adc
 nvi dey mhe 985 esl tmm owu rck -dc dmc dms hns hny
-""".split()): SUFFIX_SCORES[name] = (3855 - index) / 7710.0
+""".split()
+for index, name in enumerate(POPULAR_SUFFIXES[3]):
+    SUFFIX_SCORES[name] = (3855 - index) / 7710.0
 
-for index, name in enumerate("""
+POPULAR_SUFFIXES[4] = """
 shop club soft life ight news roup mail host home tech live land site
 sign info edia port book city game team love king plus lock blog card
 link jobs list free ames bank here town usic work show girl time talk
@@ -2248,9 +2266,11 @@ exec bark mbat ahal rhis x911 emps rien pron fico hevy aike gana aguy
 ng4u sexx obei reds gere gery sors osum pfix rape itsa ocut flet ntus
 -bay okey rhow teor elts etel nier esms coll amex uces ndof opal ngzi
 inci uros lsky acka arsh oyan oski nedo ssmy leak pike nney
-""".split()): SUFFIX_SCORES[name] = (6046 - index) / 9069.0
+""".split()
+for index, name in enumerate(POPULAR_SUFFIXES[4]):
+    SUFFIX_SCORES[name] = (6046 - index) / 9069.0
 
-for index, name in enumerate("""
+POPULAR_SUFFIXES[5] = """
 group media music store today esign house space games china forum
 style hotel money video books guide radio ravel works press sales
 signs place green power trade homes india photo print light ation
@@ -2790,9 +2810,11 @@ npull ndguy anfly celik ilian rwash lecat deven sedog n-usa rince
 lenew kthat rread wdeep entin eknew rlies isted glock anoil recan
 antry lster ecinc rsuit oting enact a-inc sties pgrow brush wcase
 gspot glink shers clife sroot
-""".split()): SUFFIX_SCORES[name] = (5923 - index) / 7107.6
+""".split()
+for index, name in enumerate(POPULAR_SUFFIXES[5]):
+    SUFFIX_SCORES[name] = (5923 - index) / 7107.6
 
-for index, name in enumerate("""
+POPULAR_SUFFIXES[6] = """
 design travel studio sports market global search school direct mobile
 realty esigns family center system events gaming osting -group vision
 server energy etwork racing stoday portal photos beauty xpress planet
@@ -2996,8 +3018,9 @@ retime n-tech finity toshop isheng dscore effect ewords telink ustoms
 llwind sstuff lltape npaper ythere eoffer gmusic eready troute arteam
 nwatch rwatch otwear kstock lvideo lltell llthis andeal rlines stwalk
 sitesi tcatch stless dstand
-""".split()): SUFFIX_SCORES[name] = (2024 - index) / 2024.0
-
+""".split()
+for index, name in enumerate(POPULAR_SUFFIXES[6]):
+    SUFFIX_SCORES[name] = (2024 - index) / 2024.0
 
 
 def prefix_score(name):
