@@ -515,14 +515,14 @@
 11 infoba
 10 infoma
 10 inform
-11 infose
-11 innova
+12 infose
+12 innova
 23 inside
 16 inspir
 16 instan
 17 insura
 16 insure
-10 integr
+11 integr
 11 inteli
 11 inter-
 15 intera
@@ -1088,6 +1088,7 @@
 13 vitals
 19 vitami
 11 voicea
+10 wallpa
 14 watchs
 12 watcht
 15 waterb
