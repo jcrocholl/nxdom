@@ -4,7 +4,6 @@ from google.appengine.ext import db
 
 from django.core.urlresolvers import reverse
 
-from languages import english, spanish, german, french
 from languages.utils import word_score
 
 MAX_NAME_LENGTH = 12
@@ -114,6 +113,7 @@ class Domain(db.Model):
         return False
 
     def update_language_scores(self):
+        from languages import english, spanish, german, french
         self.english = word_score(self.key().name(), english.TRIPLE_SCORES)
         self.spanish = word_score(self.key().name(), spanish.TRIPLE_SCORES)
         self.german = word_score(self.key().name(), german.TRIPLE_SCORES)

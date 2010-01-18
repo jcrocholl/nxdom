@@ -5,10 +5,10 @@ import math
 from google.appengine.ext import db
 
 from domains.models import Domain, MAX_NAME_LENGTH
-from prefixes import popular
 
 
 def random_prefix(position='left', length_choices=[1, 2, 3, 4, 5, 6]):
+    from prefixes import popular
     length = random.choice(length_choices)
     if position == 'left':
         prefixes = popular.POPULAR_PREFIXES[max(2, length)]
