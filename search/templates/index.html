@@ -5,9 +5,6 @@
 {% block extra-head %}
 <script type="text/javascript">
   $(document).ready(function() {
-    $("#loading")
-      .ajaxStart(function() { $(this).show(); })
-      .ajaxStop(function() { $(this).hide(); });
     $("input.keyword").keypress(keyword_keypress);
     $("input.keyword").keyup(keyword_keyup);
     $.registrar = $("select#id_registrar").val();
