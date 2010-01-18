@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Preloaded JSON for {{ left }}{% endblock %}
+
+{% block content %}
+<h1>Preloaded JSON for {{ left }}</h1>
+
+{% for line in lines %}
+<p>{{ line }}</p>
+{% endfor %}
+{% endblock %}
