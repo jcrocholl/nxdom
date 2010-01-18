@@ -59,8 +59,9 @@ def all_lengths(Model, lengths):
                 Model.kind().split('_')[-1], length))
         print 'for index, name in enumerate("""'
         print textwrap.fill(' '.join(names))
+        max_score = float(length) / max(lengths)
         print '""".split()): %s[name] = (%d - index) / %.1f' % (
-            variable, len(names), len(names) * (length + 1) / length)
+            variable, len(names), len(names) / max_score)
         print
 
 

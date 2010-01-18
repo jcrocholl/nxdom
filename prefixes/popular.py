@@ -58,7 +58,7 @@ p6 l0 5x 5w 5o y1 b5 l4 u3 n8 n3 g6 g0 z5 z0 9h 9g e4 9v e6 f0 s9 y8
 d9 q5 j8 w9 0z 0f 0g 0j 0m 6i 6o 6v c7 p9 l5 o3 l8 4q n6 z9 z4 z2 f5
 y0 y6 8q r9 q0 q7 w7 w4 y4 0v 0t 0h 6j 6x p5 v0 f9 8v r5 7q j4 j7 0y
 0i 0o p7 5v b8 n5 u9 u4 4o t5 z8 z7 q9 0e 6z 5q x9 o7 o5 o4 n7
-""".split()): PREFIX_SCORES[name] = (1332 - index) / 1998.0
+""".split()): PREFIX_SCORES[name] = (1332 - index) / 3996.0
 
 for index, name in enumerate("""
 the car sho new for sex pla hot fun net you chi all mar ban par fin
@@ -338,7 +338,7 @@ dbo 998 jna aea dpa ebc bto 031 bti dla luy ety 575 ucc lga hmo otu
 cvm avm ilt zgh iot jpr wym ofy xee yod tco dax adz zyg k-m mha a-m
 njo dcc dct dcp es- xar owl vaz rcc eam bup buj ssm rc- nrg hnt hp-
 hnx
-""".split()): PREFIX_SCORES[name] = (4693 - index) / 6257.0
+""".split()): PREFIX_SCORES[name] = (4693 - index) / 9386.0
 
 for index, name in enumerate("""
 game shop free love best just info team real club live easy link good
@@ -835,7 +835,7 @@ aimd riff nylo barj solt asde javi qich dvdc empo prow medo weis orlo
 pred lexu rowt rowm pire usfo leng dalu gand gani gina redv icee iceo
 kosh kost rape itsv itsr tact leco edis tray geol geof meba rous afla
 dens oneo spur wald mika refu knox onma pika nuke appe madv phpm
-""".split()): PREFIX_SCORES[name] = (6915 - index) / 8643.0
+""".split()): PREFIX_SCORES[name] = (6915 - index) / 10372.5
 
 for index, name in enumerate("""
 china green hotel video super games media dream power radio black
@@ -1405,7 +1405,8 @@ shipd shipa billk redpa funba byted lawfi thein sheli wordo chipa
 usepa trueg manyl manyt artse artsa artsh junks junkc fitsa outfa
 amigo armle richm motiv unitl dryst promi buyfa loseb kindw airba
 minep minem minec paste sakes fireg fundm bidma jenni theon towna
-kindh """.split()): PREFIX_SCORES[name] = (6238 - index) / 7485.0
+kindh
+""".split()): PREFIX_SCORES[name] = (6238 - index) / 7485.6
 
 for index, name in enumerate("""
 travel online global studio design organi health planet domain search
@@ -1520,7 +1521,7 @@ bestre lastlo matchb steven interl salest makeme flying sugars jenand
 magazi purepa shopla lifewi wholes namema record builda multis weston
 homepa dropse playma videon clickn thermo orient thinkl hacker stockm
 finalf stockf modelt smileb deallo modela housin clubso goodfi lovemy
-""".split()): PREFIX_SCORES[name] = (1120 - index) / 1306.0
+""".split()): PREFIX_SCORES[name] = (1120 - index) / 1120.0
 
 SUFFIX_SCORES = {}
 for index, name in enumerate("""
@@ -1578,7 +1579,7 @@ q7 q9 w0 6j i0 5b h6 h5 u4 u0 4x 4r 8y z9 8p 8q 6x 2h 8h 8b 8a 6s 1o
 7g 7d 7l 7v d0 q4 j5 j2 0v 0j 6q v9 5o 5d 2y 2g 2j 6r 3u 3b 9h 9j 9o
 9v 2w 1q 1j 1l 7o 7n 7m 7j 7w 7z k0 k6 j9 j4 j1 w6 6p 6z c7 v0 v7 5y
 5e b5 2e 4q g0 3v z7 9l 8v 4o 2r q2 j7 5p 5f z4 z6 f0 4v q6 w4
-""".split()): SUFFIX_SCORES[name] = (1240 - index) / 1860.0
+""".split()): SUFFIX_SCORES[name] = (1240 - index) / 3720.0
 
 for index, name in enumerate("""
 ing all and art net ate ell ost est age are ear ill air ore ace ite
@@ -1808,7 +1809,7 @@ voy k4u sri afo 949 2sc daw 023 lfa hle ecd emr iho iha clo 655 udu
 mip pya urc wop jal syy jab jac 995 993 tbc aen ebc ebr dla omz yad
 otr avs uqe ofc ilz 350 sku adc nvi dey mhe 985 esl tmm owu rck -dc
 dmc dms hns hny
-""".split()): SUFFIX_SCORES[name] = (3846 - index) / 5128.0
+""".split()): SUFFIX_SCORES[name] = (3846 - index) / 7692.0
 
 for index, name in enumerate("""
 shop club soft life ight news roup mail host home tech live land site
@@ -2243,7 +2244,7 @@ emps rien pron fico hevy aike gana aguy ng4u sexx obei reds gere gery
 sors osum pfix rape itsa ocut flet ntus -bay okey rhow teor elts etel
 nier esms coll amex uces ndof opal ngzi inci uros lsky acka arsh oyan
 oski nedo ssmy leak pike nney
-""".split()): SUFFIX_SCORES[name] = (6040 - index) / 7550.0
+""".split()): SUFFIX_SCORES[name] = (6040 - index) / 9060.0
 
 for index, name in enumerate("""
 group media music store today esign house space games china forum
@@ -2785,7 +2786,7 @@ ndguy anfly celik ilian rwash lecat deven sedog n-usa rince lenew
 kthat rread wdeep entin eknew rlies isted glock anoil recan antry
 lster ecinc rsuit oting enact a-inc sties pgrow brush wcase gspot
 glink shers clife sroot
-""".split()): SUFFIX_SCORES[name] = (5922 - index) / 7106.0
+""".split()): SUFFIX_SCORES[name] = (5922 - index) / 7106.4
 
 for index, name in enumerate("""
 design travel studio sports market global search school direct mobile
@@ -2990,7 +2991,7 @@ aninfo kstore stcare stflow ayclub smovie retime n-tech finity toshop
 isheng dscore effect ewords telink ustoms llwind sstuff lltape npaper
 ythere eoffer gmusic eready troute arteam nwatch rwatch otwear kstock
 lvideo lltell llthis andeal rlines stwalk sitesi tcatch stless dstand
-""".split()): SUFFIX_SCORES[name] = (2020 - index) / 2356.0
+""".split()): SUFFIX_SCORES[name] = (2020 - index) / 2020.0
 
 
 
