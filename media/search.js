@@ -225,8 +225,10 @@ function ajax_search(left, right) {
 	delete_domains(left, right);
 	for (var index in SEARCH_LENGTHS) {
 		var length = SEARCH_LENGTHS[index];
-		if ($.ajax_search.xhr[length])
+		if ($.ajax_search.xhr[length]) {
 			$.ajax_search.xhr[length].abort();
+			$.ajax_search.xhr[length] = false;
+		}
 		if (left.length > length || right.length > length)
 			continue;
 		$.ajax_search.xhr[length] = $.ajax({
