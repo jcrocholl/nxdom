@@ -187,8 +187,9 @@ def json(request):
     if json is None:
         json = generate_json(left, right, length)
         memcache.set(memcache_key, json, MEMCACHE_TIMEOUT)
-    # else:
-    #     logging.debug('json: memcache hit for %s', memcache_key)
+        logging.info("Generated JSON for %s", memcache_key)
+    else:
+        logging.info("Found cached JSON for %s", memcache_key)
     response = HttpResponse(json, mimetype='application/javascript')
     expires = time.time() + MEMCACHE_TIMEOUT
     response['Expires'] = email.utils.formatdate(expires)[:26] + 'GMT'
