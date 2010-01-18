@@ -1,4 +1,8 @@
 cron:
+- description: preload popular searches in memcache
+  url: /search/cron/
+  schedule: every 1 minutes
+  timezone: America/Los_Angeles
 - description: count popular prefixes
   url: /prefixes/cron/
   schedule: every 1 minutes

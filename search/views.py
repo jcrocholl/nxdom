@@ -17,6 +17,7 @@ from domains.models import Domain, MAX_NAME_LENGTH
 from dns.models import Lookup, TOP_LEVEL_DOMAINS
 from dns.utils import reverse_name
 from prefixes.utils import increment_prefix
+from prefixes.selectors import random_prefix
 
 JSON_FETCH_LIMIT = 60 # Domains for each length from 3 to 12.
 MEMCACHE_TIMEOUT = 24 * 60 * 60 # 24 hours.
@@ -164,22 +165,27 @@ def domains_to_dict(domains):
     return result
 
 
+def generate_json(left, right, length):
+    domains = fetch_candidates(left, right, length)
+    update_scores(domains)
+    fetch_dns_lookups(domains)
+    result = domains_to_dict(domains)
+    json = simplejson.dumps(result, separators=(',', ':'))
+    json = json.replace('},', '},\n ')
+    return json
+
+
 @cache_control(public=True, max_age=MEMCACHE_TIMEOUT)
 def json(request):
     left = request.GET.get('left', '')
     right = request.GET.get('right', '')
-    length = int(request.GET.get('length', MAX_NAME_LENGTH))
-    version = int(request.GET.get('version', settings.MEDIA_VERSION))
-    version = min(version, settings.MEDIA_VERSION)
+    length = int(request.GET.get('length', 8))
+    version = int(request.GET.get('version', settings.JSON_VERSION))
+    version = min(version, settings.JSON_VERSION)
     memcache_key = 'json%d,%s,%s,%d' % (version, left, right, length)
     json = memcache.get(memcache_key)
     if json is None:
-        domains = fetch_candidates(left, right, length)
-        update_scores(domains)
-        fetch_dns_lookups(domains)
-        result = domains_to_dict(domains)
-        json = simplejson.dumps(result, separators=(',', ':'))
-        json = json.replace('},', '},\n ')
+        json = generate_json(left, right, length)
         memcache.set(memcache_key, json, MEMCACHE_TIMEOUT)
     # else:
     #     logging.debug('json: memcache hit for %s', memcache_key)
@@ -187,3 +193,19 @@ def json(request):
     expires = time.time() + MEMCACHE_TIMEOUT
     response['Expires'] = email.utils.formatdate(expires)[:26] + 'GMT'
     return response
+
+
+def cron(request):
+    """
+    Preload memcache with some JSON requests.
+    """
+    version = settings.JSON_VERSION
+    left = random_prefix(length_choices=[1, 2, 3])
+    right = ''
+    lines = []
+    for length in range(max(2, len(left)) + 1, MAX_NAME_LENGTH + 1):
+        memcache_key = 'json%d,%s,%s,%d' % (version, left, right, length)
+        json = generate_json(left, right, length)
+        memcache.set(memcache_key, json, MEMCACHE_TIMEOUT)
+        lines.append(json[:120] + '...' if len(json) > 120 else json)
+    return render_to_response(request, 'search/cron.html', locals())
