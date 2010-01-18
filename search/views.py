@@ -73,7 +73,7 @@ def index(request):
     search_form = SearchForm(request.GET or None)
     weights_form = WeightsForm(request.GET or None)
     registrar_form = RegistrarForm(request.GET or
-                                   {'registrar': 'moniker.com'})
+                                   {'registrar': 'godaddy.com'})
     return render_to_response(request, 'search/index.html', locals())
 
 
