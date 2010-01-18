@@ -5,6 +5,7 @@
 {% block extra-head %}
 <script type="text/javascript">
   $(document).ready(function() {
+    $("html").css("overflow-y", "scroll");
     $("input.keyword").keypress(keyword_keypress);
     $("input.keyword").keyup(keyword_keyup);
     $.registrar = $("select#id_registrar").val();
