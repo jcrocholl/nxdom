@@ -119,6 +119,15 @@ def fetch_candidates(left, right, length):
     return query.fetch(JSON_FETCH_LIMIT)
 
 
+def update_scores(domains):
+    from prefixes.popular import prefix_score, suffix_score
+    for domain in domains:
+        name = domain.key().name()
+        domain.prefix, domain._best_prefix = prefix_score(name)
+        domain.suffix, domain._best_suffix = suffix_score(name)
+        domain.update_score()
+
+
 def fetch_dns_lookups(domains):
     keys = [db.Key.from_path('dns_lookup', domain.key().name())
             for domain in domains]
@@ -146,6 +155,10 @@ def domains_to_dict(domains):
         for attr in TOP_LEVEL_DOMAINS:
             if hasattr(domain, attr):
                 properties[attr] = getattr(domain, attr)
+        if hasattr(domain, '_best_prefix'):
+            properties['pl'] = len(domain._best_prefix)
+        if hasattr(domain, '_best_suffix'):
+            properties['sl'] = len(domain._best_suffix)
         properties['updated'] = domain.updated.strftime('%Y-%m-%dT%H:%M:%SZ')
         result[domain.key().name()] = properties
     return result
@@ -162,6 +175,7 @@ def json(request):
     json = memcache.get(memcache_key)
     if json is None:
         domains = fetch_candidates(left, right, length)
+        update_scores(domains)
         fetch_dns_lookups(domains)
         result = domains_to_dict(domains)
         json = simplejson.dumps(result, separators=(',', ':'))
