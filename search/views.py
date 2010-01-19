@@ -67,7 +67,7 @@ class RegistrarForm(forms.Form):
 
 
 @cache_control(public=True, max_age=MEMCACHE_TIMEOUT)
-@cache_page(15 * 60) # Server side cache for 15 minutes.
+@cache_page(5 * 60) # Server side cache for 5 minutes.
 def index(request):
     logging.info("Generating home page")
     search_form = SearchForm(request.GET or None)
