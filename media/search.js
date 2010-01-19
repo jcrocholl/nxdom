@@ -243,11 +243,12 @@ function ajax_search(left, right) {
 		}
 		if (left.length > length || right.length > length)
 			continue;
+		var data = 'left=' + left + '&right=' + right +
+			'&length=' + length + '&version=' + $.json_version;
 		$.ajax_search.xhr[length] = $.ajax({
 				type: "GET",
 				url: "/search/json/",
-				data: {left: left, right: right, length: length,
-					   version: $.json_version},
+				data: data,
 				dataType: "json",
 				cache: true,
 				success: ajax_result,
