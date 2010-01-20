@@ -66,16 +66,16 @@ MIDDLEWARE_CLASSES = (
     'appstats.recording.AppStatsDjangoMiddleware',
     'tools.middleware.DomainRedirectMiddleware',
     'ragendja.middleware.ErrorMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.contrib.sessions.middleware.SessionMiddleware',
     # Django authentication
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    #'django.contrib.auth.middleware.AuthenticationMiddleware',
     # Google authentication
     #'ragendja.auth.middleware.GoogleAuthenticationMiddleware',
     # Hybrid Django/Google authentication
     #'ragendja.auth.middleware.HybridAuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'ragendja.sites.dynamicsite.DynamicSiteIDMiddleware',
+    #'ragendja.sites.dynamicsite.DynamicSiteIDMiddleware',
     #'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     #'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 )
