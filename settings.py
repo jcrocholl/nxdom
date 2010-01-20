@@ -63,11 +63,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'appstats.recording.AppStatsDjangoMiddleware',
     'tools.middleware.DomainRedirectMiddleware',
     'ragendja.middleware.ErrorMiddleware',
-    #'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     # Django authentication
-    #'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     # Google authentication
     #'ragendja.auth.middleware.GoogleAuthenticationMiddleware',
     # Hybrid Django/Google authentication
