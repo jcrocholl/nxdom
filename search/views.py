@@ -43,23 +43,23 @@ class SearchForm(forms.Form):
 
 class WeightsForm(forms.Form):
     len = forms.ChoiceField(initial=-3, label="Short names",
-        choices=[(1, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
-    digits = forms.ChoiceField(initial=-2, label="Without numbers",
-        choices=[(1, ''), (0, ''), (-1, ''), (-2, ''), (-5, '')])
-    dashes = forms.ChoiceField(initial=-5, label="Without dashes",
-        choices=[(1, ''), (0, ''), (-1, ''), (-2, ''), (-5, '')])
+        choices=[(3, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
+    digits = forms.ChoiceField(initial=-3, label="Without numbers",
+        choices=[(3, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
+    dashes = forms.ChoiceField(initial=-9, label="Without dashes",
+        choices=[(3, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
     english = forms.ChoiceField(initial=3, label="English",
-        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+        choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
     spanish = forms.ChoiceField(initial=1, label="Spanish (Espa&ntilde;ol)",
-        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+        choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
     french = forms.ChoiceField(initial=1, label="French (Fran&ccedil;ais)",
-        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+        choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
     german = forms.ChoiceField(initial=1, label="German (Deutsch)",
-        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
-    prefix = forms.ChoiceField(initial=3, label="Popular prefixes",
-        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
-    suffix = forms.ChoiceField(initial=3, label="Popular suffixes",
-        choices=[(-1, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+        choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+    prefix = forms.ChoiceField(initial=9, label="Popular prefixes",
+        choices=[(-3, ''), (0, ''), (3, ''), (9, ''), (27, '')])
+    suffix = forms.ChoiceField(initial=9, label="Popular suffixes",
+        choices=[(-3, ''), (0, ''), (3, ''), (9, ''), (27, '')])
 
 
 class RegistrarForm(forms.Form):
