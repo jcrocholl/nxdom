@@ -58,7 +58,7 @@ def all_lengths(Model, lengths):
     print upper + '_SCORES = {}'
     for length in lengths:
         print
-        names = sort_prefixes('data/popular/%ses.%d.txt' % (
+        names = sort_prefixes('.data/popular/%ses.%d.txt' % (
                 Model.kind().split('_')[-1], length))
         print 'POPULAR_%sES[%d] = """' % (upper, length)
         print textwrap.fill(' '.join(names))
