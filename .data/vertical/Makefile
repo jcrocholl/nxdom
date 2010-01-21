@@ -3,7 +3,7 @@ WIDTH=20
 .SECONDARY :
 
 vertical.png : vertical.ppm
-	pnmtopng $< > $@
+	pnmtopng -transparent white $< > $@
 
 vertical.ppm : negative.ppm neutral.ppm interesting.ppm \
 important.ppm critical.ppm
