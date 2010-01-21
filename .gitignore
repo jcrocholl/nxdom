@@ -1,7 +1,6 @@
 .DS_Store
 *.pyc
 *.ppm
-*.orig.png
 appstats
 common
 trash

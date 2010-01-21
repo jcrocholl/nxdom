@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Vertical table headers{% endblock %}
+
+{% block content %}
+<h1>Vertical table headers</h1>
+
+<table><tr>
+{% for header in headers %}
+<td style="-moz-transform: rotate(-90deg); -moz-transform-origin: bottom left; width: 80px; height: 80px;">
+{{ header }}
+</td>
+{% endfor %}
+</tr></table>
+{% endblock %}

@@ -210,3 +210,8 @@ def cron(request):
         memcache.set(memcache_key, json, MEMCACHE_TIMEOUT)
         lines.append(json[:120] + '...' if len(json) > 120 else json)
     return render_to_response(request, 'search/cron.html', locals())
+
+
+def vertical(request):
+    headers = 'Negative Neutral Positive Important Critical'.split()
+    return render_to_response(request, 'search/vertical.html', locals())
