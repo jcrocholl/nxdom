@@ -26,12 +26,11 @@ def update_app_yaml(lines, **kwargs):
     output.close()
 
 
-def attempt(app_yaml, command):
+def attempt(command):
     print command
     returncode = subprocess.call(command.split())
     if returncode:
         print "failed with return code", returncode
-        update_app_yaml(app_yaml)
         sys.exit(returncode)
 
 
@@ -45,15 +44,17 @@ def main():
         options.version = args[0]
     else:
         parser.error("Too many command line arguments.")
-    app_yaml = load_app_yaml()
-    update_app_yaml(app_yaml, version=options.version)
     exclude = ['.git', 'appstats', 'common', 'popular.py',
                'english.py', 'french.py', 'spanish.py', 'german.py']
-    attempt(app_yaml, 'pep8 --repeat --exclude %s .' % ','.join(exclude))
-    attempt(app_yaml, '.git/hooks/pre-commit')
-    attempt(app_yaml, './manage.py test')
-    attempt(app_yaml, './manage.py update')
-    update_app_yaml(app_yaml)
+    attempt('pep8 --repeat --exclude %s .' % ','.join(exclude))
+    attempt('.git/hooks/pre-commit')
+    attempt('./manage.py test')
+    app_yaml = load_app_yaml()
+    update_app_yaml(app_yaml, version=options.version)
+    try:
+        attempt('./manage.py update')
+    finally:
+        update_app_yaml(app_yaml)
 
 
 if __name__ == '__main__':
