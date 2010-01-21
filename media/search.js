@@ -99,8 +99,8 @@ function google_link(name) {
 
 function table_row(domain, row) {
 	var html = '<tr class="row' + row + '">';
-	html += '<td class="quiet right">' + domain.length + '</td>';
 	html += '<td title="Web search">' + google_link(domain.key) + '</td>';
+	html += '<td class="right quiet">' + domain.length + '</td>';
 	for (var tld in TLD_SCORES) {
 		if (domain[tld]) {
 			var color = 'taken';
