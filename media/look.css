@@ -82,3 +82,4 @@ p.highlight { padding: 4px; background: #fed; }
 
 div#footer { text-align: center; }
 div#footer, div#footer a { color: #aaa; }
+div#footer a:hover { color: #666; }
