@@ -13,7 +13,7 @@ important.ppm : important.png
 	pngtopnm $< | pnmcrop \
 	| pnmpad -white -width $(WIDTH) -halign 0 -bottom 4 > $@
 
-interesting.ppm : interesting.png
+positive.ppm : positive.png
 	pngtopnm $< | pnmcrop \
 	| pnmpad -white -width $(WIDTH) -halign 0 -bottom 4 > $@
 
