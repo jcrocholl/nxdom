@@ -2,7 +2,7 @@ logo.png : logo.ppm
 	pnmtopng -transparent "#FFFFFF" $< > $@
 
 logo.ppm : big.ppm
-	pnmscale -width 111 $< > $@
+	pnmscale -height 45 $< > $@
 
 favicon.png : 16x16.ppm
 	pnmtopng -transparent "#AAAAAA" $< > $@

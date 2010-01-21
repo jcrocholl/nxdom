@@ -12,7 +12,7 @@ div#timer {
 
 div#left { width: 230px; height: 620px; }
 div#logo { margin-top: 18px; }
-div#keywords { position: absolute; top: 89px; }
+div#keywords { position: absolute; top: 72px; }
 table#weights { position: absolute; top: 112px; }
 div#registrar { position: absolute; top: 458px; }
 div#feedback { position: absolute; top: 509px; }

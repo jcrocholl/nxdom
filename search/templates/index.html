@@ -28,13 +28,20 @@
 
 <div id="logo">
 <a href="/">
-<img style="vertical-align:top" src="static/images/logo.png" width="111" height="58" alt="NXdom" />
+  <img style="vertical-align:top" src="static/images/logo45.png"
+width="86" height="45" alt="NXdom" />
 </a>
 </div>
 
 <div id="keywords">
-<div class="span-3">{{ search_form.left }}</div>
-<div class="span-3 last right">{{ search_form.right }}</div>
+<div class="span-3">
+<label for="id_left">Beginning</label><br />
+{{ search_form.left }}<br />
+</div>
+<div class="span-3 last right">
+<label for="id_right">Ending</label><br />
+{{ search_form.right }}<br />
+</div>
 </div>
 
 <table id="weights" class="span-6">
@@ -60,7 +67,7 @@
 </table>
 
 <div id="registrar">
-<div class="span-3 label"><b>Registrar</b></div>
+<div class="span-3 label"><label for="id_registrar">Registrar</label></div>
 <div class="span-3 last right">{{ registrar_form.registrar }}</div>
 </div>
 </form>
