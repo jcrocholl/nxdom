@@ -1,12 +1,40 @@
 img#loading {
   position: absolute;
-  margin: 21px 0 0 216px;
+  top: 100px;
+  margin-left: -29px;
 }
 
 div#timer {
   position: absolute;
   text-align: right;
   visibility: hidden;
+}
+
+div#left { width: 230px; height: 620px; }
+div#logo { margin-top: 18px; }
+div#keywords { position: absolute; top: 89px; }
+table#weights { position: absolute; top: 112px; }
+div#registrar { position: absolute; top: 458px; }
+div#feedback { position: absolute; top: 509px; }
+
+div#registrar select {
+  margin-top: 0;
+  width: 110px;
+}
+
+div.one { top: 99px; }
+div.two { top: 207px; }
+div.three { top: 459px; }
+div.four { top: 549px; }
+
+div#welcome p { font-size: 14px; }
+div.step {
+  position: absolute;
+}
+div.step h2 {
+  margin-top: 0;
+  background: url("/static/images/left.png") no-repeat 0% 50%;
+  padding-left: 20px;
 }
 
 table.wide { width: 100%; }
@@ -27,16 +55,15 @@ tr.row1 td.status { background: #ccc; }
 tr.row2 td.status { background: #bbb; }
 tr.hover td.status { background: #aaa; }
 
-table.weights { margin-top: -1em; }
-table.weights th,
-table.weights td {
+table#weights th,
+table#weights td {
   padding-left: 0;
   padding-right: 0;
 }
-table.weights td { text-align: right; }
+table#weights td { text-align: right; }
 td.vertical {
-  width: 21px;
-  height: 64px;
+  width: 23px;
+  height: 80px;
   background: url("/static/images/vertical.png") no-repeat bottom;
 }
 
@@ -45,7 +72,7 @@ tr.row2 td.best { background: #ee8; }
 
 .right { text-align: right; }
 .bottom { vertical-align: bottom; }
-input.keyword { width: 97px; }
+input.keyword { width: 98px; }
 
 p.highlight { padding: 4px; background: #fed; }
 .sum { background: #def; }
@@ -54,3 +81,4 @@ p.highlight { padding: 4px; background: #fed; }
 .image16x16 { vertical-align: top; }
 
 div#footer { text-align: center; }
+div#footer, div#footer a { color: #aaa; }

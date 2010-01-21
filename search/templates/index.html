@@ -10,7 +10,7 @@
     $("input.keyword").keyup(keyword_keyup);
     $.registrar = $("select#id_registrar").val();
     $("select#id_registrar").change(update_registrar);
-    $("table.weights input").change(update_scores);
+    $("table#weights input").change(update_scores);
     $("div#timer").everyTime(200, update_if_changed);
     keyword_keyup();
   });
@@ -25,13 +25,19 @@
 <form method="get" action="">
 <img id="loading" src="/static/images/loading.gif" alt="" />
 <div id="timer" class="span-6 quiet small"></div>
-<h1>Find the best available short domain names</h1>
+
+<div id="logo">
+<a href="/">
+<img style="vertical-align:top" src="static/images/logo.png" width="111" height="58" alt="NXdom" />
+</a>
+</div>
+
+<div id="keywords">
 <div class="span-3">{{ search_form.left }}</div>
 <div class="span-3 last right">{{ search_form.right }}</div>
+</div>
 
-<p>Registrar: {{ registrar_form.registrar }}</p>
-
-<table class="weights wide">
+<table id="weights" class="span-6">
 <tr>
 <th class="bottom">Characters</th>
 <td class="vertical" style="background-position: 7px bottom" title="Negative"></td>
@@ -52,11 +58,17 @@
 {% endfor %}</tr>
 {% endfor %}
 </table>
+
+<div id="registrar">
+<div class="span-3 label"><b>Registrar</b></div>
+<div class="span-3 last right">{{ registrar_form.registrar }}</div>
+</div>
 </form>
 
-<hr />
+<div id="feedback">
 {% load feedback_tags %}
 {% feedback_form request %}
+</div>
 </div>
 {% endblock%}
 
@@ -64,11 +76,62 @@
 {% block content-class %} search last{% endblock %}
 
 {% block content %}
+<div id="welcome">
+<h1>Find the best available short domain names</h1>
+<p>In three simple steps:</p>
+
+<div class="step one">
+<h2>1. Start typing in the search box</h2>
+<p>
+The results will start loading immediately, and they are updated while
+you type.<br />
+
+The two input fields match the beginning and ending of available names.
+</p>
+</div>
+
+<div class="step two">
+<h2>2. Play with the sort order</h2>
+<p>
+There are millions of available names, but you can save time by
+sorting and looking only at the best names.<br />
+
+You can adjust the importance of various qualities with the radio
+buttons on the left.
+</p>
+<p>
+If you want really short names, set <b>Short names</b>
+to <b>Critical</b>.
+</p>
+<p>
+If you don't care about <b>Spanish</b>, <b>French</b>,
+or <b>German</b>, you can set those to <b>Neutral</b>.
+</p>
+<p>
+If you want your domain name to start or end with popular letters
+(based on thousands of registered .com domains),<br />
+
+that's what the the <b>Popularity</b> settings are for.
+</p>
+</div>
+
+<div class="step three">
+<h2>3. Check availability</h2>
+<p>
+Click on a top level domain to check if the name is still available,
+using your favorite registrar.</p>
+</div>
+
+<div class="step four">
+<h2>4. Give feedback (optional)</h2>
+<p>If you have an idea how this site could be improved, please let us
+know.</p>
+</div>
+</div>
+
 <table class="ruler wide">
 <tbody id="results">
-<tr><td colspan="16">
-Loading...
-</td></tr>
+<tr><td></td></tr>
 </tbody>
 </table>
 {% endblock %}

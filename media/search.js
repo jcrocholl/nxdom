@@ -134,6 +134,12 @@ function activate_ruler() {
 }
 
 function update_html() {
+	if ($.ajax_search.left + $.ajax_search.right == '') {
+		$("tbody#results").html('');
+		$("div#welcome").show();
+		return;
+	}
+	$("div#welcome").hide();
 	var html = '';
 	var row = 1;
 	var keys = [];
