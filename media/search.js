@@ -99,7 +99,7 @@ function google_link(name) {
 
 function table_row(domain, row) {
 	var html = '<tr class="row' + row + '">';
-	html += '<td>' + domain.length + '</td>';
+	html += '<td class="quiet right">' + domain.length + '</td>';
 	html += '<td title="Web search">' + google_link(domain.key) + '</td>';
 	for (var tld in TLD_SCORES) {
 		if (domain[tld]) {
@@ -122,7 +122,7 @@ function table_row(domain, row) {
 			html += '</td>';
 		}
 	}
-	html += '<td>' + domain.score.toFixed(1) + '</td>';
+	// html += '<td>' + domain.score.toFixed(1) + '</td>';
 	html += '</tr>';
 	return html;
 }
