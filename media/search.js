@@ -229,8 +229,11 @@ function ajax_stop() {
 						   $.ajax_search.left.length + '/' +
 						   $.ajax_search.right.length + '/' +
 						   seconds + '/');
-		var gwoTracker = _gat._getTracker("UA-939486-5");
-		gwoTracker._trackPageview("/3251202061/goal");
+		$.ajax_search.counter++;
+		if (_gat && $.ajax_search.counter == 1) {
+			var gwoTracker = _gat._getTracker("UA-939486-5");
+			gwoTracker._trackPageview("/3251202061/goal");
+		}
 	}
 }
 
@@ -299,6 +302,7 @@ function document_ready() {
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.left = '*';
 	$.ajax_search.right = '*';
+	$.ajax_search.counter = 0;
 	$.changed = false;
 	activate_ruler();
     $("#loading").ajaxStart(ajax_start).ajaxStop(ajax_stop);
