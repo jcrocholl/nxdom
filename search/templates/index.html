@@ -2,9 +2,31 @@
 
 {% block title %}Short domain name search{% endblock %}
 
+{% block jquery %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $.ga.load("UA-939486-4", function() {
+      var gwoTracker = _gat._getTracker("UA-939486-5");
+      gwoTracker._trackPageview("/3251202061/test");
+    });
+    $.json_version = {{ json_version }};
+    $("input.focus:last").focus();
+    $("html").css("overflow-y", "scroll");
+    $("input.keyword").keypress(keyword_keypress);
+    $("input.keyword").keyup(keyword_keyup);
+    $.registrar = $("select#id_registrar").val();
+    $("select#id_registrar").change(update_registrar);
+    $("table#weights input").change(update_scores);
+    $("div#timer").everyTime(200, update_if_changed);
+    keyword_keyup();
+});
+</script>
+{% endblock %}
+
 {% block extra-head %}
 <!-- Google Website Optimizer Control Script -->
 <script type="text/javascript">
+/* <![CDATA[ */
 function utmx_section(){}function utmx(){}
 (function(){var k='3251202061',d=document,l=d.location,c=d.cookie;function f(n){
 if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.indexOf(';',i);return c.substring(i+n.
@@ -14,23 +36,9 @@ d.write('<sc'+'ript src="'+
 +'/siteopt.js?v=1&utmxkey='+k+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='
 +new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 '" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
+/* ]]> */
 </script>
 <!-- End of Google Website Optimizer Control Script -->
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    var gwoTracker = _gat._getTracker("UA-939486-5");
-    gwoTracker._trackPageview("/3251202061/test");
-    $("html").css("overflow-y", "scroll");
-    $("input.keyword").keypress(keyword_keypress);
-    $("input.keyword").keyup(keyword_keyup);
-    $.registrar = $("select#id_registrar").val();
-    $("select#id_registrar").change(update_registrar);
-    $("table#weights input").change(update_scores);
-    $("div#timer").everyTime(200, update_if_changed);
-    keyword_keyup();
-  });
-</script>
 
 <meta name="google-site-verification" content="wl5XW4kG6Lnb-gAflYHZGiNfrZtUqJTDul7zHLcV67g" />
 {% endblock %}
