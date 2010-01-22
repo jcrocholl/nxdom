@@ -3,8 +3,24 @@
 {% block title %}Short domain name search{% endblock %}
 
 {% block extra-head %}
+<!-- Google Website Optimizer Control Script -->
+<script type="text/javascript">
+function utmx_section(){}function utmx(){}
+(function(){var k='3251202061',d=document,l=d.location,c=d.cookie;function f(n){
+if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.indexOf(';',i);return c.substring(i+n.
+length+1,j<0?c.length:j)}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;
+d.write('<sc'+'ript src="'+
+'http'+(l.protocol=='https:'?'s://ssl':'://www')+'.google-analytics.com'
++'/siteopt.js?v=1&utmxkey='+k+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='
++new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
+</script>
+<!-- End of Google Website Optimizer Control Script -->
+
 <script type="text/javascript">
   $(document).ready(function() {
+    var gwoTracker = _gat._getTracker("UA-939486-5");
+    gwoTracker._trackPageview("/3251202061/test");
     $("html").css("overflow-y", "scroll");
     $("input.keyword").keypress(keyword_keypress);
     $("input.keyword").keyup(keyword_keyup);
@@ -18,7 +34,6 @@
 
 <meta name="google-site-verification" content="wl5XW4kG6Lnb-gAflYHZGiNfrZtUqJTDul7zHLcV67g" />
 {% endblock %}
-
 
 {% block left %}
 <div id="left" class="span-6 append-1">
@@ -84,12 +99,13 @@ width="86" height="45" alt="NXdom" />
 
 {% block content %}
 <div id="welcome">
+<script type="text/javascript">utmx_section("welcome")</script>
 <h1>Find the best available short domain names</h1>
 <p>In three simple steps:</p>
 
 <div class="step one">
 <h2>1. Start typing in the search box</h2>
-<p>
+<p class="explain">
 The results will start loading immediately, and they are updated while
 you type.<br />
 
@@ -99,22 +115,22 @@ The two input fields match the beginning and ending of available names.
 
 <div class="step two">
 <h2>2. Play with the sort order</h2>
-<p>
+<p class="explain">
 There are millions of available names, but you can save time by
 sorting and looking only at the best names.<br />
 
 You can adjust the importance of various qualities with the radio
 buttons on the left.
 </p>
-<p>
+<p class="explain">
 If you want really short names, set <b>Short names</b>
 to <b>Critical</b>.
 </p>
-<p>
+<p class="explain">
 If you don't care about <b>Spanish</b>, <b>French</b>,
 or <b>German</b>, you can set those to <b>Neutral</b>.
 </p>
-<p>
+<p class="explain">
 If you want your domain name to start or end with popular letters
 (based on thousands of registered .com domains),<br />
 
@@ -124,16 +140,19 @@ that's what the the <b>Popularity</b> settings are for.
 
 <div class="step three">
 <h2>3. Check availability</h2>
-<p>
+<p class="explain">
 Click on a top level domain to check if the name is still available,
-using your favorite registrar.</p>
+using your favorite registrar.
+</p>
 </div>
 
 <div class="step four">
 <h2>4. Give feedback (optional)</h2>
-<p>If you have an idea how this site could be improved, please let us
-know.</p>
+<p class="explain">
+If you have an idea how this site could be improved, please let us know.
+</p>
 </div>
+</noscript>
 </div>
 
 <table class="ruler wide">
@@ -141,4 +160,16 @@ know.</p>
 <tr><td></td></tr>
 </tbody>
 </table>
+
+<!-- Google Website Optimizer Tracking Script -->
+<script type="text/javascript">
+if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
+(document.location.protocol=='https:'?'s://ssl':'://www')+
+'.google-analytics.com/ga.js"></sc'+'ript>')</script>
+<script type="text/javascript">
+try {
+var gwoTracker=_gat._getTracker("UA-939486-5");
+gwoTracker._trackPageview("/3251202061/test");
+}catch(err){}</script>
+<!-- End of Google Website Optimizer Tracking Script -->
 {% endblock %}
