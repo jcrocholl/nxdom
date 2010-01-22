@@ -1,3 +1,6 @@
+square.png : logo45.ppm
+	pnmpad -white -height 86 -valign 0.5 $< | pnmtopng > $@
+
 logo.png : logo.ppm
 	pnmtopng -transparent "#FFFFFF" $< > $@
 
@@ -26,4 +29,4 @@ square.ppm : big.ppm
 	pnmpad -white -height 962 -valign 0.5 $< > $@
 
 %.ppm : %.png
-	pngtopnm $< > $@
+	pngtopnm -mix -background white $< > $@
