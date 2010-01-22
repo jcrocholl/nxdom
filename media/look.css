@@ -1,7 +1,6 @@
 img#loading {
   position: absolute;
-  top: 100px;
-  margin-left: -29px;
+  margin: 0 0 0 216px;
 }
 
 div#timer {
@@ -83,6 +82,7 @@ p.highlight { padding: 4px; background: #fed; }
 a { color: #04f; text-decoration: none; }
 a:visited { color: #08f; }
 a:focus, a:hover { text-decoration: underline; }
+tbody#results a { color: #000; }
 
 div#footer { text-align: center; }
 div#footer, div#footer a { color: #aaa; }
