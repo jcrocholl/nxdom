@@ -27,7 +27,6 @@ div.two { top: 207px; }
 div.three { top: 459px; }
 div.four { top: 549px; }
 
-div#welcome p { font-size: 14px; }
 div.step {
   position: absolute;
 }
@@ -36,6 +35,7 @@ div.step h2 {
   background: url("/static/images/left.png") no-repeat 0% 50%;
   padding-left: 20px;
 }
+p.explain { font-size: 14px; }
 
 table.wide { width: 100%; }
 tr.row2 { background: #eee; }
@@ -80,6 +80,10 @@ p.highlight { padding: 4px; background: #fed; }
 
 .image16x16 { vertical-align: top; }
 
+a { color: #04f; text-decoration: none; }
+a:visited { color: #08f; }
+a:focus, a:hover { text-decoration: underline; }
+
 div#footer { text-align: center; }
 div#footer, div#footer a { color: #aaa; }
-div#footer a:hover { color: #666; }
+div#footer a:hover { color: #04f; }
