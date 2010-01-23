@@ -17,9 +17,9 @@ def feedback_form(request):
     return render_to_string('feedback/form.html', locals())
 
 
-def render_query(request, query):
+def render_query(request, query, limit=10):
     feedback_list = []
-    for feedback in query.fetch(10):
+    for feedback in query.fetch(limit):
         try:
             submitter = feedback.submitter # Attempt to dereference.
             feedback_list.append(feedback)
@@ -37,7 +37,7 @@ def feedback_recently(request, page=None):
     if page != 'all':
         query.filter('page', page)
     query.order('-submitted')
-    return render_query(request, query)
+    return render_query(request, query, 20 if page == 'all' else 10)
 
 
 @register.simple_tag
@@ -50,7 +50,7 @@ def feedback_popular(request, page=None):
         query.filter('page', page)
     query.order('-points')
     query.order('-submitted')
-    return render_query(request, query)
+    return render_query(request, query, 20 if page == 'all' else 10)
 
 
 @register.filter
