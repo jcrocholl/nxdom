@@ -1,8 +1,14 @@
+logotitle.png : logo.ppm space.ppm title.ppm
+	pnmcat -lr $^ | pnmtopng -transparent white > $@
+
+space.ppm :
+	ppmmake white 12 45 > $@
+
 square.png : logo45.ppm
 	pnmpad -white -height 86 -valign 0.5 $< | pnmtopng > $@
 
 logo.png : logo.ppm
-	pnmtopng -transparent "#FFFFFF" $< > $@
+	pnmtopng -transparent white $< > $@
 
 logo.ppm : big.ppm
 	pnmscale -height 45 $< > $@
