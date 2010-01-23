@@ -17,12 +17,9 @@ def feedback_form(request):
     return render_to_string('feedback/form.html', locals())
 
 
-@register.simple_tag
-def feedback_recently(request):
-    page = request.META['PATH_INFO']
+def render_query(request, query):
     feedback_list = []
-    for feedback in (Feedback.all().filter('page', page)
-                     .order('-points').order('-submitted').fetch(10)):
+    for feedback in query.fetch(10):
         try:
             submitter = feedback.submitter # Attempt to dereference.
             feedback_list.append(feedback)
@@ -30,6 +27,30 @@ def feedback_recently(request):
             pass # Ignore feedback if the submitter doesn't exist.
     already_voted = get_already_voted(request)
     return render_to_string('feedback/messages.html', locals())
+
+
+@register.simple_tag
+def feedback_recently(request, page=None):
+    if page is None:
+        page = request.META['PATH_INFO']
+    query = Feedback.all()
+    if page != 'all':
+        query.filter('page', page)
+    query.order('-submitted')
+    return render_query(request, query)
+
+
+@register.simple_tag
+def feedback_popular(request, page=None):
+    if page is None:
+        page = request.META['PATH_INFO']
+    feedback_list = []
+    query = Feedback.all()
+    if page != 'all':
+        query.filter('page', page)
+    query.order('-points')
+    query.order('-submitted')
+    return render_query(request, query)
 
 
 @register.filter

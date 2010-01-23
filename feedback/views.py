@@ -39,9 +39,6 @@ def index(request):
     if delete_form.is_valid():
         return delete(request, delete_form.cleaned_data['delete'])
     # Otherwise, display recent feedback.
-    feedback_list = Feedback.all()
-    feedback_list.order('-points').order('-submitted').fetch(50)
-    already_voted = get_already_voted(request)
     return render_to_response(request, 'feedback/index.html', locals())
 
 
