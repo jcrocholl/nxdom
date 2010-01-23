@@ -1,16 +1,20 @@
+div#left { width: 230px; height: 620px; }
+div#logo_div { margin-top: 18px; }
+div#logo_div h1 { display: none; }
+img#logo {
+  float: left;
+}
 img#loading {
   position: absolute;
-  margin: 0 0 0 216px;
+  top: 28px;
+  left: 248px;
 }
-
 div#timer {
   position: absolute;
   text-align: right;
   visibility: hidden;
 }
 
-div#left { width: 230px; height: 620px; }
-div#logo { margin-top: 18px; }
 div#keywords { position: absolute; top: 72px; }
 table#weights { position: absolute; top: 112px; }
 div#registrar { position: absolute; top: 458px; }

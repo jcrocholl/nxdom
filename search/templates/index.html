@@ -47,18 +47,17 @@ d.write('<sc'+'ript src="'+
 
 {% block left %}
 <div id="left" class="span-6 append-1">
-<form method="get" action="">
-<img id="loading" src="/static/images/loading.gif" alt="" />
+<div id="logo_div" class="span-6 last">
+<a href="/"><img id="logo" src="static/images/logo45.png" alt="NXdom"
+width="86" height="45" style="vertical-align:top" /></a>
 <div id="timer" class="span-6 quiet small"></div>
-
-<div id="logo">
-<a href="/">
-  <img style="vertical-align:top" src="static/images/logo45.png"
-width="86" height="45" alt="NXdom" />
-</a>
+<p style="text-align:right"><b>Find the best available<br />
+short domain names</b></p>
 </div>
 
+<form method="get" action="">
 <div id="keywords">
+<img id="loading" src="/static/images/loading.gif" alt="" />
 <div class="span-3">
 <label for="id_left">Beginning</label><br />
 {{ search_form.left }}<br />
@@ -110,9 +109,6 @@ width="86" height="45" alt="NXdom" />
 {% block content %}
 <div id="welcome">
 <script type="text/javascript">utmx_section("welcome")</script>
-<h1>Find the best available short domain names</h1>
-<p>In three simple steps:</p>
-
 <div class="step one">
 <h2>1. Start typing in the search box</h2>
 <p class="explain">
