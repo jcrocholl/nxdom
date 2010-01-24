@@ -53,21 +53,6 @@ def auth_func():
     return open('.passwd').read().split(':')
 
 
-def already_uploaded(names):
-    if len(names) < 10:
-        return False
-    sample = names[:]
-    random.shuffle(sample)
-    sample = sample[:100]
-    domains = retry(Domain.get_by_key_name, sample)
-    found = [domain.key().name() for domain in domains if domain is not None]
-    if len(found) > len(sample) / 2:
-        print len(found) * 100 / len(sample),
-        print 'percent of these names are already in the datastore:'
-        print ' '.join(found)
-        return True
-
-
 class NameServer(ADNS.QueryEngine):
 
     def __init__(self, ip):
@@ -199,6 +184,35 @@ def upload_names(names, options):
     retry_objects(db.put, lookups)
 
 
+def count_existing(names):
+    domains = retry(Domain.get_by_key_name, names)
+    return sum([1 for domain in domains if domain])
+
+
+def bisect(names):
+    # Check the beginning of the list.
+    if count_existing(names[:10]) <= 5:
+        return names
+    # Check the end of the list.
+    if count_existing(names[-10:]) > 5:
+        return []
+    # Bisect the list to find the crash point.
+    left = 0
+    right = len(names) - 1
+    while right - left > 10:
+        middle = (left + right) / 2
+        sample = names[middle:middle+10]
+        domains = retry(Domain.get_by_key_name, sample)
+        count = sum([1 for domain in domains if domain])
+        print "bisect left=%s right=%s middle=%s count=%d" % (
+            names[left], names[right], names[middle], count)
+        if count <= 5:
+            right = middle
+        else:
+            left = middle
+    return names[left:]
+
+
 def upload_files(filenames, options):
     for filename in filenames:
         names = []
@@ -212,20 +226,20 @@ def upload_files(filenames, options):
                 continue
             if options.right and not name.startswith(options.right):
                 continue
-            if options.resume and name < options.resume:
-                continue
             if names and names[-1] == name:
                 continue
             if len(name) > options.max:
                 continue
             names.append(name)
+        names.sort()
         print "Loaded %d names from %s" % (len(names), filename)
-        if already_uploaded(names):
-            continue
+        all_names = names
+        names = bisect(all_names)
+        print "Found %d of %d names already in the datastore." % (
+            len(all_names) - len(names), len(all_names))
         while names:
             upload_names(names[:options.batch], options)
             names = names[options.batch:]
-        options.resume = None
 
 
 def main():
@@ -253,8 +267,6 @@ def main():
                       help="only names with this suffix")
     parser.add_option('--random', action='store_true',
                       help="update random popular prefixes and suffixes")
-    parser.add_option('--resume', metavar='<name>',
-                      help="continue file upload from this name")
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api_hidden', auth_func, options.server)
