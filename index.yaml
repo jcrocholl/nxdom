@@ -116,6 +116,14 @@ indexes:
 
 - kind: domains_domain
   properties:
+  - name: left1
+  - name: right2
+  - name: length
+  - name: score
+    direction: desc
+
+- kind: domains_domain
+  properties:
   - name: right2
   - name: length
   - name: score
@@ -132,6 +140,14 @@ indexes:
   properties:
   - name: left3
   - name: right1
+  - name: length
+  - name: score
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left1
+  - name: right3
   - name: length
   - name: score
     direction: desc
