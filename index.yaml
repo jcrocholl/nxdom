@@ -176,6 +176,14 @@ indexes:
 
 - kind: domains_domain
   properties:
+  - name: left1
+  - name: right4
+  - name: length
+  - name: score
+    direction: desc
+
+- kind: domains_domain
+  properties:
   - name: right4
   - name: length
   - name: score
