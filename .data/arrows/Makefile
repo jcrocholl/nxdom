@@ -6,17 +6,14 @@ all: left.png right.png up.png down.png
 	pnmscale -width $(SIZE) $< | pnmtopng -transparent white > $@
 	cp -f $@ ../../static/images/
 
-left.ppm : arrow.ppm
+left.ppm : right.ppm
 	pnmflip -lr $< > $@
-
-right.ppm : arrow.ppm
-	cp -f $< $@
-
-up.ppm : arrow.ppm
-	pnmflip -r90 $< > $@
 
 down.ppm : up.ppm
 	pnmflip -tb $< > $@
 
-right.ppm : right373.png
-	pngtopnm $< > $@
+up.ppm : right.ppm
+	pnmflip -r90 $< > $@
+
+right.ppm : right23.png
+	pngtopnm $< | pgmtoppm "#aaaaaa"-white > $@
