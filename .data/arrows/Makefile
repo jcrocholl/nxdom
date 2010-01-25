@@ -16,4 +16,4 @@ up.ppm : right.ppm
 	pnmflip -r90 $< > $@
 
 right.ppm : right23.png
-	pngtopnm $< | pgmtoppm "#aaaaaa"-white > $@
+	pngtopnm $< | pgmtoppm "#cccccc"-white > $@
