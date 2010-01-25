@@ -46,7 +46,7 @@ function mouse_down_track(one, two, three, four) {
 	if (two) path += two + '/';
 	if (three) path += three + '/';
 	if (four) path += four + '/';
-	var javascript = "$.ga.trackPageview('" + path + "');";
+	var javascript = "ga_track('" + path + "');";
 	return 'onMouseDown="' + javascript + '"';
 }
 
@@ -222,6 +222,19 @@ function ajax_result(json, status) {
 	$.ajax_search.xhr[length] = false;
 }
 
+function ga_track(path) {
+	if ($.ga && window.location.host == "www.nxdom.com") {
+		$.ga.trackPageview(path);
+	}
+}
+
+function gwo_track(path) {
+	if (_gat && window.location.host == "www.nxdom.com") {
+		var gwoTracker = _gat._getTracker("UA-939486-5");
+		gwoTracker._trackPageview(path);
+	}
+}
+
 function ajax_start() {
 	$(this).show();
 	var now = new Date();
@@ -234,14 +247,13 @@ function ajax_stop() {
 	var milliseconds = now.getTime() - $.ajax_search.start;
 	var seconds = (milliseconds / 1000).toFixed(1);
 	if ($.ajax_search.left || $.ajax_search.right) {
-		$.ga.trackPageview('/search/' +
-						   $.ajax_search.left.length + '/' +
-						   $.ajax_search.right.length + '/' +
-						   seconds + '/');
+		ga_track('/search/' +
+				 $.ajax_search.left.length + '/' +
+				 $.ajax_search.right.length + '/' +
+				 seconds + '/');
 		$.ajax_search.counter++;
-		if (_gat && $.ajax_search.counter == 1) {
-			var gwoTracker = _gat._getTracker("UA-939486-5");
-			gwoTracker._trackPageview("/3251202061/goal");
+		if ($.ajax_search.counter == 1) {
+			gwo_track("/3251202061/goal");
 		}
 	}
 }

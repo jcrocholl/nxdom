@@ -8,8 +8,8 @@ $(document).ready(function() {
     $.ga.load("UA-939486-4", function() {
       // Set custom variable (slot 1) for the scope of this session (2).
       $.ga.setCustomVar(1, "Welcome", utmx("combination_string"), 2);
-      var gwoTracker = _gat._getTracker("UA-939486-5");
-      gwoTracker._trackPageview("/3251202061/test");
+      ga_track();
+      gwo_track("/3251202061/test");
     });
     $.json_version = {{ json_version }};
     $("input.focus:last").focus();

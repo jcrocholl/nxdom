@@ -23,7 +23,7 @@ lang="{% firstof LANGUAGE_CODE 'en' %}">
 {% block jquery %}
 <script type="text/javascript">
 $(document).ready(function() {{% if not refresh_seconds %}
-    $.ga.load("UA-939486-4");{% endif %}
+    $.ga.load("UA-939486-4", function() { ga_track(); });{% endif %}
     $.json_version = {{ json_version }};
     $("input.focus:last").focus();
 });
