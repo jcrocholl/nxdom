@@ -79,7 +79,8 @@ function affiliate_link(name, tld) {
 		html += "?affiliate_id=3154&landingpage=domaincheck&domain=";
 		html += name + "." + tld;
 	}
-	html += '" title="Check availability on ' + $.registrar + '" ';
+	html += '" title="Click here to check if ' + name + '.' + tld +
+		' is available on ' + $.registrar + '" ';
 	html += mouse_down_track('outgoing', $.registrar, tld, name.length);
 	html += '>' + tld + '</a>';
 	return html;
@@ -101,23 +102,30 @@ function table_row(domain, row) {
 	var html = '<tr class="row' + row + '">';
 	html += '<td title="Web search">' + google_link(domain.key) + '</td>';
 	html += '<td class="right quiet">' + domain.length + '</td>';
+	var name = domain.key;
 	for (var tld in TLD_SCORES) {
 		if (domain[tld]) {
+			var title = 'Taken: ' + name + '.' + tld + ' uses name server';
 			var color = 'taken';
 			if (domain[tld].indexOf('parking') >= 0 ||
 				domain[tld].indexOf('parked') >= 0 ||
 				domain[tld].indexOf('hitfarm.com') >= 0 ||
 				domain[tld].indexOf('fastpark.net') >= 0 ||
-				domain[tld].indexOf('buydomains.com') >= 0)
+				domain[tld].indexOf('buydomains.com') >= 0) {
+				title = 'Parking: ' + name + '.' + tld + ' uses name server';
 				color = 'parking';
+			}
 			if (domain[tld].substr(0, 7) == 'status=' ||
-				domain[tld].substr(0, 8) == 'timeout=')
+				domain[tld].substr(0, 8) == 'timeout=') {
+				title = 'DNS error: ' + name + '.' + tld + ' returned';
 				color = 'status';
-			html += '<td class="' + color + '" title="' + domain[tld] + '">';
+			}
+			html += '<td class="tld ' + color + '" title="' +
+				title + ' ' + domain[tld] + '">';
 			html += domain_link(domain.key, tld);
 			html += '</td>';
 		} else {
-			html += '<td>';
+			html += '<td class="tld">';
 			html += affiliate_link(domain.key, tld);
 			html += '</td>';
 		}
@@ -135,11 +143,10 @@ function activate_ruler() {
 
 function update_html() {
 	if ($.ajax_search.left + $.ajax_search.right == '') {
-		$("tbody#results").html('');
+		$("div#results_div").hide();
 		$("div#welcome").show();
 		return;
 	}
-	$("div#welcome").hide();
 	var html = '';
 	var row = 1;
 	var keys = [];
@@ -153,6 +160,8 @@ function update_html() {
 		row = (row % 2) + 1;
 	}
 	$("tbody#results").html(html);
+	$("div#welcome").hide();
+	$("div#results_div").show();
 	activate_ruler();
 	$.changed = false;
 }
