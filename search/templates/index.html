@@ -161,9 +161,25 @@ If you have an idea how this site could be improved, please let us know.
 </noscript>
 </div>
 
+<div id="results_div">
+<p class="hint">
+Click to check if a domain name is still available. Mouse over
+<span class="tld taken" title="Red means this domain name is taken.">taken</span> or
+<span class="tld parking" title="Blue means this domain name is parked.">parking</span> or
+<span class="tld status" title="Gray means there was a DNS error.">error</span>
+for details.
+</p>
+
 <table class="ruler wide">
+<thead>
+<tr>
+<td></td><td></td>
+<td class="tld"><img src="/static/images/down.png" alt="" /></td>
+</tr>
+</thead>
 <tbody id="results">
 <tr><td></td></tr>
 </tbody>
 </table>
+</div>
 {% endblock %}
