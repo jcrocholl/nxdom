@@ -185,8 +185,8 @@ def upload_names(names, options):
 
 
 def count_existing(names):
-    domains = retry(Domain.get_by_key_name, names)
-    return sum([1 for domain in domains if domain])
+    lookups = retry(Lookup.get_by_key_name, names)
+    return sum([1 for lookup in lookups if lookup])
 
 
 def bisect(names):
@@ -201,9 +201,7 @@ def bisect(names):
     right = len(names) - 1
     while right - left > 10:
         middle = (left + right) / 2
-        sample = names[middle:middle+10]
-        domains = retry(Domain.get_by_key_name, sample)
-        count = sum([1 for domain in domains if domain])
+        count = count_existing(names[middle:middle+10])
         print "bisect left=%s right=%s middle=%s count=%d" % (
             names[left], names[right], names[middle], count)
         if count <= 5:
