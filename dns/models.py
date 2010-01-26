@@ -4,7 +4,7 @@ TOP_LEVEL_DOMAINS = """
 com net org biz info
 am at
 be by
-ch
+ca ch
 de
 es eu
 fm
