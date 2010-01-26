@@ -5,18 +5,37 @@ django_admin_log:content_type,object_id,action_time
 django_admin_log:user,-action_time
 __Stat_Kind__:kind_name,-timestamp
 prefixes_prefix:length,timestamp
-prefixes_dotcomprefix:length,-count
-prefixes_dotcomsuffix:length,-count
+prefixes_prefix:length,-com
+prefixes_prefix:length,resume
+prefixes_suffix:length,timestamp
+prefixes_suffix:length,-com
+prefixes_suffix:length,resume
 tests_comparison:path,-timestamp
+feedback_feedback:page,-submitted
+feedback_feedback:page,-points,-submitted
+feedback_feedback:-points,-submitted
 dns_lookup:-__key__
 dns_lookup:com,backwards
 domains_domain:-__key__
 domains_domain:length,-score
 """.split()
 
+
 for length in range(1, 7):
-    INDEXES.append('domains_domain:left%d,length,-score' % length)
-    INDEXES.append('domains_domain:right%d,length,-score' % length)
+    for right in range(0, length + 1):
+        left = length - right
+        minimum = min(left, right)
+        maximum = max(left, right)
+        if minimum and minimum + maximum > 5:
+            continue
+        parts = []
+        if left:
+            parts.append('left%d' % left)
+        if right:
+            parts.append('right%d' % right)
+        parts.append('length')
+        parts.append('-score')
+        INDEXES.append('domains_domain:' + ','.join(parts))
 
 
 print 'indexes:'

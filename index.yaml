@@ -56,6 +56,27 @@ indexes:
   - name: timestamp
     direction: desc
 
+- kind: feedback_feedback
+  properties:
+  - name: page
+  - name: submitted
+    direction: desc
+
+- kind: feedback_feedback
+  properties:
+  - name: page
+  - name: points
+    direction: desc
+  - name: submitted
+    direction: desc
+
+- kind: feedback_feedback
+  properties:
+  - name: points
+    direction: desc
+  - name: submitted
+    direction: desc
+
 - kind: dns_lookup
   properties:
   - name: __key__
@@ -86,14 +107,6 @@ indexes:
 
 - kind: domains_domain
   properties:
-  - name: left1
-  - name: right1
-  - name: length
-  - name: score
-    direction: desc
-
-- kind: domains_domain
-  properties:
   - name: right1
   - name: length
   - name: score
@@ -102,22 +115,6 @@ indexes:
 - kind: domains_domain
   properties:
   - name: left2
-  - name: length
-  - name: score
-    direction: desc
-
-- kind: domains_domain
-  properties:
-  - name: left2
-  - name: right1
-  - name: length
-  - name: score
-    direction: desc
-
-- kind: domains_domain
-  properties:
-  - name: left2
-  - name: right2
   - name: length
   - name: score
     direction: desc
@@ -125,7 +122,7 @@ indexes:
 - kind: domains_domain
   properties:
   - name: left1
-  - name: right2
+  - name: right1
   - name: length
   - name: score
     direction: desc
@@ -146,7 +143,7 @@ indexes:
 
 - kind: domains_domain
   properties:
-  - name: left3
+  - name: left2
   - name: right1
   - name: length
   - name: score
@@ -154,24 +151,8 @@ indexes:
 
 - kind: domains_domain
   properties:
-  - name: left3
-  - name: right2
-  - name: length
-  - name: score
-    direction: desc
-
-- kind: domains_domain
-  properties:
-  - name: left2
-  - name: right3
-  - name: length
-  - name: score
-    direction: desc
-
-- kind: domains_domain
-  properties:
   - name: left1
-  - name: right3
+  - name: right2
   - name: length
   - name: score
     direction: desc
@@ -192,7 +173,7 @@ indexes:
 
 - kind: domains_domain
   properties:
-  - name: left4
+  - name: left3
   - name: right1
   - name: length
   - name: score
@@ -200,8 +181,16 @@ indexes:
 
 - kind: domains_domain
   properties:
+  - name: left2
+  - name: right2
+  - name: length
+  - name: score
+    direction: desc
+
+- kind: domains_domain
+  properties:
   - name: left1
-  - name: right4
+  - name: right3
   - name: length
   - name: score
     direction: desc
@@ -216,6 +205,38 @@ indexes:
 - kind: domains_domain
   properties:
   - name: left5
+  - name: length
+  - name: score
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left4
+  - name: right1
+  - name: length
+  - name: score
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left3
+  - name: right2
+  - name: length
+  - name: score
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left2
+  - name: right3
+  - name: length
+  - name: score
+    direction: desc
+
+- kind: domains_domain
+  properties:
+  - name: left1
+  - name: right4
   - name: length
   - name: score
     direction: desc
@@ -250,24 +271,3 @@ indexes:
 # manually, move them above the marker line.  The index.yaml file is
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
-
-- kind: feedback_feedback
-  properties:
-  - name: page
-  - name: submitted
-    direction: desc
-
-- kind: feedback_feedback
-  properties:
-  - name: page
-  - name: points
-    direction: desc
-  - name: submitted
-    direction: desc
-
-- kind: feedback_feedback
-  properties:
-  - name: points
-    direction: desc
-  - name: submitted
-    direction: desc
