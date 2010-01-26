@@ -103,6 +103,9 @@ def update_dns(lookups, options):
                     print "Server %-16s" % server.ip,
                     print "returned", len(server.results),
                     print "of", server.queries, "queries"
+                    if (server.queries > 10 and
+                        len(server.results) < server.queries / 2):
+                        sys.exit(1)
                     results.update(server.results)
     for lookup in lookups:
         display = False
@@ -228,13 +231,16 @@ def upload_files(filenames, options):
                 continue
             if len(name) > options.max:
                 continue
+            if name < options.resume:
+                continue
             names.append(name)
         names.sort()
         print "Loaded %d names from %s" % (len(names), filename)
-        all_names = names
-        names = bisect(all_names)
-        print "Found %d of %d names already in the datastore." % (
-            len(all_names) - len(names), len(all_names))
+        if not options.resume:
+            all_names = names
+            names = bisect(all_names)
+            print "Found %d of %d names already in the datastore." % (
+                len(all_names) - len(names), len(all_names))
         while names:
             upload_names(names[:options.batch], options)
             names = names[options.batch:]
@@ -265,6 +271,8 @@ def main():
                       help="only names with this suffix")
     parser.add_option('--random', action='store_true',
                       help="update random popular prefixes and suffixes")
+    parser.add_option('--resume', metavar='<name>',
+                      help="continue file upload from this name")
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api_hidden', auth_func, options.server)
