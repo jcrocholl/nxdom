@@ -107,14 +107,28 @@ def score_domains(cleaned_data, domain_list):
     return domain_list[:50]
 
 
+def best_left_right(left, right):
+    if left and not right:
+        left = left[:6]
+    elif right and not left:
+        right = right[-6:]
+    elif len(left) >= len(right) > 0:
+        left = left[:4]
+        if len(left) + len(right) > 5:
+            right = right[len(left) - 5:]
+    elif len(right) > len(left) > 0:
+        right = right[-4:]
+        if len(left) + len(right) > 5:
+            left = left[:5 - len(right)]
+    return left, right
+
+
 def fetch_candidates(left, right, length):
     query = Domain.all()
-    if len(right) > len(left):
-        right = right[:6]
-        query.filter('right%d' % len(right), right)
-    elif left:
-        left = left[:6]
+    if left:
         query.filter('left%d' % len(left), left)
+    if right:
+        query.filter('right%d' % len(right), right)
     query.filter('length', length)
     query.order('-score')
     return query.fetch(JSON_FETCH_LIMIT)
@@ -177,8 +191,8 @@ def generate_json(left, right, length):
 
 @cache_control(public=True, max_age=MEMCACHE_TIMEOUT)
 def json(request):
-    left = request.GET.get('left', '')
-    right = request.GET.get('right', '')
+    left, right = best_left_right(request.GET.get('left', ''),
+                                  request.GET.get('right', ''))
     length = int(request.GET.get('length', 8))
     version = int(request.GET.get('version', settings.JSON_VERSION))
     version = min(version, settings.JSON_VERSION)
