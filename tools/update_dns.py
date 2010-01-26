@@ -243,6 +243,7 @@ def upload_files(filenames, options):
         while names:
             upload_names(names[:options.batch], options)
             names = names[options.batch:]
+        options.resume = None
 
 
 def main():
