@@ -104,7 +104,7 @@ def update_dns(lookups, options):
                     print "of", server.queries, "queries"
                     if (server.queries > 10 and
                         len(server.results) < server.queries / 2):
-                        sys.exit(1)
+                        sys.exit(int(server.ip.split('.')[2]))
                     results.update(server.results)
     for lookup in lookups:
         display = False
