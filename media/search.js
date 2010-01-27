@@ -163,7 +163,6 @@ function update_html() {
 	$("div#welcome").hide();
 	$("div#results_div").show();
 	activate_ruler();
-	$.changed = false;
 }
 
 function array_unchanged(a, b) {
@@ -187,6 +186,7 @@ function update_scores() {
 		domain.score = domain_score(domain, weights);
 	}
 	update_html();
+	$.changed = false;
 }
 
 function keyword_match(left, right, name) {
@@ -311,9 +311,8 @@ function keyword_keyup() {
 }
 
 function update_if_changed(i) {
-	$(this).html(i);
-	if (!$.changed) return;
-	update_html();
+	if ($.changed) update_html();
+	$.changed = false;
 }
 
 function document_ready() {
