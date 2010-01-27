@@ -6,8 +6,6 @@ sys.path[0] = os.path.dirname(sys.path[0])
 from common.appenginepatch.aecmd import setup_env
 setup_env()
 
-import textwrap
-
 from prefixes.models import Prefix, Suffix
 
 LENGTHS = range(2, 7)
@@ -61,7 +59,8 @@ def all_lengths(Model, lengths):
         names = sort_prefixes('.data/popular/%ses.%d.txt' % (
                 Model.kind().split('_')[-1], length))
         print 'POPULAR_%sES[%d] = """' % (upper, length)
-        print textwrap.fill(' '.join(names))
+        for name in names:
+            print name
         print '""".split()'
         max_score = float(length) / max(lengths)
         print 'for index, name in enumerate(POPULAR_%sES[%d]):' % (
