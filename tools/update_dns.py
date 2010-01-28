@@ -174,6 +174,19 @@ def update_random(options):
         update_best_names(position, keyword, length, options)
 
 
+def update_timeout(options):
+    prefix = random_prefix('left', length_choices=[2, 3, 4])
+    start_key = db.Key.from_path('dns_lookup', prefix)
+    query = Lookup.all(keys_only=True).filter('com', 'timeout=20')
+    query.filter('__key__ >', start_key)
+    print "Trying to fetch %d names after %s with timeout=20" % (
+        options.batch, prefix)
+    keys = retry(query.fetch, options.batch)
+    names = [key.name() for key in keys]
+    lookups = lookup_names(names, options)
+    retry_objects(db.put, lookups)
+
+
 def upload_names(names, options):
     timestamp = datetime.now()
     domains = []
@@ -271,6 +284,8 @@ def main():
                       help="only names with this suffix")
     parser.add_option('--random', action='store_true',
                       help="update random popular prefixes and suffixes")
+    parser.add_option('--retry', action='store_true',
+                      help="update lookups that had a timeout earlier")
     parser.add_option('--resume', metavar='<name>',
                       help="continue file upload from this name")
     (options, args) = parser.parse_args()
@@ -281,6 +296,9 @@ def main():
     elif options.random:
         while True:
             update_random(options)
+    elif options.retry:
+        while True:
+            update_timeout(options)
     elif options.left is not None:
         for length in range(max(3, len(options.left)), options.max + 1):
             update_best_names('left', options.left, length, options)
