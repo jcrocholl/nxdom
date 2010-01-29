@@ -205,12 +205,12 @@ def count_existing(names):
 
 
 def bisect(names):
-    # Check the beginning of the list.
-    if count_existing(names[:10]) <= 5:
-        return names
     # Check the end of the list.
     if count_existing(names[-10:]) > 5:
         return []
+    # Check the beginning of the list.
+    if count_existing(names[:10]) <= 5:
+        return names
     # Bisect the list to find the crash point.
     left = 0
     right = len(names) - 1
