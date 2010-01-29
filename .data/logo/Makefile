@@ -7,11 +7,15 @@ space.ppm :
 square.png : logo45.ppm
 	pnmpad -white -height 86 -valign 0.5 $< | pnmtopng > $@
 
-logo.png : logo.ppm
+logo%.png : logo%.ppm
 	pnmtopng -transparent white $< > $@
+	cp $@ /Users/johann/Desktop/
 
 logo.ppm : big.ppm
 	pnmscale -height 45 $< > $@
+
+logo120x60.ppm : big.ppm
+	pnmscale -width 115 -height 60 $< | pnmpad -white -width 120 -height 60 -halign 0 -valign 1 > $@
 
 favicon.png : 16x16.ppm
 	pnmtopng -transparent "#AAAAAA" $< > $@
