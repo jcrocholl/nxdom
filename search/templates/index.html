@@ -161,6 +161,18 @@ If you have an idea how this site could be improved, please let us know.
 </noscript>
 </div>
 
+<div id="results_loading" class="step one" style="display:none">
+<h2>One moment please...</h2>
+</div>
+
+<div id="results_empty" class="step one" style="display:none">
+<h2>Remove some letters</h2>
+<p class="explain">
+Sorry, your search was too specific.<br />
+It did not match any domain names in our database.
+</p>
+</div>
+
 <div id="results_div">
 <p class="hint">
 Click to check if a domain name is still available. Mouse over
@@ -181,5 +193,9 @@ for details.
 <tr><td></td></tr>
 </tbody>
 </table>
+
+<p id="results_few" class="hint" style="display:none">
+Remove some letters to show more results.
+</p>
 </div>
 {% endblock %}

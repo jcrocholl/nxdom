@@ -144,6 +144,8 @@ function activate_ruler() {
 function update_html() {
 	if ($.ajax_search.left + $.ajax_search.right == '') {
 		$("div#results_div").hide();
+		$("div#results_loading").hide();
+		$("div#results_empty").hide();
 		$("div#welcome").show();
 		return;
 	}
@@ -151,17 +153,34 @@ function update_html() {
 	var row = 1;
 	var keys = [];
 	for (var key in $.domains) keys.push(key);
-	keys.sort(function(a,b) {
+	keys.sort(function(a, b) {
 		return $.domains[b].score - $.domains[a].score });
+	var total = keys.length;
 	keys.length = 100;
 	for (var index in keys) {
 		domain = $.domains[keys[index]];
 		html += table_row(domain, row);
 		row = (row % 2) + 1;
 	}
-	$("tbody#results").html(html);
 	$("div#welcome").hide();
-	$("div#results_div").show();
+	if (total == 0) {
+		$("div#results_div").hide();
+		if ($.ajax_search.start) {
+			$("#results_empty").hide();
+			$("#results_loading").show();
+		} else {
+			$("#results_loading").hide();
+			$("#results_empty").show();
+		}
+	} else {
+		$("#results_empty").hide();
+		$("#results_loading").hide();
+		$("tbody#results").html(html);
+		$("div#results_div").show();
+		if (total < 30 && !$.ajax_search.start)
+			$("#results_few").show();
+		else $("#results_few").hide();
+	}
 	activate_ruler();
 }
 
@@ -204,8 +223,8 @@ function delete_domains(left, right) {
 }
 
 function ajax_result(json, status) {
-	var left = jQuery.trim($("input#id_left").val());
-	var right = jQuery.trim($("input#id_right").val());
+	var left = jQuery.trim($("input#id_left").val()).toLowerCase();
+	var right = jQuery.trim($("input#id_right").val()).toLowerCase();
 	var weights = form_weights();
 	var length = 0;
 	for (var key in json) {
@@ -256,11 +275,13 @@ function ajax_stop() {
 			gwo_track("/3251202061/goal");
 		}
 	}
+	$.ajax_search.start = false;
+	$.changed = true;
 }
 
 function ajax_search(left, right) {
-	left = jQuery.trim(left);
-	right = jQuery.trim(right);
+	left = jQuery.trim(left).toLowerCase();
+	right = jQuery.trim(right).toLowerCase();
 	if ($.ajax_search.left == left && $.ajax_search.right == right) return;
 	var now = new Date();
 	$.ajax_search.start = now.getTime();
@@ -320,6 +341,7 @@ function document_ready() {
 	$.weights = form_weights();
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	$.ajax_search.start = false;
 	$.ajax_search.left = '*';
 	$.ajax_search.right = '*';
 	$.ajax_search.counter = 0;
