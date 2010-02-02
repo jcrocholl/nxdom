@@ -178,14 +178,17 @@ def update_random(options):
         update_best_names(position, keyword, length, options)
 
 
-def update_timeout(options):
+def update_error(options):
     prefix = random_prefix('left', length_choices=[2, 3, 4])
     start_key = db.Key.from_path('dns_lookup', prefix)
-    query = Lookup.all(keys_only=True).filter('com', 'timeout=20')
+    tld = random.choice(TOP_LEVEL_DOMAINS + ['com', 'com', 'com', 'net', 'org', 'info', 'de', 'eu', 'ru'])
+    query = Lookup.all(keys_only=True).filter(tld, options.retry)
     query.filter('__key__ >', start_key)
-    print "Trying to fetch %d names after %s with timeout=20" % (
-        options.batch, prefix)
+    print "Trying to fetch %d names after %s where %s is %s" % (
+        options.batch, prefix, tld, options.retry)
     keys = retry(query.fetch, options.batch)
+    if tld == 'com' and not keys:
+        sys.exit(12)
     names = [key.name() for key in keys]
     lookups = lookup_names(names, options)
     retry_objects(db.put, lookups)
@@ -290,8 +293,8 @@ def main():
                       help="only names with this suffix")
     parser.add_option('--random', action='store_true',
                       help="update random popular prefixes and suffixes")
-    parser.add_option('--retry', action='store_true',
-                      help="update lookups that had a timeout earlier")
+    parser.add_option('--retry', metavar='<error>',
+                      help="update errors like timeout=20 or status=rcodeservfail")
     parser.add_option('--resume', metavar='<name>',
                       help="continue file upload from this name")
     (options, args) = parser.parse_args()
@@ -304,7 +307,7 @@ def main():
             update_random(options)
     elif options.retry:
         while True:
-            update_timeout(options)
+            update_error(options)
     elif options.left is not None:
         for length in range(max(options.min, len(options.left)),
                             options.max + 1):
