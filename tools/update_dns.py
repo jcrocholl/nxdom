@@ -170,7 +170,8 @@ def update_best_names(position, keyword, length, options):
 def update_random(options):
     position = random.choice(('left', 'right'))
     keyword = random_prefix(position, length_choices=[2, 3, 4])
-    for length in range(max(3, len(keyword) + 1), options.max + 1):
+    for length in range(max(options.min, len(keyword) + 1),
+                        options.max + 1):
         update_best_names(position, keyword, length, options)
 
 
@@ -241,7 +242,7 @@ def upload_files(filenames, options):
                 continue
             if names and names[-1] == name:
                 continue
-            if len(name) > options.max:
+            if len(name) < options.min or len(name) > options.max:
                 continue
             if name < options.resume:
                 continue
@@ -276,6 +277,8 @@ def main():
                       help="adjust batch size (default 60)")
     parser.add_option('--timeout', metavar='<seconds>', type="int", default=20,
                       help="maximum wait time for DNS response (default 20)")
+    parser.add_option('--min', metavar='<length>', type="int", default=3,
+                      help="only names of this length or longer (default 3)")
     parser.add_option('--max', metavar='<length>', type="int", default=9,
                       help="only names of this length or shorter (default 9)")
     parser.add_option('--left', metavar='<keyword>', default=None,
@@ -300,10 +303,12 @@ def main():
         while True:
             update_timeout(options)
     elif options.left is not None:
-        for length in range(max(3, len(options.left)), options.max + 1):
+        for length in range(max(options.min, len(options.left)),
+                            options.max + 1):
             update_best_names('left', options.left, length, options)
     elif options.right is not None:
-        for length in range(max(3, len(options.right)), options.max + 1):
+        for length in range(max(options.min, len(options.right)),
+                            options.max + 1):
             update_best_names('right', options.right, length, options)
     else:
         while True:
