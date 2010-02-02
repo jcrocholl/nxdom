@@ -74,7 +74,10 @@ class NameServer(ADNS.QueryEngine):
             server_list.sort()
             results[name] = server_list[0][0]
         else:
-            results[name] = 'status=' + status_name(status)
+            error_string = status_name(status)
+            if error_string == 'norecurse':
+                sys.exit(11)
+            results[name] = 'status=' + error_string
 
 
 def update_dns(lookups, options):
