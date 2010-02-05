@@ -199,7 +199,7 @@ def update_error(options):
         names = [key.name() for key in keys]
         lookups = lookup_names(names, options)
         retry_objects(db.put, lookups)
-    else:
+    if len(keys) < options.batch:
         options.active_tld_list.remove(tld)
 
 
