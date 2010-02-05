@@ -109,9 +109,13 @@ function table_row(domain, row) {
 			var color = 'taken';
 			if (domain[tld].indexOf('parking') >= 0 ||
 				domain[tld].indexOf('parked') >= 0 ||
-				domain[tld].indexOf('hitfarm.com') >= 0 ||
-				domain[tld].indexOf('fastpark.net') >= 0 ||
-				domain[tld].indexOf('buydomains.com') >= 0) {
+				domain[tld].indexOf('.hitfarm.com') >= 0 ||
+				domain[tld].indexOf('.fastpark.net') >= 0 ||
+				domain[tld].indexOf('.name-services.com') >= 0 ||
+				domain[tld].indexOf('.above.com') >= 0 ||
+				domain[tld].indexOf('.domaincontrol.com') >= 0 ||
+				domain[tld].indexOf('.dsredirection.com') >= 0 ||
+				domain[tld].indexOf('.buydomains.com') >= 0) {
 				title = 'Parking: ' + name + '.' + tld + ' uses name server';
 				color = 'parking';
 			}
