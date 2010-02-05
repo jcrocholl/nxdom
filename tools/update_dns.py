@@ -21,7 +21,7 @@ from google.appengine.ext.remote_api import remote_api_stub
 
 from dns.models import TOP_LEVEL_DOMAINS, Lookup
 from dns.utils import status_name, reverse_name
-from domains.models import MAX_NAME_LENGTH, Domain
+from domains.models import MAX_NAME_LENGTH, DOMAIN_CHARS, Domain
 from domains.utils import random_domains
 from tools.retry import retry, retry_objects
 from prefixes.selectors import random_prefix
@@ -121,7 +121,15 @@ def update_dns(lookups, options):
         if display or options.verbose:
             print '%-12s' % name,
             for tld in TOP_LEVEL_DOMAINS:
-                print tld if getattr(lookup, tld, None) else ' ' * len(tld),
+                value = getattr(lookup, tld, None)
+                if not value:
+                    print ' ' * len(tld),
+                elif value.startswith('status='):
+                    print value[7:][:len(tld)],
+                elif value.startswith('timeout='):
+                    print (value[8:] + '    ')[:len(tld)],
+                else:
+                    print tld,
             print
     timeouts = []
     for lookup in lookups:
@@ -179,19 +187,20 @@ def update_random(options):
 
 
 def update_error(options):
-    prefix = random_prefix('left', length_choices=[2, 3, 4])
-    start_key = db.Key.from_path('dns_lookup', prefix)
-    tld = random.choice(TOP_LEVEL_DOMAINS + ['com', 'com', 'com', 'net', 'org', 'info', 'de', 'eu', 'ru'])
+    tld = random.choice(options.active_tld_list)
     query = Lookup.all(keys_only=True).filter(tld, options.retry)
-    query.filter('__key__ >', start_key)
-    print "Trying to fetch %d names after %s where %s is %s" % (
-        options.batch, prefix, tld, options.retry)
+    # prefix = random_prefix('left', length_choices=[2, 3, 4])
+    # start_key = db.Key.from_path('dns_lookup', prefix)
+    # query.filter('__key__ >', start_key)
+    print "Trying to fetch %d names where %s is %s" % (
+        options.batch, tld, options.retry)
     keys = retry(query.fetch, options.batch)
-    if tld == 'com' and not keys:
-        sys.exit(12)
-    names = [key.name() for key in keys]
-    lookups = lookup_names(names, options)
-    retry_objects(db.put, lookups)
+    if keys:
+        names = [key.name() for key in keys]
+        lookups = lookup_names(names, options)
+        retry_objects(db.put, lookups)
+    else:
+        options.active_tld_list.remove(tld)
 
 
 def upload_names(names, options):
@@ -233,6 +242,12 @@ def bisect(names):
     return names[left:]
 
 
+def illegal_characters(name):
+    for char in name:
+        if char not in DOMAIN_CHARS:
+            return True
+
+
 def upload_files(filenames, options):
     for filename in filenames:
         names = []
@@ -242,6 +257,8 @@ def upload_files(filenames, options):
                 name = name.split()[-1]
             if '.' in name:
                 name = name.split('.')[0]
+            if illegal_characters(name):
+                continue
             if options.left and not name.startswith(options.left):
                 continue
             if options.right and not name.startswith(options.right):
@@ -306,7 +323,8 @@ def main():
         while True:
             update_random(options)
     elif options.retry:
-        while True:
+        options.active_tld_list = TOP_LEVEL_DOMAINS[:]
+        while options.active_tld_list:
             update_error(options)
     elif options.left is not None:
         for length in range(max(options.min, len(options.left)),
