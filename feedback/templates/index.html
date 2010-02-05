@@ -4,12 +4,12 @@
 {% block title %}Recent Feedback{% endblock %}
 
 {% block content %}
-<div id="recent" class="span-9 append-1">
+<div id="recent" class="span-8 append-1">
 <h1>Recent Feedback</h1>
 {% feedback_recently request "all" %}
 </div>
 
-<div id="popular" class="span-9 last">
+<div id="popular" class="span-8 last">
 <h1>Popular Feedback</h1>
 {% feedback_popular request "all" %}
 </div>

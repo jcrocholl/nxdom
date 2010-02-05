@@ -40,7 +40,7 @@ $(document).ready(function() {{% if not refresh_seconds %}
 <body>
   <div class="container">
     {% block left %}{% endblock%}
-    <div id="content" class="span-20{% block content-class %}{% endblock %}">
+    <div id="content" class="span-18{% block content-class %}{% endblock %}">
       {% block content %}{% endblock %}
     </div>
     {% block right %}
@@ -50,7 +50,7 @@ $(document).ready(function() {{% if not refresh_seconds %}
       {% feedback_recently request %}
     </div>
     {% endblock%}
-    <div id="footer" class="span-27 last">
+    <div id="footer" class="span-25 last">
       <p>
         <a href="/">Home</a> |
         <a href="/about/">About</a> |
