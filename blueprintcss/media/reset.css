@@ -23,6 +23,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 
 body {
   line-height: 1.5;
+  margin: 0 1em;
 }
 
 /* Tables still need 'cellspacing="0"' in the markup. */
