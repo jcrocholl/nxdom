@@ -4,8 +4,8 @@ SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 TLD_SCORES = {
 	com: 10, net: 5, org: 5, biz: 3, info: 3,
 	mobi: 3, name: 3, tel: 3, travel: 3,
-	at: 1, be: 1, ch: 1, de: 1, es: 1, eu: 2, fm: 2,
-	"in": 1, is: 1, it: 1, la: 1, li: 1, ly: 2, ru: 1, se: 1,
+	at: 1, be: 1, ca: 1, de: 1, es: 1, eu: 2, fm: 2,
+	"in": 1, is: 1, it: 1, li: 1, ly: 2, ru: 1, se: 1,
 	to: 1, tv: 2, us: 1,
 };
 SEARCH_LENGTHS = [7, 6, 8, 5, 9, 4, 10, 3, 11, 12];
