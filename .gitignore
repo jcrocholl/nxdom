@@ -7,3 +7,4 @@ trash
 .passwd
 .dynamic_media
 _generated_media
+*.log

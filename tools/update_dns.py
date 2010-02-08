@@ -26,6 +26,14 @@ from domains.utils import random_domains
 from tools.retry import retry, retry_objects
 from prefixes.selectors import random_prefix
 
+import logging
+logging.basicConfig(filename='update_dns.log', level=logging.DEBUG)
+logfile = logging.FileHandler('update_dns.log')
+formatter = logging.Formatter('%(levelname)-8s %(asctime)s %(message)s')
+logfile.setFormatter(formatter)
+logfile.setLevel(logging.WARNING)
+logging.getLogger().addHandler(logfile)
+
 NAMESERVERS = """
 208.67.222.222
 208.67.220.220
@@ -101,12 +109,15 @@ def update_dns(lookups, options):
                     and not server.finished()):
                     finished = False # Keep trying for timeout seconds.
                 else:
-                    print "%-4.1fsec " % (time.time() - start),
-                    print "Server %-16s" % server.ip,
-                    print "returned", len(server.results),
-                    print "of", server.queries, "queries"
+                    returned = ' '.join((
+                            "%-4.1fsec " % (time.time() - start),
+                            "Server %-16s" % server.ip,
+                            "returned", str(len(server.results)),
+                            "of", str(server.queries), "queries"))
+                    print returned
                     if (server.queries > 10 and
                         len(server.results) < server.queries / 2):
+                        logging.critical(returned)
                         sys.exit(int(server.ip.split('.')[2]))
                     results.update(server.results)
     for lookup in lookups:
