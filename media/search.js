@@ -1,3 +1,4 @@
+DEFAULT_LIMIT = 100
 DIRECT_PROPERTIES = ["length", "digits", "dashes"];
 SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 					"prefix", "suffix"];
@@ -148,6 +149,18 @@ function activate_ruler() {
 		function() { $(this).removeClass("hover"); });
 }
 
+function table_html(start, end) {
+	var html = '';
+	var row = 1;
+	if (end > $.keys.length) end = $.keys.length;
+	for (var index = start; index < end; index++) {
+		var domain = $.domains[$.keys[index]];
+		html += table_row(domain, row);
+		row = (row % 2) + 1;
+	}
+	return html;
+}
+
 function update_html() {
 	if ($.ajax_search.left + $.ajax_search.right == '') {
 		$("div#results_div").hide();
@@ -156,21 +169,13 @@ function update_html() {
 		$("div#welcome").show();
 		return;
 	}
-	var html = '';
-	var row = 1;
-	var keys = [];
-	for (var key in $.domains) keys.push(key);
-	keys.sort(function(a, b) {
+	$.keys = [];
+	for (var key in $.domains) $.keys.push(key);
+	$.keys.sort(function(a, b) {
 		return $.domains[b].score - $.domains[a].score });
-	var total = keys.length;
-	keys.length = 100;
-	for (var index in keys) {
-		domain = $.domains[keys[index]];
-		html += table_row(domain, row);
-		row = (row % 2) + 1;
-	}
+	var html = table_html(0, DEFAULT_LIMIT);
 	$("div#welcome").hide();
-	if (total == 0) {
+	if ($.keys.length == 0) {
 		$("div#results_div").hide();
 		if ($.ajax_search.start) {
 			$("#results_empty").hide();
@@ -184,11 +189,22 @@ function update_html() {
 		$("#results_loading").hide();
 		$("tbody#results").html(html);
 		$("div#results_div").show();
-		if (total < 30 && !$.ajax_search.start)
+		if ($.keys.length > DEFAULT_LIMIT && !$.ajax_search.start)
+			$("#results_more").show();
+		else
+			$("#results_more").hide();
+		if ($.keys.length <= DEFAULT_LIMIT / 2 && !$.ajax_search.start)
 			$("#results_few").show();
-		else $("#results_few").hide();
+		else
+			$("#results_few").hide();
 	}
 	activate_ruler();
+}
+
+function show_more() {
+	var html = table_html(DEFAULT_LIMIT, 2 * DEFAULT_LIMIT);
+	$("tbody#results").append(html);
+	$("#results_more").hide();
 }
 
 function array_unchanged(a, b) {
@@ -345,6 +361,7 @@ function update_if_changed(i) {
 
 function document_ready() {
 	$.domains = {};
+	$.keys = [];
 	$.weights = form_weights();
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
