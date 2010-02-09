@@ -209,6 +209,7 @@ function show_more() {
 	$("tbody#results").append(html);
 	if ($.ajax_search.showing >= $.keys.length)
 		$("#results_more").hide();
+	ga_track("/more/" + start + "/");
 }
 
 function array_unchanged(a, b) {
