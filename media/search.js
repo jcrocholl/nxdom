@@ -9,6 +9,9 @@ TLD_SCORES = {
 	to: 1, tv: 2, us: 1,
 };
 SEARCH_LENGTHS = [7, 6, 8, 5, 9, 4, 10, 3, 11, 12];
+TLD_SUPPORTED = {
+	"godaddy.com": " ag am asia at be biz bz ca cc com de es eu fm gs in info it jobs jp me mobi ms mx net nl nu org tc tk tv tw us vg ws ",
+}
 
 function force_number(text) {
 	var number = parseInt(text);
