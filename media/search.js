@@ -173,6 +173,7 @@ function update_html() {
 	for (var key in $.domains) $.keys.push(key);
 	$.keys.sort(function(a, b) {
 		return $.domains[b].score - $.domains[a].score });
+	$.ajax_search.showing = DEFAULT_LIMIT;
 	var html = table_html(0, DEFAULT_LIMIT);
 	$("div#welcome").hide();
 	if ($.keys.length == 0) {
@@ -202,9 +203,12 @@ function update_html() {
 }
 
 function show_more() {
-	var html = table_html(DEFAULT_LIMIT, 2 * DEFAULT_LIMIT);
+	var start = $.ajax_search.showing;
+	$.ajax_search.showing += DEFAULT_LIMIT;
+	var html = table_html(start, $.ajax_search.showing);
 	$("tbody#results").append(html);
-	$("#results_more").hide();
+	if ($.ajax_search.showing >= $.keys.length)
+		$("#results_more").hide();
 }
 
 function array_unchanged(a, b) {
@@ -369,6 +373,7 @@ function document_ready() {
 	$.ajax_search.left = '*';
 	$.ajax_search.right = '*';
 	$.ajax_search.counter = 0;
+	$.ajax_search.showing = 0;
 	$.changed = false;
 	activate_ruler();
     $("#loading").ajaxStart(ajax_start).ajaxStop(ajax_stop);
