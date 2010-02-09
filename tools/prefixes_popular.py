@@ -57,7 +57,7 @@ def all_lengths(Model, lengths):
     for length in lengths:
         print
         names = sort_prefixes('.data/popular/%ses.%d.txt' % (
-                Model.kind().split('_')[-1], length))
+                Model.kind().split('_')[-1], length))[:8000]
         print 'POPULAR_%sES[%d] = """' % (upper, length)
         for name in names:
             print name
