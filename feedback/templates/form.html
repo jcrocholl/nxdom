@@ -1,6 +1,6 @@
 <form method="post" action="/feedback/">
 <p>
-{{ feedback_form.message.label }}<br />
+<label for="id_message">{{ feedback_form.message.label }}</label><br />
 {{ feedback_form.message }}<br />
 {{ feedback_form.page }}
 <input type="submit" value="Submit feedback"/>
