@@ -11,10 +11,6 @@ cron:
   url: /prefixes/cron/suffixes/
   schedule: every 1 minutes
   timezone: America/Los_Angeles
-- description: update domain names
-  url: /domains/cron/
-  schedule: every 1 minutes
-  timezone: America/Los_Angeles
 - description: update DNS lookups
   url: /dns/cron/
   schedule: every 1 minutes
