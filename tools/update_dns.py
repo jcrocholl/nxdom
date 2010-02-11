@@ -8,6 +8,7 @@ from common.appenginepatch.aecmd import setup_env
 setup_env()
 
 import time
+import getpass
 from datetime import datetime
 import urllib2
 import random
@@ -55,9 +56,15 @@ NAMESERVERS = """
 205.171.3.65
 """.split()
 
+PASSWORD_FILENAME = '.passwd'
+
 
 def auth_func():
-    return open('.passwd').read().split(':')
+    if os.path.exists(PASSWORD_FILENAME):
+        return open(PASSWORD_FILENAME).read().split(':')
+    username = raw_input('Username:')
+    password = getpass.getpass('Password:')
+    return username, password
 
 
 class NameServer(ADNS.QueryEngine):
