@@ -1,4 +1,4 @@
-div#left { width: 230px; height: 620px; }
+div#left { width: 230px; height: 600px; }
 div#logo_div { margin-top: 18px; }
 div#logo_div h1 { display: none; }
 img#logo {
@@ -104,6 +104,8 @@ tbody#results td a {
   height: 100%;
 }
 
-div#footer { text-align: center; }
-div#footer, div#footer a { color: #aaa; }
-div#footer a:hover { color: #04f; }
+div#footer {
+  text-align: center;
+  font-size: 14px;
+  color: #aaa;
+}
