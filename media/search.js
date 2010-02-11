@@ -3,7 +3,7 @@ DIRECT_PROPERTIES = ["length", "digits", "dashes"];
 SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 					"prefix", "suffix"];
 TLD_SCORES = {
-	com: 10, net: 5, org: 5, biz: 3, info: 3, mobi: 3, name: 3, tel: 3,
+	net: 5, org: 5, biz: 3, info: 3, mobi: 3, name: 3, tel: 3,
 	at: 1, be: 1, ca: 1, de: 1, es: 1, eu: 2, fm: 2,
 	"in": 1, is: 1, it: 1, li: 1, ly: 2, ru: 1, se: 1,
 	to: 1, tv: 2, us: 1,
@@ -85,7 +85,9 @@ function affiliate_link(name, tld) {
 	html += '" title="Click here to check if ' + name + '.' + tld +
 		' is available on ' + $.registrar + '" ';
 	html += mouse_down_track('outgoing', $.registrar, tld, name.length);
-	html += '>' + tld + '</a>';
+	html += '>';
+	if (tld == 'com') html += name + '.';
+	html += tld + '</a>';
 	return html;
 }
 
@@ -103,8 +105,7 @@ function google_link(name) {
 
 function table_row(domain, row) {
 	var html = '<tr class="row' + row + '">';
-	html += '<td title="Web search">' + google_link(domain.key) + '</td>';
-	html += '<td class="right quiet">' + domain.length + '</td>';
+	html += '<td class="com">' + affiliate_link(domain.key, 'com') + '</td>';
 	var name = domain.key;
 	for (var tld in TLD_SCORES) {
 		if (domain[tld]) {
@@ -137,6 +138,7 @@ function table_row(domain, row) {
 			html += '</td>';
 		}
 	}
+	// html += '<td class="right quiet">' + domain.length + '</td>';
 	// html += '<td>' + domain.score.toFixed(1) + '</td>';
 	html += '</tr>';
 	return html;
@@ -256,6 +258,7 @@ function ajax_result(json, status) {
 	var length = 0;
 	for (var key in json) {
 		domain = json[key];
+		if (domain.com) continue;
 		domain.key = key;
 		domain.length = key.length;
 		domain.score = domain_score(domain, weights);
