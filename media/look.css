@@ -97,6 +97,7 @@ a { color: #04f; text-decoration: none; }
 a:visited { color: #08f; }
 a:focus, a:hover, td.com a { text-decoration: underline; }
 td.tld a { color: #000; }
+td.aff a:focus, td.aff a:hover { color: #04f; }
 tbody#results td a {
   display: block;
   width: 100%;

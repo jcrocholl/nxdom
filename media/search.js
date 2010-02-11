@@ -105,7 +105,7 @@ function google_link(name) {
 
 function table_row(domain, row) {
 	var html = '<tr class="row' + row + '">';
-	html += '<td class="com">' + affiliate_link(domain.key, 'com') + '</td>';
+	html += '<td class="com aff">' + affiliate_link(domain.key, 'com') + '</td>';
 	var name = domain.key;
 	for (var tld in TLD_SCORES) {
 		if (domain[tld]) {
@@ -133,7 +133,7 @@ function table_row(domain, row) {
 			html += domain_link(domain.key, tld);
 			html += '</td>';
 		} else {
-			html += '<td class="tld">';
+			html += '<td class="tld aff">';
 			html += affiliate_link(domain.key, tld);
 			html += '</td>';
 		}
