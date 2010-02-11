@@ -162,6 +162,8 @@ def fetch_dns_lookups(domains):
 def domains_to_dict(domains):
     result = {}
     for domain in domains:
+        if hasattr(domain, 'com') and domain.com:
+            continue
         properties = {}
         for attr in 'digits dashes'.split():
             properties[attr] = getattr(domain, attr)
