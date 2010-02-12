@@ -3,14 +3,6 @@ cron:
   url: /search/cron/
   schedule: every 1 minutes
   timezone: America/Los_Angeles
-- description: count popular prefixes
-  url: /prefixes/cron/
-  schedule: every 1 minutes
-  timezone: America/Los_Angeles
-- description: count popular suffixes
-  url: /prefixes/cron/suffixes/
-  schedule: every 1 minutes
-  timezone: America/Los_Angeles
 - description: update DNS lookups
   url: /dns/cron/
   schedule: every 1 minutes
