@@ -183,7 +183,22 @@ def update_oldest_lookups(options):
     print "Trying to fetch %d oldest names" % options.batch
     query = Lookup.all(keys_only=True).order('timestamp')
     keys = retry(query.fetch, options.batch)
-    lookups = lookup_names([key.name() for key in keys], options)
+    names = [key.name() for key in keys]
+    print "Resolving .com names:",
+    results = resolve_parallel(names, ['com'], options, 5.0)
+    # Delete registered .com names.
+    registered = [name for name in names
+                  if '.' in results.get(name + '.com', '')]
+    print len(registered), 'registered:', ' '.join(registered)
+    retry(db.delete,
+        [db.Key.from_path('dns_lookup', name) for name in registered] +
+        [db.Key.from_path('domains_domain', name) for name in registered])
+    # Update available .com names.
+    available = [name for name in names
+                 if '.' not in results.get(name + '.com', '')]
+    print len(available), 'available:', ' '.join(available)
+    print "Resolving", len(available), "of", options.batch, "names:",
+    lookups = lookup_names(available, options)
     retry_objects(db.put, lookups)
 
 
