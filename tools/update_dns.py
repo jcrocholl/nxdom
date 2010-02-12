@@ -95,11 +95,15 @@ class NameServer(ADNS.QueryEngine):
             results[name] = 'status=' + error_string
 
 
-def update_dns(lookups, options):
-    servers = [NameServer(ip) for ip in NAMESERVERS]
-    for lookup in lookups:
-        name = lookup.key().name()
-        for tld in TOP_LEVEL_DOMAINS:
+def resolve_parallel(names, tlds, options, timeout=None):
+    if timeout is None:
+        timeout = options.timeout
+    servers = NAMESERVERS[:]
+    while len(servers) > max(3, len(names) * len(tlds) / 30):
+        servers.remove(random.choice(servers))
+    servers = [NameServer(ip) for ip in servers]
+    for name in names:
+        for tld in tlds:
             server = random.choice(servers)
             domain_name = name + '.' + tld
             server.submit(domain_name)
@@ -112,7 +116,7 @@ def update_dns(lookups, options):
         for server in servers:
             if not server.finished():
                 server.run(0.1)
-                if (time.time() - start < options.timeout
+                if (time.time() - start < timeout
                     and not server.finished()):
                     finished = False # Keep trying for timeout seconds.
                 else:
@@ -127,6 +131,12 @@ def update_dns(lookups, options):
                         logging.critical(returned)
                         sys.exit(int(server.ip.split('.')[2]))
                     results.update(server.results)
+    return results
+
+
+def update_dns(lookups, options):
+    results = resolve_parallel([lookup.key().name() for lookup in lookups],
+                               TOP_LEVEL_DOMAINS, options)
     for lookup in lookups:
         display = False
         name = lookup.key().name()
@@ -240,17 +250,17 @@ def count_existing(names):
 
 def bisect(names):
     # Check the end of the list.
-    if count_existing(names[-10:]) > 5:
+    if count_existing(names[-20:]) > 5:
         return []
     # Check the beginning of the list.
-    if count_existing(names[:10]) <= 5:
+    if count_existing(names[:20]) <= 5:
         return names
     # Bisect the list to find the crash point.
     left = 0
     right = len(names) - 1
-    while right - left > 10:
+    while right - left > 20:
         middle = (left + right) / 2
-        count = count_existing(names[middle:middle+10])
+        count = count_existing(names[middle:middle + 20])
         print "bisect left=%s right=%s middle=%s count=%d" % (
             names[left], names[right], names[middle], count)
         if count <= 5:
@@ -296,7 +306,15 @@ def upload_files(filenames, options):
             print "Found %d of %d names already in the datastore." % (
                 len(all_names) - len(names), len(all_names))
         while names:
-            upload_names(names[:options.batch], options)
+            print "Removing registered .com names:",
+            results = resolve_parallel(names[:options.batch],
+                                       ['com'], options, 5.0)
+            # print 'results', results, len(results)
+            available = [name for name in names[:options.batch]
+                         if '.' not in results.get(name + '.com', '')]
+            print "Looking up", len(available), "of", options.batch, "names:",
+            # print 'available', available, len(available)
+            upload_names(available, options)
             names = names[options.batch:]
         options.resume = None
 
