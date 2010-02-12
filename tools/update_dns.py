@@ -73,11 +73,11 @@ class NameServer(ADNS.QueryEngine):
         ADNS.QueryEngine.__init__(self, s=adns.init(
                 adns.iflags.noautosys, sys.stderr, 'nameserver %s' % ip))
         self.ip = ip
-        self.queries = 0
+        self.queries = []
         self.results = {}
 
     def submit(self, name):
-        self.queries += 1
+        self.queries.append(name)
         ADNS.QueryEngine.submit(self, name, adns.rr.SOA, 0,
                                 self.callback, self.results)
 
@@ -94,49 +94,52 @@ class NameServer(ADNS.QueryEngine):
                 sys.exit(11)
             results[name] = 'status=' + error_string
 
+    def status_message(self, start):
+        return ' '.join((
+                "%-4.1fsec " % (time.time() - start),
+                "Server %-16s" % self.ip,
+                "returned %d" % len(self.results),
+                "of %d queries" % len(self.queries)))
 
-def resolve_parallel(names, tlds, options, timeout=None):
+
+def resolve_parallel(names_with_tlds, options, timeout=None):
     if timeout is None:
         timeout = options.timeout
     servers = NAMESERVERS[:]
-    while len(servers) > max(3, len(names) * len(tlds) / 30):
+    while len(servers) > max(3, len(names_with_tlds) / 30):
         servers.remove(random.choice(servers))
     servers = [NameServer(ip) for ip in servers]
-    for name in names:
-        for tld in tlds:
-            server = random.choice(servers)
-            domain_name = name + '.' + tld
-            server.submit(domain_name)
+    for name_with_tld in names_with_tlds:
+        server = random.choice(servers)
+        domain_name = name_with_tld
+        server.submit(domain_name)
     print "Waiting for DNS results..."
-    results = {}
     start = time.time()
-    finished = False
-    while not finished:
-        finished = True
-        for server in servers:
-            if not server.finished():
-                server.run(0.1)
-                if (time.time() - start < timeout
-                    and not server.finished()):
-                    finished = False # Keep trying for timeout seconds.
-                else:
-                    returned = ' '.join((
-                            "%-4.1fsec " % (time.time() - start),
-                            "Server %-16s" % server.ip,
-                            "returned", str(len(server.results)),
-                            "of", str(server.queries), "queries"))
-                    print returned
-                    if (server.queries > 10 and
-                        len(server.results) < server.queries / 2):
-                        logging.critical(returned)
-                        sys.exit(int(server.ip.split('.')[2]))
-                    results.update(server.results)
+    unfinished = servers[:]
+    while unfinished and time.time() - start < timeout:
+        server = random.choice(unfinished)
+        if server.finished():
+            print server.status_message(start)
+            unfinished.remove(server)
+        else:
+            server.run(0.1)
+    for server in unfinished:
+        print server.status_message(start)
+    results = {}
+    for server in servers:
+        if (len(server.queries) > 10 and
+            len(server.results) < len(server.queries) / 2):
+            logging.warning(server.status_message(start))
+            server.results = resolve_parallel(server.queries, options, timeout * 2)
+        results.update(server.results)
     return results
 
 
 def update_dns(lookups, options):
-    results = resolve_parallel([lookup.key().name() for lookup in lookups],
-                               TOP_LEVEL_DOMAINS, options)
+    names_with_tlds = [lookup.key().name() + '.' + tld
+                       for lookup in lookups
+                       for tld in TOP_LEVEL_DOMAINS]
+    results = resolve_parallel(names_with_tlds, options)
     for lookup in lookups:
         display = False
         name = lookup.key().name()
@@ -185,7 +188,7 @@ def update_oldest_lookups(options):
     keys = retry(query.fetch, options.batch)
     names = [key.name() for key in keys]
     print "Resolving .com names:",
-    results = resolve_parallel(names, ['com'], options, 5.0)
+    results = resolve_parallel([name + '.com' for name in names], options, 5.0)
     # Delete registered .com names.
     registered = [name for name in names
                   if '.' in results.get(name + '.com', '')]
@@ -322,8 +325,9 @@ def upload_files(filenames, options):
                 len(all_names) - len(names), len(all_names))
         while names:
             print "Removing registered .com names:",
-            results = resolve_parallel(names[:options.batch],
-                                       ['com'], options, 5.0)
+            results = resolve_parallel(
+                [name + '.com' for name in names[:options.batch]],
+                options, 5.0)
             # print 'results', results, len(results)
             available = [name for name in names[:options.batch]
                          if '.' not in results.get(name + '.com', '')]
