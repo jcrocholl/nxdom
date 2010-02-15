@@ -182,6 +182,11 @@ def lookup_names(names, options):
     return lookups
 
 
+def com_available(results, name):
+    result = results.get(name + '.com', 'status=nxdomain')
+    return result.startswith('timeout=') or result.endswith('=nxdomain')
+
+
 def update_oldest_lookups(options):
     print "Trying to fetch %d oldest names" % options.batch
     query = Lookup.all(keys_only=True).order('timestamp')
@@ -197,8 +202,7 @@ def update_oldest_lookups(options):
         [db.Key.from_path('dns_lookup', name) for name in registered] +
         [db.Key.from_path('domains_domain', name) for name in registered])
     # Update available .com names.
-    available = [name for name in names
-                 if '.' not in results.get(name + '.com', '')]
+    available = [name for name in names if com_available(results, name)]
     print len(available), 'available:', ' '.join(available)
     print "Resolving", len(available), "of", options.batch, "names:",
     lookups = lookup_names(available, options)
@@ -330,7 +334,7 @@ def upload_files(filenames, options):
                 options, 5.0)
             # print 'results', results, len(results)
             available = [name for name in names[:options.batch]
-                         if '.' not in results.get(name + '.com', '')]
+                         if com_available(results, name)]
             print "Looking up", len(available), "of", options.batch, "names:",
             # print 'available', available, len(available)
             upload_names(available, options)
