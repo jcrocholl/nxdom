@@ -196,13 +196,14 @@ def update_oldest_lookups(options):
     results = resolve_parallel([name + '.com' for name in names], options, 5.0)
     # Delete registered .com names.
     registered = [name for name in names
-                  if '.' in results.get(name + '.com', '')]
+                  if not com_available(results, name)]
     print len(registered), 'registered:', ' '.join(registered)
     retry(db.delete,
         [db.Key.from_path('dns_lookup', name) for name in registered] +
         [db.Key.from_path('domains_domain', name) for name in registered])
     # Update available .com names.
-    available = [name for name in names if com_available(results, name)]
+    available = [name for name in names
+                 if com_available(results, name)]
     print len(available), 'available:', ' '.join(available)
     print "Resolving", len(available), "of", options.batch, "names:",
     lookups = lookup_names(available, options)
