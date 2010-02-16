@@ -1,7 +1,6 @@
 .DS_Store
 *.pyc
 *.ppm
-appstats
 common
 trash
 .passwd

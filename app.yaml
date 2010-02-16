@@ -11,6 +11,9 @@ handlers:
   secure: optional
   login: admin
 
+- url: /stats.*
+  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
+
 - url: /media
   static_dir: _generated_media
   secure: optional
@@ -25,9 +28,6 @@ handlers:
 - url: /favicon.ico
   static_files: static/images/favicon.ico
   upload: static/images/favicon.ico
-
-- url: /stats.*
-  script: appstats/ui.py
 
 - url: /.*
   script: common/appenginepatch/main.py

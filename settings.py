@@ -63,7 +63,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'appstats.recording.AppStatsDjangoMiddleware',
+    'google.appengine.ext.appstats.recording.AppStatsDjangoMiddleware',
     'tools.middleware.DomainRedirectMiddleware',
     'ragendja.middleware.ErrorMiddleware',
     #'django.contrib.sessions.middleware.SessionMiddleware',
