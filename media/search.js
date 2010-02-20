@@ -287,13 +287,12 @@ function gwo_track(path) {
 }
 
 function ajax_start() {
-	$(this).show();
 	var now = new Date();
 	$.ajax_search.start = now.getTime();
 }
 
 function ajax_stop() {
-	$(this).hide();
+	$("img#loading").hide();
 	var now = new Date();
 	var milliseconds = now.getTime() - $.ajax_search.start;
 	var seconds = (milliseconds / 1000).toFixed(1);
@@ -315,6 +314,12 @@ function ajax_search(left, right) {
 	left = jQuery.trim(left).toLowerCase();
 	right = jQuery.trim(right).toLowerCase();
 	if ($.ajax_search.left == left && $.ajax_search.right == right) return;
+	if (left || right) {
+		$("img#loading").show();
+	} else {
+		$("img#loading").hide();
+		$.changed = true;
+	}
 	var now = new Date();
 	$.ajax_search.start = now.getTime();
 	$.ajax_search.left = left;
@@ -363,6 +368,10 @@ function keyword_keyup() {
 	ajax_search(left, right);
 }
 
+function keyword_delayed() {
+	setTimeout(keyword_keyup, 100);
+}
+
 function update_if_changed(i) {
 	if ($.changed) update_html();
 	$.changed = false;
@@ -381,7 +390,7 @@ function document_ready() {
 	$.ajax_search.showing = 0;
 	$.changed = false;
 	activate_ruler();
-    $("#loading").ajaxStart(ajax_start).ajaxStop(ajax_stop);
+    $("img#loading").ajaxStart(ajax_start).ajaxStop(ajax_stop);
 }
 
 $(document).ready(document_ready);
