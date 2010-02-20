@@ -167,6 +167,7 @@ function update_html() {
 		$("div#results_div").hide();
 		$("div#results_loading").hide();
 		$("div#results_empty").hide();
+		$("div#feedback").hide();
 		$("div#welcome").show();
 		return;
 	}
@@ -191,6 +192,7 @@ function update_html() {
 		$("#results_loading").hide();
 		$("tbody#results").html(html);
 		$("div#results_div").show();
+		$("div#feedback").show();
 		if ($.keys.length > DEFAULT_LIMIT && !$.ajax_search.start)
 			$("#results_more").show();
 		else
