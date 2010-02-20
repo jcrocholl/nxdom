@@ -59,14 +59,18 @@ d.write('<sc'+'ript src="'+
 <div id="left" class="span-6 append-1">
 <div id="logo_div" class="span-6 last">
 <a href="/"><img id="logo" src="static/images/logo45.png" alt="NXdom"
-width="86" height="45" style="vertical-align:top" /></a>
+width="86" height="45" style="vertical-align: top" /></a>
 <div id="timer" class="span-6 quiet small"></div>
+</div>
+
+<div id="headline_div" class="span-6 last">
 <h1>Find available domains</h1>
 </div>
 
 <form method="get" action="">
 <div id="keywords" class="step one span-6 last">
-<img id="loading" src="/static/images/loading.gif" alt="" />
+<img id="loading" style="display: none"
+     src="/static/images/loading.gif" alt="" />
 <div class="span-3"><label for="id_left">that start with</label></div>
 <div class="span-3 last">{{ search_form.left }}</div>
 <div class="span-3"><label for="id_right">and end with</label></div>
@@ -125,11 +129,11 @@ using your favorite registrar.
 </div>
 </div>
 
-<div id="results_loading" class="step one" style="display:none">
+<div id="results_loading" class="step one" style="display: none">
 <h2>One moment please...</h2>
 </div>
 
-<div id="results_empty" class="step one" style="display:none">
+<div id="results_empty" class="step one" style="display: none">
 <h2>Remove some letters</h2>
 <p class="explain">
 Sorry, your search was too specific.<br />
@@ -155,11 +159,11 @@ for details.
 </tbody>
 </table>
 
-<p id="results_more" class="hint" style="display:none; padding-left: 0; margin-top: 0">
+<p id="results_more" class="hint" style="display: none; padding-left: 0; margin-top: 0">
 <input type="button" onclick="show_more()" value="Show more domain names" />
 </p>
 
-<p id="results_few" class="hint" style="display:none">
+<p id="results_few" class="hint" style="display: none">
 Remove some letters to show more results.
 </p>
 </div>
