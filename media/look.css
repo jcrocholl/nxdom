@@ -46,8 +46,8 @@ div.step h2 {
   font-size: 22px;
   padding-left: 32px;
 }
-p.explain { color: #ddd; }
-p.explain:hover { color: #222; }
+p.hoverhint { color: #ddd; }
+p.hoverhint:hover { color: #222; }
 
 #results_div { display: none; }
 #results_div p.hint {
