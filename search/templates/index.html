@@ -14,7 +14,9 @@ $(document).ready(function() {
   $.json_version = {{ json_version }};
   $("input.focus:last").focus();
   $("html").css("overflow-y", "scroll");
-  $("input.keyword").keypress(keyword_keypress).keyup(keyword_keyup);
+  $("input.keyword")
+    .keypress(keyword_keypress).keyup(keyword_keyup)
+    .bind("cut", keyword_delayed).bind("paste", keyword_delayed);
   $.registrar = $("select#id_registrar").val();
   $("select#id_registrar").change(update_registrar);
   $("table#weights input").change(update_scores);
