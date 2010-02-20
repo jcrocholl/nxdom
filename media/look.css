@@ -1,6 +1,5 @@
-div#left { width: 230px; height: 600px; }
+div#left { width: 230px; height: 520px; }
 div#logo_div { margin-top: 18px; }
-div#logo_div h1 { display: none; }
 img#logo {
   float: left;
 }
@@ -14,32 +13,41 @@ div#timer {
   text-align: right;
   visibility: hidden;
 }
-
-div#keywords { position: absolute; top: 72px; }
-table#weights { position: absolute; top: 112px; }
-div#registrar { position: absolute; top: 458px; }
-div#feedback { position: absolute; top: 509px; }
+div#keywords div.span-3 {
+  height: 36px;
+}
+div#keywords input {
+  position: relative;
+  top: -7px;
+}
 
 div#registrar select {
   margin-top: 0;
   width: 110px;
 }
 
-div.one { top: 96px; }
-div.two { top: 204px; }
-div.three { top: 456px; }
-div.four { top: 546px; }
-
-div.step {
-  position: absolute;
+div#left h1 {
+  clear: both;
+  padding-top: 14px;
+  text-align: justify;
+  font-size: 1.5em;
+  font-weight: bold;
 }
+
+div.step { position: absolute; }
+div.one { top: 115px; }
+div.two { top: 235px; }
+div.three { top: 367px; }
+div.four { top: 413px; }
+
 div.step h2 {
-  margin-top: 0;
-  background: url("/static/images/left.png") no-repeat 0% 50%;
+  margin-top: -3px;
+  background: url("/static/images/left.png") no-repeat 0% 0%;
   font-size: 22px;
   padding-left: 32px;
 }
-p.explain { font-size: 14px; }
+p.explain { color: #ddd; }
+p.explain:hover { color: #222; }
 
 #results_div { display: none; }
 #results_div p.hint {
@@ -49,6 +57,21 @@ p.explain { font-size: 14px; }
 }
 #results_div table { margin-top: 0; }
 tbody#results { font-size: 14px; }
+
+div#priority ul {
+  position: relative;
+  top: -25px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  line-height: 24px;
+}
+div#priority li {
+  margin: 0;
+  padding: 0;
+  line-height: 24px;
+  height: 24px;
+}
 
 table.wide { width: 100%; }
 .row2 { background: #eee; }
