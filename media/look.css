@@ -1,4 +1,4 @@
-div#left { width: 230px; height: 520px; }
+div#left { width: 230px; height: 519px; }
 div#logo_div { margin-top: 18px; }
 img#logo {
   float: left;
@@ -14,11 +14,17 @@ div#timer {
   visibility: hidden;
 }
 div#keywords div.span-3 {
-  height: 36px;
+  height: 48px;
 }
 div#keywords input {
+  width: 98px;
   position: relative;
-  top: -7px;
+  top: -6px;
+}
+
+div#priority input {
+  margin: 0 0.6em 0 0;
+  padding: 0;
 }
 
 div#registrar select {
@@ -28,25 +34,27 @@ div#registrar select {
 
 div#left h1 {
   clear: both;
-  padding-top: 14px;
+  padding-top: 13px;
   text-align: justify;
   font-size: 1.5em;
   font-weight: bold;
 }
 
 div.step { position: absolute; }
-div.one { top: 115px; }
-div.two { top: 235px; }
-div.three { top: 367px; }
-div.four { top: 413px; }
+div.one { top: 126px; }
+div.two { top: 246px; }
+div.three { top: 366px; }
+div.four { top: 424px; }
 
 div.step h2 {
-  margin-top: -3px;
+  margin-top: -2px;
+  margin-bottom: 0;
   background: url("/static/images/left.png") no-repeat 0px 3px;
   font-size: 22px;
   padding-left: 32px;
-  padding-bottom: 4px;
+  padding-bottom: 3px;
 }
+p.explain { margin-top: 0; }
 p.hoverhint { color: #ddd; }
 
 #results_div { display: none; }
@@ -108,7 +116,6 @@ tr.row2 td.best { background: #ee8; }
 
 .right { text-align: right; }
 .bottom { vertical-align: bottom; }
-input.keyword { width: 98px; }
 
 p.highlight { padding: 4px; background: #fed; }
 .sum { background: #def; }
