@@ -1,8 +1,5 @@
-div#left { width: 230px; height: 519px; }
+div#left { width: 230px; height: 543px; }
 div#logo_div { margin-top: 18px; }
-img#logo {
-  float: left;
-}
 img#loading {
   position: absolute;
   top: 4px;
@@ -14,12 +11,12 @@ div#timer {
   visibility: hidden;
 }
 div#keywords div.span-3 {
-  height: 48px;
+  height: 24px;
 }
 div#keywords input {
   width: 98px;
   position: relative;
-  top: -6px;
+  top: -4px;
 }
 
 div#priority input {
@@ -32,10 +29,11 @@ div#registrar select {
   width: 110px;
 }
 
-div#left h1 {
-  clear: both;
-  padding-top: 13px;
-  text-align: justify;
+div#headline_div {
+  position: absolute;
+  top: 84px;
+}
+div#headline_div h1 {
   font-size: 1.5em;
   font-weight: bold;
 }
@@ -43,8 +41,8 @@ div#left h1 {
 div.step { position: absolute; }
 div.one { top: 126px; }
 div.two { top: 246px; }
-div.three { top: 366px; }
-div.four { top: 424px; }
+div.three { top: 390px; }
+div.four { top: 448px; }
 
 div.step h2 {
   margin-top: -2px;
