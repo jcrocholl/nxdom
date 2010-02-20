@@ -9,6 +9,7 @@
    The font-size percentage is of 16px. (0.75 * 16px = 12px) */
 body {
   font-size: 87.5%;
+  line-height: 24px;
   color: #222;
   background: #fff;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
