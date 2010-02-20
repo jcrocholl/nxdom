@@ -38,7 +38,7 @@ $(document).ready(function() {{% if not refresh_seconds %}
 </head>
 
 <body>
-  <div class="container">
+  <div class="container{% if request.GET.showgrid %} showgrid{% endif %}">
     {% block left %}{% endblock%}
     <div id="content" class="span-18{% block content-class %}{% endblock %}">
       {% block content %}{% endblock %}
