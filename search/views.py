@@ -41,6 +41,18 @@ class SearchForm(forms.Form):
                 'title': "Find names that end with this suffix"}))
 
 
+class PriorityForm(forms.Form):
+    priority = forms.ChoiceField(initial='short', label="Priority",
+        widget=forms.RadioSelect(),
+        choices=[
+            ('short', "Shortest domain names"),
+            ('letters', "Without numbers and dashes"),
+            ('readable', "More human-readable"),
+            ('popular', "With popular keywords"),
+            ('long', "Longer but most popular"),
+            ])
+
+
 class WeightsForm(forms.Form):
     len = forms.ChoiceField(initial=-3, label="Short names",
         choices=[(3, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
@@ -71,7 +83,7 @@ class RegistrarForm(forms.Form):
 def index(request):
     logging.info("Generating home page")
     search_form = SearchForm(request.GET or None)
-    weights_form = WeightsForm(request.GET or None)
+    priority_form = PriorityForm(request.GET or None)
     registrar_form = RegistrarForm(request.GET or
                                    {'registrar': 'godaddy.com'})
     return render_to_response(request, 'search/index.html', locals())
