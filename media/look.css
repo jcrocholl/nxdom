@@ -48,7 +48,6 @@ div.step h2 {
   padding-bottom: 4px;
 }
 p.hoverhint { color: #ddd; }
-p.hoverhint:hover { color: #222; }
 
 #results_div { display: none; }
 #results_div p.hint {

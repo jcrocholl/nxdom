@@ -5,22 +5,32 @@
 {% block jquery %}
 <script type="text/javascript">
 $(document).ready(function() {
-    $.ga.load("UA-939486-4", function() {
-      // Set custom variable (slot 1) for the scope of this session (2).
-      $.ga.setCustomVar(1, "Welcome", utmx("combination_string"), 2);
-      ga_track();
-      gwo_track("/3251202061/test");
-    });
-    $.json_version = {{ json_version }};
-    $("input.focus:last").focus();
-    $("html").css("overflow-y", "scroll");
-    $("input.keyword").keypress(keyword_keypress);
-    $("input.keyword").keyup(keyword_keyup);
-    $.registrar = $("select#id_registrar").val();
-    $("select#id_registrar").change(update_registrar);
-    $("table#weights input").change(update_scores);
-    $("div#timer").everyTime(200, update_if_changed);
-    keyword_keyup();
+  $.ga.load("UA-939486-4", function() {
+    // Set custom variable (slot 1) for the scope of this session (2).
+    $.ga.setCustomVar(1, "Welcome", utmx("combination_string"), 2);
+    ga_track();
+    gwo_track("/3251202061/test");
+  });
+  $.json_version = {{ json_version }};
+  $("input.focus:last").focus();
+  $("html").css("overflow-y", "scroll");
+  $("input.keyword").keypress(keyword_keypress).keyup(keyword_keyup);
+  $.registrar = $("select#id_registrar").val();
+  $("select#id_registrar").change(update_registrar);
+  $("table#weights input").change(update_scores);
+  $("div#timer").everyTime(200, update_if_changed);
+  keyword_keyup();
+  var ms = 1200;
+  $(".one .hoverhint").animate( {color: "#222"}, ms, function() {
+    $(".one .hoverhint").animate( {color: "#ddd"}, ms);
+    $(".two .hoverhint").animate( {color: "#222"}, ms, function() {
+      $(".two .hoverhint").animate( {color: "#ddd"}, ms);
+      $(".three .hoverhint").animate( {color: "#222"}, ms, function() {
+        $(".three .hoverhint").animate( {color: "#ddd"}, ms, function() {
+          $(".hoverhint").hover(
+            function(){ $(this).stop().animate({color: "#222"}, "slow")},
+            function(){ $(this).stop().animate({color: "#ddd"}, "slow")});
+  })})})});
 });
 </script>
 {% endblock %}
@@ -85,7 +95,6 @@ width="86" height="45" style="vertical-align:top" /></a>
 
 {% block content %}
 <div id="welcome">
-<script type="text/javascript">utmx_section("welcome")</script>
 <div class="step one">
 <h2>1. Start typing in the search box</h2>
 <p class="explain hoverhint">
@@ -114,7 +123,6 @@ Click on a top level domain to check if the name is still available,
 using your favorite registrar.
 </p>
 </div>
-</noscript>
 </div>
 
 <div id="results_loading" class="step one" style="display:none">
