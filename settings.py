@@ -14,7 +14,7 @@ JSON_VERSION = 4
 # Add base media (jquery can be easily added via INSTALLED_APPS)
 COMBINE_MEDIA = {
     'combined-%(LANGUAGE_CODE)s.js': (
-        'global/jquery.cookie.js',
+        'global/jquery.color.js',
         'global/jquery.timers.js',
         'global/jquery.timeago.js',
         'global/jquery.ga.js',
