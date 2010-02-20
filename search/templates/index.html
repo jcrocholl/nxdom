@@ -51,52 +51,29 @@ d.write('<sc'+'ript src="'+
 <a href="/"><img id="logo" src="static/images/logo45.png" alt="NXdom"
 width="86" height="45" style="vertical-align:top" /></a>
 <div id="timer" class="span-6 quiet small"></div>
-<p style="text-align:right"><b>Find the best available<br />
-short domain names</b></p>
+<img id="loading" src="/static/images/loading.gif" alt="" />
+<h1>Find available domains</h1>
 </div>
 
 <form method="get" action="">
-<div id="keywords">
-<img id="loading" src="/static/images/loading.gif" alt="" />
-<div class="span-3">
-<label for="id_left">Beginning</label><br />
-{{ search_form.left }}<br />
-</div>
-<div class="span-3 last right">
-<label for="id_right">Ending</label><br />
-{{ search_form.right }}<br />
-</div>
+<div id="keywords" class="step one span-6 last">
+<div class="span-3"><label for="id_left">that start with</label></div>
+<div class="span-3 last">{{ search_form.left }}</div>
+<div class="span-3"><label for="id_right">and end with</label></div>
+<div class="span-3 last">{{ search_form.right }}</div>
 </div>
 
-<table id="weights" class="span-6">
-<tr>
-<th class="bottom">Characters</th>
-<td class="vertical" style="background-position: 9px bottom" title="Negative"></td>
-<td class="vertical" style="background-position: -16px bottom" title="Neutral"></td>
-<td class="vertical" style="background-position: -41px bottom" title="Interesting"></td>
-<td class="vertical" style="background-position: -66px bottom" title="Important"></td>
-<td class="vertical" style="background-position: -91px bottom" title="Critical"></td>
-</tr>
-{% for field in weights_form %}
-{% ifequal field.name "english" %}
-<tr><th colspan="6">Readability</th></tr>
-{% endifequal %}
-{% ifequal field.name "prefix" %}
-<tr><th colspan="6">Popularity</th></tr>
-{% endifequal %}
-<tr><td>{{ field.label|safe }}</td>
-{% for value, text in field.field.choices %}<td><input name="{{ field.name }}" value="{{ value }}" type="radio" {% ifequal value field.field.initial %}checked="checked" {% endifequal %}/></td>
-{% endfor %}</tr>
-{% endfor %}
-</table>
+<div id="priority" class="step two">
+{{ priority_form.priority }}
+</div>
 
-<div id="registrar">
+<div id="registrar" class="step three">
 <div class="span-3 label"><label for="id_registrar">Registrar</label></div>
 <div class="span-3 last right">{{ registrar_form.registrar }}</div>
 </div>
 </form>
 
-<div id="feedback">
+<div id="feedback" class="step four" style="display: none">
 {% load feedback_tags %}
 {% feedback_form request %}
 </div>
@@ -127,20 +104,6 @@ sorting and looking only at the best names.<br />
 
 You can adjust the importance of various qualities with the radio
 buttons on the left.
-</p>
-<p class="explain">
-If you want really short names, set <b>Short names</b>
-to <b>Critical</b>.
-</p>
-<p class="explain">
-If you don't care about <b>Spanish</b>, <b>French</b>,
-or <b>German</b>, you can set those to <b>Neutral</b>.
-</p>
-<p class="explain">
-If you want your domain name to start or end with popular letters
-(based on registered .com domains),<br />
-
-that's what the the <b>Popularity</b> settings are for.
 </p>
 </div>
 
