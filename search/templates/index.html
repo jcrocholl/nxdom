@@ -23,15 +23,17 @@ $(document).ready(function() {
   $("div#timer").everyTime(200, update_if_changed);
   keyword_keyup();
   var ms = 1200;
-  $(".one .hoverhint").animate( {color: "#222"}, ms, function() {
-    $(".one .hoverhint").animate( {color: "#ddd"}, ms);
-    $(".two .hoverhint").animate( {color: "#222"}, ms, function() {
-      $(".two .hoverhint").animate( {color: "#ddd"}, ms);
-      $(".three .hoverhint").animate( {color: "#222"}, ms, function() {
-        $(".three .hoverhint").animate( {color: "#ddd"}, ms, function() {
+  $("p.fade1").animate( {color: "#222"}, ms, function() {
+    $("p.fade1").animate( {color: "#ddd"}, ms);
+    $("p.fade2").animate( {color: "#222"}, ms, function() {
+      $("p.fade2").animate( {color: "#ddd"}, ms);
+      $("p.fade3").animate( {color: "#222"}, ms, function() {
+        $("p.fade3").animate( {color: "#ddd"}, ms, function() {
           $(".hoverhint").hover(
-            function(){ $(this).stop().animate({color: "#222"}, "slow")},
-            function(){ $(this).stop().animate({color: "#ddd"}, "slow")});
+            function(){ $(".explain", this)
+              .stop().animate({color: "#222"}, "slow")},
+            function(){ $(".explain", this)
+              .stop().animate({color: "#ddd"}, "slow")});
   })})})});
 });
 </script>
@@ -101,9 +103,9 @@ width="86" height="45" style="vertical-align: top" /></a>
 
 {% block content %}
 <div id="welcome">
-<div class="step one">
+<div class="step one hoverhint">
 <h2>1. Start typing in the search box</h2>
-<p class="explain hoverhint">
+<p class="explain fade1">
 The results will start loading immediately, and they are updated while
 you type.<br />
 
@@ -111,9 +113,9 @@ The two input fields match the beginning and ending of available names.
 </p>
 </div>
 
-<div class="step two">
+<div class="step two hoverhint">
 <h2>2. Play with the sort order</h2>
-<p class="explain hoverhint">
+<p class="explain fade2">
 There are millions of available names, but you can save time by
 sorting and looking only at the best names.<br />
 
@@ -122,9 +124,9 @@ buttons on the left.
 </p>
 </div>
 
-<div class="step three">
+<div class="step three hoverhint">
 <h2>3. Check availability</h2>
-<p class="explain hoverhint">
+<p class="explain fade3">
 Click on a top level domain to check if the name is still available,
 using your favorite registrar.
 </p>

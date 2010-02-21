@@ -53,7 +53,7 @@ div.step h2 {
   padding-bottom: 3px;
 }
 p.explain { margin-top: 0; }
-p.hoverhint { color: #ddd; }
+.hoverhint p.explain { color: #ddd; }
 
 #results_div { display: none; }
 #results_div p.hint {
