@@ -33,5 +33,5 @@ class Lookup(db.Expando):
     'timeout=20' (in seconds). If a domain property is missing, this
     indicates NXDOMAIN.
     """
-    backwards = db.StringProperty(required=True) # For suffix matching.
-    timestamp = db.DateTimeProperty(required=True) # Created or updated.
+    backwards = db.StringProperty(required=True)  # For suffix matching.
+    timestamp = db.DateTimeProperty(required=True)  # Created or updated.

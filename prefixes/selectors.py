@@ -88,12 +88,12 @@ class Selector:
         elif self.position == 'right':
             compare = lambda a, b: cmp(a[::-1], b[::-1])
         if self.order == 'ascending':
-            assert compare(names[0], self.name) >= 0 # ascending index
+            assert compare(names[0], self.name) >= 0  # Ascending index
         elif self.order == 'descending':
-            assert compare(names[0], self.name) <= 0 # descending index
+            assert compare(names[0], self.name) <= 0  # Descending index
             names.reverse()
         for index in range(1, len(names)):
-            assert compare(names[index - 1], names[index]) < 0 # sorted
+            assert compare(names[index - 1], names[index]) < 0  # Sorted
         return names
 
     def truncate_range(self, a, b):

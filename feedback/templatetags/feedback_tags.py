@@ -21,10 +21,10 @@ def render_query(request, query, limit=10):
     feedback_list = []
     for feedback in query.fetch(limit):
         try:
-            submitter = feedback.submitter # Attempt to dereference.
+            submitter = feedback.submitter  # Attempt to dereference.
             feedback_list.append(feedback)
         except datastore_errors.Error:
-            pass # Ignore feedback if the submitter doesn't exist.
+            pass  # Ignore feedback if the submitter doesn't exist.
     already_voted = get_already_voted(request)
     return render_to_string('feedback/messages.html', locals())
 

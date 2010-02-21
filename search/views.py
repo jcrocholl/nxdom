@@ -19,8 +19,8 @@ from dns.utils import reverse_name
 from prefixes.utils import increment_prefix
 from prefixes.selectors import random_prefix
 
-JSON_FETCH_LIMIT = 60 # Domains for each length from 3 to 12.
-MEMCACHE_TIMEOUT = 24 * 60 * 60 # 24 hours.
+JSON_FETCH_LIMIT = 60  # Domains for each length from 3 to 12.
+MEMCACHE_TIMEOUT = 24 * 60 * 60  # 24 hours.
 REGISTRAR_CHOICES = [
     ('godaddy.com', 'GoDaddy'),
     ('moniker.com', 'Moniker'),
