@@ -1407,4 +1407,5 @@ rteag rteabl rtaun rtarr rtaobj rtao$ rtanv rtand rtanc rtald rtah rtafr
 rtaest rtaeq rtaav rtaalm rsur rsup rsunc rsul rsud rsuc rsubst rstit rsta$
 rsopl rsop rsom rsoll rsol rsog rso4 rsism rsis rsign rsig rsiac rsia$ rsey$
 rsex rsel
-""".split()): TRIPLE_SCORES[triple] = (20000 - index) / 20000.0
+""".split()):
+    TRIPLE_SCORES[triple] = (20000 - index) / 20000.0

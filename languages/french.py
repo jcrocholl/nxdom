@@ -1495,4 +1495,5 @@ louett loues loue$ louag louabl lou$ lorsq lors loph loop long-c lombr lok
 loi$ logg lobb load lo- lneair lmoth lmon lmiq lmip lmett lmar llyr lluv llusq
 llueus lluch llu$ lloues lloue$ llocr llo$ llism llipt llips llins llif llienn
 lliag lleyeus lley$ llev lleuls lles-l llenc lleabl lleab
-""".split()): TRIPLE_SCORES[triple] = (20000 - index) / 20000.0
+""".split()):
+    TRIPLE_SCORES[triple] = (20000 - index) / 20000.0
