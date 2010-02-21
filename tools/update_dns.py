@@ -130,7 +130,8 @@ def resolve_parallel(names_with_tlds, options, timeout=None):
         if (len(server.queries) > 10 and
             len(server.results) < len(server.queries) / 2):
             logging.warning(server.status_message(start))
-            server.results = resolve_parallel(server.queries, options, timeout * 2)
+            server.results = resolve_parallel(server.queries, options,
+                                              timeout * 2)
         results.update(server.results)
     return results
 
@@ -371,7 +372,7 @@ def main():
     parser.add_option('--random', action='store_true',
                       help="update random popular prefixes and suffixes")
     parser.add_option('--retry', metavar='<error>',
-                      help="update errors like timeout=20 or status=rcodeservfail")
+                      help="update e.g. timeout=20 or status=rcodeservfail")
     parser.add_option('--resume', metavar='<name>',
                       help="continue file upload from this name")
     (options, args) = parser.parse_args()
