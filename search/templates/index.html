@@ -19,7 +19,7 @@ $(document).ready(function() {
     .bind("cut", keyword_delayed).bind("paste", keyword_delayed);
   $.registrar = $("select#id_registrar").val();
   $("select#id_registrar").change(update_registrar);
-  $("table#weights input").change(update_scores);
+  $("div#priority input").change(update_scores);
   $("div#timer").everyTime(200, update_if_changed);
   keyword_keyup();
   var ms = 1200;

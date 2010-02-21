@@ -24,15 +24,22 @@ function force_million(text) {
 }
 
 function form_weights() {
-	return {length: force_number($("input[name=len]:checked").val()),
-			digits: force_number($("input[name=digits]:checked").val()),
-			dashes: force_number($("input[name=dashes]:checked").val()),
-			english: force_million($("input[name=english]:checked").val()),
-			spanish: force_million($("input[name=spanish]:checked").val()),
-			french: force_million($("input[name=french]:checked").val()),
-			german: force_million($("input[name=german]:checked").val()),
-			prefix: force_million($("input[name=prefix]:checked").val()),
-			suffix: force_million($("input[name=suffix]:checked").val())}
+	if ($("input#id_priority_0").attr("checked"))
+		return {length: -1};
+	if ($("input#id_priority_1").attr("checked"))
+		return {length: -1, digits: -3, dashes: -9};
+	if ($("input#id_priority_2").attr("checked"))
+		return {length: -1, digits: -3, dashes: -9,
+				english: 3, spanish: 1, french: 1, german: 1};
+	if ($("input#id_priority_3").attr("checked"))
+		return {length: -1, digits: -3, dashes: -9,
+				english: 3, spanish: 1, french: 1, german: 1,
+				prefix: 3, suffix: 3};
+	if ($("input#id_priority_4").attr("checked"))
+		return {length: -1, digits: -3, dashes: -9,
+				english: 3, spanish: 1, french: 1, german: 1,
+				prefix: 9, suffix: 9};
+	return {};
 }
 
 function domain_score(domain, weights) {
@@ -216,9 +223,8 @@ function show_more() {
 }
 
 function array_unchanged(a, b) {
-	for (var index in a)
-		if (a[index] != b[index])
-			return false;
+	for (var index in a) if (a[index] != b[index]) return false;
+	for (var index in b) if (a[index] != b[index]) return false;
 	return true;
 }
 
