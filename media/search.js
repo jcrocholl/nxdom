@@ -25,29 +25,31 @@ function force_million(text) {
 
 function form_weights() {
 	if ($("input#id_priority_0").attr("checked"))
-		return {length: -1};
+		return {length: -3000000, english: 1, prefix: 1, suffix: 1};
 	if ($("input#id_priority_1").attr("checked"))
-		return {length: -1, digits: -3, dashes: -9};
+		return {length: -3000000, digits: -9000000, dashes: -27000000,
+			    english: 1, prefix: 1, suffix: 1};
 	if ($("input#id_priority_2").attr("checked"))
-		return {length: -1, digits: -3, dashes: -9,
-				english: 3, spanish: 1, french: 1, german: 1};
+		return {length: -3000000, digits: -9000000, dashes: -27000000,
+				english: 3, spanish: 1, french: 1, german: 1,
+				prefix: 1, suffix: 1};
 	if ($("input#id_priority_3").attr("checked"))
-		return {length: -1, digits: -3, dashes: -9,
+		return {length: -1000000, digits: -3000000, dashes: -9000000,
 				english: 3, spanish: 1, french: 1, german: 1,
 				prefix: 3, suffix: 3};
 	if ($("input#id_priority_4").attr("checked"))
-		return {length: -1, digits: -3, dashes: -9,
+		return {length: -1000000, digits: -3000000, dashes: -9000000,
 				english: 3, spanish: 1, french: 1, german: 1,
 				prefix: 9, suffix: 9};
 	return {};
 }
 
 function domain_score(domain, weights) {
-	var score = 0.0;
+	var score = 0;
 	for (var attr in weights)
 		score += domain[attr] * weights[attr];
 	for (var tld in TLD_SCORES)
-		if (!domain[tld]) score += TLD_SCORES[tld];
+		if (!domain[tld]) score += TLD_SCORES[tld] * 1000000;
 	return score;
 }
 
