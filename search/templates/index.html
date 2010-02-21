@@ -7,9 +7,9 @@
 $(document).ready(function() {
   $.ga.load("UA-939486-4", function() {
     // Set custom variable (slot 1) for the scope of this session (2).
-    $.ga.setCustomVar(1, "Welcome", utmx("combination_string"), 2);
+    // $.ga.setCustomVar(1, "Welcome", utmx("combination_string"), 2);
     ga_track();
-    gwo_track("/3251202061/test");
+    // gwo_track("/3251202061/test");
   });
   $.json_version = {{ json_version }};
   $("input.focus:last").focus();
@@ -40,22 +40,6 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block extra-head %}
-<!-- Google Website Optimizer Control Script -->
-<script type="text/javascript">
-/* <![CDATA[ */
-function utmx_section(){}function utmx(){}
-(function(){var k='3251202061',d=document,l=d.location,c=d.cookie;function f(n){
-if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.indexOf(';',i);return c.substring(i+n.
-length+1,j<0?c.length:j)}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;
-d.write('<sc'+'ript src="'+
-'http'+(l.protocol=='https:'?'s://ssl':'://www')+'.google-analytics.com'
-+'/siteopt.js?v=1&utmxkey='+k+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='
-+new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-'" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
-/* ]]> */
-</script>
-<!-- End of Google Website Optimizer Control Script -->
-
 <meta name="google-site-verification" content="wl5XW4kG6Lnb-gAflYHZGiNfrZtUqJTDul7zHLcV67g" />
 {% endblock %}
 

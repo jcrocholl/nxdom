@@ -288,6 +288,7 @@ function ga_track(path) {
 }
 
 function gwo_track(path) {
+	return; // Disabled on 2010-02-21.
 	if (_gat && window.location.host == "www.nxdom.com") {
 		var gwoTracker = _gat._getTracker("UA-939486-5");
 		gwoTracker._trackPageview(path);
@@ -310,9 +311,9 @@ function ajax_stop() {
 				 $.ajax_search.right.length + '/' +
 				 seconds + '/');
 		$.ajax_search.counter++;
-		if ($.ajax_search.counter == 1) {
-			gwo_track("/3251202061/goal");
-		}
+		// if ($.ajax_search.counter == 1) {
+		//     gwo_track("/3251202061/goal");
+		// }
 	}
 	$.ajax_search.start = false;
 	$.changed = true;
