@@ -1,4 +1,4 @@
-div#left { width: 230px; height: 543px; }
+div#left { width: 230px; height: 567px; }
 div#logo_div { margin-top: 18px; }
 img#loading {
   position: absolute;
@@ -40,9 +40,9 @@ div#headline_div h1 {
 
 div.step { position: absolute; }
 div.one { top: 126px; }
-div.two { top: 246px; }
-div.three { top: 390px; }
-div.four { top: 448px; }
+div.two { top: 270px; }
+div.three { top: 414px; }
+div.four { top: 472px; }
 
 div.step h2 {
   margin-top: -2px;
@@ -64,9 +64,17 @@ p.explain { margin-top: 0; }
 #results_div table { margin-top: 0; }
 tbody#results { font-size: 14px; }
 
+div#priority {
+  position: absolute;
+  top: 227px;
+}
+div#priority h3 {
+  font-weight: bold;
+  font-size: 1em;
+  padding: 0;
+  margin: 0 0 4px;
+}
 div#priority ul {
-  position: relative;
-  top: -25px;
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -78,6 +86,7 @@ div#priority li {
   line-height: 24px;
   height: 24px;
 }
+div#priority label { font-weight: normal; }
 
 table.wide { width: 100%; }
 .row2 { background: #eee; }

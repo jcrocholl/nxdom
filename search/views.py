@@ -45,7 +45,7 @@ class PriorityForm(forms.Form):
     priority = forms.ChoiceField(initial='short', label="Priority",
         widget=forms.RadioSelect(),
         choices=[
-            ('short', "Shortest domain names"),
+            ('short', "Shortest names first"),
             ('letters', "Without numbers and dashes"),
             ('readable', "More human-readable"),
             ('popular', "With popular keywords"),
