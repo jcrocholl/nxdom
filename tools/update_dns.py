@@ -9,7 +9,7 @@ setup_env()
 
 import time
 import getpass
-from datetime import datetime
+from datetime import datetime, timedelta
 import urllib2
 import random
 from hashlib import md5
@@ -189,8 +189,14 @@ def com_available(results, name):
 
 
 def update_oldest_lookups(options):
-    print "Trying to fetch %d oldest names" % options.batch
     query = Lookup.all(keys_only=True).order('timestamp')
+    if options.days is None:
+        print "Trying to fetch %d oldest names" % options.batch
+    else:
+        print "Trying to fetch %d names that are younger than %d days" % (
+            options.batch, options.days)
+        days_ago = datetime.now() - timedelta(days=options.days)
+        query.filter('timestamp >', days_ago)
     keys = retry(query.fetch, options.batch)
     names = [key.name() for key in keys]
     print "Resolving .com names:",
@@ -375,6 +381,8 @@ def main():
                       help="update e.g. timeout=20 or status=rcodeservfail")
     parser.add_option('--resume', metavar='<name>',
                       help="continue file upload from this name")
+    parser.add_option('--days', metavar='<number>', type='int',
+                      help="update lookups younger than <number> days")
     (options, args) = parser.parse_args()
     remote_api_stub.ConfigureRemoteDatastore(
         'scoretool', '/remote_api_hidden', auth_func, options.server)
