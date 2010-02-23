@@ -16,6 +16,8 @@ $(document).ready(function() {
   $("html").css("overflow-y", "scroll");
   $("input.keyword")
     .keypress(keyword_keypress).keyup(keyword_keyup)
+    .change(keyword_delayed)
+    .mousedown(keyword_delayed).mouseup(keyword_delayed)
     .bind("cut", keyword_delayed).bind("paste", keyword_delayed);
   $.registrar = $("select#id_registrar").val();
   $("select#id_registrar").change(update_registrar);
