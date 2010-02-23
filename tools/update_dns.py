@@ -198,7 +198,15 @@ def update_oldest_lookups(options):
         days_ago = datetime.now() - timedelta(days=options.days)
         query.filter('timestamp >', days_ago)
     keys = retry(query.fetch, options.batch)
+    if not keys:
+        sys.exit("The datastore returned no results.")
     names = [key.name() for key in keys]
+    age = datetime.now() - Lookup.get_by_key_name(names[0]).timestamp
+    hours = age.seconds / 3600
+    minutes = (age.seconds - hours * 3600) / 60
+    seconds = age.seconds - hours * 3600 - minutes * 60
+    print "Age of oldest lookup: %d days, %d:%02d:%02d" % (
+        age.days, hours, minutes, seconds)
     print "Resolving .com names:",
     results = resolve_parallel([name + '.com' for name in names], options, 5.0)
     # Delete registered .com names.
