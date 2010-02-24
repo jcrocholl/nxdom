@@ -42,7 +42,7 @@ div.step { position: absolute; }
 div.one { top: 126px; }
 div.two { top: 270px; }
 div.three { top: 414px; }
-div.four { top: 472px; }
+div.four { top: 486px; }
 
 div.step h2 {
   margin-top: -2px;
@@ -54,6 +54,7 @@ div.step h2 {
 }
 p.explain { margin-top: 0; }
 .hoverhint p.explain { color: #ddd; }
+.raster { background: url("/static/images/raster.png"); }
 
 #results_div { display: none; }
 #results_div p.hint {
@@ -66,13 +67,7 @@ tbody#results { font-size: 14px; }
 
 div#priority {
   position: absolute;
-  top: 227px;
-}
-div#priority h3 {
-  font-weight: bold;
-  font-size: 1em;
-  padding: 0;
-  margin: 0 0 4px;
+  top: 222px;
 }
 div#priority ul {
   margin: 0;
@@ -87,6 +82,10 @@ div#priority li {
   height: 24px;
 }
 div#priority label { font-weight: normal; }
+div#priority label#sort_order {
+  font-weight: bold;
+  margin: 0 0 4px;
+}
 
 table.wide { width: 100%; }
 .row2 { background: #eee; }
@@ -116,6 +115,12 @@ td.vertical {
   width: 23px;
   height: 80px;
   background: url("/static/images/vertical.png") no-repeat bottom;
+}
+
+input#feedback_submit {
+  width: 110px;
+  margin-top: 5px;
+  float: right;
 }
 
 tr.row1 td.best { background: #ff8; }

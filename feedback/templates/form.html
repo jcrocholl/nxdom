@@ -1,11 +1,9 @@
 <form method="post" action="/feedback/">
-<p>
 <label for="id_message">{{ feedback_form.message.label }}</label><br />
 {{ feedback_form.message }}<br />
 {{ feedback_form.page }}
-<input type="submit" value="Submit feedback"/>
+<input id="feedback_submit" type="submit" value="Submit feedback"/><br />
 {% if feedback_form.errors.message %}
 <span class="admonition error">{{ feedback_form.errors.message.0 }}</span>
 {% endif %}
-</p>
 </form>
