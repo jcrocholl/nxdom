@@ -94,7 +94,7 @@ function affiliate_link(name, tld) {
 	html += '" title="Click here to check if ' + name + '.' + tld +
 		' is available on ' + $.registrar + '" ';
 	html += mouse_down_track('outgoing', $.registrar, tld, name.length);
-	html += '>';
+	html += ' target="_blank">';
 	if (tld == 'com') html += name + '.';
 	html += tld + '</a>';
 	return html;
@@ -102,14 +102,14 @@ function affiliate_link(name, tld) {
 
 function domain_link(name, tld) {
 	return '<a href="http://' + name + '.' + tld + '/" ' +
-		mouse_down_track('outgoing', 'website', tld, name.length) + '>' +
-		tld + '</a>';
+		mouse_down_track('outgoing', 'website', tld, name.length) +
+		' target="_blank">' + tld + '</a>';
 }
 
 function google_link(name) {
 	return '<a href="http://www.google.com/search?q=' + name + '" ' +
-		mouse_down_track('outgoing', 'google', name.length) + '>' +
-		name + '</a>';
+		mouse_down_track('outgoing', 'google', name.length) +
+		' target="_blank">' + name + '</a>';
 }
 
 function table_row(domain, row) {
