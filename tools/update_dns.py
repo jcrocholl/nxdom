@@ -201,9 +201,10 @@ def update_oldest_lookups(options):
     if not keys:
         sys.exit("The datastore returned no results.")
     names = [key.name() for key in keys]
-    age = datetime.now() - Lookup.get_by_key_name(names[0]).timestamp
+    oldest = retry(Lookup.get_by_key_name, names[0])
+    age = datetime.now() - oldest.timestamp
     hours = age.seconds / 3600
-    minutes = (age.seconds - hours * 3600) / 60
+    minutes = age.seconds / 60 - hours * 60
     seconds = age.seconds - hours * 3600 - minutes * 60
     print "Age of oldest lookup: %d days, %d:%02d:%02d" % (
         age.days, hours, minutes, seconds)
