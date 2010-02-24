@@ -48,7 +48,7 @@ class PriorityForm(forms.Form):
             ('short', "Shortest names first"),
             ('letters', "Without numbers and dashes"),
             ('readable', "More human-readable"),
-            ('popular', "With popular keywords"),
+            ('popular', "Popular beginning or end"),
             ('long', "Longer but most popular"),
             ])
 
