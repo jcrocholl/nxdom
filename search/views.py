@@ -35,6 +35,20 @@ REGISTRAR_CHOICES = [
     ('1and1.com', '1&1 (USA)'),
     ('dotster.com', 'Dotster'),
     ]
+WEIGHT_CHOICES = [
+    (-3, 'negative'),
+    (0, 'neutral'),
+    (1, 'positive'),
+    (3, 'important'),
+    (9, 'critical'),
+    ]
+NEGATIVE_CHOICES = [
+    (3, 'negative'),
+    (0, 'neutral'),
+    (-1, 'positive'),
+    (-3, 'important'),
+    (-9, 'critical'),
+    ]
 
 
 class SearchForm(forms.Form):
@@ -56,23 +70,23 @@ class PriorityForm(forms.Form):
 
 class WeightsForm(forms.Form):
     len = forms.ChoiceField(initial=-3, label="Short names",
-        choices=[(3, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
+        choices=NEGATIVE_CHOICES)
     digits = forms.ChoiceField(initial=-3, label="Without numbers",
-        choices=[(3, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
+        choices=NEGATIVE_CHOICES)
     dashes = forms.ChoiceField(initial=-9, label="Without dashes",
-        choices=[(3, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
+        choices=NEGATIVE_CHOICES)
     english = forms.ChoiceField(initial=3, label="English",
-        choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+        choices=WEIGHT_CHOICES)
     spanish = forms.ChoiceField(initial=1, label="Spanish",
-        choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+        choices=WEIGHT_CHOICES)
     french = forms.ChoiceField(initial=1, label="French",
-        choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+        choices=WEIGHT_CHOICES)
     german = forms.ChoiceField(initial=1, label="German",
-        choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
+        choices=WEIGHT_CHOICES)
     prefix = forms.ChoiceField(initial=9, label="Popular prefixes",
-        choices=[(-3, ''), (0, ''), (3, ''), (9, ''), (27, '')])
+        choices=WEIGHT_CHOICES)
     suffix = forms.ChoiceField(initial=9, label="Popular suffixes",
-        choices=[(-3, ''), (0, ''), (3, ''), (9, ''), (27, '')])
+        choices=WEIGHT_CHOICES)
 
 
 class RegistrarForm(forms.Form):
