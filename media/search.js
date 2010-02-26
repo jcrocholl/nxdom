@@ -371,17 +371,10 @@ function keyword_keypress(e) {
 	ajax_search(left, right);
 }
 
-function keyword_keyup() {
+function update_if_changed(i) {
 	var left = $("input#id_left").val();
 	var right = $("input#id_right").val();
 	ajax_search(left, right);
-}
-
-function keyword_delayed() {
-	setTimeout(keyword_keyup, 100);
-}
-
-function update_if_changed(i) {
 	if ($.changed) update_html();
 	$.changed = false;
 }
