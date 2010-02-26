@@ -19,12 +19,15 @@ from tools.retry import retry, retry_objects
 
 PASSWORD_FILENAME = '.passwd'
 BATCH_SIZE = 100
-PURGE_VALUES = """
-status=rcodeservfail
-status=prohibitedcname
-status=nodata
-timeout=30
-""".split()
+PURGE_VALUES = [
+    '',
+    'localhost',
+    'status=rcodeservfail',
+    'status=prohibitedcname',
+    'status=nodata',
+    'timeout=30',
+    ]
+
 
 def auth_func():
     if os.path.exists(PASSWORD_FILENAME):
