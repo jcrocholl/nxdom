@@ -17,7 +17,8 @@ $(document).ready(function() {
   $("input.keyword").keypress(keyword_keypress);
   $.registrar = $("select#id_registrar").val();
   $("select#id_registrar").change(update_registrar);
-  $("div#priority input").change(update_scores);
+  $("div#priority input").change(priority_changed);
+  $("div#weights input").change(update_scores);
   $("div#timer").everyTime(200, update_if_changed);
   var ms = 1200;
   $("p.fade1").animate( {color: "#222"}, ms, function() {
@@ -85,7 +86,7 @@ onclick="show_weights(); return false;">Show advanced options</a>
 {% ifequal field.name "prefix" %}
 <tr><td colspan="5"></td><th>Popularity</th></tr>{% endifequal %}
 <tr>{% for value, text in field.field.choices %}
-<td class="radio"><input name="{{ field.name }}" value="{{ value }}" type="radio" {% ifequal value field.field.initial %}checked="checked" {% endifequal %}/></td>{% endfor %}
+<td class="radio"><input id="id_{{ field.name}}_{{ text }}" name="{{ field.name }}" value="{{ value }}" type="radio" {% ifequal value field.field.initial %}checked="checked" {% endifequal %}/></td>{% endfor %}
 <td>{{ field.label|safe }}</td>
 </tr>
 {% endfor %}
