@@ -20,28 +20,56 @@ function force_number(text) {
 }
 
 function force_million(text) {
-	return force_number(text) / 1000000;
+	return force_number(text) * 1000000;
 }
 
 function form_weights() {
-	if ($("input#id_priority_0").attr("checked"))
-		return {length: -3000000, english: 1, prefix: 1, suffix: 1};
-	if ($("input#id_priority_1").attr("checked"))
-		return {length: -3000000, digits: -9000000, dashes: -27000000,
-			    english: 1, prefix: 1, suffix: 1};
-	if ($("input#id_priority_2").attr("checked"))
-		return {length: -3000000, digits: -9000000, dashes: -27000000,
-				english: 3, spanish: 1, french: 1, german: 1,
-				prefix: 1, suffix: 1};
-	if ($("input#id_priority_3").attr("checked"))
-		return {length: -1000000, digits: -3000000, dashes: -9000000,
-				english: 3, spanish: 1, french: 1, german: 1,
-				prefix: 3, suffix: 3};
-	if ($("input#id_priority_4").attr("checked"))
-		return {length: -1000000, digits: -3000000, dashes: -9000000,
-				english: 3, spanish: 1, french: 1, german: 1,
-				prefix: 9, suffix: 9};
-	return {};
+	return {length: force_million($("input[name=len]:checked").val()),
+			digits: force_million($("input[name=digits]:checked").val()),
+			dashes: force_million($("input[name=dashes]:checked").val()),
+			english: force_number($("input[name=english]:checked").val()),
+			spanish: force_number($("input[name=spanish]:checked").val()),
+			french: force_number($("input[name=french]:checked").val()),
+			german: force_number($("input[name=german]:checked").val()),
+			prefix: force_number($("input[name=prefix]:checked").val()),
+			suffix: force_number($("input[name=suffix]:checked").val())};
+}
+
+function priority_changed() {
+	var weights = {
+		len: "positive", digits: "important", dashes: "critical",
+		english: "important", spanish: "positive", french: "positive",
+		german: "positive", prefix: "positive", suffix: "positive",
+	}
+	if ($("input#id_priority_0").attr("checked")) {
+		weights["len"] = "critical";
+		weights["digits"] = "neutral";
+		weights["dashes"] = "neutral";
+	}
+	if ($("input#id_priority_1").attr("checked")) {
+		weights["len"] = "important";
+		weights["digits"] = "critical";
+		weights["dashes"] = "critical";
+	}
+	if ($("input#id_priority_0").attr("checked") ||
+		$("input#id_priority_1").attr("checked")) {
+		weights["english"] = "positive";
+		weights["spanish"] = "neutral";
+		weights["french"] = "neutral";
+		weights["german"] = "neutral";
+	}
+	if ($("input#id_priority_3").attr("checked")) {
+		weights["prefix"] = "important";
+		weights["suffix"] = "important";
+	}
+	if ($("input#id_priority_4").attr("checked")) {
+		weights["prefix"] = "critical";
+		weights["suffix"] = "critical";
+	}
+	for (var key in weights) {
+		$("input#id_" + key + "_" + weights[key]).attr("checked", true);
+	}
+	update_scores();
 }
 
 function domain_score(domain, weights) {
