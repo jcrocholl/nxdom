@@ -15,5 +15,6 @@ urlpatterns = patterns('',
     ('^terms/$', direct_to_template, {'template': 'terms.html'}),
     ('^privacy/$', direct_to_template, {'template': 'privacy.html'}),
     ('^goal/$', direct_to_template, {'template': 'goal.html'}),
+    ('^design/$', direct_to_template, {'template': 'design.html'}),
     (r'^$', 'search.views.index'),
 ) + urlpatterns

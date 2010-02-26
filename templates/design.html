@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Design{% endblock %}
+
+{% block extra-head %}
+<style type="text/css">
+div#rotate {
+  margin: 40px 0 0 12px;
+}
+div#rotate div {
+  font-weight: bold;
+  -webkit-transform: rotate(-45deg);
+  -webkit-transform-origin: bottom left;
+  -moz-transform: rotate(-45deg);
+  -moz-transform-origin: bottom left;
+  width: 24px;
+  float: left;
+}
+div#critical {
+  position: relative;
+  top: 1px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Design</h1>
+
+<p>This page is a CSS test for NXdom.</p>
+
+<div id="rotate">
+<div>Negative</div>
+<div>Neutral</div>
+<div>Positive</div>
+<div>Important</div>
+<div id="critical">Critical</div>
+</div>
+
+{% endblock %}
