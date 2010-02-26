@@ -13,8 +13,9 @@ def retry(func, *args, **kwargs):
     for attempt in range(MAX_ATTEMPTS):
         if attempt:
             seconds = min(300, 2 ** attempt)
-            logging.info("Attempt %d of %d will start in %d seconds." % (
-                attempt + 1, MAX_ATTEMPTS, seconds))
+            logging.warning(
+                "Attempt %d of %d will start in %d seconds." % (
+                    attempt + 1, MAX_ATTEMPTS, seconds))
             time.sleep(seconds)
         try:
             return func(*args, **kwargs)
