@@ -19,7 +19,6 @@ $(document).ready(function() {
   $("select#id_registrar").change(update_registrar);
   $("div#priority input").change(update_scores);
   $("div#timer").everyTime(200, update_if_changed);
-  keyword_keyup();
   var ms = 1200;
   $("p.fade1").animate( {color: "#222"}, ms, function() {
     $("p.fade1").animate( {color: "#ddd"}, ms);
@@ -66,10 +65,11 @@ width="86" height="45" style="vertical-align: top" /></a>
 <div id="priority" class="step two span-6 last">
 <label id="sort_order">Sort order</label>
 {{ priority_form.priority }}
-<a href="#" onclick="show_weights(); return false;">Show advanced options</a>
+<a href="#" class="toggle"
+onclick="show_weights(); return false;">Show advanced options</a>
 </div>
 
-<div id="weights" class="step two span-6 last">
+<div id="weights" class="step two span-6 last" style="display: none">
 <table class="wide">
 <tr class="rotated">
 <td class="radio"></td>
@@ -90,7 +90,8 @@ width="86" height="45" style="vertical-align: top" /></a>
 </tr>
 {% endfor %}
 </table>
-<a href="#" onclick="show_priority(); return false;">Show simple options</a>
+<a href="#" class="toggle"
+onclick="show_priority(); return false;">Show simple options</a>
 </div>
 
 <div id="registrar" class="step three span-6 last">

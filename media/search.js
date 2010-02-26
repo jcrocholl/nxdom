@@ -379,6 +379,22 @@ function update_if_changed(i) {
 	$.changed = false;
 }
 
+function show_weights() {
+	$("div#priority").hide();
+	$("div#weights").show();
+    $("div.three").css("top", 606);
+    $("div.four").css("top", 678);
+	$("div#left").css("height", 759);
+}
+
+function show_priority() {
+	$("div#weights").hide();
+	$("div#priority").show();
+    $("div.three").css("top", 438);
+    $("div.four").css("top", 510);
+	$("div#left").css("height", 591);
+}
+
 function document_ready() {
 	$.domains = {};
 	$.keys = [];
