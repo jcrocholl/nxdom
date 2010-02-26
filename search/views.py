@@ -21,6 +21,13 @@ from prefixes.selectors import random_prefix
 
 JSON_FETCH_LIMIT = 60  # Domains for each length from 3 to 12.
 MEMCACHE_TIMEOUT = 24 * 60 * 60  # 24 hours.
+PRIORITY_CHOICES = [
+    ('short', "Shortest names first"),
+    ('letters', "Without numbers and dashes"),
+    ('readable', "More human-readable"),
+    ('popular', "Popular beginning or end"),
+    ('long', "Longer but most popular"),
+    ]
 REGISTRAR_CHOICES = [
     ('godaddy.com', 'GoDaddy'),
     ('moniker.com', 'Moniker'),
@@ -44,13 +51,7 @@ class SearchForm(forms.Form):
 class PriorityForm(forms.Form):
     priority = forms.ChoiceField(initial='short', label="Priority",
         widget=forms.RadioSelect(),
-        choices=[
-            ('short', "Shortest names first"),
-            ('letters', "Without numbers and dashes"),
-            ('readable', "More human-readable"),
-            ('popular', "Popular beginning or end"),
-            ('long', "Longer but most popular"),
-            ])
+        choices=PRIORITY_CHOICES)
 
 
 class WeightsForm(forms.Form):
@@ -62,11 +63,11 @@ class WeightsForm(forms.Form):
         choices=[(3, ''), (0, ''), (-1, ''), (-3, ''), (-9, '')])
     english = forms.ChoiceField(initial=3, label="English",
         choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
-    spanish = forms.ChoiceField(initial=1, label="Spanish (Espa&ntilde;ol)",
+    spanish = forms.ChoiceField(initial=1, label="Spanish",
         choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
-    french = forms.ChoiceField(initial=1, label="French (Fran&ccedil;ais)",
+    french = forms.ChoiceField(initial=1, label="French",
         choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
-    german = forms.ChoiceField(initial=1, label="German (Deutsch)",
+    german = forms.ChoiceField(initial=1, label="German",
         choices=[(-3, ''), (0, ''), (1, ''), (3, ''), (9, '')])
     prefix = forms.ChoiceField(initial=9, label="Popular prefixes",
         choices=[(-3, ''), (0, ''), (3, ''), (9, ''), (27, '')])
@@ -83,9 +84,9 @@ class RegistrarForm(forms.Form):
 def index(request):
     logging.info("Generating home page")
     search_form = SearchForm(request.GET or None)
-    priority_form = PriorityForm(request.GET or None)
-    registrar_form = RegistrarForm(request.GET or
-                                   {'registrar': 'godaddy.com'})
+    priority_form = PriorityForm(request.GET or {'priority': 'popular'})
+    weights_form = WeightsForm(request.GET or None)
+    registrar_form = RegistrarForm(request.GET or {'registrar': 'godaddy.com'})
     return render_to_response(request, 'search/index.html', locals())
 
 

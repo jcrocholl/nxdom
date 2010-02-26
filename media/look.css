@@ -19,7 +19,8 @@ div#keywords input {
   top: -4px;
 }
 
-div#priority input {
+div#priority input,
+div#weights input {
   margin: 0 0.6em 0 0;
   padding: 0;
 }
@@ -87,6 +88,23 @@ div#priority label#sort_order {
   margin: 0 0 4px;
 }
 
+div#weights {
+  position: absolute;
+  top: 211px;
+  background: url("/static/images/rotated.png") no-repeat top left;
+}
+div#weights table {
+  margin: 0;
+}
+div#weights th,
+div#weights td {
+  padding-left: 0;
+  padding-right: 0;
+}
+tr.rotated { height: 59px; }
+tr.rotated th { vertical-align: bottom; }
+td.radio { width: 24px; }
+
 table.wide { width: 100%; }
 .row2 { background: #eee; }
 .hover { background: #ff8; }
@@ -104,18 +122,6 @@ tr.hover .parking { background: #38f; }
 .status { background: #aaa; }
 tr.row2 .status { background: #999; }
 tr.hover .status { background: #888; }
-
-table#weights th,
-table#weights td {
-  padding-left: 0;
-  padding-right: 0;
-}
-table#weights td { text-align: right; }
-td.vertical {
-  width: 23px;
-  height: 80px;
-  background: url("/static/images/vertical.png") no-repeat bottom;
-}
 
 input#feedback_submit {
   width: 110px;

@@ -66,6 +66,31 @@ width="86" height="45" style="vertical-align: top" /></a>
 <div id="priority" class="step two span-6 last">
 <label id="sort_order">Sort order</label>
 {{ priority_form.priority }}
+<a href="#" onclick="show_weights(); return false;">Show advanced options</a>
+</div>
+
+<div id="weights" class="step two span-6 last">
+<table class="wide">
+<tr class="rotated">
+<td class="radio"></td>
+<td class="radio"></td>
+<td class="radio"></td>
+<td class="radio"></td>
+<td class="radio"></td>
+<th>Characters</th>
+</tr>
+{% for field in weights_form %}
+{% ifequal field.name "english" %}
+<tr><td colspan="5"></td><th>Readability</th></tr>{% endifequal %}
+{% ifequal field.name "prefix" %}
+<tr><td colspan="5"></td><th>Popularity</th></tr>{% endifequal %}
+<tr>{% for value, text in field.field.choices %}
+<td class="radio"><input name="{{ field.name }}" value="{{ value }}" type="radio" {% ifequal value field.field.initial %}checked="checked" {% endifequal %}/></td>{% endfor %}
+<td>{{ field.label|safe }}</td>
+</tr>
+{% endfor %}
+</table>
+<a href="#" onclick="show_priority(); return false;">Show simple options</a>
 </div>
 
 <div id="registrar" class="step three span-6 last">
