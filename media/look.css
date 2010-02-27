@@ -35,11 +35,7 @@ div#registrar select {
 
 div#headline_div {
   position: absolute;
-  top: 84px;
-}
-div#headline_div h1 {
-  font-size: 1.5em;
-  font-weight: bold;
+  top: 86px;
 }
 
 div.step { position: absolute; }
@@ -49,12 +45,11 @@ div.three { top: 438px; }
 div.four { top: 510px; }
 
 div.step h2 {
-  margin-top: -2px;
-  margin-bottom: 0;
+  font-size: 1.3em;
+  margin: -2px 0 0;
   background: url("/static/images/left.png") no-repeat 0px 3px;
-  font-size: 22px;
   padding-left: 32px;
-  padding-bottom: 3px;
+  padding-bottom: 2px;
 }
 p.explain { margin-top: 0; }
 .hoverhint p.explain { color: #ddd; }

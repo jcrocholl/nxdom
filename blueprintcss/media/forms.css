@@ -17,6 +17,8 @@ legend      { font-weight: bold; font-size:1.2em; }
 /* Form fields
 -------------------------------------------------------------- */
 
+input, textarea, select { font-size: 11px; }
+
 input.text, input.title,
 textarea, select {
   margin:0.5em 0;
