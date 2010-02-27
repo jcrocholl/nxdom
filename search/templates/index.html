@@ -17,6 +17,7 @@ $(document).ready(function() {
   $("input.keyword").keypress(keyword_keypress);
   $.registrar = $("select#id_registrar").val();
   $("select#id_registrar").change(update_registrar);
+  priority_changed();
   $("div#priority input").change(priority_changed);
   $("div#weights input").change(update_scores);
   $("div#timer").everyTime(200, update_if_changed);
