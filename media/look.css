@@ -47,11 +47,13 @@ div.four { top: 510px; }
 div.step h2 {
   font-size: 1.3em;
   margin: -2px 0 0;
-  background: url("/static/images/left.png") no-repeat 0px 3px;
-  padding-left: 32px;
-  padding-bottom: 2px;
+  padding: 0 0 2px 32px;
+  background: url("/static/images/left.png") no-repeat 0px 2px;
 }
-p.explain { margin-top: 0; }
+p.explain {
+  margin: 0;
+  padding: 0;
+}
 .hoverhint p.explain { color: #ddd; }
 .raster { background: url("/static/images/raster.png"); }
 
