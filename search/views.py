@@ -63,7 +63,7 @@ class SearchForm(forms.Form):
 
 
 class PriorityForm(forms.Form):
-    priority = forms.ChoiceField(initial='short', label="Priority",
+    priority = forms.ChoiceField(label="Priority",
         widget=forms.RadioSelect(),
         choices=PRIORITY_CHOICES)
 
@@ -98,9 +98,11 @@ class RegistrarForm(forms.Form):
 def index(request):
     logging.info("Generating home page")
     search_form = SearchForm(request.GET or None)
-    priority_form = PriorityForm(request.GET or {'priority': 'popular'})
+    priority_form = PriorityForm(
+        {'priority': request.GET.get('priority', 'popular')})
     weights_form = WeightsForm(request.GET or None)
-    registrar_form = RegistrarForm(request.GET or {'registrar': 'godaddy.com'})
+    registrar_form = RegistrarForm(
+        {'registrar': request.GET.get('registrar', 'godaddy.com')})
     return render_to_response(request, 'search/index.html', locals())
 
 
