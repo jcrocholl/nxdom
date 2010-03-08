@@ -35,6 +35,9 @@ logfile.setFormatter(formatter)
 logfile.setLevel(logging.WARNING)
 logging.getLogger().addHandler(logfile)
 
+BISECT_BLOCK_SIZE = 30
+BISECT_LIMIT = BISECT_BLOCK_SIZE / 2
+PASSWORD_FILENAME = '.passwd'
 NAMESERVERS = """
 208.67.222.222
 208.67.220.220
@@ -55,8 +58,6 @@ NAMESERVERS = """
 205.171.2.65
 205.171.3.65
 """.split()
-
-PASSWORD_FILENAME = '.passwd'
 
 
 def auth_func():
@@ -289,20 +290,26 @@ def count_existing(names):
 
 def bisect(names):
     # Check the end of the list.
-    if count_existing(names[-20:]) > 5:
+    count = count_existing(names[-BISECT_BLOCK_SIZE:])
+    if count > BISECT_LIMIT:
+        print "bisect end count=%d" % count
         return []
     # Check the beginning of the list.
-    if count_existing(names[:20]) <= 5:
+    count = count_existing(names[:BISECT_BLOCK_SIZE])
+    if count <= BISECT_LIMIT:
+        print "bisect start count=%d" % count
         return names
     # Bisect the list to find the crash point.
     left = 0
     right = len(names) - 1
-    while right - left > 20:
+    while right - left > BISECT_BLOCK_SIZE:
         middle = (left + right) / 2
-        count = count_existing(names[middle:middle + 20])
+        start = middle - BISECT_BLOCK_SIZE / 2
+        stop = start + BISECT_BLOCK_SIZE
+        count = count_existing(names[start:stop])
         print "bisect left=%s right=%s middle=%s count=%d" % (
             names[left], names[right], names[middle], count)
-        if count <= 5:
+        if count <= BISECT_LIMIT:
             right = middle
         else:
             left = middle
