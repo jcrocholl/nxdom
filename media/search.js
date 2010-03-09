@@ -146,13 +146,14 @@ function google_link(name) {
 }
 
 function group_row(prefix, keys) {
-	html = '';
-	html += '<span class="quiet">' + prefix + '</span>';
+	var html = '<span class="quiet">' + prefix + '</span>';
+	var length = prefix.length;
 	for (var index in keys) {
-		if (index >= 8) break;
 		var key = keys[index];
 		var domain = $.domains[key];
 		var name = domain.key;
+		length += 1 + name.length;
+		if (length >= 80) break;
 		html += ' ' + affiliate_link(name, 'com');
 	}
 	html += '<br />';
@@ -244,7 +245,7 @@ function update_html() {
 	var results_count = keys.length;
 	var groups = {};
 	groups[$.ajax_search.left] = keys;
-	make_groups(groups, 50);
+	make_groups(groups, 25);
 	var html = p_html(groups);
 	$("div#welcome").hide();
 	if (results_count == 0) {
