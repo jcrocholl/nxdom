@@ -144,47 +144,6 @@ function google_link(name) {
 		' target="_blank">' + name + '</a>';
 }
 
-function table_row(domain, row) {
-	var html = '<tr class="row' + row + '">';
-	html += '<td class="com aff">' + affiliate_link(domain.key, 'com') + '</td>';
-	var name = domain.key;
-	for (var tld in TLD_SCORES) {
-		if (domain[tld]) {
-			var title = 'Taken: ' + name + '.' + tld + ' uses name server';
-			var color = 'taken';
-			if (domain[tld].indexOf('parking') >= 0 ||
-				domain[tld].indexOf('parked') >= 0 ||
-				domain[tld].indexOf('.hitfarm.com') >= 0 ||
-				domain[tld].indexOf('.fastpark.net') >= 0 ||
-				domain[tld].indexOf('.name-services.com') >= 0 ||
-				domain[tld].indexOf('.above.com') >= 0 ||
-				domain[tld].indexOf('.domaincontrol.com') >= 0 ||
-				domain[tld].indexOf('.dsredirection.com') >= 0 ||
-				domain[tld].indexOf('.buydomains.com') >= 0) {
-				title = 'Parking: ' + name + '.' + tld + ' uses name server';
-				color = 'parking';
-			}
-			if (domain[tld].substr(0, 7) == 'status=' ||
-				domain[tld].substr(0, 8) == 'timeout=') {
-				title = 'DNS error: ' + name + '.' + tld + ' returned';
-				color = 'status';
-			}
-			html += '<td class="tld ' + color + '" title="' +
-				title + ' ' + domain[tld] + '">';
-			html += domain_link(domain.key, tld);
-			html += '</td>';
-		} else {
-			html += '<td class="tld aff">';
-			html += affiliate_link(domain.key, tld);
-			html += '</td>';
-		}
-	}
-	// html += '<td class="right quiet">' + domain.length + '</td>';
-	// html += '<td>' + domain.score.toFixed(1) + '</td>';
-	html += '</tr>';
-	return html;
-}
-
 function bar(attr, domain, highest, value) {
 	var score = muldiv($.weights[attr], domain[attr]);
 	var pixels = Math.round(400 * score / highest);
