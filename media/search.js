@@ -127,8 +127,9 @@ function affiliate_link(name, tld) {
 		' is available on ' + $.registrar + '" ';
 	html += mouse_down_track('outgoing', $.registrar, tld, name.length);
 	html += ' target="_blank">';
-	if (tld == 'com') html += name + '.';
-	html += tld + '</a>';
+	// if (tld == 'com') html += name + '.';
+	// html += tld + '</a>';
+	html += name + '</a>';
 	return html;
 }
 
@@ -144,58 +145,14 @@ function google_link(name) {
 		' target="_blank">' + name + '</a>';
 }
 
-function bar(attr, domain, highest, value) {
-	var score = muldiv($.weights[attr], domain[attr]);
-	var pixels = Math.round(400 * score / highest);
-	if (pixels <= 0) return '';
-	var html = '';
-	html += '<div class="bar color-' + attr + '"';
-	html += ' style="width: ' + pixels + 'px">';
-	if (!value) value = score;
-	if (typeof value == "number") value = value.toFixed(0);
-	html += value + '</div>\n';
-	return html;
-}
-
-function domain_row(domain, highest) {
+function group_row(keys) {
 	html = '';
-	html += bar('length', domain, highest, domain.length);
-	html += bar('english', domain, highest, domain.english / 10000);
-	html += bar('spanish', domain, highest, domain.spanish / 10000);
-	html += bar('french', domain, highest, domain.french / 10000);
-	html += bar('german', domain, highest, domain.german / 10000);
-	html += bar('prefix', domain, highest,
-				domain.key.substr(0, domain.pl));
-	html += bar('suffix', domain, highest,
-				domain.key.substr(-domain.sl));
-	var name = domain.key;
-	html += affiliate_link(name, 'com');
-	for (var tld in TLD_SCORES) {
-		if (domain[tld]) {
-			var title = 'Taken: ' + name + '.' + tld + ' uses name server';
-			var color = 'taken';
-			if (domain[tld].indexOf('parking') >= 0 ||
-				domain[tld].indexOf('parked') >= 0 ||
-				domain[tld].indexOf('.hitfarm.com') >= 0 ||
-				domain[tld].indexOf('.fastpark.net') >= 0 ||
-				domain[tld].indexOf('.name-services.com') >= 0 ||
-				domain[tld].indexOf('.above.com') >= 0 ||
-				domain[tld].indexOf('.domaincontrol.com') >= 0 ||
-				domain[tld].indexOf('.dsredirection.com') >= 0 ||
-				domain[tld].indexOf('.buydomains.com') >= 0) {
-				title = 'Parking: ' + name + '.' + tld + ' uses name server';
-				color = 'parking';
-			}
-			if (domain[tld].substr(0, 7) == 'status=' ||
-				domain[tld].substr(0, 8) == 'timeout=') {
-				title = 'DNS error: ' + name + '.' + tld + ' returned';
-				color = 'status';
-			}
-			html += ' <span class="tld ' + color + '" title="' +
-				title + ' ' + domain[tld] + '">';
-			html += domain_link(domain.key, tld);
-			html += '</span>';
-		}
+	for (var index in keys) {
+		var key = keys[index];
+		var domain = $.domains[key];
+		var name = domain.key;
+		if (index) html += ' ';
+		html += affiliate_link(name, 'com');
 	}
 	html += '<br />';
 	return html;
@@ -203,12 +160,20 @@ function domain_row(domain, highest) {
 
 function p_html(start, end) {
 	if ($.keys.length == 0) return '';
-	var highest = $.domains[$.keys[0]].score;
-	var html = '';
+	var groups = {};
 	if (end > $.keys.length) end = $.keys.length;
 	for (var index = start; index < end; index++) {
-		var domain = $.domains[$.keys[index]];
-		html += domain_row(domain, highest);
+		var key = $.keys[index];
+		var prefix = key.substr(0, 3);
+		if (prefix in groups) {
+			groups[prefix].push(key);
+		} else {
+			groups[prefix] = [key];
+		}
+	}
+	var html = '';
+	for (var prefix in groups) {
+		html += group_row(groups[prefix]);
 	}
 	return html;
 }
