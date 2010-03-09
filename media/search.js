@@ -158,24 +158,61 @@ function group_row(keys) {
 	return html;
 }
 
-function p_html(start, end) {
-	if ($.keys.length == 0) return '';
-	var groups = {};
-	if (end > $.keys.length) end = $.keys.length;
-	for (var index = start; index < end; index++) {
-		var key = $.keys[index];
-		var prefix = key.substr(0, 3);
-		if (prefix in groups) {
-			groups[prefix].push(key);
-		} else {
-			groups[prefix] = [key];
-		}
-	}
+function p_html(groups) {
 	var html = '';
 	for (var prefix in groups) {
 		html += group_row(groups[prefix]);
 	}
 	return html;
+}
+
+function split_group(groups, old_prefix) {
+	// Count all prefixes (old_prefix + one more letter).
+	var old_length = old_prefix.length;
+	var new_length = old_length + 1;
+	var prefixes = {};
+	for (var index in groups[old_prefix]) {
+		var key = groups[old_prefix][index];
+		prefix = key.substr(0, new_length);
+		if (prefix in prefixes) prefixes[prefix] += 1;
+		else prefixes[prefix] = 1;
+	}
+	// Find the prefix with the highest count.
+	var best_count = 0;
+	var best_prefix = '';
+	for (var prefix in prefixes) {
+		if (prefixes[prefix] > best_count) {
+			best_count = prefixes[prefix];
+			best_prefix = prefix;
+		}
+	}
+	// Move keys with the best prefix to a new group.
+	groups[best_prefix] = [];
+	for (var index in groups[old_prefix]) {
+		var key = groups[old_prefix][index];
+		if (key.substr(0, new_length) == best_prefix) {
+			groups[old_prefix].splice(index, 1);
+			groups[best_prefix].push(key);
+		}
+	}
+}
+
+function make_groups(groups, max_count) {
+	while (true) {
+		// Find the largest group.
+		var best_count = 0;
+		var best_prefix = '';
+		for (var prefix in groups) {
+			if (groups[prefix].length > best_count) {
+				best_count = groups[prefix].length;
+				best_prefix = prefix;
+			}
+		}
+		// If the largest group is small enough, we're done.
+		if (best_count <= max_count) break;
+		// Split the largest group into two groups.
+		split_group(groups, best_prefix);
+	}
 }
 
 function update_html() {
@@ -191,8 +228,10 @@ function update_html() {
 	for (var key in $.domains) $.keys.push(key);
 	$.keys.sort(function(a, b) {
 		return $.domains[b].score - $.domains[a].score });
-	$.ajax_search.showing = DEFAULT_LIMIT;
-	var html = p_html(0, DEFAULT_LIMIT);
+	var groups = {};
+	groups[$.ajax_search.left] = $.keys;
+	make_groups(groups, 10);
+	var html = p_html(groups);
 	$("div#welcome").hide();
 	if ($.keys.length == 0) {
 		$("div#results_div").hide();
