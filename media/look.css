@@ -58,13 +58,23 @@ p.explain {
 .raster { background: url("/static/images/raster.png"); }
 
 #results_div { display: none; }
-#results_div p.hint {
-  padding: 0 4px;
-  font-size: 14px;
-  margin-bottom: 0;
-}
+#results_div p.hint { margin-bottom: 0; }
 #results_div table { margin-top: 0; }
-tbody#results { font-size: 14px; }
+
+.bar {
+  display: block;
+  float: left;
+  height: 22px;
+  text-align: center;
+  overflow: hidden;
+}
+.color-length { background: #08f; }
+.color-english { background: blue; }
+.color-spanish { background: red; }
+.color-french { background: green; }
+.color-german { background: yellow; }
+.color-prefix { background: #88f; }
+.color-suffix { background: #80f; }
 
 div#priority {
   position: absolute;

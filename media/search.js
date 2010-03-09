@@ -19,20 +19,20 @@ function force_number(text) {
 	return number;
 }
 
-function force_million(text) {
-	return force_number(text) * 1000000;
+function force_micro(text) {
+	return force_number(text) / 1000000;
 }
 
 function form_weights() {
-	return {length: force_million($("input[name=len]:checked").val()),
-			digits: force_million($("input[name=digits]:checked").val()),
-			dashes: force_million($("input[name=dashes]:checked").val()),
-			english: force_number($("input[name=english]:checked").val()),
-			spanish: force_number($("input[name=spanish]:checked").val()),
-			french: force_number($("input[name=french]:checked").val()),
-			german: force_number($("input[name=german]:checked").val()),
-			prefix: force_number($("input[name=prefix]:checked").val()),
-			suffix: force_number($("input[name=suffix]:checked").val())};
+	return {length: 12 * force_number($("input[name=len]:checked").val()),
+			digits: force_number($("input[name=digits]:checked").val()),
+			dashes: force_number($("input[name=dashes]:checked").val()),
+			english: force_micro($("input[name=english]:checked").val()),
+			spanish: force_micro($("input[name=spanish]:checked").val()),
+			french: force_micro($("input[name=french]:checked").val()),
+			german: force_micro($("input[name=german]:checked").val()),
+			prefix: force_micro($("input[name=prefix]:checked").val()),
+			suffix: force_micro($("input[name=suffix]:checked").val())};
 }
 
 function priority_changed() {
@@ -72,12 +72,16 @@ function priority_changed() {
 	update_scores();
 }
 
+function muldiv(weight, score) {
+	if (weight >= 0) return weight * score;
+	if (score == 0) return -weight;
+	return -weight / score;
+}
+
 function domain_score(domain, weights) {
 	var score = 0;
 	for (var attr in weights)
-		score += domain[attr] * weights[attr];
-	for (var tld in TLD_SCORES)
-		if (!domain[tld]) score += TLD_SCORES[tld] * 1000000;
+		score += muldiv(weights[attr], domain[attr]);
 	return score;
 }
 
@@ -181,20 +185,71 @@ function table_row(domain, row) {
 	return html;
 }
 
-function activate_ruler() {
-	$("table.ruler tbody tr").hover(
-		function() { $(this).addClass("hover"); },
-		function() { $(this).removeClass("hover"); });
+function bar(attr, domain, highest, value) {
+	var score = muldiv($.weights[attr], domain[attr]);
+	var pixels = Math.round(400 * score / highest);
+	if (pixels <= 0) return '';
+	var html = '';
+	html += '<div class="bar color-' + attr + '"';
+	html += ' style="width: ' + pixels + 'px">';
+	if (!value) value = score;
+	if (typeof value == "number") value = value.toFixed(0);
+	html += value + '</div>\n';
+	return html;
 }
 
-function table_html(start, end) {
+function domain_row(domain, highest) {
+	html = '';
+	html += bar('length', domain, highest, domain.length);
+	html += bar('english', domain, highest, domain.english / 10000);
+	html += bar('spanish', domain, highest, domain.spanish / 10000);
+	html += bar('french', domain, highest, domain.french / 10000);
+	html += bar('german', domain, highest, domain.german / 10000);
+	html += bar('prefix', domain, highest,
+				domain.key.substr(0, domain.pl));
+	html += bar('suffix', domain, highest,
+				domain.key.substr(-domain.sl));
+	var name = domain.key;
+	html += affiliate_link(name, 'com');
+	for (var tld in TLD_SCORES) {
+		if (domain[tld]) {
+			var title = 'Taken: ' + name + '.' + tld + ' uses name server';
+			var color = 'taken';
+			if (domain[tld].indexOf('parking') >= 0 ||
+				domain[tld].indexOf('parked') >= 0 ||
+				domain[tld].indexOf('.hitfarm.com') >= 0 ||
+				domain[tld].indexOf('.fastpark.net') >= 0 ||
+				domain[tld].indexOf('.name-services.com') >= 0 ||
+				domain[tld].indexOf('.above.com') >= 0 ||
+				domain[tld].indexOf('.domaincontrol.com') >= 0 ||
+				domain[tld].indexOf('.dsredirection.com') >= 0 ||
+				domain[tld].indexOf('.buydomains.com') >= 0) {
+				title = 'Parking: ' + name + '.' + tld + ' uses name server';
+				color = 'parking';
+			}
+			if (domain[tld].substr(0, 7) == 'status=' ||
+				domain[tld].substr(0, 8) == 'timeout=') {
+				title = 'DNS error: ' + name + '.' + tld + ' returned';
+				color = 'status';
+			}
+			html += ' <span class="tld ' + color + '" title="' +
+				title + ' ' + domain[tld] + '">';
+			html += domain_link(domain.key, tld);
+			html += '</span>';
+		}
+	}
+	html += '<br />';
+	return html;
+}
+
+function p_html(start, end) {
+	if ($.keys.length == 0) return '';
+	var highest = $.domains[$.keys[0]].score;
 	var html = '';
-	var row = 1;
 	if (end > $.keys.length) end = $.keys.length;
 	for (var index = start; index < end; index++) {
 		var domain = $.domains[$.keys[index]];
-		html += table_row(domain, row);
-		row = (row % 2) + 1;
+		html += domain_row(domain, highest);
 	}
 	return html;
 }
@@ -213,7 +268,7 @@ function update_html() {
 	$.keys.sort(function(a, b) {
 		return $.domains[b].score - $.domains[a].score });
 	$.ajax_search.showing = DEFAULT_LIMIT;
-	var html = table_html(0, DEFAULT_LIMIT);
+	var html = p_html(0, DEFAULT_LIMIT);
 	$("div#welcome").hide();
 	if ($.keys.length == 0) {
 		$("div#results_div").hide();
@@ -227,8 +282,8 @@ function update_html() {
 	} else {
 		$("#results_empty").hide();
 		$("#results_loading").hide();
-		$("tbody#results").html(html);
-		$("div#results_div").show();
+		$("#results_p").html(html);
+		$("#results_div").show();
 		$("div#feedback").show();
 		if ($.keys.length > DEFAULT_LIMIT && !$.ajax_search.start)
 			$("#results_more").show();
@@ -239,14 +294,13 @@ function update_html() {
 		else
 			$("#results_few").hide();
 	}
-	activate_ruler();
 }
 
 function show_more() {
 	var start = $.ajax_search.showing;
 	$.ajax_search.showing += DEFAULT_LIMIT;
-	var html = table_html(start, $.ajax_search.showing);
-	$("tbody#results").append(html);
+	var html = p_html(start, $.ajax_search.showing);
+	$("#results_p").append(html);
 	if ($.ajax_search.showing >= $.keys.length)
 		$("#results_more").hide();
 	ga_track("/more/" + start + "/");
@@ -435,7 +489,6 @@ function document_ready() {
 	$.ajax_search.counter = 0;
 	$.ajax_search.showing = 0;
 	$.changed = false;
-	activate_ruler();
     $("img#loading").ajaxStart(ajax_start).ajaxStop(ajax_stop);
 }
 
