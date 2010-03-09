@@ -156,25 +156,11 @@ It did not match any domain names in our database.
 </div>
 
 <div id="results_div">
-<p class="hint">
-Click to check if a domain name is still available. Mouse over
-<span class="tld taken" title="Red means this domain name is taken.">taken</span> or
-<span class="tld parking" title="Blue means this domain name is parked.">parking</span> or
-<span class="tld status" title="Gray means there was a DNS error.">error</span>
-for details.
+<p id="results_p">
 </p>
 
-<table class="ruler wide">
-<thead>
-<tr><td class="tld"><img src="/static/images/down.png" alt="" /></td></tr>
-</thead>
-<tbody id="results">
-<tr><td></td></tr>
-</tbody>
-</table>
-
 <p id="results_more" class="hint" style="display: none; padding-left: 0; margin-top: 0">
-<input type="button" onclick="show_more()" value="Show more domain names" />
+<a href="#" onclick="show_more(); return false;">Show more domain names</a>
 </p>
 
 <p id="results_few" class="hint" style="display: none">
