@@ -163,8 +163,12 @@ function p_html(groups) {
 	var prefixes = [];
 	for (var prefix in groups) prefixes.push(prefix);
 	prefixes.sort(function(a, b) {
-			return $.domains[groups[b][0]].score -
-				   $.domains[groups[a][0]].score; });
+			if (a == b) return 0;
+			if (a.substr(0, b.length) == b) return -1;
+			if (b.substr(0, a.length) == a) return 1;
+			if (a < b) return -1;
+			if (a > b) return 1;
+			return 0; });
 	var html = '';
 	for (var index in prefixes) {
 		var prefix = prefixes[index];
@@ -240,7 +244,7 @@ function update_html() {
 	var results_count = keys.length;
 	var groups = {};
 	groups[$.ajax_search.left] = keys;
-	make_groups(groups, 30);
+	make_groups(groups, 50);
 	var html = p_html(groups);
 	$("div#welcome").hide();
 	if (results_count == 0) {
