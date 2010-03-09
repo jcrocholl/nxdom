@@ -145,23 +145,30 @@ function google_link(name) {
 		' target="_blank">' + name + '</a>';
 }
 
-function group_row(keys) {
+function group_row(prefix, keys) {
 	html = '';
+	html += '<span class="quiet">' + prefix + '</span>';
 	for (var index in keys) {
+		// if (index >= 8) break;
 		var key = keys[index];
 		var domain = $.domains[key];
 		var name = domain.key;
-		if (index) html += ' ';
-		html += affiliate_link(name, 'com');
+		html += ' ' + affiliate_link(name, 'com');
 	}
 	html += '<br />';
 	return html;
 }
 
 function p_html(groups) {
+	var prefixes = [];
+	for (var prefix in groups) prefixes.push(prefix);
+	prefixes.sort(function(a, b) {
+			return $.domains[groups[b][0]].score -
+				   $.domains[groups[a][0]].score; });
 	var html = '';
-	for (var prefix in groups) {
-		html += group_row(groups[prefix]);
+	for (var index in prefixes) {
+		var prefix = prefixes[index];
+		html += group_row(prefix, groups[prefix]);
 	}
 	return html;
 }
@@ -188,7 +195,7 @@ function split_group(groups, old_prefix) {
 	}
 	// Move keys with the best prefix to a new group.
 	groups[best_prefix] = [];
-	for (var index in groups[old_prefix]) {
+	for (var index = groups[old_prefix].length - 1; index >= 0; index--) {
 		var key = groups[old_prefix][index];
 		if (key.substr(0, new_length) == best_prefix) {
 			groups[old_prefix].splice(index, 1);
@@ -213,6 +220,10 @@ function make_groups(groups, max_count) {
 		// Split the largest group into two groups.
 		split_group(groups, best_prefix);
 	}
+	for (var prefix in groups) {
+		groups[prefix].sort(function(a, b) {
+				return $.domains[b].score - $.domains[a].score });
+	}
 }
 
 function update_html() {
@@ -226,8 +237,6 @@ function update_html() {
 	}
 	$.keys = [];
 	for (var key in $.domains) $.keys.push(key);
-	$.keys.sort(function(a, b) {
-		return $.domains[b].score - $.domains[a].score });
 	var groups = {};
 	groups[$.ajax_search.left] = $.keys;
 	make_groups(groups, 10);
