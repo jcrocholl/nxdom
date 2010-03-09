@@ -153,8 +153,8 @@ p.highlight { padding: 4px; background: #fed; }
 
 a { color: #04f; text-decoration: none; }
 a:visited { color: #08f; }
-a:focus, a:hover, td.com a { text-decoration: underline; }
-td.tld a { color: #000; }
+a:focus, a:hover { text-decoration: underline; }
+a.quiet, a.quiet:visited { color: #aaa; }
 a.toggle {
   display: block;
   color: #aaa;
@@ -164,12 +164,6 @@ a.toggle:focus, td.aff a:focus,
 a.toggle:hover, td.aff a:hover {
   color: #04f;
 }
-tbody#results td a {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
 
 div#footer {
   text-align: center;

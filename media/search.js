@@ -146,7 +146,9 @@ function google_link(name) {
 }
 
 function group_row(prefix, keys) {
-	var html = '<span class="quiet">' + prefix + '</span>';
+	var html = '<a class="quiet" href="#"';
+	html += 'onclick="$(\'#id_left\').val(\'' + prefix + '\'); return false;"';
+	html += '>' + prefix + '</a>';
 	var length = prefix.length;
 	for (var index in keys) {
 		var key = keys[index];
