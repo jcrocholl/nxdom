@@ -149,7 +149,7 @@ function group_row(prefix, keys) {
 	html = '';
 	html += '<span class="quiet">' + prefix + '</span>';
 	for (var index in keys) {
-		// if (index >= 8) break;
+		if (index >= 8) break;
 		var key = keys[index];
 		var domain = $.domains[key];
 		var name = domain.key;
@@ -205,7 +205,7 @@ function split_group(groups, old_prefix) {
 }
 
 function make_groups(groups, max_count) {
-	while (true) {
+	for (var count = 1; count <= max_count; count++) {
 		// Find the largest group.
 		var best_count = 0;
 		var best_prefix = '';
@@ -216,7 +216,7 @@ function make_groups(groups, max_count) {
 			}
 		}
 		// If the largest group is small enough, we're done.
-		if (best_count <= max_count) break;
+		if (best_count <= 8) break;
 		// Split the largest group into two groups.
 		split_group(groups, best_prefix);
 	}
@@ -235,14 +235,15 @@ function update_html() {
 		$("div#welcome").show();
 		return;
 	}
-	$.keys = [];
-	for (var key in $.domains) $.keys.push(key);
+	var keys = [];
+	for (var key in $.domains) keys.push(key);
+	var results_count = keys.length;
 	var groups = {};
-	groups[$.ajax_search.left] = $.keys;
-	make_groups(groups, 10);
+	groups[$.ajax_search.left] = keys;
+	make_groups(groups, 30);
 	var html = p_html(groups);
 	$("div#welcome").hide();
-	if ($.keys.length == 0) {
+	if (results_count == 0) {
 		$("div#results_div").hide();
 		if ($.ajax_search.start) {
 			$("#results_empty").hide();
@@ -257,25 +258,11 @@ function update_html() {
 		$("#results_p").html(html);
 		$("#results_div").show();
 		$("div#feedback").show();
-		if ($.keys.length > DEFAULT_LIMIT && !$.ajax_search.start)
-			$("#results_more").show();
-		else
-			$("#results_more").hide();
-		if ($.keys.length <= DEFAULT_LIMIT / 2 && !$.ajax_search.start)
+		if (results_count <= DEFAULT_LIMIT / 2 && !$.ajax_search.start)
 			$("#results_few").show();
 		else
 			$("#results_few").hide();
 	}
-}
-
-function show_more() {
-	var start = $.ajax_search.showing;
-	$.ajax_search.showing += DEFAULT_LIMIT;
-	var html = p_html(start, $.ajax_search.showing);
-	$("#results_p").append(html);
-	if ($.ajax_search.showing >= $.keys.length)
-		$("#results_more").hide();
-	ga_track("/more/" + start + "/");
 }
 
 function array_unchanged(a, b) {
@@ -451,7 +438,6 @@ function show_priority() {
 
 function document_ready() {
 	$.domains = {};
-	$.keys = [];
 	$.weights = form_weights();
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
