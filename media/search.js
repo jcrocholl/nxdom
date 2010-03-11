@@ -400,10 +400,11 @@ function ajax_stop() {
 	$.changed = true;
 }
 
-function ajax_search(left, right) {
+function ajax_search(left, right, force_search) {
 	left = jQuery.trim(left).toLowerCase();
 	right = jQuery.trim(right).toLowerCase();
-	if ($.ajax_search.left == left && $.ajax_search.right == right) return;
+	if ($.ajax_search.left == left && $.ajax_search.right == right
+		&& !force_search) return;
 	if (left || right) {
 		$("img#loading").show();
 	} else {
@@ -477,8 +478,8 @@ function document_ready() {
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	$.ajax_search.start = false;
-	$.ajax_search.left = '*';
-	$.ajax_search.right = '*';
+	$.ajax_search.left = '';
+	$.ajax_search.right = '';
 	$.ajax_search.counter = 0;
 	$.ajax_search.results = 0;
 	$.changed = false;

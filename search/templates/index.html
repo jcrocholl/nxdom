@@ -34,6 +34,9 @@ $(document).ready(function() {
             function(){ $(".explain", this)
               .stop().animate({color: "#ddd"}, "slow")});
   })})})});
+  var left = $("input#id_left").val();
+  var right = $("input#id_right").val();
+  ajax_search(left, right, true);
 });
 </script>
 {% endblock %}
