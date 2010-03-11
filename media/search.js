@@ -146,9 +146,14 @@ function google_link(name) {
 		' target="_blank">' + name + '</a>';
 }
 
+function set_prefix(prefix) {
+	$('#id_left').val(prefix).focus();
+	return false;
+}
+
 function group_row(prefix, keys) {
 	var html = '<a class="quiet" href="#"';
-	html += 'onclick="$(\'#id_left\').val(\'' + prefix + '\'); return false;"';
+	html += 'onclick="return set_prefix(\'' + prefix + '\');"';
 	html += '>' + prefix + ' ';
 	html += '<img src="/static/images/right9.png" alt=">"';
 	html += ' width="9" height="9">';
@@ -215,6 +220,9 @@ function split_group(groups, old_prefix) {
 			groups[best_prefix].unshift(key);
 		}
 	}
+	if (groups[old_prefix].length == 0) {
+		delete groups[old_prefix];
+	}
 }
 
 function make_groups(groups, max_count) {
@@ -229,36 +237,36 @@ function make_groups(groups, max_count) {
 			}
 		}
 		// If the largest group is small enough, we're done.
-		if (best_count <= 8) break;
+		if (best_count <= 6) break;
 		// Split the largest group into two groups.
 		split_group(groups, best_prefix);
 	}
 }
 
 function update_html() {
+	$.keys = [];
+	for (var key in $.domains) $.keys.push(key);
+	if ($.keys.length == 0) return show_hide();
+	$.keys.sort(function(a, b) {
+			return $.domains[b].score - $.domains[a].score });
+	var top10_index = Math.min($.keys.length - 1, 10);
+	$.ajax_search.top10 = $.domains[$.keys[top10_index]].score;
+	var groups = {};
+	groups[$.ajax_search.left] = $.keys;
+	make_groups(groups, 25);
+	var html = p_html(groups);
+	$("#results_p").html(html);
+	show_hide();
+}
+
+function show_hide() {
 	if ($.ajax_search.left + $.ajax_search.right == '') {
 		$("div#results_div").hide();
 		$("div#results_loading").hide();
 		$("div#results_empty").hide();
-		$("div#feedback").hide();
 		$("div#welcome").show();
-		return;
-	}
-	var keys = [];
-	for (var key in $.domains) keys.push(key);
-	keys.sort(function(a, b) {
-			return $.domains[b].score - $.domains[a].score });
-	var results_count = keys.length;
-	if (results_count) {
-		var top10_index = Math.min(results_count - 1, 10);
-		$.ajax_search.top10 = $.domains[keys[top10_index]].score;
-	}
-	var groups = {};
-	groups[$.ajax_search.left] = keys;
-	make_groups(groups, 25);
-	var html = p_html(groups);
-	$("div#welcome").hide();
-	if (results_count == 0) {
+	} else if ($.keys.length == 0) {
+		$("div#welcome").hide();
 		$("div#results_div").hide();
 		if ($.ajax_search.start) {
 			$("#results_empty").hide();
@@ -268,15 +276,32 @@ function update_html() {
 			$("#results_empty").show();
 		}
 	} else {
+		$("div#welcome").hide();
 		$("#results_empty").hide();
 		$("#results_loading").hide();
-		$("#results_p").html(html);
 		$("#results_div").show();
-		$("div#feedback").show();
-		if (results_count <= DEFAULT_LIMIT / 2 && !$.ajax_search.start)
+		if ($.keys.length <= DEFAULT_LIMIT / 2 && !$.ajax_search.start)
 			$("#results_few").show();
 		else
 			$("#results_few").hide();
+	}
+	if ($.mode == 'basic') {
+		if ($.ajax_search.left || $.ajax_search.right)
+			$("div#feedback").show();
+		else
+			$("div#feedback").hide();
+		$("div#weights").hide();
+		$("div#priority").show();
+		$("div.three").css("top", 438);
+		$("div.four").css("top", 510);
+		$("div#left").css("height", 591);
+	} else {
+		$("div#feedback").hide();
+		$("div#priority").hide();
+		$("div#weights").show();
+		$("div.three").css("top", 606);
+		$("div.four").css("top", 678);
+		$("div#left").css("height", 663);
 	}
 }
 
@@ -436,23 +461,19 @@ function update_if_changed(i) {
 }
 
 function show_weights() {
-	$("div#priority").hide();
-	$("div#weights").show();
-    $("div.three").css("top", 606);
-    $("div.four").css("top", 678);
-	$("div#left").css("height", 759);
+	$.mode = 'advanced';
+	show_hide();
 }
 
 function show_priority() {
-	$("div#weights").hide();
-	$("div#priority").show();
-    $("div.three").css("top", 438);
-    $("div.four").css("top", 510);
-	$("div#left").css("height", 591);
+	$.mode = 'basic';
+	show_hide();
 }
 
 function document_ready() {
 	$.domains = {};
+	$.keys = [];
+	$.mode = 'basic';
 	$.weights = form_weights();
 	$.ajax_search = {};
 	$.ajax_search.xhr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
