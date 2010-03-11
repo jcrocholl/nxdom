@@ -1,4 +1,3 @@
-DEFAULT_LIMIT = 100
 DIRECT_PROPERTIES = ["length", "digits", "dashes"];
 SCORE_PROPERTIES = ["english", "spanish", "french", "german",
 					"prefix", "suffix"];
@@ -244,15 +243,16 @@ function make_groups(groups, max_count) {
 }
 
 function update_html() {
-	$.keys = [];
-	for (var key in $.domains) $.keys.push(key);
-	if ($.keys.length == 0) return show_hide();
-	$.keys.sort(function(a, b) {
+	keys = [];
+	for (var key in $.domains) keys.push(key);
+	$.ajax_search.results = keys.length;
+	if ($.ajax_search.results == 0) return show_hide();
+	keys.sort(function(a, b) {
 			return $.domains[b].score - $.domains[a].score });
-	var top10_index = Math.min($.keys.length - 1, 10);
-	$.ajax_search.top10 = $.domains[$.keys[top10_index]].score;
+	var top10_index = Math.min($.ajax_search.results - 1, 10);
+	$.ajax_search.top10 = $.domains[keys[top10_index]].score;
 	var groups = {};
-	groups[$.ajax_search.left] = $.keys;
+	groups[$.ajax_search.left] = keys;
 	make_groups(groups, 25);
 	var html = p_html(groups);
 	$("#results_p").html(html);
@@ -265,7 +265,7 @@ function show_hide() {
 		$("div#results_loading").hide();
 		$("div#results_empty").hide();
 		$("div#welcome").show();
-	} else if ($.keys.length == 0) {
+	} else if ($.ajax_search.results == 0) {
 		$("div#welcome").hide();
 		$("div#results_div").hide();
 		if ($.ajax_search.start) {
@@ -280,7 +280,7 @@ function show_hide() {
 		$("#results_empty").hide();
 		$("#results_loading").hide();
 		$("#results_div").show();
-		if ($.keys.length <= DEFAULT_LIMIT / 2 && !$.ajax_search.start)
+		if ($.ajax_search.results <= 100 && !$.ajax_search.start)
 			$("#results_few").show();
 		else
 			$("#results_few").hide();
@@ -472,7 +472,6 @@ function show_priority() {
 
 function document_ready() {
 	$.domains = {};
-	$.keys = [];
 	$.mode = 'basic';
 	$.weights = form_weights();
 	$.ajax_search = {};
@@ -481,7 +480,7 @@ function document_ready() {
 	$.ajax_search.left = '*';
 	$.ajax_search.right = '*';
 	$.ajax_search.counter = 0;
-	$.ajax_search.showing = 0;
+	$.ajax_search.results = 0;
 	$.changed = false;
     $("img#loading").ajaxStart(ajax_start).ajaxStop(ajax_stop);
 }
