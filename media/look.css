@@ -57,24 +57,27 @@ p.explain {
 .hoverhint p.explain { color: #ddd; }
 .raster { background: url("/static/images/raster.png"); }
 
-#results_div { display: none; }
-#results_div p.hint { margin-bottom: 0; }
-#results_div table { margin-top: 0; }
-
-.bar {
-  display: block;
-  float: left;
-  height: 22px;
-  text-align: center;
+#results_div {
+  display: none;
   overflow: hidden;
 }
-.color-length { background: #08f; }
-.color-english { background: blue; }
-.color-spanish { background: red; }
-.color-french { background: green; }
-.color-german { background: yellow; }
-.color-prefix { background: #88f; }
-.color-suffix { background: #80f; }
+#results_div p.hint { margin-bottom: 0; }
+#results_p { width: 400em; }
+#results_p a { margin-right: 1ex; }
+.fade-2 { color: #15f; }
+.fade-3 { color: #26f; }
+.fade-4 { color: #37f; }
+.fade-5 { color: #48f; }
+.fade-6 { color: #59f; }
+.fade-7 { color: #6af; }
+.fade-8 { color: #7bf; }
+.fade-9 { color: #8cf; }
+.fade-10 { color: #9df; }
+.fade-11 { color: #aef; }
+.fade-12 { color: #bff; }
+.fade-13 { color: #cff; }
+.fade-14 { color: #dff; }
+.fade-15 { color: #eff; }
 
 div#priority {
   position: absolute;

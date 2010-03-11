@@ -94,7 +94,7 @@ function mouse_down_track(one, two, three, four) {
 	return 'onMouseDown="' + javascript + '"';
 }
 
-function affiliate_link(name, tld) {
+function affiliate_link(name, tld, fade) {
 	var html = '<a href="';
 	if ($.registrar == 'godaddy.com') {
 		html += "http://www.anrdoezrs.net/interactive";
@@ -126,6 +126,7 @@ function affiliate_link(name, tld) {
 	html += '" title="Click here to check if ' + name + '.' + tld +
 		' is available on ' + $.registrar + '" ';
 	html += mouse_down_track('outgoing', $.registrar, tld, name.length);
+	html += ' class="fade-' + fade + '"';
 	html += ' target="_blank">';
 	// if (tld == 'com') html += name + '.';
 	// html += tld + '</a>';
@@ -148,15 +149,20 @@ function google_link(name) {
 function group_row(prefix, keys) {
 	var html = '<a class="quiet" href="#"';
 	html += 'onclick="$(\'#id_left\').val(\'' + prefix + '\'); return false;"';
-	html += '>' + prefix + '</a>';
-	var length = prefix.length;
+	html += '>' + prefix + ' ';
+	html += '<img src="/static/images/right9.png" alt=">"';
+	html += ' width="9" height="9">';
+	html += '</a>';
+	var length = prefix.length + 2;
 	for (var index in keys) {
 		var key = keys[index];
 		var domain = $.domains[key];
 		var name = domain.key;
-		length += 1 + name.length;
-		if (length >= 80) break;
-		html += ' ' + affiliate_link(name, 'com');
+		length += 2 + name.length;
+		if (length >= 120) break;
+		var link = affiliate_link(name, 'com', index);
+		if (domain.score > $.ajax_search.top10) link = '<b>' + link + '</b>';
+		html += ' ' + link;
 	}
 	html += '<br />';
 	return html;
@@ -206,7 +212,7 @@ function split_group(groups, old_prefix) {
 		var key = groups[old_prefix][index];
 		if (key.substr(0, new_length) == best_prefix) {
 			groups[old_prefix].splice(index, 1);
-			groups[best_prefix].push(key);
+			groups[best_prefix].unshift(key);
 		}
 	}
 }
@@ -227,10 +233,6 @@ function make_groups(groups, max_count) {
 		// Split the largest group into two groups.
 		split_group(groups, best_prefix);
 	}
-	for (var prefix in groups) {
-		groups[prefix].sort(function(a, b) {
-				return $.domains[b].score - $.domains[a].score });
-	}
 }
 
 function update_html() {
@@ -244,7 +246,13 @@ function update_html() {
 	}
 	var keys = [];
 	for (var key in $.domains) keys.push(key);
+	keys.sort(function(a, b) {
+			return $.domains[b].score - $.domains[a].score });
 	var results_count = keys.length;
+	if (results_count) {
+		var top10_index = Math.min(results_count - 1, 10);
+		$.ajax_search.top10 = $.domains[keys[top10_index]].score;
+	}
 	var groups = {};
 	groups[$.ajax_search.left] = keys;
 	make_groups(groups, 25);
