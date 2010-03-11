@@ -77,7 +77,7 @@ p.explain {
 .fade-12 { color: #bff; }
 .fade-13 { color: #cff; }
 .fade-14 { color: #dff; }
-.fade-15 { color: #eff; }
+.fade-15, .fade-16, .fade-17, .fade-18, .fade-19 { color: #eff; }
 
 div#priority {
   position: absolute;
